@@ -288,19 +288,19 @@ means 5 whole day events starting on 2023-05-29 that spaced one week apart (same
 
 Nested recurring events can recur at two different frequencies. For example, Mondays and Wednesdays on a weekly basis for 18 weeks:
 ```
-R18,2/2023-05-01/P2D,1W
+R2,18/2023-05-01/P2D,1W
 ```
 
 One clear use case for nested recurring events is scheduling university or training courses.
 
 Mondays and Wednesdays on a weekly basis for 18 weeks every year for 3 years:
 ```
-R3,18,2/2023-05-01/P2D,1W,1Y
+R2,18,3/2023-05-01/P2D,1W,1Y
 ```
 
 Mondays and Wednesdays on a weekly basis for 16 weeks twice a year 8 months apart every year for 3 years:
 ```
-R3,2,16,2/2023-01-16/P2D,1W,8M,1Y
+R2,16,2,3/2023-01-16/P2D,1W,8M,1Y
 ```
 
 This could cover 6 semesters over 3 years of a university course. The P8M can be adjusted to match the space between start of the spring semester and the start of the fall semester. The P1Y may need to be replaced with P52W to get the same days of the week in subsequent years. Honestly, a GUI will probably be necessary to set up something so complex, but this format is great because it can encode complex events as short strings.
@@ -411,9 +411,7 @@ Mixing dates and times with times zones can be confusing, but this done in ISO 8
 
 ```
 2023-123.375-167
-
 2023-05-03.375-167
-
 2023-W18-3.375-167
 ```
 all mean 9AM EDT on May 3rd.
@@ -529,6 +527,34 @@ Show broken axis on left margin, because first 5 times increment by 50, the rema
            0636
            0712
            0748
+           0748
+           0824
+           0900
+           0936
+           1012
+           1048
+           1124
+           1200  
+           1236
+           1312
+           1348
+           1424
+           1500  
+           1536
+           1612
+           1648
+           1724
+           1800  
+           1836
+           1912
+           1948
+           2024
+           2100  
+           2136
+           2212
+           2248
+           2324
+  
 ```
 
 Smaller times are possible but not a good idea, e.g.  18 minutes:
@@ -642,3 +668,24 @@ This mode is only for the digital calendar app and not the paper calendar becaus
          975
 ```
 This is because it is not possible to switch modes in the paper calendar, so all three ISO date formats have to be shown at the same time.
+
+**Calendar utilities**
+
+Class that represents an alarm: `Alarm`
+Class that represents an event: `Event`
+
+Both classes can
+-   convert datetime objects to ISO 8601 date strings
+-   convert ISO 8601 date strings to datetime objects
+
+Instantiate:
+```
+Event.from_datetime(datetime.date())
+Event.from_string("R2,18/2023-05-01/P2D,1W")
+Event(recurrence=2, start="2023-05-01", stop="2023-09-01", period="1W")
+```
+
+Recurrence and period arguments can be lists or tuples:
+```
+Event(recurrence=[2, 2], start="2023-01-16", stop="2023-05-01", period=["2D", "16W"])
+```
