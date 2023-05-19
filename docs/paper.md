@@ -52,18 +52,23 @@ Week |  pages  | start_date/final_date
  46  |  3 & 16 | 2022-11-14/20        
  52  |  4 & 22 | 2022-12-26/2023-01-01
  19  |  9 & 41 | 2023-05-08/14        
- 20  |  9 & 42 |         15/21        
+ 20  |      42 |         15/21        
  21  | 10 & 43 |         22/28        
- 22  | 10 & 44 |         29/06-04     
- 22  | 10 & 44 |      06-05/11        
+ 22  |      44 |         29/06-04     
+ 22  |      44 |      06-05/11        
 ```
-  
 
 **White space** 
 
-Use white space so that years and months do not repeat in start date as you move down the third column.  Omit years [and months] in final_date if they match with the years [and months] in start_date. This is allowed by ISO 8601 and makes the the TOC more concise, but also makes the third column variable width (13-21 characters in width). Any leftover space can be used for writing (rows are filled to screen width).
+Use white space so that years and months do not repeat in start date as you move down the third column. Also, omit page numbers that are repeated from above, but do not omit any values immediately after a solid row delimiter.
 
-I decided that the table of contents for the paper calendar should not have columns for weekdays, because this would mess up the flow of writing and not match the style of the rest of the calendar. Unlike the rest of the calendar, each week in the table of contents takes up only one row (instead of 14 in the 5-week mode and 70 in the 1-week mode). The table of contents should not follow the same pattern of solid and dashed lines as the rest of the calendar. Instead, all the lines should be solid to indicate that each row is separate. This visually differentiates the table of contents from the rest of the calendar.
+Omit years [and months] in final_date if they match with the years [and months] in start_date. This is allowed by ISO 8601 and makes the table of contents more concise, but also makes the third column variable width (13-21 characters in width). Any leftover space can be used for writing (rows are filled to screen width).
+
+I decided that the table of contents for the paper calendar should not have columns for weekdays, because this would mess up the flow of writing and not match the style of the rest of the calendar. Unlike the rest of the calendar, each week in the table of contents takes up only one row (instead of 14 in the 5-week mode and 70 in the 1-week mode).
+
+**Row delimiters**
+
+Solid lines separate years (below week 52 or 53). Weeks in the same year are separated by alternating dashed and dotted lines. There is no meaningful difference between dashed and dotted lines, but the first one in a year can be dashed and the second to last one in a year can be dotted (the last one will be solid). The pages and date intervals after a solid line cannot omit repeated values from above. The lines (row delimiters) go across all columns.
 
 **Column delimiters**
 
