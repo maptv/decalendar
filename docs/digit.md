@@ -420,25 +420,27 @@ all mean 9AM EDT on May 3rd.
 
 Alarms are denoted as lines. Events are shown as boxes. Alarms do not have end times. Whole day and multi-day events do not include times.
 
-**1 day calendar mode**
+## 1 day calendar mode
 
-70 rows as in all other modes
+The units are decimilliday.
 
-40 times (000 to 975)
+There are 70 rows as in all other modes.
 
-2 rows per 25 milliday
+There are 70 times (0000 to 9875), 1 row per 125 decimilliday (12.5 milliday), except for the first 10 which use 1 rows for 25 milliday.
 
-except for the first 10 which use 2 rows for 50 milliday
+0000 to 2500 (not inclusive) equals 10 rows, while 2500 onward equals 60 rows.
 
-000 to 250 equals 10 rows
+9875 is the last time.
 
-250 onward takes 2 rows
+In other words, the times above 6AM are on a different scale than the rest of the times.
 
-975 is the last time
+Therefore, the left margin should have a broken axis, because first 10 times increment by 250, the remaining 60 times increment by 125.
 
-In other words, 6AM starts 2 rows per time, all previous times have only one row (midnight up to but not including 6AM)
+The last digit in the decimilliday time can be a light grey color to emphasis the milliday time.
 
-Show broken axis on left margin, because first 5 times increment by 50, the remaining 30 times increment by 25
+Both decimilliday time and HHMM time use 4 digits, so the grey will serve the additional purpose of visually distinguishing these two formats.
+
+Milliday times are more readable as shown in the table below.
 
 | Metric | Regular  |
 |--------|----------|
@@ -477,197 +479,237 @@ Show broken axis on left margin, because first 5 times increment by 50, the rema
 |   925  |  22h 12m |
 |   950  |  22h 48m |
 |   975  |  23h 24m |
-|  1000  |   1d     |  
+|  1000  |   1d     |
+
 
 **Examples**
 
 ```
-2023-05-17.000
-           050
-           100
-           150
-           200
-           250
-           275
-           300
-           325
-           350
-           375
-           400
-           425
-           450
-           475
-           500
-           525
-           550
-           575
-           600
-           625
-           650
-           675
-           700
-           725
-           750
-           775
-           800
-           825
-           850
-           875
-           900
-           925
-           950
-           975
+2023-05-17.0000
+           0250
+           0500
+           0750
+           1000
+           1250
+           1500
+           1750
+           2000
+           2250
+           2500
+           2625
+           2750
+           2875
+           3000
+           3125
+           3250
+           3375
+           3500
+           3625
+           3750
+           3875
+           4000
+           4125
+           4250
+           4375
+           4500
+           4625
+           4750
+           4875
+           5000
+           5125
+           5250
+           5375
+           5500
+           5625
+           5750
+           5875
+           6000
+           6125
+           6250
+           6375
+           6500
+           6625
+           6750
+           6875
+           7000
+           7125
+           7250
+           7375
+           7500
+           7625
+           7750
+           7875
+           8000
+           8125
+           8250
+           8375
+           8500
+           8625
+           8750
+           8875
+           9000
+           9125
+           9250
+           9375
+           9500
+           9625
+           9750
+           9875
 
 2023-05-17T0000
-           0112
-           0224
-           0336
-           0448
-           0600
-           0636
-           0712
-           0748
-           0748
-           0824
-           0900
-           0936
-           1012
-           1048
-           1124
-           1200  
-           1236
-           1312
-           1348
-           1424
-           1500  
-           1536
-           1612
-           1648
-           1724
-           1800  
-           1836
-           1912
-           1948
-           2024
-           2100  
-           2136
-           2212
-           2248
-           2324
-  
+           0036
+           0112
+           0148
+           0224
+           0300
+           0336
+           0412
+           0448
+           0524
+           0600
+           0618
+           0636
+           0654
+           0712
+           0730
+           0748
+           0806
+           0824
+           0842
+           0900
+           0918
+           0936
+           0954
+           1012
+           1030
+           1048
+           1106
+           1124
+           1142
+           1200
+           1218
+           1236
+           1254
+           1312
+           1330
+           1348
+           1406
+           1424
+           1442
+           1500
+           1518
+           1536
+           1554
+           1612
+           1630
+           1648
+           1706
+           1724
+           1742
+           1800
+           1818
+           1836
+           1854
+           1912
+           1930
+           1948
+           2006
+           2024
+           2042
+           2100
+           2118
+           2136
+           2154
+           2212
+           2230
+           2248
+           2306
+           2324
+           2342
 ```
 
-Smaller times are possible but not a good idea, e.g.  18 minutes:
-```
-2023-05-17.0000
-           0500
-           1000
-           1500
-           2000
-           2500
-           2625
-           2750
-           2825
-           3000
-           3125
-           3250
-           3375
-           3500
-           3625
-           3750
-           3875
-           4000
-           4125
-           4250
-           4375
-           4500
-           4625
-           4750
-           4875
-           5000
-           5125
-           5250
-           5375
-           5500
-           5625
-           5750
-           5875
-           6000
-           6125
-           6250
-           6375
-           6500
-           6625
-           6750
-           6875
-           7000
-           7125
-           7250
-           7375
-           7500
-           7625
-           7750
-           7875
-           8000
-           8125
-           8250
-           8375
-           8500
-           8625
-           8750
-           8875
-           9000
-           9125
-           9250
-           9375
-           9500
-           9625
-           9750
-           9875
-```
-This would require 1 row per time instead of two and gets too fine grained and harder to read.
+**Row delimiters**
 
-This mode is only for the digital calendar app and not the paper calendar because it would require 365 pages per year and the pages would be all the same except for the dates in the top left. In the paper version, I would put all three of the date formats together and show time only in millidays:
-```
-2023-05-17
-     W21-3
-     156.000
-         050
-         100
-         150
-         200
-         250
-         275
-         300
-         325
-         350
-         375
-         400
-         425
-         450
-         475
-         500
-         525
-         550
-         575
-         600
-         625
-         650
-         675
-         700
-         725
-         750
-         775
-         800
-         825
-         850
-         875
-         900
-         925
-         950
-         975
-```
-This is because it is not possible to switch modes in the paper calendar, so all three ISO date formats have to be shown at the same time.
+Each time above has two rows. The each row can represents 18 minutes after 6AM and 36 minutes before 6AM.
+The solid lines can group together 36 minute blocks of time before 6AM and 1h12m blocks of time after 6AM.
+
+| Metric  | Regular    | Row delimiter |
+|---------|------------|---------------|
+|   0     |   0h 0m    |   dashed      |
+|   250   |   0h 36m   |   solid       |
+|   500   |   1h 12m   |   dashed      |
+|   750   |   1h 48m   |   solid       |
+|   1000  |   2h 24m   |   dashed      |
+|   1250  |   3h 0m    |   solid       |
+|   1500  |   3h 36m   |   dashed      |
+|   1750  |   4h 12m   |   solid       |
+|   2000  |   4h 48m   |   dashed      |
+|   2250  |   5h 24m   |   solid       |
+|   2500  |   6h 0m    |   dashed      |
+|   2625  |   6h 18m   |   solid       |
+|   2750  |   6h 36m   |   dashed      |
+|   2875  |   6h 54m   |   solid       |
+|   3000  |   7h 12m   |   dashed      |
+|   3125  |   7h 30m   |   solid       |
+|   3250  |   7h 48m   |   dashed      |
+|   3375  |   8h 6m    |   solid       |
+|   3500  |   8h 24m   |   dashed      |
+|   3625  |   8h 42m   |   solid       |
+|   3750  |   9h 0m    |   dashed      |
+|   3875  |   9h 18m   |   solid       |
+|   4000  |   9h 36m   |   dashed      |
+|   4125  |   9h 54m   |   solid       |
+|   4250  |   10h 12m  |   dashed      |
+|   4375  |   10h 30m  |   solid       |
+|   4500  |   10h 48m  |   dashed      |
+|   4625  |   11h 6m   |   solid       |
+|   4750  |   11h 24m  |   dashed      |
+|   4875  |   11h 42m  |   solid       |
+|   5000  |   12h 0m   |   dashed      |
+|   5125  |   12h 18m  |   solid       |
+|   5250  |   12h 36m  |   dashed      |
+|   5375  |   12h 54m  |   solid       |
+|   5500  |   13h 12m  |   dashed      |
+|   5625  |   13h 30m  |   solid       |
+|   5750  |   13h 48m  |   dashed      |
+|   5875  |   14h 6m   |   solid       |
+|   6000  |   14h 24m  |   dashed      |
+|   6125  |   14h 42m  |   solid       |
+|   6250  |   15h 0m   |   dashed      |
+|   6375  |   15h 18m  |   solid       |
+|   6500  |   15h 36m  |   dashed      |
+|   6625  |   15h 54m  |   solid       |
+|   6750  |   16h 12m  |   dashed      |
+|   6875  |   16h 30m  |   solid       |
+|   7000  |   16h 48m  |   dashed      |
+|   7125  |   17h 6m   |   solid       |
+|   7250  |   17h 24m  |   dashed      |
+|   7375  |   17h 42m  |   solid       |
+|   7500  |   18h 0m   |   dashed      |
+|   7625  |   18h 18m  |   solid       |
+|   7750  |   18h 36m  |   dashed      |
+|   7875  |   18h 54m  |   solid       |
+|   8000  |   19h 12m  |   dashed      |
+|   8125  |   19h 30m  |   solid       |
+|   8250  |   19h 48m  |   dashed      |
+|   8375  |   20h 6m   |   solid       |
+|   8500  |   20h 24m  |   dashed      |
+|   8625  |   20h 42m  |   solid       |
+|   8750  |   21h 0m   |   dashed      |
+|   8875  |   21h 18m  |   solid       |
+|   9000  |   21h 36m  |   dashed      |
+|   9125  |   21h 54m  |   solid       |
+|   9250  |   22h 12m  |   dashed      |
+|   9375  |   22h 30m  |   solid       |
+|   9500  |   22h 48m  |   dashed      |
+|   9625  |   23h 6m   |   solid       |
+|   9750  |   23h 24m  |   dashed      |
+|   9875  |   23h 42m  |   solid       |
+
+
+This mode is only for the digital calendar app and not the paper calendar because it would require:
+	1. 365 pages per year and the pages would be all the same except for the dates in the top left.
+	2. changing the number of the times to be 68 to accommodate two additional date formats to match the week mode.
 
 **Calendar utilities**
 
