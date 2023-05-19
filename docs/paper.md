@@ -60,7 +60,7 @@ Week |  pages  | start_date/final_date
 
 **White space** 
 
-Use white space so that years and months do not repeat in start date as you move down the third column. Also, omit page numbers that are repeated from above, but do not omit any values immediately after a solid row delimiter.
+Use white space so that years and months do not repeat in start date as you move down the third column. Also, omit page numbers that are repeated from above, but do not omit any values immediately after a solid year separator row delimiter.
 
 Omit years [and months] in final_date if they match with the years [and months] in start_date. This is allowed by ISO 8601 and makes the table of contents more concise, but also makes the third column variable width (13-21 characters in width). Any leftover space can be used for writing (rows are filled to screen width).
 
@@ -68,7 +68,11 @@ I decided that the table of contents for the paper calendar should not have colu
 
 **Row delimiters**
 
-Solid lines separate years (below week 52 or 53). Weeks in the same year are separated by alternating dashed and dotted lines. There is no meaningful difference between dashed and dotted lines, but the first one in a year can be dashed and the second to last one in a year can be dotted (the last one will be solid). The pages and date intervals after a solid line cannot omit repeated values from above. The lines (row delimiters) go across all columns.
+Solid lines separate years (below week 52 or 53). Weeks in the same year are separated by alternating dashed and solid lines. Year separators go across all columns. Delimiters in the same year start after the date interval column. There is no meaningful difference between the dashed and solid lines within a year, just like the row delimiters that separate times in the week view.
+
+The first row delimiter in a year and the second to last one in a year should both be dashed, so that an alternating pattern can be maintained. This will not work if there are 53 weeks in the year, in which case a solid line can be repeated twice. The two solid lines will not be identical because the first will start after the date interval column and the second will go across all columns.
+
+The pages and date intervals columns after a year row delimiter line cannot omit repeated values from above.
 
 **Column delimiters**
 
