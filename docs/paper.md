@@ -47,8 +47,340 @@ Blank pages do have page numbers.
 
 Page numbers are in the bottom middle of each page.
 
+For the 1-week view, the page numbers go in pairs, e.g.
+1 71, 2 71, 3 71, 4 71, 5 71, 6 72, because this view does not have a page number column.
+The right side number should be on the right bottom, while the left number should centered in the bottom middle, like all of the other page numbers.
+
+The 5-week view has 1 page number column, while the table of contents has 2 page number columns.
+
 The table of contents does not have headers.
 Headers would not match the style of the rest of the calendar.
+
+The newest version of the table of contents takes up two rows per week and has 3 columns:
+ 1. Page numbers of 1-week view pages
+ 2. Page numbers of 5-week view pages
+ 3. ISO week numbers and date intervals
+
+Table of contents:
+```
+  1    | 71 | 2023-W44              |
+       |    |      10-30/11-05      |
+  2    |    |      W45              |
+       |    |      11-06/12         |
+  3    |    |      W46              |
+       |    |      11-13/19         |
+  4    |    |      W47              |
+       |    |      11-20/26         |
+  5    |    |      W48              |
+       |    |      11-27/12-03      |
+  6    | 72 |      W49              |
+       |    |      12-04/10         |
+  7    |    |      W50              |
+       |    |      12-11/17         |
+  8    |    |      W51              |
+       |    |      12-18/24         |
+  9    |    |      W52              |
+       |    |      12-25/31         |
+ 10    |    | 2024-W01              |
+       |    |      01-01/07         |
+ 11    | 73 |      W02              |
+       |    |      01-08/14         |
+ 12    |    |      W03              |
+       |    |      01-15/21         |
+ 13    |    |      W04              |
+       |    |      01-22/28         |
+ 14    |    |      W05              |
+       |    |      01-29/02-04      |
+ 15    |    |      W06              |
+       |    |      02-05/11         |
+ 16    | 74 |      W07              |
+       |    |      02-12/18         |
+ 17    |    |      W08              |
+       |    |      02-19/25         |
+ 18    |    |      W09              |
+       |    |      02-26/03-03      |
+ 19    |    |      W10              |
+       |    |      03-04/10         |
+ 20    |    |      W11              |
+       |    |      03-11/17         |
+ 21    | 75 |      W12              |
+       |    |      03-18/24         |
+ 22    |    |      W13              |
+       |    |      03-25/31         |
+ 23    |    |      W14              |
+       |    |      04-01/07         |
+ 24    |    |      W15              |
+       |    |      04-08/14         |
+ 25    |    |      W16              |
+       |    |      04-15/21         |
+ 26    | 76 |      W17              |
+       |    |      04-22/28         |
+ 27    |    |      W18              |
+       |    |      04-29/05-05      |
+ 28    |    |      W19              |
+       |    |      05-06/12         |
+ 29    |    |      W20              |
+       |    |      05-13/19         |
+ 30    |    |      W21              |
+       |    |      05-20/26         |
+ 31    | 77 |      W22              |
+       |    |      05-27/06-02      |
+ 32    |    |      W23              |
+       |    |      06-03/09         |
+ 33    |    |      W24              |
+       |    |      06-10/16         |
+ 34    |    |      W25              |
+       |    |      06-17/23         |
+ 35    |    |      W26              |
+       |    |      06-24/30         |
+```
+
+```
+ 36    | 78 | 2024-W27              |
+       |    |      07-01/07         |
+ 37    |    |      W28              |
+       |    |      07-08/14         |
+ 38    |    |      W29              |
+       |    |      07-15/21         |
+ 39    |    |      W30              |
+       |    |      07-22/28         |
+ 40    |    |      W31              |
+       |    |      07-29/08-04      |
+ 41    | 79 |      W32              |
+       |    |      08-05/11         |
+ 42    |    |      W33              |
+       |    |      08-12/18         |
+ 43    |    |      W34              |
+       |    |      08-19/25         |
+ 44    |    |      W35              |
+       |    |      08-26/09-01      |
+ 45    |    |      W36              |
+       |    |      09-02/08         |
+ 46    | 80 |      W37              |
+       |    |      09-09/15         |
+ 47    |    |      W38              |
+       |    |      09-16/22         |
+ 48    |    |      W39              |
+       |    |      09-23/29         |
+ 49    |    |      W40              |
+       |    |      09-30/10-06      |
+ 50    |    |      W41              |
+       |    |      10-07/13         |
+ 51    | 81 |      W42              |
+       |    |      10-14/20         |
+ 52    |    |      W43              |
+       |    |      10-21/27         |
+ 53    |    |      W44              |
+       |    |      10-28/11-03      |
+ 54    |    |      W45              |
+       |    |      11-04/10         |
+ 55    |    |      W46              |
+       |    |      11-11/17         |
+ 56    | 82 |      W47              |
+       |    |      11-18/24         |
+ 57    |    |      W48              |
+       |    |      11-25/12-01      |
+ 58    |    |      W49              |
+       |    |      12-02/08         |
+ 59    |    |      W50              |
+       |    |      12-09/15         |
+ 60    |    |      W51              |
+       |    |      12-16/22         |
+ 61    | 83 |      W52              |
+       |    |      12-23/29         |
+ 62    |    | 2025-W01              |
+       |    | 2024-12-30/2025-01-05 |
+ 63    |    | 2025-W02              |
+       |    |      01-06/12         |
+ 64    |    |      W03              |
+       |    |      01-13/19         |
+ 65    |    |      W04              |
+       |    |      01-20/26         |
+ 66    | 84 |      W05              |
+       |    |      01-27/02-02      |
+ 67    |    |      W06              |
+       |    |      02-03/09         |
+ 68    |    |      W07              |
+       |    |      02-10/16         |
+ 69    |    |      W08              |
+       |    |      02-17/23         |
+ 70    |    |      W09              |
+       |    |      02-24/03-02      |
+```
+**White space**
+
+In the table of contents, use white space so that years and months do not repeat in start date as you move down the columns. This is similar to the approach for omitting values in the 1-week and 5-week views. Unlike the rest of the calendar, the values that repeat from the left are also omitted. This is similar to how values can be omitted for the end date of ISO date intervals. This white space provides a small amount of space for writing notes. Counting white space but not column delimiters, each line is 84 character wide.
+
+Change from 2023 calendar: Put the ISO week and weekday numbers (yyyy-Www-d) above the ISO date (yyyy-mm-dd).
+Change from 2023 calendar: Include week indices (1-week view page numbers) in the 5-week view (analogous to the first column in the table of contents).
+Change from 2023 calendar: Do not repeat years in the 1-week and 5-week views. For example, here is the first page of the 2024 calendar in each mode:
+
+1-week mode:
+```
+2023-W44-1
+     10-30
+     303.000
+         125
+         250
+         375
+         500
+         625
+         750
+         875
+     W44-2
+     10-31
+     304.000
+         125
+         250
+         375
+         500
+         625
+         750
+         875
+     W44-3
+     11-01    
+     305.000
+         125
+         250
+         375
+         500
+         625
+         750
+         875
+     W44-4
+     11-02    
+     306.000
+         125
+         250
+         375
+         500
+         625
+         750
+         875
+     W44-5
+     11-03    
+     307.000
+         125
+         250
+         375
+         500
+         625
+         750
+         875
+     W44-6
+     11-04    
+     308.000
+         125
+         250
+         375
+         500
+         625
+         750
+         875
+     W44-7
+     11-05    
+     309.000
+         125
+         250
+         375
+         500
+         625
+         750
+         875
+```
+
+5-week mode:
+```
+  1 | 2023-W44-1
+    |      10-30
+    |      W44-2
+    |      10-31
+    |      W44-3
+    |      11-01    
+    |      W44-4
+    |      11-02    
+    |      W44-5
+    |      11-03    
+    |      W44-6
+    |      11-04    
+    |      W44-7
+    |      11-05    
+  2 |      W45-1
+    |      11-06
+    |      W45-2
+    |      11-07
+    |      W45-3
+    |      11-08    
+    |      W45-4
+    |      11-09    
+    |      W45-5
+    |      11-10    
+    |      W45-6
+    |      11-11    
+    |      W45-7
+    |      11-12    
+  3 |      W46-1
+    |      11-13
+    |      W46-2
+    |      11-14
+    |      W46-3
+    |      11-15    
+    |      W46-4
+    |      11-16    
+    |      W46-5
+    |      11-17    
+    |      W46-6
+    |      11-18    
+    |      W46-7
+    |      11-19    
+  4 |      W47-1
+    |      11-20
+    |      W47-2
+    |      11-21
+    |      W47-3
+    |      11-22    
+    |      W47-4
+    |      11-23    
+    |      W47-5
+    |      11-24    
+    |      W47-6
+    |      11-25    
+    |      W47-7
+    |      11-26    
+  5 |      W48-1
+    |      11-27
+    |      W48-2
+    |      11-28
+    |      W48-3
+    |      11-29    
+    |      W48-4
+    |      11-30    
+    |      W48-5
+    |      12-01    
+    |      W48-6
+    |      12-02    
+    |      W48-7
+    |      12-03    
+```
+
+**Row delimiters**
+
+The row delimiter style in the table of contents and the 5-week view should be identical:
+- Solid lines alternate with dashed lines to separate rows
+- The topmost and bottommost lines are both solid
+- Solid lines that cut across all columns
+- Dashed lines start after the last column and run parallel in between the solid lines
+- Solid lines separate days in the 5-week view and weeks in the table of contents
+
+**Column delimiters**
+
+The table of contents has solid column delimiters after all 3 columns except for the last (third) column.
+The 5-week view has only one solid column delimiters in between its 2 columns.
+The 1-week view of the calendar does not have any column delimiters.
+
+The page number columns don’t make sense in the digital calendar app and should only be included in the paper calendar.
+
+**Old versions of the table of contents that may be useful for the digital calendar application:**
 
 Old version of the table of contents, which only takes up one row per week (instead of 14 in the 5-week mode and 70 in the 1-week mode).
 
@@ -171,7 +503,7 @@ Table of contents:
      |    |      01-29 |         30 |         31 |      02-01 |         02 |         03 |         04 |
  15  |    |      W06-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      02-05 |         06 |         07 |         08 |         09 |         10 |         11 |
-  16 | 74 |      W07-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 16  | 74 |      W07-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      02-12 |         13 |         14 |         15 |         16 |         17 |         18 |
  17  |    |      W08-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      02-19 |         20 |         21 |         22 |         23 |         24 |         25 |
@@ -179,7 +511,7 @@ Table of contents:
      |    |      02-26 |         27 |         28 |         29 |      03-01 |         02 |         03 |
  19  |    |      W10-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      03-04 |         05 |         06 |         07 |         08 |         09 |         10 |
-  20 |    |      W11-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 20  |    |      W11-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      03-11 |         12 |         13 |         14 |         15 |         16 |         17 |
  21  | 75 |      W12-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      03-18 |         19 |         20 |         21 |         22 |         23 |         24 |
@@ -187,7 +519,7 @@ Table of contents:
      |    |      03-25 |         26 |         27 |         28 |         29 |         30 |         31 |
  23  |    |      W14-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      04-01 |         02 |         03 |         04 |         05 |         06 |         07 |
-  24 |    |      W15-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 24  |    |      W15-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      04-08 |         09 |         10 |         11 |         12 |         13 |         14 |
  25  |    |      W16-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      04-15 |         16 |         17 |         18 |         19 |         20 |         21 |
@@ -197,7 +529,7 @@ Table of contents:
      |    |      04-29 |         30 |      05-01 |         02 |         03 |         04 |         05 |
  28  |    |      W19-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      05-06 |         07 |         08 |         09 |         10 |         11 |         12 |
-  29 |    |      W20-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 29  |    |      W20-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      05-13 |         14 |         15 |         16 |         17 |         18 |         19 |
  30  |    |      W21-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      05-20 |         21 |         22 |         23 |         24 |         25 |         26 |
@@ -205,7 +537,7 @@ Table of contents:
      |    |      05-27 |         28 |         29 |         30 |         31 |      06-01 |         02 |
  32  |    |      W23-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      06-03 |         04 |         05 |         06 |         07 |         08 |         09 |
-  33 |    |      W24-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 33  |    |      W24-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      06-10 |         11 |         12 |         13 |         14 |         15 |         16 |
  34  |    |      W25-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      06-17 |         18 |         19 |         20 |         21 |         22 |         23 |
@@ -213,7 +545,7 @@ Table of contents:
      |    |      06-24 |         25 |         26 |         27 |         28 |         29 |         30 |
  36  | 78 |      W27-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      07-01 |         02 |         03 |         04 |         05 |         06 |         07 |
-  37 |    |      W28-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 37  |    |      W28-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      07-08 |         09 |         10 |         11 |         12 |         13 |         14 |
  38  |    |      W29-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      07-15 |         16 |         17 |         18 |         19 |         20 |         21 |
@@ -223,7 +555,7 @@ Table of contents:
      |    |      07-29 |         30 |         31 |      08-01 |         02 |         03 |         04 |
  41  | 79 |      W32-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      08-05 |         06 |         07 |         08 |         09 |         10 |         11 |
-  42 |    |      W33-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 42  |    |      W33-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      08-12 |         13 |         14 |         15 |         16 |         17 |         18 |
  43  |    |      W34-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      08-19 |         20 |         21 |         22 |         23 |         24 |         25 |
@@ -231,7 +563,7 @@ Table of contents:
      |    |      08-26 |         27 |         28 |         29 |         30 |         31 |      09-01 |
  45  |    |      W36-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      09-02 |         03 |         04 |         05 |         06 |         07 |         08 |
-  46 | 80 |      W37-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 46  | 80 |      W37-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      09-09 |         10 |         11 |         12 |         13 |         14 |         15 |
  47  |    |      W38-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      09-16 |         17 |         18 |         19 |         20 |         21 |         22 |
@@ -241,7 +573,7 @@ Table of contents:
      |    |      09-30 |      10-01 |         02 |         03 |         04 |         05 |         06 |
  50  |    |      W41-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      10-07 |         08 |         09 |         10 |         11 |         12 |         13 |
-  51 | 81 |      W42-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 51  | 81 |      W42-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      10-14 |         15 |         16 |         17 |         18 |         19 |         20 |
  52  |    |      W43-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      10-21 |         22 |         23 |         24 |         25 |         26 |         27 |
@@ -249,7 +581,7 @@ Table of contents:
      |    |      10-28 |         29 |         30 |         31 |      11-01 |         02 |         03 |
  54  |    |      W45-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      11-04 |         05 |         06 |         07 |         08 |         09 |         10 |
-  55 |    |      W46-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 55  |    |      W46-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      11-11 |         12 |         13 |         14 |         15 |         16 |         17 |
  56  | 82 |      W47-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      11-18 |         19 |         20 |         21 |         22 |         23 |         24 |
@@ -257,7 +589,7 @@ Table of contents:
      |    |      11-25 |         26 |         27 |         28 |         29 |         30 |      12-01 |
  58  |    |      W49-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      12-02 |         03 |         04 |         05 |         06 |         07 |         08 |
-  59 |    |      W50-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 59  |    |      W50-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      12-09 |         10 |         11 |         12 |         13 |         14 |         15 |
  60  |    |      W51-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      12-16 |         17 |         18 |         19 |         20 |         21 |         22 |
@@ -275,174 +607,10 @@ Table of contents:
      |    |      01-27 |         28 |         29 |         30 |         31 |      02-01 |         02 |
  67  |    |      W06-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      02-03 |         04 |         05 |         06 |         07 |         08 |         09 |
-  68 |    |      W07-1 |          2 |          3 |          4 |          5 |          6 |          7 |
+ 68  |    |      W07-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      02-10 |         11 |         12 |         13 |         14 |         15 |         16 |
  69  |    |      W08-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      02-17 |         18 |         19 |         20 |         21 |         22 |         23 |
  70  |    |      W09-1 |          2 |          3 |          4 |          5 |          6 |          7 |
      |    |      02-24 |         25 |         26 |         27 |         28 |      03-01 |         02 |
 ```
-
-**White space**
-
-In the table of contents, use white space so that years and months do not repeat in start date as you move down the columns. This is similar to the approach for omitting values in the 1-week and 5-week views. This white space provides a small amount of space for writing notes: 6 to 8 characters in width by 3 to 4 characters in length. Counting white space but not column delimiters, each line is 76 character wide.
-
-Change from 2023 calendar: Do not repeat years in the 1-week and 5-week views. For example, here is the first page of the 2024 calendar in each mode:
-
-1-week mode:
-```
-2023-10-30
-     W44-1
-     303.000
-         125
-         250
-         375
-         500
-         625
-         750
-         875
-     10-31
-     W44-2
-     304.000
-         125
-         250
-         375
-         500
-         625
-         750
-         875
-     11-01    
-     W44-3
-     305.000
-         125
-         250
-         375
-         500
-         625
-         750
-         875
-     11-02    
-     W44-4
-     306.000
-         125
-         250
-         375
-         500
-         625
-         750
-         875
-     11-03    
-     W44-5
-     307.000
-         125
-         250
-         375
-         500
-         625
-         750
-         875
-     11-04    
-     W44-6
-     308.000
-         125
-         250
-         375
-         500
-         625
-         750
-         875
-     11-05    
-     W44-7
-     309.000
-         125
-         250
-         375
-         500
-         625
-         750
-         875
-```
-
-5-week mode:
-```
-2023-10-30
-     W44-1
-     10-31
-     W44-2
-     11-01    
-     W44-3
-     11-02    
-     W44-4
-     11-03    
-     W44-5
-     11-04    
-     W44-6
-     11-05    
-     W44-7
-     11-06
-     W45-1
-     11-07
-     W45-2
-     11-08    
-     W45-3
-     11-09    
-     W45-4
-     11-10    
-     W45-5
-     11-11    
-     W45-6
-     11-12    
-     W45-7
-     11-13
-     W46-1
-     11-14
-     W46-2
-     11-15    
-     W46-3
-     11-16    
-     W46-4
-     11-17    
-     W46-5
-     11-18    
-     W46-6
-     11-19    
-     W46-7
-     11-20
-     W47-1
-     11-21
-     W47-2
-     11-22    
-     W47-3
-     11-23    
-     W47-4
-     11-24    
-     W47-5
-     11-25    
-     W47-6
-     11-26    
-     W47-7
-     11-27
-     W48-1
-     11-28
-     W48-2
-     11-29    
-     W48-3
-     11-30    
-     W48-4
-     12-01    
-     W48-5
-     12-02    
-     W48-6
-     12-03    
-     W48-7
-```
-
-**Row delimiters**
-
-In the table of contents, there should not be any row delimiters. The row delimiters in the 5-week and 1-week views are perfect and require no changes.
-
-**Column delimiters**
-
-The table of contents has solid column delimiters after all 10 columns except for the last (tenth) column. The rest of the calendar does not have any column delimiters.
-
-The first two columns (page numbers) don’t make sense in the digital calendar app and should only be included in the paper calendar.
