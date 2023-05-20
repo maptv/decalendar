@@ -26,7 +26,7 @@ The paper calendar contains the following pages:
 
 The 70 weeks include 9 weeks from the previous year, 52 or 53 weeks from the current year, and 9 or 8 weeks from the next year. Each week is shown 3 times: in the table of contents and the 5-week and 1-week modes. 
 
-The table of contents is always on page 1 and provides the page numbers for each week in the 5-week and 1-week modes.
+The table of contents is always on page 85 and provides the page numbers for each week in the 5-week and 1-week modes.
 
 5-week mode is for whole day and multi-day events. 1-week mode is for events with times.
 
@@ -38,40 +38,113 @@ For page numbers:
 -   Group weeks in groups of 5, index the groups starting at 71
 
 
+Pages:
 1-70: 1-week mode pages
 71-84: 5-week mode pages
 85: 70-week table of contents page
 
 Blank pages do have page numbers.
 
-Page numbers are in the bottom middle of each page. The table of contents does not have headers (the headers in the example below are just for me) but shows 5-week view page numbers in the third column and has space for writing to the right of the fourth column:
+Page numbers are in the bottom middle of each page.
 
+The table of contents does not have headers.
+Headers would not match the style of the rest of the calendar.
+
+The 10 columns in the table of contents are:
+ 1. Page numbers of 1-week view pages
+ 2. Page numbers of 5-week view pages
+ 3. ISO week numbers
+ 4. Monday dates
+ 5. Tuesday dates
+ 6. Wednesday dates
+ 7. Thursday dates
+ 8. Friday dates
+ 9. Saturday dates
+10. Sunday dates
+
+Unlike the rest of the calendar, each week in the table of contents takes up only one row (instead of 14 in the 5-week mode and 70 in the 1-week mode).
+
+Table of contents:
 ```
-  # | Week | Group | start_date/final_date 
-  1 |  44  |  71   | 2023-10-30/11-05    
-  2 |  45  |  71   |      11-06/12        
-  3 |  46  |  71   |         13/19        
-  4 |  47  |  71   |         20/26               
-  5 |  48  |  71   |         27/12-03    
-  6 |  49  |  72   |      12-04/10              
-  7 |  50  |  72   |      12-11/17
-  8 |  51  |  72   |      12-18/24
-  9 |  52  |  72   |      12-25/31
- 10 |  01  |  72   | 2024-01-01/07               
- 11 |  02  |  73   |         08/14        
- 12 |  03  |  73   |         15/21              
- 13 |  04  |  73   |         22/28                          
- 14 |  05  |  73   |         29/02-04                       
- 15 |  06  |  73   |      02-05/02-11
+  1 | 71 | 44 | 2023-10-30 | 2023-10-31 | 2023-11-01 | 2023-11-02 | 2023-11-03 | 2023-11-04 | 2023-11-05 |
+  2 |    | 45 |      11-06 |      11-07 |         08 |         09 |         10 |         11 |         12 |
+  3 |    | 46 |         13 |         14 |         15 |         16 |         17 |         18 |         19 |
+  4 |    | 47 |         20 |         21 |         22 |         23 |         24 |         25 |         26 |
+  5 |    | 48 |         27 |         28 |         29 |         30 |      12-01 |      12-02 |      12-03 |
+  6 | 72 | 49 |      12-04 |      12-05 |      12-06 |      12-07 |         08 |         09 |         10 |
+  7 |    | 50 |         11 |         12 |         13 |         14 |         15 |         16 |         17 |
+  8 |    | 51 |         18 |         19 |         20 |         21 |         22 |         23 |         24 |
+  9 |    | 52 |         25 |         26 |         27 |         28 |         29 |         30 |         31 |
+ 10 |    | 01 | 2024-01-01 | 2024-01-02 | 2024-01-03 | 2024-01-04 | 2024-01-05 | 2024-01-06 | 2024-01-07 |
+ 11 | 73 | 02 |         08 |         09 |         10 |         11 |         12 |         13 |         14 |
+ 12 |    | 03 |         15 |         16 |         17 |         18 |         19 |         20 |         21 |
+ 13 |    | 04 |         22 |         23 |         24 |         25 |         26 |         27 |         28 |
+ 14 |    | 05 |         29 |         30 |         31 |      02-01 |      02-02 |      02-03 |      02-04 |
+ 15 |    | 06 |      02-05 |      02-06 |      02-07 |         08 |         09 |         10 |         11 |
+ 16 | 74 | 07 |         12 |         13 |         14 |         15 |         16 |         17 |         18 |
+ 17 |    | 08 |         19 |         20 |         21 |         22 |         23 |         24 |         25 |
+ 18 |    | 09 |         26 |         27 |         28 |         29 |      03-01 |      03-02 |      03-03 |
+ 19 |    | 10 |      03-04 |      03-05 |      03-06 |      03-07 |         08 |         09 |         10 |
+ 20 |    | 11 |         11 |         12 |         13 |         14 |         15 |         16 |         17 |
+ 21 | 75 | 12 |         18 |         19 |         20 |         21 |         22 |         23 |         24 |
+ 22 |    | 13 |         25 |         26 |         27 |         28 |         29 |         30 |         31 |
+ 23 |    | 14 |      04-01 |      04-02 |      04-03 |      04-04 |      04-05 |      04-06 |      04-07 |
+ 24 |    | 15 |         08 |         09 |         10 |         11 |         12 |         13 |         14 |
+ 25 |    | 16 |         15 |         16 |         17 |         18 |         19 |         20 |         21 |
+ 26 | 76 | 17 |         22 |         23 |         24 |         25 |         26 |         27 |         28 |
+ 27 |    | 18 |         29 |         30 |      05-01 |      05-02 |      05-03 |      05-04 |      05-05 |
+ 28 |    | 19 |      05-06 |      05-07 |         08 |         09 |         10 |         11 |         12 |
+ 29 |    | 20 |         13 |         14 |         15 |         16 |         17 |         18 |         19 |
+ 30 |    | 21 |         20 |         21 |         22 |         23 |         24 |         25 |         26 |
+ 31 | 77 | 22 |         27 |         28 |         29 |         30 |         31 |      06-01 |      06-02 |
+ 32 |    | 23 |      06-03 |      06-04 |      06-05 |      06-06 |      06-07 |      06-08 |      06-09 |
+ 33 |    | 24 |         10 |         11 |         12 |         13 |         14 |         15 |         16 |
+ 34 |    | 25 |         17 |         18 |         19 |         20 |         21 |         22 |         23 |
+ 35 |    | 26 |         24 |         25 |         26 |         27 |         28 |         29 |         30 |
+ 36 | 78 | 27 |      07-01 |      07-02 |      07-03 |      07-04 |      07-05 |      07-06 |      07-07 |
+ 37 |    | 28 |         08 |         09 |         10 |         11 |         12 |         13 |         14 |
+ 38 |    | 29 |         15 |         16 |         17 |         18 |         19 |         20 |         21 |
+ 39 |    | 30 |         22 |         23 |         24 |         25 |         26 |         27 |         28 |
+ 40 |    | 31 |         29 |         30 |         31 |      08-01 |      08-02 |      08-03 |      08-04 |
+ 41 | 79 | 32 |      08-05 |      08-06 |      08-07 |         08 |         09 |         10 |         11 |
+ 42 |    | 33 |         12 |         13 |         14 |         15 |         16 |         17 |         18 |
+ 43 |    | 34 |         19 |         20 |         21 |         22 |         23 |         24 |         25 |
+ 44 |    | 35 |         26 |         27 |         28 |         29 |         30 |         31 |      09-01 |
+ 45 |    | 36 |      09-02 |      09-03 |      09-04 |      09-05 |      09-06 |      09-07 |         08 |
+ 46 | 80 | 37 |         09 |         10 |         11 |         12 |         13 |         14 |         15 |
+ 47 |    | 38 |         16 |         17 |         18 |         19 |         20 |         21 |         22 |
+ 48 |    | 39 |         23 |         24 |         25 |         26 |         27 |         28 |         29 |
+ 49 |    | 40 |         30 |      10-01 |      10-02 |      10-03 |      10-04 |      10-05 |      10-06 |
+ 50 |    | 41 |      10-07 |         08 |         09 |         10 |         11 |         12 |         13 |
+ 51 | 81 | 42 |         14 |         15 |         16 |         17 |         18 |         19 |         20 |
+ 52 |    | 43 |         21 |         22 |         23 |         24 |         25 |         26 |         27 |
+ 53 |    | 44 |         28 |         29 |         30 |         31 |      11-01 |      11-02 |      11-03 |
+ 54 |    | 45 |      11-04 |      11-05 |      11-06 |      11-07 |         08 |         09 |         10 |
+ 55 |    | 46 |         11 |         12 |         13 |         14 |         15 |         16 |         17 |
+ 56 | 82 | 47 |         18 |         19 |         20 |         21 |         22 |         23 |         24 |
+ 57 |    | 48 |         25 |         26 |         27 |         28 |         29 |         30 |      12-01 |
+ 58 |    | 49 |      12-02 |      12-03 |      12-04 |      12-05 |      12-06 |      12-07 |         08 |
+ 59 |    | 50 |         09 |         10 |         11 |         12 |         13 |         14 |         15 |
+ 60 |    | 51 |         16 |         17 |         18 |         19 |         20 |         21 |         22 |
+ 61 | 83 | 52 |         23 |         24 |         25 |         26 |         27 |         28 |         29 |
+ 62 |    | 01 |         30 |         31 | 2025-01-01 | 2025-01-02 | 2025-01-03 | 2025-01-04 | 2025-01-05 |
+ 63 |    | 02 | 2025-01-06 | 2025-01-07 |         08 |         09 |         10 |         11 |         12 |
+ 64 |    | 03 |         13 |         14 |         15 |         16 |         17 |         18 |         19 |
+ 65 |    | 04 |         20 |         21 |         22 |         23 |         24 |         25 |         26 |
+ 66 | 84 | 05 |         27 |         28 |         29 |         30 |         31 |      02-01 |      02-02 |
+ 67 |    | 06 |      02-03 |      02-04 |      02-05 |      02-06 |      02-07 |         08 |         09 |
+ 68 |    | 07 |         10 |         11 |         12 |         13 |         14 |         15 |         16 |
+ 69 |    | 08 |         17 |         18 |         19 |         20 |         21 |         22 |         23 |
+ 70 |    | 09 |         24 |         25 |         26 |         27 |         28 |      03-01 |      03-02 |
 ```
 
 **White space**
 
-In the table of contents, use white space so that years and months do not repeat in start date as you move down the fourth column. This is similar to the approach for omitting values in the 1-week and 5-week views.
+In the table of contents, use white space so that years and months do not repeat in start date as you move down the columns. This is similar to the approach for omitting values in the 1-week and 5-week views. This white space provides a small amount of space for writing notes: 6 to 8 characters in width by 3 to 4 characters in length. Counting white space but not column delimiters, each line is 76 character wide.
 
-Change from 2023 calendar: Do not repeat years in the 1-week and 5-week views. For example, here is the first page of each mode:
+Change from 2023 calendar: Do not repeat years in the 1-week and 5-week views. For example, here is the first page of the 2024 calendar in each mode:
 
-1-week mode
+1-week mode:
 ```
 2023-10-30
      W44-1
@@ -145,8 +218,7 @@ Change from 2023 calendar: Do not repeat years in the 1-week and 5-week views. F
          875
 ```
 
-5-week mode
-
+5-week mode:
 ```
 2023-10-30
      W44-1
@@ -220,17 +292,12 @@ Change from 2023 calendar: Do not repeat years in the 1-week and 5-week views. F
      W48-7
 ```
 
-
-In the table of contents, omit years [and months] in final_date if they match with the years [and months] in start_date. This is allowed by ISO 8601 and makes the table of contents more concise, but also makes the fourth column variable width (13-21 characters in width). Any leftover space can be used for writing (rows are filled to screen width).
-
-I decided that the table of contents for the paper calendar should not have columns for weekdays, because this would mess up the flow of writing and not match the style of the rest of the calendar. Unlike the rest of the calendar, each week in the table of contents takes up only one row (instead of 14 in the 5-week mode and 70 in the 1-week mode).
-
 **Row delimiters**
 
-In the table of contents, solid lines that go across all columns separate two 5-week groups at a time. Groups are named after the page numbers they appear on (71-84). Each group of two can be viewed at the same time on each pair of pages, e.g. 71 and 72, thanks to the 3 blank pages at the beginning. In the table of contents, rows are separated by alternating dashed and solid lines that start after the date interval column. There is no meaningful difference between the dashed and solid lines within a year, just like the row delimiters that separate times in the week view, but the first row delimiter in a group pair should both be dashed, so that an alternating pattern can be maintained. This will not work if there are 53 weeks in the year, in which case a solid line can be repeated twice. The two solid lines will not be identical because the first will start after the date interval column and the second will go across all columns.
+In the table of contents, there should not be any row delimiters. The row delimiters in the 5-week and 1-week views are perfect and require no changes.
 
 **Column delimiters**
 
-The table of contents should only have column delimiters before and after the second column (page numbers). The rest of the calendar does not have any column delimiters.
+The table of contents has solid column delimiters after all 10 columns except for the last (tenth) column. The rest of the calendar does not have any column delimiters.
 
-The second column (page numbers) doesn’t make sense in the app and should only be included in the paper calendar. The  70-week mode in the app should have one column delimiter between week number and date interval and 7 more delimiters for the weekdays. The other modes do not have any column delimiters.
+The first two columns (page numbers) don’t make sense in the digital calendar app and should only be included in the paper calendar.
