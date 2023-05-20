@@ -210,7 +210,7 @@ Table of contents:
 
 **White space**
 
-In the table of contents, use white space so that years and months do not repeat in start date as you move down the columns. This is similar to the approach for omitting values in the 1-week and 5-week views. In ISO date intervals, the values that repeat from the left side of the slash can also be omitted. In other words, values that do not change between the start and end dates can be left out, according to the ISO 8601 standard. This white space provides a small amount of additional space for writing notes. Counting white space but not column delimiters, dashed lines can start after 28 characters in the table of contents and after 16 characters in the 5-week view.
+In the table of contents, use white space so that years and months do not repeat in start date as you move down the columns. This is similar to the approach for omitting values in the 1-week and 5-week views. In ISO date intervals, the values that repeat from the left side of the slash can also be omitted. In other words, values that do not change between the start and end dates can be left out, according to the ISO 8601 standard. This white space provides a small amount of additional space for writing notes. Counting white space but not column delimiters, dashed lines can start after 25 characters in the table of contents and after 15 characters in the 5-week view.
 
 Change from 2023 calendar: Put the ISO week and weekday numbers (yyyy-Www-d) above the ISO date (yyyy-mm-dd).
 Change from 2023 calendar: Include week indices (1-week view page numbers) in the 5-week view (analogous to the first column in the table of contents).
