@@ -39,9 +39,9 @@ For page numbers:
 
 
 Pages:
-1-70: 1-week mode pages
-71-84: 5-week mode pages
-85-86: 35-week table of contents pages
+* 1-70: 1-week mode pages
+* 71-84: 5-week mode pages
+* 85-86: 35-week table of contents pages
 
 Blank pages do have page numbers.
 
