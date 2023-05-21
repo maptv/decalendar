@@ -1,7 +1,6 @@
 import calendar
 import datetime
 import pathlib
-import re
 
 
 class Calendar:
@@ -21,22 +20,31 @@ class Calendar:
             '<link rel="stylesheet" href="cal.css">\n'
             "</head>\n\n<body>\n\t<main>\n\t\t"
         )
-        self.__foot = "\t</main>\n</body>\n\n</html>"
+        self.__foot = "\n\t\t\t</reference>\n\t\t</pages>\n\t</main>\n</body>\n\n</html>"
 
     def __str__(self):
-        return self.name.replace("_", " to ")
+        return f"{self.dates[0].isoformat()} to {self.dates[-1].isoformat()}"
 
     def __repr__(self):
         return f"Calendar(start_date={self.dates[0]}, n_days={len(self.dates)})"
 
     def write_times(self):
-        for week in self.weeks:
-            html = "".join(
-                [
-                    "<day>\n\t\t\t"
-                    f"<date>{d.isoformat()}&nbsp&nbsp;</date>\n\t\t\t"
+        for page, week in enumerate(self.weeks):
+            html_list = []
+            for i, d in enumerate(week):
+                if i and d.strftime("%G") == week[i-1].strftime("%Y"):
+                    date1 = d.strftime('W%V-%u')
+                else:
+                    date1 = d.strftime('%G-W%V-%u')
+                if d.strftime("%Y") == d.strftime("%G"):
+                    date2 = d.strftime("%m-%d")
+                else:
+                    date2 = d.strftime("%Y-%m-%d")
+                html_list.append(
+                    "<day class='underline'>\n\t\t\t"
+                    f"<date>{date1}&nbsp&nbsp;</date>\n\t\t\t"
                     "<blank></blank>\n\t\t\t"
-                    f"<date>W{d.strftime('%V-%u')}&nbsp&nbsp;</date>\n\t\t\t"
+                    f"<date>{date2}&nbsp&nbsp;</date>\n\t\t\t"
                     "<blank></blank>\n\t\t\t"
                     f"<date>{d.strftime('%j')}.000</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
@@ -53,59 +61,52 @@ class Calendar:
                     "<time>750</time>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
                     "<time>875</time>\n\t\t</day>\n\t\t"
-                    for d in week
-                ]
-            )
+                )
             pathlib.Path(
                 f"{week[0].isoformat()}_{week[-1].isoformat()}_week.html"
-            ).write_text(self.__head + html + self.__foot)
+            ).write_text(
+                self.__head
+                + "".join(html_list)
+                + f"<pages><current>{page + 1}</current>"
+                + f"<reference>{71 + (page + 1) // 5}"
+                + self.__foot
+                )
         return self
 
     def write_dates(self):
-        for five_weeks in list(zip(*[iter(self.month_dates)] * 35)):
-            html = "".join(
-                [
+        for page, weeks in enumerate(list(zip(*[iter(self.month_dates)] * 35))):
+            html_list = []
+            for i, d in enumerate(weeks):
+                if i and d.strftime("%G") == weeks[i-1].strftime("%Y"):
+                    date1 = d.strftime('W%V-%u')
+                else:
+                    date1 = d.strftime('%G-W%V-%u')
+                if d.strftime("%Y") == d.strftime("%G"):
+                    date2 = d.strftime("%m-%d")
+                else:
+                    date2 = d.strftime("%Y-%m-%d")
+                bottom_left = "<date>" if d.strftime("%u") != "7" else "<date class='underline'>"
+                html_list.append(
                     "<day>\n\t\t\t"
-                    f"<date>{d.isoformat()}&nbsp&nbsp;</date>\n\t\t\t"
-                    "<dashed></dashed>\n\t\t\t"
-                    f"<date>W{d.strftime('%V-%u')}&nbsp&nbsp;</date>\n\t\t\t"
-                    "</day>\n\t\t"
-                    for d in five_weeks
-                ]
+                    + f"<date>{date1}&nbsp&nbsp;</date>\n\t\t\t"
+                    + "<dashed></dashed>\n\t\t\t"
+                    + bottom_left
+                    + f"{date2}&nbsp&nbsp;</date>\n\t\t\t"
+                    + "<solid></solid>\n\t\t"
+                    + "</day>\n\t\t"
             )
             pathlib.Path(
-                f"{five_weeks[0].isoformat()}_{five_weeks[-1].isoformat()}_month.html"
-            ).write_text(self.__head + html + self.__foot)
+                f"{weeks[0].isoformat()}_{weeks[-1].isoformat()}_month.html"
+            ).write_text(
+                self.__head + "".join(html_list)
+                + f"\n\t\t<pages>\n\t\t\t<current>{page + 71}</current>"
+                + f"<reference>{(page * 5 + 1)}-{(page * 5 + 5)}"
+                + self.__foot
+                )
         return self
-
-    @staticmethod
-    def increment_latest_file(directory: str = ".", n_days: int = 7):
-        path = pathlib.Path(directory)
-        text = sorted(list(path.glob("*.html")))[-1].read_text()
-
-        # Get old and new YYYY-MM-DD dates
-        matches = [m for m in re.finditer(r"\d{4}-\d{2}-\d{2}", text)]
-        old_dates = [datetime.date.fromisoformat(m.group()) for m in matches]
-        new_dates = [d + datetime.timedelta(days=n_days) for d in old_dates]
-
-        # Replace YYYY-MM-DD dates
-        for m, d in zip(matches, new_dates):
-            text = text[: m.start()] + d.isoformat() + text[m.end() :]
-
-        # Replace week of year and weekday
-        for m, d in zip(matches, [m for m in re.finditer(r"W\d{2}-\d", text)]):
-            text = text[: m.start()] + "W" + d.strftime("%V-%u") + text[m.end() :]
-
-        # Replace day of year
-        for m, d in zip(matches, [m for m in re.finditer(r"\d{3}\.000", text)]):
-            text = text[: m.start()] + d.strftime("%j") + ".000" + text[m.end() :]
-
-        return (
-            path / f"{new_dates[0].isoformat()}_{new_dates[-1].isoformat()}.html"
-        ).write_text(text)
 
 
 if __name__ == "__main__":
-    cal = Calendar("2023-01-23")
+    cal = Calendar("2023-10-30", n_days=490)
     cal.write_times()
     cal.write_dates()

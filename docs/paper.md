@@ -213,7 +213,8 @@ Table of contents:
 In the table of contents, use white space so that years and months do not repeat in start date as you move down the columns. This is similar to the approach for omitting values in the 1-week and 5-week views. In ISO date intervals, the values that repeat from the left side of the slash can also be omitted. In other words, values that do not change between the start and end dates can be left out, according to the ISO 8601 standard. This white space provides a small amount of additional space for writing notes. Counting white space but not column delimiters, dashed lines can start after 25 characters in the table of contents and after 12 characters in the 5-week view.
 
 Change from 2023 calendar: Put the ISO week and weekday numbers (yyyy-Www-d) above the ISO date (yyyy-mm-dd).
-Change from 2023 calendar: Include week indices (1-week view page numbers) in the 5-week view (analogous to the first column in the table of contents).
+Change from 2023 calendar: Include week indices (1-week view page numbers) in the 5-week view to the right of the page number
+Change from 2023 calendar: Include 5-week view page numbers in the 1-week view to the right of the page number
 Change from 2023 calendar: Do not repeat years in the 1-week and 5-week views. For example, here is the first page of the 2024 calendar in each mode:
 
 1-week mode:
@@ -292,76 +293,76 @@ Change from 2023 calendar: Do not repeat years in the 1-week and 5-week views. F
 
 5-week mode:
 ```
-  1 | 2023-W44-1
-    |      10-30
-    |      W44-2
-    |      10-31
-    |      W44-3
-    |      11-01
-    |      W44-4
-    |      11-02
-    |      W44-5
-    |      11-03
-    |      W44-6
-    |      11-04
-    |      W44-7
-    |      11-05
-  2 |      W45-1
-    |      11-06
-    |      W45-2
-    |      11-07
-    |      W45-3
-    |      11-08
-    |      W45-4
-    |      11-09
-    |      W45-5
-    |      11-10
-    |      W45-6
-    |      11-11
-    |      W45-7
-    |      11-12
-  3 |      W46-1
-    |      11-13
-    |      W46-2
-    |      11-14
-    |      W46-3
-    |      11-15
-    |      W46-4
-    |      11-16
-    |      W46-5
-    |      11-17
-    |      W46-6
-    |      11-18
-    |      W46-7
-    |      11-19
-  4 |      W47-1
-    |      11-20
-    |      W47-2
-    |      11-21
-    |      W47-3
-    |      11-22
-    |      W47-4
-    |      11-23
-    |      W47-5
-    |      11-24
-    |      W47-6
-    |      11-25
-    |      W47-7
-    |      11-26
-  5 |      W48-1
-    |      11-27
-    |      W48-2
-    |      11-28
-    |      W48-3
-    |      11-29
-    |      W48-4
-    |      11-30
-    |      W48-5
-    |      12-01
-    |      W48-6
-    |      12-02
-    |      W48-7
-    |      12-03
+2023-W44-1
+     10-30
+     W44-2
+     10-31
+     W44-3
+     11-01
+     W44-4
+     11-02
+     W44-5
+     11-03
+     W44-6
+     11-04
+     W44-7
+     11-05
+     W45-1
+     11-06
+     W45-2
+     11-07
+     W45-3
+     11-08
+     W45-4
+     11-09
+     W45-5
+     11-10
+     W45-6
+     11-11
+     W45-7
+     11-12
+     W46-1
+     11-13
+     W46-2
+     11-14
+     W46-3
+     11-15
+     W46-4
+     11-16
+     W46-5
+     11-17
+     W46-6
+     11-18
+     W46-7
+     11-19
+     W47-1
+     11-20
+     W47-2
+     11-21
+     W47-3
+     11-22
+     W47-4
+     11-23
+     W47-5
+     11-24
+     W47-6
+     11-25
+     W47-7
+     11-26
+     W48-1
+     11-27
+     W48-2
+     11-28
+     W48-3
+     11-29
+     W48-4
+     11-30
+     W48-5
+     12-01
+     W48-6
+     12-02
+     W48-7
+     12-03
 ```
 
 **Row delimiters**

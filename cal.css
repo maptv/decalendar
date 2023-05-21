@@ -4,10 +4,13 @@
 }
 
 day {
-    border-bottom: solid 1px black;
     display: grid;
     font-family: 'isosevcal', monospace;
     grid-template-columns: 12ch 1fr;
+}
+
+.underline {
+    border-bottom: solid 1px black;
 }
 
 date, time {
@@ -20,4 +23,14 @@ dashed {
 
 solid {
     border-bottom: solid 1px black;
+}
+
+pages {
+    display: flex;
+    font-family: 'isosevcal', monospace;
+}
+
+current, reference {
+    text-align: right;
+    width: 50%
 }
