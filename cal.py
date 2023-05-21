@@ -1,4 +1,3 @@
-import calendar
 import datetime
 import pathlib
 
@@ -63,7 +62,7 @@ class Calendar:
                 self.__head
                 + "".join(html_list)
                 + f"<pages><current>{page + 1}</current>"
-                + f"<reference>{71 + (page + 1) // 5}"
+                + f"<reference>{71 + page // 5}"
                 + self.__foot
                 )
         return self
