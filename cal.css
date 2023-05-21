@@ -3,9 +3,19 @@
     src: url(iosevcal-regular.ttf);
 }
 
+toc {
+    display: grid;
+    font-family: 'isosevcal', monospace;
+    grid-template-columns: 2ch 2ch 21ch 1fr;
+}
+
 day {
     display: grid;
     font-family: 'isosevcal', monospace;
+    grid-template-columns: 10ch 1fr;
+}
+
+.wider {
     grid-template-columns: 12ch 1fr;
 }
 

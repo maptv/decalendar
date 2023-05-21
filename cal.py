@@ -9,12 +9,7 @@ class Calendar:
             datetime.date.fromisoformat(start_date) + datetime.timedelta(days=d)
             for d in range(n_days)
         ]
-        self.year_months = sorted(list(set((d.year, d.month) for d in self.dates)))
-        self.months = [
-            list(calendar.Calendar().itermonthdates(*ym)) for ym in self.year_months
-        ]
-        self.month_dates = sorted(list(set(d for m in self.months for d in m)))
-        self.weeks = list(zip(*[iter(self.month_dates)] * 7))
+        self.weeks = list(zip(*[iter(self.dates)] * 7))
         self.__head = (
             "<!DOCTYPE html>\n<html>\n\n<head>\n\t"
             '<link rel="stylesheet" href="cal.css">\n'
@@ -41,7 +36,7 @@ class Calendar:
                 else:
                     date2 = d.strftime("%Y-%m-%d")
                 html_list.append(
-                    "<day class='underline'>\n\t\t\t"
+                    "<day class='underline wider'>\n\t\t\t"
                     f"<date>{date1}&nbsp&nbsp;</date>\n\t\t\t"
                     "<blank></blank>\n\t\t\t"
                     f"<date>{date2}&nbsp&nbsp;</date>\n\t\t\t"
@@ -74,10 +69,10 @@ class Calendar:
         return self
 
     def write_dates(self):
-        for page, weeks in enumerate(list(zip(*[iter(self.month_dates)] * 35))):
+        for page, five_weeks in enumerate(list(zip(*[iter(self.dates)] * 35))):
             html_list = []
-            for i, d in enumerate(weeks):
-                if i and d.strftime("%G") == weeks[i-1].strftime("%Y"):
+            for i, d in enumerate(five_weeks):
+                if i and d.strftime("%G") == five_weeks[i-1].strftime("%Y"):
                     date1 = d.strftime('W%V-%u')
                 else:
                     date1 = d.strftime('%G-W%V-%u')
@@ -88,15 +83,15 @@ class Calendar:
                 bottom_left = "<date>" if d.strftime("%u") != "7" else "<date class='underline'>"
                 html_list.append(
                     "<day>\n\t\t\t"
-                    + f"<date>{date1}&nbsp&nbsp;</date>\n\t\t\t"
+                    + f"<date>{date1}</date>\n\t\t\t"
                     + "<dashed></dashed>\n\t\t\t"
                     + bottom_left
-                    + f"{date2}&nbsp&nbsp;</date>\n\t\t\t"
+                    + f"{date2}</date>\n\t\t\t"
                     + "<solid></solid>\n\t\t"
                     + "</day>\n\t\t"
             )
             pathlib.Path(
-                f"{weeks[0].isoformat()}_{weeks[-1].isoformat()}_month.html"
+                f"{five_weeks[0].isoformat()}_{five_weeks[-1].isoformat()}_month.html"
             ).write_text(
                 self.__head + "".join(html_list)
                 + f"\n\t\t<pages>\n\t\t\t<current>{page + 71}</current>"
