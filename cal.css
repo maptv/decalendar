@@ -16,7 +16,7 @@ day {
 }
 
 .wider {
-    grid-template-columns: 12ch 1fr;
+    grid-template-columns: 15ch 1fr;
 }
 
 .underline {
