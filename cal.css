@@ -15,6 +15,21 @@ day {
     grid-template-columns: 10ch 1fr;
 }
 
+.right {
+    position: relative;
+    right: 2px;
+    top: 4px;
+    font-size: 16px;
+}
+
+.left {
+    position: relative;
+    left: 2px;
+    bottom: 2px;
+    font-size: 16px;
+}
+
+
 .wider {
     grid-template-columns: 13ch 1fr;
 }
