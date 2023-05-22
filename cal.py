@@ -37,9 +37,9 @@ class Calendar:
                 html_list.append(
                     "<day class='underline wider'>\n\t\t\t"
                     f"<date>{date1}<span class='left'>1</span>/"
-                    "<span class='right'>6</span></date>\n\t\t\t"
+                    "<span class='right'>4</span></date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    f"<date>{date2}T04</date>\n\t\t\t"
+                    f"<date>{date2}T06</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
                     "<time><span class='left'>1</span>/"
                     "<span class='right'>3</span></time>\n\t\t\t"
@@ -56,10 +56,10 @@ class Calendar:
                     "<dashed></dashed>\n\t\t\t"
                     "<time>T16</time>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    "<time><span class='left'>5</span>/"
-                    "<span class='right'>6</span></time>\n\t\t\t"
+                    "<time><span class='left'>3</span>/"
+                    "<span class='right'>4</span></time>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>T20</time>\n\t\t</day>\n\t\t"
+                    "<time>T18</time>\n\t\t</day>\n\t\t"
                 )
             pathlib.Path(
                 f"{week[0].isoformat()}_{week[-1].isoformat()}_week.html"
