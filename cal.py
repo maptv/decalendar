@@ -106,7 +106,7 @@ class Calendar:
             date2 = week[0].strftime("%Y-%m-%d")
             current_page = 71 + i // 5
             toc_class = "class='solid'" if (i + 1) % 5 == 0 else ""
-            last_class = "" if (i + 1) % 5 == 0 else "class='dashed'"
+            last_class = "" if (i + 1) % 5 == 0 else "class='solid'"
             if i != 0:
                 same_year = week[0].strftime("%Y") == self.weeks[i-1][0].strftime("%Y")
                 same_month = week[0].strftime("%m") == self.weeks[i-1][0].strftime("%m")
