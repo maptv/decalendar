@@ -6,7 +6,7 @@
 toc {
     display: grid;
     font-family: 'isosevcal', monospace;
-    grid-template-columns: 3ch 3ch 9ch 11ch 10ch 1fr;
+    grid-template-columns: 3ch 3ch 3ch 10ch 1fr;
 }
 
 column {
