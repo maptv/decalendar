@@ -35,7 +35,7 @@ class Calendar:
                 else:
                     date2 = d.strftime("%Y-%m-%d")
                 html_list.append(
-                    "<day class='underline wider'>\n\t\t\t"
+                    "<day class='solid wider'>\n\t\t\t"
                     f"<date>{date1}<span class='left'>1</span>/"
                     "<span class='right'>4</span></date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
@@ -84,7 +84,7 @@ class Calendar:
                     date2 = d.strftime("%m-%d")
                 else:
                     date2 = d.strftime("%Y-%m-%d")
-                bottom_left = "<date>" if d.strftime("%u") != "7" else "<date class='underline'>"
+                bottom_left = "<date>" if d.strftime("%u") != "7" else "<date class='solid'>"
                 html_list.append(
                     "<day>\n\t\t\t"
                     + f"<date>{date1}</date>\n\t\t\t"
@@ -104,8 +104,45 @@ class Calendar:
                 )
         return self
 
+    def write_toc(self):
+        html_list = []
+        for i, week in enumerate(self.weeks):
+            date1 = week[0].strftime("%G-W%V")
+            date2 = week[0].strftime("%Y-%m-%d")
+            date3 = week[-1].strftime("%Y-%m-%d")
+            if i != 0 or i != 35:
+                same_year = week[0].strftime("%G") == self.weeks[i-1][0].strftime("%Y")
+                if same_year:
+                    date1 = f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{week[0].strftime('W%V')}"
+            same_year = week[0].strftime("%G") == week[0].strftime("%Y")
+            if same_year:
+                date2 = f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{week[0].strftime('%m-%d')}"
+            same_year = week[0].strftime("%Y") == week[-1].strftime("%Y")
+            same_month = week[0].strftime("%m") == week[-1].strftime("%m")
+            if same_year and same_month:
+                date3 = week[-1].strftime("%d")
+            elif same_year:
+                date3 = week[-1].strftime("%m-%d")
+            html_list.append(
+                "<toc>\n\t\t\t"
+                f"<first>{i + 1}</first><second>{71 + i // 5}</second>"
+                f"<third>{date1}</third>\n\t\t\t"
+                "<dashed></dashed>\n\t\t\t"
+                "<first>&nbsp;&nbsp;</first><second>&nbsp;&nbsp;</second>"
+                f"<third>{date2}/{date3}</third>\n\t\t\t"
+                "<solid></solid>\n\t\t"
+                "</toc>\n\t\t"
+            )
+        pathlib.Path(
+            f"{self.weeks[0][0].isoformat()}_{self.weeks[-1][-1].isoformat()}_toc.html"
+        ).write_text(
+            self.__head + "".join(html_list) + self.__foot
+            )
+        return self
+
 
 if __name__ == "__main__":
     cal = Calendar("2023-10-30", n_days=490)
     cal.write_times()
     cal.write_dates()
+    cal.write_toc()
