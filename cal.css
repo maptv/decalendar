@@ -6,18 +6,18 @@
 toc {
     display: grid;
     font-family: 'isosevcal', monospace;
-    grid-template-columns: 3ch 3ch 21ch 1fr;
+    grid-template-columns: 3ch 3ch 9ch 11ch 10ch 1fr;
 }
 
-first, second {
+column {
     text-align: right;
     border-right: 1px solid;
     padding-right: 2px;
     margin-right: 2px;
 }
 
-third {
-    text-align: left;
+last {
+    text-align: right;
 }
 
 day {

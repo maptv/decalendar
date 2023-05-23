@@ -110,27 +110,34 @@ class Calendar:
             date1 = week[0].strftime("%G-W%V")
             date2 = week[0].strftime("%Y-%m-%d")
             date3 = week[-1].strftime("%Y-%m-%d")
-            if i != 0 or i != 35:
-                same_year = week[0].strftime("%G") == self.weeks[i-1][0].strftime("%Y")
-                if same_year:
-                    date1 = f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{week[0].strftime('W%V')}"
-            same_year = week[0].strftime("%G") == week[0].strftime("%Y")
-            if same_year:
-                date2 = f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{week[0].strftime('%m-%d')}"
-            same_year = week[0].strftime("%Y") == week[-1].strftime("%Y")
-            same_month = week[0].strftime("%m") == week[-1].strftime("%m")
-            if same_year and same_month:
-                date3 = week[-1].strftime("%d")
-            elif same_year:
-                date3 = week[-1].strftime("%m-%d")
+            current_page = 71 + i // 5
+            toc_class = "class='solid'" if (i + 1) % 5 == 0 else ""
+            last_class = "" if (i + 1) % 5 == 0 else "class='dashed'"
+            if i != 0:
+                if week[0].strftime("%G") == self.weeks[i-1][0].strftime("%G"):
+                    date1 = week[0].strftime("W%V")
+                same_year = week[0].strftime("%Y") == self.weeks[i-1][0].strftime("%Y")
+                same_month = week[0].strftime("%m") == self.weeks[i-1][0].strftime("%m")
+                if same_year and same_month:
+                    date2 = week[0].strftime("%d")
+                elif same_year:
+                    date2 = week[0].strftime("%m-%d")
+                same_year = week[-1].strftime("%Y") == self.weeks[i-1][-1].strftime("%Y")
+                same_month = week[-1].strftime("%m") == self.weeks[i-1][-1].strftime("%m")
+                if same_year and same_month:
+                    date3 = week[-1].strftime("%d")
+                elif same_year:
+                    date3 = week[-1].strftime("%m-%d")
+                previous_page = 71 + (i-1) // 5
+                if current_page == previous_page:
+                    current_page = "&nbsp;"
             html_list.append(
-                "<toc>\n\t\t\t"
-                f"<first>{i + 1}</first><second>{71 + i // 5}</second>"
-                f"<third>{date1}</third>\n\t\t\t"
-                "<dashed></dashed>\n\t\t\t"
-                "<first>&nbsp;&nbsp;</first><second>&nbsp;&nbsp;</second>"
-                f"<third>{date2}/{date3}</third>\n\t\t\t"
-                "<solid></solid>\n\t\t"
+                f"<toc {toc_class}>\n\t\t\t"
+                f"<column>{i + 1}</column><column>{current_page}</column>"
+                f"<column>{date1}</column>\n\t\t\t"
+                f"<column>{date2}</column>\n\t\t\t"
+                f"<last>{date3}</last>\n\t\t\t"
+                f"<last {last_class}></last>\n\t\t"
                 "</toc>\n\t\t"
             )
         pathlib.Path(
