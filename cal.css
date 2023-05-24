@@ -28,7 +28,7 @@ day {
 
 .right {
     position: relative;
-    right: 2px;
+    right: 2.6px;
     top: 4px;
     font-size: 16px;
 }
@@ -42,7 +42,7 @@ day {
 
 
 .wider {
-    grid-template-columns: 14ch 1fr;
+    grid-template-columns: 13ch 1fr;
 }
 
 .solid {

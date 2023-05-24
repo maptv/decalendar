@@ -14,7 +14,7 @@ class Calendar:
             '<link rel="stylesheet" href="cal.css">\n'
             "</head>\n\n<body>\n\t<main>\n\t\t"
         )
-        self.__foot = "\n\t\t\t</reference>\n\t\t</pages>\n\t</main>\n</body>\n\n</html>"
+        self.__foot = "\n\t\t</pages>\n\t</main>\n</body>\n\n</html>"
 
     def __str__(self):
         return f"{self.dates[0].isoformat()} to {self.dates[-1].isoformat()}"
@@ -36,25 +36,27 @@ class Calendar:
                     date2 = d.strftime("%Y-%m-%d")
                 html_list.append(
                     "<day class='solid wider'>\n\t\t\t"
-                    f"<date>{date1}.25&nbsp;</date>\n\t\t\t"
+                    f"<date>{date1}.25</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    f"<date>{date2}T06&nbsp;</date>\n\t\t\t"
+                    f"<date>{date2}T06</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    f"<date>.375</date>\n\t\t\t"
+                    "<time><span class='left'>3</span>/"
+                    "<span class='right'>8</span></time>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>T09&nbsp;</time>\n\t\t\t"
+                    "<time>T09</time>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    f"<date>.5&nbsp;&nbsp;</date>\n\t\t\t"
+                    "<date>.5&nbsp;</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>T12&nbsp;</time>\n\t\t\t"
+                    "<time>T12</time>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    f"<date>.625</date>\n\t\t\t"
+                    "<time><span class='left'>5</span>/"
+                    "<span class='right'>8</span></time>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>T15&nbsp;</time>\n\t\t\t"
+                    "<time>T15</time>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    f"<date>.75&nbsp;</date>\n\t\t\t"
+                    "<date>.75</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>T18&nbsp;</time>\n\t\t</day>\n\t\t"
+                    "<time>T18</time>\n\t\t</day>\n\t\t"
                 )
             pathlib.Path(
                 f"{week[0].isoformat()}_{week[-1].isoformat()}_week.html"
@@ -62,7 +64,7 @@ class Calendar:
                 self.__head
                 + "".join(html_list)
                 + f"<pages><current>{page + 1}</current>"
-                + f"<reference>{71 + page // 5}"
+                + f"<reference>{71 + page // 5}\n\t\t\t</reference>"
                 + self.__foot
                 )
         return self
@@ -94,7 +96,7 @@ class Calendar:
             ).write_text(
                 self.__head + "".join(html_list)
                 + f"\n\t\t<pages>\n\t\t\t<current>{page + 71}</current>"
-                + f"<reference>{(page * 5 + 1)}-{(page * 5 + 5)}"
+                + f"<reference>{(page * 5 + 1)}-{(page * 5 + 5)}\n\t\t\t</reference>"
                 + self.__foot
                 )
         return self
@@ -128,7 +130,9 @@ class Calendar:
         pathlib.Path(
             f"{self.weeks[0][0].isoformat()}_{self.weeks[-1][-1].isoformat()}_toc.html"
         ).write_text(
-            self.__head + "".join(html_list) + self.__foot
+            self.__head + "".join(html_list)
+            + "\n\t\t<pages>\n\t\t\t<current>85</current>"
+            + self.__foot
             )
         return self
 
