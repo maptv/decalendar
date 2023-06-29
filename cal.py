@@ -59,7 +59,7 @@ class Calendar:
                     "<time>T18</time>\n\t\t</day>\n\t\t"
                 )
             pathlib.Path(
-                f"{week[0].isoformat()}_{week[-1].isoformat()}_week.html"
+                f"{page + 1:02}_{week[0].isoformat()}_{week[-1].isoformat()}_week.html"
             ).write_text(
                 self.__head
                 + "".join(html_list)
@@ -92,7 +92,7 @@ class Calendar:
                     + "</day>\n\t\t"
             )
             pathlib.Path(
-                f"{five_weeks[0].isoformat()}_{five_weeks[-1].isoformat()}_month.html"
+                f"{page + 71:02}_{five_weeks[0].isoformat()}_{five_weeks[-1].isoformat()}_month.html"
             ).write_text(
                 self.__head + "".join(html_list)
                 + f"\n\t\t<pages>\n\t\t\t<current>{page + 71}</current>"
@@ -128,7 +128,7 @@ class Calendar:
                 "</toc>\n\t\t"
             )
         pathlib.Path(
-            f"{self.weeks[0][0].isoformat()}_{self.weeks[-1][-1].isoformat()}_toc.html"
+            f"85_{self.weeks[0][0].isoformat()}_{self.weeks[-1][-1].isoformat()}_toc.html"
         ).write_text(
             self.__head + "".join(html_list)
             + "\n\t\t<pages>\n\t\t\t<current>85</current>"
