@@ -36,6 +36,8 @@ To create weekly HTML and PDF files for 2023, these two shell commands should be
 ```
 python cal.py
 python sel.py
+rm *.pdf
+pdfunite *.pdf 2024.pdf
 ``````
 
 # Customize
