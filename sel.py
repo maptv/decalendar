@@ -21,9 +21,8 @@ settings = {
 prefs = {'printing.print_preview_sticky_settings.appState': json.dumps(settings)}
 chrome_options.add_experimental_option('prefs', prefs)
 chrome_options.add_argument('--kiosk-printing')
-CHROMEDRIVER_PATH = '/usr/local/bin/chromedriver'
 for file in pathlib.Path.cwd().glob("*.html"):
-    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=CHROMEDRIVER_PATH)
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get(file.as_uri())
     driver.execute_script('window.print();')
     driver.quit()
