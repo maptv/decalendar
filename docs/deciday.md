@@ -17,10 +17,10 @@ DODT can be used in three main types of applications:
 
 ```
 13:00-05
- 5.50-2
+ 5 50-2
 
  7:00-05
- 3.00-2
+ 3 00-2
 ```
 
 Here is a codepen that shows this format (deciday time with milliday precision) without offsets: https://codepen.io/maptv/pen/ZEmjbJv
@@ -30,10 +30,10 @@ This format fits well with standard time. If more precision is required, then th
 
 ```
 13:00:00-05
- 5.50 00-2
+ 5 50.00-2
 
  7:00:00-05
- 3.00 00-2
+ 3 00.00-2
 ```
 
 Microdays are too precise (move too fast) to look at on a clock, so a space is added so that the last digit does not have to be shown. The space also lines everything up very nicely:
@@ -41,9 +41,19 @@ Microdays are too precise (move too fast) to look at on a clock, so a space is a
 - milliday: minute
 - centimilliday: second
 
-Here is a codepen that shows this format (deciday time with centimilliday precision) with offsets: https://codepen.io/maptv/pen/YzRjwVG
+I decided later that showing millidays is better than deciday, even though the offset is in deciday:
 
-This format is very cool, but it should not be the default. Apps should provide the ability to toggle:
+```
+13:00:00-05
+ 5 50.00-2
+
+ 7:00:00-05
+ 3 00.00-2
+```
+
+Here is a codepen that shows this format (milliday with centimilliday precision and deciday offset): https://codepen.io/maptv/pen/YzRjwVG
+
+This format is very cool, but the default should be to show only milliday without offsets. Apps should provide the ability to toggle:
 
 - precision mode (default: false): change the level of precision from milliday to centimilliday
 - offset mode (default: false): include offsets to make it easier to convert local decimal time <-> utc decimal time <-> utc standard time <-> local standard time
@@ -55,20 +65,20 @@ This format is very cool, but it should not be the default. Apps should provide 
 
 ```
 13:00
- 5.50
+ 5 50
 
  7:00
- 3.00
+ 3 00
 ```
 
 ### Precision mode is enabled
 
 ```
 13:00:00
- 5.50 00
+ 5 50.00
 
  7:00:00
- 3.00 00
+ 3 00.00
 ```
 
 ### Delimiter mode is disabled
@@ -108,10 +118,8 @@ This format is very cool, but it should not be the default. Apps should provide 
  30000-2
 ```
 
-Removing delimiters changes the units:
-- to milliday when precision mode is disabled
-- to centimilliday when precision mode is enabled
-Removing delimiters will often be paired with removing offsets.
+Enabling precision mode and removing delimiters changes the units to centimilliday, otherwise the units are always millidays.
+Removing delimiters will often be paired with removing offsets for a simpler, cleaner display.
 
 The display for HODT with the hour offset translated to centiday is precise down to decimillidays by default:
 
@@ -133,13 +141,13 @@ But can be precise down to decimicrodays if seconds are included:
 37.50000-21
 ```
 
-Decimicrodays are way too precise (move way too fast) to look at. HODT will probably just be a stepping stone to DODT. It can used as a tool to teach people about decimal time. It can used when a more precise exact match to HOST is required. HODT could be a good option to include in an app, but to limit initial development time, it should be added after DODT is fully implemented.
-
-## Stopwatch
+HODT will probably just be a stepping stone to DODT. It can used as a tool to teach people about decimal time. It can used when a more precise exact match to HOST is required. HODT could be a good option to include in an app, but to limit initial development time, it should be added after DODT is fully implemented.
 
 More precision will certainly be required for stopwatches and timers. Stopwatches count up and timers count down.
 
-The display starts with all zeros and increments once the user hits start.
+## Stopwatch
+
+The stopwatch display starts with all zeros and increments once the user hits start.
 
 ```
 s.ss
@@ -147,7 +155,7 @@ s.ss
 0.00
 ```
 
-Regardless of delimiters or duration, the stopwatch units are always centimillidays. Removing delimiters makes sense if the durations we are recording are short.
+If delimiters are removed, the stopwatch units change from centimillidays to decimicrodays. Decimicrodays are way too precise (move way too fast) to look at on a clock/watch, but can work well for a stopwatch. Decimicrodays are 8.64ms long and thus are more precise than centiseconds. If even greater precision is required, more places after the decimals can be added. Adding decimals changes the units. For example, adding a 1 place after the decimal changes centiseconds to milliseconds and decimicrodays to centimicrodays. The precision and max value of the bottom component of the stopwatch will always be greater. Removing delimiters makes sense if the durations we are recording are short:
 
 ```
 ssss
@@ -173,7 +181,7 @@ ss.ss
 34.72
 ```
 
-- minutes - the bottom will need another digit after 1m26.4s:
+- minutes - the bottom will need another digit after 1m26.4s (the delimiter does not move):
 
 ```
 m:ss.ss
@@ -185,7 +193,7 @@ mm:ss.ss
 10 41.67
 ```
 
-- hours - the bottom will need another digit after 2h24m:
+- hours - the bottom will need another digit after 2h24m (the delimiter does not move):
 
 ```
 hh:mm:ss.ss
@@ -217,88 +225,80 @@ h:mm:ss.ss
 
 This can continue forever, but only a certain number of digits can be displayed in an app so a limit can be placed at which the stopwatch will automatically stop.
 
-Decimicrodays are 8.64ms long and thus are more precise than centiseconds. If even greater precision is required, more places after the decimals can be added. The precision and max value of the bottom timer will always be greater.
-
 ## Countdown timer
 
-Users can enter any two digit value for hours, minutes, and seconds. Once the timer is started, the values are recalculated to fit within the respective limits of each (either 24 or 60). Any number of days can be entered.
+Unlike the clock/watch and the stopwatch, the timer does no use colons as delimiters for standard time. Instead it uses the first letter of each standard time unit, i.e. h, m, s. Users can enter any two digit value for hours, minutes, and seconds. Once the timer is started, the values are recalculated to fit within the respective limits of each (either 24 or 60). The timer is also different from the clock/watch and stopwatch in that the units change with duration, even without removing delimiters or adjusting the settings:
 
-For durations less than an hour (most common usage), the display is 6 characters wide:
-
-```
-15m00s
-10,416
-
-99m00s
-68,750
-md, μd
-```
-
-If the duration remaining is above an hour, the top will include an hours place:
+For durations less than 1m26.4s, the bottom component uses centimilliday (beats) units:
 
 ```
+30s
+34b
+```
+
+For durations between 1m26.4s and 2h24m, the bottom component includes milliday units:
+
+```
+   1m30s
+   1m04b
+
+  15m00s
+  10m42md
+
+  99m00s
+  68m75b
+
 1h15m00s
-  52,083
-  md, μd
+  52m08b
 ```
 
-If the duration remaining is above two hours 24 minutes, the bottom will include another digit:
+For durations more than 2h24m, the bottom component includes deciday units:
 
 ```
-6h15m00s
- 260,417
+  2h30m00s
+  1d04m17b
 
-2h30m00
- 104,167
+  6h15m00s
+  2d60m42b
+
+ 12h15m00s
+  5d10m42b
+
+ 24:15:00s
+ 10d10m42b
+
+240h15m00s
+100d10m42b
 ```
 
-When the duration remaining is above 10 hours, the top will need another digit:
-
-```
-12h15m00s
-  510,416
-  mil,mic
-```
-
-If the duration remaining is above 24 hours, another digit in front of both the top and the bottom be needed:
-
-```
-1d00h15m00s
-  1,010,416
-  d,mil,mic
-```
-
-At this point, any number of days should work for the top and bottom. As long as days are included, the bottom will be 2 digits shorter.
-
-Examples:
+### Clock Examples:
 
 Noon UTC in DC in Eastern Standard Time (EST) and West Atlantic Americas (WAS) / Today Mid-Morning (TMM) time zones, which is 1/12dd or 12 minutes ahead.
 
 ```
 07:00-05
- 3.00-2
+ 3 00-2
 ```
-
 
 6pm UTC in DC in Eastern Standard Time (EST) and West Atlantic Americas (WAS) / Today Mid-Morning (TMM) time zones, which is 1/12dd or 12 minutes ahead.
 
 ```
 13:00-05
- 5.50-2
+ 5 50-2
 ```
 
 Noon UTC in LA in Pacific Standard Time (PST) and East Pacific Americas (EPA) / Today Early-Morning (TEM) time zones, which is 1/3dd or 48 minutes ahead.
 
 ```
 05:00-08
- 2.00-3
+ 2 00-3
 ```
 
 6pm UTC in LA in Pacific Standard Time (PST) and East Pacific Americas (EPA) / Today Early-Morning (TEM) time zones, which is 1/3dd or 48 minutes ahead.
 
 ```
 10:00-08
- 4.50-3
+ 4 50-3
 ```
 
 Clock/Watch apps should make it clear that these are two different times being shown, but they become equivalent when the offset is subtracted from the time to get the time UTC. The advantage to this display is that times will line up nicely on hours divisible by 3. The disadvantage is the times cannot be converted without including the offset, except for locations with -12, 0, and 12 hour UTC offsets, which do not need subtract the offset when converting. I’m convinced that displaying HOST and DODT time together with offsets will be best. The UTC offset is not typically shown in clock/watch apps, but including the offsets should be standard for showing HOST and DODT together. To obtain the DODT offset, the UTC offset is divided by 2.4 and rounded to the nearest whole deciday. To calculate DODT, the time at UTC is converted to decidays and the offset is added. The local time should not be used to calculate DODT.
@@ -313,7 +313,7 @@ https://gist.github.com/maptv/4e056422b490c38140c4259421527cef
 
 
 1. Hourly-offset decimal time (HODT, pronounced hot): convert hours into decidays. The main advantage of this system is that it exactly matches our current time system. The disadvantage is that the hour offsets that are not evenly divisible by 3 look strange. The time can be shown with 3-5 digits. For the offset, 2 digits are enough to distinguish between time zones including those with quarter hour (1cd = 14.4m) and half hour (2cd = 28.8m) offsets. Regardless of hour many digits are displayed, the HODT will be calculated using exact times and offsets. Daylight savings times can be incorporated into HODT.
-2. Decidaily-offset decimal time (DODT, pronounced dot): By agreement of all concerned parties, the existing hourly time zone system can be simplified to decidaily metric time zones. The simplest way to calculate the decidaily metric time zones is by rounding hourly metric times to the nearest deciday. Rather than drawing new time zones on the map, this method groups existing time zones into decidaily time zones. This method will not match hourly offset metric time, but may be surprisingly close in some time zones. The greatest difference (50md, 72m) is at UTC-6 and UTC+6. There is no difference at UTC, UTC-12, and UTC+12. This system is much less fine grained than HODT and joins together 2-3 hourly offsets including any quarter hour and half hour offsets in between. Joining together time zones eliminates differences between many standard and daylight savings time zones, with the exception of Alaska Time, Amazon Time, Atlantic Time (should only apply to Bermuda), Australian Eastern Time, Central Time, Central European Time, Chatham Time, Chile Time, Choibalsan Time, Easter Island Time, Falkland Island Time, Iran Time, Lord Howe Time, Paraguay Time, Samoa, Ulaanbaater Time, and West Africa Time. The remaining daylight savings time differences should be respected until they are eventually abolished.
+2. Decidaily-offset decimal time (DODT, pronounced dot): By agreement of all concerned parties, the existing hourly time zone system can be simplified to decidaily decimal time zones. The simplest way to calculate the decidaily decimal time zones is by rounding hourly decimal times to the nearest deciday. Rather than drawing new time zones on the map, this method groups existing time zones into decidaily time zones. This method will not match hourly offset decimal time, but may be surprisingly close in some time zones. The greatest difference (50md, 72m) is at UTC-6 and UTC+6. There is no difference at UTC, UTC-12, and UTC+12. This system is much less fine grained than HODT and joins together 2-3 hourly offsets including any quarter hour and half hour offsets in between. Joining together time zones eliminates differences between many standard and daylight savings time zones, with the exception of Alaska Time, Amazon Time, Atlantic Time (should only apply to Bermuda), Australian Eastern Time, Central Time, Central European Time, Chatham Time, Chile Time, Choibalsan Time, Easter Island Time, Falkland Island Time, Iran Time, Lord Howe Time, Paraguay Time, Samoa, Ulaanbaater Time, and West Africa Time. The remaining daylight savings time differences should be respected until they are eventually abolished.
 3. Centidaily-offset decimal time (CODT, pronounced cot) time: Divide the current longitude by 3.6 and round to the nearest centiday. This method may not match DODT, because many times zones only loosely follow longitudinal divisions. Either way, only one digit should be used for DODT offsets, while HOST and CODT offsets should use two digits. CODT is a more objective system and could be used to determine the time at any location even if the time zone is unclear, for example in a remote location or on the border of two countries in different time zones.
 
 I think the better system will be to have fewer time zones, but CODT have roughly 100 time zones. The rounding could be adjusted to have fewer time zones. For example, rounding to to the nearest multiple of 5 centiday (18 degrees) would be similar to the current system of 1 hour being 15 degrees, in that there would roughly 20 two-digit offsets. Having roughly 10 one-digit time zones system with DODT would be simpler, but CODT could be used when the time zone is unclear or a closer match to sunrise/sunset time is desired.
@@ -321,10 +321,9 @@ I think the better system will be to have fewer time zones, but CODT have roughl
 Clock/Watch apps should automatically determine the HODT time from the local time and UTC offset, but provide DODT and CODT time as alternatives. The default should be to show regular time and HODT time with milliday precision. For example, noon EST:
 
 ```
- 5.00-0
+ 5 00-0
 12:00-00
 ```
-
 
 Centiday precision is enough to distinguish between all time zones. Even though -21 is shown, the actual offset is 208.33333md and the actual time UTC will be 708.3333md. Adding 500md and 21cd to get 710md is close enough. The difference is 5/3md or 2.4 minutes (2m24s).
 
@@ -334,11 +333,11 @@ CODT can have different levels of precision from the default deciday to microday
 
 ## Examples
 
-Calculate decidaily offset metric (DODT) time:
+Calculate decidaily offset decimal (DODT) time:
 
-1. Find UTC time and convert to metric time (aka metric time UTC)
-2. Find the hourly UTC offset, convert to metric time, and round to the nearest deciday
-3. Sum the metric time and metric offset, report the sum together with the offset
+1. Find UTC time and convert to decimal time (aka decimal time UTC)
+2. Find the hourly UTC offset, convert to decimal time, and round to the nearest deciday
+3. Sum the decimal time and decimal offset, report the sum together with the offset
 
 * West longitude is minus, East longitude is plus.
 
@@ -352,13 +351,13 @@ Another example, LA is -3
 * Current time UTC is 1800 or 750md
 * Current time PDT is 1100
 * Current time PST is 1000
-* Current metric time in LA is 450-3 or 10.8 hours or 10:48, a difference of -12 minutes from PDT and 48 minutes from PST.
+* Current decimal time in LA is 450-3 or 10.8 hours or 10:48, a difference of -12 minutes from PDT and 48 minutes from PST.
 
-Calculate Longitudinally offset metric (CODT) time:
+Calculate Longitudinally offset decimal (CODT) time:
 
-1. Find UTC time and convert to metric time (aka metric time UTC)
-2. Find longitude in degrees, divide by 36, and round to nearest whole number, this is the metric offset in decidays
-3. Sum the metric time and metric offset, report the sum together with the offset
+1. Find UTC time and convert to decimal time (aka decimal time UTC)
+2. Find longitude in degrees, divide by 36, and round to nearest whole number, this is the decimal offset in decidays
+3. Sum the decimal time and decimal offset, report the sum together with the offset
 
 Chicago is at -88 degrees longitude and thus has the same cutoff as NYC and DC
 
@@ -372,21 +371,20 @@ https://en.m.wikipedia.org/wiki/Extreme_points_of_South_America
 
 ## Datetimes
 
-
 The offset can also be represented by a letter using the NATO military time zone code: https://en.wikipedia.org/wiki/Military_time_zone#Description
 
 ```
 13:00:00D
- 5.50 00D
+ 5 50.00D
 
  7:00:00D
- 3.00 00D
+ 3 00.00D
 
 13:00D
- 5.50D
+ 5 50D
 
  7:00D
- 3.00D
+ 3 00D
 ```
 
 This is shorter than displaying offsets in numeric form but it makes calculating between local decimal time <-> utc decimal time <-> utc standard time <-> local standard time.
@@ -444,7 +442,7 @@ The decimal times above have centimilliday precision. Centimillidays are smaller
 
 ## ISO Week Date Calendar
 
-It would be great to create a calendar based on ISO Week Dates
+I explored a calendar based on ISO Week Dates, but concluded that it was too hard to keep track of important dates like birthdays and holidays. I decided to keep timestamps in yyyy-mm-dd.dddddz format (as above) instead of yyyy-Www-d.dddddz format.
 
 https://help.tableau.com/current/pro/desktop/en-us/dates_calendar.htm
 
@@ -465,7 +463,6 @@ The advantage is that every year would begin with Monday and only contain full w
 | November  | 30  | 334 |
 | December  | 31  | 365 |
 
-
 Ordinal number is the previous month cumulative sum (cum) plus the current
 month date minus one, e.g. Christmas is 358. The ISO week number is the floor(ordinal number / 7) plus one. e.g. Christmas is 52. The ISO weekday number is mod(ordinal number, 7) plus one, e.g. Christmas is 2. To make the ISO week dates match the Gregorian calendar dates, a lag correction has to applied for years that do not start on at the same time as that year's first ISO week. The lag ranges from -3 to +3. The lag is added to every ISO week date to make it occur on the same day as in Gregorian calendar.
 
@@ -479,9 +476,9 @@ month date minus one, e.g. Christmas is 358. The ISO week number is the floor(or
 | Jan 3  | -2  |
 | Jan 4  | -3  |
 
-
-
 ## File renaming shell program
+
+I thought about creating a shell program that rename files based on metadata, but decided to use my clipboard manager to insert timestamps, e.g. 2023-06-25.65760D, instead.
 
 Rename files based on time stamp in file metadata?
 What files will I want to rename like this?
@@ -549,18 +546,18 @@ Gēng (更) can be another name for deciday.
 
 In the French Republican Calendar system, the hour was deciday (10^-1), the minute was milliday (10^-3), and the second was centimilliday (10^-5). Following this pattern, the French word tierce could represent a decimicroday (10^-7) and the French word quatierce could be a nanoday (10^-9).
 
-Western European Time and Central European Time can be the same as metric UTC. Eastern European Time can +1
+Western European Time and Central European Time can be the same as decimal UTC. Eastern European Time can +1
 
 The offset can modify the date: At 600md in DC, it is midnight UTC and the beginning of the next calendar day
 
 Users can either share location to get Longitude or set the UTC offset themselves.
 
-Longitudinal metric time requires knowing the longitude and sometimes may cut in inconvenient places like the middle of a small country.
+Longitudinal decimal time requires knowing the longitude and sometimes may cut in inconvenient places like the middle of a small country.
 
-Translating existing time zones into metric zones time could be easier and more useful:
+Translating existing time zones into decimal zones time could be easier and more useful:
 
 There are about 25 existing time zones, because zero is included.
 
-Middle three metric time zones include three time hour time zones. Then, they move by 2 hour
+Middle three decimal time zones include three time hour time zones. Then, they move by 2 hour
 
 
