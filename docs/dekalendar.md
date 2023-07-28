@@ -34,13 +34,18 @@ Instead of using $\frac{1}{24}$-day hours, $\frac{1}{1444}$-day minutes, and $\f
 The Decalendar date format is `yyyy+ddd`, where `yyyy` is the four-digit year and `ddd` is the three-digit day-of-year (DOY). The first 2 digits of the DOY tell us the current dek. For example, the midyear point is always in Dek 18, either at noon on Day 182 in non-leap years or midnight between Day 182 and Day 183 in leap years. To obtain the pent number, double the first two digits of the DOY and then add 1 if the last digit is greater than 4. For example, the midyear point occurs in pent 36.
 
 These calculations work for all Decalendar dates with two notable exceptions:
-- Dek 36 does not exist; the last 5 days of non-leap years are in Pent 72, whereas leap days are in Dek -1.
-- Pent 73 does not exist; leap days are considered to be part of Pent -1.
-The intuition behind the number -1 is that the leap day is the day before we reset our day count to 0. Negative indexes start from the end of the year, as they do in zero-indexed programming languages, such as Python and JavaScript. This means that Day -1 is the last day of the year, Pent -1 is the last 5 days of the year, and Dek -1 is the last 10 days of the year.
+- Dek 36 does not exist; the last 5 days of non-leap years are in Pent 72 and Quint 4.
+- Leap days are considered to be part of Pent -1.
+The intuition behind the number -1 is that the leap day is the day before we reset our day count to 0. Negative indexes start from the end of the year, as they do in zero-indexed programming languages, such as Python and JavaScript.
 
-Negative indexes tell us how many much time is left in a year and could be helpful if we are not sure if a given year is a leap year. Negative day indexes can be used in Decalendar dates. For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on December 31, 1977. We can easily tell that the year `1977` is not a leap year, because odd-numbered years are not evenly divisible by 4 (a necessary but not sufficient [criteria for a leap year](https://en.wikipedia.org/wiki/Leap_year#Gregorian_calendar)).
+To eliminate the impact of leap days on negative indexes, the final day of 
 
-Day -366 is the first day of a leap year, but does not exist in non-leap years, which start with Day -365. In non-leap years, Pent 0 is synonymous with -73, and Quint 0 is the same as Quint -5, but pattern does not hold true for leap years.
+
+This means that Day -1 is the last day of the year, Pent -1 is the last 5 days of the year, and Dek -1 is the last 10 days of the year.
+
+Negative indexes tell us how many much time is left in a year and provide a way of describing the final days of any year, regardless of whether or not it is a leap year. Negative day indexes can be used in Decalendar dates. For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on December 31, 1977. We can easily tell that the year `1977` is not a leap year, because odd-numbered years are not evenly divisible by 4 (a necessary but not sufficient [criteria for a leap year](https://en.wikipedia.org/wiki/Leap_year#Gregorian_calendar)).
+
+To prevent the leap day from throwing the system of positive and negative indexes system out of alignment, the negative index of leap days (Day 365) is Day -0. In mathematics and programming, -0 is the same is 0. the first day of a leap year, but does not exist in non-leap years, which start with Day -365. In non-leap years, Pent 0 is synonymous with -73, and Quint 0 is the same as Quint -5, but this pattern does not hold true for leap years, because the leap day throws everything out of alignment.
 
 All the Decalendar units can be negative, but negative numbers have a different meaning for Decalendar years. Negative Decalendar years represent the years prior to Year 1 [BCE (Before Common Era)](https://en.wikipedia.org/wiki/Common_Era), because Decalendar Year 0 is Year 1 BCE. For example,  [Year 776 BCE](https://en.wikipedia.org/wiki/Timeline_of_ancient_history#Classical_antiquity) is the same as Decalendar Year -775.
 
