@@ -1,13 +1,13 @@
-# Decalendar
+# Decalendar and Declock
 
 ## Summary
 
 Decalendar is a calendar system that is
-- zero-indexed (starts counting from 0 instead of 1),
+- starts counting from 0 instead of 1,
 - based on the numbers 5, 10, and 73, and
-- perennial (uses the same dates for all years).
+- is nearly identical between leap years and non-leap years.
 
-Declock is a time system that is based on fractional days (quarter-day instead of 6AM).
+Declock is a time system that uses metric prefixes to define units of time in which the base unit is a day.
 
 ## Goal
 
@@ -31,19 +31,30 @@ Instead of using $\frac{1}{24}$-day hours, $\frac{1}{1444}$-day minutes, and $\f
 
 ## Dates
 
-The Decalendar date format is `yyyy+ddd`, where `yyyy` is the four-digit year and `ddd` is the three-digit day-of-year (DOY). The first 2 digits of the DOY tell us the current dek. For example, the midyear point is always in Dek 18, either at noon on Day 182 in non-leap years or midnight between Day 182 and Day 183 in leap years. To obtain the pent number, double the first two digits of the DOY and then add 1 if the last digit is greater than 4. For example, the midyear point occurs in pent 36.
+There are two main Decalendar date formats is `yyyy+ddd` and `yyyy-ddd`, in which the four-digit year is followed by a positive or negative three-digit day-of-year (DOY) index. Each day in a year can be described by both a positive and a negative index. For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on December 31, 1977. The intuition behind the number -1 is that the leap day is the day before we reset our day count to 0. Negative indexes start from the end of the year, as they do in [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) [programming languages](https://en.wikipedia.org/wiki/Zero-based_numbering#Usage_in_programming_languages), such as Python and JavaScript.
+
+Negative indexes tell us how many days are left in the year and provide consistent equivalents of Gregorian calendar dates in leap years. For example, December 25th is always Day -7, regardless of whether or not there is a leap year. Remembering the number -7 is a lot easier than remembering that December 25th is Day 358 in non-leap years and 359 on leap years.
+
+The Gregorian calendar leap day, February 29th, can be referred to either as Day 59 or Day -307, but only exists in leap years. In non-leap years, Day 59 is March 1 and Day -307 is February 28th. This illustrates a simple rule: to discuss the equivalent of Decalendar dates and Gregorian calendar dates, we should only use positive indexes before Day 59 and use negative indexes thereafter. Day 58 is always February 28th and Day -306 is always March 1.
+
+The
+
+Dates after Day 58 should use a negative index for consistent conversion to the equivalent Gregorian calendar dates. This is because Day 58 is February 28th, the day after which a leap day is added in Gregorian calendars. Negative indexes below (less than) -306 are safe from the scourge of the Gregorian calendar leap day. The 
+
+The first 2 digits of the DOY tell us the current dek. For example, the midyear point is always in Dek 18, either at noon on Day 182 in non-leap years or midnight between Day 182 and Day 183 in leap years. To obtain the pent number, double the first two digits of the DOY and then add 1 if the last digit is greater than 4. For example, the midyear point occurs in pent 36.
 
 These calculations work for all Decalendar dates with two notable exceptions:
 - Dek 36 does not exist; the last 5 days of non-leap years are in Pent 72 and Quint 4.
 - Leap days are considered to be part of Pent -1.
-The intuition behind the number -1 is that the leap day is the day before we reset our day count to 0. Negative indexes start from the end of the year, as they do in zero-indexed programming languages, such as Python and JavaScript.
 
 To eliminate the impact of leap days on negative indexes, the final day of 
+
+Negative timestamps start at -365.00000, but then change to +364.99999 in the next beat.
 
 
 This means that Day -1 is the last day of the year, Pent -1 is the last 5 days of the year, and Dek -1 is the last 10 days of the year.
 
-Negative indexes tell us how many much time is left in a year and provide a way of describing the final days of any year, regardless of whether or not it is a leap year. Negative day indexes can be used in Decalendar dates. For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on December 31, 1977. We can easily tell that the year `1977` is not a leap year, because odd-numbered years are not evenly divisible by 4 (a necessary but not sufficient [criteria for a leap year](https://en.wikipedia.org/wiki/Leap_year#Gregorian_calendar)).
+Negative indexes tell us how many much time is left in a year and provide a way of describing the final days of any year, regardless of whether or not it is a leap year. Negative day indexes can be used in Decalendar dates. We can easily tell that the year `1977` is not a leap year, because odd-numbered years are not evenly divisible by 4 (a necessary but not sufficient [criteria for a leap year](https://en.wikipedia.org/wiki/Leap_year#Gregorian_calendar)).
 
 To prevent the leap day from throwing the system of positive and negative indexes system out of alignment, the negative index of leap days (Day 365) is Day -0. In mathematics and programming, -0 is the same is 0. the first day of a leap year, but does not exist in non-leap years, which start with Day -365. In non-leap years, Pent 0 is synonymous with -73, and Quint 0 is the same as Quint -5, but this pattern does not hold true for leap years, because the leap day throws everything out of alignment.
 
