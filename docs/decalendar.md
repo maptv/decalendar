@@ -1,3 +1,5 @@
+Dekalendar
+
 # Decalendar and Declock
 
 ## Summary
@@ -17,25 +19,160 @@ Decalendar and Declock aim to first peacefully co-exist with, but then ultimatel
 
 ### Calendar units
 
-Instead of using 7-day weeks, roughly 30-day months, roughly 90-day quarters, the [day-of-month](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates), and the [day-of-week](https://en.wikipedia.org/wiki/ISO_8601#Week_dates), Decalendar dates only uses the year, the zero-indexed [day-of-year](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates), and the following 3 calendar units:
+Instead of using 7-day weeks, roughly 30-day months, roughly 90-day quarters, the [day-of-month](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates), and the [day-of-week](https://en.wikipedia.org/wiki/ISO_8601#Week_dates), Decalendar dates only uses the year, the zero-indexed [day-of-year](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates), and the following 4 calendar units:
 - 5-day pents (pentaday),
-- 10-day deks (decaday), and
+- 10-day deks (decaday), 
+- 36-day heks (hexatrigesimal dek) and
 - 73-day quints (quintiles).
 
 ### Time units
 
-Instead of using $\frac{1}{24}$-day hours, $\frac{1}{1444}$-day minutes, and $\frac{1}{86400}$-day seconds, Declock uses the following 3 time units:
+Instead of using $\frac{1}{24}$-day hours, $\frac{1}{1444}$-day minutes, and $\frac{1}{86400}$-day seconds, Declock uses the following 4 time units:
+- 10<sup>-1</sup>-day dimes (decidays),
 - 10<sup>-2</sup>-day cents (centidays),
 - 10<sup>-3</sup>-day mils (millidays), or
 - 10<sup>-5</sup>-day beats (centimillidays).
 
 ## Dates
 
-There are two main Decalendar date formats is `yyyy+ddd` and `yyyy-ddd`, in which the four-digit year is followed by a positive or negative three-digit day-of-year (DOY) index. Each day in a year can be described by both a positive and a negative index. For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on December 31, 1977. The intuition behind the number -1 is that the leap day is the day before we reset our day count to 0. Negative indexes start from the end of the year, as they do in [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) [programming languages](https://en.wikipedia.org/wiki/Zero-based_numbering#Usage_in_programming_languages), such as Python and JavaScript.
+The two main Decalendar date formats are `yyyy+ddd` and `yyyy-ddd`, in which the four-digit year is followed by a positive or negative three-digit day-of-year (DOY) index. Each day in a year can be described by both a positive and a negative index. 
 
-Negative indexes tell us how many days are left in the year and provide consistent equivalents of Gregorian calendar dates in leap years. For example, December 25th is always Day -7, regardless of whether or not there is a leap year. Remembering the number -7 is a lot easier than remembering that December 25th is Day 358 in non-leap years and 359 on leap years.
+The first day of every year has a positive index of 0 and a negative index of either -365 or -366. For example, the first day of the third millennium can be written `2000+000` or `2000-366`. 
 
-The Gregorian calendar leap day, February 29th, can be referred to either as Day 59 or Day -307, but only exists in leap years. In non-leap years, Day 59 is March 1 and Day -307 is February 28th. This illustrates a simple rule: to discuss the equivalent of Decalendar dates and Gregorian calendar dates, we should only use positive indexes before Day 59 and use negative indexes thereafter. Day 58 is always February 28th and Day -306 is always March 1.
+While positive indexes start at zero, while negative indexes start at -1.  For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on the last day of 1977. 
+
+The additional day in leap years throws Decalendar indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years. 
+
+To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year. 
+
+To obtain a negative index from a positive index, subtract the number of days in the year from the positive index. For example, 359 - 366 and 358 - 365 both equal -7.
+
+## Times
+
+Like Decalendar date indexes, Declock times can be both positive and negative. Positive times show how much time has passed, while negative times show how much time remains. For example, at 6AM we could say that 250 mils, a quarter of a day, have passed in the current day or that 750 mils, three quarters of a day, remain:
+
++250
+-750
+
+The example above only tells us the time of day, while the example below also tells us the time of year and that current year is not a leap year (because the sum of the positive day index and the absolute value of the negative day index is 365, not 366):
+
++360.250
+-005.750
+
+If we add a year to the example above, we have a timestamp that defines a specific moment in time in a specific year:
+
+1999+360.250
+1999-005.750
+
+To avoid ambiguity, timestamps should always include a time zone offset. For example, the timestamps below are in the +1 Declock time zone that includes Eastern European Time and Central African Time:
+
+1999+360.250+1
+1999-005.750+1
+
+## Calculations
+
+The times in the previous example are one dime later than than times in the +0 time zone that matches Coordinated Universal Time (UTC). To convert a UTC offset into a Declock offset, divide the UTC offset by 2.4 and round to the nearest whole number.
+
+This approach converts hours into dimes, which can then be converted into
+- cents by multiplying by 10, into
+- mils by multiplying by 100, or into
+- beats by multiplying by 10000
+
+Declock timestamps can be as precise as needed, but the units above are good approximations of quarter-hours, minutes, and seconds, respectively, and thus should be adequate for most timekeeping tasks .
+
+It is easy to obtain every time unit from a Declock time. The first digit is the current dime, the first two digits are the cents, and the first three digits are the mils. The optional last two digits are the beats.
+
+Similarly, it is possible to look at a day index and describe the the dek and pent to which it belongs. The first 2 digits of the positive day index tell us the current dek. For example, the midyear point is always in Dek 18, either at noon on Day 182 in non-leap years or midnight between Day 182 and Day 183 in leap years. To obtain the pent number, double the first two digits of the DOY and then add 1 if the last digit is greater than 4. For example, the midyear point occurs in pent 36. 
+
+Calculating negative dek and pent indexes works a little differently. If the last digit in the negative index ends in zero, the negative first two digits are the dek index, otherwise subtract one from the negative first two digits to obtain the dek index. To calculate the
+negative pent index, multiply the negative dek index by 2 and then subtract 1 if the last digit is 1-5.
+
+These index calculations work for all Decalendar dates but positive indexes at the very end of the year and negative indexes at the very beginning of the year can mix days from different years. The rules below separate days from different years:
+- Dek indexes range between -36 and 35; exceeding these ranges results in deks that include 4 days from an adjacent year if the current year is a leap year or 5 from an adjacent year if the current year is not a leap year .
+- Pent indexes range between -73 and 72; exceeding these ranges results in pents that are synonymous with pents from adjacent years if the current year is not a leap year and pents that include 4 days from an adjacent year if the current year is a leap year
+
+Following these rules means that
+- the first 5 days in non-leap years and the first 6 days in leap years do not have a negative dek index 
+- the last 5 days in non-leap years and the last 6 days in leap years do not have a positive dek index
+- the first day in leap years do not have a negative pent index 
+- the last day in leap years do not have a positive pent index
+
+While the calculations for pent and dek indexes are easy, no one could be expected to calculate the hek and quint indexes in their heads. To make it easier to determine the current hek and quint, Decalendar provides a hexatrigesimal day index.
+
+## Hexatrigesimal
+
+To calculate the
+hek index …
+
+To calculate the
+quint index …
+
+WIP
+
+- Dek indexes range between -36 and 35; exceeding these ranges results in deks that include 4 days from an adjacent year if the current year is a leap year or 5 from an adjacent year if the current year is not a leap year .
+- Pent indexes range between -73 and 72; exceeding these ranges results in pents that are synonymous with pents from adjacent years if the current year is not a leap year and pents that include 4 days from an adjacent year if the current year is a leap year
+- Quint indexes range from -5 to 4; exceeding these ranges results in quints that
+
+## Quadrasexagesimal
+
+Quadrasexagesimal Dek = Quadek
+
+Time
+Imagine you’re a DJ preparing a a 58.9824-minute-long music set. Your setlist has 64 hits in it, each hit is 55.296 seconds long and has 64 beats. The entire set has 4096 beats and the tempo remains constant throughout the set at 69
+
+4
+/
+9
+
+(625/9)  beats per minute. If we continued the playing at this tempo, there would be 100,000 beats in one day.
+
+last digit is beat, second to last is quat or quasiminute (64 beats or 0.9216m or 55.296s), first digit is quar or quasihour (4096 beats or 40.96mil or 0.98304hours or 58.9824minutes)
+
+## Dekdays
+
+
+
+## Holidays
+
+Dekends and Mideks versus Weekends
+
+
+
+
+
+
+
+These calculations work for all Decalendar dates with two notable exceptions:
+- Dek 36 does not exist; the last 5 days of non-leap years are in Pent 72 and Quint 4.
+- Leap days are considered to be part of Pent -1.
+
+
+
+
+
+
+
+In the example above, the top clock tells us
+
+## Timestamps
+
+* Day 58 is always February 28th and 
+* Day -306 is always March 1, whereas 
+* Day 59 is
+  * March 1 in non-leap years and
+  * February 29th in leap years.
+
+that occur after February 29th, the Gregorian calendar leap day.
+
+For
+Negative indexes tell us how many days are left in the year and provide consistent equivalents of Gregorian calendar dates that may occur a leap day. is Day 59 or Day -307 in leap years, but in non-leap years, and Day -307 is February 28th. To avoid confusion when comparing Decalendar dates and Gregorian calendar dates, we should only use positive indexes before Day 59 and use negative indexes thereafter. Day 58 is always February 28th and Day -306 is always March 1.
+
+Remembering the number -7 is a lot easier than remembering that
+
+The intuition behind the number -1 is that the leap day is the day before we reset our day count to 0. Negative indexes start from the end of the year, as they do in [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) [programming languages](https://en.wikipedia.org/wiki/Zero-based_numbering#Usage_in_programming_languages), such as Python and JavaScript.
+
+
+This illustrates a simple rule:
 
 The
 
@@ -249,3 +386,4 @@ The day off in the middle is called the midek. The days off at the end are calle
 2024-365.999: one milliday before midnight New Year’s Eve 2025
 
 2025-364.999: one milliday before midnight New Year’s Eve 2026
+
