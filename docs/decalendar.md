@@ -36,10 +36,10 @@ Quarterday (the time at which 1/4 of the day has passed) can be written 2 differ
 A Declock time preceded by a Decalendar date forms a timestamp called a datetime. Quarterday on the first day of the year 2000 could be written 4 different but equivalent ways:
 
 ```
-2000+000.002
-2000-365.998
-   VG+00.002
-   VG-A5.ONO
+2000+000.250
+2000-365.750
+   VG+00.66e
+   VG-A6.IJu
 ```
 
 To see the current datetime in these formats, visit this codepen:
@@ -283,37 +283,46 @@ The key to doing decimal date calculations on our fingers is to use a zero-based
 
 For tracking lunar phases, menstrual cycles, and months, it can be helpful to count days by 30. Adding 30 to the day index is easy, but we can easily move from one year to another. If we obtain a day index greater than the highest day index in the year, we can simply subtract the number of days in the current year to get the index in the next year. To count by a different number, such as 28, we would use the approach above and then subtract 2.
 
-While the calculations for pent and dek indexes are easy, no one could be expected to calculate the hek and quint indexes in their heads. Counting by 36 and 73 is not as easy as counting by 5 and 10. To make it easier to determine the current hek and quint, provides a .
+### Introduction to hexatrigesimal and quadrasexagesimal
+
+The counting by thirties approach described directly above can be modified to work for heks and quints, but Decalendar includes a hexatrigesimal day index to aid with counting and indexing heks and quints.
+
+Hexatrigesimal (base36) is an encoding that includes all ten single-digit numbers and all 26 uppercase letters in the English alphabet. Every 36 days the first character of the base36 day index increments. The base36 day index is often provided along with a quadrasexagesimal (base64) year in a format called `64-36`. For example, the first day of year 2000 in the `64-36` format is `VG+00` or `VG-A6`, while the last day of that year is `VG+A5` or `VG-01`.
+
+The `64-36` date format can be combined with a base64 time in a format called `64-36-b64`. For example, quarterday on the first day of 2000 would `VG+00.66e` or `VG-A6.IJu`. These formats are very compact and base64 time has a particular use in the Declock system, but for now we will focus on how to use base36 to determine the indexes of heks and quints.
 
 ### Hexatrigesimal date calculations
 
-The counting by thirties approach can be modified to work for heks and quints, but Decalendar includes a hexatrigesimal day index to aid with counting and indexing heks and quints.
+#### Obtaining hek indexes
 
-Hexatrigesimal (base36) is an encoding that includes all ten single-digit numbers and all 26 uppercase letters in the English alphabet. When a day index is encoded in base36, the first character is the hek index.
+The first character of the base36 day index is the hek index. The only caveat to this rule is that after Day 359, the base36 day index will start with an A, and the range of hek indexes to be 0-9. If we allowed for the existence of a Hek A, 30 or 31 out of its 36 days would be from the subsequent year. For this reason, days after Day 359 have a negative hek index, but not have a positive hek index. Negative hek indexes range from -1 to -10. Hek -10 ends before the first 5 days of non-leap year and before the first 6 days of leap years.
 
-To calculate the quint index, we subtract 
+#### Obtaining Quint Indexes
 
-To calculate the
-quint index …
+The base36 day indexes of quints follow a clear pattern that is apparent when we list the Quint indexes alongside their base36 day index ranges:
+- 0: 00-20
+- 1: 21-41
+- 2: 42-62
+- 3: 63-83
+- 4: 83-A4
 
-WIP
+To obtain the base36 day index ranges above we plug the quint index as `q` into the equations below:
+- the first day is `20 * q + q`, and
+- the last day is `20 + 20 * q + q`.
 
-- Dek indexes range between -36 and 35; exceeding these ranges results in deks that include 4 days from an adjacent year if the current year is a leap year or 5 from an adjacent year if the current year is not a leap year .
-- Pent indexes range between -73 and 72; exceeding these ranges results in pents that are synonymous with pents from adjacent years if the current year is not a leap year and pents that include 4 days from an adjacent year if the current year is a leap year
-- Quint indexes range from -5 to 4; exceeding these ranges results in quints that
+The result of this last equation for Quint 4 is 104, which we translate into A4. Leap days have a base36 index of A5. If leap days started a new quint, 72 out of 73 of its days would be in the subsequent year. For this reason, Quint indexes should only range from 0 to 4. Leap days do not have a positive Quint index, but are included in Quint -1. Conversely, the first day of leap years is not included in Quint -5. In non-leap years, all days have both a positive and negative quint index.
 
-## Quadrasexagesimal
+### Quadrasexagesimal Time Calculations
 
-Beats can be converted into sets and hits by dividing by 4096 and 64, respectively.
+The [Introduction to hexatrigesimal and quadrasexagesimal]() section above showed a format called `64-36-b64` that combines a base64 year, a base36 day index, and a base64 time. To explain the quadrasexagesimal time, we will use the following analogy.
 
-Quadrasexagesimal
+Imagine you’re a DJ playing a 58.9824-minute-long music set. Your setlist has 64 hit songs in it, each hit is 55.296 seconds long and has 64 beats. The entire set has 4096 beats and the tempo remains constant throughout the set at 69.4̅ (69⁴/₉ or 625/9) beats per minute.
 
-Time
-Imagine you’re a DJ preparing a a 58.9824-minute-long music set. Your setlist has 64 hits in it, each hit is 55.296 seconds long and has 64 beats. The entire set has 4096 beats and the tempo remains constant throughout the set at 69 4/9 (625/9) beats per minute. If we continued the playing at this tempo all day, there would be 100,000 beats in one day.
+Your first performance goes so well that you are asked to repeat your set in a loop enough times to fill an entire day with music! Playing at the same tempo as before, our daylong performance will have 100,000 beats and 1562.5 hits. We can fit all 100,000 of those beats into 3 digits if we use base64. The first digit tells us what set we are on, the second digit is the hit, and the last digit is beat.
 
+Over the course of the day it is unlikely that anyone in the audience would notice that each song is 4.704 seconds less than a minute or that the entire set is 1.0176 minutes less than an hour. To bring this analogy back to the real world, we can use 64-beat hits instead of minutes and 4096-beat sets instead of hours only be off by less than 5 seconds per minute and about a minute per hour. Unlike minutes and hours, hits and sets are based on beats and thus work within the Declock system.
 
-
-last digit is beat, second to last is quat or quasiminute (64 beats or 0.9216m or 55.296s), first digit is quar or quasihour (4096 beats or 40.96mil or 0.98304hours or 58.9824minutes)
+The 
 
 ## Dekdays
 
@@ -326,32 +335,6 @@ Dekends and Mideks versus Weekends
 
 
 
-
-
-
-These calculations work for all Decalendar dates with two notable exceptions:
-- Dek 36 does not exist; the last 5 days of non-leap years are in Pent 72 and Quint 4.
-- Leap days are considered to be part of Pent -1.
-
-
-
-
-
-
-
-In the example above, the top clock tells us
-
-## Timestamps
-
-* Day 58 is always February 28th and 
-* Day -306 is always March 1, whereas 
-* Day 59 is
-  * March 1 in non-leap years and
-  * February 29th in leap years.
-
-that occur after February 29th, the Gregorian calendar leap day.
-
-For
 Negative indexes tell us how many days are left in the year and provide consistent equivalents of Gregorian calendar dates that may occur a leap day. is Day 59 or Day -307 in leap years, but in non-leap years, and Day -307 is February 28th. To avoid confusion when comparing Decalendar dates and Gregorian calendar dates, we should only use positive indexes before Day 59 and use negative indexes thereafter. Day 58 is always February 28th and Day -306 is always March 1.
 
 Remembering the number -7 is a lot easier than remembering that
