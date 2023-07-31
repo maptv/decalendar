@@ -1,78 +1,162 @@
-Dekalendar
-
 # Decalendar and Declock
 
 ## Summary
 
-Decalendar is a calendar system that is
+Decalendar is a calendar system that
 - starts counting from 0 instead of 1,
-- based on the numbers 5, 10, 36, and 73, and
-- does not change year to year, except for an additional day on leap years.
+- uses base10 or base28 day indexes to define dates, and
+- does not change year to year, except for adding one day on leap years.
 
 Declock is a time system that uses metric prefixes to define units of time in which the base unit is a day.
 
 ## Goal
 
-Decalendar and Declock aim to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar) and [standard time](https://en.wikipedia.org/wiki/Standard_time) systems.
+Decalendar and Declock aim to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar) and [standard time](https://en.wikipedia.org/wiki/Standard_time).
 
-## Examples
+### Date formats
 
-The first day of the year 2000 can be written four different but equivalent ways:
+Decalendar dates are composed of only a year and day index. The day index can be in any of four different, but equivalent formats:
+- Base10 positive (B10+)
+- Base10 negative (B10-)
+- Base28 positive (B28+)
+- Base28 negative (B28-)
 
-```
-2000+000
-2000-366
-  VG+00
-  VG-A6
-```
+Positive indexes show the number of days that have passed in the year since Day 0, while negative indexes count down the number of days remaining in the year.
 
-Quarterday (the time at which 1/4 of the day has passed) can be written 2 different but equivalent ways:
+The table below shows New Year Day's (NYD), Mid-Year's Day (MYD), and New Year's Eve (NYE) of the year 2000 in all 4 Decalendar date formats:
 
-```
-+250
--750
-```
+| Format |   NYD    |   MYD    |    NYE   |
+| ------ |   ---    |   ---    |    ---   |
+|  B10+  | 2000+000 | 2000+183 | 2000+365 |
+|  B10-  | 2000-366 | 2000-183 | 2000-001 |
+|  B28+  | 2000+00  | 2000+53  | 2000+D1  |
+|  B28-  | 2000-D2  | 2000-53  | 2000-01  |
 
-A Declock time preceded by a Decalendar date forms a timestamp called a datetime. Quarterday on the first day of the year 2000 could be written 4 different but equivalent ways:
+On New Year's Day, the positive indexes are all 0, while the negative indexes show the total days in the year (n). Leap years (like the year 2000) have 366 days while all other years have 365 days. On New Year's Eve, the positive day indexes display the number of days in the year minus one (n-1), while the negative day index is -1.
 
-```
-2000+000.250
-2000-365.750
-   VG+00.66e
-   VG-A6.IJu
-```
+On Day 183 of leap years, the negative day indexes are the same as the positive day indexes. For this reason, Day 183 is a special Mid-Year's Day holiday called Dyad Day.
 
-To see the current datetime in these formats, visit this codepen:
+Using a Base10 day index, it is easy to track events that repeat on a yearly basis, like Dyad Day, or events with daily frequencies of 5 or 10. For events that occur at frequencies that are not divisible by 5, the Base28 day index can be helpful.
 
-## Units
+Events that occur every 28 days will end in the same second character in the Base28 day index. For example, if an event starts on Day 2 and occurs on every 28th day, its Base28 day index will always end in a two (e.g. 02, 12, 22, 32, etc.).
 
-### Calendar units
+If an event does not occur with a frequency of 28 days, the Base28 may still be helpful. For example, to track events that happen every 7 days, we can organize a single Base28 digit (list that contains every number 0-9 and capital letters A-R) in the form of a 4 by 7 matrix:
 
-Instead of using 7-day weeks, roughly 30-day months, roughly 90-day quarters, the [day-of-month](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates), and the [day-of-week](https://en.wikipedia.org/wiki/ISO_8601#Week_dates), Decalendar dates only uses the year, the zero-indexed [day-of-year](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (doy).
+|   |   |   |   |   |   |   |
+|---|---|---|---|---|---|---|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+| 7 | 8 | 9 | A | B | C | D |
+| E | F | G | H | I | J | K |
+| L | M | N | O | P | Q | R |
 
-Four additional calendar units are derived from the doy:
-- 5-day pents (pentaday),
-- 10-day deks (decaday),
-- 36-day heks (hexatrigesimal), and
-- 73-day quints (quintiles).
+In the table above, events that take place every 7 days will stay in the same column throughout the year. In the next year, we could continue the same approach after shifting to the left by one column in a non-leap year or two columns in a leap year. Using a similar approach, we could create a 2 x 14 matrix and see that events which occur every 14 days would alternate between two Base28 characters:
 
-### Time units
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+| - | - | - | - | - | - | - | - | - | - | - | - | - | - |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D |
+| E | F | G | H | I | J | K | L | M | N | O | P | Q | R |
 
-Instead of using $\frac{1}{24}$-day hours, $\frac{1}{1444}$-day minutes, and $\frac{1}{86400}$-day seconds, Declock uses the following four decimal time units:
+Base28 dates work so well that we may be tempted to create new indexes based on different numbers. For example, we could imagine a single-digit index that would reset every 6, 7, 8, or 9 days. This would not add much value, because Decalendar describes a method of using the last digit of the Base10 index to [count small numbers of days](). Similarly, a new double-digit day indexes, for example Base36, would not be a good addition to Decalendar, because it would be hard to distinguish two different double-digit day index.
+
+If we wanted both Base28 and Base10 indexes displayed at the same time, instead of switching between the formats as needed, we could use a hybrid B28+B10+ or B28-B10- format.
+
+New Year Day's (NYD), Mid-Year's Day (MYD), and New Year's Eve (NYE)
+
+|  Format  | New Year Day's | Mid-Year's Day  | New Year's Eve |
+| -------- | -------------  | -------------   | -------------- |
+| B28+B10+ |  2000+00+000   |  2000+53+183    |  2000+D1+365   |
+| B28-B10- |  2000-D2-366   |  2000-53-183    |  2000-01-001   |
+
+
+These hybrid formats shown above are not official Decalendar formats, because they are redundant (provide more information than is necessary to pinpoint a day in time). On the other hand, displaying hybrid formats may be a good way to practice reading Base28 day indexes.
+
+### Time formats
+
+Declock times, like Decalendar day indexes, can be positive or negative. Positive times show how much time has passed since midnight, while negative indexes count down the time remaining in the day. For example, noon can be written as either a positive `+50` or negative number `-50`. These numbers mean that 50 percent of the day has passed and 50 percent is left.
+
+Unlike a percent, Declock times do change in precision, and not magnitude, when there are more digits in a number. For example, noon could also be written as `+5` or number `-5`.
+Using only a single digit for time indicates that we are providing a ballpark estimate of time. More specifically, a single digit indicates a tolerance for error of up to 5% of the day. Every additional digit we add decreases that tolerance 10-fold. For example, providing midnight as `+000` means that we are expecting less than 0.05% error.
+
+If we really want to insist on punctuality, we could include up to 5 digits in the time. Specifying a time with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/), as some point the level of precision stops having relevance to daily life.
+
+Each digit provided in the time has a specific name. These are the four most useful terms:
+
 - 10<sup>-1</sup>-day dimes (decidays),
 - 10<sup>-2</sup>-day cents (centidays),
 - 10<sup>-3</sup>-day mils (millidays), and
 - 10<sup>-5</sup>-day beats (centimillidays).
 
+Using the fractions below we can see how these different units look at different times of the day.
+
+| Latin Name   | Frac  | Value  | Dime+ | Dime-  | Mil+   | Mil-  |
+| ------------ | ----- | ------ | ----- | ------ | ------ | ------ |
+| Semuncia     | 1/24  | 0.0416̅ | +0    | -9     | +04    | -96    |
+| Uncia        | 1/12  | 0.083̅  | +1    | -9     | +1     | -9     |
+| Sescuncia    | 1/8   | 0.125  | +1    | -9     | +1     | -9     |
+| Sextans      | 1/6   | 0.16̅   | +2    | -8     | +2     | -8     |
+| Quadrans     | 1/4   | 0.25   | +3    | -7     | +3     | -7     |
+| Semseptunx   | 7/24  | 0.2916̅ | +3    | -7     | +3     | -7     |
+| Triens       | 1/3   | 0.3̅    | +3    | -7     | +3     | -7     |
+| Sescquadrans | 3/8   | 0.375  | +4    | -6     | +4     | -6     |
+| Quincunx     | 5/12  | 0.416̅  | +4    | -6     | +4     | -6     |
+| Semdeunx     | 11/24 | 0.4583̅ | +5    | -5     | +5     | -5     |
+| Semis        | 1/2   | 0.5    | +5    | -5     | +5     | -5     |
+| Septunx      | 7/12  | 0.583̅  | +6    | -4     | +6     | -4     |
+| Sescquincunx | 5/8   | 0.625  | +6    | -4     | +6     | -4     |
+| Bes          | 2/3   | 0.6̅    | +7    | -3     | +7     | -3     |
+| Dodrans      | 3/4   | 0.75   | +8    | -2     | +8     | -2     |
+| Dextans      | 5/6   | 0.83̅   | +8    | -2     | +8     | -2     |
+| Sescseptunx  | 7/8   | 0.875  | +9    | -1     | +9     | -1     |
+| Deunx        | 11/12 | 0.916̅  | +9    | -1     | +9     | -1     |
+
+
+  Converting these unit to and from standard time is a bit tedious, because
+Declock includes optional 18 terms derived from Latin fractions that refer to specific.
+
+Declock uses mils as the main time unit and dimes for time zone offsets. The other units can serve as reasonably close equivalents to standard time units:
+- 1 cent = 0.96 quarter-hours
+- 1 beat = 0.864 seconds
+
+
+The times above are in centiday units, which are roughly equivalent to a quarter-hour, and can serve as a For everyday timekeeping tasks, a 3-digit millidays or 5-digit centimillidays are displayed.
+
+At midday (the time at which 1/2 of the day has passed), the positive and negative times are the same.
+
+```
++500
+-500
+```
+
+### Combined formats
+
+A Declock time preceded by a Decalendar date is called a datetime. Quarterday on the first day of the year 2000 could be written 2 different but equivalent ways:
+
+```
+2000+000.250
+2000-366.750
+```
+
+To see the current datetime in the formats, visit this codepen:
+
+## Units
+
+### Calendar units
+
+While Decalendar dates only include the year and the day-of-year index, there are 4 calendar units that Decalendar defines:
+- 5-day pents (pentaday),
+- 7-day hepts (heptaday),
+- 10-day deks (decaday), and
+- 28-day okts (icosioctaday).
+
+All of these units have positive and negative indexes with set ranges.
+
+### Time units
+
+Instead of using $\frac{1}{24}$-day hours, $\frac{1}{1444}$-day minutes, and $\frac{1}{86400}$-day seconds, Declock uses the following four decimal time units:
+
 Declock also includes two additional quadrasexigesimal (base64) time units that use beats as the base unit instead of days:
 - 64-beat hits and
 - 4096-beat sets.
-
-Declock uses mils as the main time unit and dimes for time zone offsets. The other units can serve as reasonably close equivalents to standard time units:
-- 1 set = 0.98304 hours
-- 1 cent = 0.96 quarter-hours
-- 1 hit = 0.9216 minutes
-- 1 beat = 0.864 seconds
 
 While mils should be precise for most timekeeping tasks, Declock decimal times can support any level of precision. For example, two additional digits can be added at the end of a decimal time to show beats. Units smaller than beats can be derived using metric prefixes and may be useful for scientific and technical purposes:
 -  1 decibeat = 1 microday = 86.4 milliseconds
