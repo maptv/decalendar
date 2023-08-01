@@ -154,21 +154,16 @@ While mils should be sufficiently precise for most timekeeping tasks, Declock de
 
 If the level of time precision needs to written the single letter codes listed above may be useful. Even smaller units are possible (e.g. picobeats, femtodays, etc.), but such extremely small time units only going to be useful in very niche contexts.
 
-### Reading datetimes
+### Reading dates
 
-It should be possible to derive all of the above units simply looking at a Declock time, because each unit is simply a name each digit. Visually parsing Decalendar dates works in a similar fashion. The day indexes we saw earlier can provide us with the 3 Decalendar units below:
-- 5-day pents (pentaday),
-- 10-day deks (decaday), and
-- 28-day okts (icosioctaday).
-
-For example, in the Mid-Year's Day column in table below, Base28 indexes tells that we are on Oktday 3 of Okt 5, while the Base10 index contains similar information for deks and pents.
+It should be possible to derive all of the above units simply looking at a Declock time, because each unit is simply a name each digit. Visually parsing Decalendar dates works in a similar fashion. The Base10 day indexes in the table below can provide us with information on Decalendar units called deks. Each dek has 10 days that are numbered 0-9. consists of two 5-day pents.
 
 | Format | New Year Day's | Mid-Year's Day | New Year's Eve |
 | -----  | -------------  | -------------  | -------------- |
 | B10+   | 2000+000       | 2000+183       | 2000+365.250   |
 | B10-   | 2000-366       | 2000-183       | 2000-001.750   |
-| B28+   | 2000+00        | 2000+53        | 2000+D1.250    |
-| B28-   | 2000-D2        | 2000-53        | 2000-01.750    |
+
+Okts have too many days to be useful 
 
 ### Obtaining Decimal Calendar Unit Indexes
 
@@ -179,7 +174,7 @@ Calculating negative dek and pent indexes works a little differently. If the las
 A more programmatic way to obtain these indexes is to floor divide the day index by 5 and 10 to get the pent and dek index, respectively. [Floor division](https://en.wikipedia.org/wiki/Division_(mathematics)#Of_integers), also called integer division, is the same as regular division except any remainder is discarded. The general equation for the obtaining calendar unit indexes is $\lfloor x \div y \rfloor$, where `x` is the day-of-year index and `y` is the length of the calendar unit:
 - 5 for pents,
 - 10 for deks,
-- 36 for heks, and
+- 28 for okts, and
 - 73 for quints.
 
 These index calculations work for all Decalendar dates but positive indexes at the very end of the year and negative indexes at the very beginning of the year can mix days from different years. The rules below prevent cross-contamination of days across different years:
@@ -194,6 +189,7 @@ Following these rules means that
 
 ## Dekdays
 
+The motivation for tracking pent and dek indices is that the 
 
 
 ## Holidays
@@ -783,4 +779,10 @@ Your first performance goes so well that you are asked to repeat your set in a l
 Over the course of the day it is unlikely that anyone in the audience would notice that each song is 4.704 seconds less than a minute or that the entire set is 1.0176 minutes less than an hour. To bring this analogy back to the real world, we can use 64-beat hits instead of minutes and 4096-beat sets instead of hours only be off by less than 5 seconds per minute and about a minute per hour. Unlike minutes and hours, hits and sets are based on beats and thus work within the Declock system.
 
 The 
+
+- 5-day pents (pentaday),
+- 10-day deks (decaday), and
+- 28-day okts (icosioctaday).
+
+For example, in the Mid-Year's Day column in table below, Base28 indexes tells that we are on Oktday 3 of Okt 5, while the Base10 index contains similar information for deks and pents.
 
