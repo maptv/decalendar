@@ -86,28 +86,28 @@ Each digit provided in the time has a specific name. These are the four most use
 - 10<sup>-3</sup>-day mils (millidays), and
 - 10<sup>-5</sup>-day beats (centimillidays).
 
-Using the fractions below we can see how these different units look at different times of the day.
+Using the fractions in the table below we can see how the least precise of these units look at different times of the day. An added benefit of the table below is that we can see how positive and negative times complement each other.
 
-| Latin Name   | Frac  | Value  | Dime+ | Dime-  | Mil+   | Mil-  |
-| ------------ | ----- | ------ | ----- | ------ | ------ | ------ |
-| Semuncia     | 1/24  | 0.0416̅ | +0    | -9     | +04    | -96    |
-| Uncia        | 1/12  | 0.083̅  | +1    | -9     | +1     | -9     |
-| Sescuncia    | 1/8   | 0.125  | +1    | -9     | +1     | -9     |
-| Sextans      | 1/6   | 0.16̅   | +2    | -8     | +2     | -8     |
-| Quadrans     | 1/4   | 0.25   | +3    | -7     | +3     | -7     |
-| Semseptunx   | 7/24  | 0.2916̅ | +3    | -7     | +3     | -7     |
-| Triens       | 1/3   | 0.3̅    | +3    | -7     | +3     | -7     |
-| Sescquadrans | 3/8   | 0.375  | +4    | -6     | +4     | -6     |
-| Quincunx     | 5/12  | 0.416̅  | +4    | -6     | +4     | -6     |
-| Semdeunx     | 11/24 | 0.4583̅ | +5    | -5     | +5     | -5     |
-| Semis        | 1/2   | 0.5    | +5    | -5     | +5     | -5     |
-| Septunx      | 7/12  | 0.583̅  | +6    | -4     | +6     | -4     |
-| Sescquincunx | 5/8   | 0.625  | +6    | -4     | +6     | -4     |
-| Bes          | 2/3   | 0.6̅    | +7    | -3     | +7     | -3     |
-| Dodrans      | 3/4   | 0.75   | +8    | -2     | +8     | -2     |
-| Dextans      | 5/6   | 0.83̅   | +8    | -2     | +8     | -2     |
-| Sescseptunx  | 7/8   | 0.875  | +9    | -1     | +9     | -1     |
-| Deunx        | 11/12 | 0.916̅  | +9    | -1     | +9     | -1     |
+| Latin Name   | Frac  | Value  | Dime+ | Dime-  | Cent+  | Cent-  | Mil+   | Mil-   |
+| ------------ | ----- | ------ | ----- | ------ | ------ | ------ | ------ | ------ |
+| Semuncia     | 1/24  | 0.0416̅ | +0    | -9     | +04    | -96    | +042   | -958   |
+| Uncia        | 1/12  | 0.083̅  | +1    | -9     | +08    | -92    | +083   | -917   |
+| Sescuncia    | 1/8   | 0.125  | +1    | -9     | +13    | -97    | +125   | -875   |
+| Sextans      | 1/6   | 0.16̅   | +2    | -8     | +17    | -83    | +167   | -833   |
+| Quadrans     | 1/4   | 0.25   | +3    | -7     | +25    | -75    | +250   | -750   |
+| Semseptunx   | 7/24  | 0.2916̅ | +3    | -7     | +29    | -71    | +292   | -708   |
+| Triens       | 1/3   | 0.3̅    | +3    | -7     | +33    | -67    | +333   | -667   |
+| Sescquadrans | 3/8   | 0.375  | +4    | -6     | +38    | -62    | +375   | -625   |
+| Quincunx     | 5/12  | 0.416̅  | +4    | -6     | +42    | -58    | +417   | -583   |
+| Semdeunx     | 11/24 | 0.4583̅ | +5    | -5     | +46    | -54    | +458   | -542   |
+| Semis        | 1/2   | 0.5    | +5    | -5     | +50    | -50    | +500   | -500   |
+| Septunx      | 7/12  | 0.583̅  | +6    | -4     | +58    | -42    | +583   | -417   |
+| Sescquincunx | 5/8   | 0.625  | +6    | -4     | +63    | -37    | +625   | -375   |
+| Bes          | 2/3   | 0.6̅    | +7    | -3     | +67    | -33    | +667   | -333   |
+| Dodrans      | 3/4   | 0.75   | +8    | -2     | +75    | -25    | +750   | -250   |
+| Dextans      | 5/6   | 0.83̅   | +8    | -2     | +83    | -17    | +833   | -167   |
+| Sescseptunx  | 7/8   | 0.875  | +9    | -1     | +88    | -12    | +875   | -125   |
+| Deunx        | 11/12 | 0.916̅  | +9    | -1     | +92    | -08    | +917   | -083   |
 
 
   Converting these unit to and from standard time is a bit tedious, because
