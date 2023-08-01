@@ -2,16 +2,86 @@
 
 ## Summary
 
-Decalendar is a calendar system that
-- starts counting from 0 instead of 1,
-- uses base10 or base28 day indexes to define dates, and
-- does not change year to year, except for adding one day on leap years.
+Decalendar is a calendar system that uses days as its base unit, while Declock uses days as the base unit for timekeeping. In both systems, other units are derived from days using prefixes inspired by the metric system. Decalendar units group days together, while Declock units divide days up.
 
-Declock is a time system that uses metric prefixes to define units of time in which the base unit is a day.
+Decalendar and Declock aim to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar) and [standard time](https://en.wikipedia.org/wiki/Standard_time), respectively.
 
-## Goal
+## Basics
 
-Decalendar and Declock aim to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar) and [standard time](https://en.wikipedia.org/wiki/Standard_time).
+At their core, Decalendar counts fractions of a year, while Declock counts fractions of days. The denominator for Decalendar is the number of days in the year, while for Declock the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of Decalendar, the number "5" means 5 days have passed in the year, while in the context of Declock, "5" means 5 tenths (⁵/₁₀) of the day have passed.
+
+The brevity of such Decalendar days and Declock times may make them hard to distinguish in isolation, but they often make perfect sense in context. For example, if someone says "let's have lunch at 5", it is clear that they are referring to a time and not a day of the year. Also, the value itself may provide a clue, because calendar days cannot be greater than 365, while times can have as many digits as desired. For this reason, there is no ambiguity with the number "500", it can only mean noon.
+
+Decalendar days and Declock times can also be negative. Negative numbers indicate how many parts are left in the whole (day or year). To extend the fractions analogy to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions. Negative numbers can be especially useful for Decalendar, because "-1" is always the last day of the year, regardless of how many days the year has.
+
+
+## Day indexes
+
+Each Decalendar day has a positive and a negative index. Negative indexes provide functionality that is discussed later, but for now, we will focus on positive indexes, but . we would refer to a day simply with its 3 digit `doy`. For example, New Year's Day is `000`. When speaking, we identify a given day by its `dekday` name and `dek` index. A `dek`
+
+The Decalendar days are named after the last digit of their `doy`:
+
+- 0: `Zeroday`
+- 1: `Oneday`
+- 2: `Twoday`
+- 3: `Threeday`
+- 4: `Fourday`
+- 5: `Fiveday`
+- 6: `Sixday`
+- 7: `Sevenday`
+- 8: `Eightday`
+- 9: `Nineday`
+
+This approach naturally puts days together in groups of 10. Each 10-day group is called a `dek`. The last digit of a `doy` is the `dekday` number, while the first two digits are the `dek` index.
+
+For example, leap days are always `Fiveday 36` and the first day of every year is always `Zeroday 0`. This convention avoids confusion with the term "day zero" commonly used in other contexts, such as epidemiology.
+
+If we want to show a preceeding year, We also use this approach to read full Decalendar dates. For example, the first day of the year 2000 is `Year 2000 Zeroday 0` reading full Decalendar dates.
+
+consist of a 4-digit year and a 3-digit doy separated by a plus sign: `year+doy`.
+
+The main Decalendar date format . For example, the first day of the year 2000 is `2000+000`.
+
+The separator indicates whether the doy is positive (`+doy`) and negative (`-doy`).
+
+In any given year,
+- positive doys start at $0$ and go up to $n-1$
+- negative doys start at $-n$ and go up to $-1$,
+where $n$ is the number of days in the year.
+
+Last digits day has a positive doy and a negative doy. Each day is organized in groups of 10
+
+The last digits of the positive and negative doys follow a pattern that differs by one day in common years (n=365) and leap years (n=365):
+
+| n=365  | n=366  |
+| ------ | ------ |
+| 0   -5 | 0   -6 |
+| 1   -4 | 1   -5 |
+| 2   -3 | 2   -4 |
+| 3   -2 | 3   -3 |
+| 4   -1 | 4   -2 |
+| 5  -10 | 5   -1 |
+| 6   -9 | 6  -10 |
+| 7   -8 | 7   -9 |
+| 8   -7 | 8   -8 |
+| 9   -6 | 9   -7 |
+
+The last digit of the doy is the index of that day in groups of 10
+Based on the table above,  This pattern determines the 
+
+
+The last digit of the doy is called the dekday. Deks are groups of 10 days that can 
+- 0
+
+Dekdays 4, 8, and 9 are rest days.
+
+
+Day indexes can be Base28 encoded to make it easier to track groups of 7, 14, or 28-days.
+
+
+A core aspect of Decalendar organizes days into groups of 10. Each 10-day group is called a dek. The first two digits of the doy index is the dek index. The last digit of the doy index is the dekday, the ordinal number of the day in the dek.
+
+Towards the initial goal of peaceful co-existence, Declock describes methods for converting to and from standard time, while Decalendar includes methods for keeping track of Gregorian calendar weekdays and dates. Nevertheless,  7-day weeks are  does not fit naturally in a decimal calendar system based. translating dates into 
 
 ### Date formats
 
@@ -49,7 +119,12 @@ If an event does not occur with a frequency of 28 days, the Base28 may still be 
 | E | F | G | H | I | J | K |
 | L | M | N | O | P | Q | R |
 
-In the table above, events that take place every 7 days will stay in the same column throughout the year. In the next year, we could continue the same approach after shifting to the left by one column in a non-leap year or two columns in a leap year. Using a similar approach, we could create a 2 x 14 matrix and see that events which occur every 14 days would alternate between two Base28 characters:
+
+
+In the table above, events that take place every 7 days will stay in the same column throughout the year. The order of the columns changes from year to year, but the contents of the columns do not, meaning we always have the same 7 strings: `07EL`, `18FM`, `29GN`, `3AHO`, `4BIP`, `5CJQ`, `6DKR`. This is too many strings to remember. In the next year, we could continue the same approach after shifting to the left by one column in a non-leap year or two columns in a leap year. For example, if we wanted to track Sundays in the ISO system, we could memorize the 
+
+
+Using a similar approach, we could create a 2 x 14 matrix and see that events which occur every 14 days would alternate between two Base28 characters:
 
 |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 | - | - | - | - | - | - | - | - | - | - | - | - | - | - |
