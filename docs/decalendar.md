@@ -79,14 +79,12 @@ Using only a single digit for time indicates that we are providing a ballpark es
 
 If we really want to insist on punctuality, we could include up to 5 digits in the time. Specifying a time with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/), as some point the level of precision stops having relevance to daily life.
 
-Each digit provided in the time has a specific name. These are the four most useful terms:
-
+Each digit provided in the time has a specific name. The three least precise terms are
 - 10<sup>-1</sup>-day dimes (decidays),
-- 10<sup>-2</sup>-day cents (centidays),
-- 10<sup>-3</sup>-day mils (millidays), and
-- 10<sup>-5</sup>-day beats (centimillidays).
+- 10<sup>-2</sup>-day cents (centidays), and
+- 10<sup>-3</sup>-day mils (millidays),
 
-Using the fractions in the table below we can see how the least precise of these units look at different times of the day. An added benefit of the table below is that we can see how positive and negative times complement each other.
+In the table below, we can see how the three least precise units look at different times of the day. An added benefit of the table below is that we can see how positive and negative times complement each other.
 
 | Latin Name   | Frac  | Value  | Dime+ | Dime-  | Cent+  | Cent-  | Mil+   | Mil-   |
 | ------------ | ----- | ------ | ----- | ------ | ------ | ------ | ------ | ------ |
@@ -109,182 +107,68 @@ Using the fractions in the table below we can see how the least precise of these
 | Sescseptunx  | 7/8   | 0.875  | +9    | -1     | +88    | -12    | +875   | -125   |
 | Deunx        | 11/12 | 0.916̅  | +9    | -1     | +92    | -08    | +917   | -083   |
 
+The table above shows various levels of time precision. Declock uses mils as its main time unit, because mils are precise enough for daily use without being too long to read comfortably. Units more precise than mils (such as beats) are not really suitable for watches and clocks, but can work well for stopwatches and timers.
 
-  Converting these unit to and from standard time is a bit tedious, because
-Declock includes optional 18 terms derived from Latin fractions that refer to specific.
-
-Declock uses mils as the main time unit and dimes for time zone offsets. The other units can serve as reasonably close equivalents to standard time units:
-- 1 cent = 0.96 quarter-hours
-- 1 beat = 0.864 seconds
-
-
-The times above are in centiday units, which are roughly equivalent to a quarter-hour, and can serve as a For everyday timekeeping tasks, a 3-digit millidays or 5-digit centimillidays are displayed.
-
-At midday (the time at which 1/2 of the day has passed), the positive and negative times are the same.
-
-```
-+500
--500
-```
+Using a single number to specify a time can be very convenient but can also be very imprecise. The first three negative single digit times are all the same in the table above. The meaning of `-9` could therefore be interpreted as sometime after midnight before an eighth (⅛, ¹/₈) of the day has passed. Single-digit times could be useful for situations that prioritize brevity. For example, if we want to include a date and time in a smartphone application and have very limited space.
 
 ### Combined formats
 
-A Declock time preceded by a Decalendar date is called a datetime. Quarterday on the first day of the year 2000 could be written 2 different but equivalent ways:
+A Declock time preceded by a Decalendar date is called a datetime. The 5th time from the table above (quadrans) on the first day of the year 2000 could be written 4 different but equivalent ways:
 
-```
-2000+000.250
-2000-366.750
-```
+| Format | New Year Day's | Mid-Year's Day | New Year's Eve |
+| -----  | -------------  | -------------  | -------------- |
+| B10+   | 2000+000.250   | 2000+183.250   | 2000+365.250   |
+| B10-   | 2000-366.750   | 2000-183.750   | 2000-001.750   |
+| B28+   | 2000+00.250    | 2000+53.250    | 2000+D1.250    |
+| B28-   | 2000-D2.750    | 2000-53.750    | 2000-01.750    |
 
-To see the current datetime in the formats, visit this codepen:
+If the year is dropped from the datetimes above, the resulting yearless datetime is called a day-of-year-time (doyt):
 
-## Units
+| Format | New Year Day's | Mid-Year's Day | New Year's Eve |
+| -----  | -------------  | -------------  | -------------- |
+| B10+   | +000.250       | +183.250       | +365.250       |
+| B10-   | -366.750       | -183.750       | -001.750       |
+| B28+   | +00.250        | +53.250        | +D1.250        |
+| B28-   | -D2.750        | -53.750        | -01.750        |
 
-### Calendar units
+Doyts may be useful to indicate the same time across multiple years, save space or to simply to avoid repetition if the year is also evident.
 
-While Decalendar dates only include the year and the day-of-year index, there are 4 calendar units that Decalendar defines:
+The examples above show how times are really just fractional days. The connection between day indexes and times is symbolized by the use of the decimal point as the delimiter when day indexes and time are combined. A decimal point is also used to combined times with Base28 day indexes, even though times are always Base10 and never in Base28.
+
+To avoid confusion, it is important that Base10 day indexes are always 3-digits long and Base28 are always 2-digits long. This strict rule is in contrast to the flexibility of times, which can have any number of digits depending on the desired level of precision.
+
+While mils should be sufficiently precise for most timekeeping tasks, Declock decimal times can support any level of precision. For example, two additional digits can be added at the end of a decimal time to show beats. Units smaller than beats can be derived using metric prefixes and may be useful for scientific and technical purposes:
+
+- D: 10<sup>-1</sup>-day dimes (decidays)
+- C: 10<sup>-2</sup>-day cents (centidays)
+- M: 10<sup>-3</sup>-day mils (millidays)
+- B: 10<sup>-4</sup>-day bars (decimillidays)
+- b: 10<sup>-5</sup>-day beats (centimillidays)
+- d: 10<sup>-6</sup>-day debs (decibeats)
+- c: 10<sup>-7</sup>-day cebs (centibeats)
+- m: 10<sup>-8</sup>-day mibs (millibeats)
+- N: 10<sup>-9</sup>-day nans (nanodays)
+- U: 10<sup>-10</sup>-day mars (microbars)
+- u: 10<sup>-11</sup>-day mics (microbeats)
+- P: 10<sup>-12</sup>-day pics (picodays)
+
+If the level of time precision needs to written the single letter codes listed above may be useful. Even smaller units are possible (e.g. picobeats, femtodays, etc.), but such extremely small time units only going to be useful in very niche contexts.
+
+### Reading datetimes
+
+It should be possible to derive all of the above units simply looking at a Declock time, because each unit is simply a name each digit. Visually parsing Decalendar dates works in a similar fashion. The day indexes we saw earlier can provide us with the 3 Decalendar units below:
 - 5-day pents (pentaday),
-- 7-day hepts (heptaday),
 - 10-day deks (decaday), and
 - 28-day okts (icosioctaday).
 
-All of these units have positive and negative indexes with set ranges.
+For example, in the Mid-Year's Day column in table below, Base28 indexes tells that we are on Oktday 3 of Okt 5, while the Base10 index contains similar information for deks and pents.
 
-### Time units
-
-Instead of using $\frac{1}{24}$-day hours, $\frac{1}{1444}$-day minutes, and $\frac{1}{86400}$-day seconds, Declock uses the following four decimal time units:
-
-Declock also includes two additional quadrasexigesimal (base64) time units that use beats as the base unit instead of days:
-- 64-beat hits and
-- 4096-beat sets.
-
-While mils should be precise for most timekeeping tasks, Declock decimal times can support any level of precision. For example, two additional digits can be added at the end of a decimal time to show beats. Units smaller than beats can be derived using metric prefixes and may be useful for scientific and technical purposes:
--  1 decibeat = 1 microday = 86.4 milliseconds
--  1 millibeat = 10 nanoday = 0.864 milliseconds
--  1 microbeat = 10 picoday = 0.864 microseconds
--  1 nanobeat = 10 femtoday = 0.864 nanoseconds
-
-## Decimal Dates
-
-The two main Decalendar date formats are `yyyy+ddd` and `yyyy-ddd`, in which the four-digit year is followed by a positive or negative three-digit day-of-year (DOY) index. Each day in a year can be described by both a positive and a negative index.
-
-The first day of every year has a positive index of 0 and a negative index of either -365 or -366. For example, the first day of the third millennium can be written `2000+000` or `2000-366`.
-
-While positive indexes start at zero, while negative indexes start at -1.  For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on the last day of 1977.
-
-The additional day in leap years throws Decalendar day indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years.
-
-To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year.
-
-## Decimal Times
-
-Like Decalendar date indexes, Declock times can be both positive and negative. Positive times show how much time has passed, while negative times show how much time remains. For example, at 6AM we could say that 250 mils, a quarter of a day, have passed in the current day or that 750 mils, three quarters of a day, remain:
-
-```
-+250
--750
-```
-
-In the time above, the first digit is the current dime, the first two digits are the current cent, the first three digits are the current mil. If an additional two digits were added to the end, the resulting five digits would be the current beat. Showing beats is optional and typically only done in stopwatches and timers. Declock decimal times can have any number of digits.
-
-
-The example above only tells us the time of day. If we add a day-of-year (doy) index before the time we obtain a doyt (day-of-year-time). The doyts below tells us that the current year is not a leap year (because the sum of the positive day index and the absolute value of the negative day index is 365, not 366):
-
-```
-+360.250
--005.750
-```
-
-If we add a year to the example above, we have a timestamp called a datetime that defines a specific moment in time in a specific year:
-
-```
-1999+360.250
-1999-005.750
-```
-
-The datetimes above do not include time zone offsets. To avoid ambiguity, timestamps can include a time zone offset. For example, the timestamps below are in the +1 Declock time zone that includes Eastern European Time and Central African Time:
-
-```
-1999+360.250+1
-1999-005.750+1
-```
-
-## Decimal Calculations
-
-### Decimal Time Calculations
-
-#### Decimal Time Zone Conversion
-
-The times in the previous example are one dime later than than times in the +0 time zone that matches Coordinated Universal Time (UTC). To convert a UTC offset into a Declock offset, divide the UTC offset by 2.4 and round to the nearest whole number.
-
-To obtain the time in the +0 time zone, subtract the offset from the first digit of the time. In the +0 time zone, the timestamp from the previous example would be:
-
-```
-1999+360.150+0
-1999-005.850+0
-```
-
-Declock times in the +0 time zone can be converted to and from standard times in the UTC time zone.
-
-#### Decimal Time to Standard Time Conversion
-
-Converting from decimal time to standard time is discouraged, because in doing so we are putting effort into taking something perfect and making it imperfect. Nevertheless, beats are not yet the official International System of Units (SI) time unit, so converting to seconds may be useful:
-
-$$y \cdot 86400 \cdot 10^x$$
-
-In plain text, this equation is `y*86400*10^x`.
-
-In the equation above, `y` is the decimal time and `x` should be modified to match the decimal time units:
-- -1: deks
--  0: days
--  1: dimes
--  2: cents
--  3: mils
--  4: decimils
--  5: beats
--  6: decibeats
-
-After converting decimal time, the additional steps of converting those seconds to hours and then fractional hours into minutes should hopefully convince anyone that Declock is a superior system to standard time. If anyone remains unconvinced after such as exercise, they are invited to take any Decalendar datetime or doyt and convert the days into months, days, hours, and minutes.
-
-#### Standard Time to Decimal Time Conversion
-
-The general formula for conversion of standard time to decimal time is:
-
-$$(\frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} + \frac{milliseconds}{86400000}) \cdot 10^x$$
-
-In plain text, this equation is `(hours/24+minutes/1440+seconds/86400+milliseconds/86400000)*10^x`.
-
-In the equation above, `x` can be modified to obtain different units:
-- -1: deks
--  0: days
--  1: dimes
--  2: cents
--  3: mils
--  4: decimils
--  5: beats
--  6: decibeats
-
-This type of calculation is best left up to computers, but some simple conversions between analogous units can easily be done with a calculator, by hand, or even mentally. For example:
-
-- Dimes to hours: `dimes * 2.4`
-- Hours to decidays: `hours / 2.4`
-- Minutes to mils: `minutes / 1.44`
-- Mils to Minutes: `mils * 1.44`
-
-### Decimal Calendar Calculations
-
-### Obtaining Negative Day Indexes From Positive Day Indexes
-
-To facilitate comparison of Decalendar dates with Gregorian calendar dates, we should convert positive day indexes greater than 59 to negative day indexes. To obtain a negative index from a positive index, subtract the number of days in the year from the positive index. For example, the two possible positive indexes for December 25th both equal -7 after we subtract the number of days in the year:
-- 359 - 366 = -7
-- 358 - 365 = -7
-
-
-### Obtaining Positive Day Indexes From Negative Day Indexes
-
-To facilitate comparison of Decalendar dates with Gregorian calendar dates, we should convert negative day indexes less than -306 to positive day indexes. To obtain a positive index from a negative index, subtract the absolute value of the negative index from the number of days in the year. For example, the two possible negative indexes for February 14th both equal 44 after we add the number of days in the year:
-- 366 - 322 = 44
-- 365 - 321 = 44
+| Format | New Year Day's | Mid-Year's Day | New Year's Eve |
+| -----  | -------------  | -------------  | -------------- |
+| B10+   | 2000+000       | 2000+183       | 2000+365.250   |
+| B10-   | 2000-366       | 2000-183       | 2000-001.750   |
+| B28+   | 2000+00        | 2000+53        | 2000+D1.250    |
+| B28-   | 2000-D2        | 2000-53        | 2000-01.750    |
 
 ### Obtaining Decimal Calendar Unit Indexes
 
@@ -307,106 +191,6 @@ Following these rules means that
 - the last 5 days in non-leap years and the last 6 days in leap years do not have a positive dek index
 - the first day in leap years do not have a negative pent index
 - the last day in leap years do not have a positive pent index
-
-#### Counting days by sevens
-
-Keeping track of every 7th day is also possible with decimal day indexes, but it may take a little practice. Subtracting 3 from the last digit of the current day index can tell us the last digit of the day index 7 days from now. For example, if the last digit of the current day index is 8, the last digit of the day index will be 5 (8-3) in 7 days. If the last digit of the current day index is less than 3, we add 10 to the difference. For example, if the last digit of the current day index is 1, the last digit of the day index will be 8 (1-3+10). After Day 357 in non-leap years we need to add 1 instead of subtracting 3. After Day 358 in leap years, we need to add 2 instead of subtracting 3.
-
-When performing this calculation in your head, it may be helpful to visualize a ring with 10 points numbered 0 through 9. Moving three points from point 1, we cross over point 0 and 9 to arrive at point 8. Instead mental calculations, it’s also possible to use an illustration, a physical ring, a calculator, or our fingers.
-
-The key to doing decimal date calculations on our fingers is to use a zero-based numbering system for our fingers. The recommended system is to number fingers from left to right with palms facing down as would be went typing or playing piano:
-- 0: left pinky
-- 1: left ring finger
-- 2: left middle finger
-- 3: left pointing finger
-- 4: left thumb
-- 5: right thumb
-- 6: right pointing finger
-- 7: right middle finger
-- 8: right ring finger
-- 9: right pinky
-
- To do the calculation above on our fingers, we would start on the ring finger of our left hand and move to the left, counting our left pinky as one, our right pinky as two, and settling on right ring finger as three. The number that corresponds to our right ring finger is 8.
-
- Some people may prefer to number fingers with their palms facing them:
-- 0: left thumb
-- 1: left pointing finger
-- 2: left middle finger
-- 3: left ring finger
-- 4: left pinky
-- 5: right pinky
-- 6: right ring finger
-- 7: right middle finger
-- 8: right pointing finger
-- 9: right thumb
-
- It is also possible to number fingers from right to left. The lists below are the same as above except in reverse order:
-- 0: right pinky
-- 1: right ring finger
-- 2: right middle finger
-- 3: right pointing finger
-- 4: right thumb
-- 5: left thumb
-- 6: left pointing finger
-- 7: left middle finger
-- 8: left ring finger
-- 9: left pinky
-
-- 0: right thumb
-- 1: right pointing finger
-- 2: right middle finger
-- 3: right ring finger
-- 4: right pinky
-- 5: left pinky
-- 6: left ring finger
-- 7: left middle finger
-- 8: left pointing finger
-- 9: left thumb
-
-#### Counting days by thirties
-
-For tracking lunar phases, menstrual cycles, and months, it can be helpful to count days by 30. Adding 30 to the day index is easy, but we can easily move from one year to another. If we obtain a day index greater than the highest day index in the year, we can simply subtract the number of days in the current year to get the index in the next year. To count by a different number, such as 28, we would use the approach above and then subtract 2.
-
-### Introduction to hexatrigesimal and quadrasexagesimal
-
-The counting by thirties approach described directly above can be modified to work for heks and quints, but Decalendar includes a hexatrigesimal day index to aid with counting and indexing heks and quints.
-
-Hexatrigesimal (base36) is an encoding that includes all ten single-digit numbers and all 26 uppercase letters in the English alphabet. Every 36 days the first character of the base36 day index increments. The base36 day index is often provided along with a quadrasexagesimal (base64) year in a format called `64-36`. For example, the first day of year 2000 in the `64-36` format is `VG+00` or `VG-A6`, while the last day of that year is `VG+A5` or `VG-01`.
-
-The `64-36` date format can be combined with a base64 time in a format called `64-36-b64`. For example, quarterday on the first day of 2000 would `VG+00.66e` or `VG-A6.IJu`. These formats are very compact and base64 time has a particular use in the Declock system, but for now we will focus on how to use base36 to determine the indexes of heks and quints.
-
-### Hexatrigesimal date calculations
-
-#### Obtaining hek indexes
-
-The first character of the base36 day index is the hek index. The only caveat to this rule is that after Day 359, the base36 day index will start with an A, and the range of hek indexes to be 0-9. If we allowed for the existence of a Hek A, 30 or 31 out of its 36 days would be from the subsequent year. For this reason, days after Day 359 have a negative hek index, but not have a positive hek index. Negative hek indexes range from -1 to -10. Hek -10 ends before the first 5 days of non-leap year and before the first 6 days of leap years.
-
-#### Obtaining Quint Indexes
-
-The base36 day indexes of quints follow a clear pattern that is apparent when we list the Quint indexes alongside their base36 day index ranges:
-- 0: 00-20
-- 1: 21-41
-- 2: 42-62
-- 3: 63-83
-- 4: 83-A4
-
-To obtain the base36 day index ranges above we plug the quint index as `q` into the equations below:
-- the first day is `20 * q + q`, and
-- the last day is `20 + 20 * q + q`.
-
-The result of this last equation for Quint 4 is 104, which we translate into A4. Leap days have a base36 index of A5. If leap days started a new quint, 72 out of 73 of its days would be in the subsequent year. For this reason, Quint indexes should only range from 0 to 4. Leap days do not have a positive Quint index, but are included in Quint -1. Conversely, the first day of leap years is not included in Quint -5. In non-leap years, all days have both a positive and negative quint index.
-
-### Quadrasexagesimal Time Calculations
-
-The [Introduction to hexatrigesimal and quadrasexagesimal]() section above showed a format called `64-36-b64` that combines a base64 year, a base36 day index, and a base64 time. To explain the quadrasexagesimal time, we will use the following analogy.
-
-Imagine you’re a DJ playing a 58.9824-minute-long music set. Your setlist has 64 hit songs in it, each hit is 55.296 seconds long and has 64 beats. The entire set has 4096 beats and the tempo remains constant throughout the set at 69.4̅ (69⁴/₉ or 625/9) beats per minute.
-
-Your first performance goes so well that you are asked to repeat your set in a loop enough times to fill an entire day with music! Playing at the same tempo as before, our daylong performance will have 100,000 beats and 1562.5 hits. We can fit all 100,000 of those beats into 3 digits if we use base64. The first digit tells us what set we are on, the second digit is the hit, and the last digit is beat.
-
-Over the course of the day it is unlikely that anyone in the audience would notice that each song is 4.704 seconds less than a minute or that the entire set is 1.0176 minutes less than an hour. To bring this analogy back to the real world, we can use 64-beat hits instead of minutes and 4096-beat sets instead of hours only be off by less than 5 seconds per minute and about a minute per hour. Unlike minutes and hours, hits and sets are based on beats and thus work within the Declock system.
-
-The 
 
 ## Dekdays
 
@@ -636,3 +420,367 @@ The day off in the middle is called the midek. The days off at the end are calle
 2024-365.999: one milliday before midnight New Year’s Eve 2025
 
 2025-364.999: one milliday before midnight New Year’s Eve 2026
+
+while time zones do not have to be  The other units can serve as reasonably close equivalents to standard time units:
+
+
+- 1 cent = 0.96 quarter-hours
+- 1 beat = 0.864 seconds
+
+The times above are in centiday units, which are roughly equivalent to a quarter-hour, and can serve as a For everyday timekeeping tasks, a 3-digit millidays or 5-digit centimillidays are displayed.
+
+At midday (the time at which 1/2 of the day has passed), the positive and negative times are the same.
+
+```
++500
+-500
+```
+
+All of these units have positive and negative indexes with set ranges.
+
+## Decimal Dates
+
+The two main Decalendar date formats are `yyyy+ddd` and `yyyy-ddd`, in which the four-digit year is followed by a positive or negative three-digit day-of-year (DOY) index. Each day in a year can be described by both a positive and a negative index.
+
+The first day of every year has a positive index of 0 and a negative index of either -365 or -366. For example, the first day of the third millennium can be written `2000+000` or `2000-366`.
+
+While positive indexes start at zero, while negative indexes start at -1.  For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on the last day of 1977.
+
+The additional day in leap years throws Decalendar day indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years.
+
+To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year.
+
+## Decimal Times
+
+Like Decalendar date indexes, Declock times can be both positive and negative. Positive times show how much time has passed, while negative times show how much time remains. For example, at 6AM we could say that 250 mils, a quarter of a day, have passed in the current day or that 750 mils, three quarters of a day, remain:
+
+```
++250
+-750
+```
+
+In the time above, the first digit is the current dime, the first two digits are the current cent, the first three digits are the current mil. If an additional two digits were added to the end, the resulting five digits would be the current beat. Showing beats is optional and typically only done in stopwatches and timers. Declock decimal times can have any number of digits.
+
+
+The example above only tells us the time of day. If we add a day-of-year (doy) index before the time we obtain a doyt (day-of-year-time). The doyts below tells us that the current year is not a leap year (because the sum of the positive day index and the absolute value of the negative day index is 365, not 366):
+
+```
++360.250
+-005.750
+```
+
+If we add a year to the example above, we have a timestamp called a datetime that defines a specific moment in time in a specific year:
+
+```
+1999+360.250
+1999-005.750
+```
+
+The datetimes above do not include time zone offsets. To avoid ambiguity, timestamps can include a time zone offset. For example, the timestamps below are in the +1 Declock time zone that includes Eastern European Time and Central African Time:
+
+```
+1999+360.250+1
+1999-005.750+1
+```
+
+## Decimal Calculations
+
+### Decimal Time Calculations
+
+#### Decimal Time Zone Conversion
+
+The times in the previous example are one dime later than than times in the +0 time zone that matches Coordinated Universal Time (UTC). To convert a UTC offset into a Declock offset, divide the UTC offset by 2.4 and round to the nearest whole number.
+
+To obtain the time in the +0 time zone, subtract the offset from the first digit of the time. In the +0 time zone, the timestamp from the previous example would be:
+
+```
+1999+360.150+0
+1999-005.850+0
+```
+
+Declock times in the +0 time zone can be converted to and from standard times in the UTC time zone.
+
+#### Decimal Time to Standard Time Conversion
+
+Converting from decimal time to standard time is discouraged, because in doing so we are putting effort into taking something perfect and making it imperfect. Nevertheless, beats are not yet the official International System of Units (SI) time unit, so converting to seconds may be useful:
+
+$$y \cdot 86400 \cdot 10^x$$
+
+In plain text, this equation is `y*86400*10^x`.
+
+In the equation above, `y` is the decimal time and `x` should be modified to match the decimal time units:
+- -1: deks
+-  0: days
+-  1: dimes
+-  2: cents
+-  3: mils
+-  4: decimils
+-  5: beats
+-  6: decibeats
+
+After converting decimal time, the additional steps of converting those seconds to hours and then fractional hours into minutes should hopefully convince anyone that Declock is a superior system to standard time. If anyone remains unconvinced after such as exercise, they are invited to take any Decalendar datetime or doyt and convert the days into months, days, hours, and minutes.
+
+#### Standard Time to Decimal Time Conversion
+
+The general formula for conversion of standard time to decimal time is:
+
+$$(\frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} + \frac{milliseconds}{86400000}) \cdot 10^x$$
+
+In plain text, this equation is `(hours/24+minutes/1440+seconds/86400+milliseconds/86400000)*10^x`.
+
+In the equation above, `x` can be modified to obtain different units:
+- -1: deks
+-  0: days
+-  1: dimes
+-  2: cents
+-  3: mils
+-  4: decimils
+-  5: beats
+-  6: decibeats
+
+This type of calculation is best left up to computers, but some simple conversions between analogous units can easily be done with a calculator, by hand, or even mentally. For example:
+
+- Dimes to hours: `dimes * 2.4`
+- Hours to decidays: `hours / 2.4`
+- Minutes to mils: `minutes / 1.44`
+- Mils to Minutes: `mils * 1.44`
+
+### Decimal Calendar Calculations
+
+### Obtaining Negative Day Indexes From Positive Day Indexes
+
+To facilitate comparison of Decalendar dates with Gregorian calendar dates, we should convert positive day indexes greater than 59 to negative day indexes. To obtain a negative index from a positive index, subtract the number of days in the year from the positive index. For example, the two possible positive indexes for December 25th both equal -7 after we subtract the number of days in the year:
+- 359 - 366 = -7
+- 358 - 365 = -7
+
+
+### Obtaining Positive Day Indexes From Negative Day Indexes
+
+To facilitate comparison of Decalendar dates with Gregorian calendar dates, we should convert negative day indexes less than -306 to positive day indexes. To obtain a positive index from a negative index, subtract the absolute value of the negative index from the number of days in the year. For example, the two possible negative indexes for February 14th both equal 44 after we add the number of days in the year:
+- 366 - 322 = 44
+- 365 - 321 = 44
+
+All of these units have positive and negative indexes with set ranges.
+
+## Decimal Dates
+
+The two main Decalendar date formats are `yyyy+ddd` and `yyyy-ddd`, in which the four-digit year is followed by a positive or negative three-digit day-of-year (DOY) index. Each day in a year can be described by both a positive and a negative index.
+
+The first day of every year has a positive index of 0 and a negative index of either -365 or -366. For example, the first day of the third millennium can be written `2000+000` or `2000-366`.
+
+While positive indexes start at zero, while negative indexes start at -1.  For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on the last day of 1977.
+
+The additional day in leap years throws Decalendar day indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years.
+
+To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year.
+
+## Decimal Times
+
+Like Decalendar date indexes, Declock times can be both positive and negative. Positive times show how much time has passed, while negative times show how much time remains. For example, at 6AM we could say that 250 mils, a quarter of a day, have passed in the current day or that 750 mils, three quarters of a day, remain:
+
+```
++250
+-750
+```
+
+In the time above, the first digit is the current dime, the first two digits are the current cent, the first three digits are the current mil. If an additional two digits were added to the end, the resulting five digits would be the current beat. Showing beats is optional and typically only done in stopwatches and timers. Declock decimal times can have any number of digits.
+
+
+The example above only tells us the time of day. If we add a day-of-year (doy) index before the time we obtain a doyt (day-of-year-time). The doyts below tells us that the current year is not a leap year (because the sum of the positive day index and the absolute value of the negative day index is 365, not 366):
+
+```
++360.250
+-005.750
+```
+
+If we add a year to the example above, we have a timestamp called a datetime that defines a specific moment in time in a specific year:
+
+```
+1999+360.250
+1999-005.750
+```
+
+The datetimes above do not include time zone offsets. To avoid ambiguity, timestamps can include a time zone offset. For example, the timestamps below are in the +1 Declock time zone that includes Eastern European Time and Central African Time:
+
+```
+1999+360.250+1
+1999-005.750+1
+```
+
+## Decimal Calculations
+
+### Decimal Time Calculations
+
+#### Decimal Time Zone Conversion
+
+The times in the previous example are one dime later than than times in the +0 time zone that matches Coordinated Universal Time (UTC). To convert a UTC offset into a Declock offset, divide the UTC offset by 2.4 and round to the nearest whole number.
+
+To obtain the time in the +0 time zone, subtract the offset from the first digit of the time. In the +0 time zone, the timestamp from the previous example would be:
+
+```
+1999+360.150+0
+1999-005.850+0
+```
+
+Declock times in the +0 time zone can be converted to and from standard times in the UTC time zone.
+
+#### Decimal Time to Standard Time Conversion
+
+Converting from decimal time to standard time is discouraged, because in doing so we are putting effort into taking something perfect and making it imperfect. Nevertheless, beats are not yet the official International System of Units (SI) time unit, so converting to seconds may be useful:
+
+$$y \cdot 86400 \cdot 10^x$$
+
+In plain text, this equation is `y*86400*10^x`.
+
+In the equation above, `y` is the decimal time and `x` should be modified to match the decimal time units:
+- -1: deks
+-  0: days
+-  1: dimes
+-  2: cents
+-  3: mils
+-  4: decimils
+-  5: beats
+-  6: decibeats
+
+After converting decimal time, the additional steps of converting those seconds to hours and then fractional hours into minutes should hopefully convince anyone that Declock is a superior system to standard time. If anyone remains unconvinced after such as exercise, they are invited to take any Decalendar datetime or doyt and convert the days into months, days, hours, and minutes.
+
+#### Standard Time to Decimal Time Conversion
+
+The general formula for conversion of standard time to decimal time is:
+
+$$(\frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} + \frac{milliseconds}{86400000}) \cdot 10^x$$
+
+In plain text, this equation is `(hours/24+minutes/1440+seconds/86400+milliseconds/86400000)*10^x`.
+
+In the equation above, `x` can be modified to obtain different units:
+- -1: deks
+-  0: days
+-  1: dimes
+-  2: cents
+-  3: mils
+-  4: decimils
+-  5: beats
+-  6: decibeats
+
+This type of calculation is best left up to computers, but some simple conversions between analogous units can easily be done with a calculator, by hand, or even mentally. For example:
+
+- Dimes to hours: `dimes * 2.4`
+- Hours to decidays: `hours / 2.4`
+- Minutes to mils: `minutes / 1.44`
+- Mils to Minutes: `mils * 1.44`
+
+### Decimal Calendar Calculations
+
+### Obtaining Negative Day Indexes From Positive Day Indexes
+
+To facilitate comparison of Decalendar dates with Gregorian calendar dates, we should convert positive day indexes greater than 59 to negative day indexes. To obtain a negative index from a positive index, subtract the number of days in the year from the positive index. For example, the two possible positive indexes for December 25th both equal -7 after we subtract the number of days in the year:
+- 359 - 366 = -7
+- 358 - 365 = -7
+
+
+### Obtaining Positive Day Indexes From Negative Day Indexes
+
+To facilitate comparison of Decalendar dates with Gregorian calendar dates, we should convert negative day indexes less than -306 to positive day indexes. To obtain a positive index from a negative index, subtract the absolute value of the negative index from the number of days in the year. For example, the two possible negative indexes for February 14th both equal 44 after we add the number of days in the year:
+- 366 - 322 = 44
+- 365 - 321 = 44
+
+#### Counting days by sevens
+
+Keeping track of every 7th day is also possible with decimal day indexes, but it may take a little practice. Subtracting 3 from the last digit of the current day index can tell us the last digit of the day index 7 days from now. For example, if the last digit of the current day index is 8, the last digit of the day index will be 5 (8-3) in 7 days. If the last digit of the current day index is less than 3, we add 10 to the difference. For example, if the last digit of the current day index is 1, the last digit of the day index will be 8 (1-3+10). After Day 357 in non-leap years we need to add 1 instead of subtracting 3. After Day 358 in leap years, we need to add 2 instead of subtracting 3.
+
+When performing this calculation in your head, it may be helpful to visualize a ring with 10 points numbered 0 through 9. Moving three points from point 1, we cross over point 0 and 9 to arrive at point 8. Instead mental calculations, it’s also possible to use an illustration, a physical ring, a calculator, or our fingers.
+
+The key to doing decimal date calculations on our fingers is to use a zero-based numbering system for our fingers. The recommended system is to number fingers from left to right with palms facing down as would be went typing or playing piano:
+- 0: left pinky
+- 1: left ring finger
+- 2: left middle finger
+- 3: left pointing finger
+- 4: left thumb
+- 5: right thumb
+- 6: right pointing finger
+- 7: right middle finger
+- 8: right ring finger
+- 9: right pinky
+
+ To do the calculation above on our fingers, we would start on the ring finger of our left hand and move to the left, counting our left pinky as one, our right pinky as two, and settling on right ring finger as three. The number that corresponds to our right ring finger is 8.
+
+ Some people may prefer to number fingers with their palms facing them:
+- 0: left thumb
+- 1: left pointing finger
+- 2: left middle finger
+- 3: left ring finger
+- 4: left pinky
+- 5: right pinky
+- 6: right ring finger
+- 7: right middle finger
+- 8: right pointing finger
+- 9: right thumb
+
+ It is also possible to number fingers from right to left. The lists below are the same as above except in reverse order:
+- 0: right pinky
+- 1: right ring finger
+- 2: right middle finger
+- 3: right pointing finger
+- 4: right thumb
+- 5: left thumb
+- 6: left pointing finger
+- 7: left middle finger
+- 8: left ring finger
+- 9: left pinky
+
+- 0: right thumb
+- 1: right pointing finger
+- 2: right middle finger
+- 3: right ring finger
+- 4: right pinky
+- 5: left pinky
+- 6: left ring finger
+- 7: left middle finger
+- 8: left pointing finger
+- 9: left thumb
+
+#### Counting days by thirties
+
+For tracking lunar phases, menstrual cycles, and months, it can be helpful to count days by 30. Adding 30 to the day index is easy, but we can easily move from one year to another. If we obtain a day index greater than the highest day index in the year, we can simply subtract the number of days in the current year to get the index in the next year. To count by a different number, such as 28, we would use the approach above and then subtract 2.
+
+### Introduction to hexatrigesimal and quadrasexagesimal
+
+The counting by thirties approach described directly above can be modified to work for heks and quints, but Decalendar includes a hexatrigesimal day index to aid with counting and indexing heks and quints.
+
+Hexatrigesimal (base36) is an encoding that includes all ten single-digit numbers and all 26 uppercase letters in the English alphabet. Every 36 days the first character of the base36 day index increments. The base36 day index is often provided along with a quadrasexagesimal (base64) year in a format called `64-36`. For example, the first day of year 2000 in the `64-36` format is `VG+00` or `VG-A6`, while the last day of that year is `VG+A5` or `VG-01`.
+
+The `64-36` date format can be combined with a base64 time in a format called `64-36-b64`. For example, quarterday on the first day of 2000 would `VG+00.66e` or `VG-A6.IJu`. These formats are very compact and base64 time has a particular use in the Declock system, but for now we will focus on how to use base36 to determine the indexes of heks and quints.
+
+### Hexatrigesimal date calculations
+
+#### Obtaining hek indexes
+
+The first character of the base36 day index is the hek index. The only caveat to this rule is that after Day 359, the base36 day index will start with an A, and the range of hek indexes to be 0-9. If we allowed for the existence of a Hek A, 30 or 31 out of its 36 days would be from the subsequent year. For this reason, days after Day 359 have a negative hek index, but not have a positive hek index. Negative hek indexes range from -1 to -10. Hek -10 ends before the first 5 days of non-leap year and before the first 6 days of leap years.
+
+#### Obtaining Quint Indexes
+
+The base36 day indexes of quints follow a clear pattern that is apparent when we list the Quint indexes alongside their base36 day index ranges:
+- 0: 00-20
+- 1: 21-41
+- 2: 42-62
+- 3: 63-83
+- 4: 83-A4
+
+To obtain the base36 day index ranges above we plug the quint index as `q` into the equations below:
+- the first day is `20 * q + q`, and
+- the last day is `20 + 20 * q + q`.
+
+The result of this last equation for Quint 4 is 104, which we translate into A4. Leap days have a base36 index of A5. If leap days started a new quint, 72 out of 73 of its days would be in the subsequent year. For this reason, Quint indexes should only range from 0 to 4. Leap days do not have a positive Quint index, but are included in Quint -1. Conversely, the first day of leap years is not included in Quint -5. In non-leap years, all days have both a positive and negative quint index.
+
+### Quadrasexagesimal Time Calculations
+
+The [Introduction to hexatrigesimal and quadrasexagesimal]() section above showed a format called `64-36-b64` that combines a base64 year, a base36 day index, and a base64 time. To explain the quadrasexagesimal time, we will use the following analogy.
+
+Imagine you’re a DJ playing a 58.9824-minute-long music set. Your setlist has 64 hit songs in it, each hit is 55.296 seconds long and has 64 beats. The entire set has 4096 beats and the tempo remains constant throughout the set at 69.4̅ (69⁴/₉ or 625/9) beats per minute.
+
+Your first performance goes so well that you are asked to repeat your set in a loop enough times to fill an entire day with music! Playing at the same tempo as before, our daylong performance will have 100,000 beats and 1562.5 hits. We can fit all 100,000 of those beats into 3 digits if we use base64. The first digit tells us what set we are on, the second digit is the hit, and the last digit is beat.
+
+Over the course of the day it is unlikely that anyone in the audience would notice that each song is 4.704 seconds less than a minute or that the entire set is 1.0176 minutes less than an hour. To bring this analogy back to the real world, we can use 64-beat hits instead of minutes and 4096-beat sets instead of hours only be off by less than 5 seconds per minute and about a minute per hour. Unlike minutes and hours, hits and sets are based on beats and thus work within the Declock system.
+
+The 
+
