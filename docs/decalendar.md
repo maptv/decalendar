@@ -8,7 +8,7 @@ Decalendar and Declock aim to first peacefully co-exist with, but then ultimatel
 
 ## Basics
 
-At their core, Decalendar counts fractions of a year, while Declock counts fractions of days. The denominator for Decalendar is the number of days in the year, while for Declock the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of Decalendar, the number "5" means 5 days have passed in the year, while in the context of Declock, "5" means 5 tenths (⁵/₁₀) of the day have passed.
+At their core, Decalendar counts fractions of a year, while Declock counts fractions of days. The denominator for Decalendar is the number of days in the year, while for Declock the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator (the number of days or parts of the day that have passed), not the denominator, is provided. In the context of Decalendar, the number "5" means 5 days have passed in the year, while in the context of Declock, "5" means 5 tenths (⁵/₁₀) of the day have passed.
 
 The brevity of such Decalendar days and Declock times may make them hard to distinguish in isolation, but they often make perfect sense in context. For example, if someone says "let's have lunch at 5", it is clear that they are referring to a time and not a day of the year. Also, the value itself may provide a clue, because calendar days cannot be greater than 365, while times can have as many digits as desired. For this reason, there is no ambiguity with the number "500", it can only mean noon.
 
@@ -27,7 +27,7 @@ Declock provides names for extremely precise time units, but the most relevant u
 
 In the table above, the units with negative exponents are used for Declock while deks are used for Decalendar. Mils are the main Declock unit, because they provide the right level of precision for displaying time on clocks and watches. Cents are percents of the day and roughly equal to a quarter hour. Dimes are ten times larger than cents (%10), while mils are ten times smaller (.1%).
 
-In terms of percent of the day, deks are 1000 times larger than cents (1000%). This means that 1 dek contains 10 whole days. Deks are the main Decalendar unit and deserve some special focus. The ten days in a dek have names that are derived from their order in the dek:
+Deks are the main Decalendar unit and deserve some special focus. In terms of percent of the day, deks are 1000 times larger than cents (1000%). This means that 1 dek contains 10 whole days. The ten days in a dek have names that are derived from their order in the dek:
 
 - 0: `Zeroday`
 - 1: `Oneday`
