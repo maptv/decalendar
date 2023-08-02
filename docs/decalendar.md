@@ -39,12 +39,13 @@ Of the units discussed above, `dimes` are notable, because they are the units of
 
 The `dek` number is typically just the first two digits of the day number, but `Dek 36` of leap years includes 4 days from the subsequent year and `Dek 36` of common years is evenly split between years! In the example above, both Tokyo and Mexico were in `Dek 36`, even when they were in separate years. Saying `Dek 36` implies that we want to include days from both the current year and the next. If it is not our intention to combine days across years, we should instead say `Dek -1`. Just like `Day -1`, `Dek -1` retains the same meaning across common years and leap year, it is always the last 10 days of the year and only contains days from a single year.
 
-Negative numbers are useful towards the end of the year, but may be confusing at the beginning. For this reason, the day in each year are named after their positive number, not their negative number. The table below shows the names and numbers of each day in `Dek 0` and `Dek 36` in both common years (n=365) and leap years (n=366).
+Negative numbers are useful towards the end of the year, but may be confusing at the beginning. For this reason, the days in each year are named after the last digit of their positive number, not their negative number. The table below shows the names and numbers of each day in `Dek 0` and `Dek 36` in both common years (n=365) and leap years (n=366).
 
 <table>
     <tr>
       <th></th>
       <th>Dek 0</th>
+      <th>Dek -1</th>
       <th>Dek 36</th>
     </tr>
     <tr>
@@ -53,9 +54,15 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <th>n=366</th>
       <th>n=365</th>
       <th>n=366</th>
+      <th>n=365</th>
+      <th>n=366</th>
     </tr>
     <tr>
       <th>Name</th>
+      <th>pos</th>
+      <th>neg</th>
+      <th>pos</th>
+      <th>neg</th>
       <th>pos</th>
       <th>neg</th>
       <th>pos</th>
@@ -75,6 +82,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-10</td>
       <td>356</td>
       <td>-10</td>
+      <td>360</td>
+      <td>-5</td>
+      <td>360</td>
+      <td>-6</td>
     </tr>
     <tr>
       <td>Oneday</td>
@@ -86,6 +97,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-9</td>
       <td>357</td>
       <td>-9</td>
+      <td>361</td>
+      <td>-4</td>
+      <td>361</td>
+      <td>-5</td>
     </tr>
     <tr>
       <td>Twoday</td>
@@ -97,6 +112,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-8</td>
       <td>358</td>
       <td>-8</td>
+      <td>362</td>
+      <td>-3</td>
+      <td>362</td>
+      <td>-4</td>
     </tr>
     <tr>
       <td>Threeday</td>
@@ -108,6 +127,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-7</td>
       <td>359</td>
       <td>-7</td>
+      <td>363</td>
+      <td>-2</td>
+      <td>363</td>
+      <td>-3</td>
     </tr>
     <tr>
       <td>Fourday</td>
@@ -119,6 +142,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-6</td>
       <td>360</td>
       <td>-6</td>
+      <td>364</td>
+      <td>-1</td>
+      <td>364</td>
+      <td>-2</td>
     </tr>
     <tr>
       <td>Fiveday</td>
@@ -130,6 +157,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-5</td>
       <td>361</td>
       <td>-5</td>
+      <td>365</td>
+      <td>0</td>
+      <td>365</td>
+      <td>-1</td>
     </tr>
     <tr>
       <td>Sixday</td>
@@ -141,6 +172,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-4</td>
       <td>362</td>
       <td>-4</td>
+      <td>366</td>
+      <td>1</td>
+      <td>366</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>Sevenday</td>
@@ -152,6 +187,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-3</td>
       <td>363</td>
       <td>-3</td>
+      <td>367</td>
+      <td>2</td>
+      <td>367</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>Eightday</td>
@@ -163,6 +202,10 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-2</td>
       <td>364</td>
       <td>-2</td>
+      <td>368</td>
+      <td>3</td>
+      <td>368</td>
+      <td>2</td>
     </tr>
     <tr>
       <td>Nineday</td>
@@ -174,11 +217,28 @@ Negative numbers are useful towards the end of the year, but may be confusing at
       <td>-1</td>
       <td>365</td>
       <td>-1</td>
+      <td>369</td>
+      <td>4</td>
+      <td>369</td>
+      <td>3</td>
     </tr>
   </table>
 
 
+The days in the bottom right of the table do not belong to the current year. For example, `day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. This is another example of why we should be careful with the number 36. To prevent mixing days from different years, we should follow some common sense on the limits of day and `dek` numbers:
 
+In any given year,
+- positive day numbers start at $0$ and go up to $n-1$
+- negative day numbers start at $-1$ and go up to $-n$,
+- positive `dek` numbers start at $0$ and go up to $35$,
+- negative `dek` numbers start at $-1$ and go up to $-36$,
+where $n$ is the number of days in the year.
+
+
+The negative day number can tell us if we have crossed over into another year. If the negative is no longer negative, we have done too far.
+
+
+misunderstandings
 When we look at `Dek 36`, we can see that the negative turn into positive numbers, while the positive numbers continue past the end of the year.
 
 The days in 
