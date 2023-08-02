@@ -14,7 +14,7 @@ Not saying `Day` or `Dot` is acceptable, because it is convenient and often the 
 
 The dates and times above assume that the year and time zone are known. Most likely, we are talking about the current year and the local time zone, but it may be unclear. A date without a year is like a time without a time zone, both assume the context is obvious. When we include a year at the beginning of a date, we pinpoint a specific day in time, instead of talking about a date that could happen any year. For example, the first of the day of the year 2000, would be `Year 2000 Day 0` or simply `2000 0`. Similarly, noon in time zone zero would be `Dot 500 Zone 0` or simply `500 0`.
 
-When a date and a time are said together, the year is always first and the time zone is always last, so values can go from largest to smallest. For example, the date and the time from the examples above would be `Year 2000 Day 0 Dot 500 Zone 0` or simply `2000 0 500 0`. In written form, this combined date and time would be `2000+000.500+0`. The plus signs imply that the date and the time zone can be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of time zone 0. Negative dates and times shows the number of parts that are left in the whole (day or year).
+When a date and a time are said together, the year is always first and the time zone is always last, so values can go from largest to smallest. For example, the date and the time from the examples above would be `Year 2000 Day 0 Dot 500 Zone 0` or simply `2000 0 500 0`. In written form, this combined date and time would be `2000+000.500+0`. The plus signs imply that the date and the time zone can be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of Time Zone 0. Negative dates and times shows the number of parts that are left in the whole (day or year).
 
 To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions. Negative numbers can be especially useful for `Decalendar`, because `Day -1` is always the last day of the year, regardless of how many days the year has. In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. For example, even though `Dot -1` and `Dot 9` are synonymous in the context of `Declock`, the former could highlight that there is only 1 tenth (¹/₁₀) of the day remaining before midnight.
 
@@ -24,15 +24,164 @@ Similarly, providing only a single digit for a `Declock` time indicates that the
 
 `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the key units of each highlights the relationship between the two:
 
-- 10<sup>1</sup>-day deks (decadays)
-- 10<sup>-1</sup>-day dimes (decidays)
-- 10<sup>-2</sup>-day cents (centidays)
-- 10<sup>-3</sup>-day mils (millidays)
+- 10<sup>1</sup>-day `deks` (decadays)
+- 10<sup>-1</sup>-day `dimes` (decidays)
+- 10<sup>-2</sup>-day `cents` (centidays)
+- 10<sup>-3</sup>-day `mils` (millidays)
 
-In the table above, `deks` are a `Decalendar` unit, while the other three (the units with negative exponents) are used for `Declock`. Of the three, `Mils` are the most important, because they provide the right level of precision for displaying time on clocks and watches. `Cents` are percents of the day and roughly equal to a quarter hour. `Dimes` are ten times larger than cents (%10), while `mils` are ten times smaller (.1%). Notably, dimes are the units of `Declock` time zones.
+In the table above, `deks` are the main `Decalendar` unit, while the other three (the units with negative exponents) are used for `Declock`. Of those last three, `mils` are the most important, because they provide the right level of precision for displaying time on clocks and watches. Each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). `Cents` can thus serve as a useful point of comparison to understand the scale of these units. `Mils` are ten times smaller than cents (.1% = 1.4 minutes), `dimes` are ten times larger than cents (%10 = 144 minutes), and `deks` are 1000 times larger than cents (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
-`Deks` are the main Decalendar unit and deserve some special focus. In terms of percent of the day, `deks` are 1000 times larger than cents (1000%). This means that 1 `dek` contains 10 whole days. The ten days in a `dek` are called `dekdays` and have names that are derived from their index (their ordinal number in the `dek`):
+### Time zones
 
+Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. For example, the times in Time Zone 1 are one `dime` later than Time Zone 0 and two `dimes` later than Time Zone -1. Time zones are important, because different time zones could have very different times and even different dates. For example, Mexico City is in Time Zone -3 and Tokyo is in Time Zone 4, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If the date is `2000+000.500-3` in Mexico City, the date will be `2000+001.200+4` in Tokyo. These dates tell us that Mexico City and Tokyo have different times, time zones, and days, but both are in the `Year 2000` and in `Dek 0`, the first 10 days of the year. One day earlier, when its date was `1999+364.500-3`, Mexico City was in `Year 1999` and in `Dek 36`.
+
+### `Deks`
+
+The `dek` number is typically just the first two digits of the day number, but `Dek 36` of leap years includes 4 days from the subsequent year and `Dek 36` of common years is evenly split between years! In the example above, both Tokyo and Mexico were in `Dek 36`, even when they were in separate years. Saying `Dek 36` implies that we want to include days from both the current year and the next. If it is not our intention to combine days across years, we should instead say `Dek -1`. Just like `Day -1`, `Dek -1` retains the same meaning across common years and leap year, it is always the last 10 days of the year and only contains days from a single year.
+
+Negative numbers are useful towards the end of the year, but may be confusing at the beginning. For this reason, the day in each year are named after their positive number, not their negative number. The table below shows the names and numbers of each day in `Dek 0` and `Dek 36` in both common years (n=365) and leap years (n=366).
+
+<table>
+    <tr>
+      <th></th>
+      <th>Dek 0</th>
+      <th>Dek 36</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>n=365</th>
+      <th>n=366</th>
+      <th>n=365</th>
+      <th>n=366</th>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th>pos</th>
+      <th>neg</th>
+      <th>pos</th>
+      <th>neg</th>
+      <th>pos</th>
+      <th>neg</th>
+      <th>pos</th>
+      <th>neg</th>
+    </tr>
+    <tr>
+      <td>Zeroday</td>
+      <td>0</td>
+      <td>-365</td>
+      <td>0</td>
+      <td>-366</td>
+      <td>355</td>
+      <td>-10</td>
+      <td>356</td>
+      <td>-10</td>
+    </tr>
+    <tr>
+      <td>Oneday</td>
+      <td>1</td>
+      <td>-364</td>
+      <td>1</td>
+      <td>-365</td>
+      <td>356</td>
+      <td>-9</td>
+      <td>357</td>
+      <td>-9</td>
+    </tr>
+    <tr>
+      <td>Twoday</td>
+      <td>2</td>
+      <td>-363</td>
+      <td>2</td>
+      <td>-364</td>
+      <td>357</td>
+      <td>-8</td>
+      <td>358</td>
+      <td>-8</td>
+    </tr>
+    <tr>
+      <td>Threeday</td>
+      <td>3</td>
+      <td>-362</td>
+      <td>3</td>
+      <td>-363</td>
+      <td>358</td>
+      <td>-7</td>
+      <td>359</td>
+      <td>-7</td>
+    </tr>
+    <tr>
+      <td>Fourday</td>
+      <td>4</td>
+      <td>-361</td>
+      <td>4</td>
+      <td>-362</td>
+      <td>359</td>
+      <td>-6</td>
+      <td>360</td>
+      <td>-6</td>
+    </tr>
+    <tr>
+      <td>Fiveday</td>
+      <td>5</td>
+      <td>-360</td>
+      <td>5</td>
+      <td>-361</td>
+      <td>360</td>
+      <td>-5</td>
+      <td>361</td>
+      <td>-5</td>
+    </tr>
+    <tr>
+      <td>Sixday</td>
+      <td>6</td>
+      <td>-359</td>
+      <td>6</td>
+      <td>-360</td>
+      <td>361</td>
+      <td>-4</td>
+      <td>362</td>
+      <td>-4</td>
+    </tr>
+    <tr>
+      <td>Sevenday</td>
+      <td>7</td>
+      <td>-358</td>
+      <td>7</td>
+      <td>-359</td>
+      <td>362</td>
+      <td>-3</td>
+      <td>363</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <td>Eightday</td>
+      <td>8</td>
+      <td>-357</td>
+      <td>8</td>
+      <td>-358</td>
+      <td>363</td>
+      <td>-2</td>
+      <td>364</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <td>Nineday</td>
+      <td>9</td>
+      <td>-356</td>
+      <td>9</td>
+      <td>-357</td>
+      <td>364</td>
+      <td>-1</td>
+      <td>365</td>
+      <td>-1</td>
+    </tr>
+  </table>
+
+
+
+When we look at `Dek 36`, we can see that the negative turn into positive numbers, while the positive numbers continue past the end of the year.
+
+The days in 
 - 0: `Zeroday`
 - 1: `Oneday`
 - 2: `Twoday`
@@ -181,9 +330,9 @@ Declock times, like Decalendar day indexes, can be positive or negative. Positiv
 Unlike a percent, Declock times do change in precision, and not magnitude, when there are more digits in a number. For example, noon could also be written as `+5` or number `-5`.
 Using only a single digit for time indicates that we are providing a ballpark estimate of time. More specifically, a single digit indicates a tolerance for error of up to 5% of the day.
 Each digit provided in the time has a specific name. The three least precise terms are
-- 10<sup>-1</sup>-day dimes (decidays),
-- 10<sup>-2</sup>-day cents (centidays), and
-- 10<sup>-3</sup>-day mils (millidays),
+- 10<sup>-1</sup>-day `dimes` (decidays),
+- 10<sup>-2</sup>-day `cents` (centidays), and
+- 10<sup>-3</sup>-day `mils` (millidays),
 
 In the table below, we can see how the three least precise units look at different times of the day. An added benefit of the table below is that we can see how positive and negative times complement each other.
 
