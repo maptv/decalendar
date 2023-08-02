@@ -2,32 +2,30 @@
 
 ## Summary
 
-Decalendar is a calendar system that uses days as its base unit, while Declock uses days as the base unit for timekeeping. In both systems, other units are derived from days using prefixes inspired by the metric system. Decalendar units group days together, while Declock units divide days up.
-
-Decalendar and Declock aim to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar) and [standard time](https://en.wikipedia.org/wiki/Standard_time), respectively.
+`Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). `Declock` is a timekeeping system designed to replace [standard time](https://en.wikipedia.org/wiki/Standard_time). Both system use days as their base unit and derive other units from days using prefixes inspired by the metric system. To create the necessary calendar and time units, `Decalendar` groups days together, while `Declock` divides days up.
 
 ## Basics
 
-At their core, Decalendar counts fractions of a year, while Declock counts fractions of days. The denominator for Decalendar is the number of days in the year, while for Declock the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator (the number of days or parts of the day that have passed), not the denominator, is provided. In the context of Decalendar, the number "5" means 5 days have passed in the year, while in the context of Declock, "5" means 5 tenths (⁵/₁₀) of the day have passed.
+In the simplest terms, `Decalendar` counts fractions of a year, while Declock counts fractions of days. The denominator for `Decalendar` is the number of days in the year, while for `Declock` the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator (the number of days or parts of the day that have passed), not the denominator, is provided. In the context of` Decalendar`, the number "5" means 5 days have passed in the year, while in the context of` Declock`, "5" means 5 tenths (⁵/₁₀) of the day have passed.
 
-The brevity of such Decalendar days and Declock times may make them hard to distinguish in isolation, but they often make perfect sense in context. For example, if someone says "let's have lunch at 5", it is clear that they are referring to a time and not a day of the year. Also, the value itself may provide a clue, because calendar days cannot be greater than 365, while times can have as many digits as desired. For this reason, there is no ambiguity with the number "500", it can only mean noon.
+The brevity of such `Decalendar` days and Declock times may make them hard to distinguish in isolation, but they often make perfect sense in context. For example, if someone says "let's have lunch at 5", it is clear that they are referring to a time and not a day of the year. Also, the value itself may provide a clue, because calendar days cannot be greater than 365, while times can have as many digits as desired. For this reason, there is no ambiguity with the number "500", it can only mean noon.
 
-Decalendar days and Declock times can also be negative. Negative numbers indicate how many parts are left in the whole (day or year). To extend the fractions analogy to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions. Negative numbers can be especially useful for Decalendar, because "-1" is always the last day of the year, regardless of how many days the year has. In some context, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. For example, even though "-1" and "9" are synonymous in the context of Declock, the former could highlight that there is only 1 tenth (¹/₁₀) of the day remaining before midnight.
+`Decalendar` days and Declock times can also be negative. Negative numbers indicate how many parts are left in the whole (day or year). To extend the fractions analogy to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions. Negative numbers can be especially useful for `Decalendar`, because "-1" is always the last day of the year, regardless of how many days the year has. In some context, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. For example, even though "-1" and "9" are synonymous in the context of Declock, the former could highlight that there is only 1 tenth (¹/₁₀) of the day remaining before midnight.
 
-Similarly, providing only a single digit for a Declock time indicates that the time is approximate to within 5% of the day. Every additional digit we add decreases the error tolerance 10-fold. For example, if we agree to meet at "500", arriving earlier than 495 or later "505" would be frowned upon, but if we agreed to meet at "5", arriving at "450" or right before "550" would be perfectly acceptable. If we really want to insist on punctuality, we could include up to 5 digits in the time. Specifying a time with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/), at some point the level of precision stops having relevance to daily life.
+Similarly, providing only a single digit for a `Declock` time indicates that the time is approximate to within 5% of the day. Every additional digit we add decreases the error tolerance 10-fold. For example, if we agree to meet at "500", arriving earlier than 495 or later "505" would be frowned upon, but if we agreed to meet at "5", arriving at "450" or right before "550" would be perfectly acceptable. If we really want to insist on punctuality, we could include up to 5 digits in the time. Specifying a time with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/), at some point the level of precision stops having relevance to daily life.
 
 ## Units
 
-Declock provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both Declock and Decalendar. Listing the key units of each highlights the relationship between the two:
+`Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both Declock and` Decalendar`. Listing the key units of each highlights the relationship between the two:
 
 - 10<sup>1</sup>-day deks (decadays)
 - 10<sup>-1</sup>-day dimes (decidays)
 - 10<sup>-2</sup>-day cents (centidays)
 - 10<sup>-3</sup>-day mils (millidays)
 
-In the table above, the units with negative exponents are used for Declock while deks are used for Decalendar. Mils are the main Declock unit, because they provide the right level of precision for displaying time on clocks and watches. Cents are percents of the day and roughly equal to a quarter hour. Dimes are ten times larger than cents (%10), while mils are ten times smaller (.1%).
+In the table above, the units with negative exponents are used for `Declock`, while `deks` are used for `Decalendar`. `Mils` are the main Declock unit, because they provide the right level of precision for displaying time on clocks and watches. `Cents` are percents of the day and roughly equal to a quarter hour. `Dimes` are ten times larger than cents (%10), while `mils` are ten times smaller (.1%).
 
-Deks are the main Decalendar unit and deserve some special focus. In terms of percent of the day, deks are 1000 times larger than cents (1000%). This means that 1 dek contains 10 whole days. The ten days in a dek have names that are derived from their order in the dek:
+`Deks` are the main Decalendar unit and deserve some special focus. In terms of percent of the day, `deks` are 1000 times larger than cents (1000%). This means that 1 `dek` contains 10 whole days. The ten days in a `dek` have names that are derived from their index in the` dek`:
 
 - 0: `Zeroday`
 - 1: `Oneday`
@@ -39,6 +37,10 @@ Deks are the main Decalendar unit and deserve some special focus. In terms of pe
 - 7: `Sevenday`
 - 8: `Eightday`
 - 9: `Nineday`
+
+Just like `dek` days have an index, `deks` have indexes that can be used to identify them throughout the year. The `dek` indexes range from 0 to 36. We can use a `dek` day name and index to refer to any specific day in the year. For example, leap days are always `Fiveday 36` and the first day of every year is always `Zeroday 0`. This convention avoids confusion with the term "day zero" commonly used in other contexts, such as epidemiology.
+
+We can combine a `dek` day name-index pair with a `Declock` time to form a day-of-year-time (doyt).
 
 ## Day indexes
 
@@ -58,8 +60,6 @@ The Decalendar days are named after the last digit of their `doy`:
 - 9: `Nineday`
 
 This approach naturally puts days together in groups of 10. Each 10-day group is called a `dek`. The last digit of a `doy` is the `dekday` number, while the first two digits are the `dek` index.
-
-For example, leap days are always `Fiveday 36` and the first day of every year is always `Zeroday 0`. This convention avoids confusion with the term "day zero" commonly used in other contexts, such as epidemiology.
 
 If we want to show a preceeding year, We also use this approach to read full Decalendar dates. For example, the first day of the year 2000 is `Year 2000 Zeroday 0` reading full Decalendar dates.
 
