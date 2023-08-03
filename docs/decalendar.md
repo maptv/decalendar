@@ -237,6 +237,10 @@ where $n$ is the number of days in the year.
 
 The negative day numbers can tell us if we have crossed over into another year. If the negative is no longer negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar.
 
+The additional day in leap years throws Decalendar day indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years.
+
+To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year.
+
 
 misunderstandings
 When we look at `Dek 36`, we can see that the negative turn into positive numbers, while the positive numbers continue past the end of the year.
@@ -751,10 +755,6 @@ The two main Decalendar date formats are `yyyy+ddd` and `yyyy-ddd`, in which the
 The first day of every year has a positive index of 0 and a negative index of either -365 or -366. For example, the first day of the third millennium can be written `2000+000` or `2000-366`.
 
 While positive indexes start at zero, while negative indexes start at -1.  For example, `1977-001` and `1977+364` are both acceptable ways to express the birthday of Korean pop star Psy, who was born on the last day of 1977.
-
-The additional day in leap years throws Decalendar day indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years.
-
-To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year.
 
 ## Decimal Times
 
