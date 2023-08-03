@@ -235,11 +235,7 @@ In any given year,
 - negative day numbers start at $-1$ and go up to $-n$,
 where $n$ is the number of days in the year.
 
-The negative day numbers can tell us if we have crossed over into another year. If the negative is no longer negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar.
-
-The additional day in leap years throws Decalendar day indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years.
-
-To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year.
+The negative day numbers can tell us if we have crossed over into another year. If the negative is no longer negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar. The additional day in leap years throws `Decalendar` day indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years. To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year.
 
 
 misunderstandings
