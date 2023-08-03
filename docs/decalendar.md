@@ -295,7 +295,7 @@ December 25th always falls on an `Eightday` or a `Nineday`. These two days are c
 
 ### `Weeks`
 
-The ultimate goal of `Decalendar` is to replace the Gregorian calendar and its months and weekly schedules with day numbers and `dekly` schedules, like those described above. In the meantime, `Decalendar` offers a supplemental date format based on weeks that can be help users to track weekly schedules and to learn some important concepts like zero-based numbering. The `Decalendar` week-based format numbers weekdays as follows:
+The ultimate goal of `Decalendar` is to replace the Gregorian calendar and its months and weekly schedules with day numbers and `dekly` schedules, like those described above. In the meantime, `Decalendar` offers a supplemental date format based on weeks that can be help users to track weekly schedules and to learn some important concepts like zero-based numbering. The `Decalendar` week-based format starts from `Week 0` on the first day of the year and adds one to the week number every Sunday. The first two digits of of the week-based format shows the week number while the last digit shows the weekday number. The table below shows the meaning of the weekday numbers:
 
 | Day       | pos | neg |
 | --------- | --- | --- |
@@ -307,13 +307,14 @@ The ultimate goal of `Decalendar` is to replace the Gregorian calendar and its m
 | Friday    | 5   | -2  |
 | Saturday  | 6   | -1  |
 
-For example, the first day of the year 2000 was a Monday and thus would be `2000+0+1` or `2000-q-6` in the week-based format. The weekday number from the table above is the last digit in the week-based format, whereas the number in between the year and the weekday number is the week number. The week number always starts from "0" or "-q", while the weekday number will only be "0" or "-7" if the first day of the year is a Sunday. The "q" means 53.
+The week number and weekday number can be written by themselves. For example `+00+0` means the Sunday that starts the week that includes the 1st day of the year. This date is before the first day of the year unless the year starts on a Sunday. This means that the week number always starts from "0" or "-53", while the weekday number will only be "0" or "-7" if the first day of the year is a Sunday. The week number and the weekday number can be combined with a year to have a full week-based date. For example, the first day of the year 2000 was a Monday and thus would be `2000+00+1` or `2000-53-6` in the week-based format. We could read these dates as `Year 2000 Week 0 Day 1` and `Year 2000 Week -53 Day minus 6`, respectively.
 
 
-```
-2000-372
 
-```
+
+
+
+Both of the `Decalendar` date formats can be combined with a `Declock` time.
 
 While each of the two `Decalendar` date formats can identify any date on their own, they are so different that they can be shown together without appearing redundant. Even when shown together, the two formats are easy to distinguish, because the weekly format has one digit fewer:
 
@@ -420,14 +421,6 @@ Decalendar dates are composed of only a year and day index. The day index can be
 
 Positive indexes show the number of days that have passed in the year since Day 0, while negative indexes count down the number of days remaining in the year.
 
-The table below shows New Year Day's (NYD), Mid-Year's Day (MYD), and New Year's Eve (NYE) of the year 2000 in all 4 Decalendar date formats:
-
-| Format |   NYD    |   MYD    |    NYE   |
-| ------ |   ---    |   ---    |    ---   |
-|  B10+  | 2000+000 | 2000+183 | 2000+365 |
-|  B10-  | 2000-366 | 2000-183 | 2000-001 |
-|  B28+  | 2000+00  | 2000+53  | 2000+D1  |
-|  B28-  | 2000-D2  | 2000-53  | 2000-01  |
 
 On New Year's Day, the positive indexes are all 0, while the negative indexes show the total days in the year (n). Leap years (like the year 2000) have 366 days while all other years have 365 days. On New Year's Eve, the positive day indexes display the number of days in the year minus one (n-1), while the negative day index is -1.
 
@@ -1181,3 +1174,14 @@ The
 
 For example, in the Mid-Year's Day column in table below, Base28 indexes tells that we are on Oktday 3 of Okt 5, while the Base10 index contains similar information for deks and pents.
 
+2024-01-01
+    +001.25
+    -536.75
+    +000.375
+    -366.625
+        +5
+        -5
+        +625
+        -375
+        +75
+        -25
