@@ -226,7 +226,8 @@ Negative numbers are useful towards the end of the year, but may be confusing at
 
 
 
-The days in the bottom right of the table do not belong to the current year. For example, `day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. This is another example of why we should be careful with the number 36. To prevent mixing days from different years, we should follow some common sense on the limits of `dek` and day numbers:
+
+The days in the bottom right of the table do not belong to the current year. For example, `day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. To prevent mixing days from different years, we should follow some common sense on the limits of `dek` and day numbers:
 
 In any given year,
 - positive `dek` numbers start at $0$ and go up to $35$,
@@ -235,7 +236,22 @@ In any given year,
 - negative day numbers start at $-1$ and go up to $-n$,
 where $n$ is the number of days in the year.
 
-The negative day numbers can tell us if we have crossed over into another year. If the negative is no longer negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar. The additional day in leap years throws `Decalendar` day indexes out of alignment with Gregorian calendar dates. For example, December 25th is Day 358 in non-leap years and Day 359 in leap years. To consistently define Gregorian calendar dates with Decalendar indexes, we should use positive indexes before Day 59 and negative indexes thereafter. For example, December 25th is always Day -7, regardless of whether or not there is a leap year.
+The negative day numbers can tell us if we have crossed over into another year. If the negative is no longer negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar. The additional day in leap years throws `Decalendar` day indexes out of alignment with Gregorian calendar dates. For example, December 25th is `Day 358` in non-leap years and Day 359 in leap years. To consistently define Gregorian calendar dates with `Decalendar` day numbers, we should use positive day numbers before `Day 59` and negative day numbers thereafter. For example, December 25th is always `Day -7`, both in leap years and in common years.
+
+Some holidays do not have a fixed date, such as Thanksgiving, which is celebrated on the fourth Thursday in November. The Base28 day counter starts from ISO week year and thus and thus it only lines up with the Base10 day counter when the first day of the year is a Monday. The ISO week date of Thanksgiving is always W47-4.  Start counting Base28 days from the start of the ISO Week Year. Convert ISO week dates It is difficult to to translate into the are easy to translate into  December 25th  days in a `dek` will not have much meaning for us
+
+// If first Thursday is before January 4, Thanksgiving is in W48, not W47
+// Need to find first Monday after January 4 and start the counter one week earlier
+
+
+### Okts
+
+
+Day indexes can be Base28 encoded to make it easier to track groups of 7, 14, or 28-days.
+
+Towards the initial goal of peaceful co-existence, Declock describes methods for converting to and from standard time, while Decalendar includes methods for keeping track of Gregorian calendar weekdays and dates. Nevertheless,  7-day weeks are  does not fit naturally in a decimal calendar system based. translating dates into 
+
+
 
 
 misunderstandings
@@ -314,12 +330,7 @@ The last digit of the doy is called the dekday. Deks are groups of 10 days that 
 Dekdays 4, 8, and 9 are rest days.
 
 
-Day indexes can be Base28 encoded to make it easier to track groups of 7, 14, or 28-days.
-
-
 A core aspect of Decalendar organizes days into groups of 10. Each 10-day group is called a dek. The first two digits of the doy index is the dek index. The last digit of the doy index is the dekday, the ordinal number of the day in the dek.
-
-Towards the initial goal of peaceful co-existence, Declock describes methods for converting to and from standard time, while Decalendar includes methods for keeping track of Gregorian calendar weekdays and dates. Nevertheless,  7-day weeks are  does not fit naturally in a decimal calendar system based. translating dates into 
 
 ### Date formats
 
