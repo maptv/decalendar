@@ -225,17 +225,17 @@ Negative numbers are useful towards the end of the year, but may be confusing at
   </table>
 
 
-The days in the bottom right of the table do not belong to the current year. For example, `day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. This is another example of why we should be careful with the number 36. To prevent mixing days from different years, we should follow some common sense on the limits of day and `dek` numbers:
+
+The days in the bottom right of the table do not belong to the current year. For example, `day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. This is another example of why we should be careful with the number 36. To prevent mixing days from different years, we should follow some common sense on the limits of `dek` and day numbers:
 
 In any given year,
-- positive day numbers start at $0$ and go up to $n-1$
-- negative day numbers start at $-1$ and go up to $-n$,
 - positive `dek` numbers start at $0$ and go up to $35$,
 - negative `dek` numbers start at $-1$ and go up to $-36$,
+- positive day numbers start at $0$ and go up to $n-1$
+- negative day numbers start at $-1$ and go up to $-n$,
 where $n$ is the number of days in the year.
 
-
-The negative day number can tell us if we have crossed over into another year. If the negative is no longer negative, we have done too far.
+The negative day numbers can tell us if we have crossed over into another year. If the negative is no longer negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar.
 
 
 misunderstandings
