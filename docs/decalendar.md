@@ -39,193 +39,190 @@ Of the units discussed above, `dimes` are notable, because they are the units of
 
 The `dek` number is typically just the first two digits of the day number, but `Dek 36` of leap years includes 4 days from the subsequent year and `Dek 36` of common years is evenly split between years! In the example above, both Tokyo and Mexico were in `Dek 36`, even when they were in separate years. Saying `Dek 36` implies that we want to include days from both the current year and the next. If it is not our intention to combine days across years, we should instead say `Dek -1`. Just like `Day -1`, `Dek -1` retains the same meaning across common years and leap year, it is always the last 10 days of the year and only contains days from a single year.
 
-Negative numbers are useful towards the end of the year, but may be confusing at the beginning. For this reason, the days in each year are named after the last digit of their positive number, not their negative number. The table below shows the names and numbers of each day in `Dek 0` and `Dek 36` in both common years (n=365) and leap years (n=366).
+Negative numbers are useful towards the end of the year, but may be confusing at the beginning. For this reason, the days in each `dek` are named after the last digit of their positive number, not their negative number. The table below shows the names and numbers of each day in `Dek 0` and `Dek 36` in both common years (n=365) and leap years (n=366).
 
 <table>
     <tr>
-      <th></th>
-      <th>Dek 0</th>
-      <th>Dek -1</th>
-      <th>Dek 36</th>
+    <th></th>
+    <th colspan="4">Dek 0</th>
+    <th colspan="4">Dek -1</th>
+    <th colspan="4">Dek 36</th>
     </tr>
     <tr>
-      <th></th>
-      <th>n=365</th>
-      <th>n=366</th>
-      <th>n=365</th>
-      <th>n=366</th>
-      <th>n=365</th>
-      <th>n=366</th>
+    <th></th>
+    <th colspan="2">n=365</th>
+    <th colspan="2">n=366</th>
+    <th colspan="2">n=365</th>
+    <th colspan="2">n=366</th>
+    <th colspan="2">n=365</th>
+    <th colspan="2">n=366</th>
     </tr>
     <tr>
-      <th>Name</th>
-      <th>pos</th>
-      <th>neg</th>
-      <th>pos</th>
-      <th>neg</th>
-      <th>pos</th>
-      <th>neg</th>
-      <th>pos</th>
-      <th>neg</th>
-      <th>pos</th>
-      <th>neg</th>
-      <th>pos</th>
-      <th>neg</th>
+    <th>Name</th>
+    <th>pos</th>
+    <th>neg</th>
+    <th>pos</th>
+    <th>neg</th>
+    <th>pos</th>
+    <th>neg</th>
+    <th>pos</th>
+    <th>neg</th>
+    <th>pos</th>
+    <th>neg</th>
+    <th>pos</th>
+    <th>neg</th>
     </tr>
     <tr>
-      <td>Zeroday</td>
-      <td>0</td>
-      <td>-365</td>
-      <td>0</td>
-      <td>-366</td>
-      <td>355</td>
-      <td>-10</td>
-      <td>356</td>
-      <td>-10</td>
-      <td>360</td>
-      <td>-5</td>
-      <td>360</td>
-      <td>-6</td>
+    <td>Zeroday</td>
+    <td>0</td>
+    <td>-365</td>
+    <td>0</td>
+    <td>-366</td>
+    <td>355</td>
+    <td>-10</td>
+    <td>356</td>
+    <td>-10</td>
+    <td>360</td>
+    <td>-5</td>
+    <td>360</td>
+    <td>-6</td>
     </tr>
     <tr>
-      <td>Oneday</td>
-      <td>1</td>
-      <td>-364</td>
-      <td>1</td>
-      <td>-365</td>
-      <td>356</td>
-      <td>-9</td>
-      <td>357</td>
-      <td>-9</td>
-      <td>361</td>
-      <td>-4</td>
-      <td>361</td>
-      <td>-5</td>
+    <td>Oneday</td>
+    <td>1</td>
+    <td>-364</td>
+    <td>1</td>
+    <td>-365</td>
+    <td>356</td>
+    <td>-9</td>
+    <td>357</td>
+    <td>-9</td>
+    <td>361</td>
+    <td>-4</td>
+    <td>361</td>
+    <td>-5</td>
     </tr>
     <tr>
-      <td>Twoday</td>
-      <td>2</td>
-      <td>-363</td>
-      <td>2</td>
-      <td>-364</td>
-      <td>357</td>
-      <td>-8</td>
-      <td>358</td>
-      <td>-8</td>
-      <td>362</td>
-      <td>-3</td>
-      <td>362</td>
-      <td>-4</td>
+    <td>Twoday</td>
+    <td>2</td>
+    <td>-363</td>
+    <td>2</td>
+    <td>-364</td>
+    <td>357</td>
+    <td>-8</td>
+    <td>358</td>
+    <td>-8</td>
+    <td>362</td>
+    <td>-3</td>
+    <td>362</td>
+    <td>-4</td>
     </tr>
     <tr>
-      <td>Threeday</td>
-      <td>3</td>
-      <td>-362</td>
-      <td>3</td>
-      <td>-363</td>
-      <td>358</td>
-      <td>-7</td>
-      <td>359</td>
-      <td>-7</td>
-      <td>363</td>
-      <td>-2</td>
-      <td>363</td>
-      <td>-3</td>
+    <td>Threeday</td>
+    <td>3</td>
+    <td>-362</td>
+    <td>3</td>
+    <td>-363</td>
+    <td>358</td>
+    <td>-7</td>
+    <td>359</td>
+    <td>-7</td>
+    <td>363</td>
+    <td>-2</td>
+    <td>363</td>
+    <td>-3</td>
     </tr>
     <tr>
-      <td>Fourday</td>
-      <td>4</td>
-      <td>-361</td>
-      <td>4</td>
-      <td>-362</td>
-      <td>359</td>
-      <td>-6</td>
-      <td>360</td>
-      <td>-6</td>
-      <td>364</td>
-      <td>-1</td>
-      <td>364</td>
-      <td>-2</td>
+    <td>Fourday</td>
+    <td>4</td>
+    <td>-361</td>
+    <td>4</td>
+    <td>-362</td>
+    <td>359</td>
+    <td>-6</td>
+    <td>360</td>
+    <td>-6</td>
+    <td>364</td>
+    <td>-1</td>
+    <td>364</td>
+    <td>-2</td>
     </tr>
     <tr>
-      <td>Fiveday</td>
-      <td>5</td>
-      <td>-360</td>
-      <td>5</td>
-      <td>-361</td>
-      <td>360</td>
-      <td>-5</td>
-      <td>361</td>
-      <td>-5</td>
-      <td>365</td>
-      <td>0</td>
-      <td>365</td>
-      <td>-1</td>
+    <td>Fiveday</td>
+    <td>5</td>
+    <td>-360</td>
+    <td>5</td>
+    <td>-361</td>
+    <td>360</td>
+    <td>-5</td>
+    <td>361</td>
+    <td>-5</td>
+    <td>365</td>
+    <td>0</td>
+    <td>365</td>
+    <td>-1</td>
     </tr>
     <tr>
-      <td>Sixday</td>
-      <td>6</td>
-      <td>-359</td>
-      <td>6</td>
-      <td>-360</td>
-      <td>361</td>
-      <td>-4</td>
-      <td>362</td>
-      <td>-4</td>
-      <td>366</td>
-      <td>1</td>
-      <td>366</td>
-      <td>0</td>
+    <td>Sixday</td>
+    <td>6</td>
+    <td>-359</td>
+    <td>6</td>
+    <td>-360</td>
+    <td>361</td>
+    <td>-4</td>
+    <td>362</td>
+    <td>-4</td>
+    <td>366</td>
+    <td>1</td>
+    <td>366</td>
+    <td>0</td>
     </tr>
     <tr>
-      <td>Sevenday</td>
-      <td>7</td>
-      <td>-358</td>
-      <td>7</td>
-      <td>-359</td>
-      <td>362</td>
-      <td>-3</td>
-      <td>363</td>
-      <td>-3</td>
-      <td>367</td>
-      <td>2</td>
-      <td>367</td>
-      <td>1</td>
+    <td>Sevenday</td>
+    <td>7</td>
+    <td>-358</td>
+    <td>7</td>
+    <td>-359</td>
+    <td>362</td>
+    <td>-3</td>
+    <td>363</td>
+    <td>-3</td>
+    <td>367</td>
+    <td>2</td>
+    <td>367</td>
+    <td>1</td>
     </tr>
     <tr>
-      <td>Eightday</td>
-      <td>8</td>
-      <td>-357</td>
-      <td>8</td>
-      <td>-358</td>
-      <td>363</td>
-      <td>-2</td>
-      <td>364</td>
-      <td>-2</td>
-      <td>368</td>
-      <td>3</td>
-      <td>368</td>
-      <td>2</td>
+    <td>Eightday</td>
+    <td>8</td>
+    <td>-357</td>
+    <td>8</td>
+    <td>-358</td>
+    <td>363</td>
+    <td>-2</td>
+    <td>364</td>
+    <td>-2</td>
+    <td>368</td>
+    <td>3</td>
+    <td>368</td>
+    <td>2</td>
     </tr>
     <tr>
-      <td>Nineday</td>
-      <td>9</td>
-      <td>-356</td>
-      <td>9</td>
-      <td>-357</td>
-      <td>364</td>
-      <td>-1</td>
-      <td>365</td>
-      <td>-1</td>
-      <td>369</td>
-      <td>4</td>
-      <td>369</td>
-      <td>3</td>
+    <td>Nineday</td>
+    <td>9</td>
+    <td>-356</td>
+    <td>9</td>
+    <td>-357</td>
+    <td>364</td>
+    <td>-1</td>
+    <td>365</td>
+    <td>-1</td>
+    <td>369</td>
+    <td>4</td>
+    <td>369</td>
+    <td>3</td>
     </tr>
-  </table>
-
-
-
+</table>
 
 The days in the bottom right of the table do not belong to the current year. For example, `day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. To prevent mixing days from different years, we should follow some common sense on the limits of `dek` and day numbers:
 
@@ -236,9 +233,371 @@ In any given year,
 - negative day numbers start at $-1$ and go up to $-n$,
 where $n$ is the number of days in the year.
 
-The negative day numbers can tell us if we have crossed over into another year. If the negative is no longer negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar. The additional day in leap years throws `Decalendar` day indexes out of alignment with Gregorian calendar dates. For example, December 25th is `Day 358` in non-leap years and Day 359 in leap years. To consistently define Gregorian calendar dates with `Decalendar` day numbers, we should use positive day numbers before `Day 59` and negative day numbers thereafter. For example, December 25th is always `Day -7`, both in leap years and in common years.
+The negative day numbers can tell us if we have crossed over into another year. If the negative number stops being negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar. The additional day in leap years throws `Decalendar` day indexes out of alignment with Gregorian calendar dates. For example, December 25th is `Day 358` in non-leap years and `Day 359` in leap years. To consistently define Gregorian calendar dates with `Decalendar` day numbers, we should use positive day numbers before `Day 59` and negative day numbers thereafter. For example, December 25th is always `Day -7`, both in leap years and in common years.
 
-Some holidays do not have a fixed date, such as Thanksgiving, which is celebrated on the fourth Thursday in November. The Base28 day counter starts from ISO week year and thus and thus it only lines up with the Base10 day counter when the first day of the year is a Monday. The ISO week date of Thanksgiving is always W47-4.  Start counting Base28 days from the start of the ISO Week Year. Convert ISO week dates It is difficult to to translate into the are easy to translate into  December 25th  days in a `dek` will not have much meaning for us
+December 25th always falls on an `Eightday` or a `Nineday`. These two days are called the `dekend` and are separated by groups of 8 days called `okts`. We can divide up an `okt` to create one of three `dekly` schedules. If we split an `okt` symmetrically, we get a `3+2+3` schedule. If we divide it asymmetrically, we obtained either a `3+1+4` or a `4+1+3` schedule. The two days in the middle of the `3+2+3` schedule are called the `midokt`, while the `3+1+4` schedule is split by a `midhept` and the `4+1+3` schedule is divided by a `midenn`. The groups of three days in these schedules are called `treps`, while the asymmetric schedules also have groups of four days called `tets`. The table below summarizes these three schedules:
+
+<table>
+    <tr>
+    <th></th>
+    <th colspan="6">Schedule</th>
+    </tr>
+    <tr>
+    <th>Name</th>
+    <th>3+2+3</th>
+    <th>3+1+4</th>
+    <th>4+1+3</th>
+    </tr>
+    <tr>
+    <td>Zeroday</td>
+    <td rowspan="3">Trep</td>
+    <td rowspan="3">Trep</td>
+    <td rowspan="4">Tet</td>
+    </tr>
+    <tr>
+    <td>Oneday</td>
+    </tr>
+    <tr>
+    <td>Twoday</td>
+    </tr>
+    <tr>
+    <td>Threeday</td>
+    <td rowspan="2">Midokt</td>
+    <td>Midhept</td>
+    </tr>
+    <tr>
+    <td>Fourday</td>
+    <td rowspan="4">Tet</td>
+    <td>Midenn</td>
+    </tr>
+    <tr>
+    <td>Fiveday</td>
+    <td rowspan="3">Trep</td>
+    <td rowspan="3">Trep</td>
+    </tr>
+    <tr>
+    <td>Sixday</td>
+    </tr>
+    <tr>
+    <td>Sevenday</td>
+    </tr>
+    <tr>
+    <td>Eightday</td>
+    <td rowspan="2">Dekend</td>
+    <td rowspan="2">Dekend</td>
+    <td rowspan="2">Dekend</td>
+    </tr>
+    <tr>
+    <td>Nineday</td>
+    </tr>
+</table>
+
+
+### `Weeks`
+
+While `deks` addition to the 3 `dekly` schedules described above, `Decalendar` also provides a date format designed to make it easier to follow a weekly schedule. This format combines a Base53 week number and a weekday number. 
+
+Week counts start on the Sunday before January 1st.
+
+The week numbers range from 0 to "q" or -1 to -p, while the weekday numbers range from 0 to 6 or -1 to -7. 
+To support tracking of groups of 7 days, instead of 10 days, Decalendar includes a supplemental format that combines a week number and . To be clear, the main Calendar unit  The week number is `Base53` encoded so that all of the weeks in a year can fit in a single digit. A year can have 52 or 53 weeks, because of the need to insert a leap week. The 
+
+
+B
+B
+B
+B
+B
+B
+B
+C
+C
+C
+C
+C
+C
+C
+D
+D
+D
+D
+D
+D
+D
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+
+it easier to track weeks, addition to `Deks`, Decalendar has Day numbers are very useful for tracking `Deks` and `Declock` are systems built on powers of ten.
+
+To identify a particular week in a year or a particular day in a week, Decalendar uses a different.  dates we want to track differ from year. such as Thanksgiving, which is celebrated on the fourth Thursday in November. The Base28 day counter starts from ISO week year and thus and thus it only lines up with the Base10 day counter when the first day of the year is a Monday. The ISO week date of Thanksgiving is always W47-4.  Start counting Base28 days from the start of the ISO Week Year. Convert ISO week dates It is difficult to to translate into the are easy to translate into  December 25th  days in a `dek` will not have much meaning for us
 
 // If first Thursday is before January 4, Thanksgiving is in W48, not W47
 // Need to find first Monday after January 4 and start the counter one week earlier
@@ -258,17 +617,6 @@ misunderstandings
 When we look at `Dek 36`, we can see that the negative turn into positive numbers, while the positive numbers continue past the end of the year.
 
 The days in 
-- 0: `Zeroday`
-- 1: `Oneday`
-- 2: `Twoday`
-- 3: `Threeday`
-- 4: `Fourday`
-- 5: `Fiveday`
-- 6: `Sixday`
-- 7: `Sevenday`
-- 8: `Eightday`
-- 9: `Nineday`
-
 We can use the terms described above to combine `Decalendar` dates and `Declock` times when speaking. For example, we could say "`Dek 0 Day 0 Dot 500`" or simply "`Day 0 Dot 500`" to mean the first day of the year (`000.500`).
 
 ## Day indexes
