@@ -293,7 +293,7 @@ December 25th always falls on an `Eightday` or a `Nineday`. These two days are c
 </table>
 
 
-### `Weeks`
+### Weeks
 
 The ultimate goal of `Decalendar` is to replace the Gregorian calendar and its months and weekly schedules with day numbers and `dekly` schedules, like those described above. In the meantime, `Decalendar` offers a supplemental date format based on weeks that can be help users to track weekly schedules and to learn some important concepts like zero-based numbering. The `Decalendar` week-based format starts from `Week 0` on the first day of the year and adds one to the week number every Sunday. The first two digits of of the week-based format shows the week number while the last digit shows the weekday number. The table below shows the meaning of the weekday numbers:
 
@@ -307,7 +307,15 @@ The ultimate goal of `Decalendar` is to replace the Gregorian calendar and its m
 | Friday    | 5   | -2  |
 | Saturday  | 6   | -1  |
 
-The week number and weekday number can be written by themselves. For example `+00+0` means the Sunday that starts the week that includes the 1st day of the year. This date is before the first day of the year unless the year starts on a Sunday. This means that the week number always starts from "0" or "-53", while the weekday number will only be "0" or "-7" if the first day of the year is a Sunday. The week number and the weekday number can be combined with a year to have a full week-based date. For example, the first day of the year 2000 was a Monday and thus would be `2000+00+1` or `2000-53-6` in the week-based format. We could read these dates as `Year 2000 Week 0 Day 1` and `Year 2000 Week -53 Day minus 6`, respectively.
+The week number and weekday number can be written by themselves. For example `+00+0` means the Sunday that starts the week that includes the 1st day of the year. This date is before the first day of the year unless the year starts on a Sunday. This means that the week number always starts from "0" or "-53", while the weekday number will only be "0" or "-7" if the first day of the year is a Sunday. If we do not include a year in the week date, we can drop the first delimiter, because the second delimiter should be sufficient, but if we include the year, both delimiters are required. For example, `00+0` and `53-6` should be written `2000+00+1` and `2000-53-6` when combined with the year 2000. We could read these dates as `Year 2000 Week 0 Day 1` and `Year 2000 Week -53 Day minus 6`, respectively.
+
+### Months
+
+`Decalendar` also has a date format for Gregorian calendar dates. To match the other formats, the month and day-of-the-month counts start at 0 and to save space, the month is duodecimal (Base12) encoded. This changes may be confusing 
+
+
+
+If the year is already known, we
 
 
 
