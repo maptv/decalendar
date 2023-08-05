@@ -235,63 +235,11 @@ where $n$ is the number of days in the year.
 
 The negative day numbers can tell us if we have crossed over into another year. If the negative number stops being negative, we have gone past the end of the current year. Negative day numbers are useful when we are converting dates to and from the Gregorian calendar. The additional day in leap years throws `Decalendar` day indexes out of alignment with Gregorian calendar dates. For example, December 25th is `Day 358` in non-leap years and `Day 359` in leap years. To consistently define Gregorian calendar dates with `Decalendar` day numbers, we should use positive day numbers before `Day 59` and negative day numbers thereafter. For example, December 25th is always `Day -7`, both in leap years and in common years.
 
-December 25th always falls on an `Eightday` or a `Nineday`. These two days are called the `dekend` and are separated by groups of 8 days called `okts`. We can divide up an `okt` to create one of three `dekly` schedules. If we split an `okt` symmetrically, we get a `3+2+3` schedule. If we divide it asymmetrically, we obtained either a `3+1+4` or a `4+1+3` schedule. The two days in the middle of the `3+2+3` schedule are called the `midokt`, while the `3+1+4` schedule is split by a `midhept` and the `4+1+3` schedule is divided by a `midenn`. The groups of three days in these schedules are called `treps`, while the asymmetric schedules also have groups of four days called `tets`. The table below summarizes these three schedules:
-
-<table>
-    <tr>
-    <th></th>
-    <th colspan="6">Schedule</th>
-    </tr>
-    <tr>
-    <th>Name</th>
-    <th>3+2+3</th>
-    <th>3+1+4</th>
-    <th>4+1+3</th>
-    </tr>
-    <tr>
-    <td>Zeroday</td>
-    <td rowspan="3">Trep</td>
-    <td rowspan="3">Trep</td>
-    <td rowspan="4">Tet</td>
-    </tr>
-    <tr>
-    <td>Oneday</td>
-    </tr>
-    <tr>
-    <td>Twoday</td>
-    </tr>
-    <tr>
-    <td>Threeday</td>
-    <td rowspan="2">Midokt</td>
-    <td>Midhept</td>
-    </tr>
-    <tr>
-    <td>Fourday</td>
-    <td rowspan="4">Tet</td>
-    <td>Midenn</td>
-    </tr>
-    <tr>
-    <td>Fiveday</td>
-    <td rowspan="3">Trep</td>
-    <td rowspan="3">Trep</td>
-    </tr>
-    <tr>
-    <td>Sixday</td>
-    </tr>
-    <tr>
-    <td>Sevenday</td>
-    </tr>
-    <tr>
-    <td>Eightday</td>
-    <td rowspan="2">Dekend</td>
-    <td rowspan="2">Dekend</td>
-    <td rowspan="2">Dekend</td>
-    </tr>
-    <tr>
-    <td>Nineday</td>
-    </tr>
-</table>
-
+December 25th always falls on an `Eightday` or a `Nineday`. These two days are called the `dekend` and serve as a break from work and school. To avoid 8 consecutive days of work or study, `Decalendar` defines `Fourday` as an additional rest day. Resting on `Fourday`
+- creates the shortest possible sequences of consecutive workdays,
+- separates works and rest days into convenient groups of 5 days, and
+- yields a smooth transition between years.
+When we combine the last `Fourday` of the year (`Day 364`) with holidays on New Year's Days (`Day 0`) and leap days (`Day 365`), there are 2 rest days at the end of common years and 3 days off at the end of leap years. This break in between years is preceded by 4 workdays and is followed by 3 workdays before the normal rhythm resumes with the subsequent `Fourday`. Not counting any holidays other than `Day 0` and `Day 365`, the total number of rest day is 110 in common years and 111 in leap years.
 
 ### Weeks
 
