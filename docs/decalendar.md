@@ -239,7 +239,7 @@ December 25th always falls on an `Eightday` or a `Nineday`. These two days are c
 - creates the shortest possible sequences of consecutive workdays,
 - separates works and rest days into convenient groups of 5 days, and
 - yields a smooth transition between years.
-When we combine the last `Fourday` of the year (`Day 364`) with holidays on New Year's Days (`Day 0`) and leap days (`Day 365`), there are 2 rest days at the end of common years and 3 days off at the end of leap years. This break in between years is preceded by 4 workdays and is followed by 3 workdays before the normal rhythm resumes with the subsequent `Fourday`. Not counting any holidays other than `Day 0` and `Day 365`, the total number of rest day is 110 in common years and 111 in leap years.
+The last `Fourday` of the year (`Day 364`) combines with New Year's Day holiday (`Day 0`) to create 2 days of rest that act as a buffer between a common year to the next year. When transitioning from a leap year to the subsequent year, there are 3 consecutive rest days, thanks to the leap day holiday (`Day 365`). Either way, this break in between years is preceded by 4 workdays (`Day 360` to `Day 363`) and followed by 3 workdays (`Day 1` to `Day 3`) before the normal rhythm resumes with the first `Fourday` of the year (`Day 4`). Not counting any holidays other than `Day 0` and `Day 365`, the total number of days off is 110 in common years and 111 in leap years.
 
 ### Weeks
 
