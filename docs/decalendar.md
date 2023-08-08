@@ -43,7 +43,9 @@ When a date and a time are combined, they form a timestamp. The timestamps shown
 - `.w`: `year+ww+d.day`
 
 In the list above, `day` is the 3-digit day of the year number, `dd` is the 2-digit day of the month number, `d` is the 1-digit day of the week number, `.day` is the time in `mils`.
-The `m` in the `.m` format is the month number, which is zero-indexed and duodecimal (Base12 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The week number in the list above, `ww`, ranges from `00` to `53`. The table below shows the timestamps from the example above in all three formats.
+The `m` in the `.m` format is the month number, which is zero-indexed and duodecimal (Base12 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The week number in the list above, `ww`, ranges from `00` to `53`.
+
+The table below shows the timestamps from the last example in the previous section in all three formats.
 
 | Day of the | Mexico City       | Tokyo             |
 | ---------  | ---               | ---               |
@@ -51,7 +53,7 @@ The `m` in the `.m` format is the month number, which is zero-indexed and duodec
 | Month      | `1999+B+31.500-3` | `2000+0+00.200+4` |
 | Week       | `1999+51+5.500-3` | `2000+00+6.200+4` |
 
-In the example above, the month in Tokyo is January (`0`) and the month in Mexico City is December (`B`). The "day of the week" format always starts the year with week zero, but the year can start on day of the week. The example above shows that the year 2000 starts on a Saturday (`6`).
+In the table above, the month in Tokyo is January (`0`) and the month in Mexico City is December (`B`). The "day of the week" format always starts the year with week zero, but the year can start on any day of the week. The example above shows that the year 2000 starts on a Saturday (`6`).
 
 The three formats shown above are essentially zero-based versions of [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard date formats.
 `Decalendar` also permits the use of a timestamp format based on fractional years. The timestamp in Mexico City from the table above would be `1999.99863` in fractional years. The interpretation of this number could be that the year 1999 is 99.863% complete. In the table, the main format is day-based format. below summarizes below. analogous to combined date and time expressions described by the . There are three ISO 8601 date formats that can be combined with the ISO 8601 time format to create 3 different timestamp formats. The list below summarizes the 
