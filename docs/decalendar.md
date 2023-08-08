@@ -10,11 +10,11 @@ In the simplest terms, `Decalendar` counts fractions of a year, while Declock co
 
 To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year. This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
-Not saying `Day` or `Dot` is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon and not the sixth day of the year. Also, the value itself may provide a clue, because calendar dates cannot be greater than 365, while times can have as many digits as desired. For this reason, the number "500" can only mean noon. If two numbers are said, the date is always before the time. When said together, the numbers "0" and "500" mean on the first day of the year at noon. In written form, this date and time would be `000.500`.
+Not saying `Day` or `Dot` is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon and not the sixth day of the year. Also, the value itself may provide a clue, because calendar dates cannot be greater than 365, while times can have as many digits as desired. For this reason, the number "500" can only mean noon. If a data and a time are combined into a timestamp, the date always goes before the time. When said together, the numbers "0" and "500" mean on the first day of the year at noon. In written form, this timestamp would be `000.500`.
 
-The dates and times above assume that the year and time zone are known. Most likely, we are talking about the current year and the local time zone, but it may be unclear. A date without a year is like a time without a time zone, both assume the context is obvious. When we include a year at the beginning of a date, we pinpoint a specific day in time, instead of talking about a date that could happen any year. The first of the day of the year 2000, would be `Year 2000 Day 0` or simply `2000 0`. Similarly, noon in time zone zero would be `Dot 500 Zone 0` or simply `500 0`.
+The format shown above is called `doty` or `.y`, which is short for fractional day of the year. The `.y` timestamps above assume that the year and time zone are known. Most likely, we are talking about the current year and the local time zone, but it may be unclear. A date without a year is like a time without a time zone, both assume the context is obvious. When we include a year at the beginning of a date, we pinpoint a specific day, instead of talking about a date that could happen any year. The first of the day of the year 2000, would be `Year 2000 Day 0` or simply `2000 0`. Similarly, noon in time zone zero would be `Dot 500 Zone 0` or simply `500 0`.
 
-When a date and a time are said together, the year is always first and the time zone is always last, so values can go from largest to smallest. The date and the time from the examples above would be `Year 2000 Day 0 Dot 500 Zone 0` or simply `2000 0 500 0`. In written form, this combined date and time would be `2000+000.500+0`. The plus signs imply that the date and the time zone can be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of Time Zone 0. Negative dates and times shows the number of parts that are left in the whole (day or year).
+When a date and a time are said together, the year is always first and the time zone is always last, so values can go from largest to smallest. The date and the time from the examples above would be `Year 2000 Day 0 Dot 500 Zone 0` or simply `2000 0 500 0`. In written form, this combined date and time would be `2000+000.500+0`. This format can be summarized `year+day.day±z`. The signs imply that the date and the time zone can be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of Time Zone 0. Negative dates and times shows the number of parts that are left in the whole (day or year).
 
 To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions. Negative numbers can be especially useful for `Decalendar`, because `Day -1` is always the last day of the year, regardless of how many days the year has. In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous in the context of `Declock`, the former could highlight that there is only 1 tenth (¹/₁₀) of the day remaining before midnight.
 
@@ -33,29 +33,239 @@ In the table above, `deks` are the main `Decalendar` unit, while the other three
 
 ### Time zones
 
-Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in Time Zone 1 are one `dime` later than Time Zone 0 and two `dimes` later than Time Zone -1. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in Time Zone -3 and Tokyo is in Time Zone 4, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is `1999+364.500-3` in Mexico City, it will be `2000+000.200+4` in Tokyo.
+Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in Time Zone 1 are one `dime` later than Time Zone 0 and two `dimes` later than Time Zone -1. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in Time Zone -3 and Tokyo is in Time Zone 4, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is noon on the last day of the year 1999 in Mexico City, it will be `Dot 200` on the first day of the year 2000 in Tokyo. The date and time in Mexico City can be written `2000+000.200+4` or `2000-366.800+4`, while the equivalent date and time for Tokyo is `1999+364.500-3` or `1999-001.500-3`. If we removed the time zone from the end, we would not know that all of these timestamps describe the same moment in time.
 
-## Timestamps
+## Months and Weeks
 
-When a date and a time are combined, they form a timestamp. The timestamps shown above represent the main `Decalendar` timestamp format, which is based on fractional days of the year (`doty` or `.y`). There are 2 other supplemental timestamp formats, which are based on fractional days of the month (`dotm` or `.m`), and fractional days of the week `year+ww+d.mil` (`dotw` or `.w`). The list below summarizes the three day-of-the (`dot` or `.`) formats:
-- `.y`: `year+day.day`
-- `.m`: `year+m+dd.day`
-- `.w`: `year+ww+d.day`
+The timestamps shown above are in the fractional days of the year (`doty` or `.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental timestamp formats, which are based on fractional days of the month (`dotm` or `.m`), and fractional days of the week (`dotw` or `.w`). The list below summarizes the three day-of-the (`dot` or `.`) formats:
+- `.y`: `year+day.day±z`  or `year-day.day±z`
+- `.m`: `year+m+dd.day±z` or `year-m-dd.day±z`
+- `.w`: `year+ww+d.day±z` or `year-ww-d.day±z`
 
 In the list above, `day` is the 3-digit day of the year number, `dd` is the 2-digit day of the month number, `d` is the 1-digit day of the week number, `.day` is the time in `mils`.
-The `m` in the `.m` format is the month number, which is zero-indexed and duodecimal (Base12 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The week number in the list above, `ww`, ranges from `00` to `53`.
+The `m` in the `.m` format is the month number, which is zero-indexed and tridecimal (Base13 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The negative month numbers range from -C (-13) to -1, as shown in the table below.
 
-The table below shows the timestamps from the last example in the previous section in all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all in the same form. In Mexico City, the time is `500-3`, which is read `Dot 500 Zone -3`, while in Tokyo, the time is `200+4`, which is read `Dot 200 Zone +4`.
+| Month     | pos | neg |
+| --------- | --- | --- |
+| January   | 0   | -C  |
+| February  | 1   | -B  |
+| March     | 2   | -A  |
+| April     | 3   | -9  |
+| May       | 4   | -8  |
+| June      | 5   | -7  |
+| July      | 6   | -6  |
+| August    | 7   | -5  |
+| September | 8   | -4  |
+| October   | 9   | -3  |
+| November  | A   | -2  |
+| December  | B   | -1  |
+
+ The week number in the list above, `ww`, ranges from 0 to 53 or -54 to -1. Weeks in the `.w` format start from Sunday. The table below shows the possible days of the week (`d`) values, which range from 0 to 6 or -7 to -1.
+
+| Day       | pos | neg |
+| --------- | --- | --- |
+| Sunday    | 0   | -7  |
+| Monday    | 1   | -6  |
+| Tuesday   | 2   | -5  |
+| Wednesday | 3   | -4  |
+| Thursday  | 4   | -3  |
+| Friday    | 5   | -2  |
+| Saturday  | 6   | -1  |
+
+The table below shows the timestamps from the last example in the previous section in all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all in the same form. In Mexico City, the time is `+500-3` or `-500-3`, while in Tokyo, the time is `+200+4` is `-800+4`.
 
 | Day of the | Mexico City       | Tokyo             |
 | ---------  | ---               | ---               |
 | Year       | `1999+364.500-3`  | `2000+000.200+4`  |
+| Year       | `1999-001.500-3`  | `2000-366.800+4`  |
 | Month      | `1999+B+31.500-3` | `2000+0+00.200+4` |
-| Week       | `1999+51+5.500-3` | `2000+00+6.200+4` |
+| Month      | `1999-1-01.500-3` | `2000-C-31.800+4` |
+| Week       | `1999+52+5.500-3` | `2000+00+6.200+4` |
+| Week       | `1999-01-2.500-3` | `2000-53-1.800+4` |
 
-In the table above, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City is December (`Month B`). We could read the dates in the `.m` timestamps as `Year 1999 Month B Day 31` in Mexico City and `Year 2000 Month 0 Day 0` in Tokyo. The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. The example above shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). We could read the dates in the `.w` format as `Year 1999 Week 51 Day 5` in Mexico City and `Year 2000 Week 0 Day 0` in Tokyo. In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to read: `Year 1999 Day 364` in Mexico City and `Year 2000 Day 0` in Tokyo.
+In the table above, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City is December (`Month B`). We could read the dates in the `.m` timestamps as `Year 1999 Month B Day 31` or `Year 1999 Month -1 Day -1` in Mexico City and `Year 2000 Month 0 Day 0` or `Year 2000 Month -C Day -31` in Tokyo. The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. The example above shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). We could read the dates in the `.w` format as `Year 1999 Week 52 Day 5` or `Year 1999 Week -1 Day -2` in Mexico City and `Year 2000 Week 0 Day 0` or `Year 2000 Week -52 Day -1` in Tokyo. In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to read: `Year 1999 Day 364` or `Year 1999 Day -1` in Mexico City and `Year 2000 Day 0` or `Year 2000 Day -366` in Tokyo.
 
-##
+## Schedules
+
+`Decalendar` envisions a world in which 7-day weeks and ~30-day months are replaced by 10-day `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
+
+A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The table below shows the name and numbers of the days in `Dek 0`, the first `dek` of the year, and `Dek 36`, the `dek` that contains the last days of the year and the first days of the subsequent year. The table includes columns for both common years (n=365) and leap years (n=366).
+
+<table>
+    <tr>
+    <th colspan="6">Dek 0</th>
+    <th colspan="6">Dek 36</th> </tr>
+    <tr>
+    <th colspan="3">n=365</th>
+    <th colspan="3">n=366</th>
+    <th colspan="3">n=365</th>
+    <th colspan="3">n=366</th>
+    </tr>
+    <tr>
+    <th>name</th>
+    <th>pos</th>
+    <th>neg</th>
+    <th>name</th>
+    <th>pos</th>
+    <th>neg</th>
+    <th>name</th>
+    <th>pos</th>
+    <th>neg</th>
+    <th>name</th>
+    <th>pos</th>
+    <th>neg</th>
+    </tr>
+    <tr>
+    <td>Zeroday</td>
+    <td>0</td>
+    <td>-365</td>
+    <td>Zeroday</td>
+    <td>0</td>
+    <td>-366</td>
+    <td>Zeroday</td>
+    <td>360</td>
+    <td>-5</td>
+    <td>Zeroday</td>
+    <td>360</td>
+    <td>-6</td>
+    </tr>
+    <tr>
+    <td>Oneday</td>
+    <td>1</td>
+    <td>-364</td>
+    <td>Oneday</td>
+    <td>1</td>
+    <td>-365</td>
+    <td>Oneday</td>
+    <td>361</td>
+    <td>-4</td>
+    <td>Oneday</td>
+    <td>361</td>
+    <td>-5</td>
+    </tr>
+    <tr>
+    <td>Twoday</td>
+    <td>2</td>
+    <td>-363</td>
+    <td>Twoday</td>
+    <td>2</td>
+    <td>-364</td>
+    <td>Twoday</td>
+    <td>362</td>
+    <td>-3</td>
+    <td>Twoday</td>
+    <td>362</td>
+    <td>-4</td>
+    </tr>
+    <tr>
+    <td>Threeday</td>
+    <td>3</td>
+    <td>-362</td>
+    <td>Threeday</td>
+    <td>3</td>
+    <td>-363</td>
+    <td>Threeday</td>
+    <td>363</td>
+    <td>-2</td>
+    <td>Threeday</td>
+    <td>363</td>
+    <td>-3</td>
+    </tr>
+    <tr>
+    <td>Fourday</td>
+    <td>4</td>
+    <td>-361</td>
+    <td>Fourday</td>
+    <td>4</td>
+    <td>-362</td>
+    <td>Fourday</td>
+    <td>364</td>
+    <td>-1</td>
+    <td>Fourday</td>
+    <td>364</td>
+    <td>-2</td>
+    </tr>
+    <tr>
+    <td>Fiveday</td>
+    <td>5</td>
+    <td>-360</td>
+    <td>Fiveday</td>
+    <td>5</td>
+    <td>-361</td>
+    <td>Zeroday</td>
+    <td>365</td>
+    <td>0</td>
+    <td>Fiveday</td>
+    <td>365</td>
+    <td>-1</td>
+    </tr>
+    <tr>
+    <td>Sixday</td>
+    <td>6</td>
+    <td>-359</td>
+    <td>Sixday</td>
+    <td>6</td>
+    <td>-360</td>
+    <td>Oneday</td>
+    <td>366</td>
+    <td>1</td>
+    <td>Zeroday</td>
+    <td>366</td>
+    <td>0</td>
+    </tr>
+    <tr>
+    <td>Sevenday</td>
+    <td>7</td>
+    <td>-358</td>
+    <td>Sevenday</td>
+    <td>7</td>
+    <td>-359</td>
+    <td>Twoday</td>
+    <td>367</td>
+    <td>2</td>
+    <td>Oneday</td>
+    <td>367</td>
+    <td>1</td>
+    </tr>
+    <tr>
+    <td>Eightday</td>
+    <td>8</td>
+    <td>-357</td>
+    <td>Eightday</td>
+    <td>8</td>
+    <td>-358</td>
+    <td>Threeday</td>
+    <td>368</td>
+    <td>3</td>
+    <td>Twoday</td>
+    <td>368</td>
+    <td>2</td>
+    </tr>
+    <tr>
+    <td>Nineday</td>
+    <td>9</td>
+    <td>-356</td>
+    <td>Nineday</td>
+    <td>9</td>
+    <td>-357</td>
+    <td>Fourday</td>
+    <td>369</td>
+    <td>4</td>
+    <td>Threeday</td>
+    <td>369</td>
+    <td>3</td>
+    </tr>
+</table>
+
+
+
+`Dek 36` covers the transition from the current year to the next. After the last day of the current year, the negative day number of the current year becomes the positive day number of the next year. This means that the `Dek 36` portion of the table above could be used for a few days of the New Year instead of immediately switching to `Dek 0`.
+
+
+use the right half of the table above The last `Fourday` of the year (`Day 364`) combines with the New Year's Day (`Day 0`) holiday to form a buffer of 2 rest days between a common year and the subsequent year. When transitioning from a leap year, there are 3 consecutive rest days thanks to the Leap Day (`Day 365`) holiday. With these two holidays, there 110 days off in common years and 111 in leap years.
+
+`Deks` can divided up into 2 halves called the `prot` and the `deut`. The `prot` has 4 workdays and 1 rest day, while the `deut` has 3 workdays and 2 rest days. The 4 workdays in the `prot` are called the `tet`, while the 3 workdays in the `deut` are called the `trep`. The inspiration for the word `tet`, table below lists the positive and negative day numbers for the b`dekly` schedule provides of remembering a month and a day of month, we could just  the `.y` format, the `dek` number is the first two of the day number. the `.w` week number can be approximated by dividing the `.y` day number by 7. month can be approximate third of a month or about a week and a half. `Deks` are  The day number in the `.y` format could replace  Instead, the would provides all of the information we need.
+
 ## Implementation
 
 The timestamp formats described above should be easy to implement in any high-level programming language, but the implementation examples below will focus on JavaScript and Python. JavaScript is the language of the web, while Python is a versatile language with strong builtin support for dates and times in its standard library. To implement the 
@@ -258,7 +468,7 @@ Negative numbers are useful towards the end of the year, but may be confusing at
     </tr>
 </table>
 
-The days in the bottom right of the table do not belong to the current year. `Day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. To prevent mixing days from different years, we should follow some common sense on the limits of `dek` and day numbers:
+The days in the bottom right of the table do not belong to the current year. To prevent mixing days from different years, we should follow some common sense on the limits of `dek` and day numbers:
 
 In any given year,
 - positive `dek` numbers start at $0$ and go up to $35$,
@@ -278,16 +488,6 @@ b) The `tet` and `Fourday` form the first half of the `dek`, which is called the
 c) The last `Fourday` of the year (`Day 364`) combines with the New Year's Day (`Day 0`) holiday to form a buffer of 2 rest days between a common year and the subsequent year. When transitioning from a leap year, there are 3 consecutive rest days thanks to the Leap Day (`Day 365`) holiday. With these two holidays, there 110 days off in common years and 111 in leap years.
 
 
-
-| Day       | pos | neg |
-| --------- | --- | --- |
-| Sunday    | 0   | -7  |
-| Monday    | 1   | -6  |
-| Tuesday   | 2   | -5  |
-| Wednesday | 3   | -4  |
-| Thursday  | 4   | -3  |
-| Friday    | 5   | -2  |
-| Saturday  | 6   | -1  |
 
 The week number and weekday number can be written by themselves. `+00+0` means the Sunday that starts the week that includes the 1st day of the year. This date is before the first day of the year unless the year starts on a Sunday. This means that the week number always starts from "0" or "-53", while the weekday number will only be "0" or "-7" if the first day of the year is a Sunday. If we do not include a year in the week date, we can drop the first delimiter, because the second delimiter should be sufficient, but if we include the year, both delimiters are required. `00+0` and `53-6` should be written `2000+00+1` and `2000-53-6` when combined with the year 2000.
 
@@ -1175,3 +1375,5 @@ For example, in the Mid-Year's Day column in table below, Base28 indexes tells t
         -375
         +75
         -25
+
+The `Day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. 
