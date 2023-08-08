@@ -37,7 +37,7 @@ Of the units discussed above, `dimes` are notable, because they are the units of
 
 ## Timestamps
 
-When a date and a time are combined, they form a timestamp. The timestamps shown above represent the main `Decalendar` timestamp format, which is based on fractional days of the year (`doty` or `.y`). There are 2 other supplemental timestamp formats, which are based on fractional days of the month (`dotm` or `.m`), and fractional days of the week `year+ww+d.mil` (`dotw` or `.w`). The list below summarizes the three formats:
+When a date and a time are combined, they form a timestamp. The timestamps shown above represent the main `Decalendar` timestamp format, which is based on fractional days of the year (`doty` or `.y`). There are 2 other supplemental timestamp formats, which are based on fractional days of the month (`dotm` or `.m`), and fractional days of the week `year+ww+d.mil` (`dotw` or `.w`). The list below summarizes the three day-of-the (`dot` or `.`) formats:
 - `.y`: `year+day.day`
 - `.m`: `year+m+dd.day`
 - `.w`: `year+ww+d.day`
@@ -45,7 +45,7 @@ When a date and a time are combined, they form a timestamp. The timestamps shown
 In the list above, `day` is the 3-digit day of the year number, `dd` is the 2-digit day of the month number, `d` is the 1-digit day of the week number, `.day` is the time in `mils`.
 The `m` in the `.m` format is the month number, which is zero-indexed and duodecimal (Base12 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The week number in the list above, `ww`, ranges from `00` to `53`.
 
-The table below shows the timestamps from the last example in the previous section in all three formats.
+The table below shows the timestamps from the last example in the previous section in all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all in the same form. In Mexico City, the time is `500-3`, which is read `Dot 500 Zone -3`, while in Tokyo, the time is `200+4`, which is read `Dot 200 Zone +4`.
 
 | Day of the | Mexico City       | Tokyo             |
 | ---------  | ---               | ---               |
@@ -53,10 +53,14 @@ The table below shows the timestamps from the last example in the previous secti
 | Month      | `1999+B+31.500-3` | `2000+0+00.200+4` |
 | Week       | `1999+51+5.500-3` | `2000+00+6.200+4` |
 
-In the table above, the month in Tokyo is January (`0`) and the month in Mexico City is December (`B`). The "day of the week" format always starts the year with week zero, but the year can start on any day of the week. The example above shows that the year 2000 starts on a Saturday (`6`).
+In the table above, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City is December (`Month B`). We could read the dates in the `.m` timestamps as `Year 1999 Month B Day 31` in Mexico City and `Year 2000 Month 0 Day 0` in Tokyo. The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. The example above shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). We could read the dates in the `.w` format as `Year 1999 Week 51 Day 5` in Mexico City and `Year 2000 Week 0 Day 0` in Tokyo. In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to read: `Year 1999 Day 364` in Mexico City and `Year 2000 Day 0` in Tokyo.
 
-The three formats shown above are essentially zero-based versions of [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard date formats.
-`Decalendar` also permits the use of a timestamp format based on fractional years. The timestamp in Mexico City from the table above would be `1999.99863` in fractional years. The interpretation of this number could be that the year 1999 is 99.863% complete. In the table, the main format is day-based format. below summarizes below. analogous to combined date and time expressions described by the . There are three ISO 8601 date formats that can be combined with the ISO 8601 time format to create 3 different timestamp formats. The list below summarizes the 
+##
+## Implementation
+
+The timestamp formats described above should be easy to implement in any high-level programming language, but the implementation examples below will focus on JavaScript and Python. JavaScript is the language of the web, while Python is a versatile language with strong builtin support for dates and times in its standard library. To implement the 
+
+The three formats shown above are essentially zero-based versions of [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard date formats. `Decalendar` also permits the use of other timestamp format which is based on fractional years. The timestamp in Mexico City from the table above would be `1999.99863` in fractional years. The interpretation of this number could be that the year 1999 is 99.863% complete. The last digit in the fractional year format centimilliyears which are roughly 5 minutes longs, but the exact duration varies slightly between common years and leap years.
 
 The format above is 
 To achieve is ultimate goal of replacing the Gregorian calendar, `Decalendar` will have to replace monthly and weekly schedules with the `dekly` schedule described above. To provide a Months and weeks are deeply entrenched in daily life. format can described as a zero-indexed version of the 's [ordinal date format](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates). Zero-indexing allows `Decalendar` to organize every day of the year into groups of 10 days deks.  day of the year from 0 to 9.  the last digit of the day number ISO 8601 also offers The ultimate goal of `Decalendar` is to have its ordinal date format replace all other formats. months and weeks should be replaced by groups  of is to replace the Gregorian calendar. This goal will require switching  months and weeks with `deks`. Until this goal is fully realized, `Decalendar` dates will not provide sufficient information on its own. supplement with a date format based on months and weeks. It is easiest to discuss these three formats in terms of the ISO 8601 international standard. The main  monthly, weekly, and daily date format The monthly date format consists of a 1-digit Base12 month of the year and a 2-digit day of the month, while the weekly format has a 2-digit week of the year and a 1-digit day of the week number. In contrast, the main `Decalendar` date format only has a 3-digit day of the year. These three formats are essentially zero-indexed versions of the ISO 8601 date format. The main `Decalendar` date format is essentially a zero-indexed version of the ISO 8601 ordinal date format.
@@ -285,7 +289,7 @@ c) The last `Fourday` of the year (`Day 364`) combines with the New Year's Day (
 | Friday    | 5   | -2  |
 | Saturday  | 6   | -1  |
 
-The week number and weekday number can be written by themselves. `+00+0` means the Sunday that starts the week that includes the 1st day of the year. This date is before the first day of the year unless the year starts on a Sunday. This means that the week number always starts from "0" or "-53", while the weekday number will only be "0" or "-7" if the first day of the year is a Sunday. If we do not include a year in the week date, we can drop the first delimiter, because the second delimiter should be sufficient, but if we include the year, both delimiters are required. `00+0` and `53-6` should be written `2000+00+1` and `2000-53-6` when combined with the year 2000. We could read these dates as `Year 2000 Week 0 Day 1` and `Year 2000 Week -53 Day minus 6`, respectively.
+The week number and weekday number can be written by themselves. `+00+0` means the Sunday that starts the week that includes the 1st day of the year. This date is before the first day of the year unless the year starts on a Sunday. This means that the week number always starts from "0" or "-53", while the weekday number will only be "0" or "-7" if the first day of the year is a Sunday. If we do not include a year in the week date, we can drop the first delimiter, because the second delimiter should be sufficient, but if we include the year, both delimiters are required. `00+0` and `53-6` should be written `2000+00+1` and `2000-53-6` when combined with the year 2000.
 
 ### Months
 
