@@ -259,7 +259,10 @@ A major difficulty with our current calendar system is that the date is disconne
 
 
 
-`Dek 36` covers the transition from the current year to the next. After the last day of the current year, the negative day number of the current year becomes the positive day number of the next year. This means that the `Dek 36` portion of the table above could be used for a few days of the New Year instead of immediately switching to `Dek 0`.
+`Dek 36` serves as the bridge from the current year to the next. Towards the end of the year, it is convenient to use the negative day number. After the last day of the year, `Day -1`, the negative day number of the current year becomes the positive day number of the next year. The first and last days of the year, `Day 0` and `Day -1`, are always days off from work or school in the `Decalendar` system. `Day 0` is the New Year's Day (`Day 0`) holiday and Day -1 can either be Leap Day (`Day 365`), which is also a holiday, or Day 364, which is a regular day off.
+
+
+It is is convenient to use the negative day towards the This means that we could use the `Dek 36` portion of the table above for a few days of the New Year instead of immediately switching to `Dek 0`.
 
 
 use the right half of the table above The last `Fourday` of the year (`Day 364`) combines with the New Year's Day (`Day 0`) holiday to form a buffer of 2 rest days between a common year and the subsequent year. When transitioning from a leap year, there are 3 consecutive rest days thanks to the Leap Day (`Day 365`) holiday. With these two holidays, there 110 days off in common years and 111 in leap years.
