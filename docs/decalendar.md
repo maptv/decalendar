@@ -259,13 +259,24 @@ A major difficulty with our current calendar system is that the date is disconne
 
 
 
-`Dek 36` serves as the bridge from the current year to the next. Towards the end of the year, it is convenient to use the negative day number. After the last day of the year, `Day -1`, the negative day number of the current year becomes the positive day number of the next year. The first and last days of the year, `Day 0` and `Day -1`, are always days off from work or school in the `Decalendar` system. `Day 0` is the New Year's Day (`Day 0`) holiday and Day -1 can either be Leap Day (`Day 365`), which is also a holiday, or Day 364, which is a regular day off.
+`Dek 36` serves as the bridge from the current year to the next. In `Dek 36`, it may be more convenient to use negative day numbers, because while the positive day number counts up to 364 or 365, the negative day number always counts up to -1. After the last day of the year, `Day -1`, the negative day number of the current year naturally transforms into the positive day number of the next year, whereas the positive number jumps from 364 or 365 to 0. This jump represents a change in the rhythm of the `dekly` schedule because we go from `Fourday` (if n=365) or `Fiveday` (if n=366) to `Zeroday`.
+
+To make it easier to adapt to the new rhythm, the first and last days of the year, New Year's Day (`Day 0`) and Leap Day (`Day 365`), are holidays in the `Decalendar` system. With the New Year's Day and Leap Day holidays, there are 110 (if n=365) or 111 (if n=366) days off in a `Decalendar` year, because every `Fourday`, `Eightday`, and `Nineday` is also a rest day. Resting on `Fourday` helps to smooth the transition between years, because the last `Fourday` of the year (`Day 364`) combines with New Year's Day and Leap Day to form a buffer of rest days (2 if n=365 or 3 if n=366) around the time the year is changing.
+
+Some holidays do not have fixed dates in the year, change from year be translated to `.y` or `.w` format dates. year can include many other holidays can be easily defined by the day of the to translate other holidays into  provide an example of how can handle other holidays, the table below translates the federal holidays in the United States of America into `.y` or `.w` format dates. The holidays in `.w` format  vary from year to year
 
 
-It is is convenient to use the negative day towards the This means that we could use the `Dek 36` portion of the table above for a few days of the New Year instead of immediately switching to `Dek 0`.
+ Holidays with dates that vary from year to year. June 19 and July 4 are federal holidays. It is an funny coincidence that in common years June 19 falls on a `Nineday` and July 4th falls on  `Day 169` and `Day 184` (if n=365) or `Day 170` and `Day 185` (if n=366), respectively. 
+ Nevertheless, `Decalendar` highlights a few special moments in a year:
 
-
-use the right half of the table above The last `Fourday` of the year (`Day 364`) combines with the New Year's Day (`Day 0`) holiday to form a buffer of 2 rest days between a common year and the subsequent year. When transitioning from a leap year, there are 3 consecutive rest days thanks to the Leap Day (`Day 365`) holiday. With these two holidays, there 110 days off in common years and 111 in leap years.
+* `012.34578`: Small series day
+* `111.11111`: Singles day
+* `123.45789`: Medium series day
+* `183.50000`: Dyad Day (leap years only)
+* `222.22222`: Couples day
+* `234.57890`: Big series day
+* `314.15926`: Pi day
+* `333.33333`: Triples day
 
 `Deks` can divided up into 2 halves called the `prot` and the `deut`. The `prot` has 4 workdays and 1 rest day, while the `deut` has 3 workdays and 2 rest days. The 4 workdays in the `prot` are called the `tet`, while the 3 workdays in the `deut` are called the `trep`. The inspiration for the word `tet`, table below lists the positive and negative day numbers for the b`dekly` schedule provides of remembering a month and a day of month, we could just  the `.y` format, the `dek` number is the first two of the day number. the `.w` week number can be approximated by dividing the `.y` day number by 7. month can be approximate third of a month or about a week and a half. `Deks` are  The day number in the `.y` format could replace  Instead, the would provides all of the information we need.
 
@@ -488,7 +499,7 @@ b. combines work and rest days into convenient groups of 5 days, and
 c. yields a smooth transition between years.
 a) The 4 consecutive workdays before `Fourday` are called called the `tet`, while the 3 consecutive workdays before the `dekend` are called the `trep`. Together with the `Fourday`, these two sequences of workdays are known as the `okt`.
 b) The `tet` and `Fourday` form the first half of the `dek`, which is called the `prot`. The second half, which consists of the `trep` and the `dekend`, is called the `deut`. A general term for `prots` and `deuts` is `pent`.
-c) The last `Fourday` of the year (`Day 364`) combines with the New Year's Day (`Day 0`) holiday to form a buffer of 2 rest days between a common year and the subsequent year. When transitioning from a leap year, there are 3 consecutive rest days thanks to the Leap Day (`Day 365`) holiday. With these two holidays, there 110 days off in common years and 111 in leap years.
+c)
 
 
 
