@@ -95,23 +95,28 @@ Unlike Leap Day, New Year's Day is a holiday in both `Decalendar` and the Gregor
 
 The Gregorian calendar leap day represents a threshold in finding the day number equivalents of Gregorian calendar dates. If a Gregorian calendar date is below the threshold, we can count on its positive day number to always stay the same, but its negative day number will differ between common years and leap years. Conversely, if a Gregorian calendar date is above the threshold, its positive day number will vary between common years and leap years while its negative day number will always remain constant. In other words, day numbers greater than -307 and less than 59 (-307 < d < 59) are always synonymous with their corresponding Gregorian calendar dates. Numbers below the threshold (-366 <= d <= -307) will decrease by 1 day in leap years, while numbers above the threshold (59 <= d <= 365) will increase by 1 day in leap years.
 
-Valentine's Day and Christmas are on opposite sides of the Gregorian calendar leap day threshold and thus can serve as opposing examples of the leap year variation in the day numbers of Gregorian calendar dates. The positive day number of Valentine's Day (`Day 44`) and the negative day number of Christmas (`Day -7`) never change, but their respective negative day numbers are `Day -321` and `Day 358` in common years and `Day -322` and `Day 359` in leap years. If do not want to bother with this complexity, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. For example, we can express Valentine's Day as `Day -321*` and Christmas as `Day 358*`.
+Valentine's Day and Christmas are on opposite sides of the Gregorian calendar leap day threshold and thus can serve as opposing examples of the leap year variation in the day numbers of Gregorian calendar dates. The positive day number of Valentine's Day (`Day 44`) and the negative day number of Christmas (`Day -7`) never change, but their respective negative day numbers are `Day -321` and `Day 358` in common years and `Day -322` and `Day 359` in leap years. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
 
-Using the asterisk with positive day number allows us to determine what the day of the `dek` would be both in a common year and a leap year. For example, the `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and the day of the year (`doty`) numbers.
+If do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to match their birthday in the Gregorian calendar. Essentially, if we free ourselves from the Gregorian calendar, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
 
-| name                                 | date                     | doty |
-| ------                               | ------                   | ---- |
-| Valentine's Day                      | February 14              |  44  |
-| Cinco de Mayo                        | May 5                    | 124* |
-| Flag Day                             | June 14                  | 164* |
-| Juneteenth National Independence Day | June 19                  | 169* |
-| Independence Day                     | July 4                   | 184* |
-| All Saints' Day                      | November  1              | 304* |
-| Veterans’ Day                        | November 11              | 314* |
-| Christmas Day                        | December 25              | 358* |
+Using the asterisk with positive day number allows us to determine what the day of the `dek` would be in a common year and in a leap year. For example, the `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) numbers.
+
+| name                                 | date        | doty |
+| ------                               | ------      | ---- |
+| Valentine's Day                      | February 14 |  44  |
+| Cinco de Mayo                        | May 5       | 124* |
+| Flag Day                             | June 14     | 164* |
+| Juneteenth National Independence Day | June 19     | 169* |
+| Independence Day                     | July 4      | 184* |
+| All Saints' Day                      | November  1 | 304* |
+| Veterans’ Day                        | November 11 | 314* |
+| Christmas Day                        | December 25 | 358* |
+
+The holidays above are easy to incorporate into `Decalendar`, but some Gregorian calendar holidays vary from year to year in both calendars. Holidays that change across years include Thanksgiving, Hanukkah, and Chinese New Year. The problem with such holidays is that they could fall on any day of the `dek`. We may be able to redefine the dates of some of these holidays to also be on the same day number every year. For example, Thanksgiving could be `Day 328` (November 25), which is exactly 30 days before Christmas (December 25). Even though it may not be possible for every holiday with a variable date, establishing constant dates for holidays allows us to control where in the `dek` the holiday occurs and to avoid having to update our calendars every year with the new dates of the holiday.
 
 
-positive number or subtract 1 from a negative number if the current year is a leap year. When speaking the asterisk is pronounced `star`. For example, Christmas to indicate New Year's Day we could say `-365 star` or write `-365*`.
+
+calendar exactly we can,  dhpositive number or subtract 1 from a negative number if the current year is a leap year. When speaking the asterisk is pronounced `star`. For example, Christmas to indicate New Year's Day we could say `-365 star` or write `-365*`.
 
 
 we can only use negative day numbers as synonyms for Gregorian calendar dates. Gregorian calendar dates that occur. In leap years, `Day 59` is the Gregorian calendar leap day. The difference leap day definitions means that `Day 59`  because leap days are defined differently in the two calendars.because the positive day numbers of Gregorian calendar dates will vary by 1 day between common years and leap years.
@@ -129,9 +134,7 @@ New Year's Day is still considered invariable even though it's negative in holid
 
 Coincidentally, both of these holidays will always occur on `Decalendar` rest days. The, because the increments day numbers greater than 58 in leap years Other holidays are determined by  Examples of holidays with variable dates includes Chinese New Year, Hanukkah, and Thanksgiving.
 
-but The Gregorian calendar leap day (`Day 59`) throws day numbers out of alignment with Gregorian calendar dates. After `Day 58` in leap years, positive day numbers of Gregorian calendar dates are increased by 1 day. In such cases, the negative day numbers can serve as invariable `Decalendar` dates, because they will be unaffected by leap years. and negative day numbers do not tell us. The invariable dates for Gregorian calendar holidays are defined in terms of days of the week. we can use their negative day number, but we cannot tell the day of the `dek` from the negative day number. will be a consistent To handle dates based on days of the week, we can use the `.w` format. The table below provides many examples by translating the federal holidays in the United States of America into `.y` or `.w` format dates. efined according to days of the week. included in `Decalendar`, but not all 
-
- Dates in `.w` format tell us the day of the week but not the day of the `dek` and thus are an imperfect fit for `Decalendar`. It would be better to redefine the dates of these holidays 
+but The Gregorian calendar leap day (`Day 59`) throws day numbers out of alignment with Gregorian calendar dates. After `Day 58` in leap years, positive day numbers of Gregorian calendar dates are increased by 1 day. In such cases, the negative day numbers can serve as invariable `Decalendar` dates, because they will be unaffected by leap years. and negative day numbers do not tell us. 
 
 While the last digit of the day number is the day of the `dek`, the first two digits are the `dek` number. `Dek 0`, the first `dek` of the year, contains `Day 0` through `Day 9`. `Dek 36`, the last `dek` of the year, contains the last days of the current year and the first days of the subsequent year. This means that `Dek 36` overlaps with `Dek 0`. The table below shows the name and numbers of the days in `Dek 0` and `Dek 36`. The table includes columns for both common years (n=365) and leap years (n=366).
 
