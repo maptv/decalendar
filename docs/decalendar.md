@@ -31,7 +31,7 @@ Providing only a single digit for a `Declock` time indicates that the time is ap
 
 In the table above, `deks` are the main `Decalendar` unit, while the other three (the units with negative exponents) are used for `Declock`. Of those last three, `mils` are the most important, because they provide the right level of precision for displaying time on clocks and watches. Each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). `Cents` can thus serve as a useful point of comparison to understand the scale of these units. `Mils` are ten times smaller than cents (.1% = 1.4 minutes), `dimes` are ten times larger than cents (%10 = 144 minutes), and `deks` are 1000 times larger than cents (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
-### Time zones
+## Time zones
 
 Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in Time Zone 1 are one `dime` later than Time Zone 0 and two `dimes` later than Time Zone -1. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in Time Zone -3 and Tokyo is in Time Zone 4, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is noon on the last day of the year 1999 in Mexico City, it will be `Dot 200` on the first day of the year 2000 in Tokyo. The date and time in Mexico City can be written `2000+000.200+4` or `2000-366.800+4`, while the equivalent date and time for Tokyo is `1999+364.500-3` or `1999-001.500-3`. If we removed the time zone from the end, we would not know that all of these timestamps describe the same moment in time.
 
@@ -85,21 +85,25 @@ The table below shows the timestamps from the last example in the previous secti
 
 In the table above, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City is December (`Month B`). We could read the dates in the `.m` timestamps as `Year 1999 Month B Day 31` or `Year 1999 Month -1 Day -1` in Mexico City and `Year 2000 Month 0 Day 0` or `Year 2000 Month -C Day -31` in Tokyo. The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. The example above shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). We could read the dates in the `.w` format as `Year 1999 Week 52 Day 5` or `Year 1999 Week -1 Day -2` in Mexico City and `Year 2000 Week 0 Day 0` or `Year 2000 Week -52 Day -1` in Tokyo. In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to read: `Year 1999 Day 364` or `Year 1999 Day -1` in Mexico City and `Year 2000 Day 0` or `Year 2000 Day -366` in Tokyo.
 
-## Schedules
+## `Deks`
 
 `Decalendar` envisions a world in which 7-day weeks and ~30-day months are replaced by 10-day `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
 
 A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from rest days. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as rest days, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 109 rest days in a `Decalendar` year, not counting the two holidays, New Year's Day (`Day 0`) and Leap Day (`Day 365`).
 
-Unlike Leap Day, New Year's Day is a holiday in both `Decalendar` and the Gregorian calendar. New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gregorian calendar. Therefore, we can say that `Day 0` is synonymous with January 1. Every  Gregorian calendar date can be represented unequivocally by a positive or a negative day number except for February 29, the Gregorian calendar leap day. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01`, but this date cannot exist in the `.y` format without a year.
+### Gregorian calendar leap day considerations
+
+Unlike Leap Day, New Year's Day is a holiday in both `Decalendar` and the Gregorian calendar. New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gregorian calendar. Therefore, we can say that `Day 0` is synonymous with January 1. Every Gregorian calendar date can be represented unequivocally by a positive or a negative day number except for February 29, the Gregorian calendar leap day. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01`, but this date cannot exist in the `.y` format without a year.
 
 The Gregorian calendar leap day represents a threshold in finding the day number equivalents of Gregorian calendar dates. If a Gregorian calendar date is below the threshold, we can count on its positive day number to always stay the same, but its negative day number will differ between common years and leap years. Conversely, if a Gregorian calendar date is above the threshold, its positive day number will vary between common years and leap years while its negative day number will always remain constant. In other words, day numbers greater than -307 and less than 59 (-307 < d < 59) are always synonymous with their corresponding Gregorian calendar dates. Numbers below the threshold (-366 <= d <= -307) will decrease by 1 day in leap years, while numbers above the threshold (59 <= d <= 365) will increase by 1 day in leap years.
 
 Valentine's Day and Christmas are on opposite sides of the Gregorian calendar leap day threshold and thus can serve as opposing examples of the leap year variation in the day numbers of Gregorian calendar dates. The positive day number of Valentine's Day (`Day 44`) and the negative day number of Christmas (`Day -7`) never change, but their respective negative day numbers are `Day -321` and `Day 358` in common years and `Day -322` and `Day 359` in leap years. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
 
-If do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to match their birthday in the Gregorian calendar. Essentially, if we free ourselves from the Gregorian calendar, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
+If do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar precisely, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
 
-Using the asterisk with positive day number allows us to determine what the day of the `dek` would be in a common year and in a leap year. For example, the `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
+### Gregorian calendar date to day of the `dek` conversion
+
+Using the asterisk with positive day number allows us to determine what the day of the `dek` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
 
 | name             | date        | doty | dotm |
 | ------           | ------      | ---- | ---- |
@@ -112,9 +116,7 @@ Using the asterisk with positive day number allows us to determine what the day 
 | Veterans’ Day    | November 11 | 314* | A+10 |
 | Christmas Day    | December 25 | 358* | B+24 |
 
-The holidays above are easy to incorporate into `Decalendar`, but some holidays vary from year to year even in the Gregorian calendar. Holidays that change across years include Thanksgiving, Hanukkah, and Chinese New Year. The problem with such holidays is that they could fall on any day of the `dek`. We may be able to redefine the dates of some of these holidays to also be on the same day number every year. For example, Thanksgiving (November 25) could be `Day 328`, which is exactly 30 days before Christmas (December 25). Redefining variable dates to be constant would allow us to control where in the `dek` holidays occur and to avoid having to update our calendars every year with the new dates of the holidays.
-
-In the table above, the last digit of the day of the month numbers in February, June, and July are the same as the last digit of their day numbers. The lists below show the number that has to be added or subtracted from the day of the month number of each month to get the corresponding day of the `dek` number:
+In the table above, the last digit of the day of the month numbers of dates in February, June, and July are the same as the last digit of their day numbers. This pattern is maintained in all common years, but in leap years the last digits of the day of the month and day of the year numbers match in February, April, and May. The lists below show the number that has to be added to the day of the month number to get the corresponding day of the `dek` number in each month.
 
 - Common years:
     - January: -1
@@ -144,31 +146,18 @@ In the table above, the last digit of the day of the month numbers in February, 
     - November: 4
     - December: 4
 
-### Seasons
+We can use this method to find out what day of the `dek` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar `rest day and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
 
-* Day 78 March 20 northward equinox 
-* 20-21 June : northward Solstice
-* 22-23 September : southward equinox
-* 21-22 December : southward solstice/Yule
-
-
-
-
-
-
-* Bastille Day, France: July 14. ...
-* 
-* Europe Day Thu, May 9, 2024
-* 
-* 11 November : Armistice Day (end of WWI)
-
-
-
-The table below gives an idea of how Gregorian calendar and the day of the year dates compare. The comprehensive conversion tables below allow us to translate any Gregorian calendar dates into the corresponding day of the year date.
+|        | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
+| -----  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| n=365  | 0   | 30  | 58  | 89  | 119 | 150 | 180 | 211 | 242 | 272 | 303 | 333 |
+| n=366  | 0   | 30  | 59  | 90  | 120 | 151 | 181 | 212 | 243 | 273 | 304 | 334 |
 
 ### Common year date to `doty` conversion
 
-| Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
+The table above is small and portable, but using it requires some calculation. To avoid manual calculation entirely, we could use a computer program or a comprehensive conversion table like the ones below. The first table shows the day numbers for all of the days in common years, while the second table does the same for leap years. In both of these tables, the columns are labeled by month while the rows are labeled by the day of the month.
+
+|     | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 |  1  |  0  | 31  | 59  |  90 | 120 | 151 | 181 | 212 | 243 | 273 | 304 | 334 |
 |  2  |  1  | 32  | 60  |  91 | 121 | 152 | 182 | 213 | 244 | 274 | 305 | 335 |
@@ -237,6 +226,15 @@ The table below gives an idea of how Gregorian calendar and the day of the year 
 | 29  | 28  | 59  | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
 | 30  | 29  |     | 89  | 120 | 150 | 181 | 211 | 242 | 273 | 303 | 334 | 364 |
 | 31  | 30  |     | 90  |     | 151 |     | 212 | 243 |     | 304 |     | 365 |
+
+### Seasons
+
+We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, if we want to set exact the date of the longest day of the year, we could translate  from year to year such as those based on  demarcate the seasons  useful dates consecutive months in common years table below shows the approximate day numbers and Gregorian calendar dates of equinoxes and solstices.
+
+* `Day 78` (20 March): Northward Equinox (`NoEq`)
+* `Day 170` (20 June): Northward Solstice (`NoSo`)
+* `Day 264` (22 September): Southward Equinox (`SoEq`)
+* `Day 354` (21 December): Southward Solstice (`SoSo`)
 
 Another
 
@@ -1569,3 +1567,7 @@ For example, in the Mid-Year's Day column in table below, Base28 indexes tells t
         -25
 
 The `Day 366` is actually `Day 0` (if n=365) or `Day 1` (if n=366) of the following year. 
+
+
+The months in which the last digits are identical (February in any year, June and July in common years, and April and May in leap years) can serve as testing periods for the `dekly` schedule. During such a test, participants would still use the Gregorian calendar, but they would work and rest according to the last digit of the day of the month. The first day of such tests ("day zero") could be January 31 for a 29-day test in any year, March 31 for a 62-day test in a leap year or May 31 for a 62-day test in a common year. Testing could be an important step before widespread adoption.
+
