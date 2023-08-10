@@ -229,15 +229,14 @@ The table above is small and portable, but using it requires some calculation. T
 
 ### Seasons
 
-We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, if we want to set exact the date of the longest day of the year, we could translate  from year to year such as those based on  demarcate the seasons  useful dates consecutive months in common years table below shows the approximate day numbers and Gregorian calendar dates of equinoxes and solstices.
+We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. The dates of the solstices and the equinoxes (the points in between the solstices) can be used as definitions of the seasons, but these definitions will be the opposite in the Northern and Southern hemisphere. In the table below, the meaning of dates of the solstices and the equinoxes is provided as "Start of northern-hemisphere-season/southern-hemisphere-season".
 
-* `Day 78` (20 March): Northward Equinox (`NoEq`)
-* `Day 170` (20 June): Northward Solstice (`NoSo`)
-* `Day 264` (22 September): Southward Equinox (`SoEq`)
-* `Day 354` (21 December): Southward Solstice (`SoSo`)
-
-Another
-
+| doty | dotm   | date         | event              | Start of      |
+| ---- | ------ | ------       | -----              | ------        |
+| 78   | 2+19   | March 20     | Northward Equinox  | Spring/Fall   |
+| 170  | 5+19   | June 20      | Northward Solstice | Summer/Winter |
+| 264  | 8+21   | September 22 | Southward Equinox  | Fall/Spring   |
+| 354  | B+21   | December 21  | Southward Solstice | Winter/Summer |
 
 calendar exactly we can,  dhpositive number or subtract 1 from a negative number if the current year is a leap year. When speaking the asterisk is pronounced `star`. For example, Christmas to indicate New Year's Day we could say `-365 star` or write `-365*`.
 
