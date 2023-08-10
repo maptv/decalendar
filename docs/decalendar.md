@@ -10,11 +10,11 @@ In the simplest terms, `Decalendar` counts fractions of a year, while Declock co
 
 To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year. This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
-Not saying `Day` or `Dot` is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon and not the sixth day of the year. Also, the value itself may provide a clue, because calendar dates cannot be greater than 365, while times can have as many digits as desired. For this reason, the number "500" can only mean noon. If a data and a time are combined into a timestamp, the date always goes before the time. When said together, the numbers "0" and "500" mean on the first day of the year at noon. In written form, this timestamp would be `000.500`.
+Not saying `Day` or `Dot` is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon and not the sixth day of the year. Also, the value itself may provide a clue, because calendar dates cannot be greater than 365, while times can have as many digits as desired. For this reason, the number "500" can only mean noon. If a date and a time are combined into a timestamp, the date always goes before the time. When said together, the numbers "0" and "500" mean on the first day of the year at noon. In written form, this timestamp would be `000.500`.
 
 The format shown above is called `doty` or `.y`, which is short for fractional day of the year. The `.y` timestamps above assume that the year and time zone are known. Most likely, we are talking about the current year and the local time zone, but it may be unclear. A date without a year is like a time without a time zone, both assume the context is obvious. When we include a year at the beginning of a date, we pinpoint a specific day, instead of talking about a date that could happen any year. The first of the day of the year 2000, would be `Year 2000 Day 0` or simply `2000 0`. Similarly, noon in time zone zero would be `Dot 500 Zone 0` or simply `500 0`.
 
-When a date and a time are said together, the year is always first and the time zone is always last, so values can go from largest to smallest. The date and the time from the examples above would be `Year 2000 Day 0 Dot 500 Zone 0` or simply `2000 0 500 0`. In written form, this combined date and time would be `2000+000.500+0`. This format can be summarized `year+day.day±z`. The signs imply that the date and the time zone can be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of Time Zone 0. Negative dates and times shows the number of parts that are left in the whole (day or year).
+When a date and a time are said together, the year is always first and the time zone is always last, so values can go from largest to smallest. The date and the time from the examples above would be `Year 2000 Day 0 Dot 500 Zone 0` or simply `2000 0 500 0`. In written form, this combined date and time would be `2000+000.500+0`. This format can be summarized as `year+day.day±z`. The plus signs imply that the date and the time zone can also be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of Time Zone 0. Negative dates and times shows the number of parts that are left in the whole (day or year).
 
 To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions. Negative numbers can be especially useful for `Decalendar`, because `Day -1` is always the last day of the year, regardless of how many days the year has. In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous in the context of `Declock`, the former could highlight that there is only 1 tenth (¹/₁₀) of the day remaining before midnight.
 
@@ -72,7 +72,7 @@ The `m` in the `.m` format is the month number, which is zero-indexed and tridec
 | Friday    | 5   | -2  |
 | Saturday  | 6   | -1  |
 
-The table below shows the timestamps from the last example in the previous section in all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all in the same form. In Mexico City, the time is `+500-3` or `-500-3`, while in Tokyo, the time is `+200+4` is `-800+4`.
+The table below shows the timestamps from the last example in the previous section in all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all in the same form. In Mexico City, the time is `+500-3` or `-500-3`, while the time in Tokyo is `+200+4` is `-800+4`.
 
 | Day of the | Mexico City       | Tokyo             |
 | ---------  | ---               | ---               |
@@ -99,21 +99,146 @@ Valentine's Day and Christmas are on opposite sides of the Gregorian calendar le
 
 If do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to match their birthday in the Gregorian calendar. Essentially, if we free ourselves from the Gregorian calendar, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
 
-Using the asterisk with positive day number allows us to determine what the day of the `dek` would be in a common year and in a leap year. For example, the `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) numbers.
+Using the asterisk with positive day number allows us to determine what the day of the `dek` would be in a common year and in a leap year. For example, the `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
 
-| name                                 | date        | doty |
-| ------                               | ------      | ---- |
-| Valentine's Day                      | February 14 |  44  |
-| Cinco de Mayo                        | May 5       | 124* |
-| Flag Day                             | June 14     | 164* |
-| Juneteenth National Independence Day | June 19     | 169* |
-| Independence Day                     | July 4      | 184* |
-| All Saints' Day                      | November  1 | 304* |
-| Veterans’ Day                        | November 11 | 314* |
-| Christmas Day                        | December 25 | 358* |
+| name             | date        | doty | dotm |
+| ------           | ------      | ---- | ---- |
+| Valentine's Day  | February 14 | 44   | 1+13 |
+| Cinco de Mayo    | May 5       | 124* | 4+04 |
+| Flag Day         | June 14     | 164* | 5+13 |
+| Juneteenth Day   | June 19     | 169* | 5+18 |
+| Independence Day | July 4      | 184* | 6+03 |
+| All Saints' Day  | November  1 | 304* | A+00 |
+| Veterans’ Day    | November 11 | 314* | A+10 |
+| Christmas Day    | December 25 | 358* | B+24 |
 
-The holidays above are easy to incorporate into `Decalendar`, but some Gregorian calendar holidays vary from year to year in both calendars. Holidays that change across years include Thanksgiving, Hanukkah, and Chinese New Year. The problem with such holidays is that they could fall on any day of the `dek`. We may be able to redefine the dates of some of these holidays to also be on the same day number every year. For example, Thanksgiving could be `Day 328` (November 25), which is exactly 30 days before Christmas (December 25). Even though it may not be possible for every holiday with a variable date, establishing constant dates for holidays allows us to control where in the `dek` the holiday occurs and to avoid having to update our calendars every year with the new dates of the holiday.
+The holidays above are easy to incorporate into `Decalendar`, but some holidays vary from year to year even in the Gregorian calendar. Holidays that change across years include Thanksgiving, Hanukkah, and Chinese New Year. The problem with such holidays is that they could fall on any day of the `dek`. We may be able to redefine the dates of some of these holidays to also be on the same day number every year. For example, Thanksgiving (November 25) could be `Day 328`, which is exactly 30 days before Christmas (December 25). Redefining variable dates to be constant would allow us to control where in the `dek` holidays occur and to avoid having to update our calendars every year with the new dates of the holidays.
 
+In the table above, the last digit of the day of the month numbers in February, June, and July are the same as the last digit of their day numbers. The lists below show the number that has to be added or subtracted from the day of the month number of each month to get the corresponding day of the `dek` number:
+
+- Common years:
+    - January: -1
+    - February: 0
+    - March: -2
+    - April: -1
+    - May: -1
+    - June: 0
+    - July: 0
+    - August: 1
+    - September: 2
+    - October: 2
+    - November: 3
+    - December: 3
+
+- Leap years:
+    - January: -1
+    - February: 0
+    - March: 1
+    - April: 0
+    - May: 0
+    - June: 1
+    - July: 1
+    - August: 2
+    - September: 2
+    - October: 3
+    - November: 4
+    - December: 4
+
+### Seasons
+
+* Day 78 March 20 northward equinox 
+* 20-21 June : northward Solstice
+* 22-23 September : southward equinox
+* 21-22 December : southward solstice/Yule
+
+
+
+
+
+
+* Bastille Day, France: July 14. ...
+* 
+* Europe Day Thu, May 9, 2024
+* 
+* 11 November : Armistice Day (end of WWI)
+
+
+
+The table below gives an idea of how Gregorian calendar and the day of the year dates compare. The comprehensive conversion tables below allow us to translate any Gregorian calendar dates into the corresponding day of the year date.
+
+### Common year date to `doty` conversion
+
+| Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+|  1  |  0  | 31  | 59  |  90 | 120 | 151 | 181 | 212 | 243 | 273 | 304 | 334 |
+|  2  |  1  | 32  | 60  |  91 | 121 | 152 | 182 | 213 | 244 | 274 | 305 | 335 |
+|  3  |  2  | 33  | 61  |  92 | 122 | 153 | 183 | 214 | 245 | 275 | 306 | 336 |
+|  4  |  3  | 34  | 62  |  93 | 123 | 154 | 184 | 215 | 246 | 276 | 307 | 337 |
+|  5  |  4  | 35  | 63  |  94 | 124 | 155 | 185 | 216 | 247 | 277 | 308 | 338 |
+|  6  |  5  | 36  | 64  |  95 | 125 | 156 | 186 | 217 | 248 | 278 | 309 | 339 |
+|  7  |  6  | 37  | 65  |  96 | 126 | 157 | 187 | 218 | 249 | 279 | 310 | 340 |
+|  8  |  7  | 38  | 66  |  97 | 127 | 158 | 188 | 219 | 250 | 280 | 311 | 341 |
+|  9  |  8  | 39  | 67  |  98 | 128 | 159 | 189 | 220 | 251 | 281 | 312 | 342 |
+| 10  |  9  | 40  | 68  |  99 | 129 | 160 | 190 | 221 | 252 | 282 | 313 | 343 |
+| 11  | 10  | 41  | 69  | 100 | 130 | 161 | 191 | 222 | 253 | 283 | 314 | 344 |
+| 12  | 11  | 42  | 70  | 101 | 131 | 162 | 192 | 223 | 254 | 284 | 315 | 345 |
+| 13  | 12  | 43  | 71  | 102 | 132 | 163 | 193 | 224 | 255 | 285 | 316 | 346 |
+| 14  | 13  | 44  | 72  | 103 | 133 | 164 | 194 | 225 | 256 | 286 | 317 | 347 |
+| 15  | 14  | 45  | 73  | 104 | 134 | 165 | 195 | 226 | 257 | 287 | 318 | 348 |
+| 16  | 15  | 46  | 74  | 105 | 135 | 166 | 196 | 227 | 258 | 288 | 319 | 349 |
+| 17  | 16  | 47  | 75  | 106 | 136 | 167 | 197 | 228 | 259 | 289 | 320 | 350 |
+| 18  | 17  | 48  | 76  | 107 | 137 | 168 | 198 | 229 | 260 | 290 | 321 | 351 |
+| 19  | 18  | 49  | 77  | 108 | 138 | 169 | 199 | 230 | 261 | 291 | 322 | 352 |
+| 20  | 19  | 50  | 78  | 109 | 139 | 170 | 200 | 231 | 262 | 292 | 323 | 353 |
+| 21  | 20  | 51  | 79  | 110 | 140 | 171 | 201 | 232 | 263 | 293 | 324 | 354 |
+| 22  | 21  | 52  | 80  | 111 | 141 | 172 | 202 | 233 | 264 | 294 | 325 | 355 |
+| 23  | 22  | 53  | 81  | 112 | 142 | 173 | 203 | 234 | 265 | 295 | 326 | 356 |
+| 24  | 23  | 54  | 82  | 113 | 143 | 174 | 204 | 235 | 266 | 296 | 327 | 357 |
+| 25  | 24  | 55  | 83  | 114 | 144 | 175 | 205 | 236 | 267 | 297 | 328 | 358 |
+| 26  | 25  | 56  | 84  | 115 | 145 | 176 | 206 | 237 | 268 | 298 | 329 | 359 |
+| 27  | 26  | 57  | 85  | 116 | 146 | 177 | 207 | 238 | 269 | 299 | 330 | 360 |
+| 28  | 27  | 58  | 86  | 117 | 147 | 178 | 208 | 239 | 270 | 300 | 331 | 361 |
+| 29  | 28  |     | 87  | 118 | 148 | 179 | 209 | 240 | 271 | 301 | 332 | 362 |
+| 30  | 29  |     | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
+| 31  | 30  |     | 89  |     | 150 |     | 211 | 242 |     | 303 |     | 364 |
+
+### Leap year date to `doty` conversion
+
+| Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+|  1  |  0  | 31  | 60  |  91 | 121 | 152 | 182 | 213 | 244 | 274 | 305 | 335 |
+|  2  |  1  | 32  | 61  |  92 | 122 | 153 | 183 | 214 | 245 | 275 | 306 | 336 |
+|  3  |  2  | 33  | 62  |  93 | 123 | 154 | 184 | 215 | 246 | 276 | 307 | 337 |
+|  4  |  3  | 34  | 63  |  94 | 124 | 155 | 185 | 216 | 247 | 277 | 308 | 338 |
+|  5  |  4  | 35  | 64  |  95 | 125 | 156 | 186 | 217 | 248 | 278 | 309 | 339 |
+|  6  |  5  | 36  | 65  |  96 | 126 | 157 | 187 | 218 | 249 | 279 | 310 | 340 |
+|  7  |  6  | 37  | 66  |  97 | 127 | 158 | 188 | 219 | 250 | 280 | 311 | 341 |
+|  8  |  7  | 38  | 67  |  98 | 128 | 159 | 189 | 220 | 251 | 281 | 312 | 342 |
+|  9  |  8  | 39  | 68  |  99 | 129 | 160 | 190 | 221 | 252 | 282 | 313 | 343 |
+| 10  |  9  | 40  | 69  | 100 | 130 | 161 | 191 | 222 | 253 | 283 | 314 | 344 |
+| 11  | 10  | 41  | 70  | 101 | 131 | 162 | 192 | 223 | 254 | 284 | 315 | 345 |
+| 12  | 11  | 42  | 71  | 102 | 132 | 163 | 193 | 224 | 255 | 285 | 316 | 346 |
+| 13  | 12  | 43  | 72  | 103 | 133 | 164 | 194 | 225 | 256 | 286 | 317 | 347 |
+| 14  | 13  | 44  | 73  | 104 | 134 | 165 | 195 | 226 | 257 | 287 | 318 | 348 |
+| 15  | 14  | 45  | 74  | 105 | 135 | 166 | 196 | 227 | 258 | 288 | 319 | 349 |
+| 16  | 15  | 46  | 75  | 106 | 136 | 167 | 197 | 228 | 259 | 289 | 320 | 350 |
+| 17  | 16  | 47  | 76  | 107 | 137 | 168 | 198 | 229 | 260 | 290 | 321 | 351 |
+| 18  | 17  | 48  | 77  | 108 | 138 | 169 | 199 | 230 | 261 | 291 | 322 | 352 |
+| 19  | 18  | 49  | 78  | 109 | 139 | 170 | 200 | 231 | 262 | 292 | 323 | 353 |
+| 20  | 19  | 50  | 79  | 110 | 140 | 171 | 201 | 232 | 263 | 293 | 324 | 354 |
+| 21  | 20  | 51  | 80  | 111 | 141 | 172 | 202 | 233 | 264 | 294 | 325 | 355 |
+| 22  | 21  | 52  | 81  | 112 | 142 | 173 | 203 | 234 | 265 | 295 | 326 | 356 |
+| 23  | 22  | 53  | 82  | 113 | 143 | 174 | 204 | 235 | 266 | 296 | 327 | 357 |
+| 24  | 23  | 54  | 83  | 114 | 144 | 175 | 205 | 236 | 267 | 297 | 328 | 358 |
+| 25  | 24  | 55  | 84  | 115 | 145 | 176 | 206 | 237 | 268 | 298 | 329 | 359 |
+| 26  | 25  | 56  | 85  | 116 | 146 | 177 | 207 | 238 | 269 | 299 | 330 | 360 |
+| 27  | 26  | 57  | 86  | 117 | 147 | 178 | 208 | 239 | 270 | 300 | 331 | 361 |
+| 28  | 27  | 58  | 87  | 118 | 148 | 179 | 209 | 240 | 271 | 301 | 332 | 362 |
+| 29  | 28  | 59  | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
+| 30  | 29  |     | 89  | 120 | 150 | 181 | 211 | 242 | 273 | 303 | 334 | 364 |
+| 31  | 30  |     | 90  |     | 151 |     | 212 | 243 |     | 304 |     | 365 |
+
+Another
 
 
 calendar exactly we can,  dhpositive number or subtract 1 from a negative number if the current year is a leap year. When speaking the asterisk is pronounced `star`. For example, Christmas to indicate New Year's Day we could say `-365 star` or write `-365*`.
