@@ -145,7 +145,7 @@ The Gregorian calendar leap day represents a threshold in finding the day number
 
 Valentine's Day and Christmas are on opposite sides of the Gregorian calendar leap day threshold and thus can serve as opposing examples of the leap year variation in the day numbers of Gregorian calendar dates. The positive day number of Valentine's Day (`Day 44`) and the negative day number of Christmas (`Day -7`) never change, but their respective negative day numbers are `Day -321` and `Day 358` in common years and `Day -322` and `Day 359` in leap years. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
 
-If do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar precisely, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
+If we do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar exactly, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
 
 ### Gregorian calendar date to day of the `dek` conversion {#sec-dotd}
 
@@ -162,35 +162,28 @@ Using the asterisk with positive day number allows us to determine what the day 
 | Veterans’ Day    | November 11 | 314* | A+10 |
 | Christmas Day    | December 25 | 358* | B+24 |
 
-In the table above, the last digit of the day of the month numbers of dates in February, June, and July are the same as the last digit of their day numbers. This pattern is maintained in all common years, but in leap years the last digits of the day of the month and day of the year numbers match in February, April, and May. The lists below show the number that has to be added to the day of the month number to get the corresponding day of the `dek` number in each month.
+: Gregorian calendar holidays that happen to fall on `Decalendar` rest days {#tbl-holidays}
 
-- Common years:
-    - January: -1
-    - February: 0
-    - March: -2
-    - April: -1
-    - May: -1
-    - June: 0
-    - July: 0
-    - August: 1
-    - September: 2
-    - October: 2
-    - November: 3
-    - December: 3
+In the table above, the last digit of the day of the month numbers of dates in February, June, and July are the same as the last digit of their day numbers. This pattern is maintained in all common years, but in leap years the last digits of the day of the month and day of the year numbers match in February, April, and May. The table below shows the number that has to be added to the day of the month number to get the corresponding day of the `dek` number in each month in common years (365) and leap years (366).
 
-- Leap years:
-    - January: -1
-    - February: 0
-    - March: 1
-    - April: 0
-    - May: 0
-    - June: 1
-    - July: 1
-    - August: 2
-    - September: 2
-    - October: 3
-    - November: 4
-    - December: 4
+| Month     | 365 | 366 |
+| ------    | --- | --- |
+| January   | -1  | -1  |
+| February  | 0   | 0   |
+| March     | -2  | 1   |
+| April     | -1  | 0   |
+| May       | -1  | 0   |
+| June      | 0   | 1   |
+| July      | 0   | 1   |
+| August    | 1   | 2   |
+| September | 2   | 2   |
+| October   | 2   | 3   |
+| November  | 3   | 4   |
+| December  | 3   | 4   |
+
+: Difference between last digits of Gregorian calendar day of month and `Decalendar` day of year {#tbl-holidays}
+
+### Gregorian calendar week date to `doty` conversion {#sec-dotw}
 
 We can use this method to find out what day of the `dek` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar `rest day and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
 
@@ -199,7 +192,9 @@ We can use this method to find out what day of the `dek` a holiday falls on. Hol
 | n=365  | 0   | 30  | 58  | 89  | 119 | 150 | 180 | 211 | 242 | 272 | 303 | 333 |
 | n=366  | 0   | 30  | 59  | 90  | 120 | 151 | 181 | 212 | 243 | 273 | 304 | 334 |
 
-### Common year date to `doty` conversion
+: Cumulative day counts the end of each Gregorian calendar month {#tbl-cumulative}
+
+### Gregorian calendar date to `doty` conversion
 
 The table above is small and portable, but using it requires some calculation. To avoid manual calculation entirely, we could use a computer program or a comprehensive conversion table like the ones below. The first table shows the day numbers for all of the days in common years, while the second table does the same for leap years. In both of these tables, the columns are labeled by month while the rows are labeled by the day of the month.
 
@@ -237,6 +232,8 @@ The table above is small and portable, but using it requires some calculation. T
 | 30  | 29  |     | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
 | 31  | 30  |     | 89  |     | 150 |     | 211 | 242 |     | 303 |     | 364 |
 
+: Common year Gregorian calendar date to `doty` conversion
+
 ### Leap year date to `doty` conversion
 
 | Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
@@ -272,6 +269,8 @@ The table above is small and portable, but using it requires some calculation. T
 | 29  | 28  | 59  | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
 | 30  | 29  |     | 89  | 120 | 150 | 181 | 211 | 242 | 273 | 303 | 334 | 364 |
 | 31  | 30  |     | 90  |     | 151 |     | 212 | 243 |     | 304 |     | 365 |
+
+: Leap year Gregorian calendar date to `doty` conversion
 
 ### Seasons
 
