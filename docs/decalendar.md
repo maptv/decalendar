@@ -1,49 +1,81 @@
 # Decalendar and Declock
 
-## Summary
+## Summary {#sec-summary}
 
 `Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to replace [standard time](https://en.wikipedia.org/wiki/Standard_time). Both system use days as their base unit and derive other units from days using prefixes inspired by the metric system. To create the necessary calendar and time units, `Decalendar` groups days together, while `Declock` divides days up.
 
-## Basics
+## Basics {#sec-basics}
 
 In the simplest terms, `Decalendar` counts fractions of a year, while Declock counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, while for `Declock` the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of` Decalendar`, the numerator is the days that have passed in the year, while in the context of` Declock`, the numerator is the parts of the day that have passed.
 
-To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year. This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
+To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year (`doty`). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
-Not saying `Day` or `Dot` is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon and not the sixth day of the year. Also, the value itself may provide a clue, because calendar dates cannot be greater than 365, while times can have as many digits as desired. For this reason, the number "500" can only mean noon. If a date and a time are combined into a timestamp, the date always goes before the time. When said together, the numbers "0" and "500" mean on the first day of the year at noon. In written form, this timestamp would be `000.500`.
+The analogy to decimals or fractions is important, because it explains why adding a zero at the end a time does not change the time, only the implied precision. Providing only a single digit for a `Declock` time indicates that the time is approximate to within 5% of the day. Every additional digit we add decreases the error tolerance 10-fold. For example, `Dot 5` and `Dot 500` both mean noon, but `Dot 5` implies that any time between `Dot 450` and `Dot 549` is close enough to noon, while `Dot 500` narrows the acceptable range to any time between `Dot 495` and `Dot 504`.
 
-The format shown above is called `doty` or `.y`, which is short for fractional day of the year. The `.y` timestamps above assume that the year and time zone are known. Most likely, we are talking about the current year and the local time zone, but it may be unclear. A date without a year is like a time without a time zone, both assume the context is obvious. When we include a year at the beginning of a date, we pinpoint a specific day, instead of talking about a date that could happen any year. The first of the day of the year 2000, would be `Year 2000 Day 0` or simply `2000 0`. Similarly, noon in time zone zero would be `Dot 500 Zone 0` or simply `500 0`.
+If we really want to insist on punctuality, we could include up to 5 digits in the time. Specifying a time with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/), at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word "sharp" or the `#` symbol to the time. Saying "`5 Sharp`" or writing `5#` means as close as possible to noon. We can only add `#` to a time, so there is no need say "`Dot 5 Sharp`" or write `.5#`.
 
-When a date and a time are said together, the year is always first and the time zone is always last, so values can go from largest to smallest. The date and the time from the examples above would be `Year 2000 Day 0 Dot 500 Zone 0` or simply `2000 0 500 0`. In written form, this combined date and time would be `2000+000.500+0`. This format can be summarized as `year+day.day±z`. The plus signs imply that the date and the time zone can also be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of Time Zone 0. Negative dates and times shows the number of parts that are left in the whole (day or year).
+Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (`Dot 5`) and not the sixth `doty` (`Day 5`). Also, the number itself may provide a clue. Numbers greater than 365 could still be a date, but such dates would be in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean `Day 134` (if n=366) or `Day 135` (if n=365) of the subsequent year, but it would most likely mean noon (`Dot 500`).
 
-To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions. Negative numbers can be especially useful for `Decalendar`, because `Day -1` is always the last day of the year, regardless of how many days the year has. In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous in the context of `Declock`, the former could highlight that there is only 1 tenth (¹/₁₀) of the day remaining before midnight.
+If a date and a time are combined they form a `datetime`. As the name suggests, the date always goes before the time in any `datetime`. When said together, the numbers "0" and "500" mean the first `doty` (`Day 0`) at noon (`Dot 500`). In written form, this would be `000.500`. This format is called `.y`, which is read the same way as `doty`, but emphasizes that the `.` is used in a floating point decimal `doty`. In other words, `doty` can be used instead of "day of the year" in a sentence, whereas `.y` indicates a `datetime`, such as `000.500`.
 
-Providing only a single digit for a `Declock` time indicates that the time is approximate to within 5% of the day. Every additional digit we add decreases the error tolerance 10-fold. For example, `Dot 5` means any time between `Dot 450` and `Dot 549`, while `Dot 500` means any time between `Dot 495` and `Dot 505`. If we really want to insist on punctuality, we could include up to 5 digits in the time. Specifying a time with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/), at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word "sharp" or the `#` symbol to the time. Saying `5 Sharp` or writing `5#` means as close as possible to noon.
+The dates and times above assume that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once a day, rather than once in every time zone per day. The first `doty` 2000, would be written `2000+000` and said "`Year 2000 Day 0`" or simply "`2000 0`", while noon in `Zone 0` would be written `.500+0` or `500+0` and said "`Dot 500 Zone 0`", "`500 Zone 0`", or "`500 0`".
 
-## Units
+The plus signs in the date and time above indicate that the date and the time zone can also be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. Negative dates and times show the number of parts that are left in the whole (day or year). To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions.
 
-`Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the key units of each highlights the relationship between the two:
+Negative numbers can be especially useful at the end of the year, because `Day -1` is always the last `doty`, regardless of how many days the year has (365 or 366). In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous `Declock` times, the former could highlight that there is only 1 tenth (¹/₁₀ or .1) of the day remaining before midnight.
 
-- 10<sup>1</sup>-day `deks` (decadays)
-- 10<sup>-1</sup>-day `dimes` (decidays)
-- 10<sup>-2</sup>-day `cents` (centidays)
-- 10<sup>-3</sup>-day `mils` (millidays)
+The `.y` format can include positive and negative numbers, most commonly in the form `±year±day.day±z`, where `day.day` is the `datetime` and `z` is the time zone. The year is usually provided without a sign, because we rarely discuss years before 1 BCE. The other two signs are required in written form, but plus signs be omitted when speaking. For example, `2000+000.500+0` is pronounced "`Year 2000 Day 0 Dot 500 Zone 0`" or "`2000 0 500 0`", while `2000-366.600-1` (the same `datetime` in negative form in `Zone -1`) would be said "`Year 2000 Day Minus 366 Dot 600 Zone Minus 1`" or "`2000 -366 600 -1`".
 
-In the table above, `deks` are the main `Decalendar` unit, while the other three (the units with negative exponents) are used for `Declock`. Of those last three, `mils` are the most important, because they provide the right level of precision for displaying time on clocks and watches. Each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). `Cents` can thus serve as a useful point of comparison to understand the scale of these units. `Mils` are ten times smaller than cents (.1% = 1.4 minutes), `dimes` are ten times larger than cents (%10 = 144 minutes), and `deks` are 1000 times larger than cents (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
+## Units {#sec-units}
 
-## Time zones
+In the `datetimes` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the  desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each highlights the relationship between the two:
 
-Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in Time Zone 1 are one `dime` later than Time Zone 0 and two `dimes` later than Time Zone -1. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in Time Zone -3 and Tokyo is in Time Zone 4, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is noon on the last day of the year 1999 in Mexico City, it will be `Dot 200` on the first day of the year 2000 in Tokyo. The date and time in Mexico City can be written `2000+000.200+4` or `2000-366.800+4`, while the equivalent date and time for Tokyo is `1999+364.500-3` or `1999-001.500-3`. If we removed the time zone from the end, we would not know that all of these timestamps describe the same moment in time.
+| Scale            | Name     | Formal Name     |
+| ---------------  | -------  | --------------- |
+| 10<sup>1</sup>   | `dek`    | `decaday`       |
+| 10<sup>0</sup>   | `day`    | `day`           |
+| 10<sup>-1</sup>  | `dime`   | `deciday`       |
+| 10<sup>-2</sup>  | `cent`   | `centiday`      |
+| 10<sup>-3</sup>  | `mil`    | `milliday`      |
+| 10<sup>-4</sup>  | `phrase` | `decimilliday`  |
+| 10<sup>-5</sup>  | `beat`   | `centimilliday` |
+| 10<sup>-6</sup>  | `mic`    | `microday`      |
+| 10<sup>-7</sup>  | `liph`   | `decimicroday`  |
+| 10<sup>-8</sup>  | `lib`    | `centimicroday` |
+| 10<sup>-9</sup>  | `nan`    | `nanoday`       |
+| 10<sup>-10</sup> | `roph`   | `decinanoday`   |
+| 10<sup>-11</sup> | `rob`    | `centinanoday`  |
+| 10<sup>-12</sup> | `pic`    | `picoday`       |
 
-## Months and Weeks
+: The units of `Decalendar` and `Declock` {#tbl-units}
 
-The timestamps shown above are in the fractional days of the year (`doty` or `.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental timestamp formats, which are based on fractional days of the month (`dotm` or `.m`), and fractional days of the week (`dotw` or `.w`). The list below summarizes the three day-of-the (`dot` or `.`) formats:
-- `.y`: `year+day.day±z`  or `year-day.day±z`
-- `.m`: `year+m+dd.day±z` or `year-m-dd.day±z`
-- `.w`: `year+ww+d.day±z` or `year-ww-d.day±z`
+In the table above, `deks` are the main `Decalendar` unit, while the other units (the ones with negative exponents) are used for `Declock`. `Cents` can serve as a useful point of comparison to understand the scale of the largest units in the table above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` are ten times larger (10% = 144 minutes), and `deks` are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
-In the list above, `day` is the 3-digit day of the year number, `dd` is the 2-digit day of the month number, `d` is the 1-digit day of the week number, `.day` is the time in `mils`.
-The `m` in the `.m` format is the month number, which is zero-indexed and tridecimal (Base13 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The negative month numbers range from -C (-13) to -1, as shown in the table below.
+`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` and `beats`, music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
+
+`Declock` units smaller than `beats` are too small for typical daily use. For example, a `microday` (`mic`) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 `milliphrases` (`liphs`). A `millibeat` (`lib`) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person's ear to their other ear in about 7 `nanodays`. Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a `microphrase` (`roph`) difference might be too fast to notice. In a `microbeat` (`rob`), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.
+
+## Time Zones {#sec-zones}
+
+Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in `Zone 1` are one `dime` later than `Zone 0` and two `dimes` later than `Zone -1`. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in `Zone -3` and Tokyo is in `Zone 4`, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is noon on the last day of the year 1999 in Mexico City, it will be `Dot 200` on the first day of the year 2000 in Tokyo. This date and time in Mexico City can be written `2000+000.200+4` or `2000-366.800+4`, while the equivalent date and time for Tokyo is `1999+364.500-3` or `1999-001.500-3`. If we removed the time zone from the end, we would not know that all of these `datetimes` describe the same moment in time.
+
+## The Dot Formats {#sec-formats}
+
+The `datetimes` shown above are in the decimal days of the year (`.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental `datetime` formats, which are based on decimal days of the month (`.m`), and fractional days of the week (`.w`). The table below summarizes the three decimal day-of-the ( `dot` or `.`) formats:
+
+| Day of the |  `.`  | General Form      | Specific Example  |
+| ---------- | ----- | ----------------- | ----------------- |
+| Year       |  `y`  | `year±day.day±z`  | `1999+364.500-3`  |
+| Month      |  `m`  | `year±m±dd.day±z` | `1999+B+31.500-3` |
+| Week       |  `w`  | `year±ww±d.day±z` | `1999+52+5.500-3` |
+
+: The three dot formats {#tbl-formats}
+
+In the table above, `day` is the 3-digit day of the year (`doty`) number, `dd` is the 2-digit day of the month (`dotm`) number, `d` is the 1-digit day of the week (`dotw`) number, and `.day` is the time in `mils`.
+
+### The `.m` format {#sec-dotm}
+
+The `m` in the `.m` format is the 1-digit month number. To fit all of the months in a single digit, `m` is in hexadecimal form (Base16 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The negative month numbers range from -C (-13) to -1, as shown in the table below.
 
 | Month     | pos | neg |
 | --------- | --- | --- |
@@ -60,7 +92,11 @@ The `m` in the `.m` format is the month number, which is zero-indexed and tridec
 | November  | A   | -2  |
 | December  | B   | -1  |
 
- The week number in the list above, `ww`, ranges from 0 to 53 or -54 to -1. Weeks in the `.w` format start from Sunday. The table below shows the possible days of the week (`d`) values, which range from 0 to 6 or -7 to -1.
+: The months in the `.m` format {#tbl-dotm}
+
+### The `.w` format {#sec-dotw}
+
+The week number in the `.w` format, `ww`, ranges from 0 to 53 or -54 to -1. Weeks in the `.w` format start from Sunday. The table below shows the possible `dotw` values, which range from 0 to 6 or -7 to -1.
 
 | Day       | pos | neg |
 | --------- | --- | --- |
@@ -72,26 +108,36 @@ The `m` in the `.m` format is the month number, which is zero-indexed and tridec
 | Friday    | 5   | -2  |
 | Saturday  | 6   | -1  |
 
-The table below shows the timestamps from the last example in the previous section in all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all in the same form. In Mexico City, the time is `+500-3` or `-500-3`, while the time in Tokyo is `+200+4` is `-800+4`.
+: The weeks in the `.w` format {#tbl-dotw}
 
-| Day of the | Mexico City       | Tokyo             |
-| ---------  | ---               | ---               |
-| Year       | `1999+364.500-3`  | `2000+000.200+4`  |
-| Year       | `1999-001.500-3`  | `2000-366.800+4`  |
-| Month      | `1999+B+31.500-3` | `2000+0+00.200+4` |
-| Month      | `1999-1-01.500-3` | `2000-C-31.800+4` |
-| Week       | `1999+52+5.500-3` | `2000+00+6.200+4` |
-| Week       | `1999-01-2.500-3` | `2000-53-1.800+4` |
+### `.` format examples {#sec-dotex}
 
-In the table above, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City is December (`Month B`). We could read the dates in the `.m` timestamps as `Year 1999 Month B Day 31` or `Year 1999 Month -1 Day -1` in Mexico City and `Year 2000 Month 0 Day 0` or `Year 2000 Month -C Day -31` in Tokyo. The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. The example above shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). We could read the dates in the `.w` format as `Year 1999 Week 52 Day 5` or `Year 1999 Week -1 Day -2` in Mexico City and `Year 2000 Week 0 Day 0` or `Year 2000 Week -52 Day -1` in Tokyo. In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to read: `Year 1999 Day 364` or `Year 1999 Day -1` in Mexico City and `Year 2000 Day 0` or `Year 2000 Day -366` in Tokyo.
+The table below builds on the example from the ["Time Zones" section](#Time-Zones) section to compare all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all shown to 1-digit `dime` precision (same as time zones) instead of the typical 3-digit `mil` precision. In Mexico City, the time is `+5-3` or `-5-3`, while the time in London is `+8+0` or `-2+0` and time in Tokyo is `+2+4` is `-8+4`.
 
-## `Deks`
+| Day of the |  `.`  | Mexico City     | London          | Tokyo           |
+| ---------  | ----- | --------------- | --------------- | --------------- |
+| Year       |  `y`  | `1999+364.5-3`  | `1999+364.8-3`  | `2000+000.2+4`  |
+| Year       |  `y`  | `1999-001.5-3`  | `1999-001.2-3`  | `2000-366.8+4`  |
+| Month      |  `m`  | `1999+B+31.5-3` | `1999+B+31.8-3` | `2000+0+00.2+4` |
+| Month      |  `m`  | `1999-1-01.5-3` | `1999-1-01.2-3` | `2000-C-31.8+4` |
+| Week       |  `w`  | `1999+52+5.5-3` | `1999+52+5.8-3` | `2000+00+6.2+4` |
+| Week       |  `w`  | `1999-01-2.5-3` | `1999-01-2.2-3` | `2000-53-1.8+4` |
 
-`Decalendar` envisions a world in which 7-day weeks and ~30-day months are replaced by 10-day `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
+: The time in Mexico City, London, and Tokyo in all three dot formats {#tbl-dotex}
+
+In the table above, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City and London is December (`Month B`). We could say the `.m` dates in Mexico City and London as "`Year 1999 Month B Day 31`" or "`Year 1999 Month -1 Day -1`" and the Tokyo date as "`Year 2000 Month 0 Day 0`" or" `Year 2000 Month -C Day -31`".
+
+The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. The table above shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `.w` dates in Mexico City and London could be said "`Year 1999 Week 52 Day 5`" or "`Year 1999 Week -1 Day -2`", while the date in Tokyo could be pronounced "`Year 2000 Week 0 Day 0`" or "`Year 2000 Week -52 Day -1`" in Tokyo.
+
+In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to say. The spoken form of the `.y` date in Mexico City and London is  "`Year 1999 Day 364`" or "`Year 1999 Day -1`" and the spoken form of the Tokyo date is "`Year 2000 Day 0`" or "`Year 2000 Day -366`".
+
+## `Dekly` schedule {#sec-schedule}
+
+Even though it provides formats for months and weeks, `Decalendar` envisions a world in which these units are replaced by `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
 
 A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from rest days. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as rest days, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 109 rest days in a `Decalendar` year, not counting the two holidays, New Year's Day (`Day 0`) and Leap Day (`Day 365`).
 
-### Gregorian calendar leap day considerations
+### Gregorian calendar leap day considerations {#sec-leap}
 
 Unlike Leap Day, New Year's Day is a holiday in both `Decalendar` and the Gregorian calendar. New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gregorian calendar. Therefore, we can say that `Day 0` is synonymous with January 1. Every Gregorian calendar date can be represented unequivocally by a positive or a negative day number except for February 29, the Gregorian calendar leap day. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01`, but this date cannot exist in the `.y` format without a year.
 
@@ -101,7 +147,7 @@ Valentine's Day and Christmas are on opposite sides of the Gregorian calendar le
 
 If do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar precisely, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
 
-### Gregorian calendar date to day of the `dek` conversion
+### Gregorian calendar date to day of the `dek` conversion {#sec-dotd}
 
 Using the asterisk with positive day number allows us to determine what the day of the `dek` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
 
@@ -229,7 +275,7 @@ The table above is small and portable, but using it requires some calculation. T
 
 ### Seasons
 
-We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. The dates of the solstices and the equinoxes (the points in between the solstices) can be used as definitions of the seasons, but these definitions will be the opposite in the Northern and Southern hemisphere. In the table below, the meaning of dates of the solstices and the equinoxes is provided as "Start of northern-hemisphere-season/southern-hemisphere-season".
+We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. The dates of the solstices and the equinoxes (the points in between the solstices) can be used as definitions of the seasons, but these definitions will be the opposite in the Northern and Southern hemisphere. In the table below, the meaning of the dates of the solstices and the equinoxes is provided as "Start of northern/southern hemisphere season".
 
 | doty | dotm   | date         | event              | Start of      |
 | ---- | ------ | ------       | -----              | ------        |
@@ -238,6 +284,9 @@ We can use the tables above to convert any Gregorian calendar date to a day numb
 | 264  | 8+21   | September 22 | Southward Equinox  | Fall/Spring   |
 | 354  | B+21   | December 21  | Southward Solstice | Winter/Summer |
 
+### Groups of `Deks`
+
+Using the information in the table above, we can label the `deks` in the This means that the 
 calendar exactly we can,  dhpositive number or subtract 1 from a negative number if the current year is a leap year. When speaking the asterisk is pronounced `star`. For example, Christmas to indicate New Year's Day we could say `-365 star` or write `-365*`.
 
 
@@ -915,13 +964,14 @@ While mils should be sufficiently precise for most timekeeping tasks, Declock de
 - M: 10<sup>-3</sup>-day mils (millidays)
 - B: 10<sup>-4</sup>-day bars (decimillidays)
 - b: 10<sup>-5</sup>-day beats (centimillidays)
-- d: 10<sup>-6</sup>-day debs (decibeats)
+- d: 10<sup>-6</sup>-day mics (microdays)
 - c: 10<sup>-7</sup>-day cebs (centibeats)
 - m: 10<sup>-8</sup>-day mibs (millibeats)
 - N: 10<sup>-9</sup>-day nans (nanodays)
 - U: 10<sup>-10</sup>-day mars (microbars)
 - u: 10<sup>-11</sup>-day mics (microbeats)
 - P: 10<sup>-12</sup>-day pics (picodays)
+
 
 If the level of time precision needs to written the single letter codes listed above may be useful. Even smaller units are possible (e.g. picobeats, femtodays, etc.), but such extremely small time units only going to be useful in very niche contexts.
 
