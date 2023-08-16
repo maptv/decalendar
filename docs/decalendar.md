@@ -276,16 +276,68 @@ The table above is small and portable, but using it requires some calculation. T
 
 We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. The dates of the solstices and the equinoxes (the points in between the solstices) can be used as definitions of the seasons, but these definitions will be the opposite in the Northern and Southern hemisphere. In the table below, the meaning of the dates of the solstices and the equinoxes is provided as "Start of northern/southern hemisphere season".
 
-| doty | dotm   | date         | event              | Start of      |
-| ---- | ------ | ------       | -----              | ------        |
-| 78   | 2+19   | March 20     | Northward Equinox  | Spring/Fall   |
-| 170  | 5+19   | June 20      | Northward Solstice | Summer/Winter |
-| 264  | 8+21   | September 22 | Southward Equinox  | Fall/Spring   |
-| 354  | B+21   | December 21  | Southward Solstice | Winter/Summer |
+| `doty` | `dotm` | Date         | Event              | North  | South  |
+| ----   | ------ | ------------ | ------------------ | ------ | ------ |
+| 78     | 2+19   | March 20     | Northward Equinox  | Spring | Fall   |
+| 170    | 5+19   | June 20      | Northward Solstice | Summer | Winter |
+| 264    | 8+21   | September 22 | Southward Equinox  | Fall   | Spring |
+| 354    | B+21   | December 21  | Southward Solstice | Winter | Summer |
 
 ### Groups of `Deks`
 
-Using the information in the table above, we can label the `deks` in the This means that the 
+Using the information in the table above, we can label the `deks` in a year according to the seasons in which they occur. We identify `deks` using the first two digits of the day number of any day in that `dek`. For example, `Day 78` is the second to last day in `Dek 7`, while `Day 170` is the first day in `Dek 17`. Therefore, Spring starts in the northern hemisphere at the end of `Dek 7` and ends before `Dek 17`. Winter contains `Dek 35` and `Dek 36` of one year and  `Deks 0-7` of the subsequent year. The table below summarizes the division of `deks` by season.
+
+| North  | South  | Start | End |
+| -----  | -----  | ----- | --- |
+| Spring | Fall   | 8     | 16  |
+| Summer | Winter | 17    | 25  |
+| Fall   | Spring | 26    | 34  |
+| Winter | Summer | 35    | 7   |
+
+Winter/Summer has 5 or 6 days more than the other seasons which all have 90 days. The opposite is true in reality, Summer/Winter is longer than Winter/Summer by almost 5 days.
+
+| Quarter | Start | End |
+| -----   | ----- | --- |
+| 0       | 0     | 8   |
+| 1       | 9     | 17  |
+| 2       | 18    | 26  |
+| 3       | 27    | 35  |
+
+The rows alternate between even and odd numbers.
+
+Q1 ends with the first dek of Spring
+
+Q2 ends with the first dek of Summer
+
+Q3 ends with the first dek of Fall
+
+Q4 ends with the first dek of Winter
+
+The last 5 or 6 days of the year are not included in any calendar quarter.
+
+| Quarter | Start | End |
+| -----   | ----- | --- |
+| 0       | 0     | 90  |
+| 1       | 91    | 181 |
+| 2       | 182   | 272 |
+| 3       | 273   | 364 |
+
+Not only do the rows alternate between even and odd numbers, but the quarter number is the last digit of the day number.
+
+Fiscal quarters include all days, with extra days going to Q3
+
+| Quint | Start | End |
+| ----- | ----- | --- |
+| 0     | 0     | 72  |
+| 1     | 73    | 145 |
+| 2     | 146   | 218 |
+| 3     | 219   | 291 |
+| 4     | 292   | 364 |
+
+Accountants can use Quints, which divide up common years evenly.
+
+
+Each `dek` has a number that is simply the first two digits of the day numbers of the days included values in the table are the numbers of the `deks` at the seasonal boundaries. Winter includes `Dek 0`, the first `dek` of the year and `Dek 36`, the last `dek` of the year.  E set the boundaries, The Winter/summer `deks` are those with numbers below 8 and `Dek 35`     the threshold (-366 <= d <= -307) will decrease by 1 day in leap years, while numbers above the threshold (59 <= d <= 365) will increase by 1 day in leap years.
 calendar exactly we can,  dhpositive number or subtract 1 from a negative number if the current year is a leap year. When speaking the asterisk is pronounced `star`. For example, Christmas to indicate New Year's Day we could say `-365 star` or write `-365*`.
 
 
