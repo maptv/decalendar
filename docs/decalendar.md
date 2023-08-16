@@ -194,7 +194,7 @@ We can use this method to find out what day of the `dek` a holiday falls on. Hol
 
 : Cumulative day counts the end of each Gregorian calendar month {#tbl-cumulative}
 
-### Gregorian calendar date to `doty` conversion
+### Gregorian calendar date to `doty` conversion {#sec-common}
 
 The table above is small and portable, but using it requires some calculation. To avoid manual calculation entirely, we could use a computer program or a comprehensive conversion table like the ones below. The first table shows the day numbers for all of the days in common years, while the second table does the same for leap years. In both of these tables, the columns are labeled by month while the rows are labeled by the day of the month.
 
@@ -232,9 +232,10 @@ The table above is small and portable, but using it requires some calculation. T
 | 30  | 29  |     | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
 | 31  | 30  |     | 89  |     | 150 |     | 211 | 242 |     | 303 |     | 364 |
 
-: Common year Gregorian calendar date to `doty` conversion
+: Common year Gregorian calendar date to `doty` conversion {#tbl-common}
 
-### Leap year date to `doty` conversion
+### Leap year date to `doty` conversion {#sec-leap}
+
 
 | Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
@@ -270,22 +271,24 @@ The table above is small and portable, but using it requires some calculation. T
 | 30  | 29  |     | 89  | 120 | 150 | 181 | 211 | 242 | 273 | 303 | 334 | 364 |
 | 31  | 30  |     | 90  |     | 151 |     | 212 | 243 |     | 304 |     | 365 |
 
-: Leap year Gregorian calendar date to `doty` conversion
+: Leap year Gregorian calendar date to `doty` conversion {#tbl-leap}
 
-### Seasons
+### Seasons and quarters
 
-We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. The dates of the solstices and the equinoxes (the points in between the solstices) can be used as definitions of the seasons, but these definitions will be the opposite in the Northern and Southern hemisphere. In the table below, the meaning of the dates of the solstices and the equinoxes is provided as "Start of northern/southern hemisphere season".
+We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
 
-| `doty` | `dotm` | Date         | Event              | North  | South  |
-| ----   | ------ | ------------ | ------------------ | ------ | ------ |
-| 78     | 2+19   | March 20     | Northward Equinox  | Spring | Fall   |
-| 170    | 5+19   | June 20      | Northward Solstice | Summer | Winter |
-| 264    | 8+21   | September 22 | Southward Equinox  | Fall   | Spring |
-| 354    | B+21   | December 21  | Southward Solstice | Winter | Summer |
+The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has an opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. The table below lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.
 
-### Groups of `Deks`
+| North  | South  | `doty` | `dotm` | Date         | Event              |
+| ------ | ------ | ----   | ------ | ------------ | ------------------ |
+| Spring | Fall   | 78     | 2+19   | March 20     | Northward Equinox  |
+| Summer | Winter | 170    | 5+19   | June 20      | Northward Solstice |
+| Fall   | Spring | 264    | 8+21   | September 22 | Southward Equinox  |
+| Winter | Summer | 354    | B+21   | December 21  | Southward Solstice |
 
-Using the information in the table above, we can label the `deks` in a year according to the seasons in which they occur. We identify `deks` using the first two digits of the day number of any day in that `dek`. For example, `Day 78` is the second to last day in `Dek 7`, while `Day 170` is the first day in `Dek 17`. Therefore, Spring starts in the northern hemisphere at the end of `Dek 7` and ends before `Dek 17`. Winter contains `Dek 35` and `Dek 36` of one year and  `Deks 0-7` of the subsequent year. The table below summarizes the division of `deks` by season.
+: Solstice and equinox Gregorian calendar and `doty` dates {#tbl-soleq}
+
+Using the information in the table above, we can label the `deks` in a year according to the seasons in which they occur. We identify `deks` using the first 2 digits of the 3-digit day number of any day in that `dek`. For example, `Day 78` is the second to last day in `Dek 7`, while `Day 170` is the first day in `Dek 17`. Therefore, Spring starts in the northern hemisphere at the end of `Dek 7` and ends before `Dek 17`. Winter starts in `Dek 35` of one year and ends at the end of `Deks 7` of the subsequent year. The table below summarizes the division of `deks` by season.
 
 | North  | South  | Start | End |
 | -----  | -----  | ----- | --- |
@@ -294,16 +297,34 @@ Using the information in the table above, we can label the `deks` in a year acco
 | Fall   | Spring | 26    | 34  |
 | Winter | Summer | 35    | 7   |
 
-Winter/Summer has 5 or 6 days more than the other seasons which all have 90 days. The opposite is true in reality, Summer/Winter is longer than Winter/Summer by almost 5 days.
+: Seasonal division of `deks` {#tbl-seasons}
+
+Each season in the table above has 9 `deks` and exactly 90 days, except for the seasons in the last row, which have 10 `deks` and 95 days in common years or 96 days in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, these seasonal divisions shown above are convenient, because the first `dek` of each season is the last `dek` in quarterly divisions called `qops` (`qoppas`). The table below shows the division of `deks` by quarter.
+
+| Qoppa | Start | End |
+| ----- | ----- | --- |
+| 0     | 0     | 8   |
+| 1     | 9     | 17  |
+| 2     | 18    | 26  |
+| 3     | 27    | 35  |
+
+: Quarterly division of `deks` {#tbl-quarters}
+
+`Dek 36`, the last `dek` of the year, is not included in the last quarter to keep each quarter 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. In contrast to the quarters shown above, fiscal quarters do not leave out as many days in each year, because fiscal quarters split the year by day, rather than by `dek`. The table below shows the division of `deks` by quarter.
 
 | Quarter | Start | End |
 | -----   | ----- | --- |
-| 0       | 0     | 8   |
-| 1       | 9     | 17  |
-| 2       | 18    | 26  |
-| 3       | 27    | 35  |
+| 0       | 0     | 90  |
+| 1       | 91    | 181 |
+| 2       | 182   | 272 |
+| 3       | 273   | 363 |
 
-The rows alternate between even and odd numbers.
+: Quarterly division of `days` {#tbl-fiscal}
+
+Fiscal quarters are all exactly 91 days long and thus leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which quarters start and end. In the table above, not only do rows alternate between even and odd numbers, but the quarter number is the last digit of both the start and the end day of the quarter.
+
+The different yearly divisions described above have different approaches to dealing with the last days of the year. Seasons include all of the extra days in the last season of the year, while quarters leave them out. `Dek 36`
+
 
 Q1 ends with the first dek of Spring
 
@@ -314,13 +335,6 @@ Q3 ends with the first dek of Fall
 Q4 ends with the first dek of Winter
 
 The last 5 or 6 days of the year are not included in any calendar quarter.
-
-| Quarter | Start | End |
-| -----   | ----- | --- |
-| 0       | 0     | 90  |
-| 1       | 91    | 181 |
-| 2       | 182   | 272 |
-| 3       | 273   | 364 |
 
 Not only do the rows alternate between even and odd numbers, but the quarter number is the last digit of the day number.
 
