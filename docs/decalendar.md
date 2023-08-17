@@ -135,7 +135,7 @@ In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are o
 
 Even though it provides formats for months and weeks, `Decalendar` envisions a world in which these units are replaced by `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
 
-A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from rest days. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as rest days, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 109 rest days in a `Decalendar` year, not counting the two holidays, New Year's Day (`Day 0`) and Leap Day (`Day 365`).
+A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from rest days. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as rest days, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 109 rest days in a `Decalendar` year, not counting the two holidays, New Year's Day (`Day 0`) and Leap Day (`Day 365`).
 
 ### Gregorian calendar leap day considerations {#sec-leap}
 
@@ -147,9 +147,9 @@ Valentine's Day and Christmas are on opposite sides of the Gregorian calendar le
 
 If we do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar exactly, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
 
-### Gregorian calendar date to day of the `dek` conversion {#sec-dotd}
+### Gregorian calendar date to `dotd` conversion {#sec-dotd}
 
-Using the asterisk with positive day number allows us to determine what the day of the `dek` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
+Using the asterisk with positive day number allows us to determine what the `dotd` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
 
 | name             | date        | doty | dotm |
 | ------           | ------      | ---- | ---- |
@@ -164,7 +164,7 @@ Using the asterisk with positive day number allows us to determine what the day 
 
 : Gregorian calendar holidays that happen to fall on `Decalendar` rest days {#tbl-holidays}
 
-In the table above, the last digit of the day of the month numbers of dates in February, June, and July are the same as the last digit of their day numbers. This pattern is maintained in all common years, but in leap years the last digits of the day of the month and day of the year numbers match in February, April, and May. The table below shows the number that has to be added to the day of the month number to get the corresponding day of the `dek` number in each month in common years (365) and leap years (366).
+In the table above, the last digit of the day of the month numbers of dates in February, June, and July are the same as the last digit of their day numbers. This pattern is maintained in all common years, but in leap years the last digits of the day of the month and day of the year numbers match in February, April, and May. The table below shows the number that has to be added to the day of the month number to get the corresponding `dotd` number in each month in common years (365) and leap years (366).
 
 | Month     | 365 | 366 |
 | ------    | --- | --- |
@@ -185,7 +185,7 @@ In the table above, the last digit of the day of the month numbers of dates in F
 
 ### Gregorian calendar week date to `doty` conversion {#sec-dotw}
 
-We can use this method to find out what day of the `dek` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar `rest day and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
+We can use this method to find out what `dotd` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar `rest day and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
 
 |        | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 | -----  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -301,7 +301,7 @@ Using the information in the table above, we can group the `deks` in a year acco
 
 ### `Qops`, `Qals`, and `Quints` {#sec-qqq}
 
-Each season in the table above has 9 `deks` and exactly 90 days, except for the seasons in the last row, which have 10 `deks` and 95 days in common years or 96 days in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, the seasons shown above work well, because the first `dek` of each season is the last `dek` in a `qop` (`qoppa`). Like seasons, `qoppas` divide the year into four parts, but unlike seasons, `qoppas` do not include `Dek 36`. The table below shows the division of `deks` by `qoppa`.
+Each season in the table above has 9 `deks` and exactly 90 days, except for the seasons in the last row, which have 10 `deks` and 95 days in common years or 96 days in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, the seasons shown above work well, because the first `dek` of each season is the last `dek` in a `qop` (`qoppa`). Like seasons, `qops` divide the year into four parts, but unlike seasons, `qops` do not include `Dek 36`. The table below shows the division of `deks` by `qoppa`.
 
 | Qop | Start | End |
 | --- | ----- | --- |
@@ -312,78 +312,56 @@ Each season in the table above has 9 `deks` and exactly 90 days, except for the 
 
 : The `deks` that begin and end each `qop` {#tbl-qops}
 
-`Dek 36`, the last `dek` of the year, is not included in the last `qop` so that each `qop` is 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. In addition to `qops` shown above, `Decalendar` describes 2 other similar units called `qals` (`qoppaalfas`) and `quints` (`quintiles`). These units do not leave out as many days in each year, because `qals` and `quints` split the year by day, rather than by `dek`. The table below list the numbers of the days that begin and end each `qal`.
+`Dek 36`, the last `dek` of the year, is not included in the last `qop` so that each `qop` is 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. In addition to `qops` shown above, `Decalendar` describes 3 other similar units called `delts` (`deltas`), `eps` (`epsilons`), and `stigs` (`stigmas`). These units do not leave out as many days in each year, because these units split the year by day, rather than by `dek`. `Delts`, `eps`, and `stigs` split the year into 4, 5, and 6 parts, respectively. The table below list the numbers of the days that begin and end each `delt`.
 
-| Qal   | Start | End |
+| Delt  | Start | End |
 | ----- | ----- | --- |
 | 0     | 0     | 90  |
 | 1     | 91    | 181 |
 | 2     | 182   | 272 |
 | 3     | 273   | 363 |
 
-: The days that begin and end each `qal` {#tbl-qals}
+: The days that begin and end each `delt` {#tbl-delts}
 
-`Qals` are 91 days long and thus leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which `qals` start and end. In the table above, not only do rows alternate between even and odd numbers, but the quarter number is the last digit of both the start and the end day of the quarter.
+`Delts` are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which `delts` start and end. In the table above, not only do rows alternate between even and odd numbers, but the `delt` number is the last digit of both the start and the end day of the `delt`. Unlike `delts`, `eps` are 73 days long and do not leave out any days from common years. `Qops`, `delts`, and `eps` all leave out leap days in leap years. The table below list the numbers of the days that begin and end each `ep`.
 
-| Quint | Start | End |
-| ----- | ----- | --- |
-| 0     | 0     | 72  |
-| 1     | 73    | 145 |
-| 2     | 146   | 218 |
-| 3     | 219   | 291 |
-| 4     | 292   | 364 |
+| Ep | Start | End |
+| -- | ----- | --- |
+| 0  | 0     | 72  |
+| 1  | 73    | 145 |
+| 2  | 146   | 218 |
+| 3  | 219   | 291 |
+| 4  | 292   | 364 |
 
-: The days that begin and end each `quint` {#tbl-quints}
+: The days that begin and end each `ep` {#tbl-eps}
 
-Unlike `qals`, `quints` are 73 days long and do not leave out any days from common years. All of the units above leave out leap days in leap years.
+The only unit that can include the leap year is a `stig`, which is 61 days long and follows a similar pattern as a `delt`, except the last `stig` in common years is 1 day short than all the others. The table below list the numbers of the days that begin and end each `stig`. As with `delts`, the `stig` number is the last digit of the numbers of its first and last day.
+Another interesting aspect of `delts` and `stigs` is that they include the midpoints of common and leap years. The midpoint of common years is the first day of `Delt 2` and the midpoint of leap years is the first day of `Stig 3`.
 
+| Stig | Start | End |
+| ---- | ----- | --- |
+| 0    | 0     |  60 |
+| 1    | 61    | 121 |
+| 2    | 122   | 182 |
+| 3    | 183   | 243 |
+| 4    | 244   | 304 |
+| 5    | 305   | 365 |
 
+: The days that begin and end each `stig` {#tbl-stig}
 
+`Dekalendar` treats leap days like outliers or anomalies that should not be included in any sample of days. Every leap days is always a holiday, always a `Fiveday`, and always followed by a `Zeroday`. The end of the year is sensitive time for the
 
-
- The table below compares Gregorian calendar quarters and seasons with similar `Decalendar` units.
-The different yearly divisions described above have different approaches to dealing with the last days of the year. Seasons include all of the extra days in the last season of the year, while quarters leave them out. `Dek 36`
-
-
-Q1 ends with the first dek of Spring
-
-Q2 ends with the first dek of Summer
-
-Q3 ends with the first dek of Fall
-
-Q4 ends with the first dek of Winter
-
-The last 5 or 6 days of the year are not included in any calendar quarter.
-
-Not only do the rows alternate between even and odd numbers, but the quarter number is the last digit of the day number.
-
-Fiscal quarters include all days, with extra days going to Q3
-
-Accountants can use Quints, which divide up common years evenly.
+### Yearly transition
 
 
-Each `dek` has a number that is simply the first two digits of the day numbers of the days included values in the table are the numbers of the `deks` at the seasonal boundaries. Winter includes `Dek 0`, the first `dek` of the year and `Dek 36`, the last `dek` of the year.  E set the boundaries, The Winter/summer `deks` are those with numbers below 8 and `Dek 35`     the threshold (-366 <= d <= -307) will decrease by 1 day in leap years, while numbers above the threshold (59 <= d <= 365) will increase by 1 day in leap years.
-calendar exactly we can,  dhpositive number or subtract 1 from a negative number if the current year is a leap year. When speaking the asterisk is pronounced `star`. For example, Christmas to indicate New Year's Day we could say `-365 star` or write `-365*`.
 
 
-we can only use negative day numbers as synonyms for Gregorian calendar dates. Gregorian calendar dates that occur. In leap years, `Day 59` is the Gregorian calendar leap day. The difference leap day definitions means that `Day 59`  because leap days are defined differently in the two calendars.because the positive day numbers of Gregorian calendar dates will vary by 1 day between common years and leap years.
-
-To deal with variation resulting from , we can add an asterisk after the positive day number. The asterisk means add 1 to a positive number or subtract 1 from a negative number if the current year is a leap year. When speaking the asterisk is pronounced `star`. For example, Christmas to indicate New Year's Day we could say `-365 star` or write `-365*`.
-
-This  means that `Decalendar` day numbers to Gregorian calendar dates, but either the positive or the negative day numbers will vary between common years and leap years, because leap days are defined differently in the two calendars. differences in the definitions of  The rule for matching Gregorian calendar date Gregorian calendar dates to day numbers is that, including New Year's Day, has a positive and a negative day number, one of which will be shifted in leap years. For example, the positive day number of New Year's Day is always 0, but its negative day number is -365 in common years and -366 in leap years. Every Gregorian calendar date has both a positive and a negative day number in `Decalendar`, and one of those number will be shifted in leap years, while the other will not. of . leap day occurs on `Day 59` of leap years, instead of the last day of leap years (`Day 365`). This difference in leap day definitions affects the day numbers of Gregorian calendar dates in leap years:
-- positive day numbers greater than 58 increase by 1
-- negative day numbers less than 59 decrease by 1
-We can either use the day number that does not change or In other words, if the positive day number of a Gregorian calendar date is less than 59, we we can count on it to never change. Otherwise, Starting from `Day 59`, we can either increment positive day numbers during leap years or use negative day numbers, which to represent Gregorian calendar dates without one of the two numbers that describe each day will be affected by leap years. 
-Gregorian calendar dates that occur before `Day 59` will have decremented negative day numbers in leap.  and add 1 to positive day numbers starting from `Day 59`. and only one have to decrement (decrease by 1) negative days different definitions of leap days requires us to decre a Gregorian calendar, whereas New Year's Day is a holiday in both calendars. The Gregorian calendar leap day occurs on `Day 59` in leap years and increments positive day number of New Year's Day will always match its Gregorian calendar date, because New Year's Day occurs before  This is true for all holidays earlier than `Day 59`, like Valentine's Day, which is always `Day 44`.
+`Dek 36`
 
 
-New Year's Day is still considered invariable even though it's negative in holidays are useful milestones for comparing `Decalendar` and Gregorian calendar dates. Only Christmas are both invariable holidays, but are on opposite sides of the Gregorian calendar leap day (`Day 59`). Starting from `Day 59` in leap years, we have to add 1 to positive day numbers to account for Gregorian calendar leap day and match Gregorian calendar dates exactly. add 1Valentine's Day has an invariable is before, so To match Gregorian calendar dates in leap years, we have to add 1 to positive day numbers greater than 58 and subtract 1 from negative day numbers are one day behind Valentine's Day is before `Day 59`, so it is always `Day 44` is unaffected by leap years, while  it also  These two holidays are affected in different ways by leap years because the  instead of the last day of the year.
 
-Coincidentally, both of these holidays will always occur on `Decalendar` rest days. The, because the increments day numbers greater than 58 in leap years Other holidays are determined by  Examples of holidays with variable dates includes Chinese New Year, Hanukkah, and Thanksgiving.
 
-but The Gregorian calendar leap day (`Day 59`) throws day numbers out of alignment with Gregorian calendar dates. After `Day 58` in leap years, positive day numbers of Gregorian calendar dates are increased by 1 day. In such cases, the negative day numbers can serve as invariable `Decalendar` dates, because they will be unaffected by leap years. and negative day numbers do not tell us. 
-
-While the last digit of the day number is the day of the `dek`, the first two digits are the `dek` number. `Dek 0`, the first `dek` of the year, contains `Day 0` through `Day 9`. `Dek 36`, the last `dek` of the year, contains the last days of the current year and the first days of the subsequent year. This means that `Dek 36` overlaps with `Dek 0`. The table below shows the name and numbers of the days in `Dek 0` and `Dek 36`. The table includes columns for both common years (n=365) and leap years (n=366).
+`Dek 0`, the first `dek` of the year, contains `Day 0` through `Day 9`. `Dek 36`, the last `dek` of the year, contains the last days of the current year and the first days of the subsequent year. This means that `Dek 36` overlaps with `Dek 0`. The table below shows the name and numbers of the days in `Dek 0` and `Dek 36`. The table includes columns for both common years (n=365) and leap years (n=366).
 
 <table>
     <tr>
