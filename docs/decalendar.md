@@ -273,7 +273,7 @@ The table above is small and portable, but using it requires some calculation. T
 
 : Leap year Gregorian calendar date to `doty` conversion {#tbl-leap}
 
-### Seasons and quarters
+### Seasons {#sec-seasons}
 
 We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
 
@@ -288,7 +288,7 @@ The dates of the solstices and the equinoxes can be used as definitions of the s
 
 : Solstice and equinox Gregorian calendar and `doty` dates {#tbl-soleq}
 
-Using the information in the table above, we can label the `deks` in a year according to the seasons in which they occur. We identify `deks` using the first 2 digits of the 3-digit day number of any day in that `dek`. For example, `Day 78` is the second to last day in `Dek 7`, while `Day 170` is the first day in `Dek 17`. Therefore, Spring starts in the northern hemisphere at the end of `Dek 7` and ends before `Dek 17`. Winter starts in `Dek 35` of one year and ends at the end of `Deks 7` of the subsequent year. The table below summarizes the division of `deks` by season.
+Using the information in the table above, we can group the `deks` in a year according to the seasons in which they occur. We identify `deks` using the first 2 digits of the 3-digit day number of any day in that `dek`. For example, `Day 78` is the second to last day in `Dek 7`, while `Day 170` is the first day in `Dek 17`. Therefore, Spring starts in the northern hemisphere at the end of `Dek 7` and ends before `Dek 17`. Winter starts in `Dek 35` of one year and ends at the end of `Deks 7` of the subsequent year. The table below summarizes the division of `deks` by season.
 
 | North  | South  | Start | End |
 | -----  | -----  | ----- | --- |
@@ -297,32 +297,51 @@ Using the information in the table above, we can label the `deks` in a year acco
 | Fall   | Spring | 26    | 34  |
 | Winter | Summer | 35    | 7   |
 
-: Seasonal division of `deks` {#tbl-seasons}
+: The `deks` that begin and end each season {#tbl-seasons}
 
-Each season in the table above has 9 `deks` and exactly 90 days, except for the seasons in the last row, which have 10 `deks` and 95 days in common years or 96 days in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, these seasonal divisions shown above are convenient, because the first `dek` of each season is the last `dek` in quarterly divisions called `qops` (`qoppas`). The table below shows the division of `deks` by quarter.
+### `Qops`, `Qals`, and `Quints` {#sec-qqq}
 
-| Qoppa | Start | End |
+Each season in the table above has 9 `deks` and exactly 90 days, except for the seasons in the last row, which have 10 `deks` and 95 days in common years or 96 days in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, the seasons shown above work well, because the first `dek` of each season is the last `dek` in a `qop` (`qoppa`). Like seasons, `qoppas` divide the year into four parts, but unlike seasons, `qoppas` do not include `Dek 36`. The table below shows the division of `deks` by `qoppa`.
+
+| Qop | Start | End |
+| --- | ----- | --- |
+| 0   | 0     | 8   |
+| 1   | 9     | 17  |
+| 2   | 18    | 26  |
+| 3   | 27    | 35  |
+
+: The `deks` that begin and end each `qop` {#tbl-qops}
+
+`Dek 36`, the last `dek` of the year, is not included in the last `qop` so that each `qop` is 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. In addition to `qops` shown above, `Decalendar` describes 2 other similar units called `qals` (`qoppaalfas`) and `quints` (`quintiles`). These units do not leave out as many days in each year, because `qals` and `quints` split the year by day, rather than by `dek`. The table below list the numbers of the days that begin and end each `qal`.
+
+| Qal   | Start | End |
 | ----- | ----- | --- |
-| 0     | 0     | 8   |
-| 1     | 9     | 17  |
-| 2     | 18    | 26  |
-| 3     | 27    | 35  |
+| 0     | 0     | 90  |
+| 1     | 91    | 181 |
+| 2     | 182   | 272 |
+| 3     | 273   | 363 |
 
-: Quarterly division of `deks` {#tbl-quarters}
+: The days that begin and end each `qal` {#tbl-qals}
 
-`Dek 36`, the last `dek` of the year, is not included in the last quarter to keep each quarter 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. In contrast to the quarters shown above, fiscal quarters do not leave out as many days in each year, because fiscal quarters split the year by day, rather than by `dek`. The table below shows the division of `deks` by quarter.
+`Qals` are 91 days long and thus leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which `qals` start and end. In the table above, not only do rows alternate between even and odd numbers, but the quarter number is the last digit of both the start and the end day of the quarter.
 
-| Quarter | Start | End |
-| -----   | ----- | --- |
-| 0       | 0     | 90  |
-| 1       | 91    | 181 |
-| 2       | 182   | 272 |
-| 3       | 273   | 363 |
+| Quint | Start | End |
+| ----- | ----- | --- |
+| 0     | 0     | 72  |
+| 1     | 73    | 145 |
+| 2     | 146   | 218 |
+| 3     | 219   | 291 |
+| 4     | 292   | 364 |
 
-: Quarterly division of `days` {#tbl-fiscal}
+: The days that begin and end each `quint` {#tbl-quints}
 
-Fiscal quarters are all exactly 91 days long and thus leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which quarters start and end. In the table above, not only do rows alternate between even and odd numbers, but the quarter number is the last digit of both the start and the end day of the quarter.
+Unlike `qals`, `quints` are 73 days long and do not leave out any days from common years. All of the units above leave out leap days in leap years.
 
+
+
+
+
+ The table below compares Gregorian calendar quarters and seasons with similar `Decalendar` units.
 The different yearly divisions described above have different approaches to dealing with the last days of the year. Seasons include all of the extra days in the last season of the year, while quarters leave them out. `Dek 36`
 
 
@@ -339,14 +358,6 @@ The last 5 or 6 days of the year are not included in any calendar quarter.
 Not only do the rows alternate between even and odd numbers, but the quarter number is the last digit of the day number.
 
 Fiscal quarters include all days, with extra days going to Q3
-
-| Quint | Start | End |
-| ----- | ----- | --- |
-| 0     | 0     | 72  |
-| 1     | 73    | 145 |
-| 2     | 146   | 218 |
-| 3     | 219   | 291 |
-| 4     | 292   | 364 |
 
 Accountants can use Quints, which divide up common years evenly.
 
