@@ -37,8 +37,8 @@ list(my_slice(-49, 32, *[2, 3, 2, 3]))
 class MyList(list):
     def init(self, data):
         self.data = data
-    def __getitem__(key):
+    def __getitem__(self, key):
         if isinstance(key, slice):
-            return
+            return [self[i] for i in range(*key.indices(len(self)))]
         return self[key]
 
