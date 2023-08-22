@@ -1,31 +1,44 @@
 import itertools
 
 
-def myslice(start, stop, *steps):
-    if all(s > 0 for s in steps):
-        steps = itertools.cycle(steps)
-        while start < stop:
-            yield start
-            start += next(steps)
-    else:
-        raise ValueError("All steps must be greater than zero.")
-
-
-def my_slice(start, stop, *steps):
+def my_slice(start, stop=None, *args, **kwargs):
+    if stop is None:
+        start, stop = 0, start 
     ascending = start < stop
-    sum_steps = sum(steps)
-    if sum_steps == 0:
-        raise ValueError("The sum of steps cannot be zero.")
-    elif ascending and sum_steps < 0:
-        raise ValueError("The sum of steps must be positive if start is less than stop.")
-    elif not ascending and sum_steps > 0:
-        raise ValueError("The sum of steps must be negative if start is greater than stop.")
-    steps = itertools.cycle(steps)
-    while ascending == (start < stop):
-       yield start
-       start += next(steps)
+    steps = args + tuple(kwargs.values())
+    if steps:
+        sum_steps = sum(steps)
+        if (
+            sum_steps == 0 or
+            ascending and sum_steps < 0 or
+            not ascending and sum_steps > 0
+            ):
+            raise ValueError(
+                "The sum of positional arguments and "
+                "keyword argument values cannot be zero and "
+                "must have the same sign as stop - start."
+                )
+    if kwargs:
+        key = list(kwargs.keys())[-1]
+        steps = itertools.cycle(
+            (dict(enumerate(args)) | kwargs).items()
+        )
+        while ascending == (start < stop):
+            yield start, key
+            key, value = next(steps)
+            start += value
+    else:
+        steps = itertools.cycle(args)
+        while ascending == (start < stop):
+            yield start
+            start += next(steps) if args else 1
 
+list(my_slice(170))
+list(my_slice(80, 170))
+dict(my_slice(80, 170, twoday=2))
 list(my_slice(80, 170, 2, 3, 2, 3))
+dict(my_slice(80, 170, twoday=2, fiveday=3, sevenday=2, zeroday=3))
+dict(my_slice(80, 170, twoday=2, fiveday=3, sevenday=2, zeroday=3))
 list(my_slice(80, 170, 2, 3, -2, 3))
 list(my_slice(80, 170, -2, 3, -2, 3))
 list(my_slice(170, 80, -2, -3, -2, -3))
@@ -41,4 +54,5 @@ class MyList(list):
         if isinstance(key, slice):
             return [self[i] for i in range(*key.indices(len(self)))]
         return self[key]
+    def __g
 

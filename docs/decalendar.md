@@ -6,19 +6,31 @@
 
 ## Basics {#sec-basics}
 
+### Fractions analogy
+
 In the simplest terms, `Decalendar` counts fractions of a year, while Declock counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, while for `Declock` the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of` Decalendar`, the numerator is the days that have passed in the year, while in the context of` Declock`, the numerator is the parts of the day that have passed.
 
 To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year (`doty`). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
 The analogy to decimals or fractions is important, because it explains why adding a zero at the end a time does not change the time, only the implied precision. Providing only a single digit for a `Declock` time indicates that the time is approximate to within 5% of the day. Every additional digit we add decreases the error tolerance 10-fold. For example, `Dot 5` and `Dot 500` both mean noon, but `Dot 5` implies that any time between `Dot 450` and `Dot 549` is close enough to noon, while `Dot 500` narrows the acceptable range to any time between `Dot 495` and `Dot 504`.
 
+### Precision
+
 If we really want to insist on punctuality, we could include up to 5 digits in the time. Specifying a time with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/), at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word "sharp" or the `#` symbol to the time. Saying "`5 Sharp`" or writing `5#` means as close as possible to noon. We can only add `#` to a time, so there is no need say "`Dot 5 Sharp`" or write `.5#`.
+
+### Context clues
 
 Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (`Dot 5`) and not the sixth `doty` (`Day 5`). Also, the number itself may provide a clue. Numbers greater than 365 could still be a date, but such dates would be in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean `Day 134` (if n=366) or `Day 135` (if n=365) of the subsequent year, but it would most likely mean noon (`Dot 500`).
 
+### `Datetimes`
+
 If a date and a time are combined they form a `datetime`. As the name suggests, the date always goes before the time in any `datetime`. When said together, the numbers "0" and "500" mean the first `doty` (`Day 0`) at noon (`Dot 500`). In written form, this would be `000.500`. This format is called `.y`, which is read the same way as `doty`, but emphasizes that the `.` is used in a floating point decimal `doty`. In other words, `doty` can be used instead of "day of the year" in a sentence, whereas `.y` indicates a `datetime`, such as `000.500`.
 
+### Specific dates and times
+
 The dates and times above assume that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once a day, rather than once in every time zone per day. The first `doty` 2000, would be written `2000+000` and said "`Year 2000 Day 0`" or simply "`2000 0`", while noon in `Zone 0` would be written `.500+0` or `500+0` and said "`Dot 500 Zone 0`", "`500 Zone 0`", or "`500 0`".
+
+### Negative numbers
 
 The plus signs in the date and time above indicate that the date and the time zone can also be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. Negative dates and times show the number of parts that are left in the whole (day or year). To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions.
 
@@ -26,40 +38,58 @@ Negative numbers can be especially useful at the end of the year, because `Day -
 
 The `.y` format can include positive and negative numbers, most commonly in the form `±year±day.day±z`, where `day.day` is the `datetime` and `z` is the time zone. The year is usually provided without a sign, because we rarely discuss years before 1 BCE. The other two signs are required in written form, but plus signs be omitted when speaking. For example, `2000+000.500+0` is pronounced "`Year 2000 Day 0 Dot 500 Zone 0`" or "`2000 0 500 0`", while `2000-366.600-1` (the same `datetime` in negative form in `Zone -1`) would be said "`Year 2000 Day Minus 366 Dot 600 Zone Minus 1`" or "`2000 -366 600 -1`".
 
+### Intervals
+
+A `datetime` is a specific point in time, whereas an interval
+
 ## Units {#sec-units}
 
 In the `datetimes` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the  desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each highlights the relationship between the two:
 
-| Scale            | Name     | Formal Name     |
-| ---------------  | -------  | --------------- |
-| 10<sup>1</sup>   | `dek`    | `decaday`       |
-| 10<sup>0</sup>   | `day`    | `day`           |
-| 10<sup>-1</sup>  | `dime`   | `deciday`       |
-| 10<sup>-2</sup>  | `cent`   | `centiday`      |
-| 10<sup>-3</sup>  | `mil`    | `milliday`      |
-| 10<sup>-4</sup>  | `phrase` | `decimilliday`  |
-| 10<sup>-5</sup>  | `beat`   | `centimilliday` |
-| 10<sup>-6</sup>  | `mic`    | `microday`      |
-| 10<sup>-7</sup>  | `liph`   | `decimicroday`  |
-| 10<sup>-8</sup>  | `lib`    | `centimicroday` |
-| 10<sup>-9</sup>  | `nan`    | `nanoday`       |
-| 10<sup>-10</sup> | `roph`   | `decinanoday`   |
-| 10<sup>-11</sup> | `rob`    | `centinanoday`  |
-| 10<sup>-12</sup> | `pic`    | `picoday`       |
+| Scale                | Name     | Symbol | Formal Name       |
+| -------------------- | -------  | ------ | ----------------- |
+| 10<sup>2</sup>       | `hekt`   | ρ      | `hectoday`        |
+| 9.1 x 10<sup>1</sup> | `delt`   | δ      | `deltayear`       |
+| 9 x 10<sup>1</sup>   | `qop`    | ϟ      | `qoppaday`        |
+| 8 x 10<sup>1</sup>   | `pi`     | π      | `piday`           |
+| 7.3 x 10<sup>1</sup> | `ep`     | ε      | `epsilonyear`     |
+| 7 x 10<sup>1</sup>   | `om`     | ο      | `omicronday`      |
+| 6.1 x 10<sup>1</sup> | `zet`    | ζ      | `zetayear`        |
+| 6 x 10<sup>1</sup>   | `xi`     | ξ      | `xiday`           |
+| 5 x 10<sup>1</sup>   | `nu`     | ν      | `nuday`           |
+| 4 x 10<sup>1</sup>   | `mu`     | Μ      | `muday`           |
+| 3 x 10<sup>1</sup>   | `lam`    | λ      | `lamdaday`        |
+| 2 x 10<sup>1</sup>   | `kap`    | κ      | `kappaday`        |
+| 10<sup>1</sup>       | `dek`    | ι      | `decaday`         |
+| 10<sup>0</sup>       | `day`    | d      | `day`             |
+| 10<sup>-1</sup>      | `dime`   | ⅒      | `deciday`         |
+| 10<sup>-2</sup>      | `cent`   | ¢      | `centiday`        |
+| 10<sup>-3</sup>      | `mil`    | m      | `milliday`        |
+| 2 x 10<sup>-4</sup>  | `period` | .      | `dodecimilliday`  |
+| 10<sup>-4</sup>      | `phrase` | ⏜      | `decimilliday`    |
+| 2 x 10<sup>-5</sup>  | `bar`    | \|     | `docentimilliday` |
+| 10<sup>-5</sup>      | `beat`   | ࿁      | `centimilliday`   |
+| 10<sup>-6</sup>      | `mic`    | μ      | `microday`        |
+| 10<sup>-7</sup>      | `liph`   | m̑      | `decimicroday`    |
+| 10<sup>-8</sup>      | `lib`    | m̊      | `centimicroday`   |
+| 10<sup>-9</sup>      | `nan`    | n      | `nanoday`         |
+| 10<sup>-10</sup>     | `roph`   | μ̑      | `decinanoday`     |
+| 10<sup>-11</sup>     | `rob`    | μ̊      | `centinanoday`    |
+| 10<sup>-12</sup>     | `pic`    | p      | `picoday`         |
 
 : The units of `Decalendar` and `Declock` {#tbl-units}
 
-In the table above, `deks` are the main `Decalendar` unit, while the other units (the ones with negative exponents) are used for `Declock`. `Cents` can serve as a useful point of comparison to understand the scale of the largest units in the table above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` are ten times larger (10% = 144 minutes), and `deks` are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
+In the table above, the units with positive exponents are used for `Decalendar`, while the ones with negative exponents are used for `Declock`. `Cents` can serve as a useful point of comparison to understand the scale of some of the units in the table above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` are ten times larger (10% = 144 minutes), and `deks` are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
 `Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` and `beats`, music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
 
-`Declock` units smaller than `beats` are too small for typical daily use. For example, a `microday` (`mic`) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 `milliphrases` (`liphs`). A `millibeat` (`lib`) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person's ear to their other ear in about 7 `nanodays`. Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a `microphrase` (`roph`) difference might be too fast to notice. In a `microbeat` (`rob`), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.
+`Declock` units smaller than `beats` are too small for typical daily use. For example, a `mic` (`microday`, `μ`) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 `liphs` (`milliphrases`, `m̑`). A `lib` (`millibeat`, `m̊`) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person's ear to their other ear in about 7 `nans` (`nanodays`). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a `roph` (`microphrase`, `μ̑`) difference might be too fast to notice. In a `rob` (`microbeat`, `μ̊`), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.
 
-## Time Zones {#sec-zones}
+### Time Zones {#sec-zones}
 
 Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in `Zone 1` are one `dime` later than `Zone 0` and two `dimes` later than `Zone -1`. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in `Zone -3` and Tokyo is in `Zone 4`, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is noon on the last day of the year 1999 in Mexico City, it will be `Dot 200` on the first day of the year 2000 in Tokyo. This date and time in Mexico City can be written `2000+000.200+4` or `2000-366.800+4`, while the equivalent date and time for Tokyo is `1999+364.500-3` or `1999-001.500-3`. If we removed the time zone from the end, we would not know that all of these `datetimes` describe the same moment in time.
 
-## The Dot Formats {#sec-formats}
+### The Dot Formats {#sec-formats}
 
 The `datetimes` shown above are in the decimal days of the year (`.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental `datetime` formats, which are based on decimal days of the month (`.m`), and fractional days of the week (`.w`). The table below summarizes the three decimal day-of-the ( `dot` or `.`) formats:
 
@@ -131,13 +161,13 @@ The `.w` format always starts the year with `Week 0`, but the year can start on 
 
 In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to say. The spoken form of the `.y` date in Mexico City and London is  "`Year 1999 Day 364`" or "`Year 1999 Day -1`" and the spoken form of the Tokyo date is "`Year 2000 Day 0`" or "`Year 2000 Day -366`".
 
-## `Dekly` schedule {#sec-schedule}
+### `Deks` {#sec-deks}
 
 Even though it provides formats for months and weeks, `Decalendar` envisions a world in which these units are replaced by `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
 
 A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from rest days. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as rest days, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 109 rest days in a `Decalendar` year, not counting the two holidays, New Year's Day (`Day 0`) and Leap Day (`Day 365`).
 
-### Gregorian calendar leap day considerations {#sec-leap}
+#### Gregorian calendar leap day considerations {#sec-leap}
 
 Unlike Leap Day, New Year's Day is a holiday in both `Decalendar` and the Gregorian calendar. New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gregorian calendar. Therefore, we can say that `Day 0` is synonymous with January 1. Every Gregorian calendar date can be represented unequivocally by a positive or a negative day number except for February 29, the Gregorian calendar leap day. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01`, but this date cannot exist in the `.y` format without a year.
 
@@ -147,7 +177,7 @@ Valentine's Day and Christmas are on opposite sides of the Gregorian calendar le
 
 If we do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar exactly, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
 
-### Gregorian calendar date to `dotd` conversion {#sec-dotd}
+#### Gregorian calendar date to `dotd` conversion {#sec-dotd}
 
 Using the asterisk with positive day number allows us to determine what the `dotd` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
 
@@ -183,7 +213,7 @@ In the table above, the last digit of the day of the month numbers of dates in F
 
 : Difference between last digits of Gregorian calendar day of month and `Decalendar` day of year {#tbl-holidays}
 
-### Gregorian calendar week date to `doty` conversion {#sec-dotw}
+#### Gregorian calendar week date to `doty` conversion {#sec-dotw}
 
 We can use this method to find out what `dotd` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar `rest day and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
 
@@ -194,7 +224,7 @@ We can use this method to find out what `dotd` a holiday falls on. Holidays with
 
 : Cumulative day counts the end of each Gregorian calendar month {#tbl-cumulative}
 
-### Gregorian calendar date to `doty` conversion {#sec-common}
+#### Gregorian calendar date to `doty` conversion {#sec-common}
 
 The table above is small and portable, but using it requires some calculation. To avoid manual calculation entirely, we could use a computer program or a comprehensive conversion table like the ones below. The first table shows the day numbers for all of the days in common years, while the second table does the same for leap years. In both of these tables, the columns are labeled by month while the rows are labeled by the day of the month.
 
@@ -234,7 +264,7 @@ The table above is small and portable, but using it requires some calculation. T
 
 : Common year Gregorian calendar date to `doty` conversion {#tbl-common}
 
-### Leap year date to `doty` conversion {#sec-leap}
+#### Leap year date to `doty` conversion {#sec-leap}
 
 
 | Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
@@ -273,82 +303,85 @@ The table above is small and portable, but using it requires some calculation. T
 
 : Leap year Gregorian calendar date to `doty` conversion {#tbl-leap}
 
-### Seasons {#sec-seasons}
+### `Subyear` units {#sec-subyear}
+
+#### Seasons {#sec-seasons}
 
 We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
 
 The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has an opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. The table below lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.
 
-| North  | South  | `doty` | `dotm` | Date         | Event              |
-| ------ | ------ | ----   | ------ | ------------ | ------------------ |
-| Spring | Fall   | 78     | 2+19   | March 20     | Northward Equinox  |
-| Summer | Winter | 170    | 5+19   | June 20      | Northward Solstice |
-| Fall   | Spring | 264    | 8+21   | September 22 | Southward Equinox  |
-| Winter | Summer | 354    | B+21   | December 21  | Southward Solstice |
+| Code | North  | South  | `doty` | `dotm` | Date         | Event              |
+| ---- | ------ | ------ | ----   | ------ | ------------ | ------------------ |
+| S0   | Spring | Fall   | 78     | 2+19   | March 20     | Northward Equinox  |
+| S1   | Summer | Winter | 170    | 5+19   | June 20      | Northward Solstice |
+| S2   | Fall   | Spring | 264    | 8+21   | September 22 | Southward Equinox  |
+| S3   | Winter | Summer | 354    | B+21   | December 21  | Southward Solstice |
 
 : Solstice and equinox Gregorian calendar and `doty` dates {#tbl-soleq}
 
 Using the information in the table above, we can group the `deks` in a year according to the seasons in which they occur. We identify `deks` using the first 2 digits of the 3-digit day number of any day in that `dek`. For example, `Day 78` is the second to last day in `Dek 7`, while `Day 170` is the first day in `Dek 17`. Therefore, Spring starts in the northern hemisphere at the end of `Dek 7` and ends before `Dek 17`. Winter starts in `Dek 35` of one year and ends at the end of `Deks 7` of the subsequent year. The table below summarizes the division of `deks` by season.
 
-| North  | South  | Start | End |
-| -----  | -----  | ----- | --- |
-| Spring | Fall   | 8     | 16  |
-| Summer | Winter | 17    | 25  |
-| Fall   | Spring | 26    | 34  |
-| Winter | Summer | 35    | 7   |
+| Code | North  | South  | Start | End |
+| ---- | -----  | -----  | ----- | --- |
+| S0   | Spring | Fall   | 8     | 16  |
+| S1   | Summer | Winter | 17    | 25  |
+| S2   | Fall   | Spring | 26    | 34  |
+| S3   | Winter | Summer | 35    | 7   |
 
 : The `deks` that begin and end each season {#tbl-seasons}
 
-### `Qops`, `Qals`, and `Quints` {#sec-qqq}
+#### `Qops`, `Delts`, `Eps` and `Zets` {#sec-qdez}
 
 Each season in the table above has 9 `deks` and exactly 90 days, except for the seasons in the last row, which have 10 `deks` and 95 days in common years or 96 days in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, the seasons shown above work well, because the first `dek` of each season is the last `dek` in a `qop` (`qoppa`). Like seasons, `qops` divide the year into four parts, but unlike seasons, `qops` do not include `Dek 36`. The table below shows the division of `deks` by `qoppa`.
 
-| Qop | Start | End |
-| --- | ----- | --- |
-| 0   | 0     | 8   |
-| 1   | 9     | 17  |
-| 2   | 18    | 26  |
-| 3   | 27    | 35  |
+| Code | Start | End |
+| ---- | ----- | --- |
+| Q0   | 0     | 8   |
+| Q1   | 9     | 17  |
+| Q2   | 18    | 26  |
+| Q3   | 27    | 35  |
 
-: The `deks` that begin and end each `qop` {#tbl-qops}
+: The `deks` that begin and end each `qop` {#tbl-q}
 
 `Dek 36`, the last `dek` of the year, is not included in the last `qop` so that each `qop` is 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. In addition to `qops` shown above, `Decalendar` describes 3 other similar units called `delts` (`deltas`), `eps` (`epsilons`), and `stigs` (`stigmas`). These units do not leave out as many days in each year, because these units split the year by day, rather than by `dek`. `Delts`, `eps`, and `stigs` split the year into 4, 5, and 6 parts, respectively. The table below list the numbers of the days that begin and end each `delt`.
 
-| Delt  | Start | End |
-| ----- | ----- | --- |
-| 0     | 0     | 90  |
-| 1     | 91    | 181 |
-| 2     | 182   | 272 |
-| 3     | 273   | 363 |
+| Code | Start | End |
+| ---- | ----- | --- |
+| D0   | 0     | 90  |
+| D1   | 91    | 181 |
+| D2   | 182   | 272 |
+| D3   | 273   | 363 |
 
-: The days that begin and end each `delt` {#tbl-delts}
+: The days that begin and end each `delt` {#tbl-d}
 
 `Delts` are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which `delts` start and end. In the table above, not only do rows alternate between even and odd numbers, but the `delt` number is the last digit of both the start and the end day of the `delt`. Unlike `delts`, `eps` are 73 days long and do not leave out any days from common years. `Qops`, `delts`, and `eps` all leave out leap days in leap years. The table below list the numbers of the days that begin and end each `ep`.
 
-| Ep | Start | End |
-| -- | ----- | --- |
-| 0  | 0     | 72  |
-| 1  | 73    | 145 |
-| 2  | 146   | 218 |
-| 3  | 219   | 291 |
-| 4  | 292   | 364 |
-
-: The days that begin and end each `ep` {#tbl-eps}
-
-The only unit that can include the leap year is a `stig`, which is 61 days long and follows a similar pattern as a `delt`, except the last `stig` in common years is 1 day short than all the others. The table below list the numbers of the days that begin and end each `stig`. As with `delts`, the `stig` number is the last digit of the numbers of its first and last day.
-Another interesting aspect of `delts` and `stigs` is that they include the midpoints of common and leap years. The midpoint of common years is the first day of `Delt 2` and the midpoint of leap years is the first day of `Stig 3`.
-
-| Stig | Start | End |
+| Code | Start | End |
 | ---- | ----- | --- |
-| 0    | 0     |  60 |
-| 1    | 61    | 121 |
-| 2    | 122   | 182 |
-| 3    | 183   | 243 |
-| 4    | 244   | 304 |
-| 5    | 305   | 365 |
+| E0   | 0     | 72  |
+| E1   | 73    | 145 |
+| E2   | 146   | 218 |
+| E3   | 219   | 291 |
+| E4   | 292   | 364 |
 
-: The days that begin and end each `stig` {#tbl-stig}
+: The days that begin and end each `ep` {#tbl-e}
 
+The only unit that can include the leap year is a `zet`, which is 61 days long and follows a similar pattern as a `delt`, except the last `zet` in common years is 1 day short than all the others. The table below list the numbers of the days that begin and end each `zet`. As with `delts`, the `zet` number is the last digit of the numbers of its first and last day.
+
+
+| Code | Start | End |
+| ---- | ----- | --- |
+| Z0   | 0     |  60 |
+| Z1   | 61    | 121 |
+| Z2   | 122   | 182 |
+| Z3   | 183   | 243 |
+| Z4   | 244   | 304 |
+| Z5   | 305   | 365 |
+
+: The days that begin and end each `zet` {#tbl-z}
+
+All of the `subyear` unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Zet 3`, `Z3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+078`. The `subyear` units are essentially date intervals, series of contiguous dates. 
 `Dekalendar` treats leap days like outliers or anomalies that should not be included in any sample of days. Every leap days is always a holiday, always a `Fiveday`, and always followed by a `Zeroday`. The end of the year is sensitive time for the
 
 ### Yearly transition
