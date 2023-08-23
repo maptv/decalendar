@@ -38,15 +38,23 @@ Negative numbers can be especially useful at the end of the year, because `Day -
 
 The `.y` format can include positive and negative numbers, most commonly in the form `±year±day.day±z`, where `day.day` is the `datetime` and `z` is the time zone. The year is usually provided without a sign, because we rarely discuss years before 1 BCE. The other two signs are required in written form, but plus signs be omitted when speaking. For example, `2000+000.500+0` is pronounced "`Year 2000 Day 0 Dot 500 Zone 0`" or "`2000 0 500 0`", while `2000-366.600-1` (the same `datetime` in negative form in `Zone -1`) would be said "`Year 2000 Day Minus 366 Dot 600 Zone Minus 1`" or "`2000 -366 600 -1`".
 
-### Intervals
+### Slices and series
 
-A `datetime` is a specific point in time, whereas an interval
+Each component of a `datetime`, except for the time zone, can be turned into a `slice`, an interval between two points in time. `Slices` fill in the space between a `start` value and a `stop` value, which are separated by a `colon` (`:`). Providing only a `start` value and a `stop` value can be much more succinct than explicitly listing all of the time points in between. For example, the first decade of the second millennia in `slice` form would be `2000:2010`. This `slice` can also be written in the form of `series`, a list of time points: `2000,2001,2002,2003,2004,2005,2006,2007,2008,2009`. In this case, the `series` is more than 5 times longer than the  `slice`, `slicing` saves us 40 characters!
+
+`Slices` are left-open, right-closed intervals, which means the `start` value is included, but the `stop` value is not. This is why the year 2010 is not included in `2000:2010` example above. It may be useful to not include a `stop` value, which means to go up to and including the last value. For example,
+
+`Slices` in which `start` does not occur before `stop` are empty, meaning that they do not contain any time points. For example, `2000:2000` is a `slice` that does not contain any years. `Series` can also be empty. While an empty `series` can be represent by a single comma (`,`), a single colon (`:`) represents a `slice` that starts at beginning and goes up to and including the end. Without any context, this could mean an infinite slice that contains all of time, but in the context of a date, we  all time points  Unlike `slices`, `series` can include dates  The stop We could also describe The first ten days of the year 2000 would be `2000+000:010`. If a `datetime` has more than 1 `colon`, it represents more than 1 interval. For example, `2000:2003+000:010` is synonymous with `2000+000:010,2001+000:010,2002+000:010` The first singular points in time, but could also represent durations. The date `2000+000` essentially means that 2000 years have passed since `Year 0`, a duration of 2000 years. Typically small amounts of time are durations, while We could say that a meeting will last 4 `cents` or, in other words, 4 percent of the day. If we say `Dot 04` or 4 `cents`, it is unlikely we mean The time between two dates is called a date interval, while the  the time in between two dates  between two times is called an interval. For example, if we plan to meet at noon and spend 4 percent of the day eating lunch together, we could write this time interval as `50:54`. This time interval can be combined with a date like the first day of the year 2000: `2000+000.50:54`. 
+
+### Series
+
+A group of dates, times, or `datetimes` is called a series. The items in a series are separated by commas. If we planned to meet for lunch on the first and last day of the year 2000, we could summarize our lunch plans with a series: `2000+000.5,2000+365.5`. This series tells us when we plan to meet for lunch, but not for how long. A series amount to lunch, we could add time intervals to this series. k was 4 `cents` long there is a pattern to the items in a series, it could be expressed as an interval. is called a time interval. A series an interval is a series of datetimes
 
 ## Units {#sec-units}
 
 In the `datetimes` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the  desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each highlights the relationship between the two:
 
-| Scale                | Name     | Symbol | Formal Name       |
+| Base 10              | Name     | Symbol | Formal Name       |
 | -------------------- | -------  | ------ | ----------------- |
 | 10<sup>2</sup>       | `hekt`   | ρ      | `hectoday`        |
 | 9.1 x 10<sup>1</sup> | `delt`   | δ      | `deltayear`       |
@@ -66,7 +74,7 @@ In the `datetimes` above, the time has 3 digits, because this is the best level 
 | 10<sup>-2</sup>      | `cent`   | ¢      | `centiday`        |
 | 10<sup>-3</sup>      | `mil`    | m      | `milliday`        |
 | 2 x 10<sup>-4</sup>  | `period` | .      | `dodecimilliday`  |
-| 10<sup>-4</sup>      | `phrase` | ⏜      | `decimilliday`    |
+| 10<sup>-4</sup>      | `phrase` |  ̑      | `decimilliday`    |
 | 2 x 10<sup>-5</sup>  | `bar`    | \|     | `docentimilliday` |
 | 10<sup>-5</sup>      | `beat`   | ࿁      | `centimilliday`   |
 | 10<sup>-6</sup>      | `mic`    | μ      | `microday`        |
@@ -76,12 +84,30 @@ In the `datetimes` above, the time has 3 digits, because this is the best level 
 | 10<sup>-10</sup>     | `roph`   | μ̑      | `decinanoday`     |
 | 10<sup>-11</sup>     | `rob`    | μ̊      | `centinanoday`    |
 | 10<sup>-12</sup>     | `pic`    | p      | `picoday`         |
+| 10<sup>-13</sup>     | `noph`   | n̑      | `decipicoday`     |
+| 10<sup>-14</sup>     | `nob`    | n̊      | `centipicoday`    |
+| 10<sup>-15</sup>     | `femt`   | f      | `femtoday`        |
+| 10<sup>-16</sup>     | `coph`   | p̑      | `decifemtoday`    |
+| 10<sup>-17</sup>     | `cob`    | p̊      | `centifemtoday`   |
+| 10<sup>-18</sup>     | `att`    | a      | `attoday`         |
+| 10<sup>-19</sup>     | `foph`   | f̑      | `deciattoday`     |
+| 10<sup>-20</sup>     | `fob`    | f̊      | `centiattoday`    |
+| 10<sup>-21</sup>     | `zept`   | z      | `zeptoday`        |
+| 10<sup>-22</sup>     | `toph`   | ȃ      | `decizeptoday`    |
+| 10<sup>-23</sup>     | `tob`    | å      | `centizeptoday`   |
+| 10<sup>-24</sup>     | `yokt`   | y      | `yoctoday`        |
+| 10<sup>-25</sup>     | `zoph`   | z̑      | `deciyoctoday`    |
+| 10<sup>-26</sup>     | `zob`    | z̊      | `centiyoctoday`   |
+| 10<sup>-27</sup>     | `ront`   | r      | `rontoday`        |
+| 10<sup>-28</sup>     | `yoph`   | y̑      | `decirontoday`    |
+| 10<sup>-29</sup>     | `yob`    | ẙ      | `centirontoday`   |
+| 10<sup>-30</sup>     | `quek`   | q      | `quectoday`       |
 
 : The units of `Decalendar` and `Declock` {#tbl-units}
 
-In the table above, the units with positive exponents are used for `Decalendar`, while the ones with negative exponents are used for `Declock`. `Cents` can serve as a useful point of comparison to understand the scale of some of the units in the table above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` are ten times larger (10% = 144 minutes), and `deks` are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
+In the table above, the units with positive exponents are used for `Decalendar`, while the ones with negative exponents are used for `Declock`. `Cents` (`¢`) can serve as a useful point of comparison to understand the scale of some of the units in the table above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` (`⅒`) are ten times larger (10% = 144 minutes), and `deks` (`ι`) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
-`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` and `beats`, music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
+`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` (` ̑`) and `beats` (`࿁`), music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
 
 `Declock` units smaller than `beats` are too small for typical daily use. For example, a `mic` (`microday`, `μ`) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 `liphs` (`milliphrases`, `m̑`). A `lib` (`millibeat`, `m̊`) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person's ear to their other ear in about 7 `nans` (`nanodays`). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a `roph` (`microphrase`, `μ̑`) difference might be too fast to notice. In a `rob` (`microbeat`, `μ̊`), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.
 

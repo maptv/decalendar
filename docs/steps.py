@@ -34,7 +34,7 @@ def my_slice(start, stop=None, *args, **kwargs):
             start += next(steps) if args else 1
 
 list(my_slice(170))
-list(my_slice(80, 170))
+list(my_slice(80, 170))[0:0]
 dict(my_slice(80, 170, twoday=2))
 list(my_slice(80, 170, 2, 3, 2, 3))
 dict(my_slice(80, 170, twoday=2, fiveday=3, sevenday=2, zeroday=3))
@@ -54,5 +54,4 @@ class MyList(list):
         if isinstance(key, slice):
             return [self[i] for i in range(*key.indices(len(self)))]
         return self[key]
-    def __g
 
