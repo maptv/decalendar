@@ -20,7 +20,7 @@ If we really want to insist on punctuality, we could include up to 5 digits in t
 
 ### Context clues
 
-Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (`Dot 5`) and not the sixth `doty` (`Day 5`). Also, the number itself may provide a clue. Numbers greater than 365 could still be a date, but such dates would be in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean `Day 134` (if n=366) or `Day 135` (if n=365) of the subsequent year, but it would most likely mean noon (`Dot 500`).
+Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (`Dot 5`) and not the sixth `doty` (`Day 5`). Also, the number itself may provide a clue. Numbers greater than 365 could still be a `doty` date, but such dates would be in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean `Day 134` (if n=366) or `Day 135` (if n=365) of the subsequent year, but it would most likely mean noon (`Dot 500`).
 
 ### `Datetimes`
 
@@ -32,15 +32,56 @@ The dates and times above assume that the year and time zone are known. A date w
 
 ### Negative numbers
 
-The plus signs in the date and time above indicate that the date and the time zone can also be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. Negative dates and times show the number of parts that are left in the whole (day or year). To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions.
+The plus signs in the date and time above indicate that the `doty` date and the time zone can also be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. Negative dates and times show the number of parts that are left in the whole (day or year). To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions.
 
-Negative numbers can be especially useful at the end of the year, because `Day -1` is always the last `doty`, regardless of how many days the year has (365 or 366). In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous `Declock` times, the former could highlight that there is only 1 tenth (¹/₁₀ or .1) of the day remaining before midnight.
+Negative `doty` numbers can be especially useful at the end of the year, because `Day -1` is always the last `doty`, regardless of how many days the year has (365 or 366). In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous `Declock` times, the former could highlight that there is only 1 tenth (¹/₁₀ or .1) of the day remaining before midnight.
 
-The `.y` format can include positive and negative numbers, most commonly in the form `±year±day.day±z`, where `day.day` is the `datetime` and `z` is the time zone. The year is usually provided without a sign, because we rarely discuss years before 1 BCE. The other two signs are required in written form, but plus signs be omitted when speaking. For example, `2000+000.500+0` is pronounced "`Year 2000 Day 0 Dot 500 Zone 0`" or "`2000 0 500 0`", while `2000-366.600-1` (the same `datetime` in negative form in `Zone -1`) would be said "`Year 2000 Day Minus 366 Dot 600 Zone Minus 1`" or "`2000 -366 600 -1`".
+The `.y` format can include positive and negative numbers, most commonly in the form `±year±day.day±z`, where `day.day` is the combined `doty` date and time (`datetime`) and `z` is the time zone. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE. The other two signs are required in written form, but plus signs can be omitted when speaking. For example, `2000+000.500+0` is pronounced "`Year 2000 Day 0 Dot 500 Zone 0`" or "`2000 0 500 0`", while `2000-366.600-1` (the same `datetime` in negative form in `Zone -1`) would be said "`Year 2000 Day Minus 366 Dot 600 Zone Minus 1`" or "`2000 -366 600 -1`".
+
+### Segments and series
+
+Dates, times, and `datetimes` can be grouped together into time `segments` or time `series`. Time `segments` are continuous time interval, and thus the items in a `segment` must be unique, consecutive, and in chronological order. Time `series` do not have any of these restrictions and can contain anything, including time `segments`. A `series` of `segments` is called a `segment series` and can be useful for describing recurring events. For example, 
+
+We can express a `segment` either as a comma-separated list of items or as a slice.  breaks, duplicates, missing values,   items in time `segments` must be unique and in chronological order, because kb. In contrast, the items consist of items that are . whereas the items in time `series` do not have to be related or even in chronological order. All of the items in a `segments` have to be unique, but a `series` can contain duplicates. 
+
+Items must be Segment  Series  Set
+Continuous    Yes      No      No
+Ordered       Yes      No      No
+Unique        Yes      No      Yes
+
+
+only difference between a series and a set In fact, the times in a  `series` because they simply list time points separated by commas. There 2 types of `segments` The first 3 years of the second millennium can written as a `series`: `2000,2001,2002` or one of three types   The first 3 years of the second millennium  contrast, time because they have a beginning (`start`), an end (`stop`), and a duration (`span`). Time `segments` can be defined using any two of these three values either by `slicing` or `spreading`. `Slicing` cuts between a `start` and a `stop` (`start:stop`), while `spreading` either extends forward from a `start` by a `span` (`start>span`) or extends backward from a `stop` by a `span` (`stop<span`). The `stop` is always excluded in `slices` and `spreads`. For example, a time `segment` that includes the years 2000 and 2001, but not the year 2002, can be written as `2000>2`, `2000:2002`, or `2002<2`.
+
+Unlike the intervals above, above could be written in the form of a `series`: `2000,2001`. the `slice` and `spread` intervals shown above, a `series` can contain discontinuous time points. his are of time from   we cut out a certain portion of `start:stop`, `start>span`, or `stop<span`.
+
+
+but they could mark the beginning or end of a time interval. There are 3 ways to express intervals in `Decalendar` and `Declock`: we could 
+We can turn any date, time, or `datetime` into an interval in one of three ways: `start:stop`, `start>shift`, `stop<shift`. If we were planning take a vacation for 3 days at the beginning of the year 2000, we could express to celebrate the end of the year 1999, we could provide the planned duration of the party in three ways: `start:stop`, `start>shift`, `stop<shift`. `1999+364.9>2+0` on the invitation.
+`2000-360` = 360 days have passed in the year
+
+`2000-360>4` = 360 days have passed in the year
+
+`2000-360.250` = 6.25 days left in the year
+
+`2000-007` = 7 days left in the year
+
+`2000-007.500` = 6.5 days left in the year
+
+`2000-007.250` = 6.25 days left in the year
+
+`2000-007.250` = 6.25 days left in the year
+
+Positive `doty` numbers keep track of how much has passed in a year, while negative `doty` numbers keep track of how much time is left in a year.
+The date `2000+000` essentially means that 2000 years have passed since `Year 0`, a duration of 2000 years. Typically small amounts of time are durations, while We could say that a meeting will last 4 `cents` or,
 
 ### Slices and series
 
-Each component of a `datetime`, except for the time zone, can be turned into a `slice`, an interval between two points in time. `Slices` fill in the space between a `start` value and a `stop` value, which are separated by a `colon` (`:`). Providing only a `start` value and a `stop` value can be much more succinct than explicitly listing all of the time points in between. For example, the first 4 days of the year in `slice` form would be `:004`. This `slice` can also be written in the form of `series`, a list of time points: `000,001,002,003`. The `slice` is much shorter than the `series`, but can be harder to understand.
+500>040 = 500:540
+500<040 = 460:500
+50<04 = 46:50
+50<4 = 46:50 or 10:50
+
+Each component of a `datetime`, except for the time zone, can be turned into a `slice`, an interval between two points in time. `Slices` fill in the space between a `start` value and a `stop` value, which are separated by a `colon` (`:`). Providing only a `start` value and a `stop` value can be much more succinct than explicitly listing all of the time points in between. For example, the first 4 days of the year in `slice` form would be `:004`. This `slice` can also be written in the form of a `series`, a list of time points: `000,001,002,003`. The `slice` is much shorter than the `series`, but can be harder to understand.
 
 `Slices` that start with the very first value can omit the `start` value, like the `slice` in the example above. Similarly, omitting the `stop` value means that a `slice` goes up to and including the very last value. For example, `360:` includes `Day 360` and all of the days thereafter in a year. The `slice` above could also be written `:010`, which is almost ten times shorter than listing all. is a left-open, right-closed intervals, which means the `start` value is included, but the `stop` value is not. This is why the year 2010 is not included in `2000:2010` example above. It may be useful to not include a `stop` value, which means to go up to and including the last value. For example,
 
