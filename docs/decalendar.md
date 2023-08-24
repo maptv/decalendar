@@ -52,11 +52,13 @@ In addition to default `start` and `stop` values, `spreads` also have default `s
 
 ### Segment series
 
-The `simple spreads` and `simple slices` above are called time `segments`, because they form unbroken time intervals. Instead of `segments`, `slices` and `spreads` can also form `series`. Beyond simple `slices` `Slices` `Slices` and `spreads` can also form that are not `simple` create `series` instead of `segments`. are called `stepped slices` and `spaced spreads`. `Slices` can create `series` of non-consecutive dates, times, or `stamps` by `stepping`, w
+The `simple spreads` and `simple slices` above are called time `segments`, because they form unbroken time intervals. To break up the `segments` into `series`, we can use special `slices` and `spreads` called `stepped slices` and `spaced spreads`. also form `series`. `Slices` can `step` from one item to another to create `series` of non-consecutive dates, times, or `stamps`. Such `slices` are called `stepped slices`  `Slices` `Slices` and `spreads` can also form that are not `simple` create `series` instead of `segments`. are called `stepped slices` and `split spreads`. `spaced spreads`. `Slices` can create `series` of non-consecutive dates, times, or `stamps` by `stepping`, w
 
-`start:stop:step>span>space`
+
+`start:stop:step:step:step:step>span>space>split`
+`start>span>space>split`
 Beyond `simple slices` and `simple spreads`
-`start>span>space`
+`start>span>split>space>`
 Negative numbers 
 If the `span` were negative, it would simple reverse the direction of the angle bracket.
 
