@@ -12,11 +12,7 @@ In the simplest terms, `Decalendar` counts fractions of a year, while Declock co
 
 To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year (`doty`). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
-The analogy to decimals or fractions is important, because it explains why adding a zero at the end a time does not change the time, only the implied precision. Providing only a single digit for a `Declock` time indicates that the time is approximate to within 5% of the day. Every additional digit we add decreases the error tolerance 10-fold. For example, `Dot 5` and `Dot 500` both mean noon, but `Dot 5` implies that any time between `Dot 450` and `Dot 549` is close enough to noon, while `Dot 500` narrows the acceptable range to any time between `Dot 495` and `Dot 504`.
-
-### Precision
-
-If we really want to insist on punctuality, we could include up to 5 digits in the time. Specifying a time with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/), at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word "sharp" or the `#` symbol to the time. Saying "`5 Sharp`" or writing `5#` means as close as possible to noon. We can only add `#` to a time, so there is no need say "`Dot 5 Sharp`" or write `.5#`.
+The analogy to decimals or fractions is important, because it explains why adding a zero at the end a time does not change the time,  only the implied duration. Providing only a single digit for a `Declock` time indicates that the duration is expected to be 10% of the day. Every additional digit we add decreases the implied duration 10-fold. For example, `Dot 5` and `Dot 50` both mean noon, but `Dot 5` implies that the duration will be an interval starting at `Dot 5` and ending before `Dot 6`, whereas the interval represented by `Dot 50` ends before `Dot 51`.
 
 ### Context clues
 
