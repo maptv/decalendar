@@ -1,20 +1,22 @@
-# Decalendar and Declock
+# `Decalendar` and `Declock`
 
 ## Summary {#sec-summary}
 
 `Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to replace [standard time](https://en.wikipedia.org/wiki/Standard_time). Both system use days as their base unit and derive other units from days using prefixes inspired by the metric system. To create the necessary calendar and time units, `Decalendar` groups days together, while `Declock` divides days up.
 
-## Basics {#sec-basics}
+## Basic concepts {#sec-basics}
 
-### Fractions analogy
+### Fractions analogy {#sec-frac}
 
 In the simplest terms, `Decalendar` counts fractions of a year, while Declock counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, while for `Declock` the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of` Decalendar`, the numerator is the days that have passed in the year, while in the context of` Declock`, the numerator is the parts of the day that have passed.
 
 To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year (`doty`). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
-The analogy to decimals or fractions is important, because it explains why adding a zero at the end a time does not change the time,  only the implied duration. Providing only a single digit for a `Declock` time indicates that the duration is expected to be 10% of the day. Every additional digit we add decreases the implied duration 10-fold. For example, `Dot 5` and `Dot 50` both mean noon, but `Dot 5` implies that the duration will be an interval starting at `Dot 5` and ending before `Dot 6`, whereas the interval represented by `Dot 50` ends before `Dot 51`.
+### Implied duration {#sec-duration}
 
-### Context clues
+The analogy to decimals or fractions is important, because it explains why adding a zero at the end a time does not change the time,  only the implied duration. Providing only a single digit for a `Declock` time indicates that the duration is expected to be 10% of the day. Every additional digit we add decreases the implied duration 10-fold. Essentially, the higher the precision, the lower the implied duration. For example, `Dot 5` and `Dot 50` both mean noon, but `Dot 5` implies that the duration will be an interval starting at `Dot 5` and ending before `Dot 6`, whereas the interval represented by `Dot 50` ends before `Dot 51`.
+
+### Context clues {#sec-context}
 
 Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (`Dot 5`) and not the sixth `doty` (`Day 5`). Also, the number itself may provide a clue. Numbers greater than 365 could still be a `doty` date, but such dates would be in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean `Day 134` (if n=366) or `Day 135` (if n=365) of the subsequent year, but it would most likely mean noon (`Dot 500`).
 
@@ -22,11 +24,11 @@ Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient
 
 If a date and a time are combined they form a time `stamp`. The date always goes before the time in any `stamp`. When said together, the numbers "0" and "500" mean the first `doty` (`Day 0`) at noon (`Dot 500`). In written form, this would be `000.500`. This format is called `.y`, which is read the same way as `doty`, but emphasizes that the `.` is used in a floating point decimal `doty`. In other words, `doty` can be used instead of "day of the year" in a sentence, whereas `.y` indicates a `stamp`, such as `000.500`. Ideally, a stamp will include all of the information needed to identify a singular point in time, and thus should include a year and time zone.
 
-### Specific dates and times
+### Specific dates and times {#sec-specific}
 
 The dates and times above assume that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once a day, rather than once in every time zone per day. The first `doty` 2000, would be written `2000+000` and said "`Year 2000 Day 0`" or simply "`2000 0`", while noon in `Zone 0` would be written `.500+0` or `500+0` and said "`Dot 500 Zone 0`", "`500 Zone 0`", or "`500 0`".
 
-### Negative numbers
+### Negative numbers {#sec-neg}
 
 The plus signs in the date and time above indicate that the `doty` date and the time zone can also be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. Negative dates and times show the number of parts that are left in the whole (day or year). To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions.
 
@@ -34,135 +36,9 @@ Negative `doty` numbers can be especially useful at the end of the year, because
 
 The `.y` format can include positive and negative numbers, most commonly in the form `±year±day.day±z`, where `.day` is the time and `z` is the time zone. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE. The other two signs are required in written form, but plus signs can be omitted when speaking. For example, the `stamp` `2000+000.500+0` is pronounced "`Year 2000 Day 0 Dot 500 Zone 0`" or "`2000 0 500 0`", while `2000-366.600-1` (the same `stamp` in negative form and in `Zone -1`) would be said "`Year 2000 Day Minus 366 Dot 600 Zone Minus 1`" or "`2000 -366 600 -1`".
 
-### Series and slices
-
-A group of dates, times, or `stamps` is called a `series`. The items in a `series` are separated by commas (`,`). The first 3 days of the year in the form of a `series` would be written `000,001,002`. Instead of listing every single day in a `series`, we can "slice" from `Day 0` up to but not including `Day 3` by writing `:003`. `Simple slices` consist of a `start` and a `stop` separated by a colon (`start:stop`). When the `start` is omitted, `slices` begin at the first value, which in the context of a year is `Day 0`. Therefore, writing `:003` is the same as writing `000:003`, both represent the first 3 days of the year. To denote a 3-day vacation at the beginning of the year 2000, we could write `2000+:003`.
-
-If we omit the `stop`, instead of the `start`, we would "slice" up to and including the last value. In the context of `doty` dates, omitting the `stop` value obtains all of the days in the year after the `start`, because the default `stop` is the number of days in the year (`n`). For example, the `slice` `003:` has a `start` of `Day 3` and a `stop` of `n`, and thus represents every day in the year except the first 3. The number of days we obtain from a `slice` is called a `span`. To calculate the `span`, we subtract the `start` from the `stop` ($stop-start$). In a common year, the `span` of `003:` is $n-3=362$, while in a leap year it would be $n-3=363$.
-
-### Steps
-
-The `simple slices` (`start:stop`) described above are a type of time `segment`, an unbroken time interval. To break up a `simple slice` into a `series`, we can add a `step` value and create a `stepped slice` (`start:stop:step`). `Stepped slices` move in `step`-sized "steps" starting from `start`, skipping over $step-1$ items with each "step", keeping only items that are "stepped" on. In other words, `stepped slices` keep items whose index (zero-based position) in the `slice` is evenly divisible by `step`. A `step` value of 1 keeps every item, because every index is divisible by 1, and a `step` of 2 keeps every other item, those with even-numbered indexes. `Day 0` and every other third day in the year thereafter (`Day 3`, `Day 6`, etc.) can be represented by the `slice` `::3`.
-
-Any part of a `slice` can be a fractional day, include the `step`. Every tenth (⅒ or .1 or 10%) of the day can be obtained with the `slice` `:1:.1`. Every other tenths starting from noon and is represented by the `slice` `.5:1:.2`, which is equivalent to the `series` `.5,.7,.9`. To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of "steps" called a `seq` (short for `sequence`, pronounced "seek"). The steps in a `seq` are taken in a cycle; after the last step we go back to the first step. The `seq` `.5::.2,.2,9.6` includes the times `.5,.7,.9` of every day with a `doty` number that ends in 0. In its first cycle, this `seq` goes from `Day 0 Dot 5` to `Day 0 Dot 7` to `Day 0 Dot 9` with steps of .2 and then to `Day 10 Dot 5` with a step of 9.6.
-
-
-### Spreads
-
-Another way we could create a event `series` or `series` of event  `slice` with a of "steps" is called a `seq` (short for `sequence`, pronounced "seek"). The `seq` `::2,8` will obtain all of the days with `doty` numbers that ends in 0 or 2. `Seqs` can be For example, if we planned meet for lunch on every `doty` that ends in 9
-
-
-0.5».6::2,8
-spread::seq
-
-`Seqs` can useful for occurrence that repeat with a regular pattern. 
-Another way we could make an event Just like with `slices`, we can use `spreads` to create `series` of consecutive dates, times, or `stamps`. `Simple spreads` consist of a `start` and a `span` (`start»span`) separated by a right [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `bb`, html: `&raquo;`, vim: `>>`)  or a `stop` and a `span` (`stop«span`) separated by a left [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `ab`, html: `&laquo;`, vim: `<<`). The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `>003`, which is synonymous with the `slice` `:003`. In this example, the `start` is 0, while the `stop` and the `span` are both 3.
-
-In addition to default `start` and `stop` values, `spreads` also have default `span` values. If we spread forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `«003` represents the last 3 days of any year. We could also use a negative `start` of `-003`, the third to last day of any year, to create the `slice` `-003:` and the `spread` `-003»`, both of which are synonymous with `«003`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers.
-
-
-`Simple slices` omit `step` and therefore use the default `step` value of 1, every second value. 
-move in steps keep items with a zero-based position in `span` that is evenly divisible by `step`. every other value after `start` is included. split  special `slices` and `spreads` called `stepped slices` and `split spreads`. `Stepped slices` can `step` from one item to another to create `series` of non-consecutive dates, times, or `stamps`. `Split spreads` are `split` into series of `seqments`. `stepped slices`  `Slices` `Slices` and `spreads` can also form that are not `simple` create `series` instead of `segments`. are called `stepped slices` and `split spreads`. `spaced spreads`. `Slices` can create `series` of non-consecutive dates, times, or `stamps` by `stepping`, w
-
-span space span skip
-
-`start:stop:step:step:step:step»span»split»space`
-`start>span>space>split`
-Beyond `simple slices` and `simple spreads`
-`start>span>split>space>`
-
-start»span«split: spread to the right, but split to the left
-The default space is 0
-The default skip is None, meaning do not skip any
-skip is 1: 1 0 1 0 1 0 1 0
-skip is 2: 1 1 0 1 1 0 1 1
-skip can be a step or another spread
-A 5 cent span with a 1 cent break in between
-0»5»2
-A 9 cent span with a 1 cent break in between
-0»9»4
-A 9 cent span with a 2 cent break in between
-0»9»4:6
-0»9»4»2
-
-Negative numbers 
-If the `span` were negative, it would simple reverse the direction of the angle bracket.
-
-
-`stepping slice` `:-4:-1`. Unlike `simple slices`, `stepping slices` have more than 1 colon. Any values after the `start` and the `stop` are called `steps`. A negative `step`  possible with a simple `slice`. To obtain the last 3 days of any year we include a  would have to `slice` in reverse
-
-is synonymous with the `slice` `:003`. All of the remaining days in the year can be expressed as `003<` or `003:`. If we do not want to `spread` all the way to the first or last value, we can provide a `span` after the left or right angle bracket (`<` or `>`) in the form `stop<span` or `start>span`. This is especially useful when combined with the default `stop`. For example, `>3` is synonymous with `000>3`, `003<` and `:003`. from the `start` by writing `000>3`, but then we have to specify that we only want 3 days instead of all of the days in the year. the `stop`, by writing. If we `spread` from the `start`,  `stop` is We could also `spread` starting from `start`. The value after `<` is called  to the way we could write the  , whereas `003:` uses the default stop and gives us
-
-When the `stop` is omitted, the `slice` goes up to and including the last value. 
-
-We can `slice` up to but not including `Day 3` by writing `:003`. `Day 3` in this is synonymous with the `series` `000,001,002`. This In addition to `slicing`, we can also replace the series with `Slices` cut out the `span` in between a `start` and a `stop` (`start:stop`), whereas `spreads` use the `span` to extend either forward from a `start` (`start>span`) or backward from a `stop` (`stop<span`). `Slices` can omit their `start` `stop` `span` `stop` is never included in `slices` and `spreads`. , `000:003` as a `slice`, and `000>3` or `003<3` as a `spread`.
-
-
-We can shorten the `slice` above from `000:003` to `:003` by omitting the `start` value, because the default `start` value of `slices` is the first value. Similarly, we can shorten `003<3` to `003<` because if a `span` is omitted, `spreads` will extend as far as possible, in this case to the first value.
-
-All of three of these approaches can be combined together in the form `start:stop:step>span`. 
-
- in part to enable simple algebraic reasoning about the `stop`, `start`, and `span`. The `stop` is the sum of the `start` and the `span` (`stop` = `start` + `span`), the `start` is the difference between the `stop` and the `span` (`start` = `stop` - `span`), and the `span` is the difference between the `stop` and the `start` (`span` = `stop` - `start`). Excluding the `stop` is even more useful when combined with the default values of `slices` and `spreads`. The default `start` and `stop` values of `slices` are the first and last values, respectively. Similarly, default `span` of `spreads` is `n`, the difference between the last value and the first value. The first three days of the year can written `:003` as a `slice`, and `000>3` or `003<`In the context of the days in a year, 
-
-
-If a `stamp` has a duration, it is called a time `segment`. A group of `stamps` or `segments` is called a time `series`. A `series` can be synonymous with a `segment` if it contains only unique, consecutive, and chronologically ordered `stamps`.  `segments` are uninterrupted time intervals,  The main difference between between a `segment` and a `series`, is that a  A `series` of `segments` can describe. While a time `segment` can de If we specified `datetime` with a duration is called a time `segment` and  have a beginning (`start`), an end (`stop`), and a duration (`span`). we could decide when to meet for lunch, but not how much time we would spend eating lunch. 
-
-Dates, times, and `datetimes` can be grouped together into time `segments` or time `series`. Time `segments` are uninterrupted time intervals, and thus the items in a `segment` must be unique, consecutive, and in chronological order. Time `series` do not have any of these restrictions and can contain anything, including time `segments`. A `series` of `segments` is called a `segment series` and can be useful for describing recurring events. `Segment series` will have For example, a group of friends may agree to meet for lunch on New Year's Day every year starting from the year 2000. `2000:+000.50:54`
- `2000:+000.50>4`
- `2000:+000.54<4`
-We can express a `segment` either as a comma-separated list of items or as a slice.  breaks, duplicates, missing values,   items in time `segments` must be unique and in chronological order, because kb. In contrast, the items consist of items that are . whereas the items in time `series` do not have to be related or even in chronological order. All of the items in a `segments` have to be unique, but a `series` can contain duplicates. 
-
-
-Items must be Segment  Series  Set
-Continuous    Yes      No      No
-Ordered       Yes      No      No
-Unique        Yes      No      Yes
-
-
-only difference between a series and a set In fact, the times in a  `series` because they simply list time points separated by commas. There 2 types of `segments`  or one of three types   The first 3 years of the second millennium  contrast, time because they  Time `segments` can be defined using any two of these three values either by `slicing` or `spreading`. For example, a time `segment` that includes the years 2000 and 2001, but not the year 2002, can be written as `2000>2`, `2000:2002`, or `2002<2`.
-
-Unlike the intervals above, above could be written in the form of a `series`: `2000,2001`. the `slice` and `spread` intervals shown above, a `series` can contain discontinuous time points. his are of time from   we cut out a certain portion of `start:stop`, `start>span`, or `stop<span`.
-
-
-but they could mark the beginning or end of a time interval. There are 3 ways to express intervals in `Decalendar` and `Declock`: we could 
-We can turn any date, time, or `datetime` into an interval in one of three ways: `start:stop`, `start>shift`, `stop<shift`. If we were planning take a vacation for 3 days at the beginning of the year 2000, we could express to celebrate the end of the year 1999, we could provide the planned duration of the party in three ways: `start:stop`, `start>shift`, `stop<shift`. `1999+364.9>2+0` on the invitation.
-`2000-360` = 360 days have passed in the year
-
-`2000-360>4` = 360 days have passed in the year
-
-`2000-360.250` = 6.25 days left in the year
-
-`2000-007` = 7 days left in the year
-
-`2000-007.500` = 6.5 days left in the year
-
-`2000-007.250` = 6.25 days left in the year
-
-`2000-007.250` = 6.25 days left in the year
-
-Positive `doty` numbers keep track of how much has passed in a year, while negative `doty` numbers keep track of how much time is left in a year.
-The date `2000+000` essentially means that 2000 years have passed since `Year 0`, a duration of 2000 years. Typically small amounts of time are durations, while We could say that a meeting will last 4 `cents` or,
-««»
-### Slices and series
-
-500>040 = 500:540
-500<040 = 460:500
-50<04 = 46:50
-50<4 = 46:50 or 10:50
-
-Each component of a `datetime`, except for the time zone, can be turned into a `slice`, an interval between two points in time. Providing only a `start` value and a `stop` value can be much more succinct than explicitly listing all of the time points in between. For example, the first 4 days of the year in `slice` form would be `:004`. This `slice` can also be written in the form of a `series`, a list of time points: `000,001,002,003`. The `slice` is much shorter than the `series`, but can be harder to understand.
-
-`Slices` that start with the very first value can omit the `start` value, like the `slice` in the example above. Similarly, omitting the `stop` value means that a `slice` goes up to and including the very last value. For example, `360:` includes `Day 360` and all of the days thereafter in a year. The `slice` above could also be written `:010`, which is almost ten times shorter than listing all. is a left-open, right-closed intervals, which means the `start` value is included, but the `stop` value is not. This is why the year 2010 is not included in `2000:2010` example above. It may be useful to not include a `stop` value, which means to go up to and including the last value. For example,
-
-`Slices` in which `start` does not occur before `stop` are empty, meaning that they do not contain any time points. For example, `2000:2000` is a `slice` that does not contain any years. `Series` can also be empty. While an empty `series` can be represent by a single comma (`,`), a single colon (`:`) represents a `slice` that starts at beginning and goes up to and including the end. Without any context, this could mean an infinite slice that contains all of time, but in the context of a date, we  all time points  Unlike `slices`, `series` can include dates  The stop We could also describe The first ten days of the year 2000 would be `2000+000:010`. If a `datetime` has more than 1 `colon`, it represents more than 1 interval. For example, `2000:2003+000:010` is synonymous with `2000+000:010,2001+000:010,2002+000:010` The first singular points in time, but could also represent durations. The date `2000+000` essentially means that 2000 years have passed since `Year 0`, a duration of 2000 years. Typically small amounts of time are durations, while We could say that a meeting will last 4 `cents` or, in other words, 4 percent of the day. If we say `Dot 04` or 4 `cents`, it is unlikely we mean The time between two dates is called a date interval, while the  the time in between two dates  between two times is called an interval. For example, if we plan to meet at noon and spend 4 percent of the day eating lunch together, we could write this time interval as `50:54`. This time interval can be combined with a date like the first day of the year 2000: `2000+000.50:54`. 
-
-### Series
-
-A group of dates, times, or `datetimes` is called a series. The items in a series are separated by commas. If we planned to meet for lunch on the first and last day of the year 2000, we could summarize our lunch plans with a series: `2000+000.5,2000+365.5`. This series tells us when we plan to meet for lunch, but not for how long. A series amount to lunch, we could add time intervals to this series. k was 4 `cents` long there is a pattern to the items in a series, it could be expressed as an interval. is called a time interval. A series an interval is a series of datetimes
-
 ## Units {#sec-units}
 
-In the `datetimes` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the  desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each highlights the relationship between the two:
+In the `datetimes` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each highlights the relationship between the two:
 
 | Base 10              | Name     | Symbol | Formal Name       |
 | -------------------- | -------  | ------ | ----------------- |
@@ -301,11 +177,11 @@ In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are o
 
 Even though it provides formats for months and weeks, `Decalendar` envisions a world in which these units are replaced by `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
 
-A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from rest days. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as rest days, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 109 rest days in a `Decalendar` year, not counting the two holidays, New Year's Day (`Day 0`) and Leap Day (`Day 365`).
+A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from rest days. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as rest days, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 109 rest days in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
 
 #### Gregorian calendar leap day considerations {#sec-leap}
 
-Unlike Leap Day, New Year's Day is a holiday in both `Decalendar` and the Gregorian calendar. New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gregorian calendar. Therefore, we can say that `Day 0` is synonymous with January 1. Every Gregorian calendar date can be represented unequivocally by a positive or a negative day number except for February 29, the Gregorian calendar leap day. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01`, but this date cannot exist in the `.y` format without a year.
+New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gregorian calendar. Therefore, we can say that `Day 0` is synonymous with January 1. Every Gregorian calendar date can be represented unequivocally by a positive or a negative day number except for February 29, the Gregorian calendar leap day. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01`, but this date cannot exist in the `.y` format without a year.
 
 The Gregorian calendar leap day represents a threshold in finding the day number equivalents of Gregorian calendar dates. If a Gregorian calendar date is below the threshold, we can count on its positive day number to always stay the same, but its negative day number will differ between common years and leap years. Conversely, if a Gregorian calendar date is above the threshold, its positive day number will vary between common years and leap years while its negative day number will always remain constant. In other words, day numbers greater than -307 and less than 59 (-307 < d < 59) are always synonymous with their corresponding Gregorian calendar dates. Numbers below the threshold (-366 <= d <= -307) will decrease by 1 day in leap years, while numbers above the threshold (59 <= d <= 365) will increase by 1 day in leap years.
 
@@ -505,7 +381,6 @@ Each season in the table above has 9 `deks` and exactly 90 days, except for the 
 
 The only unit that can include the leap year is a `zet`, which is 61 days long and follows a similar pattern as a `delt`, except the last `zet` in common years is 1 day short than all the others. The table below list the numbers of the days that begin and end each `zet`. As with `delts`, the `zet` number is the last digit of the numbers of its first and last day.
 
-
 | Code | Start | End |
 | ---- | ----- | --- |
 | Z0   | 0     |  60 |
@@ -517,8 +392,166 @@ The only unit that can include the leap year is a `zet`, which is 61 days long a
 
 : The days that begin and end each `zet` {#tbl-z}
 
-All of the `subyear` unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Zet 3`, `Z3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+078`. The `subyear` units are essentially date intervals, series of contiguous dates. 
-`Dekalendar` treats leap days like outliers or anomalies that should not be included in any sample of days. Every leap days is always a holiday, always a `Fiveday`, and always followed by a `Zeroday`. The end of the year is sensitive time for the
+All of the `subyear` unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Zet 3`, `Z3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+078`. The `subyear` units are essentially date intervals, series of contiguous dates. `Decalendar` includes very powerful approaches to describing series of dates, times, and `stamps`.
+
+## Series {#sec-series}
+
+A single `doty` number, such as `Day 0`, implies a duration on 1 day. We can indicate a duration of multiple days by listing consecutive days in a `series`. A `series` consists of dates, times, or `stamps` separated by commas (`,`). The items in a `series` should all be of the same type. In other words, `series` should be homogeneous and not mix dates, times, and `stamps`. The first 3 days of the year in the form of a `series` would be written `000,001,002`, while the last three days would be `-003,-002,-001`. The first half a day, from midnight to noon, could be written `0,.1,.2,.3,.4`.
+
+### Slices {#sec-slices}
+
+Instead of listing every single day in a `series`, we can "slice" from `Day 0` up to but not including `Day 3` by writing `:003`. `Simple slices` consist of a `start` and a `stop` separated by a colon (`start:stop`). When the `start` is omitted, `slices` begin at the first value, which in the context of a year is `Day 0` and in the context of a day is midnight. Therefore, writing `:003` is the same as writing `000:003`, both represent the first 3 days of the year: `000,001,002`. Using this approach, we can shorten the series `0,.1,.2,.3,.4` to `:.5`.
+
+If we omit the `stop`, instead of the `start`, we would "slice" up to and including the last value. In the context of `doty` dates, omitting the `stop` value obtains all of the days in the year after the `start`, because the default `stop` is the number of days in the year (`n`). For example, the `slice` `003:` has a `start` of `Day 3` and a `stop` of `n`, and thus represents every day in the year except the first 3. The number of days we obtain from a `slice` is called a `span`. To calculate the `span`, we subtract the `start` from the `stop` ($stop-start$). In a common year, the `span` of `003:` is $n-3=362$, while in a leap year it would be $n-3=363$. The tables below lists the seasons, `qops`, and `delts` in the form of `slices`:
+
+| Index | Season  | Qop     | Delt    |
+| ----- | ------- | ------- | ------- |
+| 0     | 78:170  | :90     | :91     |
+| 1     | 170:264 | 90:180  | 91:182  |
+| 2     | 264:354 | 180:270 | 182:273 |
+| 3     | 354:78  | 270:360 | 273:364 |
+
+### Steps {#sec-steps}
+
+The `simple slices` (`start:stop`) described above are a type of time `segment`, an unbroken time interval. To break up a `simple slice` into a non-consecutive `series`, we can add a `step` value and create a `stepped slice` (`start:stop:step`). `Stepped slices` move in `step`-sized "steps" starting from `start`, skipping over $step-1$ items with each "step", keeping only items that are "stepped" on. In other words, `stepped slices` keep items whose index (zero-based position) in the `slice` is evenly divisible by `step`. A `step` value of 1 keeps every item, because every index is divisible by 1, and a `step` of 2 keeps every other item, those with even-numbered indexes. `Day 0` and every other third day in the year thereafter (`Day 3`, `Day 6`, etc.) can be represented by the `slice` `::3`.
+
+Any part of a `slice` can be a fractional day, include the `step`. Every other tenth of the day (⅒ or .1 or 10%) starting from noon and is represented by the `slice` `.5:1:.2`, which is equivalent to the `series` `.5,.7,.9`. To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of "steps" called a `seq` (short for `sequence`, pronounced "seek"). The steps in a `seq` are taken in a cycle; after the last step we go back to the first step. The `seq` `.5::.2,.2,9.6` includes the times `.5,.7,.9` of every day with a `doty` number that ends in 0. In its first cycle, this `seq` goes from `Day 0 Dot 5` to `Day 0 Dot 7` to `Day 0 Dot 9` with steps of .2 and then to `Day 10 Dot 5` with a step of 9.6.
+
+### Spreads {#sec-spreads}
+
+Another way we could create a `series` is with a `spread`. `Simple spreads` consist of a `start` and a `span` (`start»span`) separated by a right [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `bb`, html: `&raquo;`, vim/compose: `>>`)  or a `stop` and a `span` (`stop«span`) separated by a left [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `ab`, html: `&laquo;`, vim/compose: `<<`). The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `>003`, which is synonymous with the `slice` `:003`. In this example, the `start` is 0, while the `stop` and the `span` are both 3.
+
+In addition to default `start` and `stop` values, `spreads` also have default `span` values. If we "spread" forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `«003` represents the last 3 days of any year. We could also use a negative `start` of `-003`, the third to last day of any year, to create the `slice` `-003:` and the `spread` `-003»`, both of which are synonymous with `«003`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers.
+
+### Splits {#sec-splits}
+
+As with `stepped slices`, we create non-consecutive `series` by "splitting" a `simple spread` (`start»span` or `stop«span`) into `split spread` (`start»span»split` or `stop«span«split`) with a `split` value that works like the opposite of a `step`. While `steps` keep items that are "stepped" on, `splits` exclude items that are used to create the boundaries of the `splits`. `Split spreads` with a `split` greater than 1 will yield a `series` of `segments`. The `split spread` `»»4` that skips every 5th day to create groups of 4 days throughout the year. The first 3 `splits` in `»»4` can be written as three different `series` of `segments`: `:004,005:009,010:014`, `»004,005»004,010»004`, or `004«,009«004,010«004`. Notably, `»»4` will always end with a `segment` containing the last 4 days of common years, `360:364`, `360»004`, or `364«004`, even in leap years, because partial splits are no allowed.
+
+### Spaces {#sec-spaces}
+
+The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. The first `segment` of `»»3»2` can be written as `:003`, `»003`, or `003«`, while the last `segment` is `360:363`, `360»003`, or `363«003`. The patterns created by `»»4` and `»»3»2` can be mixed if we use a `series` of `splits` and `spaces`. The `split spread` `»»4,3»1,2` alternates between `»»4` and `»»3»2`. This is the pattern of workdays in the `Decalendar` system. The workdays in the first `dek` of `»»4,3»1,2` can be written as the following `series` of `segments`: `:004,005:008`, `»004,005»003`, or `004«,008«003`.
+
+A `space` value of 0 may also be useful. For example, `qops`, `delts`, `eps`, and `zets` can be summarized as `split spreads` as shown in the following table:
+
+| Unit | Spread   |
+| ---- | -------- |
+| Delt | `»»90»0` |
+| Qop  | `»»91»0` |
+| Ep   | `»»73»0` |
+| Zet  | `»»61»0` |
+
+### `Spreeqs` {#sec-spreeqs}
+
+split  special `slices` and `spreads` called `stepped slices` and. 
+into `series` of `seqments` called `a`. `split spread` `stepped slices`  `Slices` `Slices` and `spreads` can also form that are not `simple` create `series` instead of `segments`. are called `stepped slices` and `split spreads`. `spaced spreads`. `Slices` can create `series` of non-consecutive dates, times, or `stamps` by `stepping`, w
+
+Spread-seqs
+Spreeqs
+`0.5».6::2,8`
+ spread::seq
+`start»span»split»space:stop:step,step`
+
+Seqreads
+`start:stop:step,step»span,span»split»space`
+
+
+
+span space span skip
+
+`start:stop:step:step:step:step»span»split»space`
+`start>span>space>split`
+Beyond `simple slices` and `simple spreads`
+`start>span>split>space>`
+
+start»span«split: spread to the right, but split to the left
+The default space is 0
+The default skip is None, meaning do not skip any
+skip is 1: 1 0 1 0 1 0 1 0
+skip is 2: 1 1 0 1 1 0 1 1
+skip can be a step or another spread
+A 5 cent span with a 1 cent break in between
+0»5»2
+A 9 cent span with a 1 cent break in between
+0»9»4
+A 9 cent span with a 2 cent break in between
+0»9»4:6
+0»9»4»2
+
+Negative numbers 
+If the `span` were negative, it would simple reverse the direction of the angle bracket.
+
+
+`stepping slice` `:-4:-1`. Unlike `simple slices`, `stepping slices` have more than 1 colon. Any values after the `start` and the `stop` are called `steps`. A negative `step`  possible with a simple `slice`. To obtain the last 3 days of any year we include a  would have to `slice` in reverse
+
+is synonymous with the `slice` `:003`. All of the remaining days in the year can be expressed as `003<` or `003:`. If we do not want to `spread` all the way to the first or last value, we can provide a `span` after the left or right angle bracket (`<` or `>`) in the form `stop<span` or `start>span`. This is especially useful when combined with the default `stop`. For example, `>3` is synonymous with `000>3`, `003<` and `:003`. from the `start` by writing `000>3`, but then we have to specify that we only want 3 days instead of all of the days in the year. the `stop`, by writing. If we `spread` from the `start`,  `stop` is We could also `spread` starting from `start`. The value after `<` is called  to the way we could write the  , whereas `003:` uses the default stop and gives us
+
+When the `stop` is omitted, the `slice` goes up to and including the last value. 
+
+We can `slice` up to but not including `Day 3` by writing `:003`. `Day 3` in this is synonymous with the `series` `000,001,002`. This In addition to `slicing`, we can also replace the series with `Slices` cut out the `span` in between a `start` and a `stop` (`start:stop`), whereas `spreads` use the `span` to extend either forward from a `start` (`start>span`) or backward from a `stop` (`stop<span`). `Slices` can omit their `start` `stop` `span` `stop` is never included in `slices` and `spreads`. , `000:003` as a `slice`, and `000>3` or `003<3` as a `spread`.
+
+
+We can shorten the `slice` above from `000:003` to `:003` by omitting the `start` value, because the default `start` value of `slices` is the first value. Similarly, we can shorten `003<3` to `003<` because if a `span` is omitted, `spreads` will extend as far as possible, in this case to the first value.
+
+All of three of these approaches can be combined together in the form `start:stop:step>span`. 
+
+ in part to enable simple algebraic reasoning about the `stop`, `start`, and `span`. The `stop` is the sum of the `start` and the `span` (`stop` = `start` + `span`), the `start` is the difference between the `stop` and the `span` (`start` = `stop` - `span`), and the `span` is the difference between the `stop` and the `start` (`span` = `stop` - `start`). Excluding the `stop` is even more useful when combined with the default values of `slices` and `spreads`. The default `start` and `stop` values of `slices` are the first and last values, respectively. Similarly, default `span` of `spreads` is `n`, the difference between the last value and the first value. The first three days of the year can written `:003` as a `slice`, and `000>3` or `003<`In the context of the days in a year, 
+
+
+If a `stamp` has a duration, it is called a time `segment`. A group of `stamps` or `segments` is called a time `series`. A `series` can be synonymous with a `segment` if it contains only unique, consecutive, and chronologically ordered `stamps`.  `segments` are uninterrupted time intervals,  The main difference between between a `segment` and a `series`, is that a  A `series` of `segments` can describe. While a time `segment` can de If we specified `datetime` with a duration is called a time `segment` and  have a beginning (`start`), an end (`stop`), and a duration (`span`). we could decide when to meet for lunch, but not how much time we would spend eating lunch. 
+
+Dates, times, and `datetimes` can be grouped together into time `segments` or time `series`. Time `segments` are uninterrupted time intervals, and thus the items in a `segment` must be unique, consecutive, and in chronological order. Time `series` do not have any of these restrictions and can contain anything, including time `segments`. A `series` of `segments` is called a `segment series` and can be useful for describing recurring events. `Segment series` will have For example, a group of friends may agree to meet for lunch on New Year's Day every year starting from the year 2000. `2000:+000.50:54`
+ `2000:+000.50>4`
+ `2000:+000.54<4`
+We can express a `segment` either as a comma-separated list of items or as a slice.  breaks, duplicates, missing values,   items in time `segments` must be unique and in chronological order, because kb. In contrast, the items consist of items that are . whereas the items in time `series` do not have to be related or even in chronological order. All of the items in a `segments` have to be unique, but a `series` can contain duplicates. 
+
+
+Items must be Segment  Series  Set
+Continuous    Yes      No      No
+Ordered       Yes      No      No
+Unique        Yes      No      Yes
+
+
+only difference between a series and a set In fact, the times in a  `series` because they simply list time points separated by commas. There 2 types of `segments`  or one of three types   The first 3 years of the second millennium  contrast, time because they  Time `segments` can be defined using any two of these three values either by `slicing` or `spreading`. For example, a time `segment` that includes the years 2000 and 2001, but not the year 2002, can be written as `2000>2`, `2000:2002`, or `2002<2`.
+
+Unlike the intervals above, above could be written in the form of a `series`: `2000,2001`. the `slice` and `spread` intervals shown above, a `series` can contain discontinuous time points. his are of time from   we cut out a certain portion of `start:stop`, `start>span`, or `stop<span`.
+
+
+but they could mark the beginning or end of a time interval. There are 3 ways to express intervals in `Decalendar` and `Declock`: we could 
+We can turn any date, time, or `datetime` into an interval in one of three ways: `start:stop`, `start>shift`, `stop<shift`. If we were planning take a vacation for 3 days at the beginning of the year 2000, we could express to celebrate the end of the year 1999, we could provide the planned duration of the party in three ways: `start:stop`, `start>shift`, `stop<shift`. `1999+364.9>2+0` on the invitation.
+`2000-360` = 360 days have passed in the year
+
+`2000-360>4` = 360 days have passed in the year
+
+`2000-360.250` = 6.25 days left in the year
+
+`2000-007` = 7 days left in the year
+
+`2000-007.500` = 6.5 days left in the year
+
+`2000-007.250` = 6.25 days left in the year
+
+`2000-007.250` = 6.25 days left in the year
+
+Positive `doty` numbers keep track of how much has passed in a year, while negative `doty` numbers keep track of how much time is left in a year.
+The date `2000+000` essentially means that 2000 years have passed since `Year 0`, a duration of 2000 years. Typically small amounts of time are durations, while We could say that a meeting will last 4 `cents` or,
+««»
+### Slices and series
+
+500>040 = 500:540
+500<040 = 460:500
+50<04 = 46:50
+50<4 = 46:50 or 10:50
+
+Each component of a `datetime`, except for the time zone, can be turned into a `slice`, an interval between two points in time. Providing only a `start` value and a `stop` value can be much more succinct than explicitly listing all of the time points in between. For example, the first 4 days of the year in `slice` form would be `:004`. This `slice` can also be written in the form of a `series`, a list of time points: `000,001,002,003`. The `slice` is much shorter than the `series`, but can be harder to understand.
+
+`Slices` that start with the very first value can omit the `start` value, like the `slice` in the example above. Similarly, omitting the `stop` value means that a `slice` goes up to and including the very last value. For example, `360:` includes `Day 360` and all of the days thereafter in a year. The `slice` above could also be written `:010`, which is almost ten times shorter than listing all. is a left-open, right-closed intervals, which means the `start` value is included, but the `stop` value is not. This is why the year 2010 is not included in `2000:2010` example above. It may be useful to not include a `stop` value, which means to go up to and including the last value. For example,
+
+`Slices` in which `start` does not occur before `stop` are empty, meaning that they do not contain any time points. For example, `2000:2000` is a `slice` that does not contain any years. `Series` can also be empty. While an empty `series` can be represent by a single comma (`,`), a single colon (`:`) represents a `slice` that starts at beginning and goes up to and including the end. Without any context, this could mean an infinite slice that contains all of time, but in the context of a date, we  all time points  Unlike `slices`, `series` can include dates  The stop We could also describe The first ten days of the year 2000 would be `2000+000:010`. If a `datetime` has more than 1 `colon`, it represents more than 1 interval. For example, `2000:2003+000:010` is synonymous with `2000+000:010,2001+000:010,2002+000:010` The first singular points in time, but could also represent durations. The date `2000+000` essentially means that 2000 years have passed since `Year 0`, a duration of 2000 years. Typically small amounts of time are durations, while We could say that a meeting will last 4 `cents` or, in other words, 4 percent of the day. If we say `Dot 04` or 4 `cents`, it is unlikely we mean The time between two dates is called a date interval, while the  the time in between two dates  between two times is called an interval. For example, if we plan to meet at noon and spend 4 percent of the day eating lunch together, we could write this time interval as `50:54`. This time interval can be combined with a date like the first day of the year 2000: `2000+000.50:54`. 
+
+### Series
+
+A group of dates, times, or `datetimes` is called a series. The items in a series are separated by commas. If we planned to meet for lunch on the first and last day of the year 2000, we could summarize our lunch plans with a series: `2000+000.5,2000+365.5`. This series tells us when we plan to meet for lunch, but not for how long. A series amount to lunch, we could add time intervals to this series. k was 4 `cents` long there is a pattern to the items in a series, it could be expressed as an interval. is called a time interval. A series an interval is a series of datetimes
+
 
 ### Yearly transition
 
@@ -527,6 +560,8 @@ All of the `subyear` unit codes can be preceded by a year and followed by a day 
 
 `Dek 36`
 
+
+`Dekalendar` treats leap days like outliers or anomalies that should not be included in any sample of days. Every leap days is always a holiday, always a `Fiveday`, and always followed by a `Zeroday`. The end of the year is sensitive time for the
 
 
 
