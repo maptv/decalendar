@@ -429,30 +429,32 @@ As with `stepped slices`, we create non-consecutive `series` by "splitting" a `s
 
 ### Spaces {#sec-spaces}
 
-The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. The first `segment` of `»»3»2` can be written as `:003`, `»003`, or `003«`, while the last `segment` is `360:363`, `360»003`, or `363«003`. The patterns created by `»»4` and `»»3»2` can be mixed if we use a `series` of `splits` and `spaces`. The `split spread` `»»4,3»1,2` alternates between `»»4` and `»»3»2`. This is the pattern of workdays in the `Decalendar` system. The workdays in the first `dek` of `»»4,3»1,2` can be written as the following `series` of `segments`: `:004,005:008`, `»004,005»003`, or `004«,008«003`.
-
-A `space` value of 0 may also be useful. For example, `qops`, `delts`, `eps`, and `zets` can be summarized as `split spreads` as shown in the following table:
+The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. The first `segment` of `»»3»2` can be written as `:003`, `»003`, or `003«`, while the last `segment` is `360:363`, `360»003`, or `363«003`. The patterns created by `»»4` and `»»3»2` can be mixed if we use a `series` of `splits` and `spaces`. The `split spread` `»»4,3»1,2` alternates between `»»4` and `»»3»2`. This is the pattern of workdays in the `Decalendar` system. The workdays in the first `dek` of `»»4,3»1,2` can be written as the following `series` of `segments`: `:004,005:008`, `»004,005»003`, or `004«,008«003`. A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `zets` can be summarized as `split spreads` as shown in the following table:
 
 | Unit | Spread   |
 | ---- | -------- |
-| Delt | `»»90»0` |
-| Qop  | `»»91»0` |
+| Delt | `»»91»0` |
+| Qop  | `»»90»0` |
 | Ep   | `»»73»0` |
 | Zet  | `»»61»0` |
 
-### `Spreeqs` {#sec-spreeqs}
+### Splices {#sec-splices}
 
+All `segments` (`simple spreads` and `simple slices`) have a `start`, `stop`, and `span`. `Spreads` have everything that `slices` have except for `steps`. and transforming it into a `splice`. The only thing that `slices` are missing
+`0.5».6::2,8`
+`start»span»split»space:step`
+`stop«span«split«space:step`
 split  special `slices` and `spreads` called `stepped slices` and. 
 into `series` of `seqments` called `a`. `split spread` `stepped slices`  `Slices` `Slices` and `spreads` can also form that are not `simple` create `series` instead of `segments`. are called `stepped slices` and `split spreads`. `spaced spreads`. `Slices` can create `series` of non-consecutive dates, times, or `stamps` by `stepping`, w
 
 Spread-seqs
 Spreeqs
-`0.5».6::2,8`
  spread::seq
-`start»span»split»space:stop:step,step`
 
-Seqreads
-`start:stop:step,step»span,span»split»space`
+### Slides {#sec-slides}
+
+`start:stop:step»span»split»space`
+`0.5».6::2,8`
 
 
 
