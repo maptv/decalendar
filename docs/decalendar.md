@@ -440,10 +440,15 @@ The pattern above requires that the `splits` are separated by the default `space
 
 ### Splices {#sec-splices}
 
-All `segments` (`simple spreads` and `simple slices`) have a `start`, `stop`, and `span`. We can augment `spreads` with a `step` and transform it into a `splice`, the combination of a `spread` and a `slice`. The `step` value of `splice` can replace the `split` and `space` (`start»span:step` or `stop«span:step`) or all of these elements can work together (`start»span»split»space:step` or `stop«span«split«space:step`). The intended use of a `splice` is to replicate a `span` of time over a series of days. The `splice` `000.40».74:2,8` could represent the time spent at work or in school on every `Zeroday` and `Twoday` of the year. Instead of just a single `segment` per day, we could add a `split` and a `space` and have breaks throughout the day. With the `splice` `000.3».44».04».01:2,8`, we would have 9 `splits`, each 4 `cents` long and separated by 1-`cent` `spaces`, on every `Zeroday` and `Twoday` of the year.
+All `segments` (`simple spreads` and `simple slices`) have a `start`, `stop`, and `span`. We can augment `spreads` with a `step` and transform it into a `splice`, the combination of a `spread` and a `slice`. The `step` value of `splice` can replace the `split` and `space` (`start»span:step` or `stop«span:step`) or all of these elements can work together (`start»span»split»space:step` or `stop«span«split«space:step`). The intended use of a `splice` is to replicate a `span` of time over a series of days. The `splice` `000.40».74:2,8` could represent the time spent at work or in school on every `Zeroday` and `Twoday` of the year. Instead of just a single `segment` per day, we could add a `split` and a `space` and have breaks throughout the day. With the `splice` `000.4».34».04».01:2,8`, we would have 7 `splits`, each 4 `cents` long and separated by 1-`cent` `spaces`, on every `Zeroday` and `Twoday` of the year.
+
+A more realistic workday would be to have longer working sessions and a longer break from lunch. We could achieve this with a `series` of `splits` with `spaces`: `000.4».34».1,.09,.09».05,.1:2,8`. If we see repetition, we can use the replication operator `*` to replace a value: `000.4».34».1,.09*2».05,.1:2,8`. 
+
+we wanted a longer break around lunch time, we could use a `series` of `splits` with `spaces`, but we would pay a price for breaking the pattern: `000.4».34».04,.05,.05,.04,.04,.04».01,.04,.01,.01,.01,.01:2,8`. To avoid this repetition, we could
+
+`000.4».34».1,.09,.09».05,.1:2,8`
 
 `000.3».44».04».01:2,8` `000.4».34».04».01:2,8`
-If we wanted a longer break around lunch time, we could use a `series` of `splits` with `spaces`, but we would pay a price for breaking the pattern: `000.4».34».04,.05,.05,.04,.04,.04».01,.04,.01,.01,.01,.01:2,8`. To avoid this repetition, we could
 
 ### Slides {#sec-slides}
 
