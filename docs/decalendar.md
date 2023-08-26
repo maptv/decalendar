@@ -415,7 +415,7 @@ If we omit the `stop`, instead of the `start`, we would "slice" up to and includ
 
 The `simple slices` (`start:stop`) described above are a type of time `segment`, an unbroken time interval. To break up a `simple slice` into a non-consecutive `series`, we can add a `step` value and create a `stepped slice` (`start:stop:step`). `Stepped slices` move in `step`-sized "steps" starting from `start`, skipping over $step-1$ items with each "step", keeping only items that are "stepped" on. In other words, `stepped slices` keep items whose index (zero-based position) in the `slice` is evenly divisible by `step`. A `step` value of 1 keeps every item, because every index is divisible by 1, and a `step` of 2 keeps every other item, those with even-numbered indexes. `Day 0` and every other third day in the year thereafter (`Day 3`, `Day 6`, etc.) can be represented by the `slice` `::3`.
 
-Any part of a `slice` can be a fractional day, include the `step`. Every other tenth of the day (⅒ or .1 or 10%) starting from noon and is represented by the `slice` `.5:1:.2`, which is equivalent to the `series` `.5,.7,.9`. To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of "steps" called a `seq` (short for `sequence`, pronounced "seek"). The steps in a `seq` are taken in a cycle; after the last step we go back to the first step. The `seq` `.5::.2,.2,9.6` includes the times `.5,.7,.9` of every day with a `doty` number that ends in 0. In its first cycle, this `seq` goes from `Day 0 Dot 5` to `Day 0 Dot 7` to `Day 0 Dot 9` with steps of .2 and then to `Day 10 Dot 5` with a step of 9.6.
+Any part of a `slice` can be a fractional day, include the `step`. Every other tenth of the day (⅒ or .1 or 10%) starting from noon and is represented by the `slice` `.5:1:.2`, which is equivalent to the `series` `.5,.7,.9`. To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of "steps" called a `seq` (short for `sequence`, pronounced "seek"). The steps in a `seq` are taken in a cycle; after the last step we go back to the first step. The `seq` `.5::.2,.2,9.6` includes the times `.5,.7,.9` of every `Zeroday`. In its first cycle, this `seq` goes from `Day 0 Dot 5` to `Day 0 Dot 7` to `Day 0 Dot 9` with steps of .2 and then to `Day 10 Dot 5` with a step of 9.6.
 
 ### Spreads {#sec-spreads}
 
@@ -440,8 +440,15 @@ The pattern above requires that the `splits` are separated by the default `space
 
 ### Splices {#sec-splices}
 
-All `segments` (`simple spreads` and `simple slices`) have a `start`, `stop`, and `span`. `Spreads` have everything that `slices` have except for `steps`. and transforming it into a `splice`. The only thing that `slices` are missing
-`0.5».6::2,8`
+All `segments` (`simple spreads` and `simple slices`) have a `start`, `stop`, and `span`. We can augment `spreads` with a `step` and transform it into a `splice`, the combination of a `spread` and a `slice`. The `step` value of `splice` can replace the `split` and `space` (`start»span:step` or `stop«span:step`) or all of these elements can work together (`start»span»split»space:step` or `stop«span«split«space:step`). The intended use of a `splice` is to replicate a `span` of time over a series of days. The `splice` `000.40».74:2,8` could represent the time spent at work or in school on every `Zeroday` and `Twoday` of the year. Instead of just a single `segment` per day, we could add a `split` and a `space` and have breaks throughout the day. With the `splice` `000.3».44».04».01:2,8`, we would have 9 `splits`, each 4 `cents` long and separated by 1-`cent` `spaces`, on every `Zeroday` and `Twoday` of the year.
+
+`000.3».44».04».01:2,8` `000.4».34».04».01:2,8`
+If we wanted a longer break around lunch time, we could use a `series` of `splits` with `spaces`, but we would pay a price for breaking the pattern: `000.4».34».04,.05,.05,.04,.04,.04».01,.04,.01,.01,.01,.01:2,8`. To avoid this repetition, we could
+
+### Slides {#sec-slides}
+
+Similar to the 
+
 `start»span»split»space:step`
 `stop«span«split«space:step`
 split  special `slices` and `spreads` called `stepped slices` and. 
