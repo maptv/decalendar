@@ -411,6 +411,8 @@ If we omit the `stop`, instead of the `start`, we would "slice" up to and includ
 | 2     | 264:354 | 180:270 | 182:273 |
 | 3     | 354:78  | 270:360 | 273:364 |
 
+: The slices that represent the 4-part subyear units {#tbl-fourpart}
+
 ### Steps {#sec-steps}
 
 The `simple slices` (`start:stop`) described above are a type of time `segment`, an unbroken time interval. To break up a `simple slice` into a non-consecutive `series`, we can add a `step` value and create a `stepped slice` (`start:stop:step`). `Stepped slices` move in `step`-sized "steps" starting from `start`, skipping over $step-1$ items with each "step", keeping only items that are "stepped" on. In other words, `stepped slices` keep items whose index (zero-based position) in the `slice` is evenly divisible by `step`. A `step` value of 1 keeps every item, because every index is divisible by 1, and a `step` of 2 keeps every other item, those with even-numbered indexes. `Day 0` and every other third day in the year thereafter (`Day 3`, `Day 6`, etc.) can be represented by the `slice` `::3`.
@@ -438,17 +440,38 @@ The pattern above requires that the `splits` are separated by the default `space
 | Ep   | `»»73»0` |
 | Zet  | `»»61»0` |
 
+: The spread that represent the constant length subyear units {#tbl-constant}
+
 ### Splices {#sec-splices}
 
-All `segments` (`simple spreads` and `simple slices`) have a `start`, `stop`, and `span`. We can augment `spreads` with a `step` and transform it into a `splice`, the combination of a `spread` and a `slice`. The `step` value of `splice` can replace the `split` and `space` (`start»span:step` or `stop«span:step`) or all of these elements can work together (`start»span»split»space:step` or `stop«span«split«space:step`). The intended use of a `splice` is to replicate a `span` of time over a series of days. The `splice` `000.40».74:2,8` could represent the time spent at work or in school on every `Zeroday` and `Twoday` of the year. Instead of just a single `segment` per day, we could add a `split` and a `space` and have breaks throughout the day. With the `splice` `000.4».34».04».01:2,8`, we would have 7 `splits`, each 4 `cents` long and separated by 1-`cent` `spaces`, on every `Zeroday` and `Twoday` of the year.
+All `spreads` have either a `start` or a `stop`, but not a `step`. We can turn any `spread` into a `splice`, the combination of a `spread` and a `slice`, so that it has a `start`, a `stop`, and a `step`. The `step` value of `splice` can replace the `split` and `space` (`start»span:stop:step` or `stop«span:start:step`) or all of these elements can work together (`start»span»split»space:stop:step` or `stop«span«split«space:start:step`). The intended use of a `splice` is to replicate a `span` of time over a series of days. The `splice` `000.35».4:2,8` could represent the time spent at work or in school on every `Zeroday` and `Twoday` of the year. Instead of just a single `segment` per day, we could add a `split` and a `space` and have breaks throughout the day. With the `splice` `000.35».4».04».01:2,8`, we would have 7 `splits`, each 4 `cents` long and separated by 1-`cent` `spaces`, on every `Zeroday` and `Twoday` of the year.
 
-A more realistic workday would be to have longer working sessions and a longer break from lunch. We could achieve this with a `series` of `splits` with `spaces`: `000.4».34».1,.09,.09».05,.1:2,8`. If we see repetition, we can use the replication operator `*` to replace a value: `000.4».34».1,.09*2».05,.1:2,8`. 
+#### Percent operator {#sec-operator}
 
-we wanted a longer break around lunch time, we could use a `series` of `splits` with `spaces`, but we would pay a price for breaking the pattern: `000.4».34».04,.05,.05,.04,.04,.04».01,.04,.01,.01,.01,.01:2,8`. To avoid this repetition, we could
+A more realistic workday or school day would have a longer break for lunch. We could achieve this with a `series` of `splits` and a `series` of `spaces`. Instead of listing all of the times in a `splice` like this: `000.35».4».04,.04,.05,.05,.04,.04,.05».01,.01,.04,.01,.01,.01:2,8`, we can use cycling to remove some of the values that repeat as in this `slice`: `000.35».4».04,.04,.05,.05».01,.01,.04,.01:2,8`.  Repetition of values is the price we pay for breaking the pattern, but we can mitigate this repetition by using the `%` operator, because all of the values in each of the series are percents of the day. The resulting `splice `, `000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`, is shorter and easier to read.
 
-`000.4».34».1,.09,.09».05,.1:2,8`
+#### Replication operator {#sec-operator}
 
-`000.3».44».04».01:2,8` `000.4».34».04».01:2,8`
+We can make the `splice` above even shorter by using the replication operator `*` to replace a repetitive values. The result, `000.35»4%»2*4%,2*5%»2*1%,4%,1%::2,8`, is a bit easier to read and understand. We can modify the step to extend this splice to every workday in a `dek` by `000.35»4%»2*4%,2*5%»2*1%,4%,1%::1,1,1,2,1,1,3`. This represents another opportunity to use the replication operator. The final result, `000.35»4%»2*4%,2*5%»2*1%,4%,1%::3*1,2,2*1,3`, is the recommended `Decalendar` work schedule. This work schedule starts a 2.5% earlier and ends 4.16̅% later than a typical 9 to 5 (9AM=37.5%, 5PM=70.83̅%). If 4 `dimes` is too much time to spend at work or in school, the first or last work session can be skipped to either start the workday at `Dot 4` or end it at  `Dot 7`. The table below summarizes the recommended daily work schedule.
+
+| slice   | spread | spread | label |
+| ------- | ------ | ------ | ----- |
+| 35%:39% | 35%»4% | 39%«4% | work0 |
+| 39%:40% | 39%»1% | 40%«1% | rest0 |
+| 40%:44% | 40%»4% | 44%«4% | work1 |
+| 44%:45% | 44%»1% | 45%«1% | rest1 |
+| 45%:50% | 45%»5% | 50%«5% | work2 |
+| 50%:54% | 50%»4% | 54%«4% | lunch |
+| 54%:59% | 54%»5% | 59%«5% | work3 |
+| 59%:60% | 59%»1% | 60%«1% | rest2 |
+| 60%:64% | 60%»4% | 64%«4% | work4 |
+| 64%:65% | 64%»1% | 65%«1% | rest3 |
+| 65%:69% | 65%»4% | 69%«4% | work5 |
+| 69%:70% | 69%»1% | 70%«1% | rest4 |
+| 70%:75% | 70%»5% | 75%«5% | work6 |
+
+: The recommend `Decalendar` daily work schedule {#tbl-schedule}
+
 
 ### Slides {#sec-slides}
 
