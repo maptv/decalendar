@@ -59,9 +59,9 @@ In the `datetimes` above, the time has 3 digits, because this is the best level 
 | 10<sup>-1</sup>      | `dime`   | ⅒      | `deciday`         |
 | 10<sup>-2</sup>      | `cent`   | ¢ or % | `centiday`        |
 | 10<sup>-3</sup>      | `mil`    | m or ‰ | `milliday`        |
-| 2 x 10<sup>-4</sup>  | `period` | .      | `dodecimilliday`  |
-| 10<sup>-4</sup>      | `phrase` |  ̑      | `decimilliday`    |
-| 2 x 10<sup>-5</sup>  | `bar`    | \|     | `docentimilliday` |
+| 2 x 10<sup>-4</sup>  | `period` | .      | `didecimilliday`  |
+| 10<sup>-4</sup>      | `phrase` |  ̑ or ‱ | `decimilliday`    |
+| 2 x 10<sup>-5</sup>  | `bar`    | \|     | `dicentimilliday` |
 | 10<sup>-5</sup>      | `beat`   | ࿁      | `centimilliday`   |
 | 10<sup>-6</sup>      | `mic`    | μ      | `microday`        |
 | 10<sup>-7</sup>      | `liph`   | m̑      | `decimicroday`    |
@@ -441,6 +441,18 @@ The pattern above requires that the `splits` are separated by the default `space
 | Zet  | `»»61»0` |
 
 : The spread that represent the constant length subyear units {#tbl-constant}
+
+### Pomodoro {#sec-pom}
+
+Another real-life application of `spreads` can be to intersperse breaks in between periods of work. `Declock` uses the term `pom`, which is short for [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique), to describe a combined unit of work and rest. The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the `Declock` units would be to have `poms` that consist of 17 `mils` of work and 3 `mils` of rest, with a 17 `mil` break after every 4 `poms`. If we did not include the longer break, we could write infinite `poms` as this `split spread`: `»».017».003`. The longer break complicates the pattern and introduces repetition to the `split spread`: `»».017,.017,.017,.017».003,.003,.003,.02`.
+
+#### Replication operator {#sec-operator}
+
+Repetition of values is the price we pay for breaking a pattern, but we can mitigate this repetition by using the replication operator `*` to replace a repetitive values. When we apply this approach to the `spread` above: `»».017,.017,.017,.017».003,.003,.003,.02`, it becomes easier to read and understand: `»».017*4».003*3,.02`. The replication operator can also be used in the `span` of a `split spread` or the `stop` of a `stepped slice` to indicate has many cycles of `splits` or `steps` we want to complete. For example, instead of writing `.5».7».017*4».003*3,.02` to indicate 2 sets of 4 `poms` that start at noon, we can write `.5»*2».017*4».003*3,.02` to mean that we will start at noon (`.5`) and end after completing two cycles (`*2`).
+
+#### Percent, permil, and permyr operator {#sec-operator}
+
+We can make the `split spread` above even shorter by using the `%` and `‰` operators, because all of its values are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day. We can therefore rewrite `.5».7».017*4».003*3,.02` as `.5».7»17‰*4»3‰*3,2%`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), so it is also possible to write `.5».7»17‰*4»3‰*3,2%` as `.5».7»17m*4»3m*3,2%`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator (hex: `2031`, html: `&pertenk;`), which is short for permyriad and represents `Declock phrases`.
 
 ### Splices {#sec-splices}
 
