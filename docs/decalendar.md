@@ -429,7 +429,7 @@ In addition to default `start` and `stop` values, `spreads` also have default `s
 
 ### Splits {#sec-splits}
 
-As with `stepped slices`, we create non-consecutive `series` by "splitting" a `simple spread` (`start»span` or `stop«span`) into `split spread` (`start»span»split` or `stop«span«split`) with a `split` value that works like the opposite of a `step`. While `steps` keep items that are "stepped" on, `splits` exclude items that are used to create the boundaries of the `splits`. `Split spreads` with a `split` greater than 1 will yield a `series` of `segments`. The `split spread` `»»4` that skips every 5th day to create groups of 4 days throughout the year. Notably, `»»4` will always end with a `segment` containing the last 4 days of common years, `360:364`, `360»004`, or `364«004`, even in leap years, because partial splits are no allowed. Just like `stepped slices`, `split spreads` cannot be included in a `series`, because every `split` and `space` can have a `series` of values.
+As with `stepped slices`, we can create non-consecutive `series` by "splitting" a `simple spread` (`start»span` or `stop«span`) into `split spread` (`start»span»split` or `stop«span«split`) with a `split` value that works like the opposite of a `step`. While `steps` keep items that are "stepped" on, `splits` exclude items that are used to create the boundaries of the `splits`. `Split spreads` with a `split` greater than 1 will yield a `series` of `segments`. The `split spread` `»»4` that skips every 5th day to create groups of 4 days throughout the year. Notably, `»»4` will always end with a `segment` containing the last 4 days of common years, `360:364`, `360»004`, or `364«004`, even in leap years, because partial splits are no allowed. Just like `stepped slices`, `split spreads` cannot be included in a `series`, because every `split` and `space` can have a `series` of values.
 
 ### Spaces {#sec-spaces}
 
@@ -444,11 +444,11 @@ The pattern above requires that the `splits` are separated by the default `space
 
 : The spreads that represent the constant length subyear units {#tbl-constant}
 
-### Concatenation {#sec-cat}
+### Nesting {#sec-nest}
 
-`Split spreads` can be concatenated to create `spans` or `splits` that are nested within other `spans` or `splits`. The intended use of `spread` concatenation is to first "spread" across days and then "spread" across times in those days. We can append `.3».4`, a `simple spread` that represents the `Decalendar` workday, to `»»3»2` and obtain `»»3»2».3».4`, a concatenated `spread` that represents the time spent at work in a `Decalendar` year.
+`Split spreads` can be nested to create `spans` or `splits` within other `spans` or `splits`. Similarly, `slices` can be nested to create `slices` within `slices`. The intuition behind nested `spreads` and `slices` is that each item in the first (outer) `spread` or `slices` serves as a starting point for the second (inner) `spread`. The main use of `spread` nesting is to first "spread" or "slice" across days and then "spread" or "slice" across times in those days. We can append `.3».4`, a `simple spread` that represents the `Decalendar` workday, to `»»3»2` and obtain `»»3»2».3».4`, a nested `spread` that represents the time spent at work in a `Decalendar` year. The `slice` equivalent of `»»3»2».3».4` is `:365:1,1,3:.3:.7`.
 
-Instead of just a single `segment` per day, we could add a `split` and a `space` to the concatenated `spread` above and include breaks throughout the day. A typical workday consists of two blocks of work separated by a lunch break in the middle of the day. The concatenated `spread` `»»3»2».3».4».18».04`, includes a 4-`cent`-long lunch break in between two 18-`cent`-long work sessions. The table below shows this schedule in the form of `slices` and `spreads`.
+The nested `spread` above is more succinct than the nested `slice`, but the two are synonymous. It is very awkward to create long consecutive sequences with breaks in between using `slices`. For example, to include a lunch break in the middle of work, we could simply add a `split` and a `space` to the nested `spread` above: `»»3»2».3».4».18».04`. To do the same with a `slice`, we have to create 18 steps of 0.01 and a step of .04: `:365:1,1,3:.3:.7:18*.01,.04`. Here, we are using the replication operator (`*`) to avoid writing 0.01 18 times. The table below shows each part of this schedule in the form of `slices` and `spreads`.
 
 | slice   | spread  | spread  | label |
 | ------- | ------  | ------  | ----- |
@@ -458,17 +458,15 @@ Instead of just a single `segment` per day, we could add a `split` and a `space`
 
 : A workday schedule with a lunch break {#tbl-workday}
 
-
-
-
- We could use a series of `splits` and `spaces` to provide breaks in between the working sessions.
-
 ### Pomodoro {#sec-pom}
 
 Another real-life application of `spreads` can be to intersperse breaks in between periods of work. `Declock` uses the term `pom`, which is short for [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique), to describe a combined unit of work and rest. The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the `Declock` units would be to have `poms` that consist of 17 `mils` of work and 3 `mils` of rest, with a 17 `mil` break after every 4 `poms`. If we did not include the longer break, we could write infinite `poms` as this `split spread`: `»».017».003`. The longer break complicates the pattern and introduces repetition to the `split spread`: `»».017,.017,.017,.017».003,.003,.003,.02`.
+`.3».7».08»».017».003`
 
 The 3.4-`dime` long `Decalendar` workday starts at `Dot 35`, ends at `Dot 69`, and can be summarized by the `spread` `.35».34`. This work schedule is 6̅ `mils` longer than the typical 9 to 5 schedule, because it starts 2.5 `cents` earlier than 9AM (`Dot 375`) and ends 1.83̅ `cents` earlier than 5PM (`Dot 7083̅`).
-`.5».9».08».02».017».003`
+
+
+We could use a series of `splits` and `spaces` to provide breaks in between the working sessions.
 
 #### Replication operator {#sec-rep}
 
