@@ -177,7 +177,7 @@ In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are o
 
 Even though it provides formats for months and weeks, `Decalendar` envisions a world in which these units are replaced by `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
 
-A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from rest days. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as rest days, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 109 rest days in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
+A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from restdays. `Decalendar` defines `Fourday`, `Eightday`, and `Nineday` as restdays, which means that days with numbers that end in 4, 8, or 9 are days off from work and school. In total, there are 256 workdays and 109 restdays in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
 
 #### Gregorian calendar leap day considerations {#sec-leap}
 
@@ -191,7 +191,7 @@ If we do not want to bother with accounting for the Gregorian calendar leap day,
 
 #### Gregorian calendar date to `dotd` conversion {#sec-dotd}
 
-Using the asterisk with positive day number allows us to determine what the `dotd` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are rest days. In fact, many holidays just so happen to fall on `Decalendar` rest days. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
+Using the asterisk with positive day number allows us to determine what the `dotd` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are restdays. In fact, many holidays just so happen to fall on `Decalendar` restdays. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
 
 | name             | date        | doty | dotm |
 | ------           | ------      | ---- | ---- |
@@ -204,7 +204,7 @@ Using the asterisk with positive day number allows us to determine what the `dot
 | Veterans’ Day    | November 11 | 314* | A+10 |
 | Christmas Day    | December 25 | 358* | B+24 |
 
-: Gregorian calendar holidays that happen to fall on `Decalendar` rest days {#tbl-holidays}
+: Gregorian calendar holidays that happen to fall on `Decalendar` restdays {#tbl-holidays}
 
 In the table above, the last digit of the day of the month numbers of dates in February, June, and July are the same as the last digit of their day numbers. This pattern is maintained in all common years, but in leap years the last digits of the day of the month and day of the year numbers match in February, April, and May. The table below shows the number that has to be added to the day of the month number to get the corresponding `dotd` number in each month in common years (365) and leap years (366).
 
@@ -227,7 +227,7 @@ In the table above, the last digit of the day of the month numbers of dates in F
 
 #### Gregorian calendar week date to `doty` conversion {#sec-dotw}
 
-We can use this method to find out what `dotd` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar `rest day and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
+We can use this method to find out what `dotd` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar` restday and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
 
 |        | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 | -----  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -452,7 +452,7 @@ Repetition of values is the price we pay for breaking a pattern, but we can miti
 
 #### Percent, permil, and permyr operator {#sec-per}
 
-We can make the `split spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. All of the values in `.35».7».017*4».003*3,.02` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this `split spread` as `.5».7»4*17‰»3*3‰,2%`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.35».4»4*17‰»3*3‰,2%` as `.3».4»4*17m»3*m3,2%`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator (hex: `2031`, html: `&pertenk;`), which is short for permyriad and represents `Declock phrases`.
+We can make the `split spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. All of the values in `.35».4».017*4».003*3,.02` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this `split spread` as `.35».4»4*17‰»3*3‰,2%`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.35».4»4*17‰»3*3‰,2%` as `.35».4»4*17m»3*3m,2%`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator (hex: `2031`, html: `&pertenk;`), which is short for permyriad and represents `Declock phrases`.
 
 ### Slice and spread hybrids {#sec-hybrids}
 
@@ -460,15 +460,51 @@ We can make the `split spread` above even shorter by using the `per` operators: 
 
 Both of these hybrids either `spread` forward (`start:stop:step»span»split»space` or `start»span»split»space:stop:step`) or `spread` backward (`start:stop:step«span«split«space` or `stop«span«split«space:start:step`) from each `step` of the `slice`. In all cases, the `slice` elements are used for dates and the `spread` elements are used for times. When put together, these elements replicate a `segment` or a series of `segments` a series of days.
 
-Between the two hybrid approaches, `Decalendar` recommends `sleds`, instead of `splices`, because they follow the convention of largest-to-smallest in `dot` format dates (`±year±day.day±z`, `year±m±dd.day±z`, and `year±ww±d.day±z`). Another advantage of `sleds` is they keep dates closer together. For example, the `sled` `000.35::2,8».4` and `splice` `000.35».4::2,8` both begin with a start time of `Dot 35` on the first `Zeroday` of the year, but the `sled` first specifies every `Zeroday` and `Twoday` of the year before providing the `span`, whereas the `splice` focuses on describing the first `segment` before saying how it should be replicated.
+Between the two hybrid approaches, `Decalendar` recommends `sleds`, instead of `splices`, because they follow the convention of largest-to-smallest in `dot` format dates (`±year±day.day±z`, `year±m±dd.day±z`, and `year±ww±d.day±z`). Another advantage of `sleds` is they keep dates closer together. For example, the `sled` `000.35::3*1,2,2*1,3».4` and `splice` `000.35».4::3*1,2,2*1,3` both begin with a start time of `Dot 35` on the first `Zeroday` of the year, but the `sled` first specifies all of the days before providing the `span`, whereas the `splice` focuses on describing the first `segment` before saying how it should be replicated.
 
-We can build on the `sled` above to create a representation of the recommended `Decalendar` work schedule. `Decalendar` specifies every day except `Fourday`, `Eightday`, and `Nineday` as workdays. The sequence of restdays can be written as `4::4,1,5`, while the workdays can be summarized as `::3*1,2,2*1,3`. A 4-`dime` long workday that starts at `Dot 35` and ends at `Dot 75` would then be `000.35::3*1,2,2*1,3».4`. We 
+The `sled` and `slice` above represent the recommended `Decalendar` work schedule. `Decalendar` specifies every day except `Fourday`, `Eightday`, and `Nineday` as workdays. The restdays in the form of a `slice` are `4::4,1,5`, while the workdays in `slice` form are `::3*1,2,2*1,3`. The 4-`dime` long `Decalendar` workday starts at `Dot 35`, ends at `Dot 75`, and can be summarized by the `spread` `.35».4`. This work schedule starts a 2.5% earlier and ends 4.16̅% later than a typical 9 to 5 (9AM=37.5%, 5PM=70.83̅%). If 4 dimes is too much time to spend at work or in school, the first and/or last 5 `cents` can be skipped to start the workday at `Dot 4` (2.5% later than 37.5%) and/or end it at `Dot 7` (.83̅% earlier than 70.83̅%).
 
-Instead of just a single `segment` per day, we could add a `split` and a `space` and have breaks throughout the day. `Sleds` first specify the days and then define the `segments`. 
+Instead of just a single `segment` per day, we could add a `split` and a `space` and have breaks throughout the day. Following the  Pomidoro technique timing, we would split the workday into 3 sets of 4 `poms` (`000.4::3*1,2,2*1,3».3»4*17m»3*3m,2%`) or 4 sets of 4 `poms` (`000.35::3*1,2,2*1,3».4»4*17m»3*3m,2%`). A more typical workday would be two large blocks of work separated by a lunch break in the middle of the day. Such a workday could also be either 3 `dimes` (`000.4::3*1,2,2*1,3».3».1,.16».4`) or 4 `dimes` long (`000.35::3*1,2,2*1,3».4».15,.21».4`).
+
+(`000.4::3*1,2,2*1,3».3»4%,2*5%»1%,4%,2*1%`)
+`000.4».3»4%,4%,5%,5%»1%,1%,4%,1%:2,8`
+`000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`
+It is possible to  option is to take more The table below summarizes the recommended daily work schedule.
+
+ When combined together, the workdays `slice` and workday `spread` create the `sled` `000.35::3*1,2,2*1,3».4`.
+`Sleds` first specify the days and then define the `segments`. 
 
 #### Percent operator {#sec-operator}
 
 A more realistic workday or school day would have a longer break for lunch. We could achieve this with a `series` of `splits` and a `series` of `spaces`. Instead of listing all of the times in a `splice` like this: `000.35».4».04,.04,.05,.05,.04,.04,.05».01,.01,.04,.01,.01,.01:2,8`, we can use cycling to remove some of the values that repeat as in this `slice`: `000.35».4».04,.04,.05,.05».01,.01,.04,.01:2,8`.  Repetition of values is the price we pay for breaking the pattern, but we can mitigate this repetition by using the `%` operator, because all of the values in each of the series are percents of the day. The resulting `splice `, `000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`, is shorter and easier to read.
+
+| slice   | spread | spread | label |
+| ------- | ------ | ------ | ----- |
+| 40%:44% | 40%»4% | 44%«4% | work0 |
+| 44%:45% | 44%»1% | 45%«1% | rest0 |
+| 45%:50% | 45%»5% | 50%«5% | work1 |
+| 50%:54% | 50%»4% | 54%«4% | lunch |
+| 54%:59% | 54%»5% | 59%«5% | work2 |
+| 59%:60% | 59%»1% | 60%«1% | rest1 |
+| 60%:64% | 60%»4% | 64%«4% | work3 |
+| 64%:65% | 64%»1% | 65%«1% | rest2 |
+| 65%:70% | 65%»5% | 70%«5% | work4 |
+
+| slice   | spread | spread | label |
+| ------- | ------ | ------ | ----- |
+| 35%:39% | 35%»4% | 39%«4% | work0 |
+| 39%:40% | 39%»1% | 40%«1% | rest0 |
+| 40%:44% | 40%»4% | 44%«4% | work1 |
+| 44%:45% | 44%»1% | 45%«1% | rest1 |
+| 45%:50% | 45%»5% | 50%«5% | work2 |
+| 50%:54% | 50%»4% | 54%«4% | lunch |
+| 54%:59% | 54%»5% | 59%«5% | work3 |
+| 59%:60% | 59%»1% | 60%«1% | rest2 |
+| 60%:64% | 60%»4% | 64%«4% | work4 |
+| 64%:65% | 64%»1% | 65%«1% | rest3 |
+| 65%:69% | 65%»4% | 69%«4% | work5 |
+| 69%:70% | 69%»1% | 70%«1% | rest4 |
+| 70%:75% | 70%»5% | 75%«5% | work6 |
 
 #### Replication operator {#sec-operator}
 
@@ -794,7 +830,7 @@ A group of dates, times, or `datetimes` is called a series. The items in a serie
 
 `Dek 36` serves as the bridge from the current year to the next. In `Dek 36`, it may be more convenient to use negative day numbers, because while the positive day number counts up to 364 or 365, the negative day number always counts up to -1. After the last day of the year, `Day -1`, the negative day number of the current year naturally transforms into the positive day number of the next year, whereas the positive day number jumps from 364 or 365 to 0. This jump represents a change in the rhythm of the `dekly` schedule because we go from `Fourday` (if n=365) or `Fiveday` (if n=366) to `Zeroday`.
 
-To make it easier to adapt to the new rhythm, New Year's Day (`Day 0`) and Leap Day (`Day 365`), are holidays in the `Decalendar` system. With the New Year's Day and Leap Day holidays, there are 110 days off in common years and 111 days off in leap years, because every `Fourday`, `Eightday`, and `Nineday` is also a rest day. Resting on `Fourday` helps to smooth the transition between years, because the last `Fourday` of the year (`Day 364`) combines with New Year's Day and Leap Day to form a buffer of rest days (2 if n=365 or 3 if n=366) around the time the year is changing.
+To make it easier to adapt to the new rhythm, New Year's Day (`Day 0`) and Leap Day (`Day 365`), are holidays in the `Decalendar` system. With the New Year's Day and Leap Day holidays, there are 110 days off in common years and 111 days off in leap years, because every `Fourday`, `Eightday`, and `Nineday` is also a restday. Resting on `Fourday` helps to smooth the transition between years, because the last `Fourday` of the year (`Day 364`) combines with New Year's Day and Leap Day to form a buffer of restdays (2 if n=365 or 3 if n=366) around the time the year is changing.
 
 `Decalendar` focuses on New Year's Day and Leap Day, but other holidays can be tracked using. The positive day number of New Year's Day (0) never changes, but its negative day number is -365 in common years and -366 in leap years. A similar shift occurs in leap years to Gregorian calender dates that occur before `Day 59`, the Gregorian calendar leap day. For example, Valentine's Day is always `Day 44`, but it is also `Day -321` in common years or `Day -322` in leap years. Conversely, the positive day numbers of Gregorian calendar that occur after `Day 59` increment by 1 in leap years, but their negative day numbers are unaffected. Essentially, the Gregorian calendar leap day throws `Decalendar` day numbers out of alignment with Gregorian calendar dates.
 
@@ -817,7 +853,7 @@ but eventually the way the dates of these holidays are defined should be changed
 * `314.15926`: Pi day
 * `333.33333`: Triples day
 
-`Deks` can divided up into 2 halves called the `prot` and the `deut`. The `prot` has 4 workdays and 1 rest day, while the `deut` has 3 workdays and 2 rest days. The 4 workdays in the `prot` are called the `tet`, while the 3 workdays in the `deut` are called the `trep`. The inspiration for the word `tet`, table below lists the positive and negative day numbers for the b`dekly` schedule provides of remembering a month and a day of month, we could just  the `.y` format, the `dek` number is the first two of the day number. the `.w` week number can be approximated by dividing the `.y` day number by 7. month can be approximate third of a month or about a week and a half. `Deks` are  The day number in the `.y` format could replace  Instead, the would provides all of the information we need.
+`Deks` can divided up into 2 halves called the `prot` and the `deut`. The `prot` has 4 workdays and 1 restday, while the `deut` has 3 workdays and 2 restdays. The 4 workdays in the `prot` are called the `tet`, while the 3 workdays in the `deut` are called the `trep`. The inspiration for the word `tet`, table below lists the positive and negative day numbers for the b`dekly` schedule provides of remembering a month and a day of month, we could just  the `.y` format, the `dek` number is the first two of the day number. the `.w` week number can be approximated by dividing the `.y` day number by 7. month can be approximate third of a month or about a week and a half. `Deks` are  The day number in the `.y` format could replace  Instead, the would provides all of the information we need.
 
 ## Implementation
 
@@ -1034,7 +1070,7 @@ The negative day numbers can tell us if we have crossed over into another year. 
 
 December 25th always falls on an `Eightday` or a `Nineday`. These two days are called the `dekend` and serve as a break from work and school. To avoid 8 consecutive days of work or study, `Decalendar` defines `Fourday` as an additional day off. Resting on `Fourday`
 a. creates the shortest possible sequences of consecutive workdays,
-b. combines work and rest days into convenient groups of 5 days, and
+b. combines work and restdays into convenient groups of 5 days, and
 c. yields a smooth transition between years.
 a) The 4 consecutive workdays before `Fourday` are called called the `tet`, while the 3 consecutive workdays before the `dekend` are called the `trep`. Together with the `Fourday`, these two sequences of workdays are known as the `okt`.
 b) The `tet` and `Fourday` form the first half of the `dek`, which is called the `prot`. The second half, which consists of the `trep` and the `dekend`, is called the `deut`. A general term for `prots` and `deuts` is `pent`.
@@ -1149,7 +1185,7 @@ Based on the table above,  This pattern determines the
 The last digit of the doy is called the dekday. Deks are groups of 10 days that can 
 - 0
 
-Dekdays 4, 8, and 9 are rest days.
+Dekdays 4, 8, and 9 are restdays.
 
 
 A core aspect of Decalendar organizes days into groups of 10. Each 10-day group is called a dek. The first two digits of the doy index is the dek index. The last digit of the doy index is the dekday, the ordinal number of the day in the dek.
