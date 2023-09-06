@@ -62,7 +62,7 @@ In the `datetimes` above, the time has 3 digits, because this is the best level 
 | 2 x 10<sup>-4</sup>  | `period` | .      | `didecimilliday`  |
 | 10<sup>-4</sup>      | `phrase` |  ̑ or ‱ | `decimilliday`    |
 | 2 x 10<sup>-5</sup>  | `bar`    | \|     | `dicentimilliday` |
-| 10<sup>-5</sup>      | `beat`   | ࿁      | `centimilliday`   |
+| 10<sup>-5</sup>      | `beat`   | °      | `centimilliday`   |
 | 10<sup>-6</sup>      | `mic`    | μ      | `microday`        |
 | 10<sup>-7</sup>      | `liph`   | m̑      | `decimicroday`    |
 | 10<sup>-8</sup>      | `lib`    | m̊      | `centimicroday`   |
@@ -178,6 +178,8 @@ In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are o
 Even though it provides formats for months and weeks, `Decalendar` envisions a world in which these units are replaced by `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
 
 A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from restdays. `Decalendar` defines `Threeday`, `Fourday`, `Eightday`, and `Nineday` as restdays, which means that days with numbers that end in 3, 4, 8, or 9 are days off from work and school. In total, there are 219 workdays and 146 restdays in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
+
+The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` (261*8/240) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 8.76 `deks` (219*.04) spent at work every year. In simpler terms, `Decalendar` offsets more restdays with longer workdays.
 
 #### Gregorian calendar leap day considerations {#sec-leap}
 
@@ -417,21 +419,21 @@ If we omit the `stop`, instead of the `start`, we would "slice" up to and includ
 
 The `simple slices` (`start:stop`) described above are a type of time `segment`, an unbroken time interval. To break up a `simple slice` into a non-consecutive `series`, we can add a `step` value and create a `stepped slice` (`start:stop:step`). `Stepped slices` move in `step`-sized "steps" starting from `start`, skipping over $step-1$ items with each "step", keeping only items that are "stepped" on. In other words, `stepped slices` keep items whose index (zero-based position) in the `slice` is evenly divisible by `step`. A `step` value of 1 keeps every item, because every index is divisible by 1, and a `step` of 2 keeps every other item, those with even-numbered indexes. `Day 0` and every other third day in the year thereafter (`Day 3`, `Day 6`, etc.) can be represented by the `slice` `::3`.
 
-To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of "steps". The `slice` `:365:1,1,3` represents all of the `Decalendar` workdays in a year. It is necessary to specify 365 as the `stop`, so that Leap Day (`Day 365`) is not included as a workday in leap years. Similarly, `003::1,4` is a `seq` that represents all of the regular restdays, not including the Leap Day holiday.
+To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of `steps`. The `slice` `:365:1,1,3` represents all of the `Decalendar` workdays in a year. It is necessary to specify 365 as the `stop`, so that Leap Day (`Day 365`) is not included as a workday in leap years. Similarly, `003::1,4` is a `seq` that represents all of the regular restdays, not including the Leap Day holiday. `Stepped slices` cannot be included in `series`, because both use commas (`,`) and it would not possible to differentiate a `series` of `steps` from subsequent items in the `series`. The simple rule is that `slices` with more than 1 colon (`:`) cannot be part of a series. For example, `:365:1,1,3` is a `stepped slice` with a `series` of 3 `steps` rather than a series consisting of a `slice` and two numbers.
 
 ### Spreads {#sec-spreads}
 
-Another way we could create a `series` is with a `spread`. `Simple spreads` consist of a `start` and a `span` (`start»span`) separated by a right [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `bb`, html: `&raquo;`, vim/compose: `>>`)  or a `stop` and a `span` (`stop«span`) separated by a left [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `ab`, html: `&laquo;`, vim/compose: `<<`). The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `>003`, which is synonymous with the `slice` `:003`. In this example, the `start` is 0, while the `stop` and the `span` are both 3.
+To create `series` of consecutive items with breaks in between, it may be better to use a `spread` than a `slice`. `Simple spreads` consist of a `start` and a `span` (`start»span`) separated by a right [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `bb`, html: `&raquo;`, vim/compose: `>>`)  or a `stop` and a `span` (`stop«span`) separated by a left [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `ab`, html: `&laquo;`, vim/compose: `<<`). When entering text by hand, it is acceptable to use two less-than (`<<`) or two greater-than signs (`>>`) instead of guillemets. The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `>003`, which is synonymous with the `slice` `:003`. In this example, the `start` is 0, while the `stop` and the `span` are both 3.
 
 In addition to default `start` and `stop` values, `spreads` also have default `span` values. If we "spread" forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `«003` represents the last 3 days of any year. We could also use a negative `start` of `-003`, the third to last day of any year, to create the `slice` `-003:` and the `spread` `-003»`, both of which are synonymous with `«003`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers.
 
 ### Splits {#sec-splits}
 
-As with `stepped slices`, we create non-consecutive `series` by "splitting" a `simple spread` (`start»span` or `stop«span`) into `split spread` (`start»span»split` or `stop«span«split`) with a `split` value that works like the opposite of a `step`. While `steps` keep items that are "stepped" on, `splits` exclude items that are used to create the boundaries of the `splits`. `Split spreads` with a `split` greater than 1 will yield a `series` of `segments`. The `split spread` `»»4` that skips every 5th day to create groups of 4 days throughout the year. The first 3 `splits` in `»»4` can be written as three different `series` of `segments`: `:004,005:009,010:014`, `»004,005»004,010»004`, or `004«,009«004,010«004`. Notably, `»»4` will always end with a `segment` containing the last 4 days of common years, `360:364`, `360»004`, or `364«004`, even in leap years, because partial splits are no allowed.
+As with `stepped slices`, we create non-consecutive `series` by "splitting" a `simple spread` (`start»span` or `stop«span`) into `split spread` (`start»span»split` or `stop«span«split`) with a `split` value that works like the opposite of a `step`. While `steps` keep items that are "stepped" on, `splits` exclude items that are used to create the boundaries of the `splits`. `Split spreads` with a `split` greater than 1 will yield a `series` of `segments`. The `split spread` `»»4` that skips every 5th day to create groups of 4 days throughout the year. Notably, `»»4` will always end with a `segment` containing the last 4 days of common years, `360:364`, `360»004`, or `364«004`, even in leap years, because partial splits are no allowed. Just like `stepped slices`, `split spreads` cannot be included in a `series`, because every `split` and `space` can have a `series` of values.
 
 ### Spaces {#sec-spaces}
 
-The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `»»3»2` can be written as `:003`, `»003`, or `003«`, while the last `segment` is `360:363`, `360»003`, or `363«003`. The patterns created by `»»4` and `»»3»2` can be mixed if we use a `series` of `splits` and `spaces`. The `split spread` `»»4,3»1,2` alternates between `»»4` and `»»3»2`. The workdays in the first `dek` of `»»4,3»1,2` can be written as the following `series` of `segments`: `:004,005:008`, `»004,005»003`, or `004«,008«003`. A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `zets` can be summarized as `split spreads` as shown in the following table:
+The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `»»3»2` can be written as `:003`, `»003`, or `003«`, while the last `segment` is `360:363`, `360»003`, or `363«003`. The workdays in the first `dek` of `»»3»2` can be written as the following `series` of `segments`: `:004,005:008`, `»003,005»003`, or `003«,008«003`. A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `zets` can be summarized as `split spreads` as shown in the following table:
 
 | Unit | Spread   |
 | ---- | -------- |
@@ -440,7 +442,165 @@ The pattern above requires that the `splits` are separated by the default `space
 | Ep   | `»»73»0` |
 | Zet  | `»»61»0` |
 
-: The spread that represent the constant length subyear units {#tbl-constant}
+: The spreads that represent the constant length subyear units {#tbl-constant}
+
+### Concatenation {#sec-cat}
+
+`Split spreads` can be concatenated to create `spans` or `splits` that are nested within other `spans` or `splits`. The intended use of `spread` concatenation is to first "spread" across days and then "spread" across times in those days. We can append `.3».4`, a `simple spread` that represents the `Decalendar` workday, to `»»3»2` and obtain `»»3»2».3».4`, a concatenated `spread` that represents the time spent at work in a `Decalendar` year.
+
+Instead of just a single `segment` per day, we could add a `split` and a `space` to the concatenated `spread` above and include breaks throughout the day. A typical workday consists of two blocks of work separated by a lunch break in the middle of the day. The concatenated `spread` `»»3»2».3».4».18».04`, includes a 4-`cent`-long lunch break in between two 18-`cent`-long work sessions. The table below shows this schedule in the form of `slices` and `spreads`.
+
+| slice   | spread  | spread  | label |
+| ------- | ------  | ------  | ----- |
+| .30:.48 | .30».18 | .48«.18 | work0 |
+| .48:.52 | .48».04 | .52«.04 | lunch |
+| .52:.70 | .52».18 | .70«.18 | work1 |
+
+: A workday schedule with a lunch break {#tbl-workday}
+
+
+
+
+ We could use a series of `splits` and `spaces` to provide breaks in between the working sessions.
+
+### Pomodoro {#sec-pom}
+
+Another real-life application of `spreads` can be to intersperse breaks in between periods of work. `Declock` uses the term `pom`, which is short for [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique), to describe a combined unit of work and rest. The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the `Declock` units would be to have `poms` that consist of 17 `mils` of work and 3 `mils` of rest, with a 17 `mil` break after every 4 `poms`. If we did not include the longer break, we could write infinite `poms` as this `split spread`: `»».017».003`. The longer break complicates the pattern and introduces repetition to the `split spread`: `»».017,.017,.017,.017».003,.003,.003,.02`.
+
+The 3.4-`dime` long `Decalendar` workday starts at `Dot 35`, ends at `Dot 69`, and can be summarized by the `spread` `.35».34`. This work schedule is 6̅ `mils` longer than the typical 9 to 5 schedule, because it starts 2.5 `cents` earlier than 9AM (`Dot 375`) and ends 1.83̅ `cents` earlier than 5PM (`Dot 7083̅`).
+`.5».9».08».02».017».003`
+
+#### Replication operator {#sec-rep}
+
+Repetition of values is the price we pay for breaking a pattern, but we can mitigate this repetition by using the `rep` (replication) operator (`*`) to replace the repetitive values. When we apply this approach to the `spread` above: `»».017,.017,.017,.017».003,.003,.003,.02`, it becomes easier to read and understand: `»»4*.017»3*.003,.02`. The rep can also be used in the `span` of a `split spread` or the `stop` of a `stepped slice` to indicate has many cycles of `splits` or `steps` we want to complete. For example, instead of writing `.35».4»4*.017»3*.003,.02` to indicate sets of 4 `poms` that start at `Dot 35` and last 4 `dimes`, we can write `.35»4*»4*.017»3*.003,.02` to mean that we will start at `Dot 35` and end after completing four cycles (`4*`).
+
+#### Percent, permil, and permyr operator {#sec-per}
+
+We can make the `split spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. All of the values in `.35».4».017*4».003*3,.02` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this `split spread` as `.35».4»4*17‰»3*3‰,2%`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.35».4»4*17‰»3*3‰,2%` as `.35».4»4*17m»3*3m,2%`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator (hex: `2031`, html: `&pertenk;`), which is short for permyriad and represents `Declock phrases`.
+
+### Slice and spread hybrids {#sec-hybrids}
+
+`Split spreads` can be useful for planning 1 day of `poms`, but the easiest way to plan multiple days is with a `slice`-`spread` hybrid called a `sled` or a `spread`-`slice` hybrid called a `splice`. These hybrids have all of the elements of both `spreads` and `slices`: `start`, `stop`, `step`, `span`, `split`, and `space`. The only different between the hybrids is the order of these elements. `Sleds` put the `slice` elements first (`start:stop:step»span»split»space` or `start:stop:step«span«split«space`), while `splices` start with the `spread` elements (`start»span»split»space:stop:step` or `stop«span«split«space:start:step`).
+
+Both of these hybrids either `spread` forward (`start:stop:step»span»split»space` or `start»span»split»space:stop:step`) or `spread` backward (`start:stop:step«span«split«space` or `stop«span«split«space:start:step`) from each `step` of the `slice`. In all cases, the `slice` elements are used for dates and the `spread` elements are used for times. When put together, these elements replicate a `segment` or a series of `segments` a series of days. Between the two hybrid approaches, `Decalendar` recommends `sleds`, instead of `splices`, because they follow the convention of largest-to-smallest in `dot` format dates (`±year±day.day±z`, `year±m±dd.day±z`, and `year±ww±d.day±z`).
+
+### Brackets {#sec-brackets}
+
+Using square brackets (`[]`), we can replicate a 
+Another advantage of `sleds` is they keep dates closer together. For example, the `sled` `000.35::3*1,2,2*1,3».34` and `splice` `000.35».34::3*1,2,2*1,3` both begin with a start time of `Dot 35` on the first `Zeroday` of the year, but the `sled` first specifies all of the days before providing the `span`, whereas the `splice` focuses on describing the first `segment` before saying how it should be replicated.
+
+The `sled` and `slice` above represent the recommended `Decalendar` work schedule. `Decalendar` specifies every day except `Threeday`, `Fourday`, `Eightday`, and `Nineday` as workdays. The restdays in the form of a `slice` are `4::4,1,5`, while the workdays in `slice` form are `::3*1,2,2*1,3`. The 3.4-`dime` long `Decalendar` workday starts at `Dot 35`, ends at `Dot 69`, and can be summarized by the `spread` `.35».34`. This work schedule is 6̅ `mils` longer than the typical 9 to 5 schedule, because it starts 2.5 `cents` earlier than 9AM (`Dot 375`) and ends 1.83̅ `cents` earlier than 5PM (`Dot 7083̅`).
+
+### Slice and spread hybrids {#sec-hybrids}
+
+Following this schedule, a worker would spend 2.38 days at work per `dek`, which is 238 `mils` per day on average. In a typical 40-hour workweek, a worker would spend 238.0952381 `mils` per day at work. Interestingly, the difference is only 9.52381 beats (8.22857184 seconds) long. If a worker spends an extra 5 `cents` at work for 6 days, they should be entitled to an extra day off. This schedule would be Starting at  days instead of 10, which is almost exactly the same as if we extended the typical workweek to `000.3::2[3*1,2]».39»2*.15».4`.
+Instead of just a single `segment` per day, we could add a `split` and a `space` to the `sled` above and include breaks throughout the day. A typical workday would be two blocks of work separated by a lunch break in the middle of the day. We could combine the `spread` `.35».34»2*.15».4` with the `sled` above to create a new `sled` with two 15-`cent`-long work sessions with one 4-`cent`-long lunch break in between: `000.35::3*1,2,2*1,3».34»2*.15».4`.
+
+We can adjust the time spent at work while keeping the lunch break at `Dot 5` by changing the length of the work sessions, the start time, and the duration. If we expect 3 `dimes` of work per day and we can  dimes is too much time to spend at work or in school
+Another option is to spend 
+If more time at work is required dimes is too much time to spend at work or in school, the first and/or last 5 `cents` can be skipped to start the workday at `Dot 4` (2.5% later than 37.5%) and/or end it at `Dot 7` (.83̅% earlier than 70.83̅%).
+
+(`000.4::3*1,2,2*1,3».3»4%,2*5%»1%,4%,2*1%`)
+`000.4».3»4%,4%,5%,5%»1%,1%,4%,1%:2,8`
+`000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`
+It is possible to  option is to take more The table below summarizes the recommended daily work schedule.
+
+ When combined together, the workdays `slice` and workday `spread` create the `sled` `000.35::3*1,2,2*1,3».4`.
+`Sleds` first specify the days and then define the `segments`. 
+
+#### Percent operator {#sec-operator}
+
+A more realistic workday or school day would have a longer break for lunch. We could achieve this with a `series` of `splits` and a `series` of `spaces`. Instead of listing all of the times in a `splice` like this: `000.35».4».04,.04,.05,.05,.04,.04,.05».01,.01,.04,.01,.01,.01:2,8`, we can use cycling to remove some of the values that repeat as in this `slice`: `000.35».4».04,.04,.05,.05».01,.01,.04,.01:2,8`.  Repetition of values is the price we pay for breaking the pattern, but we can mitigate this repetition by using the `%` operator, because all of the values in each of the series are percents of the day. The resulting `splice `, `000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`, is shorter and easier to read.
+
+| slice   | spread | spread | label |
+| ------- | ------ | ------ | ----- |
+| 36%:44% | 36%»8% | 44%«8% | work0 |
+| 44%:45% | 44%»1% | 45%«1% | rest0 |
+| 45%:50% | 45%»5% | 50%«5% | work1 |
+| 50%:54% | 50%»4% | 54%«4% | lunch |
+| 54%:59% | 54%»5% | 59%«5% | work3 |
+| 59%:60% | 59%»1% | 60%«1% | rest2 |
+| 60%:64% | 60%»4% | 64%«4% | work4 |
+| 64%:65% | 64%»1% | 65%«1% | rest3 |
+| 65%:69% | 65%»4% | 69%«4% | work5 |
+| 69%:70% | 69%»1% | 70%«1% | rest4 |
+| 70%:75% | 70%»5% | 75%«5% | work6 |
+
+| slice   | spread | spread | label |
+| ------- | ------ | ------ | ----- |
+| 40%:44% | 40%»4% | 44%«4% | work0 |
+| 44%:45% | 44%»1% | 45%«1% | rest0 |
+| 45%:50% | 45%»5% | 50%«5% | work1 |
+| 50%:54% | 50%»4% | 54%«4% | lunch |
+| 54%:59% | 54%»5% | 59%«5% | work2 |
+| 59%:60% | 59%»1% | 60%«1% | rest1 |
+| 60%:64% | 60%»4% | 64%«4% | work3 |
+| 64%:65% | 64%»1% | 65%«1% | rest2 |
+| 65%:70% | 65%»5% | 70%«5% | work4 |
+
+| slice   | spread | spread | label |
+| ------- | ------ | ------ | ----- |
+| 35%:39% | 35%»4% | 39%«4% | work0 |
+| 39%:40% | 39%»1% | 40%«1% | rest0 |
+| 40%:44% | 40%»4% | 44%«4% | work1 |
+| 44%:45% | 44%»1% | 45%«1% | rest1 |
+| 45%:50% | 45%»5% | 50%«5% | work2 |
+| 50%:54% | 50%»4% | 54%«4% | lunch |
+| 54%:59% | 54%»5% | 59%«5% | work3 |
+| 59%:60% | 59%»1% | 60%«1% | rest2 |
+| 60%:64% | 60%»4% | 64%«4% | work4 |
+| 64%:65% | 64%»1% | 65%«1% | rest3 |
+| 65%:69% | 65%»4% | 69%«4% | work5 |
+| 69%:70% | 69%»1% | 70%«1% | rest4 |
+| 70%:75% | 70%»5% | 75%«5% | work6 |
+
+#### Replication operator {#sec-operator}
+
+We can make the `splice` above even shorter by using the replication operator `*` to replace a repetitive values. The result, `000.35»4%»2*4%,2*5%»2*1%,4%,1%::2,8`, is a bit easier to read and understand. We can modify the step to extend this splice to every workday in a `dek` by `000.35»4%»4%*2,5%*2»1%*2,4%,1%::1,1,1,2,1,1,3`. This represents another opportunity to use the replication operator. The final result, `000.35»4%»2*4%,2*5%»2*1%,4%,1%::3*1,2,2*1,3`, is the recommended `Decalendar` work schedule. This work schedule starts a 2.5% earlier and ends 4.16̅% later than a typical 9 to 5 (9AM=37.5%, 5PM=70.83̅%), but includes 4% of the day worth of breaks. The entire workday is 4 `dimes` long. If that is too much time to spend at work or in school, the first or last work session can be skipped to either start the workday at `Dot 4` or end it at  `Dot 7`. The table below summarizes the recommended daily work schedule.
+
+| slice   | spread | spread | label |
+| ------- | ------ | ------ | ----- |
+| 35%:39% | 35%»4% | 39%«4% | work0 |
+| 39%:40% | 39%»1% | 40%«1% | rest0 |
+| 40%:44% | 40%»4% | 44%«4% | work1 |
+| 44%:45% | 44%»1% | 45%«1% | rest1 |
+| 45%:50% | 45%»5% | 50%«5% | work2 |
+| 50%:54% | 50%»4% | 54%«4% | lunch |
+| 54%:59% | 54%»5% | 59%«5% | work3 |
+| 59%:60% | 59%»1% | 60%«1% | rest2 |
+| 60%:64% | 60%»4% | 64%«4% | work4 |
+| 64%:65% | 64%»1% | 65%«1% | rest3 |
+| 65%:69% | 65%»4% | 69%«4% | work5 |
+| 69%:70% | 69%»1% | 70%«1% | rest4 |
+| 70%:75% | 70%»5% | 75%«5% | work6 |
+
+: The recommend `Decalendar` daily work schedule {#tbl-schedule}
+
+
+### Slides {#sec-slides}
+
+Similar to the 
+
+`start»span»split»space:step`
+`stop«span«split«space:step`
+split  special `slices` and `spreads` called `stepped slices` and. 
+into `series` of `seqments` called `a`. `split spread` `stepped slices`  `Slices` `Slices` and `spreads` can also form that are not `simple` create `series` instead of `segments`. are called `stepped slices` and `split spreads`. `spaced spreads`. `Slices` can create `series` of non-consecutive dates, times, or `stamps` by `stepping`, w
+
+Spread-seqs
+Spreeqs
+ spread::seq
+
+### Slides {#sec-slides}
+
+`start:stop:step»span»split»space`
+`0.5».6::2,8`
+
+
+
+span space span skip
+
+`start:stop:step:step:step:step»span»split»space`
+`start`Instead of just a single `segment` per day, we could add a `split` and a `space` to the concatenated `spread` above and include breaks throughout the day. A typical workday would be two blocks of work separated by a lunch break in the middle of the day. The concatenated `spread` `»»3»2».35».34».15».04`, includes a 4-`cent`-long lunch break in between two 15-`cent`-long work sessions.
 
 ### Pomodoro {#sec-pom}
 
