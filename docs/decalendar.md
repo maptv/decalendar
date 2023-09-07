@@ -62,28 +62,28 @@ In the `datetimes` above, the time has 3 digits, because this is the best level 
 | 2 x 10<sup>-4</sup>  | `period` | .      | `didecimilliday`  |
 | 10<sup>-4</sup>      | `phrase` |  ̑ or ‱ | `decimilliday`    |
 | 2 x 10<sup>-5</sup>  | `bar`    | \|     | `dicentimilliday` |
-| 10<sup>-5</sup>      | `beat`   | °      | `centimilliday`   |
+| 10<sup>-5</sup>      | `beat`   | ♫      | `centimilliday`   |
 | 10<sup>-6</sup>      | `mic`    | μ      | `microday`        |
 | 10<sup>-7</sup>      | `liph`   | m̑      | `decimicroday`    |
-| 10<sup>-8</sup>      | `lib`    | m̊      | `centimicroday`   |
+| 10<sup>-8</sup>      | `lib`    | m̈      | `centimicroday`   |
 | 10<sup>-9</sup>      | `nan`    | n      | `nanoday`         |
 | 10<sup>-10</sup>     | `roph`   | μ̑      | `decinanoday`     |
-| 10<sup>-11</sup>     | `rob`    | μ̊      | `centinanoday`    |
+| 10<sup>-11</sup>     | `rob`    | µ̈      | `centinanoday`    |
 | 10<sup>-12</sup>     | `pic`    | p      | `picoday`         |
 | 10<sup>-13</sup>     | `noph`   | n̑      | `decipicoday`     |
 | 10<sup>-14</sup>     | `nob`    | n̊      | `centipicoday`    |
 | 10<sup>-15</sup>     | `femt`   | f      | `femtoday`        |
 | 10<sup>-16</sup>     | `coph`   | p̑      | `decifemtoday`    |
-| 10<sup>-17</sup>     | `cob`    | p̊      | `centifemtoday`   |
+| 10<sup>-17</sup>     | `cob`    | p̈      | `centifemtoday`   |
 | 10<sup>-18</sup>     | `att`    | a      | `attoday`         |
 | 10<sup>-19</sup>     | `foph`   | f̑      | `deciattoday`     |
-| 10<sup>-20</sup>     | `fob`    | f̊      | `centiattoday`    |
+| 10<sup>-20</sup>     | `fob`    | f̈      | `centiattoday`    |
 | 10<sup>-21</sup>     | `zept`   | z      | `zeptoday`        |
 | 10<sup>-22</sup>     | `toph`   | ȃ      | `decizeptoday`    |
-| 10<sup>-23</sup>     | `tob`    | å      | `centizeptoday`   |
+| 10<sup>-23</sup>     | `tob`    | ä      | `centizeptoday`   |
 | 10<sup>-24</sup>     | `yokt`   | y      | `yoctoday`        |
 | 10<sup>-25</sup>     | `zoph`   | z̑      | `deciyoctoday`    |
-| 10<sup>-26</sup>     | `zob`    | z̊      | `centiyoctoday`   |
+| 10<sup>-26</sup>     | `zob`    | z̈      | `centiyoctoday`   |
 | 10<sup>-27</sup>     | `ront`   | r      | `rontoday`        |
 | 10<sup>-28</sup>     | `yoph`   | y̑      | `decirontoday`    |
 | 10<sup>-29</sup>     | `yob`    | ẙ      | `centirontoday`   |
@@ -93,9 +93,9 @@ In the `datetimes` above, the time has 3 digits, because this is the best level 
 
 In the table above, the units with positive exponents are used for `Decalendar`, while the ones with negative exponents are used for `Declock`. `Cents` (`¢`) can serve as a useful point of comparison to understand the scale of some of the units in the table above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` (`⅒`) are ten times larger (10% = 144 minutes), and `deks` (`ι`) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
-`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` (` ̑`) and `beats` (`࿁`), music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
+`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` (` ̑`) and `beats` (`♫`), music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
 
-`Declock` units smaller than `beats` are too small for typical daily use. For example, a `mic` (`microday`, `μ`) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 `liphs` (`milliphrases`, `m̑`). A `lib` (`millibeat`, `m̊`) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person's ear to their other ear in about 7 `nans` (`nanodays`). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a `roph` (`microphrase`, `μ̑`) difference might be too fast to notice. In a `rob` (`microbeat`, `μ̊`), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.
+`Declock` units smaller than `beats` are too small for typical daily use. For example, a `mic` (`microday`, `μ`) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 `liphs` (`milliphrases`, `m̑`). A `lib` (`millibeat`, `m̈`) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person's ear to their other ear in about 7 `nans` (`nanodays`). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a `roph` (`microphrase`, `μ̑`) difference might be too fast to notice. In a `rob` (`microbeat`, `µ̈`), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.
 
 ### Time Zones {#sec-zones}
 
@@ -177,72 +177,34 @@ In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are o
 
 Even though it provides formats for months and weeks, `Decalendar` envisions a world in which these units are replaced by `deks`. In terms of scale, `deks` are somewhere between a week and a month, precisely half a day less than a week and a half (1.5 weeks - 0.5 days) and approximately a third of month. `Deks` could provide the functionality of both weeks and months if we followed a `dekly` schedule instead of `weekly` and `monthly` schedules. The transition to a `dekly` schedule would be a massive undertaking, but could start with the creation of the digital infrastructure needed for the new system. Every desktop and mobile application that uses dates could be adapted to optionally use `deks` instead of weeks and months.
 
-A major difficulty with our current calendar system is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from restdays. `Decalendar` defines `Threeday`, `Fourday`, `Eightday`, and `Nineday` as restdays, which means that days with numbers that end in 3, 4, 8, or 9 are days off from work and school. In total, there are 219 workdays and 146 restdays in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
+#### Days of the `dek` {#sec-dotd}
 
-The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` (261*8/240) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 8.76 `deks` (219*.04) spent at work every year. In simpler terms, `Decalendar` offsets more restdays with longer workdays.
+A major difficulty with the Gregorian calendar is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from restdays. `Decalendar` defines `Threeday`, `Fourday`, `Eightday`, and `Nineday` as restdays, which means that days with numbers that end in 3, 4, 8, or 9 are days off from work and school. In total, there are 219 workdays and 146 restdays in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
 
-#### Gregorian calendar leap day considerations {#sec-leap}
+#### Workdays {#sec-work}
 
-New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gregorian calendar. Therefore, we can say that `Day 0` is synonymous with January 1. Every Gregorian calendar date can be represented unequivocally by a positive or a negative day number except for February 29, the Gregorian calendar leap day. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01`, but this date cannot exist in the `.y` format without a year.
+The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` (261*8/240) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 8.76 `deks` (219*.04) spent at work every year. By default, `Decalendar` compensates for having more restdays with longer workdays.
 
-The Gregorian calendar leap day represents a threshold in finding the day number equivalents of Gregorian calendar dates. If a Gregorian calendar date is below the threshold, we can count on its positive day number to always stay the same, but its negative day number will differ between common years and leap years. Conversely, if a Gregorian calendar date is above the threshold, its positive day number will vary between common years and leap years while its negative day number will always remain constant. In other words, day numbers greater than -307 and less than 59 (-307 < d < 59) are always synonymous with their corresponding Gregorian calendar dates. Numbers below the threshold (-366 <= d <= -307) will decrease by 1 day in leap years, while numbers above the threshold (59 <= d <= 365) will increase by 1 day in leap years.
+#### Schedules {#sec-sched}
 
-Valentine's Day and Christmas are on opposite sides of the Gregorian calendar leap day threshold and thus can serve as opposing examples of the leap year variation in the day numbers of Gregorian calendar dates. The positive day number of Valentine's Day (`Day 44`) and the negative day number of Christmas (`Day -7`) never change, but their respective negative day numbers are `Day -321` and `Day 358` in common years and `Day -322` and `Day 359` in leap years. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
+If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. Each half of the `dek` is called a `pent` (`pentaday`) and can have its own schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. The table below displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different schedules are named after the number of workdays per `pent`. The default schedule, `Schedule 3`, has 3 workdays and 2 restdays in each `pent`. Each `Schedule 3` workday starts at `Dot 3`, ends at `Dot 7`, and lasts 4 `dimes`.
 
-If we do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar exactly, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
+| workdays | restdays | start | end | duration |
+| -------- | -------- | ----- | --- | -------- |
+| 2        | 3        | .2    | .8  | .6       |
+| 3        | 2        | .3    | .7  | .4       |
+| 4        | 1        | .35   | .65 | .3       |
+| 5        | 0        | .38   | .62 | .24      |
 
-#### Gregorian calendar date to `dotd` conversion {#sec-dotd}
+#### Coordinate analogy {#sec-coor}
 
-Using the asterisk with positive day number allows us to determine what the `dotd` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are restdays. In fact, many holidays just so happen to fall on `Decalendar` restdays. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
+In the Gregorian calendar, dates are like a set of coordinates, where the month and the day of the month (`dotm`) are like longitude and latitude in the Geographic coordinate system or x and y in the Cartesian coordinate system. `Decalendar` provides both coordinates in one number, the `doty` contains both the `dek` number (first 2 digits) and the `dotd` number (last digit). In this way, the `doty` contains all of the information we need for the `Decalendar` system: the `dek`, which fulfills the role of both the month and the week, and the `dotd`, which fulfills the role of both the day of the month and the day of the week.
 
-| name             | date        | doty | dotm |
-| ------           | ------      | ---- | ---- |
-| Valentine's Day  | February 14 | 44   | 1+13 |
-| Cinco de Mayo    | May 5       | 124* | 4+04 |
-| Flag Day         | June 14     | 164* | 5+13 |
-| Juneteenth Day   | June 19     | 169* | 5+18 |
-| Independence Day | July 4      | 184* | 6+03 |
-| All Saints' Day  | November  1 | 304* | A+00 |
-| Veterans’ Day    | November 11 | 314* | A+10 |
-| Christmas Day    | December 25 | 358* | B+24 |
+#### Conversion tables {#sec-conv}
 
-: Gregorian calendar holidays that happen to fall on `Decalendar` restdays {#tbl-holidays}
+The first table below shows the `doty` numbers for all of the days in common years, while the second table below does the same for leap years. In both of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). The positive `doty` numbers of dates after the Gregorian calendar leap day, February 29, need to be incremented by 1 in leap years. Similarly, the negative `doty` numbers of dates before February 29 need to decremented by 1.
 
-In the table above, the last digit of the day of the month numbers of dates in February, June, and July are the same as the last digit of their day numbers. This pattern is maintained in all common years, but in leap years the last digits of the day of the month and day of the year numbers match in February, April, and May. The table below shows the number that has to be added to the day of the month number to get the corresponding `dotd` number in each month in common years (365) and leap years (366).
-
-| Month     | 365 | 366 |
-| ------    | --- | --- |
-| January   | -1  | -1  |
-| February  | 0   | 0   |
-| March     | -2  | 1   |
-| April     | -1  | 0   |
-| May       | -1  | 0   |
-| June      | 0   | 1   |
-| July      | 0   | 1   |
-| August    | 1   | 2   |
-| September | 2   | 2   |
-| October   | 2   | 3   |
-| November  | 3   | 4   |
-| December  | 3   | 4   |
-
-: Difference between last digits of Gregorian calendar day of month and `Decalendar` day of year {#tbl-holidays}
-
-#### Gregorian calendar week date to `doty` conversion {#sec-dotw}
-
-We can use this method to find out what `dotd` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar` restday and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
-
-|        | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
-| -----  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| n=365  | 0   | 30  | 58  | 89  | 119 | 150 | 180 | 211 | 242 | 272 | 303 | 333 |
-| n=366  | 0   | 30  | 59  | 90  | 120 | 151 | 181 | 212 | 243 | 273 | 304 | 334 |
-
-: Cumulative day counts the end of each Gregorian calendar month {#tbl-cumulative}
-
-#### Gregorian calendar date to `doty` conversion {#sec-common}
-
-The table above is small and portable, but using it requires some calculation. To avoid manual calculation entirely, we could use a computer program or a comprehensive conversion table like the ones below. The first table shows the day numbers for all of the days in common years, while the second table does the same for leap years. In both of these tables, the columns are labeled by month while the rows are labeled by the day of the month.
-
-|     | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
+| Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 |  1  |  0  | 31  | 59  |  90 | 120 | 151 | 181 | 212 | 243 | 273 | 304 | 334 |
 |  2  |  1  | 32  | 60  |  91 | 121 | 152 | 182 | 213 | 244 | 274 | 305 | 335 |
@@ -276,7 +238,7 @@ The table above is small and portable, but using it requires some calculation. T
 | 30  | 29  |     | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
 | 31  | 30  |     | 89  |     | 150 |     | 211 | 242 |     | 303 |     | 364 |
 
-: Common year Gregorian calendar date to `doty` conversion {#tbl-common}
+: Common year Gregorian calendar date to positive `doty` conversion {#tbl-common}
 
 #### Leap year date to `doty` conversion {#sec-leap}
 
@@ -315,13 +277,89 @@ The table above is small and portable, but using it requires some calculation. T
 | 30  | 29  |     | 89  | 120 | 150 | 181 | 211 | 242 | 273 | 303 | 334 | 364 |
 | 31  | 30  |     | 90  |     | 151 |     | 212 | 243 |     | 304 |     | 365 |
 
-: Leap year Gregorian calendar date to `doty` conversion {#tbl-leap}
+: Leap year Gregorian calendar date to positive `doty` conversion {#tbl-leap}
+
+Having different conversion tables for common years and leap years is cumbersome, so the two tables below work for both common years and leap years, by indicating positive `doty` numbers that need to incremented in leap years with a superscript plus sign (`⁺`) and negative `doty` numbers that need to decremented in leap years with a superscript minus sign (`⁻`). The generalized conversion tables do not include February 29, which is a date that cannot be consistently described solely with a `doty` number. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01` and in the `.w` or `.y` formats if we specify a year.
+
+| Day | Jan | Feb | Mar | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec  |
+| --- | --- | --- | --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 1   | 0   | 31  | 59⁺ | 90⁺  | 120⁺ | 151⁺ | 181⁺ | 212⁺ | 243⁺ | 273⁺ | 304⁺ | 334⁺ |
+| 2   | 1   | 32  | 60⁺ | 91⁺  | 121⁺ | 152⁺ | 182⁺ | 213⁺ | 244⁺ | 274⁺ | 305⁺ | 335⁺ |
+| 3   | 2   | 33  | 61⁺ | 92⁺  | 122⁺ | 153⁺ | 183⁺ | 214⁺ | 245⁺ | 275⁺ | 306⁺ | 336⁺ |
+| 4   | 3   | 34  | 62⁺ | 93⁺  | 123⁺ | 154⁺ | 184⁺ | 215⁺ | 246⁺ | 276⁺ | 307⁺ | 337⁺ |
+| 5   | 4   | 35  | 63⁺ | 94⁺  | 124⁺ | 155⁺ | 185⁺ | 216⁺ | 247⁺ | 277⁺ | 308⁺ | 338⁺ |
+| 6   | 5   | 36  | 64⁺ | 95⁺  | 125⁺ | 156⁺ | 186⁺ | 217⁺ | 248⁺ | 278⁺ | 309⁺ | 339⁺ |
+| 7   | 6   | 37  | 65⁺ | 96⁺  | 126⁺ | 157⁺ | 187⁺ | 218⁺ | 249⁺ | 279⁺ | 310⁺ | 340⁺ |
+| 8   | 7   | 38  | 66⁺ | 97⁺  | 127⁺ | 158⁺ | 188⁺ | 219⁺ | 250⁺ | 280⁺ | 311⁺ | 341⁺ |
+| 9   | 8   | 39  | 67⁺ | 98⁺  | 128⁺ | 159⁺ | 189⁺ | 220⁺ | 251⁺ | 281⁺ | 312⁺ | 342⁺ |
+| 10  | 9   | 40  | 68⁺ | 99⁺  | 129⁺ | 160⁺ | 190⁺ | 221⁺ | 252⁺ | 282⁺ | 313⁺ | 343⁺ |
+| 11  | 10  | 41  | 69⁺ | 100⁺ | 130⁺ | 161⁺ | 191⁺ | 222⁺ | 253⁺ | 283⁺ | 314⁺ | 344⁺ |
+| 12  | 11  | 42  | 70⁺ | 101⁺ | 131⁺ | 162⁺ | 192⁺ | 223⁺ | 254⁺ | 284⁺ | 315⁺ | 345⁺ |
+| 13  | 12  | 43  | 71⁺ | 102⁺ | 132⁺ | 163⁺ | 193⁺ | 224⁺ | 255⁺ | 285⁺ | 316⁺ | 346⁺ |
+| 14  | 13  | 44  | 72⁺ | 103⁺ | 133⁺ | 164⁺ | 194⁺ | 225⁺ | 256⁺ | 286⁺ | 317⁺ | 347⁺ |
+| 15  | 14  | 45  | 73⁺ | 104⁺ | 134⁺ | 165⁺ | 195⁺ | 226⁺ | 257⁺ | 287⁺ | 318⁺ | 348⁺ |
+| 16  | 15  | 46  | 74⁺ | 105⁺ | 135⁺ | 166⁺ | 196⁺ | 227⁺ | 258⁺ | 288⁺ | 319⁺ | 349⁺ |
+| 17  | 16  | 47  | 75⁺ | 106⁺ | 136⁺ | 167⁺ | 197⁺ | 228⁺ | 259⁺ | 289⁺ | 320⁺ | 350⁺ |
+| 18  | 17  | 48  | 76⁺ | 107⁺ | 137⁺ | 168⁺ | 198⁺ | 229⁺ | 260⁺ | 290⁺ | 321⁺ | 351⁺ |
+| 19  | 18  | 49  | 77⁺ | 108⁺ | 138⁺ | 169⁺ | 199⁺ | 230⁺ | 261⁺ | 291⁺ | 322⁺ | 352⁺ |
+| 20  | 19  | 50  | 78⁺ | 109⁺ | 139⁺ | 170⁺ | 200⁺ | 231⁺ | 262⁺ | 292⁺ | 323⁺ | 353⁺ |
+| 21  | 20  | 51  | 79⁺ | 110⁺ | 140⁺ | 171⁺ | 201⁺ | 232⁺ | 263⁺ | 293⁺ | 324⁺ | 354⁺ |
+| 22  | 21  | 52  | 80⁺ | 111⁺ | 141⁺ | 172⁺ | 202⁺ | 233⁺ | 264⁺ | 294⁺ | 325⁺ | 355⁺ |
+| 23  | 22  | 53  | 81⁺ | 112⁺ | 142⁺ | 173⁺ | 203⁺ | 234⁺ | 265⁺ | 295⁺ | 326⁺ | 356⁺ |
+| 24  | 23  | 54  | 82⁺ | 113⁺ | 143⁺ | 174⁺ | 204⁺ | 235⁺ | 266⁺ | 296⁺ | 327⁺ | 357⁺ |
+| 25  | 24  | 55  | 83⁺ | 114⁺ | 144⁺ | 175⁺ | 205⁺ | 236⁺ | 267⁺ | 297⁺ | 328⁺ | 358⁺ |
+| 26  | 25  | 56  | 84⁺ | 115⁺ | 145⁺ | 176⁺ | 206⁺ | 237⁺ | 268⁺ | 298⁺ | 329⁺ | 359⁺ |
+| 27  | 26  | 57  | 85⁺ | 116⁺ | 146⁺ | 177⁺ | 207⁺ | 238⁺ | 269⁺ | 299⁺ | 330⁺ | 360⁺ |
+| 28  | 27  | 58  | 86⁺ | 117⁺ | 147⁺ | 178⁺ | 208⁺ | 239⁺ | 270⁺ | 300⁺ | 331⁺ | 361⁺ |
+| 29  | 28  |     | 87⁺ | 118⁺ | 148⁺ | 179⁺ | 209⁺ | 240⁺ | 271⁺ | 301⁺ | 332⁺ | 362⁺ |
+| 30  | 29  |     | 88⁺ | 119⁺ | 149⁺ | 180⁺ | 210⁺ | 241⁺ | 272⁺ | 302⁺ | 333⁺ | 363⁺ |
+| 31  | 30  |     | 89⁺ |      | 150⁺ |      | 211⁺ | 242⁺ |      | 303⁺ |      | 364⁺ |
+
+: Generalized Gregorian calendar date to positive `doty` conversion {#tbl-leap}
+
+| Day | Jan   | Feb   | Mar   | Apr   | May   | Jun   | Jul   | Aug   | Sep   | Oct   | Nov   | Dec   |
+| --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| 1   | -365⁻ | -334⁻ | -306  | -275  | -245  | -214  | -184  | -153  | -122  | -92   | -61   | -31   |
+| 2   | -364⁻ | -333⁻ | -305  | -274  | -244  | -213  | -183  | -152  | -121  | -91   | -60   | -30   |
+| 3   | -363⁻ | -332⁻ | -304  | -273  | -243  | -212  | -182  | -151  | -120  | -90   | -59   | -29   |
+| 4   | -362⁻ | -331⁻ | -303  | -272  | -242  | -211  | -181  | -150  | -119  | -89   | -58   | -28   |
+| 5   | -361⁻ | -330⁻ | -302  | -271  | -241  | -210  | -180  | -149  | -118  | -88   | -57   | -27   |
+| 6   | -360⁻ | -329⁻ | -301  | -270  | -240  | -209  | -179  | -148  | -117  | -87   | -56   | -26   |
+| 7   | -359⁻ | -328⁻ | -300  | -269  | -239  | -208  | -178  | -147  | -116  | -86   | -55   | -25   |
+| 8   | -358⁻ | -327⁻ | -299  | -268  | -238  | -207  | -177  | -146  | -115  | -85   | -54   | -24   |
+| 9   | -357⁻ | -326⁻ | -298  | -267  | -237  | -206  | -176  | -145  | -114  | -84   | -53   | -23   |
+| 10  | -356⁻ | -325⁻ | -297  | -266  | -236  | -205  | -175  | -144  | -113  | -83   | -52   | -22   |
+| 11  | -355⁻ | -324⁻ | -296  | -265  | -235  | -204  | -174  | -143  | -112  | -82   | -51   | -21   |
+| 12  | -354⁻ | -323⁻ | -295  | -264  | -234  | -203  | -173  | -142  | -111  | -81   | -50   | -20   |
+| 13  | -353⁻ | -322⁻ | -294  | -263  | -233  | -202  | -172  | -141  | -110  | -80   | -49   | -19   |
+| 14  | -352⁻ | -321⁻ | -293  | -262  | -232  | -201  | -171  | -140  | -109  | -79   | -48   | -18   |
+| 15  | -351⁻ | -320⁻ | -292  | -261  | -231  | -200  | -170  | -139  | -108  | -78   | -47   | -17   |
+| 16  | -350⁻ | -319⁻ | -291  | -260  | -230  | -199  | -169  | -138  | -107  | -77   | -46   | -16   |
+| 17  | -349⁻ | -318⁻ | -290  | -259  | -229  | -198  | -168  | -137  | -106  | -76   | -45   | -15   |
+| 18  | -348⁻ | -317⁻ | -289  | -258  | -228  | -197  | -167  | -136  | -105  | -75   | -44   | -14   |
+| 19  | -347⁻ | -316⁻ | -288  | -257  | -227  | -196  | -166  | -135  | -104  | -74   | -43   | -13   |
+| 20  | -346⁻ | -315⁻ | -287  | -256  | -226  | -195  | -165  | -134  | -103  | -73   | -42   | -12   |
+| 21  | -345⁻ | -314⁻ | -286  | -255  | -225  | -194  | -164  | -133  | -102  | -72   | -41   | -11   |
+| 22  | -344⁻ | -313⁻ | -285  | -254  | -224  | -193  | -163  | -132  | -101  | -71   | -40   | -10   |
+| 23  | -343⁻ | -312⁻ | -284  | -253  | -223  | -192  | -162  | -131  | -100  | -70   | -39   | -9    |
+| 24  | -342⁻ | -311⁻ | -283  | -252  | -222  | -191  | -161  | -130  | -99   | -69   | -38   | -8    |
+| 25  | -341⁻ | -310⁻ | -282  | -251  | -221  | -190  | -160  | -129  | -98   | -68   | -37   | -7    |
+| 26  | -340⁻ | -309⁻ | -281  | -250  | -220  | -189  | -159  | -128  | -97   | -67   | -36   | -6    |
+| 27  | -339⁻ | -308⁻ | -280  | -249  | -219  | -188  | -158  | -127  | -96   | -66   | -35   | -5    |
+| 28  | -338⁻ | -307⁻ | -279  | -248  | -218  | -187  | -157  | -126  | -95   | -65   | -34   | -4    |
+| 29  | -337⁻ |       | -278  | -247  | -217  | -186  | -156  | -125  | -94   | -64   | -33   | -3    |
+| 30  | -336⁻ |       | -277  | -246  | -216  | -185  | -155  | -124  | -93   | -63   | -32   | -2    |
+| 31  | -335⁻ |       | -276  |       | -215  |       | -154  | -123  |       | -62   |       | -1    |
+
+: Generalized Gregorian calendar date to negative `doty` conversion {#tbl-leap}
 
 ### `Subyear` units {#sec-subyear}
 
+In addition to serving as a part of the Gregorian date coordinate system described above, months can also indicate the current season or quarter. `Deks` can also serve as indicator of subyear units like seasons.
+
 #### Seasons {#sec-seasons}
 
-We can use the tables above to convert any Gregorian calendar date to a day number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact day number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
+We can use the tables above to convert any Gregorian calendar date to a `doty` number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact `doty` number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
 
 The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has an opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. The table below lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.
 
@@ -347,7 +385,9 @@ Using the information in the table above, we can group the `deks` in a year acco
 
 #### `Qops`, `Delts`, `Eps` and `Zets` {#sec-qdez}
 
-Each season in the table above has 9 `deks` and exactly 90 days, except for the seasons in the last row, which have 10 `deks` and 95 days in common years or 96 days in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, the seasons shown above work well, because the first `dek` of each season is the last `dek` in a `qop` (`qoppa`). Like seasons, `qops` divide the year into four parts, but unlike seasons, `qops` do not include `Dek 36`. The table below shows the division of `deks` by `qoppa`.
+##### `Qops` {#sec-q}
+
+Each season in the table above has 9 `deks` and exactly 90 days, except for the seasons in the last row, which have 10 `deks` and 95 days in common years or 96 days in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, the seasons shown above are convenient, because the first `dek` of each season is the last `dek` in a `qop` (`qoppa`). Like seasons, `qops` divide the year into four parts, but unlike seasons, `qops` do not include `Dek 36`. The table below shows the division of `deks` by `qoppa`.
 
 | Code | Start | End |
 | ---- | ----- | --- |
@@ -357,6 +397,8 @@ Each season in the table above has 9 `deks` and exactly 90 days, except for the 
 | Q3   | 27    | 35  |
 
 : The `deks` that begin and end each `qop` {#tbl-q}
+
+##### `Delts` {#sec-d}
 
 `Dek 36`, the last `dek` of the year, is not included in the last `qop` so that each `qop` is 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. In addition to `qops` shown above, `Decalendar` describes 3 other similar units called `delts` (`deltas`), `eps` (`epsilons`), and `stigs` (`stigmas`). These units do not leave out as many days in each year, because these units split the year by day, rather than by `dek`. `Delts`, `eps`, and `stigs` split the year into 4, 5, and 6 parts, respectively. The table below list the numbers of the days that begin and end each `delt`.
 
@@ -369,6 +411,8 @@ Each season in the table above has 9 `deks` and exactly 90 days, except for the 
 
 : The days that begin and end each `delt` {#tbl-d}
 
+##### `Eps` {#sec-e}
+
 `Delts` are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which `delts` start and end. In the table above, not only do rows alternate between even and odd numbers, but the `delt` number is the last digit of both the start and the end day of the `delt`. Unlike `delts`, `eps` are 73 days long and do not leave out any days from common years. `Qops`, `delts`, and `eps` all leave out leap days in leap years. The table below list the numbers of the days that begin and end each `ep`.
 
 | Code | Start | End |
@@ -380,6 +424,8 @@ Each season in the table above has 9 `deks` and exactly 90 days, except for the 
 | E4   | 292   | 364 |
 
 : The days that begin and end each `ep` {#tbl-e}
+
+##### `Zets` {#sec-z}
 
 The only unit that can include the leap year is a `zet`, which is 61 days long and follows a similar pattern as a `delt`, except the last `zet` in common years is 1 day short than all the others. The table below list the numbers of the days that begin and end each `zet`. As with `delts`, the `zet` number is the last digit of the numbers of its first and last day.
 
@@ -448,7 +494,7 @@ The pattern above requires that the `splits` are separated by the default `space
 
 `Split spreads` can be nested to create `spans` or `splits` within other `spans` or `splits`. Similarly, `slices` can be nested to create `slices` within `slices`. The intuition behind nested `spreads` and `slices` is that each item in the first (outer) `spread` or `slices` serves as a starting point for the second (inner) `spread`. The main use of `spread` nesting is to first "spread" or "slice" across days and then "spread" or "slice" across times in those days. We can append `.3».4`, a `simple spread` that represents the `Decalendar` workday, to `»»3»2` and obtain `»»3»2».3».4`, a nested `spread` that represents the time spent at work in a `Decalendar` year. The `slice` equivalent of `»»3»2».3».4` is `:365:1,1,3:.3:.7`.
 
-The nested `spread` above is more succinct than the nested `slice`, but the two are synonymous. It is very awkward to create long consecutive sequences with breaks in between using `slices`. For example, to include a lunch break in the middle of work, we could simply add a `split` and a `space` to the nested `spread` above: `»»3»2».3».4».18».04`. To do the same with a `slice`, we have to create 18 steps of 0.01 and a step of .04: `:365:1,1,3:.3:.7:18*1%,4%`. Here, we are using the replication operator (`*`) to avoid writing 0.01 18 times and the percent operator (`%`) to save a few characters, but even so the `slice` is not as concise as the `spread`. The table below shows each part of this schedule in the form of `slices` and `spreads`.
+The nested `spread` above is more succinct than the nested `slice`, but the two are synonymous. `Spreads` are in general a better tool for creating long consecutive sequences with breaks than `slices`. For example, to include a lunch break in the middle of work, we could simply add a `split` and a `space` to the nested `spread` above: `»»3»2».3».4».18».04`. To do the same with a `slice`, we have to create 18 steps of 0.01 and a step of .04: `:365:1,1,3:.3:.7:18*1%,4%`. Here, we are using the replication operator (`*`) to avoid writing 0.01 18 times and the percent operator (`%`) to save a few characters, but even so the `slice` is not as concise as the `spread`. The table below shows each part of this schedule in the form of `slices` and `spreads`.
 
 | slice   | spread  | spread  | label |
 | ------- | ------  | ------  | ----- |
@@ -460,8 +506,8 @@ The nested `spread` above is more succinct than the nested `slice`, but the two 
 
 ### Pomodoro {#sec-pom}
 
-Another real-life application of `spreads` can be to intersperse breaks in between periods of work. `Declock` uses the term `pom`, which is short for [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique), to describe a combined unit of work and rest. The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the `Declock` units would be to have `poms` that consist of 17 `mils` of work and 3 `mils` of rest, with a 17 `mil` break after every 4 `poms`. If we did not include the longer break, we could write infinite `poms` as this `split spread`: `»».017».003`. The longer break complicates the pattern and introduces repetition to the `split spread`: `»».017,.017,.017,.017».003,.003,.003,.02`.
-`.3».7».08»».017».003`
+Another real-life application of `spreads` can be to intersperse breaks in between periods of work as in the [Pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the `Declock` units would be to have each `pomodoro` consist of 17 `mils` of work and 3 `mils` of rest, with a 17 `mil` break after every 4 `pomodoros`. This pattern is difficult to capture with a `slice`: .3:.7:: `.3».7».08».02»».017».003` If we did not include the longer break, we could write infinite `poms` as this `split spread`: `»».017».003`. The longer break complicates the pattern and introduces repetition to the `split spread`: `»».017,.017,.017,.017».003,.003,.003,.02`.
+
 
 The 3.4-`dime` long `Decalendar` workday starts at `Dot 35`, ends at `Dot 69`, and can be summarized by the `spread` `.35».34`. This work schedule is 6̅ `mils` longer than the typical 9 to 5 schedule, because it starts 2.5 `cents` earlier than 9AM (`Dot 375`) and ends 1.83̅ `cents` earlier than 5PM (`Dot 7083̅`).
 
@@ -494,7 +540,7 @@ The `sled` and `slice` above represent the recommended `Decalendar` work schedul
 Following this schedule, a worker would spend 2.38 days at work per `dek`, which is 238 `mils` per day on average. In a typical 40-hour workweek, a worker would spend 238.0952381 `mils` per day at work. Interestingly, the difference is only 9.52381 beats (8.22857184 seconds) long. If a worker spends an extra 5 `cents` at work for 6 days, they should be entitled to an extra day off. This schedule would be Starting at  days instead of 10, which is almost exactly the same as if we extended the typical workweek to `000.3::2[3*1,2]».39»2*.15».4`.
 Instead of just a single `segment` per day, we could add a `split` and a `space` to the `sled` above and include breaks throughout the day. A typical workday would be two blocks of work separated by a lunch break in the middle of the day. We could combine the `spread` `.35».34»2*.15».4` with the `sled` above to create a new `sled` with two 15-`cent`-long work sessions with one 4-`cent`-long lunch break in between: `000.35::3*1,2,2*1,3».34»2*.15».4`.
 
-We can adjust the time spent at work while keeping the lunch break at `Dot 5` by changing the length of the work sessions, the start time, and the duration. If we expect 3 `dimes` of work per day and we can  dimes is too much time to spend at work or in school
+We can adjust the time spent at work while keeping the lunch break at `Dot 5` by changing the length of the work sessions, the start time, and the duration. If we expect 3 `dimes` of work per day and we can  
 Another option is to spend 
 If more time at work is required dimes is too much time to spend at work or in school, the first and/or last 5 `cents` can be skipped to start the workday at `Dot 4` (2.5% later than 37.5%) and/or end it at `Dot 7` (.83̅% earlier than 70.83̅%).
 
@@ -2158,3 +2204,63 @@ Any part of a `slice` can be a fractional day, including the `step`. Every other
 Building on the `stepped slice` above, we can  can be used for times, they are especially useful for creating series of days. The 
 
 
+#### Gregorian calendar leap day considerations {#sec-leap}
+
+New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gregorian calendar. Therefore, we can say that `Day 0` is synonymous with January 1. Every Gregorian calendar date can be represented unequivocally by a positive or a negative day number except for February 29, the Gregorian calendar leap day. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01`, but this date cannot exist in the `.y` format without a year.
+
+The Gregorian calendar leap day represents a threshold in finding the day number equivalents of Gregorian calendar dates. If a Gregorian calendar date is below the threshold, we can count on its positive day number to always stay the same, but its negative day number will differ between common years and leap years. Conversely, if a Gregorian calendar date is above the threshold, its positive day number will vary between common years and leap years while its negative day number will always remain constant. In other words, day numbers greater than -307 and less than 59 (-307 < d < 59) are always synonymous with their corresponding Gregorian calendar dates. Numbers below the threshold (-366 <= d <= -307) will decrease by 1 day in leap years, while numbers above the threshold (59 <= d <= 365) will increase by 1 day in leap years.
+
+Valentine's Day and Christmas are on opposite sides of the Gregorian calendar leap day threshold and thus can serve as opposing examples of the leap year variation in the day numbers of Gregorian calendar dates. The positive day number of Valentine's Day (`Day 44`) and the negative day number of Christmas (`Day -7`) never change, but their respective negative day numbers are `Day -321` and `Day 358` in common years and `Day -322` and `Day 359` in leap years. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
+
+If we do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar exactly, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
+
+#### Gregorian calendar date to `dotd` conversion {#sec-dotd}
+
+Using the asterisk with positive day number allows us to determine what the `dotd` would be in a common year and in a leap year. For example, `Day 358*` falls on an `Eightday` in common years and on a `Nineday` in leap years. Coincidentally, both of these days are restdays. In fact, many holidays just so happen to fall on `Decalendar` restdays. The table below lists 8 such holidays and their day of the year (`doty`) and day of the month (`dotm`) numbers.
+
+| name             | date        | doty | dotm |
+| ------           | ------      | ---- | ---- |
+| Valentine's Day  | February 14 | 44   | 1+13 |
+| Cinco de Mayo    | May 5       | 124* | 4+04 |
+| Flag Day         | June 14     | 164* | 5+13 |
+| Juneteenth Day   | June 19     | 169* | 5+18 |
+| Independence Day | July 4      | 184* | 6+03 |
+| All Saints' Day  | November  1 | 304* | A+00 |
+| Veterans’ Day    | November 11 | 314* | A+10 |
+| Christmas Day    | December 25 | 358* | B+24 |
+
+: Gregorian calendar holidays that happen to fall on `Decalendar` restdays {#tbl-holidays}
+
+In the table above, the last digit of the day of the month numbers of dates in February, June, and July are the same as the last digit of their day numbers. This pattern is maintained in all common years, but in leap years the last digits of the day of the month and day of the year numbers match in February, April, and May. The table below shows the number that has to be added to the day of the month number to get the corresponding `dotd` number in each month in common years (365) and leap years (366).
+
+| Month     | 365 | 366 |
+| ------    | --- | --- |
+| January   | -1  | -1  |
+| February  | 0   | 0   |
+| March     | -2  | 1   |
+| April     | -1  | 0   |
+| May       | -1  | 0   |
+| June      | 0   | 1   |
+| July      | 0   | 1   |
+| August    | 1   | 2   |
+| September | 2   | 2   |
+| October   | 2   | 3   |
+| November  | 3   | 4   |
+| December  | 3   | 4   |
+
+: Difference between last digits of Gregorian calendar day of month and `Decalendar` day of year {#tbl-holidays}
+
+#### Gregorian calendar week date to `doty` conversion {#sec-dotw}
+
+We can use this method to find out what `dotd` a holiday falls on. Holidays with dates are based on the days of the week will fall on a different day number every year. `Decalendar` recommends redefining such dates to always be on the same day number. We can determine a range of possible new dates using the original date definition as a guide. For example, Thanksgiving is the fourth Thursday in November. Taking the number of the first day of November (303) from the table below month, we can calculate the earliest possible date to be `Day 324` (303 + 3 * 7) and the latest to be `Day 330` (303 + 4 * 7 - 1). From this range, we can pick `Day 328*` (November 25), because it falls on a `Decalendar` restday and will be exactly 30 days before Christmas (December 25). This new date will coincide with the original date of Thanksgiving whenever November begins on a Sunday.
+
+|        | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
+| -----  | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| n=365  | 0   | 30  | 58  | 89  | 119 | 150 | 180 | 211 | 242 | 272 | 303 | 333 |
+| n=366  | 0   | 30  | 59  | 90  | 120 | 151 | 181 | 212 | 243 | 273 | 304 | 334 |
+
+: Cumulative day counts the end of each Gregorian calendar month {#tbl-cumulative}
+
+#### Gregorian calendar date to `doty` conversion {#sec-common}
+
+The table above is small and portable, but using it requires some calculation. To avoid manual calculation entirely, we could use a computer program or a comprehensive conversion table like the ones below.
