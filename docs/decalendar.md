@@ -40,54 +40,54 @@ The `.y` format can include positive and negative numbers, most commonly in the 
 
 In the `datetimes` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each highlights the relationship between the two:
 
-| Base 10              | Name     | Symbol | Formal Name       |
-| -------------------- | -------  | ------ | ----------------- |
-| 10<sup>2</sup>       | `hekt`   | ρ      | `hectoday`        |
-| 9.1 x 10<sup>1</sup> | `delt`   | δ      | `deltayear`       |
-| 9 x 10<sup>1</sup>   | `qop`    | ϟ      | `qoppaday`        |
-| 8 x 10<sup>1</sup>   | `pi`     | π      | `piday`           |
-| 7.3 x 10<sup>1</sup> | `ep`     | ε      | `epsilonyear`     |
-| 7 x 10<sup>1</sup>   | `om`     | ο      | `omicronday`      |
-| 6.1 x 10<sup>1</sup> | `zet`    | ζ      | `zetayear`        |
-| 6 x 10<sup>1</sup>   | `xi`     | ξ      | `xiday`           |
-| 5 x 10<sup>1</sup>   | `nu`     | ν      | `nuday`           |
-| 4 x 10<sup>1</sup>   | `mu`     | Μ      | `muday`           |
-| 3 x 10<sup>1</sup>   | `lam`    | λ      | `lamdaday`        |
-| 2 x 10<sup>1</sup>   | `kap`    | κ      | `kappaday`        |
-| 10<sup>1</sup>       | `dek`    | ι      | `decaday`         |
-| 10<sup>0</sup>       | `day`    | d      | `day`             |
-| 10<sup>-1</sup>      | `dime`   | ⅒      | `deciday`         |
-| 10<sup>-2</sup>      | `cent`   | ¢ or % | `centiday`        |
-| 10<sup>-3</sup>      | `mil`    | m or ‰ | `milliday`        |
-| 2 x 10<sup>-4</sup>  | `period` | .      | `didecimilliday`  |
-| 10<sup>-4</sup>      | `phrase` |  ̑ or ‱ | `decimilliday`    |
-| 2 x 10<sup>-5</sup>  | `bar`    | \|     | `dicentimilliday` |
-| 10<sup>-5</sup>      | `beat`   | ♫      | `centimilliday`   |
-| 10<sup>-6</sup>      | `mic`    | μ      | `microday`        |
-| 10<sup>-7</sup>      | `liph`   | m̑      | `decimicroday`    |
-| 10<sup>-8</sup>      | `lib`    | m̈      | `centimicroday`   |
-| 10<sup>-9</sup>      | `nan`    | n      | `nanoday`         |
-| 10<sup>-10</sup>     | `roph`   | μ̑      | `decinanoday`     |
-| 10<sup>-11</sup>     | `rob`    | µ̈      | `centinanoday`    |
-| 10<sup>-12</sup>     | `pic`    | p      | `picoday`         |
-| 10<sup>-13</sup>     | `noph`   | n̑      | `decipicoday`     |
-| 10<sup>-14</sup>     | `nob`    | n̊      | `centipicoday`    |
-| 10<sup>-15</sup>     | `femt`   | f      | `femtoday`        |
-| 10<sup>-16</sup>     | `coph`   | p̑      | `decifemtoday`    |
-| 10<sup>-17</sup>     | `cob`    | p̈      | `centifemtoday`   |
-| 10<sup>-18</sup>     | `att`    | a      | `attoday`         |
-| 10<sup>-19</sup>     | `foph`   | f̑      | `deciattoday`     |
-| 10<sup>-20</sup>     | `fob`    | f̈      | `centiattoday`    |
-| 10<sup>-21</sup>     | `zept`   | z      | `zeptoday`        |
-| 10<sup>-22</sup>     | `toph`   | ȃ      | `decizeptoday`    |
-| 10<sup>-23</sup>     | `tob`    | ä      | `centizeptoday`   |
-| 10<sup>-24</sup>     | `yokt`   | y      | `yoctoday`        |
-| 10<sup>-25</sup>     | `zoph`   | z̑      | `deciyoctoday`    |
-| 10<sup>-26</sup>     | `zob`    | z̈      | `centiyoctoday`   |
-| 10<sup>-27</sup>     | `ront`   | r      | `rontoday`        |
-| 10<sup>-28</sup>     | `yoph`   | y̑      | `decirontoday`    |
-| 10<sup>-29</sup>     | `yob`    | ẙ      | `centirontoday`   |
-| 10<sup>-30</sup>     | `quek`   | q      | `quectoday`       |
+| Base 10   | Name     | Symbol | Formal Name       |
+| --------- | -------  | ------ | ----------------- |
+| 10²       | `hekt`   | ρ      | `hectoday`        |
+| 9.1 x 10¹ | `delt`   | δ      | `deltayear`       |
+| 9 x 10¹   | `qop`    | ϟ      | `qoppaday`        |
+| 8 x 10¹   | `pi`     | π      | `piday`           |
+| 7.3 x 10¹ | `ep`     | ε      | `epsilonyear`     |
+| 7 x 10¹   | `om`     | ο      | `omicronday`      |
+| 6.1 x 10¹ | `zet`    | ζ      | `zetayear`        |
+| 6 x 10¹   | `xi`     | ξ      | `xiday`           |
+| 5 x 10¹   | `nu`     | ν      | `nuday`           |
+| 4 x 10¹   | `mu`     | Μ      | `muday`           |
+| 3 x 10¹   | `lam`    | λ      | `lamdaday`        |
+| 2 x 10¹   | `kap`    | κ      | `kappaday`        |
+| 10¹       | `dek`    | ι      | `decaday`         |
+| 10⁰       | `day`    | d      | `day`             |
+| 10⁻¹      | `dime`   | ⅒      | `deciday`         |
+| 10⁻²      | `cent`   | ¢ or % | `centiday`        |
+| 10⁻³      | `mil`    | m or ‰ | `milliday`        |
+| 2 x 10⁻⁴  | `period` | .      | `didecimilliday`  |
+| 10⁻⁴      | `phrase` |  ̑ or ‱ | `decimilliday`    |
+| 2 x 10⁻⁵  | `bar`    | \|     | `dicentimilliday` |
+| 10⁻⁵      | `beat`   | ♫      | `centimilliday`   |
+| 10⁻⁶      | `mic`    | μ      | `microday`        |
+| 10⁻⁷      | `liph`   | m̑      | `decimicroday`    |
+| 10⁻⁸      | `lib`    | m̈      | `centimicroday`   |
+| 10⁻⁹      | `nan`    | n      | `nanoday`         |
+| 10⁻¹⁰     | `roph`   | μ̑      | `decinanoday`     |
+| 10⁻¹¹     | `rob`    | µ̈      | `centinanoday`    |
+| 10⁻¹²     | `pic`    | p      | `picoday`         |
+| 10⁻¹³     | `noph`   | n̑      | `decipicoday`     |
+| 10⁻¹⁴     | `nob`    | n̊      | `centipicoday`    |
+| 10⁻¹⁵     | `femt`   | f      | `femtoday`        |
+| 10⁻¹⁶     | `coph`   | p̑      | `decifemtoday`    |
+| 10⁻¹⁷     | `cob`    | p̈      | `centifemtoday`   |
+| 10⁻¹⁸     | `att`    | a      | `attoday`         |
+| 10⁻¹⁹     | `foph`   | f̑      | `deciattoday`     |
+| 10⁻²⁰     | `fob`    | f̈      | `centiattoday`    |
+| 10⁻²¹     | `zept`   | z      | `zeptoday`        |
+| 10⁻²²     | `toph`   | ȃ      | `decizeptoday`    |
+| 10⁻²³     | `tob`    | ä      | `centizeptoday`   |
+| 10⁻²⁴     | `yokt`   | y      | `yoctoday`        |
+| 10⁻²⁵     | `zoph`   | z̑      | `deciyoctoday`    |
+| 10⁻²⁶     | `zob`    | z̈      | `centiyoctoday`   |
+| 10⁻²⁷     | `ront`   | r      | `rontoday`        |
+| 10⁻²⁸     | `yoph`   | y̑      | `decirontoday`    |
+| 10⁻²⁹     | `yob`    | ẙ      | `centirontoday`   |
+| 10⁻³⁰     | `quek`   | q      | `quectoday`       |
 
 : The units of `Decalendar` and `Declock` {#tbl-units}
 
@@ -183,11 +183,11 @@ A major difficulty with the Gregorian calendar is that the date is disconnected 
 
 #### Workdays {#sec-work}
 
-The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` (261*8/240) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 8.76 `deks` (219*.04) spent at work every year. By default, `Decalendar` compensates for having more restdays with longer workdays.
+The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In other words, this work schedule is starts 75 `mils` earlier than 9AM (`Dot 375`) and ends 8.3̅ `mils` earlier than 5PM (`Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` (261*8/240) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 8.76 `deks` (219*.04) spent at work every year. The default approach of `Decalendar` is to  compensate for having more restdays with longer workdays.
 
 #### Schedules {#sec-sched}
 
-If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. Each half of the `dek` is called a `pent` (`pentaday`) and can have its own schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. The table below displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different schedules are named after the number of workdays per `pent`. The default schedule, `Schedule 3`, has 3 workdays and 2 restdays in each `pent`. Each `Schedule 3` workday starts at `Dot 3`, ends at `Dot 7`, and lasts 4 `dimes`.
+If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. Each half of the `dek` is called a `pent` (`pentaday`) and can have its own `pently` schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. The table below displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different `pently` schedules are named after the number of workdays per `pent`. The default `pently` schedule, `Schedule 3`, has 3 workdays and 2 restdays in each `pent`. Each `Schedule 3` workday starts at `Dot 3`, ends at `Dot 7`, and lasts 4 `dimes`.
 
 | workdays | restdays | start | end | duration |
 | -------- | -------- | ----- | --- | -------- |
@@ -202,7 +202,7 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 
 #### Conversion tables {#sec-conv}
 
-The first table below shows the `doty` numbers for all of the days in common years, while the second table below does the same for leap years. In both of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). The positive `doty` numbers of dates after the Gregorian calendar leap day, February 29, need to be incremented by 1 in leap years. Similarly, the negative `doty` numbers of dates before February 29 need to decremented by 1.
+The first table below shows the `doty` numbers for all of the days in common years, while the second table below does the same for leap years. In both of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). The positive `doty` numbers of dates after the Gregorian calendar leap day, February 29, need to be incremented by 1 in leap years. Similarly, the negative `doty` numbers of dates before February 29 need to decremented by 1. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
 
 | Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
@@ -353,7 +353,7 @@ Having different conversion tables for common years and leap years is cumbersome
 
 : Generalized Gregorian calendar date to negative `doty` conversion {#tbl-leap}
 
-### `Subyear` units {#sec-subyear}
+### Subyear units {#sec-subyear}
 
 In addition to serving as a part of the Gregorian date coordinate system described above, months can also indicate the current season or quarter. `Deks` can also serve as indicator of subyear units like seasons.
 
@@ -440,7 +440,7 @@ The only unit that can include the leap year is a `zet`, which is 61 days long a
 
 : The days that begin and end each `zet` {#tbl-z}
 
-All of the `subyear` unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Zet 3`, `Z3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+078`. The `subyear` units are essentially date intervals, series of contiguous dates. `Decalendar` includes very powerful approaches to describing series of dates, times, and `stamps`.
+All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Zet 3`, `Z3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+078`. The subyear units are essentially date intervals, series of contiguous dates. `Decalendar` includes very powerful approaches to describing series of dates, times, and `stamps`.
 
 ## Series {#sec-series}
 
@@ -492,9 +492,9 @@ The pattern above requires that the `splits` are separated by the default `space
 
 ### Nesting {#sec-nest}
 
-`Split spreads` can be nested to create `spans` or `splits` within other `spans` or `splits`. Similarly, `slices` can be nested to create `slices` within `slices`. The intuition behind nested `spreads` and `slices` is that each item in the first (outer) `spread` or `slices` serves as a starting point for the second (inner) `spread`. The main use of `spread` nesting is to first "spread" or "slice" across days and then "spread" or "slice" across times in those days. We can append `.3».4`, a `simple spread` that represents the `Decalendar` workday, to `»»3»2` and obtain `»»3»2».3».4`, a nested `spread` that represents the time spent at work in a `Decalendar` year. The `slice` equivalent of `»»3»2».3».4` is `:365:1,1,3:.3:.7`.
+`Split spreads` can be nested to create `spans` or `splits` within other `spans` or `splits`. Similarly, `slices` can be nested to create `slices` within `slices`. The intuition behind nested `spreads` and `slices` is that each item in the first (outer) `spread` or `slices` serves as a starting point for the second (inner) `spread`. The main use of `spread` nesting is to first "spread" or "slice" across days and then "spread" or "slice" across times in those days. We can append `.3».4`, a `simple spread` that represents the `Decalendar` workday, to `»»3»2` and obtain `»»3»2».3».4`, a nested `spread` that represents the time spent at work in a `Decalendar` year.  In this nested `spread`, the `split` is the number of workdays (`3`), the space is the number of restdays (`2`), the second-to-last number is the `start` of the workday and the last number is the workday `span` (duration).
 
-The nested `spread` above is more succinct than the nested `slice`, but the two are synonymous. `Spreads` are in general a better tool for creating long consecutive sequences with breaks than `slices`. For example, to include a lunch break in the middle of work, we could simply add a `split` and a `space` to the nested `spread` above: `»»3»2».3».4».18».04`. To do the same with a `slice`, we have to create 18 steps of 0.01 and a step of .04: `:365:1,1,3:.3:.7:18*1%,4%`. Here, we are using the replication operator (`*`) to avoid writing 0.01 18 times and the percent operator (`%`) to save a few characters, but even so the `slice` is not as concise as the `spread`. The table below shows each part of this schedule in the form of `slices` and `spreads`.
+The `slice` equivalent of `»»3»2».3».4` is `:365:1,1,3:.3:.7`. The nested `spread` above is more succinct than this nested `slice`, but the two are synonymous. `Spreads` are in general a better tool for creating long consecutive sequences with breaks than `slices`. For example, to include a lunch break in the middle of work, we could simply add a `split` and a `space` to the nested `spread` above: `»»3»2».3».4».18».04`. To do the same with a `slice`, we have to create 18 steps of 0.01 and a step of .04: `:365:1,1,3:.3:.7:18*1%,4%`. Here, we are using the replication operator (`*`) to avoid writing 0.01 18 times and the percent operator (`%`) to save a few characters, but even so the `slice` is not as concise as the `spread`. The table below shows each part of this schedule in the form of `slices` and `spreads`.
 
 | slice   | spread  | spread  | label |
 | ------- | ------  | ------  | ----- |
@@ -504,387 +504,37 @@ The nested `spread` above is more succinct than the nested `slice`, but the two 
 
 : A workday schedule with a lunch break {#tbl-workday}
 
-### Pomodoro {#sec-pom}
+Nested `spreads` can mix left- and right-pointing guillemets. For example, we could replace the start of the workday in `»»3»2».3».4` with the end of workday if we reverse the last guillemet: `»»3»2».7«.4`. These two nested `spreads` are essentially concatenations of the spread `»»3»2` with either `.3».4` or `.7«.4`. We concatenate the two `spreads` with `»` because we want to use the beginning of each workday as a `start`, not a `stop`. The `spread` `»»3»2«.3».4` would "spread" forward from `Dot 7` of the day before each workday up to `Dot 1` of each workday, while `»»3»2«.7«.4` would "spread" backward from `Dot 3` of the day before each workday to `Dot 9` of the day two days before each workday. The most common usage will be to use only right-pointing guillemets (`»`), but there may be use cases for "spreading" across days in different directions.
 
-Another real-life application of `spreads` can be to intersperse breaks in between periods of work as in the [Pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the `Declock` units would be to have each `pomodoro` consist of 17 `mils` of work and 3 `mils` of rest, with a 17 `mil` break after every 4 `pomodoros`. This pattern is difficult to capture with a `slice`: .3:.7:: `.3».7».08».02»».017».003` If we did not include the longer break, we could write infinite `poms` as this `split spread`: `»».017».003`. The longer break complicates the pattern and introduces repetition to the `split spread`: `»».017,.017,.017,.017».003,.003,.003,.02`.
-
-
-The 3.4-`dime` long `Decalendar` workday starts at `Dot 35`, ends at `Dot 69`, and can be summarized by the `spread` `.35».34`. This work schedule is 6̅ `mils` longer than the typical 9 to 5 schedule, because it starts 2.5 `cents` earlier than 9AM (`Dot 375`) and ends 1.83̅ `cents` earlier than 5PM (`Dot 7083̅`).
-
-
-We could use a series of `splits` and `spaces` to provide breaks in between the working sessions.
-
-#### Replication operator {#sec-rep}
-
-Repetition of values is the price we pay for breaking a pattern, but we can mitigate this repetition by using the `rep` (replication) operator (`*`) to replace the repetitive values. When we apply this approach to the `spread` above: `»».017,.017,.017,.017».003,.003,.003,.02`, it becomes easier to read and understand: `»»4*.017»3*.003,.02`. The rep can also be used in the `span` of a `split spread` or the `stop` of a `stepped slice` to indicate has many cycles of `splits` or `steps` we want to complete. For example, instead of writing `.35».4»4*.017»3*.003,.02` to indicate sets of 4 `poms` that start at `Dot 35` and last 4 `dimes`, we can write `.35»4*»4*.017»3*.003,.02` to mean that we will start at `Dot 35` and end after completing four cycles (`4*`).
-
-#### Percent, permil, and permyr operator {#sec-per}
-
-We can make the `split spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. All of the values in `.35».4».017*4».003*3,.02` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this `split spread` as `.35».4»4*17‰»3*3‰,2%`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.35».4»4*17‰»3*3‰,2%` as `.35».4»4*17m»3*3m,2%`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator (hex: `2031`, html: `&pertenk;`), which is short for permyriad and represents `Declock phrases`.
-
-### Slice and spread hybrids {#sec-hybrids}
-
-`Split spreads` can be useful for planning 1 day of `poms`, but the easiest way to plan multiple days is with a `slice`-`spread` hybrid called a `sled` or a `spread`-`slice` hybrid called a `splice`. These hybrids have all of the elements of both `spreads` and `slices`: `start`, `stop`, `step`, `span`, `split`, and `space`. The only different between the hybrids is the order of these elements. `Sleds` put the `slice` elements first (`start:stop:step»span»split»space` or `start:stop:step«span«split«space`), while `splices` start with the `spread` elements (`start»span»split»space:stop:step` or `stop«span«split«space:start:step`).
-
-Both of these hybrids either `spread` forward (`start:stop:step»span»split»space` or `start»span»split»space:stop:step`) or `spread` backward (`start:stop:step«span«split«space` or `stop«span«split«space:start:step`) from each `step` of the `slice`. In all cases, the `slice` elements are used for dates and the `spread` elements are used for times. When put together, these elements replicate a `segment` or a series of `segments` a series of days. Between the two hybrid approaches, `Decalendar` recommends `sleds`, instead of `splices`, because they follow the convention of largest-to-smallest in `dot` format dates (`±year±day.day±z`, `year±m±dd.day±z`, and `year±ww±d.day±z`).
-
-### Brackets {#sec-brackets}
-
-Using square brackets (`[]`), we can replicate a 
-Another advantage of `sleds` is they keep dates closer together. For example, the `sled` `000.35::3*1,2,2*1,3».34` and `splice` `000.35».34::3*1,2,2*1,3` both begin with a start time of `Dot 35` on the first `Zeroday` of the year, but the `sled` first specifies all of the days before providing the `span`, whereas the `splice` focuses on describing the first `segment` before saying how it should be replicated.
-
-The `sled` and `slice` above represent the recommended `Decalendar` work schedule. `Decalendar` specifies every day except `Threeday`, `Fourday`, `Eightday`, and `Nineday` as workdays. The restdays in the form of a `slice` are `4::4,1,5`, while the workdays in `slice` form are `::3*1,2,2*1,3`. The 3.4-`dime` long `Decalendar` workday starts at `Dot 35`, ends at `Dot 69`, and can be summarized by the `spread` `.35».34`. This work schedule is 6̅ `mils` longer than the typical 9 to 5 schedule, because it starts 2.5 `cents` earlier than 9AM (`Dot 375`) and ends 1.83̅ `cents` earlier than 5PM (`Dot 7083̅`).
-
-### Slice and spread hybrids {#sec-hybrids}
-
-Following this schedule, a worker would spend 2.38 days at work per `dek`, which is 238 `mils` per day on average. In a typical 40-hour workweek, a worker would spend 238.0952381 `mils` per day at work. Interestingly, the difference is only 9.52381 beats (8.22857184 seconds) long. If a worker spends an extra 5 `cents` at work for 6 days, they should be entitled to an extra day off. This schedule would be Starting at  days instead of 10, which is almost exactly the same as if we extended the typical workweek to `000.3::2[3*1,2]».39»2*.15».4`.
-Instead of just a single `segment` per day, we could add a `split` and a `space` to the `sled` above and include breaks throughout the day. A typical workday would be two blocks of work separated by a lunch break in the middle of the day. We could combine the `spread` `.35».34»2*.15».4` with the `sled` above to create a new `sled` with two 15-`cent`-long work sessions with one 4-`cent`-long lunch break in between: `000.35::3*1,2,2*1,3».34»2*.15».4`.
-
-We can adjust the time spent at work while keeping the lunch break at `Dot 5` by changing the length of the work sessions, the start time, and the duration. If we expect 3 `dimes` of work per day and we can  
-Another option is to spend 
-If more time at work is required dimes is too much time to spend at work or in school, the first and/or last 5 `cents` can be skipped to start the workday at `Dot 4` (2.5% later than 37.5%) and/or end it at `Dot 7` (.83̅% earlier than 70.83̅%).
-
-(`000.4::3*1,2,2*1,3».3»4%,2*5%»1%,4%,2*1%`)
-`000.4».3»4%,4%,5%,5%»1%,1%,4%,1%:2,8`
-`000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`
-It is possible to  option is to take more The table below summarizes the recommended daily work schedule.
-
- When combined together, the workdays `slice` and workday `spread` create the `sled` `000.35::3*1,2,2*1,3».4`.
-`Sleds` first specify the days and then define the `segments`. 
-
-#### Percent operator {#sec-operator}
-
-A more realistic workday or school day would have a longer break for lunch. We could achieve this with a `series` of `splits` and a `series` of `spaces`. Instead of listing all of the times in a `splice` like this: `000.35».4».04,.04,.05,.05,.04,.04,.05».01,.01,.04,.01,.01,.01:2,8`, we can use cycling to remove some of the values that repeat as in this `slice`: `000.35».4».04,.04,.05,.05».01,.01,.04,.01:2,8`.  Repetition of values is the price we pay for breaking the pattern, but we can mitigate this repetition by using the `%` operator, because all of the values in each of the series are percents of the day. The resulting `splice `, `000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`, is shorter and easier to read.
-
-| slice   | spread | spread | label |
-| ------- | ------ | ------ | ----- |
-| 36%:44% | 36%»8% | 44%«8% | work0 |
-| 44%:45% | 44%»1% | 45%«1% | rest0 |
-| 45%:50% | 45%»5% | 50%«5% | work1 |
-| 50%:54% | 50%»4% | 54%«4% | lunch |
-| 54%:59% | 54%»5% | 59%«5% | work3 |
-| 59%:60% | 59%»1% | 60%«1% | rest2 |
-| 60%:64% | 60%»4% | 64%«4% | work4 |
-| 64%:65% | 64%»1% | 65%«1% | rest3 |
-| 65%:69% | 65%»4% | 69%«4% | work5 |
-| 69%:70% | 69%»1% | 70%«1% | rest4 |
-| 70%:75% | 70%»5% | 75%«5% | work6 |
-
-| slice   | spread | spread | label |
-| ------- | ------ | ------ | ----- |
-| 40%:44% | 40%»4% | 44%«4% | work0 |
-| 44%:45% | 44%»1% | 45%«1% | rest0 |
-| 45%:50% | 45%»5% | 50%«5% | work1 |
-| 50%:54% | 50%»4% | 54%«4% | lunch |
-| 54%:59% | 54%»5% | 59%«5% | work2 |
-| 59%:60% | 59%»1% | 60%«1% | rest1 |
-| 60%:64% | 60%»4% | 64%«4% | work3 |
-| 64%:65% | 64%»1% | 65%«1% | rest2 |
-| 65%:70% | 65%»5% | 70%«5% | work4 |
-
-| slice   | spread | spread | label |
-| ------- | ------ | ------ | ----- |
-| 35%:39% | 35%»4% | 39%«4% | work0 |
-| 39%:40% | 39%»1% | 40%«1% | rest0 |
-| 40%:44% | 40%»4% | 44%«4% | work1 |
-| 44%:45% | 44%»1% | 45%«1% | rest1 |
-| 45%:50% | 45%»5% | 50%«5% | work2 |
-| 50%:54% | 50%»4% | 54%«4% | lunch |
-| 54%:59% | 54%»5% | 59%«5% | work3 |
-| 59%:60% | 59%»1% | 60%«1% | rest2 |
-| 60%:64% | 60%»4% | 64%«4% | work4 |
-| 64%:65% | 64%»1% | 65%«1% | rest3 |
-| 65%:69% | 65%»4% | 69%«4% | work5 |
-| 69%:70% | 69%»1% | 70%«1% | rest4 |
-| 70%:75% | 70%»5% | 75%«5% | work6 |
-
-#### Replication operator {#sec-operator}
-
-We can make the `splice` above even shorter by using the replication operator `*` to replace a repetitive values. The result, `000.35»4%»2*4%,2*5%»2*1%,4%,1%::2,8`, is a bit easier to read and understand. We can modify the step to extend this splice to every workday in a `dek` by `000.35»4%»4%*2,5%*2»1%*2,4%,1%::1,1,1,2,1,1,3`. This represents another opportunity to use the replication operator. The final result, `000.35»4%»2*4%,2*5%»2*1%,4%,1%::3*1,2,2*1,3`, is the recommended `Decalendar` work schedule. This work schedule starts a 2.5% earlier and ends 4.16̅% later than a typical 9 to 5 (9AM=37.5%, 5PM=70.83̅%), but includes 4% of the day worth of breaks. The entire workday is 4 `dimes` long. If that is too much time to spend at work or in school, the first or last work session can be skipped to either start the workday at `Dot 4` or end it at  `Dot 7`. The table below summarizes the recommended daily work schedule.
-
-| slice   | spread | spread | label |
-| ------- | ------ | ------ | ----- |
-| 35%:39% | 35%»4% | 39%«4% | work0 |
-| 39%:40% | 39%»1% | 40%«1% | rest0 |
-| 40%:44% | 40%»4% | 44%«4% | work1 |
-| 44%:45% | 44%»1% | 45%«1% | rest1 |
-| 45%:50% | 45%»5% | 50%«5% | work2 |
-| 50%:54% | 50%»4% | 54%«4% | lunch |
-| 54%:59% | 54%»5% | 59%«5% | work3 |
-| 59%:60% | 59%»1% | 60%«1% | rest2 |
-| 60%:64% | 60%»4% | 64%«4% | work4 |
-| 64%:65% | 64%»1% | 65%«1% | rest3 |
-| 65%:69% | 65%»4% | 69%«4% | work5 |
-| 69%:70% | 69%»1% | 70%«1% | rest4 |
-| 70%:75% | 70%»5% | 75%«5% | work6 |
-
-: The recommend `Decalendar` daily work schedule {#tbl-schedule}
-
-
-### Slides {#sec-slides}
-
-Similar to the 
-
-`start»span»split»space:step`
-`stop«span«split«space:step`
-split  special `slices` and `spreads` called `stepped slices` and. 
-into `series` of `seqments` called `a`. `split spread` `stepped slices`  `Slices` `Slices` and `spreads` can also form that are not `simple` create `series` instead of `segments`. are called `stepped slices` and `split spreads`. `spaced spreads`. `Slices` can create `series` of non-consecutive dates, times, or `stamps` by `stepping`, w
-
-Spread-seqs
-Spreeqs
- spread::seq
-
-### Slides {#sec-slides}
-
-`start:stop:step»span»split»space`
-`0.5».6::2,8`
-
-
-
-span space span skip
-
-`start:stop:step:step:step:step»span»split»space`
-`start`Instead of just a single `segment` per day, we could add a `split` and a `space` to the concatenated `spread` above and include breaks throughout the day. A typical workday would be two blocks of work separated by a lunch break in the middle of the day. The concatenated `spread` `»»3»2».35».34».15».04`, includes a 4-`cent`-long lunch break in between two 15-`cent`-long work sessions.
 
 ### Pomodoro {#sec-pom}
 
-Another real-life application of `spreads` can be to intersperse breaks in between periods of work. `Declock` uses the term `pom`, which is short for [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique), to describe a combined unit of work and rest. The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the `Declock` units would be to have `poms` that consist of 17 `mils` of work and 3 `mils` of rest, with a 17 `mil` break after every 4 `poms`. If we did not include the longer break, we could write infinite `poms` as this `split spread`: `»».017».003`. The longer break complicates the pattern and introduces repetition to the `split spread`: `»».017,.017,.017,.017».003,.003,.003,.02`.
+Another real-life application of `spreads` can be to intersperse breaks in between periods of work as in the [Pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the `Declock` units would be to have each `pomodoro` consist of 17 `mils` of work and 3 `mils` of rest, with a 17 `mil` break after every 4 `pomodoros`. To repeat 16 `pomodoros` throughout the `Decalendar` workday, we could use the following nested `spread`: `.3».7».08».02»»».017».003`. This pattern is difficult to capture with a `slice` because we have to use `*` for the steps of the inner and the outer `slice`: `.3:.7:8*.01,.02:::17*.001,.003`.
 
 #### Replication operator {#sec-rep}
 
-Repetition of values is the price we pay for breaking a pattern, but we can mitigate this repetition by using the `rep` (replication) operator (`*`) to replace the repetitive values. When we apply this approach to the `spread` above: `»».017,.017,.017,.017».003,.003,.003,.02`, it becomes easier to read and understand: `»»4*.017»3*.003,.02`. The rep can also be used in the `span` of a `split spread` or the `stop` of a `stepped slice` to indicate has many cycles of `splits` or `steps` we want to complete. For example, instead of writing `.35».4»4*.017»3*.003,.02` to indicate sets of 4 `poms` that start at `Dot 35` and last 4 `dimes`, we can write `.35»4*»4*.017»3*.003,.02` to mean that we will start at `Dot 35` and end after completing four cycles (`4*`).
+The replication operator (`*`) is very useful for replacing repetitive values, but `*` rep can also be used in the `span` of a `split spread` or the `stop` of a `stepped slice` to indicate has many cycles of `splits` or `steps` we want to complete. For example, `.3»2*».08».02»»».017».003` indicates 2 sets of 4 `poms` that start at `Dot 3`. In other words, `2*` means that we want to stop cycling after completing four cycles. We can read `2*` out loud as "two times" because it means we intend to go through the cycle "two times".
 
-#### Percent, permil, and permyr operator {#sec-per}
+#### Percent, permil, and permyr operators {#sec-per}
 
-We can make the `split spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. All of the values in `.35».4».017*4».003*3,.02` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this `split spread` as `.35».4»4*17‰»3*3‰,2%`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.35».4»4*17‰»3*3‰,2%` as `.35».4»4*17m»3*3m,2%`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator (hex: `2031`, html: `&pertenk;`), which is short for permyriad and represents `Declock phrases`.
+We can make the nested `spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. Most of the values in `.3»2*».08».02»»».017».003` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this nested `spread` as `.3»2*»8%»2%»»»17‰»3‰`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.3»2*»8%»2%»»»17‰»3‰` as `.3»2*»8%»2%»»»17m»3m`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator (hex: `2031`, html: `&pertenk;`), which is short for permyriad and represents `Declock phrases` (10⁻⁴).
 
-### Slice and spread hybrids {#sec-hybrids}
+#### Pently schedules as slices and spreads {#sec-pently}
 
-`Split spreads` can be useful for planning 1 day of `poms`, but the easiest way to plan multiple days is with a `slice`-`spread` hybrid called a `sled` or a `spread`-`slice` hybrid called a `splice`. These hybrids have all of the elements of both `spreads` and `slices`: `start`, `stop`, `step`, `span`, `split`, and `space`. The only different between the hybrids is the order of these elements. `Sleds` put the `slice` elements first (`start:stop:step»span»split»space` or `start:stop:step«span«split«space`), while `splices` start with the `spread` elements (`start»span»split»space:stop:step` or `stop«span«split«space:start:step`).
+Now that we have finished describing `spreads`, we can use them to describe the 4 `pently` schedules. The default schedule, `Schedule 3`, described previously is `»»3»2».3».4`.
 
-Both of these hybrids either `spread` forward (`start:stop:step»span»split»space` or `start»span»split»space:stop:step`) or `spread` backward (`start:stop:step«span«split«space` or `stop«span«split«space:start:step`) from each `step` of the `slice`. In all cases, the `slice` elements are used for dates and the `spread` elements are used for times. When put together, these elements replicate a `segment` or a series of `segments` a series of days. Between the two hybrid approaches, `Decalendar` recommends `sleds`, instead of `splices`, because they follow the convention of largest-to-smallest in `dot` format dates (`±year±day.day±z`, `year±m±dd.day±z`, and `year±ww±d.day±z`).
+| Schedule | spread      | spread      |
+| -------- | ----------- | ----------- |
+| 2        | »»2»3».2».6 | »»2»3».8«.6 |
+| 3        | »»3»2».3».4 | »»3»2».7«.4 |
+| 4        | »»4»».35».3 | »»4»».65«.3 |
+| 5        | »»»».38».24 | »»»».62«.24 |
 
-### Brackets {#sec-brackets}
-
-Using square brackets (`[]`), we can replicate a 
-Another advantage of `sleds` is they keep dates closer together. For example, the `sled` `000.35::3*1,2,2*1,3».34` and `splice` `000.35».34::3*1,2,2*1,3` both begin with a start time of `Dot 35` on the first `Zeroday` of the year, but the `sled` first specifies all of the days before providing the `span`, whereas the `splice` focuses on describing the first `segment` before saying how it should be replicated.
-
-The `sled` and `slice` above represent the recommended `Decalendar` work schedule. `Decalendar` specifies every day except `Threeday`, `Fourday`, `Eightday`, and `Nineday` as workdays. The restdays in the form of a `slice` are `4::4,1,5`, while the workdays in `slice` form are `::3*1,2,2*1,3`. The 3.4-`dime` long `Decalendar` workday starts at `Dot 35`, ends at `Dot 69`, and can be summarized by the `spread` `.35».34`. This work schedule is 6̅ `mils` longer than the typical 9 to 5 schedule, because it starts 2.5 `cents` earlier than 9AM (`Dot 375`) and ends 1.83̅ `cents` earlier than 5PM (`Dot 7083̅`).
-
-### Slice and spread hybrids {#sec-hybrids}
-
-Following this schedule, a worker would spend 2.38 days at work per `dek`, which is 238 `mils` per day on average. In a typical 40-hour workweek, a worker would spend 238.0952381 `mils` per day at work. Interestingly, the difference is only 9.52381 beats (8.22857184 seconds) long. If a worker spends an extra 5 `cents` at work for 6 days, they should be entitled to an extra day off. This schedule would be Starting at  days instead of 10, which is almost exactly the same as if we extended the typical workweek to `000.3::2[3*1,2]».39»2*.15».4`.
-Instead of just a single `segment` per day, we could add a `split` and a `space` to the `sled` above and include breaks throughout the day. A typical workday would be two blocks of work separated by a lunch break in the middle of the day. We could combine the `spread` `.35».34»2*.15».4` with the `sled` above to create a new `sled` with two 15-`cent`-long work sessions with one 4-`cent`-long lunch break in between: `000.35::3*1,2,2*1,3».34»2*.15».4`.
-
-We can adjust the time spent at work while keeping the lunch break at `Dot 5` by changing the length of the work sessions, the start time, and the duration. If we expect 3 `dimes` of work per day and we can  dimes is too much time to spend at work or in school
-Another option is to spend 
-If more time at work is required dimes is too much time to spend at work or in school, the first and/or last 5 `cents` can be skipped to start the workday at `Dot 4` (2.5% later than 37.5%) and/or end it at `Dot 7` (.83̅% earlier than 70.83̅%).
-
-(`000.4::3*1,2,2*1,3».3»4%,2*5%»1%,4%,2*1%`)
-`000.4».3»4%,4%,5%,5%»1%,1%,4%,1%:2,8`
-`000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`
-It is possible to  option is to take more The table below summarizes the recommended daily work schedule.
-
- When combined together, the workdays `slice` and workday `spread` create the `sled` `000.35::3*1,2,2*1,3».4`.
-`Sleds` first specify the days and then define the `segments`. 
-
-#### Percent operator {#sec-operator}
-
-A more realistic workday or school day would have a longer break for lunch. We could achieve this with a `series` of `splits` and a `series` of `spaces`. Instead of listing all of the times in a `splice` like this: `000.35».4».04,.04,.05,.05,.04,.04,.05».01,.01,.04,.01,.01,.01:2,8`, we can use cycling to remove some of the values that repeat as in this `slice`: `000.35».4».04,.04,.05,.05».01,.01,.04,.01:2,8`.  Repetition of values is the price we pay for breaking the pattern, but we can mitigate this repetition by using the `%` operator, because all of the values in each of the series are percents of the day. The resulting `splice `, `000.35».4»4%,4%,5%,5%»1%,1%,4%,1%:2,8`, is shorter and easier to read.
-
-| slice   | spread | spread | label |
-| ------- | ------ | ------ | ----- |
-| 36%:44% | 36%»8% | 44%«8% | work0 |
-| 44%:45% | 44%»1% | 45%«1% | rest0 |
-| 45%:50% | 45%»5% | 50%«5% | work1 |
-| 50%:54% | 50%»4% | 54%«4% | lunch |
-| 54%:59% | 54%»5% | 59%«5% | work3 |
-| 59%:60% | 59%»1% | 60%«1% | rest2 |
-| 60%:64% | 60%»4% | 64%«4% | work4 |
-| 64%:65% | 64%»1% | 65%«1% | rest3 |
-| 65%:69% | 65%»4% | 69%«4% | work5 |
-| 69%:70% | 69%»1% | 70%«1% | rest4 |
-| 70%:75% | 70%»5% | 75%«5% | work6 |
-
-| slice   | spread | spread | label |
-| ------- | ------ | ------ | ----- |
-| 40%:44% | 40%»4% | 44%«4% | work0 |
-| 44%:45% | 44%»1% | 45%«1% | rest0 |
-| 45%:50% | 45%»5% | 50%«5% | work1 |
-| 50%:54% | 50%»4% | 54%«4% | lunch |
-| 54%:59% | 54%»5% | 59%«5% | work2 |
-| 59%:60% | 59%»1% | 60%«1% | rest1 |
-| 60%:64% | 60%»4% | 64%«4% | work3 |
-| 64%:65% | 64%»1% | 65%«1% | rest2 |
-| 65%:70% | 65%»5% | 70%«5% | work4 |
-
-| slice   | spread | spread | label |
-| ------- | ------ | ------ | ----- |
-| 35%:39% | 35%»4% | 39%«4% | work0 |
-| 39%:40% | 39%»1% | 40%«1% | rest0 |
-| 40%:44% | 40%»4% | 44%«4% | work1 |
-| 44%:45% | 44%»1% | 45%«1% | rest1 |
-| 45%:50% | 45%»5% | 50%«5% | work2 |
-| 50%:54% | 50%»4% | 54%«4% | lunch |
-| 54%:59% | 54%»5% | 59%«5% | work3 |
-| 59%:60% | 59%»1% | 60%«1% | rest2 |
-| 60%:64% | 60%»4% | 64%«4% | work4 |
-| 64%:65% | 64%»1% | 65%«1% | rest3 |
-| 65%:69% | 65%»4% | 69%«4% | work5 |
-| 69%:70% | 69%»1% | 70%«1% | rest4 |
-| 70%:75% | 70%»5% | 75%«5% | work6 |
-
-#### Replication operator {#sec-operator}
-
-We can make the `splice` above even shorter by using the replication operator `*` to replace a repetitive values. The result, `000.35»4%»2*4%,2*5%»2*1%,4%,1%::2,8`, is a bit easier to read and understand. We can modify the step to extend this splice to every workday in a `dek` by `000.35»4%»4%*2,5%*2»1%*2,4%,1%::1,1,1,2,1,1,3`. This represents another opportunity to use the replication operator. The final result, `000.35»4%»2*4%,2*5%»2*1%,4%,1%::3*1,2,2*1,3`, is the recommended `Decalendar` work schedule. This work schedule starts a 2.5% earlier and ends 4.16̅% later than a typical 9 to 5 (9AM=37.5%, 5PM=70.83̅%), but includes 4% of the day worth of breaks. The entire workday is 4 `dimes` long. If that is too much time to spend at work or in school, the first or last work session can be skipped to either start the workday at `Dot 4` or end it at  `Dot 7`. The table below summarizes the recommended daily work schedule.
-
-| slice   | spread | spread | label |
-| ------- | ------ | ------ | ----- |
-| 35%:39% | 35%»4% | 39%«4% | work0 |
-| 39%:40% | 39%»1% | 40%«1% | rest0 |
-| 40%:44% | 40%»4% | 44%«4% | work1 |
-| 44%:45% | 44%»1% | 45%«1% | rest1 |
-| 45%:50% | 45%»5% | 50%«5% | work2 |
-| 50%:54% | 50%»4% | 54%«4% | lunch |
-| 54%:59% | 54%»5% | 59%«5% | work3 |
-| 59%:60% | 59%»1% | 60%«1% | rest2 |
-| 60%:64% | 60%»4% | 64%«4% | work4 |
-| 64%:65% | 64%»1% | 65%«1% | rest3 |
-| 65%:69% | 65%»4% | 69%«4% | work5 |
-| 69%:70% | 69%»1% | 70%«1% | rest4 |
-| 70%:75% | 70%»5% | 75%«5% | work6 |
-
-: The recommend `Decalendar` daily work schedule {#tbl-schedule}
-
-
-### Slides {#sec-slides}
-
-Similar to the 
-
-`start»span»split»space:step`
-`stop«span«split«space:step`
-split  special `slices` and `spreads` called `stepped slices` and. 
-into `series` of `seqments` called `a`. `split spread` `stepped slices`  `Slices` `Slices` and `spreads` can also form that are not `simple` create `series` instead of `segments`. are called `stepped slices` and `split spreads`. `spaced spreads`. `Slices` can create `series` of non-consecutive dates, times, or `stamps` by `stepping`, w
-
-Spread-seqs
-Spreeqs
- spread::seq
-
-### Slides {#sec-slides}
-
-`start:stop:step»span»split»space`
-`0.5».6::2,8`
-
-
-
-span space span skip
-
-`start:stop:step:step:step:step»span»split»space`
-`start>span>space>split`
-Beyond `simple slices` and `simple spreads`
-`start>span>split>space>`
-
-start»span«split: spread to the right, but split to the left
-The default space is 0
-The default skip is None, meaning do not skip any
-skip is 1: 1 0 1 0 1 0 1 0
-skip is 2: 1 1 0 1 1 0 1 1
-skip can be a step or another spread
-A 5 cent span with a 1 cent break in between
-0»5»2
-A 9 cent span with a 1 cent break in between
-0»9»4
-A 9 cent span with a 2 cent break in between
-0»9»4:6
-0»9»4»2
-
-Negative numbers 
-If the `span` were negative, it would simple reverse the direction of the angle bracket.
-
-
-`stepping slice` `:-4:-1`. Unlike `simple slices`, `stepping slices` have more than 1 colon. Any values after the `start` and the `stop` are called `steps`. A negative `step`  possible with a simple `slice`. To obtain the last 3 days of any year we include a  would have to `slice` in reverse
-
-is synonymous with the `slice` `:003`. All of the remaining days in the year can be expressed as `003<` or `003:`. If we do not want to `spread` all the way to the first or last value, we can provide a `span` after the left or right angle bracket (`<` or `>`) in the form `stop<span` or `start>span`. This is especially useful when combined with the default `stop`. For example, `>3` is synonymous with `000>3`, `003<` and `:003`. from the `start` by writing `000>3`, but then we have to specify that we only want 3 days instead of all of the days in the year. the `stop`, by writing. If we `spread` from the `start`,  `stop` is We could also `spread` starting from `start`. The value after `<` is called  to the way we could write the  , whereas `003:` uses the default stop and gives us
-
-When the `stop` is omitted, the `slice` goes up to and including the last value. 
-
-We can `slice` up to but not including `Day 3` by writing `:003`. `Day 3` in this is synonymous with the `series` `000,001,002`. This In addition to `slicing`, we can also replace the series with `Slices` cut out the `span` in between a `start` and a `stop` (`start:stop`), whereas `spreads` use the `span` to extend either forward from a `start` (`start>span`) or backward from a `stop` (`stop<span`). `Slices` can omit their `start` `stop` `span` `stop` is never included in `slices` and `spreads`. , `000:003` as a `slice`, and `000>3` or `003<3` as a `spread`.
-
-
-We can shorten the `slice` above from `000:003` to `:003` by omitting the `start` value, because the default `start` value of `slices` is the first value. Similarly, we can shorten `003<3` to `003<` because if a `span` is omitted, `spreads` will extend as far as possible, in this case to the first value.
-
-All of three of these approaches can be combined together in the form `start:stop:step>span`. 
-
- in part to enable simple algebraic reasoning about the `stop`, `start`, and `span`. The `stop` is the sum of the `start` and the `span` (`stop` = `start` + `span`), the `start` is the difference between the `stop` and the `span` (`start` = `stop` - `span`), and the `span` is the difference between the `stop` and the `start` (`span` = `stop` - `start`). Excluding the `stop` is even more useful when combined with the default values of `slices` and `spreads`. The default `start` and `stop` values of `slices` are the first and last values, respectively. Similarly, default `span` of `spreads` is `n`, the difference between the last value and the first value. The first three days of the year can written `:003` as a `slice`, and `000>3` or `003<`In the context of the days in a year, 
-
-
-If a `stamp` has a duration, it is called a time `segment`. A group of `stamps` or `segments` is called a time `series`. A `series` can be synonymous with a `segment` if it contains only unique, consecutive, and chronologically ordered `stamps`.  `segments` are uninterrupted time intervals,  The main difference between between a `segment` and a `series`, is that a  A `series` of `segments` can describe. While a time `segment` can de If we specified `datetime` with a duration is called a time `segment` and  have a beginning (`start`), an end (`stop`), and a duration (`span`). we could decide when to meet for lunch, but not how much time we would spend eating lunch. 
-
-Dates, times, and `datetimes` can be grouped together into time `segments` or time `series`. Time `segments` are uninterrupted time intervals, and thus the items in a `segment` must be unique, consecutive, and in chronological order. Time `series` do not have any of these restrictions and can contain anything, including time `segments`. A `series` of `segments` is called a `segment series` and can be useful for describing recurring events. `Segment series` will have For example, a group of friends may agree to meet for lunch on New Year's Day every year starting from the year 2000. `2000:+000.50:54`
- `2000:+000.50>4`
- `2000:+000.54<4`
-We can express a `segment` either as a comma-separated list of items or as a slice.  breaks, duplicates, missing values,   items in time `segments` must be unique and in chronological order, because kb. In contrast, the items consist of items that are . whereas the items in time `series` do not have to be related or even in chronological order. All of the items in a `segments` have to be unique, but a `series` can contain duplicates. 
-
-
-Items must be Segment  Series  Set
-Continuous    Yes      No      No
-Ordered       Yes      No      No
-Unique        Yes      No      Yes
-
-
-only difference between a series and a set In fact, the times in a  `series` because they simply list time points separated by commas. There 2 types of `segments`  or one of three types   The first 3 years of the second millennium  contrast, time because they  Time `segments` can be defined using any two of these three values either by `slicing` or `spreading`. For example, a time `segment` that includes the years 2000 and 2001, but not the year 2002, can be written as `2000>2`, `2000:2002`, or `2002<2`.
-
-Unlike the intervals above, above could be written in the form of a `series`: `2000,2001`. the `slice` and `spread` intervals shown above, a `series` can contain discontinuous time points. his are of time from   we cut out a certain portion of `start:stop`, `start>span`, or `stop<span`.
-
-
-but they could mark the beginning or end of a time interval. There are 3 ways to express intervals in `Decalendar` and `Declock`: we could 
-We can turn any date, time, or `datetime` into an interval in one of three ways: `start:stop`, `start>shift`, `stop<shift`. If we were planning take a vacation for 3 days at the beginning of the year 2000, we could express to celebrate the end of the year 1999, we could provide the planned duration of the party in three ways: `start:stop`, `start>shift`, `stop<shift`. `1999+364.9>2+0` on the invitation.
-`2000-360` = 360 days have passed in the year
-
-`2000-360>4` = 360 days have passed in the year
-
-`2000-360.250` = 6.25 days left in the year
-
-`2000-007` = 7 days left in the year
-
-`2000-007.500` = 6.5 days left in the year
-
-`2000-007.250` = 6.25 days left in the year
-
-`2000-007.250` = 6.25 days left in the year
-
-Positive `doty` numbers keep track of how much has passed in a year, while negative `doty` numbers keep track of how much time is left in a year.
-The date `2000+000` essentially means that 2000 years have passed since `Year 0`, a duration of 2000 years. Typically small amounts of time are durations, while We could say that a meeting will last 4 `cents` or,
-««»
-### Slices and series
-
-500>040 = 500:540
-500<040 = 460:500
-50<04 = 46:50
-50<4 = 46:50 or 10:50
-
-Each component of a `datetime`, except for the time zone, can be turned into a `slice`, an interval between two points in time. Providing only a `start` value and a `stop` value can be much more succinct than explicitly listing all of the time points in between. For example, the first 4 days of the year in `slice` form would be `:004`. This `slice` can also be written in the form of a `series`, a list of time points: `000,001,002,003`. The `slice` is much shorter than the `series`, but can be harder to understand.
-
-`Slices` that start with the very first value can omit the `start` value, like the `slice` in the example above. Similarly, omitting the `stop` value means that a `slice` goes up to and including the very last value. For example, `360:` includes `Day 360` and all of the days thereafter in a year. The `slice` above could also be written `:010`, which is almost ten times shorter than listing all. is a left-open, right-closed intervals, which means the `start` value is included, but the `stop` value is not. This is why the year 2010 is not included in `2000:2010` example above. It may be useful to not include a `stop` value, which means to go up to and including the last value. For example,
-
-`Slices` in which `start` does not occur before `stop` are empty, meaning that they do not contain any time points. For example, `2000:2000` is a `slice` that does not contain any years. `Series` can also be empty. While an empty `series` can be represent by a single comma (`,`), a single colon (`:`) represents a `slice` that starts at beginning and goes up to and including the end. Without any context, this could mean an infinite slice that contains all of time, but in the context of a date, we  all time points  Unlike `slices`, `series` can include dates  The stop We could also describe The first ten days of the year 2000 would be `2000+000:010`. If a `datetime` has more than 1 `colon`, it represents more than 1 interval. For example, `2000:2003+000:010` is synonymous with `2000+000:010,2001+000:010,2002+000:010` The first singular points in time, but could also represent durations. The date `2000+000` essentially means that 2000 years have passed since `Year 0`, a duration of 2000 years. Typically small amounts of time are durations, while We could say that a meeting will last 4 `cents` or, in other words, 4 percent of the day. If we say `Dot 04` or 4 `cents`, it is unlikely we mean The time between two dates is called a date interval, while the  the time in between two dates  between two times is called an interval. For example, if we plan to meet at noon and spend 4 percent of the day eating lunch together, we could write this time interval as `50:54`. This time interval can be combined with a date like the first day of the year 2000: `2000+000.50:54`. 
-
-### Series
-
-A group of dates, times, or `datetimes` is called a series. The items in a series are separated by commas. If we planned to meet for lunch on the first and last day of the year 2000, we could summarize our lunch plans with a series: `2000+000.5,2000+365.5`. This series tells us when we plan to meet for lunch, but not for how long. A series amount to lunch, we could add time intervals to this series. k was 4 `cents` long there is a pattern to the items in a series, it could be expressed as an interval. is called a time interval. A series an interval is a series of datetimes
-
+: The slices and spreads that represent the 4 pently schedules {#tbl-slice}
 
 ### Yearly transition
 
-
-
-
-`Dek 36`
-
-
-`Dekalendar` treats leap days like outliers or anomalies that should not be included in any sample of days. Every leap days is always a holiday, always a `Fiveday`, and always followed by a `Zeroday`. The end of the year is sensitive time for the
-
-
+Many of the series described above do not include a small number of days at the end of the year. In particular, `Day 365` is included only in seasons and `zets`. Overall, `Dekalendar` treats leap days like outliers or anomalies that should not be included in any sample of days. Leap days are like a bump in the transition The transition from the last day of the year to the `Zeroday` of the subsequent year is easier if each `pent` follows the same schedule. That way `:005` can be treated as a continuation of `360:`. and because the last `dek` . Every leap day is always a holiday, always a `Fiveday`, and always followed by a `Zeroday`. 
 
 `Dek 0`, the first `dek` of the year, contains `Day 0` through `Day 9`. `Dek 36`, the last `dek` of the year, contains the last days of the current year and the first days of the subsequent year. This means that `Dek 36` overlaps with `Dek 0`. The table below shows the name and numbers of the days in `Dek 0` and `Dek 36`. The table includes columns for both common years (n=365) and leap years (n=366).
 
@@ -2210,7 +1860,7 @@ New Year's Day is always `Day 0` in `Decalendar` and always January 1 in the Gre
 
 The Gregorian calendar leap day represents a threshold in finding the day number equivalents of Gregorian calendar dates. If a Gregorian calendar date is below the threshold, we can count on its positive day number to always stay the same, but its negative day number will differ between common years and leap years. Conversely, if a Gregorian calendar date is above the threshold, its positive day number will vary between common years and leap years while its negative day number will always remain constant. In other words, day numbers greater than -307 and less than 59 (-307 < d < 59) are always synonymous with their corresponding Gregorian calendar dates. Numbers below the threshold (-366 <= d <= -307) will decrease by 1 day in leap years, while numbers above the threshold (59 <= d <= 365) will increase by 1 day in leap years.
 
-Valentine's Day and Christmas are on opposite sides of the Gregorian calendar leap day threshold and thus can serve as opposing examples of the leap year variation in the day numbers of Gregorian calendar dates. The positive day number of Valentine's Day (`Day 44`) and the negative day number of Christmas (`Day -7`) never change, but their respective negative day numbers are `Day -321` and `Day 358` in common years and `Day -322` and `Day 359` in leap years. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
+Valentine's Day and Christmas are on opposite sides of the Gregorian calendar leap day threshold and thus can serve as opposing examples of the leap year variation in the day numbers of Gregorian calendar dates. The positive day number of Valentine's Day (`Day 44`) and the negative day number of Christmas (`Day -7`) never change, but their respective negative day numbers are `Day -321` and `Day 358` in common years and `Day -322` and `Day 359` in leap years.
 
 If we do not want to bother with accounting for the Gregorian calendar leap day, we can add an asterisk (`*`) after the day number to mean: if it is a leap year, add 1 to this day number if it is greater than 58 or subtract 1 from it if it less than -306. Whether these instructions are carried out depends on the recipient, who could simply ignore them. The recipient could decide that staying faithful to the Gregorian calendar exactly is not important to them. For example, if someone's birthday is after the threshold, they might prefer to celebrate their birthday on the same day number every year instead of incrementing their birthday day number during leap years to avoid celebrating their birthday a day earlier than in the Gregorian calendar. Essentially, if we are not required to match the Gregorian calendar exactly, we can get forget about the asterisks and just use the `.y` numbers as they are without thinking about whether the current year is a leap year or not.
 
