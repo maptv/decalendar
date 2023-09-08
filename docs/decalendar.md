@@ -504,8 +504,7 @@ The `slice` equivalent of `»»3»2».3».4` is `:365:1,1,3:.3:.7`. The nested `
 
 : A workday schedule with a lunch break {#tbl-workday}
 
-Nested `spreads` can mix left- and right-pointing guillemets. For example, we could replace the start of the workday in `»»3»2».3».4` with the end of workday if we reverse the last guillemet: `»»3»2».7«.4`. These two nested `spreads` are essentially concatenations of the spread `»»3»2` with either `.3».4` or `.7«.4`. We concatenate the two `spreads` with `»` because we want to use the beginning of each workday as a `start`, not a `stop`. The `spread` `»»3»2«.3».4` would "spread" forward from `Dot 7` of the day before each workday up to `Dot 1` of each workday, while `»»3»2«.7«.4` would "spread" backward from `Dot 3` of the day before each workday to `Dot 9` of the day two days before each workday. The most common usage will be to use only right-pointing guillemets (`»`), but there may be use cases for "spreading" across days in different directions.
-
+Nested `spreads` can mix left- and right-pointing guillemets. For example, we could replace the start of the workday in `»»3»2».3».4` with the end of workday if we reverse the last guillemet: `»»3»2».7«.4`. These two nested `spreads` are essentially concatenations of the spread `»»3»2` with either `.3».4` or `.7«.4`. We concatenate the two `spreads` with `»` because we want to use the beginning of each workday as a `start`, not a `stop`. The `spread` `»»3»2«.3».4` would "spread" forward from `Dot 7` of the day before each workday up to `Dot 1` of each workday, while `»»3»2«.7«.4` would "spread" backward from `Dot 3` of the day before each workday to `Dot 9` of the day two days before each workday. The most common usage will be to use only right-pointing guillemets (`»`), but there may be situations in which we want to mix the directions of each `spread` in a nested `spread`.
 
 ### Pomodoro {#sec-pom}
 
