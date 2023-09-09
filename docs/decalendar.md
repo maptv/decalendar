@@ -492,7 +492,7 @@ The pattern above requires that the `splits` are separated by the default `space
 
 : The spreads that represent the constant length subyear units {#tbl-constant}
 
-### Sequential spreads and slices {#sec-nest}
+### Sequential spreads and slices {#sec-seq}
 
 `Split spreads` can be combined with other `spreads` into `sequences` called `seq spreads` (`sequential spreads`). The intuition behind `seq spreads` and is that each item in the first (outer) `spread` serves as a starting point for the second (inner) `spread`. The main use of `seq spreads` is to first "spread" across days and then "spread" across times in those days. We can combine `»»3»2`, a `split spread` that represents the `Decalendar` workdays, with `.3».4`, a `simple spread` that provides the `start` and `span` of the `Decalendar` workday, to obtain `»»3»2».3».4`, a `seq spread` that represents the time spent at work in a `Decalendar` year. In this `seq spread`, the `split` is the number of workdays (`3`), the space is the number of restdays (`2`), the second-to-last number is the `start` of the workday (`.3`) and the last number is the workday `span` (`.4`). The `spread` `»»3»2».3».4` first starts at midnight of each workday, then moves forward 3 `dimes` to the new `start` of `Dot 3`, and then "spreads" forward by a `span` of 4 `dimes` to the new `stop` of `Dot 7`.
 
@@ -516,27 +516,26 @@ Another real-life application of `spreads` can be to intersperse breaks in betwe
 
 The replication operator (`*`) is very useful for replacing repetitive values. For example, to divide any year into six parts we could use the `spread` `»»5*61,60⁺»0` to create 5 "splits" that are all 61 days long and one last "split" that is 60⁺ days (60 days in a common year or 61 days in a leap year) long. The `*` helps us avoid the repetitiveness of writing `»»61,61,61,61,61,60⁺»0`. In addition to being used in the `split` and `space` of a `split spread` or the `step` of a `stepped slice`, the `*` can also be used in the `span` of a `split spread` or the `stop` of a `stepped slice` to indicate has many cycles of `splits` or `steps` we want to complete. For example, `»4*»5*61,60⁺»0` indicates that we want 4 years (the current year and the 4 subsequent years) "split" into 6 parts for a total of 24 parts. In other words, `4*` means that we want to stop cycling after completing four cycles. We can read `4*` out loud as "four times" because it means we intend to go through the cycle "four times".
 
-
 #### Percent, permil, and permyr operators {#sec-per}
 
 We can make the `seq spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. Most of the values in `.3»2*».08».02»»».017».003` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this `seq spread` as `.3»2*»8%»2%»»»17‰»3‰`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.3»2*»8%»2%»»»17‰»3‰` as `.3»2*»8%»2%»»»17m»3m`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator (hex: `2031`, html: `&pertenk;`), which is short for permyriad and represents `Declock phrases` (10⁻⁴).
 
 #### Pently schedules as seq spreads {#sec-pently}
 
-We can use `seq spreads` to describe the [`pently `schedules](#sched). `Schedule 5` is particularly interesting because it includes all of the days of the year. `Spreads` that include every item can be written as `»` or `«`, but `seq spreads` must have at least 5 guillemets, so the `Schedule 5` `seq spread` `»»»».38».24` has 4 blank values, which represent the default `start`, `span`, `split`, and `space`. Similarly, the `Schedule 4` `seq spread` `»»4»».35».3` has 3 blank values, which represent the default `start`, `span`, and `space`. In the `Schedule 2` and `Schedule 3` `seq spreads`, there are only 2 blank values. table below shows all 4 `pently` schedules in the form of `seq spreads`. The `Schedule 2` and `Schedule 3` `seq spreads` are essentially combinations of their respective workday `split spreads`, `»»2»3` and `»»3»2`, and the `simple spreads` that provide the `start` and `span` of their respective workdays: `.2».6` and `.3».4`. In contrast, the `Schedule 4` and `Schedule 5` have more default values in the `split spreads` that describe their workdays: `»»4` and `»`, respectively, and thus additional guillemets have to be added before these `spreads` can be combined with others to form `seq spreads` . `simple spreads` the `start` and `span` of the workday. Each resulting `spread` will have  4 guillemets. uses the default `span` and `split` are both "n" (365⁺ days), meaning we get . while `Schedule 4` skips every 5th day of the year `»»4»»` The default schedule, `Schedule 3`, described previously is `»»3»2».3».4`.
+We can use `seq spreads` to describe the [`pently `schedules](#sched). `Schedule 5` is particularly interesting because it includes all of the days of the year. `Spreads` that include every item can be written as `»` or `«`, but `seq spreads` must have at least 5 guillemets, so the `Schedule 5` `seq spread` `»»»».38».24` has 4 blank values, which represent the default `start`, `span`, `split`, and `space`. Similarly, the `Schedule 4` `seq spread` `»»4»».35».3` has 3 blank values, which represent the default `start`, `span`, and `space`. The `Schedule 2` and `Schedule 3` `seq spreads`, `»»2»3».2».6` and `»»3»2».3».4`, respectively, only have 2 blank values, the `start` and the `span`. As an alternative to `seq spreads` and `seq slices`, we can use `slice`-`spread` hybrids called `sleds` or `spread`-`slice` hybrids called `splices`. `Sleds` put the `slice` elements first (`start:stop:step»start»span»split»space`), while `splices` start with the `spread` elements (`start»span»split»space:stop:step`). The `pently `schedules are easiest to write as `seq spreads` and `splices` as shown in the table below.
 
-| Schedule | spread      | spread      |
-| -------- | ----------- | ----------- |
-| 2        | »»2»3».2».6 | »»2»3».8«.6 |
-| 3        | »»3»2».3».4 | »»3»2».7«.4 |
-| 4        | »»4»».35».3 | »»4»».65«.3 |
-| 5        | »»»».38».24 | »»»».62«.24 |
+| Schedule | seq spread  | splice       | sled             |
+| -------- | ----------- | ------------ | ---------------- |
+| 2        | »»2»3».2».6 | »»2»3».2:.8  | :365:1,4:.2:.6   |
+| 3        | »»3»2».3».4 | »»3»2».3:.7  | :365:1,1,3:.3:.7 |
+| 4        | »»4»».35».3 | »»4»».35:.65 | :365:3*1,2:.3:.7 |
+| 5        | »»»».38».24 | »»»».38:.62  | :365::.3:.7      |
 
-: The slices and spreads that represent the 4 pently schedules {#tbl-slice}
+: The seq spreads, splices and sleds that represent the 4 pently schedules {#tbl-sss}
 
 ### Yearly transition
 
-The `pently` schedules are important in the transition between years. Many of the series described above do not include a small number of days at the end of the year. In particular, `Day 365` is included only in seasons and `zets`. Overall, `Dekalendar` treats leap days like outliers or anomalies that should not be included in any sample of days. Leap days are like a bump in the transition The transition from the last day of the year to the `Zeroday` of the subsequent year is easier if each `pent` follows the same schedule. That way `:005` can be treated as a continuation of `360:`. and because the last `dek` . Every leap day is always a holiday, always a `Fiveday`, and always followed by a `Zeroday`. 
+The `pently` schedules are important for the transition between years, because the last days of common years `dek` of the year, `Dek` 36 is a `pent` in common years. In leap years, the rparticular, `Day 365` is included only in seasons and `zets`. Overall, `Dekalendar` treats leap days like outliers or anomalies that should not be included in any sample of days. Leap days are like a bump in the transition The transition from the last day of the year to the `Zeroday` of the subsequent year is easier if each `pent` follows the same schedule. That way `:005` can be treated as a continuation of `360:`. and because the last `dek` . Every leap day is always a holiday, always a `Fiveday`, and always followed by a `Zeroday`. 
 
 `Dek 0`, the first `dek` of the year, contains `Day 0` through `Day 9`. `Dek 36`, the last `dek` of the year, contains the last days of the current year and the first days of the subsequent year. This means that `Dek 36` overlaps with `Dek 0`. The table below shows the name and numbers of the days in `Dek 0` and `Dek 36`. The table includes columns for both common years (n=365) and leap years (n=366).
 
