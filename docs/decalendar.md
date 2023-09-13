@@ -103,9 +103,6 @@ In the table above, the units with positive exponents are used for `Decalendar`,
 
 Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in `Zone 1` are one `dime` later than `Zone 0` and two `dimes` later than `Zone -1`. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in `Zone -3` and Tokyo is in `Zone 4`, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is noon on the last day of the year 1999 in Mexico City, it will be `Dot 200` on the first day of the year 2000 in Tokyo. This date and time in Mexico City can be written `2000+000.200+4` or `2000-366.800+4`, while the equivalent date and time for Tokyo is `1999+364.500-3` or `1999-001.500-3`. If we removed the time zone from the end, we would not know that all of these `stamps` describe the same moment in time.
 
-`Declock` groups together the 26 [Coordinated Universal Time (UTC) offsets](https://en.wikipedia.org/wiki/List_of_UTC_offsets) (-12:00 to +14:00) into 11 time zones (`Zone -5` to `Zone 6`) by converting hours into `dimes` and rounding to the nearest whole number. Fewer time zones make it easier to calculate `Declock` time zones thus contain 2-3 standard time zones are  we wanted `Dot 5` to match solar noon, the point when the sun reaches its highest position in the sky, as Zone 0, In some cases, the The other way we could UTC offset but additional time zones can be created simply by adding digits to the end of each time zone. The time zone for Seoul, South Korea is Zone 4.
-obtain one of these time zones, we divide its 
-
 ### The Dot Formats {#sec-formats}
 
 The `stamps` shown above are in the decimal days of the year (`.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental `datetime` formats, which are based on decimal days of the month (`.m`), and fractional days of the week (`.w`). The table below summarizes the three decimal day-of-the ( `dot` or `.`) formats:
@@ -623,6 +620,12 @@ Button that switches between `dot` formats (`.y`, `.m`, and `.w`).
 The basic elements of `Decalendar` include the `dot` formats (`.y`, `.m`, and `.w`) and the series described above should be easy to implement in any high-level programming language, but the implementation examples below will focus on JavaScript and Python. , while Python is a versatile language with strong builtin support for dates and times in its standard library. To implement the 
 
 ## Calculations
+
+
+`Declock` groups together the 26 [Coordinated Universal Time (UTC) offsets](https://en.wikipedia.org/wiki/List_of_UTC_offsets) (-12:00 to +14:00) into 11 time zones (`Zone -5` to `Zone 6`) by converting hours into `dimes` ($offset \div 2.4$) and rounding to the nearest whole number. Fewer time zones make it easier to calculate `Declock` time zones thus contain 2-3 standard time zones are  we wanted `Dot 5` to match solar noon, the point when the sun reaches its highest position in the sky, as Zone 0, In some cases, the The other way we could UTC offset but additional time zones can be created simply by adding digits to the end of each time zone. The time zone for Seoul, South Korea is Zone 4.
+obtain one of these time zones, we divide its 
+
+
 Some programming languages provide direct access to ISO ordinal dates. Subtracting 1 from an ISO ordinal date yields the Dekalendar date:
 
 ```{python}
