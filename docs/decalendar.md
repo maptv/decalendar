@@ -621,8 +621,7 @@ The basic elements of `Decalendar` include the `dot` formats (`.y`, `.m`, and `.
 
 ## Calculations
 
-
-`Declock` groups together the 26 [Coordinated Universal Time (UTC) offsets](https://en.wikipedia.org/wiki/List_of_UTC_offsets) (-12:00 to +14:00) into 11 time zones (`Zone -5` to `Zone 6`) by converting hours into `dimes` ($offset \div 2.4$) and rounding to the nearest whole number. Fewer time zones make it easier to calculate `Declock` time zones thus contain 2-3 standard time zones are  we wanted `Dot 5` to match solar noon, the point when the sun reaches its highest position in the sky, as Zone 0, In some cases, the The other way we could UTC offset but additional time zones can be created simply by adding digits to the end of each time zone. The time zone for Seoul, South Korea is Zone 4.
+`Declock` groups together the 26 [Coordinated Universal Time (UTC) offsets](https://en.wikipedia.org/wiki/List_of_UTC_offsets) (-12:00 to +14:00) into 11 time zones (`Zone -5` to `Zone 6`) by converting hours into `dimes` ($offset \div 2.4$) and rounding to the nearest whole number. Fewer time zones results in a simpler system, but  Instead of converting hours into `dimes`, we could convert degrees of longitude into `cents` or `mils` to better match `Dot 5` with [solar noon](https://en.wikipedia.org/wiki/Noon#Solar_noon). Mexico fewer time zones is helpful but cannot  we can convert easier, but  to calculate `Declock` time zones thus contain 2-3 standard time zones are  we wanted `Dot 5` to match solar noon, the point when the sun reaches its highest position in the sky, as Zone 0, In some cases, the The other way we could UTC offset but additional time zones can be created simply by adding digits to the end of each time zone. The time zone for Seoul, South Korea is Zone 4.
 obtain one of these time zones, we divide its 
 
 
