@@ -200,9 +200,11 @@ A major difficulty with the Gregorian calendar is that the date is disconnected 
 
 #### Workdays {#sec-work}
 
-The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In other words, this work schedule is starts 75 `mils` earlier than 9AM (`Dot 375`) and ends 8.3̅ `mils` earlier than 5PM (`Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` (261*8/240) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 8.76 `deks` (219*.04) spent at work every year. The default approach of `Decalendar` is to  compensate for having more restdays with longer workdays.
+The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 4 `dimes` (9.6 hours) long, 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In other words, this work schedule starts 75 `mils` (1.8 hours) earlier than 9AM (`Dot 375`) and ends 8.3̅ `mils` (12 minutes) earlier than 5PM (`Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` (261*8/240) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 8.76 `deks` (219*.04) spent at work every year. The default approach of `Decalendar` is to compensate for having more restdays with longer workdays.
 
 #### Schedules {#sec-sched}
+
+##### Pently schedules {#sec-pently}
 
 If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. As mentioned above, each half of the `dek` is called a `pent`. Each `pent` can have its own `pently` schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. The table below displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different `pently` schedules are named after the number of workdays per `pent`. People can switch between `pently` schedules every `pent` as needed, but unless there is a compelling reason to follow a different `pently` schedule, everyone should follow the `Schedule 3` by default. `Schedule 3` has 3 workdays and 2 restdays in each `pent`. Each `Schedule 3` workday starts at `Dot 3`, ends at `Dot 7`, and lasts 4 `dimes`.
 
@@ -213,11 +215,28 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 | 4        | 4        | 1        | .35   | .65 | .3       |
 | 5        | 5        | 0        | .38   | .62 | .24      |
 
+: The characteristics of the pently schedules {#tbl-pently}
+
+##### Daily schedules {#sec-daily}
+
+`Decalendar` recommends waking up at `Dot 2` and going to bed at `Dot 8`. This recommendation allots 4 `dimes` (9.6 hours) for falling asleep and sleeping. To keep daily schedules symmetrical, the time spent awake should be split evenly before and after work. People following `Schedule 3` would thus have 10 `cents` (2.4 hours) to prepare for work and another 10 `cents` to prepare for bed. The table below shows the recommended `Schedule 3` daily schedule. `Schedule 4` and `Schedule 5` allot even more time, 15 `cents` (3.6 hours) and 18 `cents` (4.32 hours), respectively, for before-work and after-work activities. The recommended sleep schedule does not fit well with `Schedule 2`, but this incompatibility does not have to result in a sleep deficit. If the `Schedule 2` workdays are not consecutive, people following `Schedule 2` can catch up on sleep on their days off by going to bed early before and sleeping in after every workday.
+
+| Start | End | Duration | Description                  |
+| ----- | --- | -------- | ---------------------------- |
+| .2    | .3  | .1       | Wake up and prepare for work |
+| .3    | .7  | .4       | Work                         |
+| .7    | .8  | .1       | End work and prepare for bed |
+| .8    | .2  | .4       | Go to bed and sleep          |
+
+: The workday schedule {#tbl-daily}
+
 #### Coordinate analogy {#sec-coor}
 
 In the Gregorian calendar, dates are like a set of coordinates, where the month and the day of the month (`dotm`) are like longitude and latitude in the Geographic coordinate system or x and y in the Cartesian coordinate system. `Decalendar` provides both coordinates in one number, the `doty` contains both the `dek` number (first 2 digits) and the `dotd` number (last digit). In this way, the `doty` contains all of the information we need for the `Decalendar` system: the `dek`, which fulfills the role of both the month and the week, and the `dotd`, which fulfills the role of both the day of the month and the day of the week.
 
 #### Conversion tables {#sec-conv}
+
+##### Common and leap year specific conversion tables {#sec-specific}
 
 The first table below shows the `doty` numbers for all of the days in common years, while the second table below does the same for leap years. In both of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). The positive `doty` numbers of dates after the Gregorian calendar leap day, February 29, need to be incremented by 1 in leap years. Similarly, the negative `doty` numbers of dates before February 29 need to decremented by 1. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
 
@@ -257,9 +276,6 @@ The first table below shows the `doty` numbers for all of the days in common yea
 
 : Common year Gregorian calendar date to positive `doty` conversion {#tbl-common}
 
-#### Leap year date to `doty` conversion {#sec-leap}
-
-
 | Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 |  1  |  0  | 31  | 60  |  91 | 121 | 152 | 182 | 213 | 244 | 274 | 305 | 335 |
@@ -295,6 +311,8 @@ The first table below shows the `doty` numbers for all of the days in common yea
 | 31  | 30  |     | 90  |     | 151 |     | 212 | 243 |     | 304 |     | 365 |
 
 : Leap year Gregorian calendar date to positive `doty` conversion {#tbl-leap}
+
+##### Generalized conversion tables {#sec-general}
 
 Having different conversion tables for common years and leap years is cumbersome, so the two tables below work for both common years and leap years, by indicating positive `doty` numbers that need to incremented in leap years with a superscript plus sign (`⁺`) and negative `doty` numbers that need to decremented in leap years with a superscript minus sign (`⁻`). The generalized conversion tables do not include February 29, which is a date that cannot be consistently described solely with a `doty` number. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01` and in the `.w` or `.y` formats if we specify a year.
 
@@ -548,7 +566,7 @@ We can use `seq spreads` to describe the [`pently `schedules](#sched). `Schedule
 
 : The seq spreads, splices, and sleds that represent the 4 pently schedules {#tbl-3s}
 
-### Yearly transition
+### Yearly transition {#sec-trans}
 
 #### Common years {#sec-common}
 
@@ -590,7 +608,7 @@ In leap years, `Dek 36` contains the last 6 days of the current year and the fir
 
 ### Holidays {#sec-holidays}
 
-Leap Day is a important holiday because it occurs only once every four years (except for years that start centuries not divisible by 400) and it results in the only time when there are 3 consecutive restdays in `Decalendar`. Another `Decalendar` holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative `.y` format `stamps` are the same (`+183.500` and `-183.500`), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Coincidentally, many Gregorian calendar holidays just so happen to also fall on `Decalendar` restdays. The table below lists 11 such holidays and their `doty`, `dotm`, and Gregorian calendar dates. Any holiday with a fixed (rather than floating) date in the Gregorian calendar can easily be added to `Decalendar`.
+Leap Day is a important holiday because it occurs only once every four years (except for years that start centuries not divisible by 400) and it results in the only time when there are 3 consecutive restdays in `Decalendar`. Another `Decalendar` holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative `.y` format `stamps` are the same (`+183.5` and `-183.5`), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Coincidentally, many Gregorian calendar holidays just so happen to also fall on `Decalendar` restdays. The table below lists 11 such holidays and their `doty`, `dotm`, and Gregorian calendar dates.
 
 | Name               | doty | dotm | date        |
 | ------------------ | ---- | ---- | ----------- |
@@ -608,9 +626,11 @@ Leap Day is a important holiday because it occurs only once every four years (ex
 
 : Gregorian calendar holidays that happen to fall on `Decalendar` restdays {#tbl-holidays}
 
-## Programming languages
+Any holiday with a fixed (rather than floating) date in the Gregorian calendar can easily be added to `Decalendar`. Holidays with floating dates do not follow easily recognizable patterns. `Decalendar` recommends redefining such dates to always be on the same `doty` every year. For example, November 25 (`Day 328⁺`) is a sensible fixed date for Thanksgiving, because it is exactly 30 days before Christmas (December 25, `Day 358⁺`) and falls on a `Decalendar` restday. When assigning fixed dates to floating date holidays, we should choose `Decalendar` restdays to avoid disrupting the normal rhythm of the `pently` schedules. Instead of gaining days off from holidays, workers should gain additional time off from their employers. In the United States, the 11 federal holidays (88 hours = 3.6̅ dimes) would translate to 9 `Schedule 3` days offs (3.6 dimes).
 
-### JavaScript
+## Programming languages {#sec-prog}
+
+### JavaScript {#sec-js}
 
 A key tool in the dissemination of `Decalendar` will the JavaScript programming language. JavaScript is the language of the web and can run in any browser on any computer.
 
@@ -621,7 +641,9 @@ The basic elements of `Decalendar` include the `dot` formats (`.y`, `.m`, and `.
 
 ## Calculations
 
-`Declock` groups together the 26 [Coordinated Universal Time (UTC) offsets](https://en.wikipedia.org/wiki/List_of_UTC_offsets) (-12:00 to +14:00) into 11 time zones (`Zone -5` to `Zone 6`) by converting hours into `dimes` ($hours \div 2.4$) and rounding to the nearest whole number. This time zone system is simple and facilitates conversion, but locations on the edges of the main time zones may experience a significant difference between `Dot 5` and [solar noon](https://en.wikipedia.org/wiki/Noon#Solar_noon), the point when the sun reaches its highest position in the sky. If we decide to prioritize the amount of sunlight at `Dot 5` over simplicity and ease of conversion, we could convert degrees of longitude into `cents` or `mils`, instead of converting hours into `dimes`. For example, we could say that Mexico City is in `Zone -275` instead of `Zone -3`, because the longitude of Mexico City is 99 degrees West, which translates to an offset of -275 `mils` ($degrees \div .36$). Essentially, we could create as many additional `Declock` time zones are desired simply by adding digits to the end of each time zone.
+`Declock` groups together the 26 [Coordinated Universal Time (UTC) offsets](https://en.wikipedia.org/wiki/List_of_UTC_offsets) (-12:00 to +14:00) into 11 time zones (`Zone -5` to `Zone 6`) by converting hours into `dimes` ($hours \div 2.4$) and rounding to the nearest whole number. This time zone system is simple and facilitates conversion, but locations on the edges of the main time zones may experience a significant difference between `Dot 5` and [solar noon](https://en.wikipedia.org/wiki/Noon#Solar_noon), the point when the sun reaches its highest position in the sky.
+
+If we decide to prioritize the amount of sunlight at `Dot 5` over simplicity and ease of conversion, we could convert degrees of longitude into `cents` or `mils`, instead of converting hours into `dimes`. For example, we could say that Mexico City is in `Zone -275` instead of `Zone -3`, because the longitude of Mexico City is 99 degrees West, which translates to an offset of -275 `mils` ($degrees \div .36$). Essentially, we could create as many additional `Declock` time zones are desired simply by adding digits to the end of each time zone. 
 
 
 Some programming languages provide direct access to ISO ordinal dates. Subtracting 1 from an ISO ordinal date yields the Dekalendar date:
@@ -641,4 +663,6 @@ start = new Date(now.getFullYear(), 0, 0),
 doy = Math.floor((now - start) / 86400000) - 1;
 console.log(doy);
 ```
+
+Certain times of day are easier to express as fractions, rather than decimals. This can be done with the `Slash` operator. For example, 9PM (21:00) is `.416̅`, which is pronounced `Dot four one six vinculum`, or `5/12` which is read `five slash twelve`.
 
