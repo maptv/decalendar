@@ -1,10 +1,10 @@
 function myStamp(date, offset, dayOf="y", sign="+") {
+    offset = offset == null ? -date.getTimezoneOffset() / 60 : offset
     signOffset = offset < 0 ? "-" : "+";
-    offset = "Etc/GMT" + signOffset + Math.abs(offset);
+    tzString = "Etc/GMT" + signOffset + Math.abs(offset);
     date = new Date((
         typeof date === "string" ? new Date(date) : date
-    ).toLocaleString("en-US", {timeZone: offset}));
-
+    ).toLocaleString("en-US", {timeZone: tzString}));
     const UtcYear = date.getUTCFullYear(),
         UtcMonth = date.getUTCMonth(),
         UtcDay = date.getUTCDate(),
@@ -65,7 +65,7 @@ function myStamp(date, offset, dayOf="y", sign="+") {
 const now = new Date();
 const utc = new Date(now.toUTCString());
 console.log(utc)
-console.log(myStamp(now, 2, "y", "+"));
+console.log(myStamp(now, 3, "y", "+"));
 // console.log(myStamp(now, "y", "-"));
 // console.log(myStamp(now, "m", "+"));
 // console.log(myStamp(now, "m", "-"));
