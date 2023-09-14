@@ -1,11 +1,17 @@
-function myStamp(date, dayOf="y", sign="+") {
-    const UtcYear = now.getUTCFullYear(),
-        UtcMonth = now.getUTCMonth(),
-        UtcDay = now.getUTCDate(),
-        UtcHour = now.getUTCHours(),
-        UtcMinute = now.getUTCMinutes(),
-        UtcSecond = now.getUTCSeconds(),
-        UtcMillisecond = now.getUTCMilliseconds(),
+function myStamp(date, offset, dayOf="y", sign="+") {
+    signOffset = offset < 0 ? "-" : "+";
+    offset = "Etc/GMT" + signOffset + Math.abs(offset);
+    date = new Date((
+        typeof date === "string" ? new Date(date) : date
+    ).toLocaleString("en-US", {timeZone: offset}));
+
+    const UtcYear = date.getUTCFullYear(),
+        UtcMonth = date.getUTCMonth(),
+        UtcDay = date.getUTCDate(),
+        UtcHour = date.getUTCHours(),
+        UtcMinute = date.getUTCMinutes(),
+        UtcSecond = date.getUTCSeconds(),
+        UtcMillisecond = date.getUTCMilliseconds(),
         utc = new Date(UtcYear, UtcMonth, UtcDay, UtcHour, UtcMinute, UtcSecond, UtcMillisecond),
         mid = new Date(UtcYear, UtcMonth, UtcDay, 0, 0, 0, 0),
         daysInYear = ((UtcYear % 4 === 0 && UtcYear % 100 > 0) || UtcYear %400 == 0) ? 366 : 365,
@@ -19,7 +25,6 @@ function myStamp(date, dayOf="y", sign="+") {
         minuteOffset = -date.getTimezoneOffset(),
         hourOffset = minuteOffset / 60,
         ddOffset = hourOffset / 2.4,
-        signOffset = minuteOffset < 0 ? "-" : "+",
         offsetCmd = centimilliday + Math.round(minuteOffset / 144) * 1e4,
         local = new Date(UtcYear, UtcMonth, UtcDay + offsetCmd / 1e5),
         normalizedCmd = offsetCmd - 1e5 * (offsetCmd > 1e5) + 1e5 * (offsetCmd < 0),
@@ -60,9 +65,9 @@ function myStamp(date, dayOf="y", sign="+") {
 const now = new Date();
 const utc = new Date(now.toUTCString());
 console.log(utc)
-console.log(myStamp(now, "y", "+"));
-console.log(myStamp(now, "y", "-"));
-console.log(myStamp(now, "m", "+"));
-console.log(myStamp(now, "m", "-"));
-console.log(myStamp(now, "w", "+"));
-console.log(myStamp(now, "w", "-"));
+console.log(myStamp(now, 2, "y", "+"));
+// console.log(myStamp(now, "y", "-"));
+// console.log(myStamp(now, "m", "+"));
+// console.log(myStamp(now, "m", "-"));
+// console.log(myStamp(now, "w", "+"));
+// console.log(myStamp(now, "w", "-"));
