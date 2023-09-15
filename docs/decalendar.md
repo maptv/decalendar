@@ -4,6 +4,16 @@
 
 `Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to replace [standard time](https://en.wikipedia.org/wiki/Standard_time). Both system use days as their base unit and derive other units from days using prefixes inspired by the metric system. To create the necessary calendar and time units, `Decalendar` groups days together, while `Declock` divides days up.
 
+## Similar systems
+
+### ISO 8601
+
+`Decalendar` is most similar to the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for dates and times. Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. Just like ISO 8601, `Decalendar` has three date formats. The `Decalendar` `.y` (`±year±day`), `.m` (`±year±m±dd`), and `.w` (`±year±ww±d`) formats are similar to the ISO 8601 [ordinal date](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day), [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (year-mm-dd), and [week date](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (year-Www-d) formats, respectively. In contrast to ISO 8601, `Decalendar` seeks to replace all other date formats with the `.y` format.
+
+The numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create series of dates and times.
+
+[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard date formats.
+
 ## Basic concepts {#sec-basics}
 
 ### Fractions analogy {#sec-frac}

@@ -3,15 +3,15 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
     const signOffset = offset < 0 ? "-" : "+";
     if (dayOf == "y") {
         const ddOffset = Math.round(offset / 2.4),
-            decimal = new Date(Date.UTC(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate(),
-                date.getHours(),
-                date.getMinutes(),
-                date.getSeconds(),
-                date.getMilliseconds() + ddOffset * 8640000,
-            )),
+            decimal = new Date(
+                date.getUTCFullYear(),
+                date.getUTCMonth(),
+                date.getUTCDate(),
+                date.getUTCHours(),
+                date.getUTCMinutes(),
+                date.getUTCSeconds(),
+                date.getUTCMilliseconds() + ddOffset * 8640000,
+            ),
             decYear = decimal.getFullYear(),
             firstDay = new Date(decYear, 0, 1),
             doy = (decimal - firstDay) / 86400000,
@@ -30,15 +30,15 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
             return `${decYear}${negDateDoy}.${negTimeDoy}${signOffset}${Math.abs(ddOffset)}`;
         }
     } else {
-        const standard = new Date(Date.UTC(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds(),
-            date.getMilliseconds() + offset * 3600000,
-        )),
+        const standard = new Date(
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate(),
+            date.getUTCHours(),
+            date.getUTCMinutes(),
+            date.getUTCSeconds(),
+            date.getUTCMilliseconds() + offset * 3600000,
+        ),
             stanYear = standard.getFullYear(),
             stanMonth = standard.getMonth(),
             stanDate = standard.getDate(),
@@ -93,13 +93,21 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
     }
 }
 
-const now = new Date(new Date()).toLocaleString("en-US", { timeZone: "Etc/GMT" });
-const shift = new Date(2023, 7, 15, 19, 62, 0, 86400000);
-console.log(Date.UTC(shift.getFullYear(), shift.getMonth(), shift.getDate()))
-console.log(shift)
-console.log(myStamp(now, 4));
-console.log(myStamp(now, 4, "y", "-"));
-console.log(myStamp(now, 4, "m", "+"));
-console.log(myStamp(now, 4, "m", "-"));
-console.log(myStamp(now, 4, "w", "+"));
-console.log(myStamp(now, 4, "w", "-"));
+const now = new Date()
+const utc = new Date(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    now.getUTCHours(),
+    now.getUTCMinutes(),
+    now.getUTCSeconds(),
+    now.getUTCMilliseconds(),
+    )
+console.log(utc);
+console.log(myStamp(utc, -4, "y", "+"));
+console.log(myStamp(utc, -4, "y", "-"));
+console.log(myStamp(utc, -4, "m", "+"));
+console.log(myStamp(utc, -4, "m", "-"));
+console.log(myStamp(utc, -4, "w", "+"));
+console.log(myStamp(utc, -4, "w", "-"));
+console.log(myStamp(utc, -now.getTimezoneOffset() / 60, "y", "+"));
