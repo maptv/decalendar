@@ -103,11 +103,13 @@ const utc = new Date(
     now.getUTCSeconds(),
     now.getUTCMilliseconds(),
     )
+console.log(now);
 console.log(utc);
-console.log(myStamp(utc, -4, "y", "+"));
-console.log(myStamp(utc, -4, "y", "-"));
-console.log(myStamp(utc, -4, "m", "+"));
-console.log(myStamp(utc, -4, "m", "-"));
-console.log(myStamp(utc, -4, "w", "+"));
-console.log(myStamp(utc, -4, "w", "-"));
-console.log(myStamp(utc, -now.getTimezoneOffset() / 60, "y", "+"));
+console.log(now.toISOString());
+console.log(myStamp(now, -4, "y", "+"));
+console.log(myStamp(now, -4, "y", "-"));
+console.log(myStamp(now, -4, "m", "+"));
+console.log(myStamp(now, -4, "m", "-"));
+console.log(myStamp(now, -4, "w", "+"));
+console.log(myStamp(now, -4, "w", "-"));
+console.log(myStamp(now, -now.getTimezoneOffset() / 60, "y", "+"));
