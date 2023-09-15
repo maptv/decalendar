@@ -8,11 +8,17 @@
 
 ### ISO 8601
 
-`Decalendar` is most similar to the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for dates and times. Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. Just like ISO 8601, `Decalendar` has three date formats. The `Decalendar` `.y` (`±year±day`), `.m` (`±year±m±dd`), and `.w` (`±year±ww±d`) formats are similar to the ISO 8601 [ordinal date](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day), [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (year-mm-dd), and [week date](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (year-Www-d) formats, respectively. In contrast to ISO 8601, `Decalendar` seeks to replace all other date formats with the `.y` format.
+#### ISO 8601 dates
 
-The numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create series of dates and times.
+`Decalendar` date formats are most similar to the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard dates formats. Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. Just like ISO 8601, `Decalendar` has three date formats. The `Decalendar` `.y` (`±year±day`), `.m` (`±year±m±dd`), and `.w` (`±year±ww±d`) formats are similar to the ISO 8601 [ordinal date](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day), [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (year-mm-dd), and [week date](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (year-Www-d) formats, respectively. In contrast to ISO 8601, `Decalendar` seeks to replace all other date formats with the `.y` format.
 
-[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard date formats.
+#### ISO 8601 times
+
+
+### Indexing and slicing
+
+The numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create series of dates and times. For example, [indexing and slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/). Building on the concept of array slicing (`start:stop:step`), `Decalendar` introduces a new technique called array spreading (`start»span»split»space` or `stop«span«split«space` ) and even allows for nesting and hybridization of `slices` and `spreads`.
+
 
 ## Basic concepts {#sec-basics}
 
