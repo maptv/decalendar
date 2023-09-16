@@ -545,9 +545,7 @@ The pattern above requires that the `splits` are separated by the default `space
 
 : The spreads that represent the constant length subyear units {#tbl-constant}
 
-When `space` is zero, the direction of the third guillemet does not matter. The `split spreads` `»»61»0`, `«»61»0`, `»»61«0`, and `«»61«0` are all synonymous. If `space` is greater than zero and the second and third guillemet are not pointing in the same direction, the resulting splits will be overlapping. The `split spread` `»10»4«2` results in the 4 overlapping segments: `»4`, `2»4`, `4»4`, `6»4`.
-
-spaces in between direction of the third guillemet determines whether or not `splits` are overlapping. If the  `split` (`»`) or before (`«`). 
+When `space` is zero, the direction of the third guillemet does not matter. The `split spreads` `»»61»0`, `«»61»0`, `»»61«0`, and `«»61«0` are all synonymous. If `space` is greater than zero and the second and third guillemet are not pointing in the same direction, the resulting splits will overlap. The `split spreads` `»1».4«.2` and `«1«.4».2`  both result in the same 4 overlapping time segments: `:.4`, `.2:.6`, `.4:.6`, `.6:1`. Such segments could be used to plan shifts of work that require one team to hand off the work to another team. If the segments are in `Zone 0` time, the first shift would be for workers in `Zone 3`, the second shift for `Zone 1`, the third shift for `Zone -1`, and the fourth shift for `Zone -3`. Each team works during the normal business hours in their time zone and has two dimes of overlap with the subsequent team.
 
 ### Sequential spreads and slices {#sec-seq}
 
