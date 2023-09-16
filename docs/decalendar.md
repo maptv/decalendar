@@ -6,25 +6,27 @@
 
 ## Similar systems
 
-### ISO 8601
+`Decalendar` and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time).
 
 #### ISO 8601 dates
 
-`Decalendar` date formats are most similar to the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard dates formats. Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. Just like ISO 8601, `Decalendar` has three date formats. The `Decalendar` `.y` (`±year±day`), `.m` (`±year±m±dd`), and `.w` (`±year±ww±d`) formats are similar to the ISO 8601 [ordinal date](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day), [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (year-mm-dd), and [week date](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (year-Www-d) formats, respectively. In contrast to ISO 8601, `Decalendar` seeks to replace all other date formats with the `.y` format.
+Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. Just like ISO 8601, `Decalendar` has three date formats. The `Decalendar` `.y` (`year±day`), `.m` (`year±m±dd`), and `.w` (`year±ww±d`) formats are similar to the ISO 8601 [ordinal date](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day), [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (year-mm-dd), and [week date](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (year-Www-d) formats, respectively. In contrast to ISO 8601, `Decalendar` has no need for months and weeks, it only requires ordinal dates in the `.y` format.
 
 #### ISO 8601 times
 
+Just like `Decalendar` seeks to make months and weeks obsolete, `Declock` does not use hours, minutes, or seconds and aims to deprecate these units in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days). `Declock` and ISO 8601 each have 1 time format. Both of these formats can be appended to dates to form timestamps. `Declock` timestamps are more concise and easier to read than ISO 8601 timestamps. An ISO 8601 calendar date timestamp that includes seconds is 23 characters long (`year-mm-ddThh:mm:ss`), while a `Decalendar` timestamp with slightly greater precision is only 14 characters long (`year±day.ddddd`). Without delimiters, ISO 8601 timestamps become even more difficult to read (`yearmmddThhmmss`) and still cannot match the brevity of `Declock` timestamps.
 
 ### Indexing and slicing
 
-The numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create series of dates and times. For example, [indexing and slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/). Building on the concept of array slicing (`start:stop:step`), `Decalendar` introduces a new technique called array spreading (`start»span»split»space` or `stop«span«split«space` ) and even allows for nesting and hybridization of `slices` and `spreads`.
+The numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create time intervals. For example, [indexing and slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/).
 
+Building on the concept of array slicing (`start:stop:step`), `Decalendar` introduces a new technique called "array spreading" (`start»span»split»space`) and even allows for nesting and mixing of `slices` and `spreads`. The various expressions that represent dates, times, timestamps and time intervals ares collectively called `Decalendar strings`. Taken together, `Decalendar` provides very powerful tools for creating time intervals. ISO 8601 has an approach for [time intervals](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) that is very verbose and cannot create non-consecutive recurring intervals.
 
 ## Basic concepts {#sec-basics}
 
 ### Fractions analogy {#sec-frac}
 
-In the simplest terms, `Decalendar` counts fractions of a year, while Declock counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, while for `Declock` the denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of` Decalendar`, the numerator is the days that have passed in the year, while in the context of` Declock`, the numerator is the parts of the day that have passed.
+In the simplest terms, `Decalendar` counts fractions of a year, while `Declock` counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, and the `Declock` denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of` Decalendar`, the numerator is the days that have passed in the year, while in the context of` Declock`, the numerator is the parts of the day that have passed.
 
 To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year (`doty`). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
@@ -197,20 +199,20 @@ Even though it provides formats for months and weeks, `Decalendar` envisions a w
 
 #### Days of the `dek` {#sec-dotd}
 
-A major difficulty with the Gregorian calendar is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always a `Zeroday`, the last day of common years (`Day 364`) is always a `Fourday`, and the last day of leap years (`Day 365`) is always a `Fiveday`. The day number allows us to distinguish workdays from restdays. `Decalendar` defines `Threeday`, `Fourday`, `Eightday`, and `Nineday` as restdays, which means that days with numbers that end in 3, 4, 8, or 9 are days off from work and school. Each `dek` consists of 2 `pents` (`pentadays`), each `pent` has 3 workdays called a `trep` (`trepalium`) and 2 restdays called the `pentend`. In total, there are 219 workdays and 146 restdays in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
+A major difficulty with the Gregorian calendar is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always an `Oudday`, the last day of common years (`Day 364`) is always an `Quaday`, and the last day of leap years (`Day 365`) is always a `Penday`. The day number allows us to distinguish workdays from restdays. `Decalendar` defines `Triday`, `Quaday`, `Octday`, and `Ennday` as restdays, which means that days with numbers that end in 3, 4, 8, or 9 are days off from work and school. Each `dek` consists of 2 `pents` (`pentadays`), each `pent` has 3 workdays called the `trep` (`trepalium`) and 2 restdays called the `pentend`. In total, there are 219 workdays and 146 restdays in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
 
-| # | Name     | Type |
-| - | -------- | ---- |
-| 0 | Zeroday  | work |
-| 1 | Oneday   | work |
-| 2 | Twoday   | work |
-| 3 | Threeday | rest |
-| 4 | Fourday  | rest |
-| 5 | Fiveday  | work |
-| 6 | Sixday   | work |
-| 7 | Sevenday | work |
-| 8 | Eightday | rest |
-| 9 | Nineday  | rest |
+| # | Name   | Type |
+| - | ------ | ---- |
+| 0 | Oudday | work |
+| 1 | Unoday | work |
+| 2 | Duoday | work |
+| 3 | Triday | rest |
+| 4 | Quaday | rest |
+| 5 | Penday | work |
+| 6 | Hexday | work |
+| 7 | Sepday | work |
+| 8 | Octday | rest |
+| 9 | Ennday | rest |
 
 : The days of the `dek` {#tbl-dotd}
 
@@ -516,21 +518,23 @@ In the context of `doty` dates, omitting the `stop` value obtains all of the day
 
 The `simple slices` (`start:stop`) described above are a type of time `segment`, an unbroken time interval. To break up a `simple slice` into a non-consecutive `series`, we can add a `step` value and create a `stepped slice` (`start:stop:step`). `Stepped slices` move in `step`-sized "steps" starting from `start`, skipping over $step-1$ items with each "step", keeping only items that are "stepped" on. In other words, `stepped slices` keep items whose index (zero-based position) in the `slice` is evenly divisible by `step`. A `step` value of 1 keeps every item, because every index is divisible by 1, and a `step` of 2 keeps every other item, those with even-numbered indexes. `Day 0` and every other third day in the year thereafter (`Day 3`, `Day 6`, etc.) can be represented by the `slice` `::3`.
 
-To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of `steps`. The `slice` `:365:1,1,3` represents all of the `Decalendar` workdays in a year. It is necessary to specify 365 as the `stop`, so that Leap Day (`Day 365`) is not included as a workday in leap years. Similarly, `003::1,4` is a `seq` that represents all of the regular restdays, not including the Leap Day holiday. `Stepped slices` cannot be included in `series`, because both use commas (`,`) and it would not possible to differentiate a `series` of `steps` from subsequent items in the `series`. The simple rule is that `slices` with more than 1 colon (`:`) cannot be part of a series. For example, `:365:1,1,3` is a `stepped slice` with a `series` of 3 `steps` rather than a series consisting of a `slice` and two numbers.
+To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of `steps`. The `slice` `:365:1,1,3` represents all of the `Decalendar` workdays in a year. It is necessary to specify 365 as the `stop`, so that Leap Day (`Day 365`) is not included as a workday in leap years. Similarly, `3::1,4` is a `seq` that represents all of the regular restdays, not including the Leap Day holiday. `Stepped slices` cannot be included in `series`, because both use commas (`,`) and it would not possible to differentiate a `series` of `steps` from subsequent items in the `series`. The simple rule is that `slices` with more than 1 colon (`:`) cannot be part of a series. For example, `:365:1,1,3` is a `stepped slice` with a `series` of 3 `steps` rather than a series consisting of a `slice` and two numbers.
 
 ### Spreads {#sec-spreads}
 
-To create `series` of consecutive items with breaks in between, it may be better to use a `spread` than a `slice`. `Simple spreads` consist of a `start` and a `span` (`start»span`) separated by a right [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `bb`, html: `&raquo;`, vim/compose: `>>`)  or a `stop` and a `span` (`stop«span`) separated by a left [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `ab`, html: `&laquo;`, vim/compose: `<<`). When entering text by hand, it is acceptable to use two less-than (`<<`) or two greater-than signs (`>>`) instead of guillemets. The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `>003`, which is synonymous with the `slice` `:003`. In this example, the `start` is 0, while the `stop` and the `span` are both 3.
+To create `series` of consecutive items with breaks in between, it may be better to use a `spread` than a `slice`. `Simple spreads` consist of a `start` and a `span` (`start»span`) separated by a right [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `bb`, html: `&raquo;`, vim/compose: `>>`)  or a `stop` and a `span` (`stop«span`) separated by a left [guillemet](https://en.wikipedia.org/wiki/Guillemet) (hex: `ab`, html: `&laquo;`, vim/compose: `<<`). When entering text by hand, it is acceptable to use two less-than (`<<`) or two greater-than signs (`>>`) instead of guillemets. The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `»3`, which is synonymous with the `slice` `:3`. In this example, the `start` is 0, while the `stop` and the `span` are both 3.
 
-In addition to default `start` and `stop` values, `spreads` also have default `span` values. A `spread` that only uses default values (`»` or `«`) will include every day in the year ($span=n$). If we "spread" forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `«003` represents the last 3 days of any year. We could also use a negative `start` of `-003`, the third to last day of any year, to create the `slice` `-003:` and the `spread` `-003»`, both of which are synonymous with `«003`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers.
+In addition to default `start` and `stop` values, `spreads` also have default `span` values. A `spread` that only uses default values (`»` or `«`) will include every day in the year ($span=n$). If we "spread" forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `«3` represents the last 3 days of any year. We could also use a negative `start` of `-3`, the third to last day of any year, to create the `slice` `-3:` and the `spread` `-3»`, both of which are synonymous with `«3`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers.
 
 ### Splits {#sec-splits}
 
-As with `stepped slices`, we can create non-consecutive `series` by "splitting" a `simple spread` (`start»span` or `stop«span`) into `split spread` (`start»span»split` or `stop«span«split`) with a `split` value that works like the opposite of a `step`. While `steps` keep items that are "stepped" on, `splits` exclude items that are used to create the boundaries of the `splits`. `Split spreads` with a `split` greater than 1 will yield a `series` of `segments`. The `split spread` `»»4` that skips every 5th day to create groups of 4 days throughout the year. Notably, `»»4` will always end with a `segment` containing the last 4 days of common years, `360:364`, `360»004`, or `364«004`, even in leap years, because partial splits are no allowed. Just like `stepped slices`, `split spreads` cannot be included in a `series`, because every `split` and `space` can have a `series` of values.
+As with `stepped slices`, we can create non-consecutive `series` by "splitting" a `simple spread` (`start»span` or `stop«span`) into `split spread` (e.g. `start»span»split`) with a `split` value that works like the opposite of a `step`. While `steps` keep items that are "stepped" on, `splits` exclude items that are used to create the boundaries of the `splits`. `Split spreads` with a `split` greater than 1 will yield a `series` of `segments`. The direction of the second guillemet in `split spreads` determines whether we begin creating splits from the `start` (`»`) or the `stop` (`«`) of the `span`. Just like `stepped slices`, `split spreads` cannot be included in a `series`, because every `split` and `space` can have a `series` of values.
+
+The `split spread` `»»4` skips every 5th day to create groups of 4 days throughout the year starting with the first 4 days of the year `»4`. In contrast, the `split spread` `««4` creates groups of 4 days starting with the last 4 days of the year (`«4`). Notably, `»»4` will always end with a `segment` containing the last 4 days of common years, `360:364`, `360»4`, or `364«4`, even in leap years, because partial splits are no allowed. Similarly, `««4` excludes the first day of the common years and the first two days of leap years. If the first two values (`start` and `span` or `stop` and `span`) are blank, the direction of the first guillemet does not matter. The split spreads `»»4` and `«»4` are synonymous, as are the `split spreads` `««4` and `»«4`.
 
 ### Spaces {#sec-spaces}
 
-The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `»»3»2` can be written as `:003`, `»003`, or `003«`, while the last `segment` is `360:363`, `360»003`, or `363«003`. The workdays in the first `dek` of `»»3»2` can be written as the following `series` of `segments`: `:004,005:008`, `»003,005»003`, or `003«,008«003`. A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `zets` can be summarized as `split spreads` as shown in the following table:
+The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `»»3»2` can be written as `:3`, `»3`, or `3«`, while the last `segment` is `360:363`, `360»3`, or `363«3`. The workdays in the first `dek` of `»»3»2` can be written as the following `series` of `segments`: `:4,5:8`, `»3,5»3`, or `3«,8«3`. A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `zets` can be summarized as `split spreads` as shown in the following table:
 
 | Unit | Spread   |
 | ---- | -------- |
@@ -540,6 +544,10 @@ The pattern above requires that the `splits` are separated by the default `space
 | Zet  | `»»61»0` |
 
 : The spreads that represent the constant length subyear units {#tbl-constant}
+
+When `space` is zero, the direction of the third guillemet does not matter. The `split spreads` `»»61»0`, `«»61»0`, `»»61«0`, and `«»61«0` are all synonymous. If `space` is greater than zero and the second and third guillemet are not pointing in the same direction, the resulting splits will be overlapping. The `split spread` `»10»4«2` results in the 4 overlapping segments: `»4`, `2»4`, `4»4`, `6»4`.
+
+spaces in between direction of the third guillemet determines whether or not `splits` are overlapping. If the  `split` (`»`) or before (`«`). 
 
 ### Sequential spreads and slices {#sec-seq}
 
@@ -590,35 +598,35 @@ The `pently` schedules are important for the transition between years. In common
 
 | Pos | Neg | Name     | Type |
 | --- | --- | -------- | ---- |
-| 360 | -5  | Zeroday  | work |
-| 361 | -4  | Oneday   | work |
-| 362 | -3  | Twoday   | work |
-| 363 | -2  | Threeday | rest |
-| 364 | -1  | Fourday  | rest |
-| 365 | 0   | Zeroday  | work |
-| 366 | 1   | Oneday   | work |
-| 367 | 2   | Twoday   | work |
-| 368 | 3   | Threeday | rest |
-| 369 | 4   | Fourday  | rest |
+| 360 | -5  | Oudday  | work |
+| 361 | -4  | Unoday   | work |
+| 362 | -3  | Duoday   | work |
+| 363 | -2  | Triday | rest |
+| 364 | -1  | Quaday  | rest |
+| 365 | 0   | Oudday  | work |
+| 366 | 1   | Unoday   | work |
+| 367 | 2   | Duoday   | work |
+| 368 | 3   | Triday | rest |
+| 369 | 4   | Quaday  | rest |
 
 : The days in Dek 36 in common years {#tbl-common}
 
 #### Leap years {#sec-leap}
 
-In leap years, `Dek 36` contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, `Dek 36` always contain 6 workdays and 4 restdays, just like every other `dek`, but in leaps years these days do not follow the typical order of `Schedule 3`. Leap years end in 3 restdays instead of 2, because Leap Day (`Day 365`) is always a holiday. Leap day is always a `Fiveday` and always followed by a `Zeroday`. After Leap Day, the normal rhythm of `Schedule 3` resumes. The table below shows the positive and negative `doty` numbers of the days in `Dek 36` in leap years, as well as their names and their types (work or rest).
+In leap years, `Dek 36` contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, `Dek 36` always contain 6 workdays and 4 restdays, just like every other `dek`, but in leaps years these days do not follow the typical order of `Schedule 3`. Leap years end in 3 restdays instead of 2, because Leap Day (`Day 365`) is always a holiday. Leap day is always a `Penday` and always followed by an `Oudday`. After Leap Day, the normal rhythm of `Schedule 3` resumes. The table below shows the positive and negative `doty` numbers of the days in `Dek 36` in leap years, as well as their names and their types (work or rest).
 
 | Pos | Neg | Name     | Type |
 | --- | --- | -------- | ---- |
-| 360 | -6  | Zeroday  | work |
-| 361 | -5  | Oneday   | work |
-| 362 | -4  | Twoday   | work |
-| 363 | -3  | Threeday | rest |
-| 364 | -2  | Fourday  | rest |
-| 365 | -1  | Fiveday  | rest |
-| 366 | 0   | Zeroday  | work |
-| 367 | 1   | Oneday   | work |
-| 368 | 2   | Twoday   | work |
-| 369 | 3   | Threeday | rest |
+| 360 | -6  | Oudday  | work |
+| 361 | -5  | Unoday   | work |
+| 362 | -4  | Duoday   | work |
+| 363 | -3  | Triday | rest |
+| 364 | -2  | Quaday  | rest |
+| 365 | -1  | Penday  | rest |
+| 366 | 0   | Oudday  | work |
+| 367 | 1   | Unoday   | work |
+| 368 | 2   | Duoday   | work |
+| 369 | 3   | Triday | rest |
 
 : The days in Dek 36 in leap years {#tbl-common}
 
