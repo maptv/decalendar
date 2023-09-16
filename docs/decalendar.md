@@ -491,9 +491,9 @@ The only unit that can include the leap year is a `wau` (`ϛ`), which is 61 days
 | W4   | 244   | 304  |
 | W5   | 305   | 365  |
 
-: The days that begin and end each `zet` {#tbl-z}
+: The days that begin and end each `wau` {#tbl-z}
 
-All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Zet 3`, `Z3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+078`. The subyear units are essentially date intervals, series of contiguous dates. `Decalendar` includes very powerful approaches to describing series of dates, times, and `stamps`.
+All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Wau 3`, `Z3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+078`. The subyear units are essentially date intervals, series of contiguous dates. `Decalendar` includes very powerful approaches to describing series of dates, times, and `stamps`.
 
 ## Series {#sec-series}
 
@@ -534,18 +534,18 @@ The `split spread` `»»4` skips every 5th day to create groups of 4 days throug
 
 ### Spaces {#sec-spaces}
 
-The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `»»3»2` can be written as `:3`, `»3`, or `3«`, while the last `segment` is `360:363`, `360»3`, or `363«3`. The workdays in the first `dek` of `»»3»2` can be written as the following `series` of `segments`: `:4,5:8`, `»3,5»3`, or `3«,8«3`. A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `zets` can be summarized as `split spreads` as shown in the following table:
+The pattern above requires that the `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start»span»split»space` or `stop«span«split«space`. The `split spread` `»»3»2` creates 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `»»3»2` can be written as `:3`, `»3`, or `3«`, while the last `segment` is `360:363`, `360»3`, or `363«3`. The workdays in the first `dek` of `»»3»2` can be written as the following `series` of `segments`: `:4,5:8`, `»3,5»3`, or `3«,8«3`. A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `waus` can be summarized as `split spreads` as shown in the table below. When `space` is zero, the direction of the third guillemet does not matter. The `split spreads` `»»61»0`, `«»61»0`, `»»61«0`, and `«»61«0` all represents the `waus` in a year.
 
 | Unit | Spread   |
 | ---- | -------- |
 | Delt | `»»91»0` |
 | Qop  | `»»90»0` |
 | Ep   | `»»73»0` |
-| Zet  | `»»61»0` |
+| Wau  | `»»61»0` |
 
 : The spreads that represent the constant length subyear units {#tbl-constant}
 
-When `space` is zero, the direction of the third guillemet does not matter. The `split spreads` `»»61»0`, `«»61»0`, `»»61«0`, and `«»61«0` are all synonymous. If `space` is greater than zero and the second and third guillemet are not pointing in the same direction, the resulting splits will overlap. The `split spreads` `»1».4«.2` and `«1«.4».2`  both result in the same 4 overlapping time segments: `:.4`, `.2:.6`, `.4:.6`, `.6:1`. Such segments could be used to plan shifts of work that require one team to hand off the work to another team. If the segments are in `Zone 0` time, the first shift would be for workers in `Zone 3`, the second shift for `Zone 1`, the third shift for `Zone -1`, and the fourth shift for `Zone -3`. Each team works during the normal business hours in their time zone and has two dimes of overlap with the subsequent team.
+If `space` is greater than zero and the second and third guillemet are pointing in opposite directions, the resulting time segments will overlap. The `split spreads` `»1».4«.2` and `«1«.4».2` both result in the same 4 overlapping time segments: `:.4`, `.2:.6`, `.4:.8`, `.6:1`. Such segments could be used to plan work shifts that require a hand off between teams. The segments created by `»1».4«.2` are shifted by two `dimes` in relation to each other and overlap by 2 `dimes`. If these segments are in `Zone 0` time, they represent the normal business day (`.3:.7`) for `Zone 3` (`:.4`), `Zone 1`(`.2:.6`), `Zone -1`(`.4:.8`), and `Zone -3`(`.6:1`). Each of these 4 segments could represent a teams working during the normal business day in their respective time zone. All but the last team would have two dimes of overlap with the subsequent team.
 
 ### Sequential spreads and slices {#sec-seq}
 
