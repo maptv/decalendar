@@ -111,7 +111,7 @@ console.log(utc);
 console.log(now.toISOString());
 console.log(myStamp(start, 0, "y", "+"));
 console.log(myStamp(stop, 0, "y", "+"));
-console.log(myStamp(now, -4, "y", "+"));
+console.log(myStamp(now, 0, "y", "+"));
 console.log(myStamp(now, -4, "y", "-"));
 console.log(myStamp(now, -4, "m", "+"));
 console.log(myStamp(now, -4, "m", "-"));

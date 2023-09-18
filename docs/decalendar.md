@@ -6,7 +6,7 @@
 
 ## Similar systems
 
-`Decalendar` and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time).
+`Decalendar` and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) and the fractional day component of [Julian dates](https://en.wikipedia.org/wiki/Julian_day).
 
 #### ISO 8601 dates
 
@@ -16,13 +16,25 @@ Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_86
 
 Just like `Decalendar` seeks to make months and weeks obsolete, `Declock` does not use hours, minutes, or seconds and aims to deprecate these units in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days). `Declock` and ISO 8601 each have 1 time format. Both of these formats can be appended to dates to form timestamps. `Declock` timestamps are more concise and easier to read than ISO 8601 timestamps. An ISO 8601 calendar date timestamp that includes seconds is 23 characters long (`year-mm-ddThh:mm:ss`), while a `Decalendar` timestamp with slightly greater precision is only 14 characters long (`year±day.ddddd`). Without delimiters, ISO 8601 timestamps become even more difficult to read (`yearmmddThhmmss`) and still cannot match the brevity of `Declock` timestamps.
 
-### Indexing and slicing
+#### ISO 8601 recurring intervals 
 
 The numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create time intervals. For example, [indexing and slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/).
 
-Building on the concept of array slicing (`start:stop:step`), `Decalendar` introduces a new technique called "array spreading" (`start>span>split>space`) and even allows for nesting and mixing of `slices` and `spreads`. The various expressions that represent dates, times, timestamps, and time intervals are collectively called `Decalendar strings`. ISO 8601 has three methods of unequivocally creating [time intervals](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals), `start/stop`, `start/span`, and `span/stop`. The `Decalendar` equivalents of these interval creation methods are `start:stop`, `start>span`, and `stop<span`.
+Building on the concept of array slicing (`start:stop:step`), `Decalendar` introduces a new technique called "array spreading" (`start>span>split>space`) and even allows for nesting and mixing of `slices` and `spreads`. The various expressions that represent dates, times, timestamps, and time intervals are collectively called `Decalendar strings`. ISO 8601 has three methods of unequivocally creating [time intervals](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals), `start/stop`, `start/span`, and `span/stop`. The `Decalendar string` equivalents of these three interval creation methods are `start:stop`, `start>span`, and `stop<span`.
 
-Unlike `Decalendar`, ISO 8601 cannot create non-consecutive or overlapping recurring intervals. In contrast, `Decalendar` provides tools for creating all kinds of time intervals, including non-consecutive or overlapping recurring intervals. The `stop` is included in ISO 8601 intervals, but not `Decalendar` intervals. The main difference between these approach is that the `stop` is included in ISO `2007-03-01T13:00:00Z/2008-05-11T15:30:00Z`, `2007-03-01T13:00:00Z/P1Y2M10DT2H30M`, and `P1Y2M10DT2H30M/2008-05-11T15:30:00Z`, which convert into the `Decalendar strings` `2007+059.54167+0:2008+131.60417+0`, `2007+059.54167+0>175.0625`, and `2008+131.60417+0<175.0625`, respectively.
+Unlike `Decalendar strings`, ISO 8601 expressions cannot create non-consecutive or overlapping recurring intervals. Consecutive recurring intervals in ISO 8601 can look like `Rn/start/stop`, `Rn/start/span`, or `Rn/span/stop`, where `n` is the number of repetitions. In `Decalendar`, consecutive intervals can be created in several ways, but the easiest is with a spread (e.g. `start>span>split>0`). To create non-consecutive recurring intervals, we can set a non-zero `space` value (e.g. `start>span>split>space`) to create `space`-sized breaks in between the `splits` of the `spread`. If we want the intervals to overlap, we can flip the last sign in the `spread` and the `space` becomes the size of the overlap.
+
+### French Republican Calendar
+
+The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. Unlike the group of 10 days in the French Republican calendar (called a _décade_), the group of 10 days in `Decalendar` (called a `dek`) is [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering). The French Republican calendar and `Declock` both the break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `mil` is a thousandth (10⁻³) of day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, minutes, and seconds, respectively.
+
+### Swatch Internet Time
+
+[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, limiting its utility outside of Central Europe or West Africa. `Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits (110 double-digit time zones, 1100 triple-digit time zones, and so on).
+
+### Julian dates
+
+Julian dates 
 
 ## Basic concepts {#sec-basics}
 
@@ -530,7 +542,7 @@ To create a `series` of times on days throughout the year, we can use a `slice` 
 
 To create `series` of consecutive items with breaks in between, it may be better to use a `spread` than a `slice`. `Simple spreads` consist of either a `start` and a `span` (`start>span`) separated by a greater-than sign (`>`) or a `stop` and a `span` (`stop<span`) separated by a less-than (`<`) sign. The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `>3`, which is synonymous with the `slice` `:3`. In this example, the `start` is 0, while the `stop` and the `span` are both 3. In addition to default `start` and `stop` values, `spreads` also have default `span` values. A `spread` that only uses default values (`>` or `<`) will include every day in the year ($span=n$).
 
-If we "spread" forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `<3` represents the last 3 days of any year. We could also use a negative `start` of `-3`, the third to last day of any year, to create the `slice` `-3:` and the `spread` `-3>`, both of which are synonymous with `<3`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers.
+If we "spread" forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `<3` represents the last 3 days of any year. We could also use a negative `start` of `-3`, the third to last day of any year, to create the `slice` `-3:` and the `spread` `-3>`, both of which are synonymous with `<3`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers. A `span` value of zero does not return any items. Negative `span` values reverse the direction of the first sign, turning `start` into `stop` and vice versa.
 
 ### Splits {#sec-splits}
 
@@ -542,7 +554,7 @@ The direction of the second sign in `split spreads` determines whether we begin 
 
 ### Spaces {#sec-spaces}
 
-The patterns described above require that `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start>span>split>space`. The `split spread` `≫3>2` creates 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `≫3>2` can be written as `:3`, `>3`, or `3<`, while the last `segment` is `360:363`, `360>3`, or `363<3`. The workdays in the first `dek` of `≫3>2` can be written as the following `series` of `segments`: `:4,5:8` or `>3,5>3`.
+The patterns described above require that `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start>span>split>space`. The `split spreads` `≫3>2` and `♢3>2` create 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `≫3>2` and `♢3>2` can be written as `:3`, `>3`, or `3<`, while the last `segment` is `360:363`, `360>3`, or `363<3`. The workdays in the first `dek` of `≫3>2` and `♢3>2` can be written as the following `series` of `segments`: `:4,5:8`, `>3,5>3`, or `3<,8<3`. Unlike `stepped slices` and `split spreads`, `simple slices` and `simple spreads` can be used in `series`.
 
 A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `waus` can be summarized as `split spreads` as shown in the table below. When `space` is zero, the direction of the third sign does not matter. The `split spreads` `≫61>0`, `♢61>0`, `≫61<0`, and `♢61<0` all represents the `waus` in a year. `Waus` divide leap years evenly and `eps` divide common years evenly. Therefore, `x61>0` and `x61<0` can represent all of the `waus` in leap years, just like `x73>0` and `x73<0` can represent all of the `eps` in common years.
 
