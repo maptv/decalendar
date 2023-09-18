@@ -93,6 +93,8 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
     }
 }
 
+const start = new Date("2007-03-01T13:00:00Z")
+const stop = new Date("2008-05-11T15:30:00Z")
 const now = new Date()
 const utc = new Date(
     now.getUTCFullYear(),
@@ -103,9 +105,12 @@ const utc = new Date(
     now.getUTCSeconds(),
     now.getUTCMilliseconds(),
     )
+console.log(60417-54167);
 console.log(now);
 console.log(utc);
 console.log(now.toISOString());
+console.log(myStamp(start, 0, "y", "+"));
+console.log(myStamp(stop, 0, "y", "+"));
 console.log(myStamp(now, -4, "y", "+"));
 console.log(myStamp(now, -4, "y", "-"));
 console.log(myStamp(now, -4, "m", "+"));
