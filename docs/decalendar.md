@@ -30,11 +30,15 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 ### Swatch Internet Time
 
-[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, limiting its utility outside of Central Europe or West Africa. `Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits (110 double-digit time zones, 1100 triple-digit time zones, and so on).
+[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, [UTC+1](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC+01:00,_A), limiting its utility outside of Central Europe or West Africa. `Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits (110 double-digit time zones, 1100 triple-digit time zones, and so on).
 
 ### Julian dates
 
-Julian dates 
+Julian dates are the number of fractional days since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar or January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we obtain we subtract the Julian Day Number ($\lfloor JD \rfloor$) from the Julian Day ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 ($(JD - \lfloor JD \rfloor + .5) \mod 1$).
+
+### UNIX time
+
+UNIX time is the number of seconds since the UNIX Epoch, which is `1970+000.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar. 
 
 ## Basic concepts {#sec-basics}
 

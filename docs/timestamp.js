@@ -7,7 +7,7 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
                 date.getUTCFullYear(),
                 date.getUTCMonth(),
                 date.getUTCDate(),
-                date.getUTCHours(),
+                date.getUTCHours() + 1,
                 date.getUTCMinutes(),
                 date.getUTCSeconds(),
                 date.getUTCMilliseconds() + ddOffset * 8640000,
@@ -95,6 +95,8 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
 
 const start = new Date("2007-03-01T13:00:00Z")
 const stop = new Date("2008-05-11T15:30:00Z")
+const test = new Date("2023-11-24T04:26:00")
+const julian = new Date(-4714, 10, 24, 12)
 const now = new Date()
 const utc = new Date(
     now.getUTCFullYear(),
@@ -105,15 +107,34 @@ const utc = new Date(
     now.getUTCSeconds(),
     now.getUTCMilliseconds(),
     )
+var s = 1695157966;
+var z = s / 86400 + 719468;
+var era = (z >= 0 ? z : z - 146096) / 146097;
+var doe = (z - era * 146097);
+var yoe = (doe - doe/1460 + doe/36524 - doe/146096) / 365;
+var y = (yoe) + era * 400;
+var doy = doe - (365*yoe + yoe/4 - yoe/100);
+console.log(s);
+console.log(z);
+console.log(era);
+console.log(doe);
+console.log(yoe);
+console.log(doy);
+
 console.log(60417-54167);
 console.log(now);
+console.log((.27 + .5) % 1)
 console.log(utc);
+console.log(julian);
 console.log(now.toISOString());
 console.log(myStamp(start, 0, "y", "+"));
+console.log(myStamp(test, 0, "y", "+"));
+console.log(myStamp(julian, 0, "y", "+"));
 console.log(myStamp(stop, 0, "y", "+"));
 console.log(myStamp(now, 0, "y", "+"));
+console.log(myStamp(now, -4, "y", "+"));
 console.log(myStamp(now, -4, "y", "-"));
-console.log(myStamp(now, -4, "m", "+"));
+console.log(myStamp(now, 0, "m", "+"));
 console.log(myStamp(now, -4, "m", "-"));
 console.log(myStamp(now, -4, "w", "+"));
 console.log(myStamp(now, -4, "w", "-"));
