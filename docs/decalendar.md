@@ -4,7 +4,16 @@
 
 `Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to replace [standard time](https://en.wikipedia.org/wiki/Standard_time). Both system use days as their base unit and derive other units from days using prefixes inspired by the metric system. To create the necessary calendar and time units, `Decalendar` groups days together, while `Declock` divides days up.
 
+### UNIX time
+
+UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar.
+
 ## Similar systems
+
+#### Gregorian calendar
+
+`Decalendar` and Gregorian leap days are  positions the Gregorian leap day at the end of the year. `Decalendar` year starts with `Day 0` and ends with either `Day 364` or `Day 365`. Translated into Gregorian calendar dates, `Day 0` is March 1, `Day 364` is February 28, and `Day 365` is February 29. on years that precede Gregorian calendar leap years. February 29, is `Day 365` in `Decalendar`. the last day of `Decalendar` leap years. ends with `Day 364` () in common years or leap years. `Decalendar` leap years are always 1 year before Gregorian calendar years.
+
 
 `Decalendar` and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) and the fractional day component of [Julian dates](https://en.wikipedia.org/wiki/Julian_day).
 
@@ -16,7 +25,7 @@ Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_86
 
 Just like `Decalendar` seeks to make months and weeks obsolete, `Declock` does not use hours, minutes, or seconds and aims to deprecate these units in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days). `Declock` and ISO 8601 each have 1 time format. Both of these formats can be appended to dates to form timestamps. `Declock` timestamps are more concise and easier to read than ISO 8601 timestamps. An ISO 8601 calendar date timestamp that includes seconds is 23 characters long (`year-mm-ddThh:mm:ss`), while a `Decalendar` timestamp with slightly greater precision is only 14 characters long (`year±day.ddddd`). Without delimiters, ISO 8601 timestamps become even more difficult to read (`yearmmddThhmmss`) and still cannot match the brevity of `Declock` timestamps.
 
-#### ISO 8601 recurring intervals 
+#### ISO 8601 recurring intervals
 
 The numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create time intervals. For example, [indexing and slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/).
 
@@ -36,9 +45,6 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 Julian dates are the number of fractional days since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar or January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we obtain we subtract the Julian Day Number ($\lfloor JD \rfloor$) from the Julian Day ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 ($(JD - \lfloor JD \rfloor + .5) \mod 1$).
 
-### UNIX time
-
-UNIX time is the number of seconds since the UNIX Epoch, which is `1970+000.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar. 
 
 ## Basic concepts {#sec-basics}
 
@@ -276,153 +282,41 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 
 The first table below shows the `doty` numbers for all of the days in common years, while the second table below does the same for leap years. In both of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). The positive `doty` numbers of dates after the Gregorian calendar leap day, February 29, need to be incremented by 1 in leap years. Similarly, the negative `doty` numbers of dates before February 29 need to decremented by 1. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
 
-| Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
-|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
-|  1  |  0  | 31  | 59  |  90 | 120 | 151 | 181 | 212 | 243 | 273 | 304 | 334 |
-|  2  |  1  | 32  | 60  |  91 | 121 | 152 | 182 | 213 | 244 | 274 | 305 | 335 |
-|  3  |  2  | 33  | 61  |  92 | 122 | 153 | 183 | 214 | 245 | 275 | 306 | 336 |
-|  4  |  3  | 34  | 62  |  93 | 123 | 154 | 184 | 215 | 246 | 276 | 307 | 337 |
-|  5  |  4  | 35  | 63  |  94 | 124 | 155 | 185 | 216 | 247 | 277 | 308 | 338 |
-|  6  |  5  | 36  | 64  |  95 | 125 | 156 | 186 | 217 | 248 | 278 | 309 | 339 |
-|  7  |  6  | 37  | 65  |  96 | 126 | 157 | 187 | 218 | 249 | 279 | 310 | 340 |
-|  8  |  7  | 38  | 66  |  97 | 127 | 158 | 188 | 219 | 250 | 280 | 311 | 341 |
-|  9  |  8  | 39  | 67  |  98 | 128 | 159 | 189 | 220 | 251 | 281 | 312 | 342 |
-| 10  |  9  | 40  | 68  |  99 | 129 | 160 | 190 | 221 | 252 | 282 | 313 | 343 |
-| 11  | 10  | 41  | 69  | 100 | 130 | 161 | 191 | 222 | 253 | 283 | 314 | 344 |
-| 12  | 11  | 42  | 70  | 101 | 131 | 162 | 192 | 223 | 254 | 284 | 315 | 345 |
-| 13  | 12  | 43  | 71  | 102 | 132 | 163 | 193 | 224 | 255 | 285 | 316 | 346 |
-| 14  | 13  | 44  | 72  | 103 | 133 | 164 | 194 | 225 | 256 | 286 | 317 | 347 |
-| 15  | 14  | 45  | 73  | 104 | 134 | 165 | 195 | 226 | 257 | 287 | 318 | 348 |
-| 16  | 15  | 46  | 74  | 105 | 135 | 166 | 196 | 227 | 258 | 288 | 319 | 349 |
-| 17  | 16  | 47  | 75  | 106 | 136 | 167 | 197 | 228 | 259 | 289 | 320 | 350 |
-| 18  | 17  | 48  | 76  | 107 | 137 | 168 | 198 | 229 | 260 | 290 | 321 | 351 |
-| 19  | 18  | 49  | 77  | 108 | 138 | 169 | 199 | 230 | 261 | 291 | 322 | 352 |
-| 20  | 19  | 50  | 78  | 109 | 139 | 170 | 200 | 231 | 262 | 292 | 323 | 353 |
-| 21  | 20  | 51  | 79  | 110 | 140 | 171 | 201 | 232 | 263 | 293 | 324 | 354 |
-| 22  | 21  | 52  | 80  | 111 | 141 | 172 | 202 | 233 | 264 | 294 | 325 | 355 |
-| 23  | 22  | 53  | 81  | 112 | 142 | 173 | 203 | 234 | 265 | 295 | 326 | 356 |
-| 24  | 23  | 54  | 82  | 113 | 143 | 174 | 204 | 235 | 266 | 296 | 327 | 357 |
-| 25  | 24  | 55  | 83  | 114 | 144 | 175 | 205 | 236 | 267 | 297 | 328 | 358 |
-| 26  | 25  | 56  | 84  | 115 | 145 | 176 | 206 | 237 | 268 | 298 | 329 | 359 |
-| 27  | 26  | 57  | 85  | 116 | 146 | 177 | 207 | 238 | 269 | 299 | 330 | 360 |
-| 28  | 27  | 58  | 86  | 117 | 147 | 178 | 208 | 239 | 270 | 300 | 331 | 361 |
-| 29  | 28  |     | 87  | 118 | 148 | 179 | 209 | 240 | 271 | 301 | 332 | 362 |
-| 30  | 29  |     | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
-| 31  | 30  |     | 89  |     | 150 |     | 211 | 242 |     | 303 |     | 364 |
+| Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan  | Feb  |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
+|  1  |  0  |  31 |  61 |  92 | 122 | 153 | 184 | 214 | 245 | 275 | 306  | 337  |
+|  2  |  1  |  32 |  62 |  93 | 123 | 154 | 185 | 215 | 246 | 276 | 307  | 338  |
+|  3  |  2  |  33 |  63 |  94 | 124 | 155 | 186 | 216 | 247 | 277 | 308  | 339  |
+|  4  |  3  |  34 |  64 |  95 | 125 | 156 | 187 | 217 | 248 | 278 | 309  | 340  |
+|  5  |  4  |  35 |  65 |  96 | 126 | 157 | 188 | 218 | 249 | 279 | 310  | 341  |
+|  6  |  5  |  36 |  66 |  97 | 127 | 158 | 189 | 219 | 250 | 280 | 311  | 342  |
+|  7  |  6  |  37 |  67 |  98 | 128 | 159 | 190 | 220 | 251 | 281 | 312  | 343  |
+|  8  |  7  |  38 |  68 |  99 | 129 | 160 | 191 | 221 | 252 | 282 | 313  | 344  |
+|  9  |  8  |  39 |  69 | 100 | 130 | 161 | 192 | 222 | 253 | 283 | 314  | 345  |
+| 10  |  9  |  40 |  70 | 101 | 131 | 162 | 193 | 223 | 254 | 284 | 315  | 346  |
+| 11  | 10  |  41 |  71 | 102 | 132 | 163 | 194 | 224 | 255 | 285 | 316  | 347  |
+| 12  | 11  |  42 |  72 | 103 | 133 | 164 | 195 | 225 | 256 | 286 | 317  | 348  |
+| 13  | 12  |  43 |  73 | 104 | 134 | 165 | 196 | 226 | 257 | 287 | 318  | 349  |
+| 14  | 13  |  44 |  74 | 105 | 135 | 166 | 197 | 227 | 258 | 288 | 319  | 350  |
+| 15  | 14  |  45 |  75 | 106 | 136 | 167 | 198 | 228 | 259 | 289 | 320  | 351  |
+| 16  | 15  |  46 |  76 | 107 | 137 | 168 | 199 | 229 | 260 | 290 | 321  | 352  |
+| 17  | 16  |  47 |  77 | 108 | 138 | 169 | 200 | 230 | 261 | 291 | 322  | 353  |
+| 18  | 17  |  48 |  78 | 109 | 139 | 170 | 201 | 231 | 262 | 292 | 323  | 354  |
+| 19  | 18  |  49 |  79 | 110 | 140 | 171 | 202 | 232 | 263 | 293 | 324  | 355  |
+| 20  | 19  |  50 |  80 | 111 | 141 | 172 | 203 | 233 | 264 | 294 | 325  | 356  |
+| 21  | 20  |  51 |  81 | 112 | 142 | 173 | 204 | 234 | 265 | 295 | 326  | 357  |
+| 22  | 21  |  52 |  82 | 113 | 143 | 174 | 205 | 235 | 266 | 296 | 327  | 358  |
+| 23  | 22  |  53 |  83 | 114 | 144 | 175 | 206 | 236 | 267 | 297 | 328  | 359  |
+| 24  | 23  |  54 |  84 | 115 | 145 | 176 | 207 | 237 | 268 | 298 | 329  | 360  |
+| 25  | 24  |  55 |  85 | 116 | 146 | 177 | 208 | 238 | 269 | 299 | 330  | 361  |
+| 26  | 25  |  56 |  86 | 117 | 147 | 178 | 209 | 239 | 270 | 300 | 331  | 362  |
+| 27  | 26  |  57 |  87 | 118 | 148 | 179 | 210 | 240 | 271 | 301 | 332  | 363  |
+| 28  | 27  |  58 |  88 | 119 | 149 | 180 | 211 | 241 | 272 | 302 | 333  | 364  |
+| 29  | 28  |  59 |  89 | 120 | 150 | 181 | 212 | 242 | 273 | 303 | 334  | 365  |
+| 30  | 29  |  60 |  90 | 121 | 151 | 182 | 213 | 243 | 274 | 304 | 335  |      |
+| 31  | 30  |     |  91 |     | 152 | 183 |     | 244 | 215 | 305 | 336  |      |
 
-: Common year Gregorian calendar date to positive `doty` conversion {#tbl-common}
-
-| Day | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
-|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
-|  1  |  0  | 31  | 60  |  91 | 121 | 152 | 182 | 213 | 244 | 274 | 305 | 335 |
-|  2  |  1  | 32  | 61  |  92 | 122 | 153 | 183 | 214 | 245 | 275 | 306 | 336 |
-|  3  |  2  | 33  | 62  |  93 | 123 | 154 | 184 | 215 | 246 | 276 | 307 | 337 |
-|  4  |  3  | 34  | 63  |  94 | 124 | 155 | 185 | 216 | 247 | 277 | 308 | 338 |
-|  5  |  4  | 35  | 64  |  95 | 125 | 156 | 186 | 217 | 248 | 278 | 309 | 339 |
-|  6  |  5  | 36  | 65  |  96 | 126 | 157 | 187 | 218 | 249 | 279 | 310 | 340 |
-|  7  |  6  | 37  | 66  |  97 | 127 | 158 | 188 | 219 | 250 | 280 | 311 | 341 |
-|  8  |  7  | 38  | 67  |  98 | 128 | 159 | 189 | 220 | 251 | 281 | 312 | 342 |
-|  9  |  8  | 39  | 68  |  99 | 129 | 160 | 190 | 221 | 252 | 282 | 313 | 343 |
-| 10  |  9  | 40  | 69  | 100 | 130 | 161 | 191 | 222 | 253 | 283 | 314 | 344 |
-| 11  | 10  | 41  | 70  | 101 | 131 | 162 | 192 | 223 | 254 | 284 | 315 | 345 |
-| 12  | 11  | 42  | 71  | 102 | 132 | 163 | 193 | 224 | 255 | 285 | 316 | 346 |
-| 13  | 12  | 43  | 72  | 103 | 133 | 164 | 194 | 225 | 256 | 286 | 317 | 347 |
-| 14  | 13  | 44  | 73  | 104 | 134 | 165 | 195 | 226 | 257 | 287 | 318 | 348 |
-| 15  | 14  | 45  | 74  | 105 | 135 | 166 | 196 | 227 | 258 | 288 | 319 | 349 |
-| 16  | 15  | 46  | 75  | 106 | 136 | 167 | 197 | 228 | 259 | 289 | 320 | 350 |
-| 17  | 16  | 47  | 76  | 107 | 137 | 168 | 198 | 229 | 260 | 290 | 321 | 351 |
-| 18  | 17  | 48  | 77  | 108 | 138 | 169 | 199 | 230 | 261 | 291 | 322 | 352 |
-| 19  | 18  | 49  | 78  | 109 | 139 | 170 | 200 | 231 | 262 | 292 | 323 | 353 |
-| 20  | 19  | 50  | 79  | 110 | 140 | 171 | 201 | 232 | 263 | 293 | 324 | 354 |
-| 21  | 20  | 51  | 80  | 111 | 141 | 172 | 202 | 233 | 264 | 294 | 325 | 355 |
-| 22  | 21  | 52  | 81  | 112 | 142 | 173 | 203 | 234 | 265 | 295 | 326 | 356 |
-| 23  | 22  | 53  | 82  | 113 | 143 | 174 | 204 | 235 | 266 | 296 | 327 | 357 |
-| 24  | 23  | 54  | 83  | 114 | 144 | 175 | 205 | 236 | 267 | 297 | 328 | 358 |
-| 25  | 24  | 55  | 84  | 115 | 145 | 176 | 206 | 237 | 268 | 298 | 329 | 359 |
-| 26  | 25  | 56  | 85  | 116 | 146 | 177 | 207 | 238 | 269 | 299 | 330 | 360 |
-| 27  | 26  | 57  | 86  | 117 | 147 | 178 | 208 | 239 | 270 | 300 | 331 | 361 |
-| 28  | 27  | 58  | 87  | 118 | 148 | 179 | 209 | 240 | 271 | 301 | 332 | 362 |
-| 29  | 28  | 59  | 88  | 119 | 149 | 180 | 210 | 241 | 272 | 302 | 333 | 363 |
-| 30  | 29  |     | 89  | 120 | 150 | 181 | 211 | 242 | 273 | 303 | 334 | 364 |
-| 31  | 30  |     | 90  |     | 151 |     | 212 | 243 |     | 304 |     | 365 |
-
-: Leap year Gregorian calendar date to positive `doty` conversion {#tbl-leap}
-
-##### Generalized conversion tables {#sec-general}
-
-Having different conversion tables for common years and leap years is cumbersome, so the two tables below work for both common years and leap years, by indicating positive `doty` numbers that need to incremented in leap years with a superscript plus sign (`⁺`) and negative `doty` numbers that need to decremented in leap years with a superscript minus sign (`⁻`). When typing, regular plus (`+`) and minus (`-`) signs can be used instead of their superscript versions. The two generalized conversion tables below do not include February 29, which is a date that cannot be consistently described solely with a `doty` number. In leap years, February 29 is `Day 59` and `Day -307`, but in common years `Day 59` is March 1 and `Day -307` is February 28. We can write February 29 in the `.m` format as `+1+28` or `-B-01` and in the `.w` or `.y` formats if we specify a year.
-
-| Day | Jan | Feb | Mar | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec  |
-| --- | --- | --- | --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| 1   | 0   | 31  | 59⁺ | 90⁺  | 120⁺ | 151⁺ | 181⁺ | 212⁺ | 243⁺ | 273⁺ | 304⁺ | 334⁺ |
-| 2   | 1   | 32  | 60⁺ | 91⁺  | 121⁺ | 152⁺ | 182⁺ | 213⁺ | 244⁺ | 274⁺ | 305⁺ | 335⁺ |
-| 3   | 2   | 33  | 61⁺ | 92⁺  | 122⁺ | 153⁺ | 183⁺ | 214⁺ | 245⁺ | 275⁺ | 306⁺ | 336⁺ |
-| 4   | 3   | 34  | 62⁺ | 93⁺  | 123⁺ | 154⁺ | 184⁺ | 215⁺ | 246⁺ | 276⁺ | 307⁺ | 337⁺ |
-| 5   | 4   | 35  | 63⁺ | 94⁺  | 124⁺ | 155⁺ | 185⁺ | 216⁺ | 247⁺ | 277⁺ | 308⁺ | 338⁺ |
-| 6   | 5   | 36  | 64⁺ | 95⁺  | 125⁺ | 156⁺ | 186⁺ | 217⁺ | 248⁺ | 278⁺ | 309⁺ | 339⁺ |
-| 7   | 6   | 37  | 65⁺ | 96⁺  | 126⁺ | 157⁺ | 187⁺ | 218⁺ | 249⁺ | 279⁺ | 310⁺ | 340⁺ |
-| 8   | 7   | 38  | 66⁺ | 97⁺  | 127⁺ | 158⁺ | 188⁺ | 219⁺ | 250⁺ | 280⁺ | 311⁺ | 341⁺ |
-| 9   | 8   | 39  | 67⁺ | 98⁺  | 128⁺ | 159⁺ | 189⁺ | 220⁺ | 251⁺ | 281⁺ | 312⁺ | 342⁺ |
-| 10  | 9   | 40  | 68⁺ | 99⁺  | 129⁺ | 160⁺ | 190⁺ | 221⁺ | 252⁺ | 282⁺ | 313⁺ | 343⁺ |
-| 11  | 10  | 41  | 69⁺ | 100⁺ | 130⁺ | 161⁺ | 191⁺ | 222⁺ | 253⁺ | 283⁺ | 314⁺ | 344⁺ |
-| 12  | 11  | 42  | 70⁺ | 101⁺ | 131⁺ | 162⁺ | 192⁺ | 223⁺ | 254⁺ | 284⁺ | 315⁺ | 345⁺ |
-| 13  | 12  | 43  | 71⁺ | 102⁺ | 132⁺ | 163⁺ | 193⁺ | 224⁺ | 255⁺ | 285⁺ | 316⁺ | 346⁺ |
-| 14  | 13  | 44  | 72⁺ | 103⁺ | 133⁺ | 164⁺ | 194⁺ | 225⁺ | 256⁺ | 286⁺ | 317⁺ | 347⁺ |
-| 15  | 14  | 45  | 73⁺ | 104⁺ | 134⁺ | 165⁺ | 195⁺ | 226⁺ | 257⁺ | 287⁺ | 318⁺ | 348⁺ |
-| 16  | 15  | 46  | 74⁺ | 105⁺ | 135⁺ | 166⁺ | 196⁺ | 227⁺ | 258⁺ | 288⁺ | 319⁺ | 349⁺ |
-| 17  | 16  | 47  | 75⁺ | 106⁺ | 136⁺ | 167⁺ | 197⁺ | 228⁺ | 259⁺ | 289⁺ | 320⁺ | 350⁺ |
-| 18  | 17  | 48  | 76⁺ | 107⁺ | 137⁺ | 168⁺ | 198⁺ | 229⁺ | 260⁺ | 290⁺ | 321⁺ | 351⁺ |
-| 19  | 18  | 49  | 77⁺ | 108⁺ | 138⁺ | 169⁺ | 199⁺ | 230⁺ | 261⁺ | 291⁺ | 322⁺ | 352⁺ |
-| 20  | 19  | 50  | 78⁺ | 109⁺ | 139⁺ | 170⁺ | 200⁺ | 231⁺ | 262⁺ | 292⁺ | 323⁺ | 353⁺ |
-| 21  | 20  | 51  | 79⁺ | 110⁺ | 140⁺ | 171⁺ | 201⁺ | 232⁺ | 263⁺ | 293⁺ | 324⁺ | 354⁺ |
-| 22  | 21  | 52  | 80⁺ | 111⁺ | 141⁺ | 172⁺ | 202⁺ | 233⁺ | 264⁺ | 294⁺ | 325⁺ | 355⁺ |
-| 23  | 22  | 53  | 81⁺ | 112⁺ | 142⁺ | 173⁺ | 203⁺ | 234⁺ | 265⁺ | 295⁺ | 326⁺ | 356⁺ |
-| 24  | 23  | 54  | 82⁺ | 113⁺ | 143⁺ | 174⁺ | 204⁺ | 235⁺ | 266⁺ | 296⁺ | 327⁺ | 357⁺ |
-| 25  | 24  | 55  | 83⁺ | 114⁺ | 144⁺ | 175⁺ | 205⁺ | 236⁺ | 267⁺ | 297⁺ | 328⁺ | 358⁺ |
-| 26  | 25  | 56  | 84⁺ | 115⁺ | 145⁺ | 176⁺ | 206⁺ | 237⁺ | 268⁺ | 298⁺ | 329⁺ | 359⁺ |
-| 27  | 26  | 57  | 85⁺ | 116⁺ | 146⁺ | 177⁺ | 207⁺ | 238⁺ | 269⁺ | 299⁺ | 330⁺ | 360⁺ |
-| 28  | 27  | 58  | 86⁺ | 117⁺ | 147⁺ | 178⁺ | 208⁺ | 239⁺ | 270⁺ | 300⁺ | 331⁺ | 361⁺ |
-| 29  | 28  |     | 87⁺ | 118⁺ | 148⁺ | 179⁺ | 209⁺ | 240⁺ | 271⁺ | 301⁺ | 332⁺ | 362⁺ |
-| 30  | 29  |     | 88⁺ | 119⁺ | 149⁺ | 180⁺ | 210⁺ | 241⁺ | 272⁺ | 302⁺ | 333⁺ | 363⁺ |
-| 31  | 30  |     | 89⁺ |      | 150⁺ |      | 211⁺ | 242⁺ |      | 303⁺ |      | 364⁺ |
-
-: Generalized Gregorian calendar date to positive `doty` conversion {#tbl-leap}
-
-| Day | Jan   | Feb   | Mar   | Apr   | May   | Jun   | Jul   | Aug   | Sep   | Oct   | Nov   | Dec   |
-| --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
-| 1   | -365⁻ | -334⁻ | -306  | -275  | -245  | -214  | -184  | -153  | -122  | -92   | -61   | -31   |
-| 2   | -364⁻ | -333⁻ | -305  | -274  | -244  | -213  | -183  | -152  | -121  | -91   | -60   | -30   |
-| 3   | -363⁻ | -332⁻ | -304  | -273  | -243  | -212  | -182  | -151  | -120  | -90   | -59   | -29   |
-| 4   | -362⁻ | -331⁻ | -303  | -272  | -242  | -211  | -181  | -150  | -119  | -89   | -58   | -28   |
-| 5   | -361⁻ | -330⁻ | -302  | -271  | -241  | -210  | -180  | -149  | -118  | -88   | -57   | -27   |
-| 6   | -360⁻ | -329⁻ | -301  | -270  | -240  | -209  | -179  | -148  | -117  | -87   | -56   | -26   |
-| 7   | -359⁻ | -328⁻ | -300  | -269  | -239  | -208  | -178  | -147  | -116  | -86   | -55   | -25   |
-| 8   | -358⁻ | -327⁻ | -299  | -268  | -238  | -207  | -177  | -146  | -115  | -85   | -54   | -24   |
-| 9   | -357⁻ | -326⁻ | -298  | -267  | -237  | -206  | -176  | -145  | -114  | -84   | -53   | -23   |
-| 10  | -356⁻ | -325⁻ | -297  | -266  | -236  | -205  | -175  | -144  | -113  | -83   | -52   | -22   |
-| 11  | -355⁻ | -324⁻ | -296  | -265  | -235  | -204  | -174  | -143  | -112  | -82   | -51   | -21   |
-| 12  | -354⁻ | -323⁻ | -295  | -264  | -234  | -203  | -173  | -142  | -111  | -81   | -50   | -20   |
-| 13  | -353⁻ | -322⁻ | -294  | -263  | -233  | -202  | -172  | -141  | -110  | -80   | -49   | -19   |
-| 14  | -352⁻ | -321⁻ | -293  | -262  | -232  | -201  | -171  | -140  | -109  | -79   | -48   | -18   |
-| 15  | -351⁻ | -320⁻ | -292  | -261  | -231  | -200  | -170  | -139  | -108  | -78   | -47   | -17   |
-| 16  | -350⁻ | -319⁻ | -291  | -260  | -230  | -199  | -169  | -138  | -107  | -77   | -46   | -16   |
-| 17  | -349⁻ | -318⁻ | -290  | -259  | -229  | -198  | -168  | -137  | -106  | -76   | -45   | -15   |
-| 18  | -348⁻ | -317⁻ | -289  | -258  | -228  | -197  | -167  | -136  | -105  | -75   | -44   | -14   |
-| 19  | -347⁻ | -316⁻ | -288  | -257  | -227  | -196  | -166  | -135  | -104  | -74   | -43   | -13   |
-| 20  | -346⁻ | -315⁻ | -287  | -256  | -226  | -195  | -165  | -134  | -103  | -73   | -42   | -12   |
-| 21  | -345⁻ | -314⁻ | -286  | -255  | -225  | -194  | -164  | -133  | -102  | -72   | -41   | -11   |
-| 22  | -344⁻ | -313⁻ | -285  | -254  | -224  | -193  | -163  | -132  | -101  | -71   | -40   | -10   |
-| 23  | -343⁻ | -312⁻ | -284  | -253  | -223  | -192  | -162  | -131  | -100  | -70   | -39   | -9    |
-| 24  | -342⁻ | -311⁻ | -283  | -252  | -222  | -191  | -161  | -130  | -99   | -69   | -38   | -8    |
-| 25  | -341⁻ | -310⁻ | -282  | -251  | -221  | -190  | -160  | -129  | -98   | -68   | -37   | -7    |
-| 26  | -340⁻ | -309⁻ | -281  | -250  | -220  | -189  | -159  | -128  | -97   | -67   | -36   | -6    |
-| 27  | -339⁻ | -308⁻ | -280  | -249  | -219  | -188  | -158  | -127  | -96   | -66   | -35   | -5    |
-| 28  | -338⁻ | -307⁻ | -279  | -248  | -218  | -187  | -157  | -126  | -95   | -65   | -34   | -4    |
-| 29  | -337⁻ |       | -278  | -247  | -217  | -186  | -156  | -125  | -94   | -64   | -33   | -3    |
-| 30  | -336⁻ |       | -277  | -246  | -216  | -185  | -155  | -124  | -93   | -63   | -32   | -2    |
-| 31  | -335⁻ |       | -276  |       | -215  |       | -154  | -123  |       | -62   |       | -1    |
-
-: Generalized Gregorian calendar date to negative `doty` conversion {#tbl-leap}
+: Common year Gregorian calendar date to positive `doty` conversion {#tbl-conv}
 
 ### Subyear units {#sec-subyear}
 
@@ -436,10 +330,10 @@ The dates of the solstices and the equinoxes can be used as definitions of the s
 
 | Code | North  | South  | `doty` | `dotm` | Date         | Event              |
 | ---- | ------ | ------ | ----   | ------ | ------------ | ------------------ |
-| S0   | Spring | Fall   | 78     | 2+19   | March 20     | Northward Equinox  |
-| S1   | Summer | Winter | 170    | 5+19   | June 20      | Northward Solstice |
-| S2   | Fall   | Spring | 264    | 8+21   | September 22 | Southward Equinox  |
-| S3   | Winter | Summer | 354    | B+21   | December 21  | Southward Solstice |
+| S0   | Spring | Fall   | 19     | 0+19   | March 20     | Northward Equinox  |
+| S1   | Summer | Winter | 111    | 3+19   | June 20      | Northward Solstice |
+| S2   | Fall   | Spring | 205    | 6+21   | September 22 | Southward Equinox  |
+| S3   | Winter | Summer | 295    | 9+20   | December 21  | Southward Solstice |
 
 : Solstice and equinox Gregorian calendar and `doty` dates {#tbl-soleq}
 
@@ -447,8 +341,8 @@ Using the information in the table above, we can group the `deks` in a year acco
 
 | Code | North  | South  | First | Last |
 | ---- | -----  | -----  | ----- | ---- |
-| S0   | Spring | Fall   | 8     | 16   |
-| S1   | Summer | Winter | 17    | 25   |
+| S0   | Spring | Fall   | 2     | 10   |
+| S1   | Summer | Winter | 11    | 25   |
 | S2   | Fall   | Spring | 26    | 34   |
 | S3   | Winter | Summer | 35    | 7    |
 
@@ -664,17 +558,17 @@ Leap Day is a important holiday because it occurs only once every four years (ex
 
 | Name               | doty | dotm | date        |
 | ------------------ | ---- | ---- | ----------- |
-| Valentine's Day    | 44   | 1+13 | February 14 |
-| Cinco de Mayo      | 124⁺ | 4+04 | May 5       |
-| Flag Day           | 164⁺ | 5+13 | June 14     |
-| Juneteenth Day     | 169⁺ | 5+18 | June 19     |
-| Independence Day   | 184⁺ | 6+03 | July 4      |
-| Halloween          | 303⁺ | 9+30 | October 31  |
-| All Saints' Day    | 304⁺ | A+00 | November 1  |
-| Veterans’ Day      | 314⁺ | A+10 | November 11 |
-| Christmas Day      | 358⁺ | B+24 | December 25 |
-| Boxing Day         | 359⁺ | B+25 | December 26 |
-| New Year's Eve     | 364⁺ | B+31 | December 31 |
+| Valentine's Day    | 351  | B+13 | February 14 |
+| Cinco de Mayo      |  65  | 2+04 | May 5       |
+| Flag Day           | 105  | 3+13 | June 14     |
+| Juneteenth Day     | 110  | 3+18 | June 19     |
+| Independence Day   | 125  | 4+03 | July 4      |
+| Halloween          | 244  | 7+30 | October 31  |
+| All Saints' Day    | 245  | 8+00 | November 1  |
+| Veterans’ Day      | 255  | 8+10 | November 11 |
+| Christmas Day      | 299  | 9+24 | December 25 |
+| Boxing Day         | 300  | 9+25 | December 26 |
+| New Year's Eve     | 305  | 9+31 | December 31 |
 
 : Gregorian calendar holidays that happen to fall on `Decalendar` restdays {#tbl-holidays}
 
@@ -717,4 +611,28 @@ console.log(doy);
 ```
 
 Certain times of day are easier to express as fractions, rather than decimals. This can be done with the `Slash` operator. For example, 9PM (21:00) is `.416̅`, which is pronounced `Dot four one six vinculum`, or `5/12` which is read `five slash twelve`.
+
+
+```{javascript}
+function is_leap(y) {
+    return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
+}
+```
+
+```{julia}
+function is_leap(y)
+    y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)
+end
+```
+
+```{python}
+def is_leap(y):
+    return y % 4 == 0 and (y % 100 != 0 or y % 400 == 0)
+```
+
+```{r}
+is_leap <- function(y) {
+  y %% 4 == 0 && (y %% 100 != 0 || y %% 400 == 0)
+}
+```
 
