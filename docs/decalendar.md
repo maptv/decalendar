@@ -4,18 +4,19 @@
 
 `Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to replace [standard time](https://en.wikipedia.org/wiki/Standard_time). Both system use days as their base unit and derive other units from days using prefixes inspired by the metric system. To create the necessary calendar and time units, `Decalendar` groups days together, while `Declock` divides days up.
 
-### UNIX time
-
-UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar.
-
 ## Similar systems
+
+`Decalendar` is most similar to the Gregorian calendar. and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) and the fractional day component of [Julian dates](https://en.wikipedia.org/wiki/Julian_day).
+
+### Calendar of Romulus
+
+The first day of the `Decalendar` year, `Day 0`, is always March 1 in the Gregorian calendar. `Day 0` is preceded by either `Day 364` (February 28) or `Day 365` (February 29), the Gregorian leap day. `Decalendar` leap years always precede Gregorian calendar leap years by 1 year.
+The months September, October, November, and December are the 7th, 8th, 9th, and 10th months in `Decalendar`, like in the Ancient Roman [Calendar of Romulus](https://en.wikipedia.org/wiki/Roman_calendar#Legendary_10_month_calendar),
 
 #### Gregorian calendar
 
-`Decalendar` and Gregorian leap days are  positions the Gregorian leap day at the end of the year. `Decalendar` year starts with `Day 0` and ends with either `Day 364` or `Day 365`. Translated into Gregorian calendar dates, `Day 0` is March 1, `Day 364` is February 28, and `Day 365` is February 29. on years that precede Gregorian calendar leap years. February 29, is `Day 365` in `Decalendar`. the last day of `Decalendar` leap years. ends with `Day 364` () in common years or leap years. `Decalendar` leap years are always 1 year before Gregorian calendar years.
+`Decalendar` and Gregorian leap days are  . The `Decalendar` year starts with `Day 0` and ends with either `Day 364` or `Day 365`. Translated into Gregorian calendar dates, `Day 0` is March 1, `Day 364` is February 28, and `Day 365` is February 29. on years that precede Gregorian calendar leap years. February 29, is `Day 365` in `Decalendar`. the last day of `Decalendar` leap years. ends with `Day 364` () in common years or leap years. `Decalendar` leap years are always 1 year before Gregorian calendar years.
 
-
-`Decalendar` and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) and the fractional day component of [Julian dates](https://en.wikipedia.org/wiki/Julian_day).
 
 #### ISO 8601 dates
 
@@ -45,6 +46,10 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 Julian dates are the number of fractional days since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar or January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we obtain we subtract the Julian Day Number ($\lfloor JD \rfloor$) from the Julian Day ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 ($(JD - \lfloor JD \rfloor + .5) \mod 1$).
 
+
+### UNIX time
+
+UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar.
 
 ## Basic concepts {#sec-basics}
 
@@ -314,9 +319,82 @@ The first table below shows the `doty` numbers for all of the days in common yea
 | 28  | 27  |  58 |  88 | 119 | 149 | 180 | 211 | 241 | 272 | 302 | 333  | 364  |
 | 29  | 28  |  59 |  89 | 120 | 150 | 181 | 212 | 242 | 273 | 303 | 334  | 365  |
 | 30  | 29  |  60 |  90 | 121 | 151 | 182 | 213 | 243 | 274 | 304 | 335  |      |
-| 31  | 30  |     |  91 |     | 152 | 183 |     | 244 | 215 | 305 | 336  |      |
+| 31  | 30  |     |  91 |     | 152 | 183 |     | 244 |     | 305 | 336  |      |
 
-: Common year Gregorian calendar date to positive `doty` conversion {#tbl-conv}
+: Gregorian calendar date to positive `doty` conversion {#tbl-conv}
+
+| Day | Mar  | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec | Jan | Feb |
+| --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- |
+| 1   | -365 | -334 | -304 | -273 | -243 | -212 | -181 | -151 | -120 | -90 | -59 | -28 |
+| 2   | -364 | -333 | -303 | -272 | -242 | -211 | -180 | -150 | -119 | -89 | -58 | -27 |
+| 3   | -363 | -332 | -302 | -271 | -241 | -210 | -179 | -149 | -118 | -88 | -57 | -26 |
+| 4   | -362 | -331 | -301 | -270 | -240 | -209 | -178 | -148 | -117 | -87 | -56 | -25 |
+| 5   | -361 | -330 | -300 | -269 | -239 | -208 | -177 | -147 | -116 | -86 | -55 | -24 |
+| 6   | -360 | -329 | -299 | -268 | -238 | -207 | -176 | -146 | -115 | -85 | -54 | -23 |
+| 7   | -359 | -328 | -298 | -267 | -237 | -206 | -175 | -145 | -114 | -84 | -53 | -22 |
+| 8   | -358 | -327 | -297 | -266 | -236 | -205 | -174 | -144 | -113 | -83 | -52 | -21 |
+| 9   | -357 | -326 | -296 | -265 | -235 | -204 | -173 | -143 | -112 | -82 | -51 | -20 |
+| 10  | -356 | -325 | -295 | -264 | -234 | -203 | -172 | -142 | -111 | -81 | -50 | -19 |
+| 11  | -355 | -324 | -294 | -263 | -233 | -202 | -171 | -141 | -110 | -80 | -49 | -18 |
+| 12  | -354 | -323 | -293 | -262 | -232 | -201 | -170 | -140 | -109 | -79 | -48 | -17 |
+| 13  | -353 | -322 | -292 | -261 | -231 | -200 | -169 | -139 | -108 | -78 | -47 | -16 |
+| 14  | -352 | -321 | -291 | -260 | -230 | -199 | -168 | -138 | -107 | -77 | -46 | -15 |
+| 15  | -351 | -320 | -290 | -259 | -229 | -198 | -167 | -137 | -106 | -76 | -45 | -14 |
+| 16  | -350 | -319 | -289 | -258 | -228 | -197 | -166 | -136 | -105 | -75 | -44 | -13 |
+| 17  | -349 | -318 | -288 | -257 | -227 | -196 | -165 | -135 | -104 | -74 | -43 | -12 |
+| 18  | -348 | -317 | -287 | -256 | -226 | -195 | -164 | -134 | -103 | -73 | -42 | -11 |
+| 19  | -347 | -316 | -286 | -255 | -225 | -194 | -163 | -133 | -102 | -72 | -41 | -10 |
+| 20  | -346 | -315 | -285 | -254 | -224 | -193 | -162 | -132 | -101 | -71 | -40 | -9  |
+| 21  | -345 | -314 | -284 | -253 | -223 | -192 | -161 | -131 | -100 | -70 | -39 | -8  |
+| 22  | -344 | -313 | -283 | -252 | -222 | -191 | -160 | -130 | -99  | -69 | -38 | -7  |
+| 23  | -343 | -312 | -282 | -251 | -221 | -190 | -159 | -129 | -98  | -68 | -37 | -6  |
+| 24  | -342 | -311 | -281 | -250 | -220 | -189 | -158 | -128 | -97  | -67 | -36 | -5  |
+| 25  | -341 | -310 | -280 | -249 | -219 | -188 | -157 | -127 | -96  | -66 | -35 | -4  |
+| 26  | -340 | -309 | -279 | -248 | -218 | -187 | -156 | -126 | -95  | -65 | -34 | -3  |
+| 27  | -339 | -308 | -278 | -247 | -217 | -186 | -155 | -125 | -94  | -64 | -33 | -2  |
+| 28  | -338 | -307 | -277 | -246 | -216 | -185 | -154 | -124 | -93  | -63 | -32 | -1  |
+| 29  | -337 | -306 | -276 | -245 | -215 | -184 | -153 | -123 | -92  | -62 | -31 |     |
+| 30  | -336 | -305 | -275 | -244 | -214 | -183 | -152 | -122 | -91  | -61 | -30 |     |
+| 31  | -335 |      | -274 |      | -213 | -182 |      | -121 |      | -60 | -29 |     |
+
+: Gregorian calendar date to negative `doty` common year conversion {#tbl-common}
+
+
+| Day | Mar  | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec | Jan | Feb |
+| --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- |
+| 1   | -366 | -335 | -305 | -274 | -244 | -213 | -182 | -152 | -122 | -91 | -60 | -29 |
+| 2   | -365 | -334 | -304 | -273 | -243 | -212 | -181 | -151 | -121 | -90 | -59 | -28 |
+| 3   | -364 | -333 | -303 | -272 | -242 | -211 | -180 | -150 | -120 | -89 | -58 | -27 |
+| 4   | -363 | -332 | -302 | -271 | -241 | -210 | -179 | -149 | -119 | -88 | -57 | -26 |
+| 5   | -362 | -331 | -301 | -270 | -240 | -209 | -178 | -148 | -118 | -87 | -56 | -25 |
+| 6   | -361 | -330 | -300 | -269 | -239 | -208 | -177 | -147 | -117 | -86 | -55 | -24 |
+| 7   | -360 | -329 | -299 | -268 | -238 | -207 | -176 | -146 | -116 | -85 | -54 | -23 |
+| 8   | -359 | -328 | -298 | -267 | -237 | -206 | -175 | -145 | -115 | -84 | -53 | -22 |
+| 9   | -358 | -327 | -297 | -266 | -236 | -205 | -174 | -144 | -114 | -83 | -52 | -21 |
+| 10  | -357 | -326 | -296 | -265 | -235 | -204 | -173 | -143 | -113 | -82 | -51 | -20 |
+| 11  | -356 | -325 | -295 | -264 | -234 | -203 | -172 | -142 | -112 | -81 | -50 | -19 |
+| 12  | -355 | -324 | -294 | -263 | -233 | -202 | -171 | -141 | -111 | -80 | -49 | -18 |
+| 13  | -354 | -323 | -293 | -262 | -232 | -201 | -170 | -140 | -110 | -79 | -48 | -17 |
+| 14  | -353 | -322 | -292 | -261 | -231 | -200 | -169 | -139 | -109 | -78 | -47 | -16 |
+| 15  | -352 | -321 | -291 | -260 | -230 | -199 | -168 | -138 | -108 | -77 | -46 | -15 |
+| 16  | -351 | -320 | -290 | -259 | -229 | -198 | -167 | -137 | -107 | -76 | -45 | -14 |
+| 17  | -350 | -319 | -289 | -258 | -228 | -197 | -166 | -136 | -106 | -75 | -44 | -13 |
+| 18  | -349 | -318 | -288 | -257 | -227 | -196 | -165 | -135 | -105 | -74 | -43 | -12 |
+| 19  | -348 | -317 | -287 | -256 | -226 | -195 | -164 | -134 | -104 | -73 | -42 | -11 |
+| 20  | -347 | -316 | -286 | -255 | -225 | -194 | -163 | -133 | -103 | -72 | -41 | -10 |
+| 21  | -346 | -315 | -285 | -254 | -224 | -193 | -162 | -132 | -102 | -71 | -40 | -9  |
+| 22  | -345 | -314 | -284 | -253 | -223 | -192 | -161 | -131 | -101 | -70 | -39 | -8  |
+| 23  | -344 | -313 | -283 | -252 | -222 | -191 | -160 | -130 | -100 | -69 | -38 | -7  |
+| 24  | -343 | -312 | -282 | -251 | -221 | -190 | -159 | -129 | -99  | -68 | -37 | -6  |
+| 25  | -342 | -311 | -281 | -250 | -220 | -189 | -158 | -128 | -98  | -67 | -36 | -5  |
+| 26  | -341 | -310 | -280 | -249 | -219 | -188 | -157 | -127 | -97  | -66 | -35 | -4  |
+| 27  | -340 | -309 | -279 | -248 | -218 | -187 | -156 | -126 | -96  | -65 | -34 | -3  |
+| 28  | -339 | -308 | -278 | -247 | -217 | -186 | -155 | -125 | -95  | -64 | -33 | -2  |
+| 29  | -338 | -307 | -277 | -246 | -216 | -185 | -154 | -124 | -94  | -63 | -32 | -1  |
+| 30  | -337 | -306 | -276 | -245 | -215 | -184 | -153 | -123 | -93  | -62 | -31 |     |
+| 31  | -336 |      | -275 |      | -214 | -183 |      |      | -92  | -61 | -30 |     |
+
+: Gregorian calendar date to negative `doty` leap year conversion {#tbl-leap}
 
 ### Subyear units {#sec-subyear}
 
