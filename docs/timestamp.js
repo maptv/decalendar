@@ -118,12 +118,23 @@ function unix2doy(s) {
         doe = z - era * 146097,
         yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
         doy = Math.floor(doe - (365 * yoe + yoe / 4 - yoe / 100));
-    return `${yoe + era * 400}+${doy.toString().padStart(3, "0")}`
+    return `${yoe + era * 400}+${doe}`
+}
+function unix2doy(s) {
+    const z = s + 719468 * 86400,
+        era = Math.floor((z >= 0 ? z : z - 146096 * 86400) / (146097 * 86400)),
+        doe = (z - era * 146097 * 86400) / 86400,
+        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
+        doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    return `${yoe + era * 400}+${doy}`
 }
 
 console.log(unix2doy(1614565094));
 console.log(unix2doy(48383));
 console.log(now);
+console.log((60 + 305) % 365);
+console.log((263 + 305) % 365);
+console.log((1 + 305) % 365);
 console.log(now);
 console.log(utc);
 console.log(julian);

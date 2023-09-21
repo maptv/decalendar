@@ -1,30 +1,117 @@
- `Decalendar` and `Declock`
+`Decalendar` and `Declock`
 
 ## Summary {#sec-summary}
 
-`Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to replace [standard time](https://en.wikipedia.org/wiki/Standard_time). Both system use days as their base unit and derive other units from days using prefixes inspired by the metric system. To create the necessary calendar and time units, `Decalendar` groups days together, while `Declock` divides days up.
+`Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to replace [standard time](https://en.wikipedia.org/wiki/Standard_time). Both `Decalendar` and `Declock` use days as their base unit and derive other units from days using prefixes inspired by the metric system. To create the necessary calendar and time units, `Decalendar` groups days together, while `Declock` divides days up.
 
 ## Similar systems
 
-`Decalendar` is most similar to the Gregorian calendar. and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) and the fractional day component of [Julian dates](https://en.wikipedia.org/wiki/Julian_day).
+### Gregorian calendar
 
-### Calendar of Romulus
+Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation ($y \mod 4 \eq 0 \land (y \mod 100 \neq 0 \lor y \mod 400 \eq 0)$) in the code example below.
 
-The first day of the `Decalendar` year, `Day 0`, is always March 1 in the Gregorian calendar. `Day 0` is preceded by either `Day 364` (February 28) or `Day 365` (February 29), the Gregorian leap day. `Decalendar` leap years always precede Gregorian calendar leap years by 1 year.
-The months September, October, November, and December are the 7th, 8th, 9th, and 10th months in `Decalendar`, like in the Ancient Roman [Calendar of Romulus](https://en.wikipedia.org/wiki/Roman_calendar#Legendary_10_month_calendar),
+::: {.panel-tabset}
 
-#### Gregorian calendar
+#### Leap year identification
 
-`Decalendar` and Gregorian leap days are  . The `Decalendar` year starts with `Day 0` and ends with either `Day 364` or `Day 365`. Translated into Gregorian calendar dates, `Day 0` is March 1, `Day 364` is February 28, and `Day 365` is February 29. on years that precede Gregorian calendar leap years. February 29, is `Day 365` in `Decalendar`. the last day of `Decalendar` leap years. ends with `Day 364` () in common years or leap years. `Decalendar` leap years are always 1 year before Gregorian calendar years.
+##### JavaScript
 
+```{javascript}
+function is_leap(y) {
+    return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
+}
+```
+
+##### Julia
+
+```{julia}
+function is_leap(y)
+    y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)
+end
+```
+
+##### Python
+
+```{python}
+def is_leap(y):
+    return y % 4 == 0 and (y % 100 != 0 or y % 400 == 0)
+```
+
+##### R
+
+```{r}
+is_leap <- function(y) {
+  y %% 4 == 0 && (y %% 100 != 0 || y %% 400 == 0)
+}
+```
+
+:::
+
+`Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can provided in the `m+dd` format, where `m` is the single-digit, [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal)-encoded month and `dd` is the double-digit, [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) `dotm`. The ordinal positions of September, October, November, and December in `Decalendar` match the [numeral prefixes](https://en.m.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English) in their names (Sep=7, Oct=8, Nov=9, Dec=10). In `Decalendar`, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February). The table below shows the positive and negative `m` values of each Gregorian calendar month.
+
+| Month     | Pos | Neg |
+| --------- | --- | --- |
+| March     |  0  | -C  |
+| April     |  1  | -B  |
+| May       |  2  | -A  |
+| June      |  3  | -9  |
+| July      |  4  | -8  |
+| August    |  5  | -7  |
+| September |  6  | -6  |
+| October   |  7  | -5  |
+| November  |  8  | -4  |
+| December  |  9  | -3  |
+| January   |  A  | -2  |
+| February  |  B  | -1  |
+
+: The `m` values of Gregorian calendar months {#tbl-mvals}
 
 #### ISO 8601 dates
 
-Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. Just like ISO 8601, `Decalendar` has three date formats. The `Decalendar` `.y` (`year±day`), `.m` (`year±m±dd`), and `.w` (`year±ww±d`) formats are similar to the ISO 8601 [ordinal date](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day), [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (year-mm-dd), and [week date](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (year-Www-d) formats, respectively. In contrast to ISO 8601, `Decalendar` has no need for months and weeks, it only requires ordinal dates in the `.y` format.
+The `m+dd` format shown above is similar to the [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) format (year-mm-dd) of the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Decalendar` dates (`year±day`) are most similar to ISO 8601 [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation below ($(ordinal + 365) \mod 365$). This calculation essentially shifts the ordinal date number to be 60 days earlier.
+
+::: {.panel-tabset}
+
+#### ISO ordinal day number to `doty` conversion
+
+##### JavaScript
+
+```{javascript}
+function ordinal2doty(o) {
+    return (o + 305) % 365;
+}
+```
+
+##### Julia
+
+```{julia}
+function ordinal2doty(o)
+    (o + 305) % 365
+end
+```
+
+##### Python
+
+```{python}
+def ordinal2doty(o):
+    return (o + 305) % 365
+```
+
+##### R
+
+```{r}
+ordinal2doty <- function(o) {
+  (o + 305) %% 365
+}
+```
+
+:::
+
+Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. The years in `Decalendar`, ISO 8601 calendar, and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 year less than the ISO 8601 year. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar, `0000-03-01` in the ISO 8601 calendar date format, and `0000-061` in the ISO 8601 ordinal date format.
 
 #### ISO 8601 times
 
-Just like `Decalendar` seeks to make months and weeks obsolete, `Declock` does not use hours, minutes, or seconds and aims to deprecate these units in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days). `Declock` and ISO 8601 each have 1 time format. Both of these formats can be appended to dates to form timestamps. `Declock` timestamps are more concise and easier to read than ISO 8601 timestamps. An ISO 8601 calendar date timestamp that includes seconds is 23 characters long (`year-mm-ddThh:mm:ss`), while a `Decalendar` timestamp with slightly greater precision is only 14 characters long (`year±day.ddddd`). Without delimiters, ISO 8601 timestamps become even more difficult to read (`yearmmddThhmmss`) and still cannot match the brevity of `Declock` timestamps.
+Just like `Decalendar` seeks to make months and weeks obsolete, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days). `Declock` and ISO 8601 each have 1 time format. Both of these formats can be appended to dates to form timestamps. `Declock` timestamps are more concise and easier to read than ISO 8601 timestamps. An ISO 8601 calendar date timestamp that includes seconds is 23 characters long (`year-mm-ddThh:mm:ss`), while a `Decalendar` timestamp with slightly greater precision is only 14 characters long (`year±day.ddddd`). Without delimiters, ISO 8601 timestamps become even more difficult to read (`yearmmddThhmmss`) and still cannot match the brevity of `Declock` timestamps.
 
 #### ISO 8601 recurring intervals
 
@@ -36,7 +123,43 @@ Unlike `Decalendar strings`, ISO 8601 expressions cannot create non-consecutive 
 
 ### French Republican Calendar
 
-The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. Unlike the group of 10 days in the French Republican calendar (called a _décade_), the group of 10 days in `Decalendar` (called a `dek`) is [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering). The French Republican calendar and `Declock` both the break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `mil` is a thousandth (10⁻³) of day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, minutes, and seconds, respectively.
+#### French Republican Calendar _Décades_
+
+The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a _décade_, while a group of 10 days in `Decalendar` is called a `dek`. The names of the days in a `Decalendar` `dek` are derived from their [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) cardinal numbers (zero, one, two...), whereas the days of the _décade_ are named after their ordinal numbers (first, second, third...). The table provides the cardinal numbers, one-letter codes, names, and types of the days of the `dek` as well as the names of their French Republican calendar equivalents.
+
+| # | Code | Name   | Type | French   |
+| - | ---- | ------ | ---- | -------- |
+| 0 | N    | Nulday | work | primidi  |
+| 1 | U    | Unoday | work | duodi    |
+| 2 | D    | Duoday | work | tridi    |
+| 3 | T    | Triday | rest | quartidi |
+| 4 | Q    | Quaday | rest | quintidi |
+| 5 | P    | Penday | work | sextidi  |
+| 6 | H    | Hexday | work | septidi  |
+| 7 | S    | Sepday | work | octidi   |
+| 8 | O    | Octday | rest | nonidi   |
+| 9 | E    | Ennday | rest | décadi   |
+
+: The days of the `dek` and their French Republican calendar equivalents {#tbl-dotd}
+
+#### French Republican Calendar decimal time
+
+The French Republican calendar and `Declock` both the break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, _décimes_, and decimal seconds, respectively. The table below shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time.
+
+| ⅒ | 24-hour | 12-hour |
+| - | ------- | ------- |
+| 0 | 00:00   | 12:00AM |
+| 1 | 02:24   | 2:24AM  |
+| 2 | 04:48   | 4:48AM  |
+| 3 | 07:12   | 7:12AM  |
+| 4 | 09:36   | 9:36AM  |
+| 5 | 12:00   | 12:00PM |
+| 6 | 14:24   | 2:24PM  |
+| 7 | 16:48   | 4:48PM  |
+| 8 | 19:12   | 7:12PM  |
+| 9 | 21:36   | 9:36PM  |
+
+: The start times of each `dime` in a day and their standard time equivalents {#tbl-dime}
 
 ### Swatch Internet Time
 
@@ -44,12 +167,17 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 ### Julian dates
 
-Julian dates are the number of fractional days since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar or January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we obtain we subtract the Julian Day Number ($\lfloor JD \rfloor$) from the Julian Day ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 ($(JD - \lfloor JD \rfloor + .5) \mod 1$).
-
+Julian dates are the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we obtain we subtract the Julian Day Number ($\lfloor JD \rfloor$) from the Julian Day ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 ($(JD - \lfloor JD \rfloor + .5) \mod 1$).
 
 ### UNIX time
 
-UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar.
+UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar. The `Decalendar` 
+
+
+Gregorian calendar. and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) and the fractional day component of [Julian dates](https://en.wikipedia.org/wiki/Julian_day).
+
+`Decalendar` and Gregorian leap days are  . The `Decalendar` year starts with `Day 0` and ends with either `Day 364` or `Day 365`. Translated into Gregorian calendar dates, `Day 0` is March 1, `Day 364` is February 28, and `Day 365` is February 29. on years that precede Gregorian calendar leap years. February 29, is `Day 365` in `Decalendar`. the last day of `Decalendar` leap years. ends with `Day 364` () in common years or leap years. `Decalendar` leap years are always 1 year before Gregorian calendar years.
+
 
 ## Basic concepts {#sec-basics}
 
@@ -103,13 +231,13 @@ In the `stamps` above, the time has 3 digits, because this is the best level of 
 | 4 x 10¹   | `mu`     | Μ      | `muday`           |
 | 3 x 10¹   | `lam`    | λ      | `lamdaday`        |
 | 2 x 10¹   | `kap`    | κ      | `kappaday`        |
-| 10¹       | `dek`    | ι      | `decaday`         |
-| 10⁰       | `day`    | d      | `day`             |
-| 10⁻¹      | `dime`   | ⅒      | `deciday`         |
-| 10⁻²      | `cent`   | ¢ or % | `centiday`        |
-| 10⁻³      | `mil`    | m or ‰ | `milliday`        |
+| 10¹       | `dek`    | ι, 旬  | `decaday`         |
+| 10⁰       | `day`    | d, 日  | `day`             |
+| 10⁻¹      | `dime`   | ⅒, 更  | `deciday`         |
+| 10⁻²      | `cent`   | ¢, %   | `centiday`        |
+| 10⁻³      | `mil`    | m, ‰   | `milliday`        |
 | 2 x 10⁻⁴  | `period` | .      | `didecimilliday`  |
-| 10⁻⁴      | `phrase` |  ̑ or ‱ | `decimilliday`    |
+| 10⁻⁴      | `phrase` |  ̑, ‱   | `decimilliday`    |
 | 2 x 10⁻⁵  | `bar`    | \|     | `dicentimilliday` |
 | 10⁻⁵      | `beat`   | ♫      | `centimilliday`   |
 | 10⁻⁶      | `mic`    | μ      | `microday`        |
@@ -286,6 +414,9 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 ##### Common and leap year specific conversion tables {#sec-specific}
 
 The first table below shows the `doty` numbers for all of the days in common years, while the second table below does the same for leap years. In both of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). The positive `doty` numbers of dates after the Gregorian calendar leap day, February 29, need to be incremented by 1 in leap years. Similarly, the negative `doty` numbers of dates before February 29 need to decremented by 1. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
+d - 60
+
+59 
 
 | Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan  | Feb  |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
@@ -690,27 +821,4 @@ console.log(doy);
 
 Certain times of day are easier to express as fractions, rather than decimals. This can be done with the `Slash` operator. For example, 9PM (21:00) is `.416̅`, which is pronounced `Dot four one six vinculum`, or `5/12` which is read `five slash twelve`.
 
-
-```{javascript}
-function is_leap(y) {
-    return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
-}
-```
-
-```{julia}
-function is_leap(y)
-    y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)
-end
-```
-
-```{python}
-def is_leap(y):
-    return y % 4 == 0 and (y % 100 != 0 or y % 400 == 0)
-```
-
-```{r}
-is_leap <- function(y) {
-  y %% 4 == 0 && (y %% 100 != 0 || y %% 400 == 0)
-}
-```
 
