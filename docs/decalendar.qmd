@@ -36,9 +36,13 @@ format:
 
 ## Gregorian calendar {#sec-greg}
 
-Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation ($y \mod 4 = 0 \land (y \mod 100 \neq 0 \lor y \mod 400 = 0)$) shown in the code example below.
+Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation shown in @eq-leap and @exm-leap.
 
 ### Leap year identification
+
+$$y \mod 4 = 0 \land (y \mod 100 \neq 0 \lor y \mod 400 = 0)$$ {#eq-leap}
+
+:::::: {#exm-leap}
 
 ::: {.panel-tabset group="language"}
 
@@ -75,6 +79,8 @@ is_leap <- function(y) {
 
 :::
 
+::::::
+
 `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can provided in the `m+dd` format, where `m` is the single-digit, [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal)-encoded month and `dd` is the double-digit, [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) `dotm`. The ordinal positions of September, October, November, and December in `Decalendar` match the [numeral prefixes](https://en.m.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English) in their names (Sep=7, Oct=8, Nov=9, Dec=10). In `Decalendar`, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February). @tbl-mval shows the positive and negative `m` values of each Gregorian calendar month. @sec-dotm provides more information on how `m` values are used.
 
 | Month     | Pos | Neg |
@@ -98,9 +104,13 @@ is_leap <- function(y) {
 
 ### ISO 8601 dates
 
-The `m+dd` format shown above is similar to the [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) format (year-mm-dd) of the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Decalendar` dates (`year±day`) are most similar to ISO 8601 [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation ($(ordinal + 365) \mod 365$) shown in the code example below. This calculation essentially shifts the ordinal date number to be 60 days earlier.
+The `m+dd` format shown above is similar to the [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) format (year-mm-dd) of the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Decalendar` dates (`year±day`) are most similar to ISO 8601 [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation shown in @eq-ord and @exm-ord. This calculation essentially shifts the ordinal date number to be 60 days earlier.
 
 ### ISO ordinal day number to `doty` conversion
+
+$$(ordinal + 305) \mod 365$$ {#eq-ord}
+
+:::::: {#exm-ord}
 
 ::: {.panel-tabset group="language"}
 
@@ -136,6 +146,8 @@ ordi2doty <- function(o) {
 ```
 
 :::
+
+::::::
 
 Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. The years in `Decalendar`, ISO 8601 calendar, and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 year less than the ISO 8601 year. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar, `0000-03-01` in the ISO 8601 calendar date format, and `0000-061` in the ISO 8601 ordinal date format.
 
@@ -197,17 +209,39 @@ The French Republican calendar and `Declock` both the break the day down into de
 
 ## Julian dates {#sec-jd}
 
-Julian dates are the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we obtain we subtract the Julian Day Number ($\lfloor JD \rfloor$) from the Julian Day ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 ($(JD - \lfloor JD \rfloor + .5) \mod 1$).
+Julian dates are the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we subtract the Julian day number ($\lfloor JD \rfloor$) from the Julian date ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 as shown in @eq-jtime.
+
+$$(JD - \lfloor JD \rfloor + .5) \mod 1$$ {#eq-jd}
 
 ## UNIX time {#sec-unix}
 
-While it is possible to convert Julian dates into `Decalendar` dates and `Declock` times, the official definition of `Decalendar` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `Decalendar` dates, and `Declock` times.
+While it is possible to convert Julian dates into `Decalendar` dates and `Declock` times, the official definition of `Decalendar` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `Decalendar` dates, and `Declock` times. To obtain UNIX time from a Julian Date, we subtract 2440587.5 from the Julian Date and multiply by 86400 as shown in @eq-unix.
 
-To calculate `Decalendar` dates and `Declock` times directly from UNIX time, the seconds (or milliseconds) in UNIX time are first converted to `days`. Then, the `days` are used to obtain the `year` using a calculation described by [Howard Hinnant in his 2021 article entitled "chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days). Finally, the `year` is used to sum up all of the days in previous years and this sum is subtracted from the days to obtain the current `Decalendar` timestamp.
+$$(JD − 2440587.5) \cdot 86400$$ {#eq-unix}
 
-The code example below shows a function that converts UNIX time into a `Decalendar` timestamp. The last line in the code example obtains the current `Decalendar` timestamp by passing the current UNIX timestamp to the function. If we pass 0 to the function (`unix2doty(0)`) the result should be `1969+306.00000`. To see this function in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current timestamps in the `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamp formats.
+To calculate `Decalendar` dates directly from UNIX time, we can use a calculation described by [Howard Hinnant](https://howardhinnant.github.io/) in his 2021 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnan.github.io/date_algorithms.html#civil_from_days). Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year-of-era` (@eq-yoe), `year` (@eq-year), and `doty` (@eq-doty).
 
-### UNIX time conversion to Decalendar date and Declock time
+### UNIX time conversion to Decalendar date
+
+$$era=\frac{\begin{cases}days&{\text{if } days \geq 0;}\\days-146096&{\text{otherwise.}}\end{cases}}{146097}$$ {#eq-era}
+
+$$doe = days - era \cdot 146097$$ {#eq-doe}
+
+$$yoe = \lfloor doe - doe \div 1460 + doe \div 36524 - doe \div 146096) \div 365 \rfloor$$ {#eq-yoe}
+
+$$year = yoe + era * 400$$ {#eq-year}
+
+$$doty = \lfloor doe - (365 \cdot yoe + yoe \div 4 - yoe \div 100) \rfloor$$ {#eq-doty}
+
+To obtain fractional days, we have to extend this calculation with a new algorithm that sums up all of the days in previous years and subtracts this sum from `days` to obtain the current `Decalendar` timestamp as shown in @eq-time or @eq-iver. The @exm-time converts UNIX time into a `Decalendar` date or a `Decalendar` timestamp. The last line in @exm-time obtains the current `Decalendar` date by passing the current UNIX timestamp to the function. If we pass 0 to the function (`unix2doty(0)`) the result should be the UNIX Epoch: `1969+306`. To see @exm-time in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current timestamps in the `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamp formats.
+
+### UNIX time conversion to Decalendar timestamp
+
+$$time = year \cdot 365 + \sum_{n=1}^{year} \begin{cases}1&{\text{if  } y \mod 4 = 0 \land y \mod 100 \neq 0 \lor y \mod 400 = 0;}\\0&{\text{otherwise.}}\end{cases}$$ {#eq-time}
+
+$$time = year \cdot 365 + \sum_{n=1}^{year} [y \mod 4 = 0 \land y \mod 100 \neq 0 \lor y \mod 400 = 0]$$ {#eq-iver}
+
+:::::: {#exm-time}
 
 ::: {.panel-tabset group="language"}
 
@@ -215,20 +249,27 @@ The code example below shows a function that converts UNIX time into a `Decalend
 
 ```javascript
 
-function unix2doty(ms = 0) {
+function unix2doty(ms = 0, precision = 0) {
     const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         doe = days - era * 146097,
-        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
-        year = yoe + era * 400,
-        ts = days - (year * 365 + [...Array(year).keys()].map(
-            i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
-        ).reduce((a, b) => a + b, 0)) + 1,
-        doy = Math.floor(ts),
-        cmd = Math.floor((ts - doy) * 1e5);
-    return `${year.toString().padStart(4, "0")}`
-        + `+${doy.toString().padStart(3, "0")}`
-        + `.${cmd.toString().padStart(5, "0")}`
+        yoe = Math.floor((
+            doe - doe / 1460 + doe / 36524 - doe / 146096
+        ) / 365),
+        year = yoe + era * 400;
+    if (precision == 0) {
+        return `${year.toString().padStart(4, "0")}+${Math.round(
+            doe - (365 * yoe + yoe / 4 - yoe / 100)
+        ).toString().padStart(3, "0")}`
+    }
+    const timestamp = days - (year * 365 + [...Array(year).keys()].map(
+        i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
+    ).reduce((a, b) => a + b, 0)) + 1,
+        doty = Math.floor(timestamp),
+        time = Math.round(
+            (timestamp - doty) * 10 ** precision
+        ).toString().padStart(precision, "0");
+    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}.${time}`;
 }
 
 console.log(unix2doty(Date.now()));
@@ -324,6 +365,8 @@ paste()
 
 :::
 
+::::::
+
 # Basic concepts {#sec-basics}
 
 ## Fractions analogy {#sec-frac}
@@ -365,54 +408,54 @@ In the `stamps` above, the time has 3 digits, because this is the best level of 
 ::: {.callout-note collapse="true"}
 # Expand To See All Units
 
-| Base 10   | Name     | Symbol | Formal Name       |
-| --------- | -------  | ------ | ----------------- |
-| 10²       | `hekt`   | ρ      | `hectoday`        |
-| 9.1 x 10¹ | `delt`   | δ      | `deltayear`       |
-| 9 x 10¹   | `qop`    | ϟ      | `qoppaday`        |
-| 8 x 10¹   | `pi`     | π      | `piday`           |
-| 7.3 x 10¹ | `ep`     | ε      | `epsilonyear`     |
-| 7 x 10¹   | `om`     | ο      | `omicronday`      |
-| 6.1 x 10¹ | `wau`    | ϛ      | `wauyear`         |
-| 6 x 10¹   | `xi`     | ξ      | `xiday`           |
-| 5 x 10¹   | `nu`     | ν      | `nuday`           |
-| 4 x 10¹   | `mu`     | Μ      | `muday`           |
-| 3 x 10¹   | `lam`    | λ      | `lamdaday`        |
-| 2 x 10¹   | `kap`    | κ      | `kappaday`        |
-| 10¹       | `dek`    | ι, 旬  | `decaday`         |
-| 10⁰       | `day`    | d, 日  | `day`             |
-| 10⁻¹      | `dime`   | ⅒, 更  | `deciday`         |
-| 10⁻²      | `cent`   | ¢, %   | `centiday`        |
-| 10⁻³      | `mil`    | m, ‰   | `milliday`        |
-| 2 x 10⁻⁴  | `period` | .      | `didecimilliday`  |
-| 10⁻⁴      | `phrase` |  ̑, ‱   | `decimilliday`    |
-| 2 x 10⁻⁵  | `bar`    | \|     | `dicentimilliday` |
-| 10⁻⁵      | `beat`   | ♫      | `centimilliday`   |
-| 10⁻⁶      | `mic`    | μ      | `microday`        |
-| 10⁻⁷      | `liph`   | m̑      | `decimicroday`    |
-| 10⁻⁸      | `lib`    | m̈      | `centimicroday`   |
-| 10⁻⁹      | `nan`    | n      | `nanoday`         |
-| 10⁻¹⁰     | `roph`   | μ̑      | `decinanoday`     |
-| 10⁻¹¹     | `rob`    | µ̈      | `centinanoday`    |
-| 10⁻¹²     | `pic`    | p      | `picoday`         |
-| 10⁻¹³     | `noph`   | n̑      | `decipicoday`     |
-| 10⁻¹⁴     | `nob`    | n̈      | `centipicoday`    |
-| 10⁻¹⁵     | `femt`   | f      | `femtoday`        |
-| 10⁻¹⁶     | `coph`   | p̑      | `decifemtoday`    |
-| 10⁻¹⁷     | `cob`    | p̈      | `centifemtoday`   |
-| 10⁻¹⁸     | `att`    | a      | `attoday`         |
-| 10⁻¹⁹     | `foph`   | f̑      | `deciattoday`     |
-| 10⁻²⁰     | `fob`    | f̈      | `centiattoday`    |
-| 10⁻²¹     | `zept`   | z      | `zeptoday`        |
-| 10⁻²²     | `toph`   | ȃ      | `decizeptoday`    |
-| 10⁻²³     | `tob`    | ä      | `centizeptoday`   |
-| 10⁻²⁴     | `yokt`   | y      | `yoctoday`        |
-| 10⁻²⁵     | `zoph`   | z̑      | `deciyoctoday`    |
-| 10⁻²⁶     | `zob`    | z̈      | `centiyoctoday`   |
-| 10⁻²⁷     | `ront`   | r      | `rontoday`        |
-| 10⁻²⁸     | `yoph`   | y̑      | `decirontoday`    |
-| 10⁻²⁹     | `yob`    | ÿ      | `centirontoday`   |
-| 10⁻³⁰     | `quek`   | q      | `quectoday`       |
+| Base 10   | Name     | Symbol | Formal Name         |
+| --------- | -------  | ------ | -----------------   |
+| 10²       | `hekt`   | ρ      | `hectoday`          |
+| 9.1 x 10¹ | `delt`   | δ      | `deltakeraiayear`   |
+| 9 x 10¹   | `qop`    | ϟ      | `qoppaday`          |
+| 8 x 10¹   | `pi`     | π      | `piday`             |
+| 7.3 x 10¹ | `ep`     | ε      | `epsilonkeraiayear` |
+| 7 x 10¹   | `om`     | ο      | `omicronday`        |
+| 6.1 x 10¹ | `wau`    | ϛ      | `waukeraiayear`     |
+| 6 x 10¹   | `xi`     | ξ      | `xiday`             |
+| 5 x 10¹   | `nu`     | ν      | `nuday`             |
+| 4 x 10¹   | `mu`     | Μ      | `muday`             |
+| 3 x 10¹   | `lam`    | λ      | `lamdaday`          |
+| 2 x 10¹   | `kap`    | κ      | `kappaday`          |
+| 10¹       | `dek`    | ι, 旬  | `decaday`           |
+| 10⁰       | `day`    | d, 日  | `day`               |
+| 10⁻¹      | `dime`   | ⅒, 更  | `deciday`           |
+| 10⁻²      | `cent`   | ¢, %   | `centiday`          |
+| 10⁻³      | `mil`    | m, ‰   | `milliday`          |
+| 2 x 10⁻⁴  | `period` | .      | `didecimilliday`    |
+| 10⁻⁴      | `phrase` | , ‱    | `decimilliday`      |
+| 2 x 10⁻⁵  | `bar`    | \|     | `dicentimilliday`   |
+| 10⁻⁵      | `beat`   | ♫      | `centimilliday`     |
+| 10⁻⁶      | `mic`    | μ      | `microday`          |
+| 10⁻⁷      | `liph`   | m̑      | `decimicroday`      |
+| 10⁻⁸      | `lib`    | m̈      | `centimicroday`     |
+| 10⁻⁹      | `nan`    | n      | `nanoday`           |
+| 10⁻¹⁰     | `roph`   | μ̑      | `decinanoday`       |
+| 10⁻¹¹     | `rob`    | µ̈      | `centinanoday`      |
+| 10⁻¹²     | `pic`    | p      | `picoday`           |
+| 10⁻¹³     | `noph`   | n̑      | `decipicoday`       |
+| 10⁻¹⁴     | `nob`    | n̈      | `centipicoday`      |
+| 10⁻¹⁵     | `femt`   | f      | `femtoday`          |
+| 10⁻¹⁶     | `coph`   | p̑      | `decifemtoday`      |
+| 10⁻¹⁷     | `cob`    | p̈      | `centifemtoday`     |
+| 10⁻¹⁸     | `att`    | a      | `attoday`           |
+| 10⁻¹⁹     | `foph`   | f̑      | `deciattoday`       |
+| 10⁻²⁰     | `fob`    | f̈      | `centiattoday`      |
+| 10⁻²¹     | `zept`   | z      | `zeptoday`          |
+| 10⁻²²     | `toph`   | ȃ      | `decizeptoday`      |
+| 10⁻²³     | `tob`    | ä      | `centizeptoday`     |
+| 10⁻²⁴     | `yokt`   | y      | `yoctoday`          |
+| 10⁻²⁵     | `zoph`   | z̑      | `deciyoctoday`      |
+| 10⁻²⁶     | `zob`    | z̈      | `centiyoctoday`     |
+| 10⁻²⁷     | `ront`   | r      | `rontoday`          |
+| 10⁻²⁸     | `yoph`   | y̑      | `decirontoday`      |
+| 10⁻²⁹     | `yob`    | ÿ      | `centirontoday`     |
+| 10⁻³⁰     | `quek`   | q      | `quectoday`         |
 
 : The units of `Decalendar` and `Declock` {#tbl-unit}
 

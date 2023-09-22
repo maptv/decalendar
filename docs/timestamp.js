@@ -113,28 +113,36 @@ function is_leap(y) {
     return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
 
-function unix2doty(s = 0, ms = 0) {
-    const days = s / 86400 + ms / 86400000 + 719468,
+function unix2doty(ms = 0, precision = 0) {
+    const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         doe = days - era * 146097,
-        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
-        y = yoe + era * 400,
-        date = days - (y * 365 + [...Array(y).keys()].map(
-            i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
-        ).reduce((a, b) => a + b, 0)) + 1,
-        doy = Math.floor(date),
-        cmd = Math.round((date - doy) * 1e5);
-    return `${y.toString().padStart(4, "0")}`
-        + `+${doy.toString().padStart(3, "0")}`
-        + `.${cmd.toString().padStart(5, "0")}`
+        yoe = Math.floor((
+            doe - doe / 1460 + doe / 36524 - doe / 146096
+        ) / 365),
+        year = yoe + era * 400;
+    if (precision == 0) {
+        return `${year.toString().padStart(4, "0")}+${Math.round(
+            doe - (365 * yoe + yoe / 4 - yoe / 100)
+        ).toString().padStart(3, "0")}`
+    }
+    const timestamp = days - (year * 365 + [...Array(year).keys()].map(
+        i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
+    ).reduce((a, b) => a + b, 0)) + 1,
+        doty = Math.floor(timestamp),
+        time = Math.round(
+            (timestamp - doty) * 10 ** precision
+        ).toString().padStart(precision, "0");
+    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}.${time}`;
 }
 
-console.log(unix2doty(0, Date.now()));
+console.log(unix2doty(Date.now()));
 console.log(unix2doty(86400));
 console.log(unix2doty(0));
+console.log(unix2doty(0, 3));
 console.log(unix2doty(-86400));
-console.log(unix2doty(1695340800));
-console.log(unix2doty(1695327225));
+console.log(unix2doty(1695340800, 4));
+console.log(unix2doty(1695327225999, 5));
 console.log(now);
 console.log((60 + 305) % 365);
 console.log((263 + 305) % 365);
