@@ -342,7 +342,7 @@ If we really want to insist on punctuality, we could include up to 5 digits in a
 
 Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (`Dot 5`) and not the sixth `doty` (`Day 5`). Also, the number itself may provide a clue. Numbers greater than 365 could still be a `doty` date, but such dates would be in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean `Day 134` (if n=366) or `Day 135` (if n=365) of the subsequent year, but it would most likely mean noon (`Dot 500`).
 
-## `Stamps` Context clues {#sec-stamp}
+## `Stamps` {#sec-stamp}
 
 If a date and a time are combined they form a time `stamp`. The date always goes before the time in any `stamp`. When said together, the numbers "0" and "500" mean the first `doty` (`Day 0`) at noon (`Dot 500`). In written form, this would be `000.500`. This format is called `.y`, which is read the same way as `doty`, but emphasizes that the `.` is used in a floating point decimal `doty`. In other words, `doty` can be used instead of "day of the year" in a sentence, whereas `.y` indicates a `stamp`, such as `000.500`. Ideally, a stamp will include all of the information needed to identify a singular point in time, and thus should include a year and time zone.
 
