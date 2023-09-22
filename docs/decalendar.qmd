@@ -297,6 +297,8 @@ unix2doty <- function(s = 0, ms = 0) {
 unix2doty(as.numeric(Sys.time()))
 ```
 
+##### CopyQ
+
 ```
 copyq:
 const days = Date.now() / 86400000 + 719468,
@@ -392,7 +394,7 @@ In the `stamps` above, the time has 3 digits, because this is the best level of 
 | 10⁻¹¹     | `rob`    | µ̈      | `centinanoday`    |
 | 10⁻¹²     | `pic`    | p      | `picoday`         |
 | 10⁻¹³     | `noph`   | n̑      | `decipicoday`     |
-| 10⁻¹⁴     | `nob`    | n̊      | `centipicoday`    |
+| 10⁻¹⁴     | `nob`    | n̈      | `centipicoday`    |
 | 10⁻¹⁵     | `femt`   | f      | `femtoday`        |
 | 10⁻¹⁶     | `coph`   | p̑      | `decifemtoday`    |
 | 10⁻¹⁷     | `cob`    | p̈      | `centifemtoday`   |
@@ -407,7 +409,7 @@ In the `stamps` above, the time has 3 digits, because this is the best level of 
 | 10⁻²⁶     | `zob`    | z̈      | `centiyoctoday`   |
 | 10⁻²⁷     | `ront`   | r      | `rontoday`        |
 | 10⁻²⁸     | `yoph`   | y̑      | `decirontoday`    |
-| 10⁻²⁹     | `yob`    | ẙ      | `centirontoday`   |
+| 10⁻²⁹     | `yob`    | ÿ      | `centirontoday`   |
 | 10⁻³⁰     | `quek`   | q      | `quectoday`       |
 
 : The units of `Decalendar` and `Declock` {#tbl-units}
@@ -527,6 +529,8 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 
 The first table below shows the positive `doty` numbers for all Gregorian calendar dates. Negative `doty` numbers require two separate tables for common and leap years. In all of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive `doty` numbers of any other `Decalendar` days.
 
+::: {.callout-note collapse="true"}
+##### Expand To See Positive Number Conversion Table
 | Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan  | Feb  |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
 |  1  |  0  |  31 |  61 |  92 | 122 | 153 | 184 | 214 | 245 | 275 | 306  | 337  |
@@ -563,6 +567,10 @@ The first table below shows the positive `doty` numbers for all Gregorian calend
 
 : Gregorian calendar date to positive `doty` conversion {#tbl-conv}
 
+:::
+
+::: {.callout-note collapse="true"}
+##### Expand To See Negative Number Conversion Tables
 | Day | Mar  | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec | Jan | Feb |
 | --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- |
 | 1   | -365 | -334 | -304 | -273 | -243 | -212 | -181 | -151 | -120 | -90 | -59 | -28 |
@@ -635,6 +643,8 @@ The first table below shows the positive `doty` numbers for all Gregorian calend
 | 31  | -336 |      | -275 |      | -214 | -183 |      |      | -92  | -61 | -30 |     |
 
 : Gregorian calendar date to negative `doty` leap year conversion {#tbl-leap}
+
+:::
 
 ### Subyear units {#sec-subyear}
 
