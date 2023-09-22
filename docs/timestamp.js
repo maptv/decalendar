@@ -110,27 +110,31 @@ const utc = new Date(
 )
 
 function is_leap(y) {
-    return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
-}
-function unix2doy(s) {
-    const z = s / 86400 + 719468,
-        era = Math.floor((z >= 0 ? z : z - 146096) / 146097),
-        doe = z - era * 146097,
-        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
-        doy = Math.floor(doe - (365 * yoe + yoe / 4 - yoe / 100));
-    return `${yoe + era * 400}+${doe}`
-}
-function unix2doy(s) {
-    const z = s + 719468 * 86400,
-        era = Math.floor((z >= 0 ? z : z - 146096 * 86400) / (146097 * 86400)),
-        doe = (z - era * 146097 * 86400) / 86400,
-        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
-        doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
-    return `${yoe + era * 400}+${doy}`
+    return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
 
-console.log(unix2doy(1614565094));
-console.log(unix2doy(48383));
+function unix2doty(s = 0, ms = 0) {
+    const days = s / 86400 + ms / 86400000 + 719468,
+        era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        doe = days - era * 146097,
+        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
+        y = yoe + era * 400,
+        date = days - (y * 365 + [...Array(y).keys()].map(
+            i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
+        ).reduce((a, b) => a + b, 0)) + 1,
+        doy = Math.floor(date),
+        cmd = Math.round((date - doy) * 1e5);
+    return `${y.toString().padStart(4, "0")}`
+        + `+${doy.toString().padStart(3, "0")}`
+        + `.${cmd.toString().padStart(5, "0")}`
+}
+
+console.log(unix2doty(0, Date.now()));
+console.log(unix2doty(86400));
+console.log(unix2doty(0));
+console.log(unix2doty(-86400));
+console.log(unix2doty(1695340800));
+console.log(unix2doty(1695327225));
 console.log(now);
 console.log((60 + 305) % 365);
 console.log((263 + 305) % 365);
@@ -139,7 +143,7 @@ console.log(now);
 console.log(utc);
 console.log(julian);
 console.log(now.toISOString());
-console.log(is_leap(1987));
+console.log(is_leap(2000));
 console.log(myStamp(mar1, 0, "y", "+"));
 console.log(myStamp(start, 0, "y", "+"));
 console.log(myStamp(test, 0, "y", "+"));

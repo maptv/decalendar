@@ -8,7 +8,7 @@
 
 ### Gregorian calendar
 
-Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation ($y \mod 4 \eq 0 \land (y \mod 100 \neq 0 \lor y \mod 400 \eq 0)$) in the code example below.
+Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation ($y \mod 4 \eq 0 \land (y \mod 100 \neq 0 \lor y \mod 400 \eq 0)$) shown in the code example below.
 
 ::: {.panel-tabset}
 
@@ -17,8 +17,8 @@ Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`)
 ##### JavaScript
 
 ```{javascript}
-function is_leap(y) {
-    return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
+function isLeap(y) {
+    return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
 ```
 
@@ -26,7 +26,7 @@ function is_leap(y) {
 
 ```{julia}
 function is_leap(y)
-    y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)
+    y % 4 == 0 && y % 100 != 0 || y % 400 == 0
 end
 ```
 
@@ -34,14 +34,14 @@ end
 
 ```{python}
 def is_leap(y):
-    return y % 4 == 0 and (y % 100 != 0 or y % 400 == 0)
+    return y % 4 == 0 and y % 100 != 0 or y % 400 == 0
 ```
 
 ##### R
 
 ```{r}
 is_leap <- function(y) {
-  y %% 4 == 0 && (y %% 100 != 0 || y %% 400 == 0)
+  y %% 4 == 0 & y %% 100 != 0 | y %% 400 == 0
 }
 ```
 
@@ -68,7 +68,7 @@ is_leap <- function(y) {
 
 #### ISO 8601 dates
 
-The `m+dd` format shown above is similar to the [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) format (year-mm-dd) of the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Decalendar` dates (`year±day`) are most similar to ISO 8601 [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation below ($(ordinal + 365) \mod 365$). This calculation essentially shifts the ordinal date number to be 60 days earlier.
+The `m+dd` format shown above is similar to the [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) format (year-mm-dd) of the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Decalendar` dates (`year±day`) are most similar to ISO 8601 [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation ($(ordinal + 365) \mod 365$) shown in the code example below. This calculation essentially shifts the ordinal date number to be 60 days earlier.
 
 ::: {.panel-tabset}
 
@@ -77,7 +77,7 @@ The `m+dd` format shown above is similar to the [calendar date](https://en.wikip
 ##### JavaScript
 
 ```{javascript}
-function ordinal2doty(o) {
+function ordi2doty(o) {
     return (o + 305) % 365;
 }
 ```
@@ -85,7 +85,7 @@ function ordinal2doty(o) {
 ##### Julia
 
 ```{julia}
-function ordinal2doty(o)
+function ordi2doty(o)
     (o + 305) % 365
 end
 ```
@@ -93,14 +93,14 @@ end
 ##### Python
 
 ```{python}
-def ordinal2doty(o):
+def ordi2doty(o):
     return (o + 305) % 365
 ```
 
 ##### R
 
 ```{r}
-ordinal2doty <- function(o) {
+ordi2doty <- function(o) {
   (o + 305) %% 365
 }
 ```
@@ -144,7 +144,7 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 #### French Republican Calendar decimal time
 
-The French Republican calendar and `Declock` both the break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, _décimes_, and decimal seconds, respectively. The table below shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time.
+The French Republican calendar and `Declock` both the break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, _décimes_, and decimal seconds, respectively. The table below shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time. When converting between standard time and `Declock`, it is important to note that, unlike standard time, `Declock` does not include [leap seconds](https://en.wikipedia.org/wiki/Leap_second#Insertion_of_leap_seconds).
 
 | ⅒ | 24-hour | 12-hour |
 | - | ------- | ------- |
@@ -171,13 +171,104 @@ Julian dates are the number of [fractional days](https://en.wikipedia.org/wiki/D
 
 ### UNIX time
 
-UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar. The `Decalendar` 
+While it is possible to convert Julian dates into `Decalendar` dates and `Declock` times, the official definition of `Decalendar` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `Decalendar` dates, and `Declock` times.
 
+To calculate `Decalendar` dates and `Declock` times directly from UNIX time, the seconds (or milliseconds) in UNIX time are first converted to `days`. Then, the `days` are used to obtain the `year` using a calculation described by [Howard Hinnant in his 2021 article entitled "chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days). Finally, the `year` is used to sum up all of the days in previous years and this sum is subtracted from the days to obtain the current `Decalendar` timestamp.
 
-Gregorian calendar. and `Declock` are similar to the [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Declock` is also similar to [Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) and the fractional day component of [Julian dates](https://en.wikipedia.org/wiki/Julian_day).
+The code example below shows a function that converts UNIX time into a `Decalendar` timestamp. The last line in the code example obtains the current `Decalendar` timestamp by passing the current UNIX timestamp to the function. If we pass 0 to the function (`unix2doty(0)`) the result should be `1969+306.00000`. To see this function in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current timestamps in the `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamp formats.
 
-`Decalendar` and Gregorian leap days are  . The `Decalendar` year starts with `Day 0` and ends with either `Day 364` or `Day 365`. Translated into Gregorian calendar dates, `Day 0` is March 1, `Day 364` is February 28, and `Day 365` is February 29. on years that precede Gregorian calendar leap years. February 29, is `Day 365` in `Decalendar`. the last day of `Decalendar` leap years. ends with `Day 364` () in common years or leap years. `Decalendar` leap years are always 1 year before Gregorian calendar years.
+::: {.panel-tabset}
 
+#### UNIX time conversion to Decalendar date and Declock time
+
+##### JavaScript
+
+```{javascript}
+function unix2doty(s = 0, ms = 0) {
+    const days = s / 86400 + ms / 86400000 + 719468,
+        era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        doe = days - era * 146097,
+        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
+        year = yoe + era * 400,
+        ts = days - (year * 365 + [...Array(year).keys()].map(
+            i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
+        ).reduce((a, b) => a + b, 0)) + 1,
+        doy = Math.floor(ts),
+        cmd = Math.floor((ts - doy) * 1e5);
+    return `${year.toString().padStart(4, "0")}`
+        + `+${doy.toString().padStart(3, "0")}`
+        + `.${cmd.toString().padStart(5, "0")}`
+}
+
+console.log(unix2doty(0, Date.now()));
+```
+
+##### Julia
+
+```{julia}
+function unix2doty(s=0, ms=0)
+    days = s / 86400 + ms / 86400000 + 719468
+    era = floor((days >= 0 ? days : days - 146096) / 146097)
+    doe = days - era * 146097
+    yoe = floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365)
+    year = Int(yoe + era * 400)
+    ts = days - (year * 365 + sum([
+        i % 4 == 0 && i % 100 != 0 || i % 400 == 0
+        for i in 1:year-1]))
+    doy = Int(floor(ts))
+    cmd = Int(round((ts - doy) * 1e5))
+    "$(lpad(year,4,'0'))+$(lpad(doy,3,'0')).$(lpad(cmd,5,'0'))"
+end
+
+unix2doty(time())
+```
+
+##### Python
+
+```{python}
+from time import time
+
+def unix2doty(s=0, ms=0):
+    days = s / 86400 + ms / 86400000 + 719468
+    era = (days if days >= 0 else days - 146096) // 146097
+    doe = days - era * 146097
+    yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) // 365
+    year = int(yoe + era * 400)
+    ts = days - (year * 365 + sum(
+        i % 4 == 0 and i % 100 != 0 or i % 400 == 0
+        for i in range(year))) + 1
+    doy = int(ts.__floor__())
+    return f"{year:0<4}+{doy:0<3}.{round((ts - doy) * 1e5):0<5}"
+
+unix2doty(time())
+```
+
+##### R
+
+```{r}
+unix2doty <- function(s = 0, ms = 0) {
+  days = s / 86400 + ms / 86400000 + 719468
+  era = floor(ifelse(days >= 0, days, days - 146096) / 146097)
+  doe = days - era * 146097
+  yoe = floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365)
+  year = yoe + era * 400
+  years = 1:year
+  ts = days - (year * 365 + sum(
+    years %% 4 == 0 & years %% 100 != 0 | years %% 400 == 0
+    ))
+  doy = floor(ts)
+  cmd = round((ts - doy) * 1e5)
+  paste0(
+    sprintf("%04d", year),
+    "+", sprintf("%03d", doy),
+    ".", sprintf("%05d", cmd)
+    )
+}
+
+unix2doty(as.numeric(Sys.time()))
+```
+
+:::
 
 ## Basic concepts {#sec-basics}
 
@@ -276,16 +367,16 @@ In the table above, the units with positive exponents are used for `Decalendar`,
 
 ### Time Zones {#sec-zones}
 
-Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in `Zone 1` are one `dime` later than `Zone 0` and two `dimes` later than `Zone -1`. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in `Zone -3` and Tokyo is in `Zone 4`, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is noon on the last day of the year 1999 in Mexico City, it will be `Dot 200` on the first day of the year 2000 in Tokyo. This date and time in Mexico City can be written `2000+000.200+4` or `2000-366.800+4`, while the equivalent date and time for Tokyo is `1999+364.500-3` or `1999-001.500-3`. If we removed the time zone from the end, we would not know that all of these `stamps` describe the same moment in time.
+Of the units discussed above, `dimes` are notable, because they are the units of `Declock` time zones. The times in `Zone 1` are one `dime` later than `Zone 0` and two `dimes` later than `Zone -1`. Time zones are important, because different time zones could have very different times and even different dates. Mexico City is in `Zone -3` and Tokyo is in `Zone 4`, meaning for the majority of the day (`Dot 7` to be exact) Tokyo is one day ahead of Mexico City. If it is noon on the last day of the year 1999 in Mexico City, it will be `Dot 200` on the first day of the year 2000 in Tokyo. This date and time in Mexico City can be written `2000+000.200+4` or `2000-365.800+4`, while the equivalent date and time for Tokyo is `1999+365.500-3` or `1999-001.500-3`. If we removed the time zone from the end, we would not know that all of these `stamps` describe the same moment in time.
 
 ### The Dot Formats {#sec-formats}
 
-The `stamps` shown above are in the decimal days of the year (`.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental `datetime` formats, which are based on decimal days of the month (`.m`), and fractional days of the week (`.w`). The table below summarizes the three decimal day-of-the ( `dot` or `.`) formats:
+The `stamps` shown above are in the decimal days of the year (`.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental `datetime` formats, which are based on decimal days of the month (`.m`), and decimal days of the week (`.w`). The table below summarizes the three decimal day-of-the ( `dot` or `.`) formats:
 
 | Day of the |  `.`  | General Form      | Specific Example  |
 | ---------- | ----- | ----------------- | ----------------- |
-| Year       |  `y`  | `year±day.day±z`  | `1999+364.500-3`  |
-| Month      |  `m`  | `year±m±dd.day±z` | `1999+B+31.500-3` |
+| Year       |  `y`  | `year±day.day±z`  | `1999+365.500-3`  |
+| Month      |  `m`  | `year±m±dd.day±z` | `1999+B+29.500-3` |
 | Week       |  `w`  | `year±ww±d.day±z` | `1999+52+5.500-3` |
 
 : The three dot formats {#tbl-formats}
@@ -294,24 +385,7 @@ In the table above, `day` is the 3-digit day of the year (`doty`) number, `dd` i
 
 ### The `.m` format {#sec-dotm}
 
-The `m` in the `.m` format is the 1-digit month number. To fit all of the months in a single digit, `m` is in hexadecimal form (Base16 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The negative month numbers range from -C (-13) to -1, as shown in the table below.
-
-| Month     | Pos | Neg |
-| --------- | --- | --- |
-| January   | 0   | -C  |
-| February  | 1   | -B  |
-| March     | 2   | -A  |
-| April     | 3   | -9  |
-| May       | 4   | -8  |
-| June      | 5   | -7  |
-| July      | 6   | -6  |
-| August    | 7   | -5  |
-| September | 8   | -4  |
-| October   | 9   | -3  |
-| November  | A   | -2  |
-| December  | B   | -1  |
-
-: The months in the `.m` format {#tbl-dotm}
+The `m` in the `.m` format is the 1-digit month number. To fit all of the months in a single digit, `m` is in hexadecimal form (Base16 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The negative month numbers range from -C (-13) to -1, as shown in the first table: @tbl-mvals.
 
 ### The `.w` format {#sec-dotw}
 
@@ -331,24 +405,24 @@ The week number in the `.w` format, `ww`, ranges from 0 to 53 or -54 to -1. Week
 
 ### `.` format examples {#sec-dotex}
 
-The table below builds on the example from the ["Time Zones" section](#Time-Zones) section to compare all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all shown to 1-digit `dime` precision (same as time zones) instead of the typical 3-digit `mil` precision. In Mexico City, the time is `+5-3` or `-5-3`, while the time in London is `+8+0` or `-2+0` and time in Tokyo is `+2+4` is `-8+4`.
+The table below builds on the example from the ["Time Zones" section](#Time-Zones) section to compare all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all shown to 1-digit `dime` precision (same as time zones) instead of the typical 3-digit `mil` precision. In Mexico City, the time is `+5-3` or `-5-3`, while the time in London is `+8+0` or `-2+0` and time in Tokyo is `+2+4` or `-8+4`.
 
 | Day of the |  `.`  | Mexico City     | London          | Tokyo           |
 | ---------  | ----- | --------------- | --------------- | --------------- |
-| Year       |  `y`  | `1999+364.5-3`  | `1999+364.8-3`  | `2000+000.2+4`  |
-| Year       |  `y`  | `1999-001.5-3`  | `1999-001.2-3`  | `2000-366.8+4`  |
-| Month      |  `m`  | `1999+B+31.5-3` | `1999+B+31.8-3` | `2000+0+00.2+4` |
+| Year       |  `y`  | `1999+365.5-3`  | `1999+365.8-3`  | `2000+000.2+4`  |
+| Year       |  `y`  | `1999-001.5-3`  | `1999-001.2-3`  | `2000-365.8+4`  |
+| Month      |  `m`  | `1999+B+29.5-3` | `1999+B+29.8-3` | `2000+0+00.2+4` |
 | Month      |  `m`  | `1999-1-01.5-3` | `1999-1-01.2-3` | `2000-C-31.8+4` |
-| Week       |  `w`  | `1999+52+5.5-3` | `1999+52+5.8-3` | `2000+00+6.2+4` |
-| Week       |  `w`  | `1999-01-2.5-3` | `1999-01-2.2-3` | `2000-53-1.8+4` |
+| Week       |  `w`  | `1999+52+2.5-3` | `1999+52+2.8-3` | `2000+00+3.2+4` |
+| Week       |  `w`  | `1999-01-5.5-3` | `1999-01-5.2-3` | `2000-53-4.8+4` |
 
 : The time in Mexico City, London, and Tokyo in all three dot formats {#tbl-dotex}
 
-In the table above, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City and London is December (`Month B`). We could say the `.m` dates in Mexico City and London as "`Year 1999 Month B Day 31`" or "`Year 1999 Month -1 Day -1`" and the Tokyo date as "`Year 2000 Month 0 Day 0`" or" `Year 2000 Month -C Day -31`".
+In the table above, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City and London is December (`Month B`). We could say the `.m` dates in Mexico City and London as "`Year 1999 Month B Day 29`" or "`Year 1999 Month -1 Day -1`" and the Tokyo date as "`Year 2000 Month 0 Day 0`" or" `Year 2000 Month -C Day -31`".
 
-The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. The table above shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `.w` dates in Mexico City and London could be said "`Year 1999 Week 52 Day 5`" or "`Year 1999 Week -1 Day -2`", while the date in Tokyo could be pronounced "`Year 2000 Week 0 Day 0`" or "`Year 2000 Week -52 Day -1`" in Tokyo.
+The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. The table above shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `.w` dates in Mexico City and London could be said "`Year 1999 Week 52 Day 2`" or "`Year 1999 Week -1 Day -5`", while the date in Tokyo could be pronounced "`Year 2000 Week 0 Day 3`" or "`Year 2000 Week -52 Day -4`" in Tokyo.
 
-In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to say. The spoken form of the `.y` date in Mexico City and London is  "`Year 1999 Day 364`" or "`Year 1999 Day -1`" and the spoken form of the Tokyo date is "`Year 2000 Day 0`" or "`Year 2000 Day -366`".
+In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to say. The spoken form of the `.y` date in Mexico City and London is  "`Year 1999 Day 365`" or "`Year 1999 Day -1`" and the spoken form of the Tokyo date is "`Year 2000 Day 0`" or "`Year 2000 Day -365`".
 
 ### `Deks` {#sec-deks}
 
@@ -357,21 +431,6 @@ Even though it provides formats for months and weeks, `Decalendar` envisions a w
 #### Days of the `dek` {#sec-dotd}
 
 A major difficulty with the Gregorian calendar is that the date is disconnected from the day of the week. In contrast, the day of the `dek` (`dotd`) is simply the last digit of the day number in the `.y` format. For example, the first day of the year (`Day 0`) is always an `Nulday`, the last day of common years (`Day 364`) is always an `Quaday`, and the last day of leap years (`Day 365`) is always a `Penday`. The day number allows us to distinguish workdays from restdays. `Decalendar` defines `Triday`, `Quaday`, `Octday`, and `Ennday` as restdays, which means that days with numbers that end in 3, 4, 8, or 9 are days off from work and school. Each `dek` consists of 2 `pents` (`pentadays`), each `pent` has 3 workdays called the `trep` (`trepalium`) and 2 restdays called the `pentend`. In total, there are 219 workdays and 146 restdays in a `Decalendar` year, not counting the only obligatory holiday, Leap Day (`Day 365`).
-
-| # | Code | Name   | Type |
-| - | ---- | ------ | ---- |
-| 0 | N    | Nulday | work |
-| 1 | U    | Unoday | work |
-| 2 | D    | Duoday | work |
-| 3 | T    | Triday | rest |
-| 4 | Q    | Quaday | rest |
-| 5 | P    | Penday | work |
-| 6 | H    | Hexday | work |
-| 7 | S    | Sepday | work |
-| 8 | O    | Octday | rest |
-| 9 | E    | Ennday | rest |
-
-: The days of the `dek` {#tbl-dotd}
 
 #### Workdays {#sec-work}
 
@@ -413,10 +472,7 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 
 ##### Common and leap year specific conversion tables {#sec-specific}
 
-The first table below shows the `doty` numbers for all of the days in common years, while the second table below does the same for leap years. In both of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). The positive `doty` numbers of dates after the Gregorian calendar leap day, February 29, need to be incremented by 1 in leap years. Similarly, the negative `doty` numbers of dates before February 29 need to decremented by 1. To be clear, we only have to deal with the Gregorian calendar leap day when we are working with Gregorian calendar dates. Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive day numbers of any other `Decalendar` days.
-d - 60
-
-59 
+The first table below shows the positive `doty` numbers for all Gregorian calendar dates. Negative `doty` numbers require two separate tables for common and leap years. In all of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive `doty` numbers of any other `Decalendar` days.
 
 | Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan  | Feb  |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
@@ -535,7 +591,7 @@ In addition to serving as a part of the Gregorian date coordinate system describ
 
 We can use the tables above to convert any Gregorian calendar date to a `doty` number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact `doty` number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
 
-The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has an opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. The table below lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.
+The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has its opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. The table below lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.
 
 | Code | North  | South  | `doty` | `dotm` | Date         | Event              |
 | ---- | ------ | ------ | ----   | ------ | ------------ | ------------------ |
@@ -546,22 +602,24 @@ The dates of the solstices and the equinoxes can be used as definitions of the s
 
 : Solstice and equinox Gregorian calendar and `doty` dates {#tbl-soleq}
 
-Using the information in the table above, we can group the `deks` in a year according to the seasons in which they occur. We identify `deks` using the first 2 digits of the 3-digit day number of any day in that `dek`. For example, `Day 78` is the second to last day in `Dek 7`, while `Day 170` is the first day in `Dek 17`. Therefore, Spring starts in the northern hemisphere at the end of `Dek 7` and ends before `Dek 17`. Winter starts in `Dek 35` of one year and ends at the end of `Deks 7` of the subsequent year. The table below summarizes the division of `deks` by season.
+Using the information in the table above, we can group the `deks` and `pents` in a year according to the seasons in which they occur. We identify `deks` using the first 2 digits of the 3-digit day number of any day in that `dek`. The `pent` number is twice the `dek` number plus one if the `dotd` is greater than 4 ($dek \cdot 2 + dotd > 4$). For example, `Day 19` is the last day in `Dek 1` and `Pent 3`, while `Day 111` is the second day in `Dek 11` and `Pent 22`.
 
-| Code | North  | South  | First | Last |
-| ---- | -----  | -----  | ----- | ---- |
-| S0   | Spring | Fall   | 2     | 10   |
-| S1   | Summer | Winter | 11    | 25   |
-| S2   | Fall   | Spring | 26    | 34   |
-| S3   | Winter | Summer | 35    | 7    |
+We can round up the start of the first season and round down the start of the second season to obtain the division of `pents` by season as summarized in the table below. It is important to note that the last season starts in `Pent 59` of one year and ends with `Pent 3` of the subsequent year. In common years, each season in the table above has 18 `pents` (90 days), except for the season in the second row, which has 19 `pents` (95 days). In leap years, the season in the last row has 18.2 pents (91 days).
 
-: The `deks` that begin and end each season {#tbl-seasons}
+| Code | North  | South  | First | Last | Duration |
+| ---- | -----  | -----  | ----- | ---- | -------- |
+| S0   | Spring | Fall   | 4     | 21   | 18       |
+| S1   | Summer | Winter | 22    | 40   | 19       |
+| S2   | Fall   | Spring | 41    | 58   | 18       |
+| S3   | Winter | Summer | 59    | 3    | 18       |
+
+: The `pents` that begin and end each season {#tbl-seasons}
 
 #### `Qops`, `Delts`, `Eps` and `Waus` {#sec-qdew}
 
 ##### `Qops` {#sec-q}
 
-Each season in the table above has 9 `deks` (90 days), except for the seasons in the last row, which have 9.5 `deks` (95 days) in common years or 9.6 `deks` (96 days) in leap years. To more closely reflect the actual seasons, the extra days from the last row should be split among the first two rows. Nevertheless, the seasons shown above are convenient, because the first `dek` of each season is the last `dek` in a `qop` (`qoppa`, `ϟ`). Like seasons, `qops` divide the year into four parts, but unlike seasons, `qops` do not include `Dek 36`. `Dek 36`, the last `dek` of the year, is not included in the last `qop` so that each `qop` is 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. The table below shows the division of `deks` by `qoppa`.
+In contrast to the variable length of seasons, other `Decalendar` units are constant length. Of these constant length units, `qops` (`qoppas`, `ϟ`) are most like seasons. `Qops` divide the year into four parts, but unlike seasons, `qops` do not include `Pent 72`, the last `pent` of the year. `Pent 72` is not included in the last `qop` so that each `qop` is 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. The table below shows the division of `deks` by `qop`.
 
 | Code | First | Last |
 | ---- | ----- | ---- |
@@ -574,7 +632,7 @@ Each season in the table above has 9 `deks` (90 days), except for the seasons in
 
 ##### `Delts` {#sec-d}
 
-In addition to `qops` shown above, `Decalendar` describes 3 other similar units called `delts` (`deltas`, `δ`), `eps` (`epsilons`, `ε`), and `waus` (`ϛ`). These units do not leave out as many days in each year, because these units split the year by day, rather than by `dek`. `Delts`, `eps`, and `wau` split the year into 4, 5, and 6 parts, respectively. `Delts` are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which `delts` start and end. In the table above, not only do rows alternate between even and odd numbers, but the `delt` number is the last digit of both the start and the end day of the `delt`. The table below list the numbers of the days that begin and end each `delt`.
+In addition to `qops` shown above, `Decalendar` describes 3 other similar units called `delts` (`deltas`, `δ`), `eps` (`epsilons`, `ε`), and `waus` (`ϛ`). These units do not leave out as many days in each year, because they split the year by day, rather than by `dek`. `Delts`, `eps`, and `wau` split the year into 4, 5, and 6 parts, respectively. `Delts` are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which `delts` start and end. In the table above, not only do rows alternate between even and odd numbers, but the `delt` number is the last digit of both the start and the end day of the `delt`. The table below list the numbers of the days that begin and end each `delt`.
 
 | Code | First | Last |
 | ---- | ----- | ---- |
@@ -614,7 +672,7 @@ The only unit that can include the leap year is a `wau` (`ϛ`), which is 61 days
 
 : The days that begin and end each `wau` {#tbl-z}
 
-All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Wau 3`, `Z3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+078`. The subyear units are essentially date intervals, series of contiguous dates. `Decalendar` includes very powerful approaches to describing series of dates, times, and `stamps`.
+All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of `Delt 2`, `D2+00.5` or `+182.5`, and the midpoint of leap years is midnight of the first day of `Wau 3`, `W3+00.0` or `+183.0`. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is `2000S0+00` or `2000+020`, while the last day of this season is `2000S0+89` or `2000+109`. The subyear units are essentially date intervals, series of contiguous dates. `Decalendar` includes very powerful approaches to describing series of dates, times, and `stamps`.
 
 ## Series {#sec-series}
 
@@ -763,25 +821,22 @@ In leap years, `Dek 36` contains the last 6 days of the current year and the fir
 
 ### Holidays {#sec-holidays}
 
-Leap Day is a important holiday because it occurs only once every four years (except for years that start centuries not divisible by 400) and it results in the only time when there are 3 consecutive restdays in `Decalendar`. Another `Decalendar` holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative `.y` format `stamps` are the same (`+183.5` and `-183.5`), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Coincidentally, many Gregorian calendar holidays just so happen to also fall on `Decalendar` restdays. The table below lists 11 such holidays and their `doty`, `dotm`, and Gregorian calendar dates.
+Leap Day is a important holiday because it occurs only once every four years (except for years that start centuries not divisible by 400) and it results in the only time when there are 3 consecutive restdays in `Decalendar`. Another `Decalendar` holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative `.y` format `stamps` are the same (`+183.5` and `-183.5`), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Many Gregorian calendar holidays just so happen to also fall on the first day of a `Decalendar` `pent` (`Nulday` or `Quaday`). The table below lists 8 such holidays and their `doty`, `dotm`, and Gregorian calendar dates.
 
 | Name               | doty | dotm | date        |
 | ------------------ | ---- | ---- | ----------- |
-| Valentine's Day    | 351  | B+13 | February 14 |
 | Cinco de Mayo      |  65  | 2+04 | May 5       |
 | Flag Day           | 105  | 3+13 | June 14     |
 | Juneteenth Day     | 110  | 3+18 | June 19     |
 | Independence Day   | 125  | 4+03 | July 4      |
-| Halloween          | 244  | 7+30 | October 31  |
 | All Saints' Day    | 245  | 8+00 | November 1  |
 | Veterans’ Day      | 255  | 8+10 | November 11 |
-| Christmas Day      | 299  | 9+24 | December 25 |
 | Boxing Day         | 300  | 9+25 | December 26 |
 | New Year's Eve     | 305  | 9+31 | December 31 |
 
 : Gregorian calendar holidays that happen to fall on `Decalendar` restdays {#tbl-holidays}
 
-Any holiday with a fixed (rather than floating) date in the Gregorian calendar can easily be added to `Decalendar`. Holidays with floating dates do not follow easily recognizable patterns. `Decalendar` recommends redefining such dates to always be on the same `doty` every year. For example, November 25 (`Day 328⁺`) is a sensible fixed date for Thanksgiving, because it is exactly 30 days before Christmas (December 25, `Day 358⁺`) and falls on a `Decalendar` restday. When assigning fixed dates to floating date holidays, we should choose `Decalendar` restdays to avoid disrupting the normal rhythm of the `pently` schedules. Instead of gaining days off from holidays, workers should gain additional time off from their employers. In the United States, the 11 federal holidays (88 hours = 3.6̅ dimes) would translate to 9 `Schedule 3` days offs (3.6 dimes).
+Any holiday with a fixed (rather than floating) date in the Gregorian calendar can easily be added to `Decalendar`. Holidays with floating dates do not follow easily recognizable patterns. `Decalendar` recommends redefining such dates to always be on the same `doty` every year. For example, November 25 (`Day 269`) is a sensible fixed date for Thanksgiving, because it is exactly 30 days before Christmas (December 25, `Day 299`) and falls on a `Decalendar` restday. When assigning fixed dates to floating date holidays, we should choose `Decalendar` restdays to avoid disrupting the normal rhythm of the `pently` schedules. Instead of gaining days off from holidays, workers should gain additional time off from their employers. In the United States, the 11 federal holidays (88 hours = 3.6̅ dimes) would translate to 9 `Schedule 3` days offs (3.6 dimes).
 
 ## Programming languages {#sec-prog}
 
