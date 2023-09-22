@@ -1,4 +1,32 @@
-`Decalendar` and `Declock`
+---
+title: "`Decalendar` and `Declock`"
+execute:
+  eval: false
+  cache: false
+toc: true
+toc-depth: 2
+number-sections: true
+number-depth: 2
+format:
+  html:
+    anchor-sections: true
+    code-block-background: false
+    code-block-border-left: true
+    code-copy: true
+    code-link: true
+    code-tools: true
+    embed-resources: true
+    link-external-icon: true
+    link-external-newwindow: true
+    theme:
+      dark: darkly
+      light: flatly
+    output-file: index.html
+  pdf:
+    colorlinks: true
+    pdf-engine: wkhtmltopdf
+  docx: default
+---
 
 ## Summary {#sec-summary}
 
@@ -8,15 +36,15 @@
 
 ### Gregorian calendar
 
-Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation ($y \mod 4 \eq 0 \land (y \mod 100 \neq 0 \lor y \mod 400 \eq 0)$) shown in the code example below.
-
-::: {.panel-tabset}
+Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation ($y \mod 4 = 0 \land (y \mod 100 \neq 0 \lor y \mod 400 = 0)$) shown in the code example below.
 
 #### Leap year identification
 
+::: {.panel-tabset group="language"}
+
 ##### JavaScript
 
-```{javascript}
+```{ojs}
 function isLeap(y) {
     return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
@@ -70,13 +98,13 @@ is_leap <- function(y) {
 
 The `m+dd` format shown above is similar to the [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) format (year-mm-dd) of the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Decalendar` dates (`year±day`) are most similar to ISO 8601 [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation ($(ordinal + 365) \mod 365$) shown in the code example below. This calculation essentially shifts the ordinal date number to be 60 days earlier.
 
-::: {.panel-tabset}
-
 #### ISO ordinal day number to `doty` conversion
+
+::: {.panel-tabset group="language"}
 
 ##### JavaScript
 
-```{javascript}
+```{ojs}
 function ordi2doty(o) {
     return (o + 305) % 365;
 }
@@ -177,15 +205,16 @@ To calculate `Decalendar` dates and `Declock` times directly from UNIX time, the
 
 The code example below shows a function that converts UNIX time into a `Decalendar` timestamp. The last line in the code example obtains the current `Decalendar` timestamp by passing the current UNIX timestamp to the function. If we pass 0 to the function (`unix2doty(0)`) the result should be `1969+306.00000`. To see this function in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current timestamps in the `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamp formats.
 
-::: {.panel-tabset}
-
 #### UNIX time conversion to Decalendar date and Declock time
+
+::: {.panel-tabset group="language"}
 
 ##### JavaScript
 
-```{javascript}
-function unix2doty(s = 0, ms = 0) {
-    const days = s / 86400 + ms / 86400000 + 719468,
+```{ojs}
+
+function unix2doty(ms = 0) {
+    const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         doe = days - era * 146097,
         yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
@@ -200,7 +229,7 @@ function unix2doty(s = 0, ms = 0) {
         + `.${cmd.toString().padStart(5, "0")}`
 }
 
-console.log(unix2doty(0, Date.now()));
+console.log(unix2doty(Date.now()));
 ```
 
 ##### Julia
@@ -268,6 +297,27 @@ unix2doty <- function(s = 0, ms = 0) {
 unix2doty(as.numeric(Sys.time()))
 ```
 
+```
+copyq:
+const days = Date.now() / 86400000 + 719468,
+    era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+    doe = days - era * 146097,
+    yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
+    y = yoe + era * 400,
+    date = days - (y * 365 + [...Array(y).keys()].map(
+        i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
+    ).reduce((a, b) => a + b, 0)) + 1,
+    doy = Math.floor(date),
+    cmd = Math.round((date - doy) * 1e5),
+    date = `${y.toString().padStart(4, "0")}`
+    + `+${doy.toString().padStart(3, "0")}`
+    + `.${cmd.toString().padStart(5, "0")}`;
+copy(date)
+copySelection(date)
+paste()
+
+```
+
 :::
 
 ## Basic concepts {#sec-basics}
@@ -307,6 +357,9 @@ The `.y` format can include positive and negative numbers, most commonly in the 
 ## Units {#sec-units}
 
 In the `stamps` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each highlights the relationship between the two:
+
+::: {.callout-note collapse="true"}
+## Expand To See All Units
 
 | Base 10   | Name     | Symbol | Formal Name       |
 | --------- | -------  | ------ | ----------------- |
@@ -358,6 +411,8 @@ In the `stamps` above, the time has 3 digits, because this is the best level of 
 | 10⁻³⁰     | `quek`   | q      | `quectoday`       |
 
 : The units of `Decalendar` and `Declock` {#tbl-units}
+
+:::
 
 In the table above, the units with positive exponents are used for `Decalendar`, while the ones with negative exponents are used for `Declock`. `Cents` (`¢`) can serve as a useful point of comparison to understand the scale of some of the units in the table above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` (`⅒`) are ten times larger (10% = 144 minutes), and `deks` (`ι`) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
@@ -469,8 +524,6 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 In the Gregorian calendar, dates are like a set of coordinates, where the month and the day of the month (`dotm`) are like longitude and latitude in the Geographic coordinate system or x and y in the Cartesian coordinate system. `Decalendar` provides both coordinates in one number, the `doty` contains both the `dek` number (first 2 digits) and the `dotd` number (last digit). In this way, the `doty` contains all of the information we need for the `Decalendar` system: the `dek`, which fulfills the role of both the month and the week, and the `dotd`, which fulfills the role of both the day of the month and the day of the week.
 
 #### Conversion tables {#sec-conv}
-
-##### Common and leap year specific conversion tables {#sec-specific}
 
 The first table below shows the positive `doty` numbers for all Gregorian calendar dates. Negative `doty` numbers require two separate tables for common and leap years. In all of these tables, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive `doty` numbers of any other `Decalendar` days.
 
@@ -867,7 +920,7 @@ datetime("2023-12-25").timetuple().tm_yday - 1
 as.integer(strftime("2023-12-25", format="%j")) - 1
 ```
 
-```{javascript}
+```{ojs}
 const now = new Date(2023, 11, 25),
 start = new Date(now.getFullYear(), 0, 0),
 doy = Math.floor((now - start) / 86400000) - 1;
