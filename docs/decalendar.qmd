@@ -19,8 +19,8 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     theme:
-      dark: darkly
-      light: flatly
+      dark: superhero
+      light: cosmo
     output-file: index.html
   pdf:
     colorlinks: true
@@ -44,7 +44,7 @@ Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`)
 
 ##### JavaScript
 
-```{ojs}
+```javascript
 function isLeap(y) {
     return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
@@ -52,7 +52,7 @@ function isLeap(y) {
 
 ##### Julia
 
-```{julia}
+```julia
 function is_leap(y)
     y % 4 == 0 && y % 100 != 0 || y % 400 == 0
 end
@@ -60,14 +60,14 @@ end
 
 ##### Python
 
-```{python}
+```python
 def is_leap(y):
     return y % 4 == 0 and y % 100 != 0 or y % 400 == 0
 ```
 
 ##### R
 
-```{r}
+```r
 is_leap <- function(y) {
   y %% 4 == 0 & y %% 100 != 0 | y %% 400 == 0
 }
@@ -104,7 +104,7 @@ The `m+dd` format shown above is similar to the [calendar date](https://en.wikip
 
 ##### JavaScript
 
-```{ojs}
+```javascript
 function ordi2doty(o) {
     return (o + 305) % 365;
 }
@@ -112,7 +112,7 @@ function ordi2doty(o) {
 
 ##### Julia
 
-```{julia}
+```julia
 function ordi2doty(o)
     (o + 305) % 365
 end
@@ -120,14 +120,14 @@ end
 
 ##### Python
 
-```{python}
+```python
 def ordi2doty(o):
     return (o + 305) % 365
 ```
 
 ##### R
 
-```{r}
+```r
 ordi2doty <- function(o) {
   (o + 305) %% 365
 }
@@ -211,7 +211,7 @@ The code example below shows a function that converts UNIX time into a `Decalend
 
 ##### JavaScript
 
-```{ojs}
+```javascript
 
 function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
@@ -234,7 +234,7 @@ console.log(unix2doty(Date.now()));
 
 ##### Julia
 
-```{julia}
+```julia
 function unix2doty(s=0, ms=0)
     days = s / 86400 + ms / 86400000 + 719468
     era = floor((days >= 0 ? days : days - 146096) / 146097)
@@ -254,7 +254,7 @@ unix2doty(time())
 
 ##### Python
 
-```{python}
+```python
 from time import time
 
 def unix2doty(s=0, ms=0):
@@ -274,7 +274,7 @@ unix2doty(time())
 
 ##### R
 
-```{r}
+```r
 unix2doty <- function(s = 0, ms = 0) {
   days = s / 86400 + ms / 86400000 + 719468
   era = floor(ifelse(days >= 0, days, days - 146096) / 146097)
@@ -299,7 +299,7 @@ unix2doty(as.numeric(Sys.time()))
 
 ##### CopyQ
 
-```
+```javascript
 copyq:
 const days = Date.now() / 86400000 + 719468,
     era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
@@ -921,16 +921,16 @@ If we decide to prioritize the amount of sunlight at `Dot 5` over simplicity and
 
 Some programming languages provide direct access to ISO ordinal dates. Subtracting 1 from an ISO ordinal date yields the Dekalendar date:
 
-```{python}
+```python
 from datetime import datetime
 datetime("2023-12-25").timetuple().tm_yday - 1
 ```
 
-```{r}
+```r
 as.integer(strftime("2023-12-25", format="%j")) - 1
 ```
 
-```{ojs}
+```javascript
 const now = new Date(2023, 11, 25),
 start = new Date(now.getFullYear(), 0, 0),
 doy = Math.floor((now - start) / 86400000) - 1;
