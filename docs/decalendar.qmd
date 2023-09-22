@@ -209,7 +209,7 @@ The French Republican calendar and `Declock` both the break the day down into de
 
 ## Julian dates {#sec-jd}
 
-Julian dates are the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we subtract the Julian day number ($\lfloor JD \rfloor$) from the Julian date ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 as shown in @eq-jtime.
+Julian dates are the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we subtract the Julian day number ($\lfloor JD \rfloor$) from the Julian date ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 as shown in @eq-jd
 
 $$(JD - \lfloor JD \rfloor + .5) \mod 1$$ {#eq-jd}
 
