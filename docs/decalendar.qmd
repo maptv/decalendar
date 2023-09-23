@@ -87,7 +87,9 @@ In `Decalendar`, January is represented by `A` and February is represented by `B
 
 ### Gregorian calendar date conversion to `Decalendar` date
 
-$$y -= m <= 2$$ {#eq-conv}
+$$y -= m <= 2$$ {#eq-year1}
+
+$$doty = (153*(m > 2 ? m-3 : m+9) + 2)/5 + d-1$$ {#eq-doty1}
 
 :::::: {#exm-conv}
 
@@ -96,32 +98,47 @@ $$y -= m <= 2$$ {#eq-conv}
 #### JavaScript
 
 ```javascript
-function isLeap(y) {
-    return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
+function ymd2doty(year = 1970, month = 1, day = 1) {
+    year -= month <= 2;
+    const doty = Math.round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1);
+    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}`;
 }
+console.log(ymd2doty());
 ```
 
 #### Julia
 
 ```julia
-function is_leap(y)
-    y % 4 == 0 && y % 100 != 0 || y % 400 == 0
+function ymd2doty(year=1970, month=1, day=1)
+    year = year - (month <= 2)
+    doty = Int(round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1))
+    "$(lpad(year,4,'0'))+$(lpad(doty,3,'0'))"
 end
+
+ymd2doty()
 ```
 
 #### Python
 
 ```python
-def is_leap(y):
-    return y % 4 == 0 and y % 100 != 0 or y % 400 == 0
+def ymd2doty(year=1970, month=1, day=1):
+    year -= month <= 2
+    doty = round((153 * (month - 3 if month > 2 else month + 9) + 2) / 5 + day - 1)
+    return f"{year:0<4}+{doty:0<3}"
+
+ymd2doty()
 ```
 
 #### R
 
 ```r
-is_leap <- function(y) {
-  y %% 4 == 0 & y %% 100 != 0 | y %% 400 == 0
+ymd2doty <- function(year = 1970, month = 1, day = 1) {
+    year = year - (month <= 2)
+    doty = round((153 * (ifelse(month > 2, month - 3, month + 9)) + 2) / 5 + day - 1)
+    paste0(sprintf("%04d", year), "+", sprintf("%03d", doty))
 }
+
+ymd2doty()
 ```
 
 :::
@@ -264,7 +281,7 @@ While it is possible to convert Julian dates into `Decalendar` dates and `Decloc
 
 $$unix = (JD − 2440587.5) \cdot 86400$$ {#eq-unix}
 
-To calculate `Decalendar` dates directly from UNIX time, we can use a calculation described by [Howard Hinnant](https://howardhinnant.github.io/) in his 2021 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days). Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year-of-era` (@eq-yoe), `year` (@eq-year), and `doty` (@eq-doty).
+To calculate `Decalendar` dates directly from UNIX time, we can use a calculation described by [Howard Hinnant](https://howardhinnant.github.io/) in his 2021 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days). Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year-of-era` (@eq-yoe), `year` (@eq-year2), and `doty` (@eq-doty2).
 
 ### UNIX time conversion to `Decalendar` date
 
@@ -274,11 +291,11 @@ $$doe = days - era \cdot 146097$$ {#eq-doe}
 
 $$yoe = \lfloor \frac{doe - \frac{doe}{1460} + \frac{doe}{36524} - \frac{doe}{146096}}{365} \rfloor$$ {#eq-yoe}
 
-$$year = yoe + era * 400$$ {#eq-year}
+$$year = yoe + era * 400$$ {#eq-year2}
 
-$$doty = \lfloor doe - (365 \cdot yoe + \frac{yoe}{4} - \frac{yoe}{100}) \rfloor$$ {#eq-doty}
+$$doty = \lfloor doe - (365 \cdot yoe + \frac{yoe}{4} - \frac{yoe}{100}) \rfloor$$ {#eq-doty2}
 
-To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` timestamp as shown in @eq-time. The code in @exm-time converts UNIX time into a `Decalendar` date or a `Decalendar` timestamp in the `Zone 0` time zone. The last line in @exm-time obtains the current `Decalendar` date by passing the current UNIX timestamp to the `unix2doty` function. If we pass 0 to the function (`unix2doty(0)`) the result should be the UNIX Epoch: `1969+306`. To see @exm-time in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current timestamps in the `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamp formats.
+To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` timestamp as shown in @eq-time. The code in @exm-time converts UNIX time into a `Decalendar` date or a `Decalendar` timestamp in the `Zone 0` time zone. The last line in @exm-time obtains the current `Decalendar` date by passing the current UNIX timestamp to the `unix2doty` function. If we call this function without arguments (`unix2doty()`) the result should be the UNIX Epoch: `1969+306`. To see @exm-time in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current timestamps in the `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamp formats.
 
 ### UNIX time conversion to `Decalendar` timestamp
 
@@ -322,18 +339,22 @@ console.log(unix2doty(Date.now()));
 #### Julia
 
 ```julia
-function unix2doty(s=0, ms=0)
+
+function unix2doty(s=0, ms=0, precision=0)
     days = s / 86400 + ms / 86400000 + 719468
     era = floor((days >= 0 ? days : days - 146096) / 146097)
     doe = days - era * 146097
     yoe = floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365)
     year = Int(yoe + era * 400)
+    if precision == 0
+        return "$(lpad(year,4,'0'))+$(lpad(Int(round(doe - (365 * yoe + yoe / 4 - yoe / 100))),3,'0'))"
+    end
     ts = days - (year * 365 + sum([
         i % 4 == 0 && i % 100 != 0 || i % 400 == 0
-        for i in 1:year-1]))
+        for i in 1:year]))
     doy = Int(floor(ts))
-    cmd = Int(round((ts - doy) * 1e5))
-    "$(lpad(year,4,'0'))+$(lpad(doy,3,'0')).$(lpad(cmd,5,'0'))"
+    cmd = Int(round((ts - doy) * 10 ^ precision))
+    return "$(lpad(year,4,'0'))+$(lpad(doy,3,'0')).$(lpad(cmd,precision,'0'))"
 end
 
 unix2doty(time())
@@ -344,17 +365,19 @@ unix2doty(time())
 ```python
 from time import time
 
-def unix2doty(s=0, ms=0):
+def unix2doty(s=0, ms=0, precision=0):
     days = s / 86400 + ms / 86400000 + 719468
     era = (days if days >= 0 else days - 146096) // 146097
     doe = days - era * 146097
     yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) // 365
     year = int(yoe + era * 400)
+    if precision == 0:
+        return f"{year:0<4}+{round(doe - (365 * yoe + yoe / 4 - yoe / 100)):0<3}"
     ts = days - (year * 365 + sum(
         i % 4 == 0 and i % 100 != 0 or i % 400 == 0
-        for i in range(year))) + 1
+        for i in range(1, year + 1)))
     doy = int(ts.__floor__())
-    return f"{year:0<4}+{doy:0<3}.{round((ts - doy) * 1e5):0<5}"
+    return f"{year:0<4}+{doy:0<3}.{str(round((ts - doy) * 10 ** precision)).zfill(precision)}"
 
 unix2doty(time())
 ```
@@ -362,26 +385,28 @@ unix2doty(time())
 #### R
 
 ```r
-unix2doty <- function(s = 0, ms = 0) {
+unix2doty <- function(s = 0, ms = 0, precision = 0) {
   days = s / 86400 + ms / 86400000 + 719468
   era = floor(ifelse(days >= 0, days, days - 146096) / 146097)
   doe = days - era * 146097
   yoe = floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365)
   year = yoe + era * 400
   years = 1:year
-  ts = days - (year * 365 + sum(
-    years %% 4 == 0 & years %% 100 != 0 | years %% 400 == 0
-    ))
-  doy = floor(ts)
-  cmd = round((ts - doy) * 1e5)
-  paste0(
-    sprintf("%04d", year),
-    "+", sprintf("%03d", doy),
-    ".", sprintf("%05d", cmd)
-    )
+  if (precision == 0) {
+    return(paste0(sprintf("%04d", year), "+", sprintf("%03d", round(
+                    doe - (365 * yoe + yoe / 4 - yoe / 100)))))
+  }
+  ts = days - (year * 365 + sum(years %% 4 == 0 &
+                                  years %% 100 != 0 | years %% 400 == 0))
+  doty = floor(ts)
+  paste0(sprintf("%04d", year),
+         "+",
+         sprintf("%03d", doty),
+         ".",
+         sprintf("%05d", round((ts - doty) * 1e5)))
 }
 
-unix2doty(as.numeric(Sys.time()))
+unix2doty(as.numeric(Sys.time()), precision = 5)
 ```
 
 #### CopyQ

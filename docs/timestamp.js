@@ -136,6 +136,15 @@ function unix2doty(ms = 0, precision = 0) {
     return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}.${time}`;
 }
 
+function ymd2doty(year = 1970, month = 1, day = 1) {
+    year -= month <= 2;
+    const doty = Math.round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1);
+    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}`;
+}
+
+console.log(ymd2doty());
+
+console.log(unix2doty());
 console.log(unix2doty(Date.now()));
 console.log(unix2doty(86400));
 console.log(unix2doty(0));
