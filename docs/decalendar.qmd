@@ -36,7 +36,7 @@ format:
 
 ## Gregorian calendar {#sec-greg}
 
-Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation shown in @eq-leap and @exm-leap.
+Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, February 29 in the Gregorian calendar and `Day 365` in `Decalendar`, at the end of the year. Therefore, `Decalendar` leap years occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the usual calculation shown in @eq-leap and @exm-leap described by [Howard Hinnant](https://howardhinnant.github.io/) in his 2021 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#is_leap).
 
 ### Leap year identification
 
@@ -81,7 +81,52 @@ is_leap <- function(y) {
 
 ::::::
 
-`Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can provided in the `m+dd` format, where `m` is the single-digit, [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal)-encoded month and `dd` is the double-digit, [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) `dotm`. The ordinal positions of September, October, November, and December in `Decalendar` match the [numeral prefixes](https://en.m.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English) in their names (Sep=7, Oct=8, Nov=9, Dec=10). In `Decalendar`, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February). @tbl-mval shows the positive and negative `m` values of each Gregorian calendar month. @sec-dotm provides more information on how `m` values are used.
+`Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can provided in the `m+dd` format, where `m` is the single-digit, [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal)-encoded month and `dd` is the double-digit, [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) `dotm`. The ordinal positions of September, October, November, and December in `Decalendar` match the [numeral prefixes](https://en.m.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English) in their names (Sep=7, Oct=8, Nov=9, Dec=10).
+
+In `Decalendar`, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February). During January and February, the Decalendar year is 1 less than the Gregorian calendar year  ($dyear = gyear - [m > 9]$). @tbl-mval shows the positive and negative `m` values of each Gregorian calendar month. @sec-dotm provides more information on how `m` values are used. To convert a Gregorian calendar date into a `Decalendar` `doty` date, we pass the year, month, and day into @eq-conv and @exm-conv described by [Howard Hinnant](https://howardhinnant.github.io/) in his 2021 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#days_from_civil).
+
+### Gregorian calendar date conversion to `Decalendar` date
+
+$$y -= m <= 2$$ {#eq-conv}
+
+:::::: {#exm-conv}
+
+::: {.panel-tabset group="language"}
+
+#### JavaScript
+
+```javascript
+function isLeap(y) {
+    return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
+}
+```
+
+#### Julia
+
+```julia
+function is_leap(y)
+    y % 4 == 0 && y % 100 != 0 || y % 400 == 0
+end
+```
+
+#### Python
+
+```python
+def is_leap(y):
+    return y % 4 == 0 and y % 100 != 0 or y % 400 == 0
+```
+
+#### R
+
+```r
+is_leap <- function(y) {
+  y %% 4 == 0 & y %% 100 != 0 | y %% 400 == 0
+}
+```
+
+:::
+
+::::::
 
 | Month     | Pos | Neg |
 | --------- | --- | --- |
@@ -221,7 +266,7 @@ $$unix = (JD − 2440587.5) \cdot 86400$$ {#eq-unix}
 
 To calculate `Decalendar` dates directly from UNIX time, we can use a calculation described by [Howard Hinnant](https://howardhinnant.github.io/) in his 2021 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days). Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year-of-era` (@eq-yoe), `year` (@eq-year), and `doty` (@eq-doty).
 
-### UNIX time conversion to Decalendar date
+### UNIX time conversion to `Decalendar` date
 
 $$era = \frac{\begin{cases}days&{\text{if } days \geq 0;}\\days-146096&{\text{otherwise.}}\end{cases}}{146097}$$ {#eq-era}
 
@@ -235,7 +280,7 @@ $$doty = \lfloor doe - (365 \cdot yoe + \frac{yoe}{4} - \frac{yoe}{100}) \rfloor
 
 To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` timestamp as shown in @eq-time. The code in @exm-time converts UNIX time into a `Decalendar` date or a `Decalendar` timestamp in the `Zone 0` time zone. The last line in @exm-time obtains the current `Decalendar` date by passing the current UNIX timestamp to the `unix2doty` function. If we pass 0 to the function (`unix2doty(0)`) the result should be the UNIX Epoch: `1969+306`. To see @exm-time in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current timestamps in the `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamp formats.
 
-### UNIX time conversion to Decalendar timestamp
+### UNIX time conversion to `Decalendar` timestamp
 
 $$time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c} y \mod 4 = 0 \\ \land y \mod 100 \neq 0 \\ \lor y \mod 400 = 0 \end{array} \right]$$ {#eq-time}
 
