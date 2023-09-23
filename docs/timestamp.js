@@ -136,13 +136,31 @@ function unix2doty(ms = 0, precision = 0) {
     return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}.${time}`;
 }
 
-function ymd2doty(year = 1970, month = 1, day = 1) {
+function date2doty(year = 1970, month = 1, day = 1) {
     year -= month <= 2;
     const doty = Math.round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1);
     return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}`;
 }
+console.log(date2doty());
 
-console.log(ymd2doty());
+function doty2date(year = 1969, doty = 306) {
+    const mp = (5 * doty + 2) / 153,
+        month = Math.floor(mp < 10 ? mp + 3 : mp - 9);
+    return (year + (month <= 2)).toString().padStart(4, "0") + "-"
+    + (month).toString().padStart(2, "0") + "-"
+    + Math.floor(doty - (153 * mp + 2) / 5 + 2).toString().padStart(2, "0");
+}
+console.log(doty2date());
+
+const x = 10;
+console.log(x.toString(16).toUpperCase())
+
+function unix2wday(ms = 0) {
+    return Math.floor((ms / 86400000 + 4) % 7)
+}
+
+console.log(unix2wday(Date.now()));
+console.log(date2doty(2021, 9, 1));
 
 console.log(unix2doty());
 console.log(unix2doty(Date.now()));
@@ -161,6 +179,7 @@ console.log(utc);
 console.log(julian);
 console.log(now.toISOString());
 console.log(is_leap(2000));
+console.log(myStamp(new Date("2021-09-01"), 0, "y", "+"));
 console.log(myStamp(mar1, 0, "y", "+"));
 console.log(myStamp(start, 0, "y", "+"));
 console.log(myStamp(test, 0, "y", "+"));
