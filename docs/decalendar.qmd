@@ -219,7 +219,7 @@ While it is possible to convert Julian dates into `Decalendar` dates and `Decloc
 
 $$unix = (JD − 2440587.5) \cdot 86400$$ {#eq-unix}
 
-To calculate `Decalendar` dates directly from UNIX time, we can use a calculation described by [Howard Hinnant](https://howardhinnant.github.io/) in his 2021 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnan.github.io/date_algorithms.html#civil_from_days). Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year-of-era` (@eq-yoe), `year` (@eq-year), and `doty` (@eq-doty).
+To calculate `Decalendar` dates directly from UNIX time, we can use a calculation described by [Howard Hinnant](https://howardhinnant.github.io/) in his 2021 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days). Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year-of-era` (@eq-yoe), `year` (@eq-year), and `doty` (@eq-doty).
 
 ### UNIX time conversion to Decalendar date
 
