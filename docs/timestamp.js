@@ -208,7 +208,6 @@ console.log(utc);
 console.log(julian);
 console.log(now.toISOString());
 console.log(is_leap(2000));
-console.log(myStamp(new Date("2021-09-01"), 0, "y", "+"));
 console.log(myStamp(mar1, 0, "y", "+"));
 console.log(myStamp(start, 0, "y", "+"));
 console.log(myStamp(test, 0, "y", "+"));
@@ -222,3 +221,18 @@ console.log(myStamp(now, -4, "m", "-"));
 console.log(myStamp(now, -4, "w", "+"));
 console.log(myStamp(now, -4, "w", "-"));
 console.log(myStamp(now, -now.getTimezoneOffset() / 60, "y", "+"));
+
+function doty2year(year = 1969, doty = 306) { return year + (doty > 305) }
+
+console.log(doty2year());
+
+console.log(
+    `${date2year().toString().padStart(4, "0")}+${
+        date2doty().toString().padStart(3, "0")}`);
+
+console.log(
+    `${doty2year().toString().padStart(4, "0")}-${
+        doty2date().map(
+        i => i.toString().padStart(2, "0")
+        ).join("-")}`);
+        

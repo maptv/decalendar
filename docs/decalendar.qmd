@@ -202,17 +202,17 @@ console.log(doty2year());
 #### Julia
 
 ```julia
-function date2doty(year=1969, month=1)
+function date2year(year=1969, month=1)
     year - (month < 3)
 end
 
-date2doty()
+date2year()
 
-function doty2date(year=1969, doty=306)
+function doty2year(year=1969, doty=306)
     year + (doty > 305)
 end
 
-doty2date()
+doty2year()
 ```
 
 #### Python
@@ -221,28 +221,28 @@ doty2date()
 def date2doty(year=1969, month=1):
     return year - (month < 3)
 
-date2doty()
+date2year()
 
 def doty2date(year=1969, doty=306):
     return year + (doty > 305)
 
-doty2date()
+doty2year()
 ```
 
 #### R
 
 ```r
-date2doty <- function(year = 1970, month = 1) {
+date2year <- function(year = 1970, month = 1) {
     year - (month < 3)
 }
 
-date2doty()
+date2year()
 
-doty2date <- function(year = 1969, doty = 306) {
+doty2year <- function(year = 1969, doty = 306) {
     year + (doty > 305)
 }
 
-doty2date()
+doty2year()
 ```
 
 ::::::
@@ -379,13 +379,57 @@ doty2isoo()
 
 ::::::
 
+### ISO 8601 years {#sec-isoy}
+
+Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. As mentioned in @sec-gregm, the years in `Decalendar` and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 less than the ISO 8601 year. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar and `0000-061` in the ISO 8601 ordinal date format.
+
 ### ISO 8601 calendar dates {#sec-isoc}
 
-Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. As mentioned in @sec-gregm, the years in `Decalendar`, ISO 8601 calendar, and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 less than the ISO 8601 year. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar, `0000-03-01` in the ISO 8601 calendar date format, and `0000-061` in the ISO 8601 ordinal date format.
+The most common ISO 8601 date format is `year-mm-dd`. Known as [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates), this format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from @exm-coor and @exm-gregm to convert between `Decalendar` dates and ISO 8601 calendar dates as shown in @exm-isoc.
 
-### ISO 8601 week dates {#sec-iso2}
+:::::: {#exm-isoc}
 
-...
+::: {.panel-tabset group="language"}
+
+#### JavaScript
+
+```javascript
+console.log(
+    `${date2year().toString().padStart(4, "0")}+${
+        date2doty().toString().padStart(3, "0")}`);
+
+console.log(
+    `${doty2year().toString().padStart(4, "0")}-${
+        doty2date().map(
+        i => i.toString().padStart(2, "0")
+        ).join("-")}`);
+```
+
+#### Julia
+
+```julia
+
+```
+
+#### Python
+
+```python
+
+```
+
+#### R
+
+```r
+
+```
+
+:::
+
+::::::
+
+### ISO 8601 week dates {#sec-isow}
+
+The ISO 8601 week date format is 
 
 ### ISO 8601 times {#sec-isot}
 
