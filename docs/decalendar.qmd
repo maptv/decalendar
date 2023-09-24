@@ -1,5 +1,6 @@
 ---
 title: "`Decalendar` and `Declock`"
+author: Martin Laptev
 execute:
   eval: false
   cache: false
@@ -41,11 +42,216 @@ format:
 
 ## Gregorian calendar {#sec-greg}
 
+### Coordinate analogy {#sec-coor}
+
+In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). `Decalendar` provides two coordinates in one number: the day-of-the-year (`doty`). The first two digits of the `doty` is the `dek` number. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The last digit of the `doty` is the day-of-the-`dek` (`dotd`) number, which serves as both the `dotm` and the day-of-the-week (`dotw`) in `Decalendar`. @tbl-conv shows the `doty` equivalents of all Gregorian calendar dates. To find a specific date in @tbl-conv, first find the month among the columns (think of the month as an x-axis value) and then find the `dotm` among the rows (the day is like a y-axis value).
+
+::: {.callout-note collapse="true"}
+#### Click here to expand the Gregorian calendar date to `doty` conversion table
+| Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan  | Feb  |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
+|  1  |  0  |  31 |  61 |  92 | 122 | 153 | 184 | 214 | 245 | 275 | 306  | 337  |
+|  2  |  1  |  32 |  62 |  93 | 123 | 154 | 185 | 215 | 246 | 276 | 307  | 338  |
+|  3  |  2  |  33 |  63 |  94 | 124 | 155 | 186 | 216 | 247 | 277 | 308  | 339  |
+|  4  |  3  |  34 |  64 |  95 | 125 | 156 | 187 | 217 | 248 | 278 | 309  | 340  |
+|  5  |  4  |  35 |  65 |  96 | 126 | 157 | 188 | 218 | 249 | 279 | 310  | 341  |
+|  6  |  5  |  36 |  66 |  97 | 127 | 158 | 189 | 219 | 250 | 280 | 311  | 342  |
+|  7  |  6  |  37 |  67 |  98 | 128 | 159 | 190 | 220 | 251 | 281 | 312  | 343  |
+|  8  |  7  |  38 |  68 |  99 | 129 | 160 | 191 | 221 | 252 | 282 | 313  | 344  |
+|  9  |  8  |  39 |  69 | 100 | 130 | 161 | 192 | 222 | 253 | 283 | 314  | 345  |
+| 10  |  9  |  40 |  70 | 101 | 131 | 162 | 193 | 223 | 254 | 284 | 315  | 346  |
+| 11  | 10  |  41 |  71 | 102 | 132 | 163 | 194 | 224 | 255 | 285 | 316  | 347  |
+| 12  | 11  |  42 |  72 | 103 | 133 | 164 | 195 | 225 | 256 | 286 | 317  | 348  |
+| 13  | 12  |  43 |  73 | 104 | 134 | 165 | 196 | 226 | 257 | 287 | 318  | 349  |
+| 14  | 13  |  44 |  74 | 105 | 135 | 166 | 197 | 227 | 258 | 288 | 319  | 350  |
+| 15  | 14  |  45 |  75 | 106 | 136 | 167 | 198 | 228 | 259 | 289 | 320  | 351  |
+| 16  | 15  |  46 |  76 | 107 | 137 | 168 | 199 | 229 | 260 | 290 | 321  | 352  |
+| 17  | 16  |  47 |  77 | 108 | 138 | 169 | 200 | 230 | 261 | 291 | 322  | 353  |
+| 18  | 17  |  48 |  78 | 109 | 139 | 170 | 201 | 231 | 262 | 292 | 323  | 354  |
+| 19  | 18  |  49 |  79 | 110 | 140 | 171 | 202 | 232 | 263 | 293 | 324  | 355  |
+| 20  | 19  |  50 |  80 | 111 | 141 | 172 | 203 | 233 | 264 | 294 | 325  | 356  |
+| 21  | 20  |  51 |  81 | 112 | 142 | 173 | 204 | 234 | 265 | 295 | 326  | 357  |
+| 22  | 21  |  52 |  82 | 113 | 143 | 174 | 205 | 235 | 266 | 296 | 327  | 358  |
+| 23  | 22  |  53 |  83 | 114 | 144 | 175 | 206 | 236 | 267 | 297 | 328  | 359  |
+| 24  | 23  |  54 |  84 | 115 | 145 | 176 | 207 | 237 | 268 | 298 | 329  | 360  |
+| 25  | 24  |  55 |  85 | 116 | 146 | 177 | 208 | 238 | 269 | 299 | 330  | 361  |
+| 26  | 25  |  56 |  86 | 117 | 147 | 178 | 209 | 239 | 270 | 300 | 331  | 362  |
+| 27  | 26  |  57 |  87 | 118 | 148 | 179 | 210 | 240 | 271 | 301 | 332  | 363  |
+| 28  | 27  |  58 |  88 | 119 | 149 | 180 | 211 | 241 | 272 | 302 | 333  | 364  |
+| 29  | 28  |  59 |  89 | 120 | 150 | 181 | 212 | 242 | 273 | 303 | 334  | 365  |
+| 30  | 29  |  60 |  90 | 121 | 151 | 182 | 213 | 243 | 274 | 304 | 335  |      |
+| 31  | 30  |     |  91 |     | 152 | 183 |     | 244 |     | 305 | 336  |      |
+
+: Gregorian calendar date to positive `doty` conversion {#tbl-coor}
+
+:::
+
+### Gregorian calendar date conversion {#sec-conv}
+
+In addition to using a conversion table like @tbl-coor, we can convert between Gregorian calendar dates and `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `date2doty` function is a `doty` number, while its inverse function, `doty2date`, returns an array containing the month and `dotm` numbers.
+
+:::::: {#exm-conv}
+
+::: {.panel-tabset group="language"}
+
+#### JavaScript
+
+```javascript
+function date2doty(month = 1, day = 1) {
+    return Math.floor(
+        (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
+)}
+
+console.log(date2doty());
+
+function doty2date(doty = 306) {
+    const m = Math.floor((5 * doty + 2) / 153);
+    return [Math.floor(m < 10 ? m + 3 : m - 9), Math.floor(doty - (153 * m + 2) / 5 + 2)];
+}
+
+console.log(doty2date());
+```
+
+#### Julia
+
+```julia
+function date2doty(month=1, day=1)
+    Int(floor((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1))
+end
+
+date2doty()
+
+function doty2date(doty = 306)
+    m = floor((5 * doty + 2) / 153);
+    return Int(m < 10 ? m + 3 : m - 9), Int(floor(doty - (153 * m + 2) / 5 + 2))
+end
+
+doty2date()
+```
+
+#### Python
+
+```python
+def date2doty(month=1, day=1):
+    return (153 * (month - 3 if month > 2 else month + 9) + 2) // 5 + day - 1
+
+date2doty()
+
+def doty2date(doty=306):
+    m = (5 * doty + 2) // 153
+    return m + 3 if m < 10 else m - 9, doty - (153 * m + 2) // 5 + 1
+
+doty2date()
+```
+
+#### R
+
+```r
+date2doty <- function(month = 1, day = 1) {
+    floor((153 * (ifelse(month > 2, month - 3, month + 9)) + 2) / 5 + day - 1)
+}
+
+date2doty()
+
+doty2date <- function(doty = 306) {
+    m <- floor((5 * doty + 2) / 153)
+    c(ifelse(m < 10, m + 3, m - 9), floor(doty - (153 * m + 2) / 5 + 2))
+}
+doty2date()
+```
+
+:::
+
+::::::
+
+### Gregorian calendar months and years {#sec-gregm}
+
+The functions in @exm-coor convert between `Decalendar` and Gregorian calendar month numbers, which are shown in @tbl-m. January and February are the last months of the `Decalendar` year. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Both of these calculations are shown in @exm-gregm.
+
+| dm | gm | Month     |
+| -- | -- | --------- |
+| 0  | 3  | March     |
+| 1  | 4  | April     |
+| 2  | 5  | May       |
+| 3  | 6  | June      |
+| 4  | 7  | July      |
+| 5  | 8  | August    |
+| 6  | 9  | September |
+| 7  | 10 | October   |
+| 8  | 11 | November  |
+| 9  | 12 | December  |
+| 10 | 1  | January   |
+| 11 | 2  | February  |
+
+: The numeric values of months in `Decalendar` and the Gregorian calendar {#tbl-gregm}
+
+:::::: {#exm-gregm}
+
+::: {.panel-tabset group="language"}
+
+#### JavaScript
+
+```javascript
+function date2year(year = 1970, month = 1) { return year - (month < 3) }
+
+console.log(date2year());
+
+function doty2year(year = 1969, doty = 306) { return year + (doty > 305) }
+
+console.log(doty2year());
+```
+
+#### Julia
+
+```julia
+function date2doty(year=1969, month=1)
+    year - (month < 3)
+end
+
+date2doty()
+
+function doty2date(year=1969, doty=306)
+    year + (doty > 305)
+end
+
+doty2date()
+```
+
+#### Python
+
+```python
+def date2doty(year=1969, month=1):
+    return year - (month < 3)
+
+date2doty()
+
+def doty2date(year=1969, doty=306):
+    return year + (doty > 305)
+
+doty2date()
+```
+
+#### R
+
+```r
+date2doty <- function(year = 1970, month = 1) {
+    year - (month < 3)
+}
+
+date2doty()
+
+doty2date <- function(year = 1969, doty = 306) {
+    year + (doty > 305)
+}
+
+doty2date()
+```
+
 ### Leap years {#sec-gregl}
 
-Every date in the Gregorian calendar has a `Decalendar` day of the year (`doty`) equivalent. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, `Day 365` in `Decalendar` and February 29 in the Gregorian calendar, at the end of the year. `Decalendar` leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the [`is_leap`](http://howardhinnant.github.io/date_algorithms.html#is_leap) algorithm, described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014] and translated from C++ into $\LaTeX$ in @eq-gregl and into [JavaScript](https://tc39.es/ecma262), [Julia](https://julialang.org), [Python](https://www.python.org), and [R](https://www.r-project.org/) in @exm-gregl.
+The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions leap days, `Day 365` in `Decalendar` and February 29 in the Gregorian calendar, at the end of the year. `Decalendar` leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the [`is_leap`](http://howardhinnant.github.io/date_algorithms.html#is_leap) algorithm as described by [@hinnant2014] and shown in @eq-gregl and @exm-gregl.
 
-$$y \mod 4 = 0 \land y \mod 100 \neq 0 \lor y \mod 400 = 0$$ {#eq-gregl}
+$$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
 :::::: {#exm-gregl}
 
@@ -54,121 +260,36 @@ $$y \mod 4 = 0 \land y \mod 100 \neq 0 \lor y \mod 400 = 0$$ {#eq-gregl}
 #### JavaScript
 
 ```javascript
-function is_leap(y) {
-    return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
+function is_leap(year=1970) {
+    return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 }
+is_leap()
 ```
 
 #### Julia
 
 ```julia
-function is_leap(y)
-    y % 4 == 0 && y % 100 != 0 || y % 400 == 0
+function is_leap(year=1970)
+    year % 4 == 0 && year % 100 != 0 || year % 400 == 0
 end
+is_leap()
 ```
 
 #### Python
 
 ```python
-def is_leap(y):
-    return y % 4 == 0 and y % 100 != 0 or y % 400 == 0
+def is_leap(year=1970):
+    return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+is_leap()
 ```
 
 #### R
 
 ```r
-is_leap <- function(y) {
-  y %% 4 == 0 & y %% 100 != 0 | y %% 400 == 0
+is_leap <- function(year=1970) {
+  year %% 4 == 0 & year %% 100 != 0 | year %% 400 == 0
 }
-```
-
-:::
-
-::::::
-
-### Months {#sec-gregm}
-
-`Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can provided in the `m+dd` format, where `m` is the single-digit, [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal)-encoded month and `dd` is the double-digit, [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) `dotm`. The ordinal positions of September, October, November, and December in `Decalendar` match the [numeral prefixes](https://en.m.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English) in their names (Sep=7, Oct=8, Nov=9, Dec=10) and can be decremented to obtain their `m` values (Sep=6, Oct=7, Nov=8, Dec=9).
-
-To obtain `m` values from Gregorian calendar month, we subtract 3 if the month number is greater than two and add 9 if not ($m = \begin{cases}month - 3&{\text{if } month > 2;}\\month + 9&{\text{otherwise.}}\end{cases}$). m = mp < 10 ? mp+3 : mp-9 sWe then hexadecimal-encode the result. remainder ($m = (month + 9) \mod 12$). The inverse function () @exm-gregm shows 
-
-m = mp < 10 ? mp+3 : mp-9
-
-In `Decalendar`, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February). During January and February, the `Decalendar` year is 1 less than the Gregorian calendar year ($dyear = gyear - [m > 9]$). @tbl-mval shows the positive and negative `m` values of each Gregorian calendar month. @sec-dotm provides more information on how positive and negative `m` values are used in the `m+dd` format.
-
-| Month     | Pos | Neg |
-| --------- | --- | --- |
-| March     |  0  | -C  |
-| April     |  1  | -B  |
-| May       |  2  | -A  |
-| June      |  3  | -9  |
-| July      |  4  | -8  |
-| August    |  5  | -7  |
-| September |  6  | -6  |
-| October   |  7  | -5  |
-| November  |  8  | -4  |
-| December  |  9  | -3  |
-| January   |  A  | -2  |
-| February  |  B  | -1  |
-
-: The `m` values of Gregorian calendar months {#tbl-mval}
-
-### Gregorian calendar and `Decalendar` date conversion {#sec-gregd}
-
-To convert a Gregorian calendar date into a `Decalendar` `doty` date, we can use the code in @exm-date2doty, which is derived from [a C++ algorithm](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) in [@hinnant2014]. First, we decrement the year if the provided Gregorian calendar `month` is January (1) or February (2) with @eq-year1 and then turn the `month` and `day` into a `doty` with @eq-doty1. The inverse function in @exm-doty2date, which converts a `Decalendar` `doty` date into a Gregorian calendar date, is also derived from [@hinnant2014]. 
-
-$$year = year - [month <= 2]$$ {#eq-year1}
-
-$$doty = (153 \cdot \frac{\begin{cases}month - 3&{\text{if } month > 2;}\\m + 9&{\text{otherwise.}}\end{cases}}{5} + d - 1$$ {#eq-doty1}
-
-:::::: {#exm-date2doty}
-
-::: {.panel-tabset group="language"}
-
-#### JavaScript
-
-```javascript
-function date2doty(year = 1970, month = 1, day = 1) {
-    year -= month <= 2;
-    const doty = Math.round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1);
-    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}`;
-}
-console.log(date2doty());
-```
-
-#### Julia
-
-```julia
-function date2doty(year=1970, month=1, day=1)
-    year = year - (month <= 2)
-    doty = Int(round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1))
-    "$(lpad(year,4,'0'))+$(lpad(doty,3,'0'))"
-end
-
-date2doty()
-```
-
-#### Python
-
-```python
-def date2doty(year=1970, month=1, day=1):
-    year -= month <= 2
-    doty = round((153 * (month - 3 if month > 2 else month + 9) + 2) / 5 + day - 1)
-    return f"{year:0<4}+{doty:0<3}"
-
-date2doty()
-```
-
-#### R
-
-```r
-date2doty <- function(year = 1970, month = 1, day = 1) {
-    year = year - (month <= 2)
-    doty = round((153 * (ifelse(month > 2, month - 3, month + 9)) + 2) / 5 + day - 1)
-    paste0(sprintf("%04d", year), "+", sprintf("%03d", doty))
-}
-
-date2doty()
+is_leap()
 ```
 
 :::
@@ -177,52 +298,93 @@ date2doty()
 
 ## ISO 8601 {#sec-iso}
 
-### ISO 8601 dates {#sec-isod}
+### ISO 8601 ordinal dates {#sec-isoo}
 
-The `m+dd` format described in @sec-gregm is similar to the [calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) format (year-mm-dd) of the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). `Decalendar` dates (`year±day`) are most similar to ISO 8601 [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (year-day). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation shown in @eq-ord and @exm-ord. This calculation essentially shifts the ordinal date number to be 60 days earlier.
+`Decalendar` dates (`year+day`) are most similar to [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`) specified by the [ISO 8601 international standard](https://en.wikipedia.org/wiki/ISO_8601) for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation shown in @eq-isoo and @exm-isoo This calculation essentially shifts the ordinal date by 60 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar. We use the `is_leap` function from @exm-gregl in @exm-isoo to account for the fact that the Gregorian calendar leap year is not at the end of the year.
 
-$$(ordinal + 305) \mod 365$$ {#eq-ord}
+$$
+(isoordinal + 305 - is_leap(year)) \mod 365 \\
+(doty + 60 + is_leap(year + 1)) \mod 365
+$$ {#eq-isoo}
 
-:::::: {#exm-ord}
+:::::: {#exm-isoo}
 
 ::: {.panel-tabset group="language"}
 
 #### JavaScript
 
 ```javascript
-function ordi2doty(o) {
-    return (o + 305) % 365;
+function isoo2doty(year = 1970, day = 1) {
+    return (day + 305 - is_leap(year)) % 365
 }
+
+console.log(isoo2doty())
+
+function doty2isoo(year = 1970, doty = 0) {
+    return (doty + 60 + is_leap(year + 1)) % 365
+}
+
+console.log(doty2isoo())
 ```
 
 #### Julia
 
 ```julia
-function ordi2doty(o)
-    (o + 305) % 365
+function isoo2doty(year=1970, day=1)
+    (day + 305 - is_leap(year)) % 365
 end
+
+isoo2doty()
+
+function doty2isoo(year=1970, doty=0) {
+    (doty + 60 + is_leap(year + 1)) % 365
+}
+
+doty2isoo()
 ```
 
 #### Python
 
 ```python
-def ordi2doty(o):
-    return (o + 305) % 365
+def isoo2doty(year=1970, day=1):
+    return (day + 305 - is_leap(year)) % 365
+
+isoo2doty()
+
+def doty2isoo(year=1970, doty=0):
+    return (doty + 60 + is_leap(year + 1)) % 365
+}
+
+doty2isoo()
 ```
 
 #### R
 
 ```r
-ordi2doty <- function(o) {
-  (o + 305) %% 365
+isoo2doty <- function(year = 1970, day = 1) {
+    (day + 305 - is_leap(year)) %% 365
 }
+
+isoo2doty()
+
+doty2isoo <- function(year = 1970, doty = 0) {
+    (doty + 60 + is_leap(year + 1)) %% 365
+}
+
+doty2isoo()
 ```
 
 :::
 
 ::::::
 
-Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. The years in `Decalendar`, ISO 8601 calendar, and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 year less than the ISO 8601 year. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar, `0000-03-01` in the ISO 8601 calendar date format, and `0000-061` in the ISO 8601 ordinal date format.
+### ISO 8601 calendar dates {#sec-isoc}
+
+Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. As mentioned in @sec-gregm, the years in `Decalendar`, ISO 8601 calendar, and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 less than the ISO 8601 year. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar, `0000-03-01` in the ISO 8601 calendar date format, and `0000-061` in the ISO 8601 ordinal date format.
+
+### ISO 8601 week dates {#sec-iso2}
+
+...
 
 ### ISO 8601 times {#sec-isot}
 
@@ -230,7 +392,7 @@ Just like `Decalendar` seeks to make months and weeks obsolete, `Declock` aims t
 
 ### ISO 8601 recurring intervals {#sec-isoi}
 
-The numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create time intervals. For example, [indexing and slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/).
+The `doty` numbers in the `Decalendar` dates are essentially [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) that can be positive or negative, like in computer [programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming). Another inspiration from computer programming, is the ability to use [array slicing](https://en.wikipedia.org/wiki/Array_slicing) to create time intervals. For example, [indexing and slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/).
 
 Building on the concept of array slicing (`start:stop:step`), `Decalendar` introduces a new technique called "array spreading" (`start>span>split>space`) and even allows for nesting and mixing of `slices` and `spreads`. The various expressions that represent dates, times, timestamps, and time intervals are collectively called `Decalendar strings`. ISO 8601 has three methods of unequivocally creating [time intervals](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals), `start/stop`, `start/span`, and `span/stop`. The `Decalendar string` equivalents of these three interval creation methods are `start:stop`, `start>span`, and `stop<span`.
 
@@ -240,7 +402,7 @@ Unlike `Decalendar strings`, ISO 8601 expressions cannot create non-consecutive 
 
 ### French Republican calendar _décades_ {#sec-frcd}
 
-The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a _décade_, while a group of 10 days in `Decalendar` is called a `dek`. The names of the days in a `Decalendar` `dek` are derived from their [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) cardinal numbers (zero, one, two...), whereas the days of the _décade_ are named after their ordinal numbers (first, second, third...). @tbl-dotd provides the cardinal numbers, one-letter codes, names, and types of the days of the `dek` as well as the names of their French Republican calendar equivalents. To translate a 
+The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a _décade_, while a group of 10 days in `Decalendar` is called a `dek`. The names of the days in a `Decalendar` `dek` are derived from their [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) cardinal numbers (zero, one, two...), whereas the days of the _décade_ are named after their ordinal numbers (first, second, third...). @tbl-dotd provides the cardinal numbers, one-letter codes, names, and types of the days of the `dek` as well as the names of their French Republican calendar equivalents.
 
 | # | Code | Name   | Type | French   |
 | - | ---- | ------ | ---- | -------- |
@@ -652,53 +814,7 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 
 : The workday schedule {#tbl-daily}
 
-### Coordinate analogy {#sec-coor}
-
-In the Gregorian calendar, dates are like a set of coordinates, where the month and the day of the month (`dotm`) are like longitude and latitude in the Geographic coordinate system or x and y in the Cartesian coordinate system. `Decalendar` provides both coordinates in one number, the `doty` contains both the `dek` number (first 2 digits) and the `dotd` number (last digit). In this way, the `doty` contains all of the information we need for the `Decalendar` system: the `dek`, which fulfills the role of both the month and the week, and the `dotd`, which fulfills the role of both the day of the month and the day of the week.
-
 ### Conversion tables {#sec-conv}
-
-@tbl-conv shows the positive `doty` numbers for all Gregorian calendar dates. Negative `doty` numbers require two separate tables for common and leap years, @tbl-negc and @tbl-negl, because all negative `doty` numbers decrease by 1 in leap years. In all of the tables below, the columns are labeled by month (like longitudes or x-axis values), while the rows are labeled by the day of the month (like latitudes or y-axis values). Since the `Decalendar` leap day is at the end of the year and everything resets after the end of each year, `Decalendar` leap days do not affect the positive `doty` numbers of any other `Decalendar` days.
-
-::: {.callout-note collapse="true"}
-#### Expand To See Positive Number Conversion Table
-| Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan  | Feb  |
-|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
-|  1  |  0  |  31 |  61 |  92 | 122 | 153 | 184 | 214 | 245 | 275 | 306  | 337  |
-|  2  |  1  |  32 |  62 |  93 | 123 | 154 | 185 | 215 | 246 | 276 | 307  | 338  |
-|  3  |  2  |  33 |  63 |  94 | 124 | 155 | 186 | 216 | 247 | 277 | 308  | 339  |
-|  4  |  3  |  34 |  64 |  95 | 125 | 156 | 187 | 217 | 248 | 278 | 309  | 340  |
-|  5  |  4  |  35 |  65 |  96 | 126 | 157 | 188 | 218 | 249 | 279 | 310  | 341  |
-|  6  |  5  |  36 |  66 |  97 | 127 | 158 | 189 | 219 | 250 | 280 | 311  | 342  |
-|  7  |  6  |  37 |  67 |  98 | 128 | 159 | 190 | 220 | 251 | 281 | 312  | 343  |
-|  8  |  7  |  38 |  68 |  99 | 129 | 160 | 191 | 221 | 252 | 282 | 313  | 344  |
-|  9  |  8  |  39 |  69 | 100 | 130 | 161 | 192 | 222 | 253 | 283 | 314  | 345  |
-| 10  |  9  |  40 |  70 | 101 | 131 | 162 | 193 | 223 | 254 | 284 | 315  | 346  |
-| 11  | 10  |  41 |  71 | 102 | 132 | 163 | 194 | 224 | 255 | 285 | 316  | 347  |
-| 12  | 11  |  42 |  72 | 103 | 133 | 164 | 195 | 225 | 256 | 286 | 317  | 348  |
-| 13  | 12  |  43 |  73 | 104 | 134 | 165 | 196 | 226 | 257 | 287 | 318  | 349  |
-| 14  | 13  |  44 |  74 | 105 | 135 | 166 | 197 | 227 | 258 | 288 | 319  | 350  |
-| 15  | 14  |  45 |  75 | 106 | 136 | 167 | 198 | 228 | 259 | 289 | 320  | 351  |
-| 16  | 15  |  46 |  76 | 107 | 137 | 168 | 199 | 229 | 260 | 290 | 321  | 352  |
-| 17  | 16  |  47 |  77 | 108 | 138 | 169 | 200 | 230 | 261 | 291 | 322  | 353  |
-| 18  | 17  |  48 |  78 | 109 | 139 | 170 | 201 | 231 | 262 | 292 | 323  | 354  |
-| 19  | 18  |  49 |  79 | 110 | 140 | 171 | 202 | 232 | 263 | 293 | 324  | 355  |
-| 20  | 19  |  50 |  80 | 111 | 141 | 172 | 203 | 233 | 264 | 294 | 325  | 356  |
-| 21  | 20  |  51 |  81 | 112 | 142 | 173 | 204 | 234 | 265 | 295 | 326  | 357  |
-| 22  | 21  |  52 |  82 | 113 | 143 | 174 | 205 | 235 | 266 | 296 | 327  | 358  |
-| 23  | 22  |  53 |  83 | 114 | 144 | 175 | 206 | 236 | 267 | 297 | 328  | 359  |
-| 24  | 23  |  54 |  84 | 115 | 145 | 176 | 207 | 237 | 268 | 298 | 329  | 360  |
-| 25  | 24  |  55 |  85 | 116 | 146 | 177 | 208 | 238 | 269 | 299 | 330  | 361  |
-| 26  | 25  |  56 |  86 | 117 | 147 | 178 | 209 | 239 | 270 | 300 | 331  | 362  |
-| 27  | 26  |  57 |  87 | 118 | 148 | 179 | 210 | 240 | 271 | 301 | 332  | 363  |
-| 28  | 27  |  58 |  88 | 119 | 149 | 180 | 211 | 241 | 272 | 302 | 333  | 364  |
-| 29  | 28  |  59 |  89 | 120 | 150 | 181 | 212 | 242 | 273 | 303 | 334  | 365  |
-| 30  | 29  |  60 |  90 | 121 | 151 | 182 | 213 | 243 | 274 | 304 | 335  |      |
-| 31  | 30  |     |  91 |     | 152 | 183 |     | 244 |     | 305 | 336  |      |
-
-: Gregorian calendar date to positive `doty` conversion {#tbl-conv}
-
-:::
 
 ::: {.callout-note collapse="true"}
 #### Expand To See Negative Number Conversion Tables
@@ -1078,3 +1194,48 @@ Certain times of day are easier to express as fractions, rather than decimals. T
 
 ::: {#refs}
 :::
+
+Negative `doty` numbers require two separate tables for common and leap years, @tbl-negc and @tbl-negl, because all negative `doty` numbers decrease by 1 in leap years. 
+
+
+
+The [ordinal numerals](https://en.wikipedia.org/wiki/Ordinal_numeral) of September, October, November, and December in `Decalendar` (Sep=7th, Oct=8th, Nov=9th, Dec=10th) match the [numeral prefixes](https://en.m.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English) in their names (Sep=7, Oct=8, Nov=9, Dec=10). The `m` value of a month is based on its cardinal number in `Decalendar`, which is 1 less than its ordinal number (Sep=6, Oct=7, Nov=8, Dec=9).
+
+
+As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `m+dd` format, where `m` is the single-digit, [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal)-encoded month and `dd` is the double-digit, [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) `dotm`. The `m+dd` format is similar to the [ISO8601 calendar date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) format (year-mm-dd).
+
+To convert a double-digit Gregorian calendar month number (`mm`) into a single-digit `Decalendar` `m` value, we subtract 3 if `mm` is greater than 2, add 9 if not ($m = \begin{cases}mm - 3&{\text{if } month > 2;}\\mm + 9&{\text{otherwise.}}\end{cases}$), and then encode into hexadecimal (Base16). To do the inverse (convert `m` to `mm`), we decode from hexadecimal, add 3 to `m` values less than 10 and subtract 9 from other `m` values ($m = \begin{cases}month + 3&{\text{if } month < 10;}\\month - 9&{\text{otherwise.}}\end{cases}$. @exm-gregm includes code for round-trip conversion of `mm` and `m` values, including hexadecimal encoding and decoding.
+
+)= mp < 10 ? mp+3 : mp-9 sWe then hexadecimal-encode the result. remainder ($m = (month + 9) \mod 12$). The inverse function () shows 
+ 
+
+m = mp < 10 ? mp+3 : mp-9
+
+In `Decalendar`, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February). @sec-dotm provides more information on how positive and negative `m` values are used in the `m+dd` format.
+
+### Gregorian calendar and `Decalendar` date conversion {#sec-gregd}
+
+To convert a Gregorian calendar date into a `Decalendar` `doty` date, we can use the code in @exm-date2doty, which is derived from [a C++ algorithm](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) in [@hinnant2014]. First, we decrement the year if the provided Gregorian calendar `month` is January (1) or February (2) with @eq-year1 and then turn the `month` and `day` into a `doty` with @eq-doty1. The inverse function in @exm-doty2date, which converts a `Decalendar` `doty` date into a Gregorian calendar date, is also derived from [@hinnant2014]. 
+
+
+$$doty = (153 \cdot \frac{\begin{cases}month - 3&{\text{if } month > 2;}\\m + 9&{\text{otherwise.}}\end{cases}}{5} + d - 1$$ {#eq-doty1}
+
+:::::: {#exm-date2doty}
+
+::: {.panel-tabset group="language"}
+
+#### JavaScript
+
+```javascript
+function date2doty(year = 1970, month = 1, day = 1) {
+    year -= month <= 2;
+    const doty = Math.round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1);
+    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}`;
+}
+console.log(date2doty());
+```
+
+:::
+
+::::::
+

@@ -126,31 +126,59 @@ function unix2doty(ms = 0, precision = 0) {
             doe - (365 * yoe + yoe / 4 - yoe / 100)
         ).toString().padStart(3, "0")}`
     }
-    const timestamp = days - (year * 365 + [...Array(year).keys()].map(
-        i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
-    ).reduce((a, b) => a + b, 0)) + 1,
+    const timestamp = days - Math.floor(
+        year * 365 + year / 4 - year / 100 + year / 400
+    ) + 1,
         doty = Math.floor(timestamp),
         time = Math.round(
             (timestamp - doty) * 10 ** precision
         ).toString().padStart(precision, "0");
-    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}.${time}`;
+    return `${year.toString().padStart(4, "0")
+        }+${doty.toString().padStart(3, "0")}.${time}`;
 }
 
-function date2doty(year = 1970, month = 1, day = 1) {
-    year -= month <= 2;
-    const doty = Math.round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1);
-    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}`;
+function leaps(year) {
+    return Math.floor(year / 4 - year / 100 + year / 400)
 }
+
+console.log(leaps(2023));
+
+function date2doty(month = 1, day = 1) {
+    return Math.floor(
+        (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
+    )
+}
+
 console.log(date2doty());
 
-function doty2date(year = 1969, doty = 306) {
-    const mp = (5 * doty + 2) / 153,
-        month = Math.floor(mp < 10 ? mp + 3 : mp - 9);
-    return (year + (month <= 2)).toString().padStart(4, "0") + "-"
-    + (month).toString().padStart(2, "0") + "-"
-    + Math.floor(doty - (153 * mp + 2) / 5 + 2).toString().padStart(2, "0");
+function doty2date(doty = 306) {
+    const m = Math.floor((5 * doty + 2) / 153);
+    return [Math.floor(m < 10 ? m + 3 : m - 9), Math.floor(doty - (153 * m + 2) / 5 + 2)];
 }
+
 console.log(doty2date());
+
+function isoo2doty(year = 1970, day = 1) {
+    return (day + 305 - is_leap(year)) % 365
+}
+
+console.log(isoo2doty(2024, 61))
+console.log(isoo2doty())
+
+function doty2isoo(year = 1970, doty = 0) {
+    return (doty + 60 + is_leap(year + 1)) % 365
+}
+
+
+function date2year(year = 1970, month = 1) { return year - (month < 3) }
+
+console.log(date2year());
+
+
+console.log(doty2isoo())
+console.log(isoo2doty(2024, 61))
+console.log(doty2isoo(2023, 0))
+console.log(306 - 59)
 
 const x = 10;
 console.log(x.toString(16).toUpperCase())
