@@ -9,7 +9,8 @@ toc-depth: 3
 number-sections: true
 number-depth: 3
 bibliography: ref.bib
-date: last-modified
+keep-md: true
+citations-hover: true
 format:
   html:
     anchor-sections: true
