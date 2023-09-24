@@ -302,12 +302,11 @@ is_leap()
 
 ### ISO 8601 ordinal dates {#sec-isoo}
 
-`Decalendar` dates (`year+day`) are most similar to [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`) specified by the [ISO 8601 international standard](https://en.wikipedia.org/wiki/ISO_8601) for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculation shown in @eq-isoo and @exm-isoo This calculation essentially shifts the ordinal date by 60 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar. We use the `is_leap` function from @exm-gregl in @exm-isoo to account for the fact that the Gregorian calendar leap year is not at the end of the year.
+`Decalendar` dates (`year+day`) are most similar to [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`) specified by the [ISO 8601 international standard](https://en.wikipedia.org/wiki/ISO_8601) for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the ordinal date by 60 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar. We use the `is_leap` function from @exm-gregl in @exm-isoo to account for the fact that the Gregorian calendar leap year is not at the end of the year.
 
-$$
-(isoordinal + 305 - is_leap(year)) \mod 365 \\
-(doty + 60 + is_leap(year + 1)) \mod 365
-$$ {#eq-isoo}
+$$(isoordinal + 305 - is_leap(year)) \mod 365$$ {#eq-isoo1}
+
+$$(doty + 60 + is_leap(year + 1)) \mod 365$$ {#eq-isoo2}
 
 :::::: {#exm-isoo}
 
