@@ -498,14 +498,15 @@ function unix2doty(ms = 0, precision = 0) {
             doe - (365 * yoe + yoe / 4 - yoe / 100)
         ).toString().padStart(3, "0")}`
     }
-    const timestamp = days - (year * 365 + [...Array(year).keys()].map(
-        i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
-    ).reduce((a, b) => a + b, 0)) + 1,
+    const timestamp = days - Math.floor(
+        year * 365 + year / 4 - year / 100 + year / 400
+    ) + 1,
         doty = Math.floor(timestamp),
         time = Math.round(
             (timestamp - doty) * 10 ** precision
         ).toString().padStart(precision, "0");
-    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}.${time}`;
+    return `${year.toString().padStart(4, "0")
+        }+${doty.toString().padStart(3, "0")}.${time}`;
 }
 
 console.log(unix2doty(Date.now()));
@@ -524,12 +525,11 @@ function unix2doty(s=0, ms=0, precision=0)
     if precision == 0
         return "$(lpad(year,4,'0'))+$(lpad(Int(round(doe - (365 * yoe + yoe / 4 - yoe / 100))),3,'0'))"
     end
-    ts = days - (year * 365 + sum([
-        i % 4 == 0 && i % 100 != 0 || i % 400 == 0
-        for i in 1:year]))
-    doy = Int(floor(ts))
-    cmd = Int(round((ts - doy) * 10 ^ precision))
-    return "$(lpad(year,4,'0'))+$(lpad(doy,3,'0')).$(lpad(cmd,precision,'0'))"
+    timestamp = days - floor(
+        year * 365 + year / 4 - year / 100 + year / 400
+    ) + 1
+    doy = Int(floor(timestamp))
+    return "$(lpad(year,4,'0'))+$(lpad(doy,3,'0')).$(lpad(Int(round((timestamp - doy) * 10 ^ precision)),precision,'0'))"
 end
 
 unix2doty(time())
@@ -548,11 +548,11 @@ def unix2doty(s=0, ms=0, precision=0):
     year = int(yoe + era * 400)
     if precision == 0:
         return f"{year:0<4}+{round(doe - (365 * yoe + yoe / 4 - yoe / 100)):0<3}"
-    ts = days - (year * 365 + sum(
-        i % 4 == 0 and i % 100 != 0 or i % 400 == 0
-        for i in range(1, year + 1)))
-    doy = int(ts.__floor__())
-    return f"{year:0<4}+{doy:0<3}.{str(round((ts - doy) * 10 ** precision)).zfill(precision)}"
+    timestamp = days - (
+        year * 365 + year / 4 - year / 100 + year / 400
+    ).__floor__() + 1
+    doy = int(timestamp.__floor__())
+    return f"{year:0<4}+{doy:0<3}.{str(round((timestamp - doy) * 10 ** precision)).zfill(precision)}"
 
 unix2doty(time())
 ```
@@ -571,14 +571,15 @@ unix2doty <- function(s = 0, ms = 0, precision = 0) {
     return(paste0(sprintf("%04d", year), "+", sprintf("%03d", round(
                     doe - (365 * yoe + yoe / 4 - yoe / 100)))))
   }
-  ts = days - (year * 365 + sum(years %% 4 == 0 &
-                                  years %% 100 != 0 | years %% 400 == 0))
-  doty = floor(ts)
+    timestamp = days - floor(
+        year * 365 + year / 4 - year / 100 + year / 400
+    ) + 1
+  doty = floor(timestamp)
   paste0(sprintf("%04d", year),
          "+",
          sprintf("%03d", doty),
          ".",
-         sprintf("%05d", round((ts - doty) * 1e5)))
+         sprintf(paste0("%0", precision, "d"), round((timestamp - doty) * 10 ^ precision)))
 }
 
 unix2doty(as.numeric(Sys.time()), precision = 5)
@@ -588,23 +589,33 @@ unix2doty(as.numeric(Sys.time()), precision = 5)
 
 ```javascript
 copyq:
-const days = Date.now() / 86400000 + 719468,
-    era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
-    doe = days - era * 146097,
-    yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
-    y = yoe + era * 400,
-    date = days - (y * 365 + [...Array(y).keys()].map(
-        i => i % 4 == 0 && i % 100 != 0 || i % 400 == 0
-    ).reduce((a, b) => a + b, 0)) + 1,
-    doy = Math.floor(date),
-    cmd = Math.round((date - doy) * 1e5),
-    date = `${y.toString().padStart(4, "0")}`
-    + `+${doy.toString().padStart(3, "0")}`
-    + `.${cmd.toString().padStart(5, "0")}`;
-copy(date)
+function unix2doty(ms = 0, precision = 0) {
+    const days = ms / 86400000 + 719468,
+        era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        doe = days - era * 146097,
+        yoe = Math.floor((
+            doe - doe / 1460 + doe / 36524 - doe / 146096
+        ) / 365),
+        year = yoe + era * 400;
+    if (precision == 0) {
+        return `${year.toString().padStart(4, "0")}+${Math.round(
+            doe - (365 * yoe + yoe / 4 - yoe / 100)
+        ).toString().padStart(3, "0")}`
+    }
+    const timestamp = days - Math.floor(
+        year * 365 + year / 4 - year / 100 + year / 400
+    ) + 1,
+        doty = Math.floor(timestamp),
+        time = Math.round(
+            (timestamp - doty) * 10 ** precision
+        ).toString().padStart(precision, "0");
+    return `${year.toString().padStart(4, "0")
+        }+${doty.toString().padStart(3, "0")}.${time}`;
+}
+
+copy(unix2doty(Date.now()))
 copySelection(date)
 paste()
-
 ```
 
 :::
