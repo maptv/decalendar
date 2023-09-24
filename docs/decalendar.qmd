@@ -10,9 +10,6 @@ number-sections: true
 number-depth: 3
 bibliography: ref.bib
 date: last-modified
-date-format: "[Last updated on] %YYYY%+%DDD%"
-filters:
-  - date.lua
 format:
   html:
     anchor-sections: true
@@ -44,7 +41,7 @@ format:
 
 ### Coordinate analogy {#sec-coor}
 
-In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). `Decalendar` provides two coordinates in one number: the day-of-the-year (`doty`). The first two digits of the `doty` is the `dek` number. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The last digit of the `doty` is the day-of-the-`dek` (`dotd`) number, which serves as both the `dotm` and the day-of-the-week (`dotw`) in `Decalendar`. @tbl-conv shows the `doty` equivalents of all Gregorian calendar dates. To find a specific date in @tbl-conv, first find the month among the columns (think of the month as an x-axis value) and then find the `dotm` among the rows (the day is like a y-axis value).
+In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). `Decalendar` provides two coordinates in one number: the day-of-the-year (`doty`). The first two digits of the `doty` is the `dek` number. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The last digit of the `doty` is the day-of-the-`dek` (`dotd`) number, which serves as both the `dotm` and the day-of-the-week (`dotw`) in `Decalendar`. @tbl-coor shows the `doty` equivalents of all Gregorian calendar dates. To find a specific date in @tbl-coor, first find the month among the columns (think of the month as an x-axis value) and then find the `dotm` among the rows (the day is like a y-axis value).
 
 ::: {.callout-note collapse="true"}
 #### Click here to expand the Gregorian calendar date to `doty` conversion table
@@ -90,7 +87,7 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 
 In addition to using a conversion table like @tbl-coor, we can convert between Gregorian calendar dates and `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `date2doty` function is a `doty` number, while its inverse function, `doty2date`, returns an array containing the month and `dotm` numbers.
 
-:::::: {#exm-conv}
+:::::: {#exm-coor}
 
 ::: {.panel-tabset group="language"}
 
@@ -166,7 +163,7 @@ doty2date()
 
 ### Gregorian calendar months and years {#sec-gregm}
 
-The functions in @exm-coor convert between `Decalendar` and Gregorian calendar month numbers, which are shown in @tbl-m. January and February are the last months of the `Decalendar` year. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Both of these calculations are shown in @exm-gregm.
+The functions in @exm-coor convert between `Decalendar` and Gregorian calendar month numbers, which are shown in @tbl-gregm. January and February are the last months of the `Decalendar` year. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Both of these calculations are shown in @exm-gregm.
 
 | dm | gm | Month     |
 | -- | -- | --------- |
@@ -246,6 +243,10 @@ doty2date <- function(year = 1969, doty = 306) {
 
 doty2date()
 ```
+
+::::::
+
+:::
 
 ### Leap years {#sec-gregl}
 
@@ -746,7 +747,7 @@ In @tbl-format , `day` is the 3-digit day of the year (`doty`) number, `dd` is t
 
 ## The `.m` format {#sec-dotm}
 
-The `m` in the `.m` format is the 1-digit month number. To fit all of the months in a single digit, `m` is in hexadecimal form (Base16 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The negative month numbers range from -C (-13) to -1, as shown in @tbl-mval.
+The `m` in the `.m` format is the 1-digit month number. To fit all of the months in a single digit, `m` is in hexadecimal form (Base16 encoded). This means that the first 10 months are represented by the numbers 0 through 9 while the last two months of the year are represented by the letters "A" and "B" instead of numbers. The negative month numbers range from -C (-13) to -1, as shown in @tbl-gregm
 
 ## The `.w` format {#sec-dotw}
 
@@ -825,92 +826,13 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 
 : The workday schedule {#tbl-daily}
 
-### Conversion tables {#sec-conv}
-
-::: {.callout-note collapse="true"}
-#### Expand To See Negative Number Conversion Tables
-| Day | Mar  | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec | Jan | Feb |
-| --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- |
-| 1   | -365 | -334 | -304 | -273 | -243 | -212 | -181 | -151 | -120 | -90 | -59 | -28 |
-| 2   | -364 | -333 | -303 | -272 | -242 | -211 | -180 | -150 | -119 | -89 | -58 | -27 |
-| 3   | -363 | -332 | -302 | -271 | -241 | -210 | -179 | -149 | -118 | -88 | -57 | -26 |
-| 4   | -362 | -331 | -301 | -270 | -240 | -209 | -178 | -148 | -117 | -87 | -56 | -25 |
-| 5   | -361 | -330 | -300 | -269 | -239 | -208 | -177 | -147 | -116 | -86 | -55 | -24 |
-| 6   | -360 | -329 | -299 | -268 | -238 | -207 | -176 | -146 | -115 | -85 | -54 | -23 |
-| 7   | -359 | -328 | -298 | -267 | -237 | -206 | -175 | -145 | -114 | -84 | -53 | -22 |
-| 8   | -358 | -327 | -297 | -266 | -236 | -205 | -174 | -144 | -113 | -83 | -52 | -21 |
-| 9   | -357 | -326 | -296 | -265 | -235 | -204 | -173 | -143 | -112 | -82 | -51 | -20 |
-| 10  | -356 | -325 | -295 | -264 | -234 | -203 | -172 | -142 | -111 | -81 | -50 | -19 |
-| 11  | -355 | -324 | -294 | -263 | -233 | -202 | -171 | -141 | -110 | -80 | -49 | -18 |
-| 12  | -354 | -323 | -293 | -262 | -232 | -201 | -170 | -140 | -109 | -79 | -48 | -17 |
-| 13  | -353 | -322 | -292 | -261 | -231 | -200 | -169 | -139 | -108 | -78 | -47 | -16 |
-| 14  | -352 | -321 | -291 | -260 | -230 | -199 | -168 | -138 | -107 | -77 | -46 | -15 |
-| 15  | -351 | -320 | -290 | -259 | -229 | -198 | -167 | -137 | -106 | -76 | -45 | -14 |
-| 16  | -350 | -319 | -289 | -258 | -228 | -197 | -166 | -136 | -105 | -75 | -44 | -13 |
-| 17  | -349 | -318 | -288 | -257 | -227 | -196 | -165 | -135 | -104 | -74 | -43 | -12 |
-| 18  | -348 | -317 | -287 | -256 | -226 | -195 | -164 | -134 | -103 | -73 | -42 | -11 |
-| 19  | -347 | -316 | -286 | -255 | -225 | -194 | -163 | -133 | -102 | -72 | -41 | -10 |
-| 20  | -346 | -315 | -285 | -254 | -224 | -193 | -162 | -132 | -101 | -71 | -40 | -9  |
-| 21  | -345 | -314 | -284 | -253 | -223 | -192 | -161 | -131 | -100 | -70 | -39 | -8  |
-| 22  | -344 | -313 | -283 | -252 | -222 | -191 | -160 | -130 | -99  | -69 | -38 | -7  |
-| 23  | -343 | -312 | -282 | -251 | -221 | -190 | -159 | -129 | -98  | -68 | -37 | -6  |
-| 24  | -342 | -311 | -281 | -250 | -220 | -189 | -158 | -128 | -97  | -67 | -36 | -5  |
-| 25  | -341 | -310 | -280 | -249 | -219 | -188 | -157 | -127 | -96  | -66 | -35 | -4  |
-| 26  | -340 | -309 | -279 | -248 | -218 | -187 | -156 | -126 | -95  | -65 | -34 | -3  |
-| 27  | -339 | -308 | -278 | -247 | -217 | -186 | -155 | -125 | -94  | -64 | -33 | -2  |
-| 28  | -338 | -307 | -277 | -246 | -216 | -185 | -154 | -124 | -93  | -63 | -32 | -1  |
-| 29  | -337 | -306 | -276 | -245 | -215 | -184 | -153 | -123 | -92  | -62 | -31 |     |
-| 30  | -336 | -305 | -275 | -244 | -214 | -183 | -152 | -122 | -91  | -61 | -30 |     |
-| 31  | -335 |      | -274 |      | -213 | -182 |      | -121 |      | -60 | -29 |     |
-
-: Gregorian calendar date to negative `doty` common year conversion {#tbl-negc}
-
-
-| Day | Mar  | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec | Jan | Feb |
-| --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- |
-| 1   | -366 | -335 | -305 | -274 | -244 | -213 | -182 | -152 | -122 | -91 | -60 | -29 |
-| 2   | -365 | -334 | -304 | -273 | -243 | -212 | -181 | -151 | -121 | -90 | -59 | -28 |
-| 3   | -364 | -333 | -303 | -272 | -242 | -211 | -180 | -150 | -120 | -89 | -58 | -27 |
-| 4   | -363 | -332 | -302 | -271 | -241 | -210 | -179 | -149 | -119 | -88 | -57 | -26 |
-| 5   | -362 | -331 | -301 | -270 | -240 | -209 | -178 | -148 | -118 | -87 | -56 | -25 |
-| 6   | -361 | -330 | -300 | -269 | -239 | -208 | -177 | -147 | -117 | -86 | -55 | -24 |
-| 7   | -360 | -329 | -299 | -268 | -238 | -207 | -176 | -146 | -116 | -85 | -54 | -23 |
-| 8   | -359 | -328 | -298 | -267 | -237 | -206 | -175 | -145 | -115 | -84 | -53 | -22 |
-| 9   | -358 | -327 | -297 | -266 | -236 | -205 | -174 | -144 | -114 | -83 | -52 | -21 |
-| 10  | -357 | -326 | -296 | -265 | -235 | -204 | -173 | -143 | -113 | -82 | -51 | -20 |
-| 11  | -356 | -325 | -295 | -264 | -234 | -203 | -172 | -142 | -112 | -81 | -50 | -19 |
-| 12  | -355 | -324 | -294 | -263 | -233 | -202 | -171 | -141 | -111 | -80 | -49 | -18 |
-| 13  | -354 | -323 | -293 | -262 | -232 | -201 | -170 | -140 | -110 | -79 | -48 | -17 |
-| 14  | -353 | -322 | -292 | -261 | -231 | -200 | -169 | -139 | -109 | -78 | -47 | -16 |
-| 15  | -352 | -321 | -291 | -260 | -230 | -199 | -168 | -138 | -108 | -77 | -46 | -15 |
-| 16  | -351 | -320 | -290 | -259 | -229 | -198 | -167 | -137 | -107 | -76 | -45 | -14 |
-| 17  | -350 | -319 | -289 | -258 | -228 | -197 | -166 | -136 | -106 | -75 | -44 | -13 |
-| 18  | -349 | -318 | -288 | -257 | -227 | -196 | -165 | -135 | -105 | -74 | -43 | -12 |
-| 19  | -348 | -317 | -287 | -256 | -226 | -195 | -164 | -134 | -104 | -73 | -42 | -11 |
-| 20  | -347 | -316 | -286 | -255 | -225 | -194 | -163 | -133 | -103 | -72 | -41 | -10 |
-| 21  | -346 | -315 | -285 | -254 | -224 | -193 | -162 | -132 | -102 | -71 | -40 | -9  |
-| 22  | -345 | -314 | -284 | -253 | -223 | -192 | -161 | -131 | -101 | -70 | -39 | -8  |
-| 23  | -344 | -313 | -283 | -252 | -222 | -191 | -160 | -130 | -100 | -69 | -38 | -7  |
-| 24  | -343 | -312 | -282 | -251 | -221 | -190 | -159 | -129 | -99  | -68 | -37 | -6  |
-| 25  | -342 | -311 | -281 | -250 | -220 | -189 | -158 | -128 | -98  | -67 | -36 | -5  |
-| 26  | -341 | -310 | -280 | -249 | -219 | -188 | -157 | -127 | -97  | -66 | -35 | -4  |
-| 27  | -340 | -309 | -279 | -248 | -218 | -187 | -156 | -126 | -96  | -65 | -34 | -3  |
-| 28  | -339 | -308 | -278 | -247 | -217 | -186 | -155 | -125 | -95  | -64 | -33 | -2  |
-| 29  | -338 | -307 | -277 | -246 | -216 | -185 | -154 | -124 | -94  | -63 | -32 | -1  |
-| 30  | -337 | -306 | -276 | -245 | -215 | -184 | -153 | -123 | -93  | -62 | -31 |     |
-| 31  | -336 |      | -275 |      | -214 | -183 |      |      | -92  | -61 | -30 |     |
-
-: Gregorian calendar date to negative `doty` leap year conversion {#tbl-negl}
-
-:::
-
 ## Subyear units {#sec-subyear}
 
 In addition to serving as a part of the Gregorian date coordinate system described above, months can also indicate the current season or quarter. `Deks` can also serve as indicator of subyear units like seasons.
 
 ### Seasons {#sec-season}
 
-We can use @tbl-conv to convert any Gregorian calendar date to a positive `doty` number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact `doty` number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
+We can use @tbl-coor to convert any Gregorian calendar date to a positive `doty` number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact `doty` number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
 
 The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has its opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. @tbl-soleq lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.
 
@@ -1226,9 +1148,6 @@ In `Decalendar`, January is represented by `A` and February is represented by `B
 
 ### Gregorian calendar and `Decalendar` date conversion {#sec-gregd}
 
-To convert a Gregorian calendar date into a `Decalendar` `doty` date, we can use the code in @exm-date2doty, which is derived from [a C++ algorithm](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) in [@hinnant2014]. First, we decrement the year if the provided Gregorian calendar `month` is January (1) or February (2) with @eq-year1 and then turn the `month` and `day` into a `doty` with @eq-doty1. The inverse function in @exm-doty2date, which converts a `Decalendar` `doty` date into a Gregorian calendar date, is also derived from [@hinnant2014]. 
-
-
 $$doty = (153 \cdot \frac{\begin{cases}month - 3&{\text{if } month > 2;}\\m + 9&{\text{otherwise.}}\end{cases}}{5} + d - 1$$ {#eq-doty1}
 
 :::::: {#exm-date2doty}
@@ -1249,4 +1168,81 @@ console.log(date2doty());
 :::
 
 ::::::
+
+::: {.callout-note collapse="true"}
+#### Expand To See Negative Number Conversion Tables
+| Day | Mar  | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec | Jan | Feb |
+| --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- |
+| 1   | -365 | -334 | -304 | -273 | -243 | -212 | -181 | -151 | -120 | -90 | -59 | -28 |
+| 2   | -364 | -333 | -303 | -272 | -242 | -211 | -180 | -150 | -119 | -89 | -58 | -27 |
+| 3   | -363 | -332 | -302 | -271 | -241 | -210 | -179 | -149 | -118 | -88 | -57 | -26 |
+| 4   | -362 | -331 | -301 | -270 | -240 | -209 | -178 | -148 | -117 | -87 | -56 | -25 |
+| 5   | -361 | -330 | -300 | -269 | -239 | -208 | -177 | -147 | -116 | -86 | -55 | -24 |
+| 6   | -360 | -329 | -299 | -268 | -238 | -207 | -176 | -146 | -115 | -85 | -54 | -23 |
+| 7   | -359 | -328 | -298 | -267 | -237 | -206 | -175 | -145 | -114 | -84 | -53 | -22 |
+| 8   | -358 | -327 | -297 | -266 | -236 | -205 | -174 | -144 | -113 | -83 | -52 | -21 |
+| 9   | -357 | -326 | -296 | -265 | -235 | -204 | -173 | -143 | -112 | -82 | -51 | -20 |
+| 10  | -356 | -325 | -295 | -264 | -234 | -203 | -172 | -142 | -111 | -81 | -50 | -19 |
+| 11  | -355 | -324 | -294 | -263 | -233 | -202 | -171 | -141 | -110 | -80 | -49 | -18 |
+| 12  | -354 | -323 | -293 | -262 | -232 | -201 | -170 | -140 | -109 | -79 | -48 | -17 |
+| 13  | -353 | -322 | -292 | -261 | -231 | -200 | -169 | -139 | -108 | -78 | -47 | -16 |
+| 14  | -352 | -321 | -291 | -260 | -230 | -199 | -168 | -138 | -107 | -77 | -46 | -15 |
+| 15  | -351 | -320 | -290 | -259 | -229 | -198 | -167 | -137 | -106 | -76 | -45 | -14 |
+| 16  | -350 | -319 | -289 | -258 | -228 | -197 | -166 | -136 | -105 | -75 | -44 | -13 |
+| 17  | -349 | -318 | -288 | -257 | -227 | -196 | -165 | -135 | -104 | -74 | -43 | -12 |
+| 18  | -348 | -317 | -287 | -256 | -226 | -195 | -164 | -134 | -103 | -73 | -42 | -11 |
+| 19  | -347 | -316 | -286 | -255 | -225 | -194 | -163 | -133 | -102 | -72 | -41 | -10 |
+| 20  | -346 | -315 | -285 | -254 | -224 | -193 | -162 | -132 | -101 | -71 | -40 | -9  |
+| 21  | -345 | -314 | -284 | -253 | -223 | -192 | -161 | -131 | -100 | -70 | -39 | -8  |
+| 22  | -344 | -313 | -283 | -252 | -222 | -191 | -160 | -130 | -99  | -69 | -38 | -7  |
+| 23  | -343 | -312 | -282 | -251 | -221 | -190 | -159 | -129 | -98  | -68 | -37 | -6  |
+| 24  | -342 | -311 | -281 | -250 | -220 | -189 | -158 | -128 | -97  | -67 | -36 | -5  |
+| 25  | -341 | -310 | -280 | -249 | -219 | -188 | -157 | -127 | -96  | -66 | -35 | -4  |
+| 26  | -340 | -309 | -279 | -248 | -218 | -187 | -156 | -126 | -95  | -65 | -34 | -3  |
+| 27  | -339 | -308 | -278 | -247 | -217 | -186 | -155 | -125 | -94  | -64 | -33 | -2  |
+| 28  | -338 | -307 | -277 | -246 | -216 | -185 | -154 | -124 | -93  | -63 | -32 | -1  |
+| 29  | -337 | -306 | -276 | -245 | -215 | -184 | -153 | -123 | -92  | -62 | -31 |     |
+| 30  | -336 | -305 | -275 | -244 | -214 | -183 | -152 | -122 | -91  | -61 | -30 |     |
+| 31  | -335 |      | -274 |      | -213 | -182 |      | -121 |      | -60 | -29 |     |
+
+: Gregorian calendar date to negative `doty` common year conversion {#tbl-negc}
+
+
+| Day | Mar  | Apr  | May  | Jun  | Jul  | Aug  | Sep  | Oct  | Nov  | Dec | Jan | Feb |
+| --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- |
+| 1   | -366 | -335 | -305 | -274 | -244 | -213 | -182 | -152 | -122 | -91 | -60 | -29 |
+| 2   | -365 | -334 | -304 | -273 | -243 | -212 | -181 | -151 | -121 | -90 | -59 | -28 |
+| 3   | -364 | -333 | -303 | -272 | -242 | -211 | -180 | -150 | -120 | -89 | -58 | -27 |
+| 4   | -363 | -332 | -302 | -271 | -241 | -210 | -179 | -149 | -119 | -88 | -57 | -26 |
+| 5   | -362 | -331 | -301 | -270 | -240 | -209 | -178 | -148 | -118 | -87 | -56 | -25 |
+| 6   | -361 | -330 | -300 | -269 | -239 | -208 | -177 | -147 | -117 | -86 | -55 | -24 |
+| 7   | -360 | -329 | -299 | -268 | -238 | -207 | -176 | -146 | -116 | -85 | -54 | -23 |
+| 8   | -359 | -328 | -298 | -267 | -237 | -206 | -175 | -145 | -115 | -84 | -53 | -22 |
+| 9   | -358 | -327 | -297 | -266 | -236 | -205 | -174 | -144 | -114 | -83 | -52 | -21 |
+| 10  | -357 | -326 | -296 | -265 | -235 | -204 | -173 | -143 | -113 | -82 | -51 | -20 |
+| 11  | -356 | -325 | -295 | -264 | -234 | -203 | -172 | -142 | -112 | -81 | -50 | -19 |
+| 12  | -355 | -324 | -294 | -263 | -233 | -202 | -171 | -141 | -111 | -80 | -49 | -18 |
+| 13  | -354 | -323 | -293 | -262 | -232 | -201 | -170 | -140 | -110 | -79 | -48 | -17 |
+| 14  | -353 | -322 | -292 | -261 | -231 | -200 | -169 | -139 | -109 | -78 | -47 | -16 |
+| 15  | -352 | -321 | -291 | -260 | -230 | -199 | -168 | -138 | -108 | -77 | -46 | -15 |
+| 16  | -351 | -320 | -290 | -259 | -229 | -198 | -167 | -137 | -107 | -76 | -45 | -14 |
+| 17  | -350 | -319 | -289 | -258 | -228 | -197 | -166 | -136 | -106 | -75 | -44 | -13 |
+| 18  | -349 | -318 | -288 | -257 | -227 | -196 | -165 | -135 | -105 | -74 | -43 | -12 |
+| 19  | -348 | -317 | -287 | -256 | -226 | -195 | -164 | -134 | -104 | -73 | -42 | -11 |
+| 20  | -347 | -316 | -286 | -255 | -225 | -194 | -163 | -133 | -103 | -72 | -41 | -10 |
+| 21  | -346 | -315 | -285 | -254 | -224 | -193 | -162 | -132 | -102 | -71 | -40 | -9  |
+| 22  | -345 | -314 | -284 | -253 | -223 | -192 | -161 | -131 | -101 | -70 | -39 | -8  |
+| 23  | -344 | -313 | -283 | -252 | -222 | -191 | -160 | -130 | -100 | -69 | -38 | -7  |
+| 24  | -343 | -312 | -282 | -251 | -221 | -190 | -159 | -129 | -99  | -68 | -37 | -6  |
+| 25  | -342 | -311 | -281 | -250 | -220 | -189 | -158 | -128 | -98  | -67 | -36 | -5  |
+| 26  | -341 | -310 | -280 | -249 | -219 | -188 | -157 | -127 | -97  | -66 | -35 | -4  |
+| 27  | -340 | -309 | -279 | -248 | -218 | -187 | -156 | -126 | -96  | -65 | -34 | -3  |
+| 28  | -339 | -308 | -278 | -247 | -217 | -186 | -155 | -125 | -95  | -64 | -33 | -2  |
+| 29  | -338 | -307 | -277 | -246 | -216 | -185 | -154 | -124 | -94  | -63 | -32 | -1  |
+| 30  | -337 | -306 | -276 | -245 | -215 | -184 | -153 | -123 | -93  | -62 | -31 |     |
+| 31  | -336 |      | -275 |      | -214 | -183 |      |      | -92  | -61 | -30 |     |
+
+: Gregorian calendar date to negative `doty` leap year conversion {#tbl-negl}
+
+:::
 
