@@ -527,7 +527,7 @@ function unix2doty(s=0, ms=0, precision=0)
     end
     timestamp = days - floor(
         year * 365 + year / 4 - year / 100 + year / 400
-    ) + 1
+    )
     doy = Int(floor(timestamp))
     return "$(lpad(year,4,'0'))+$(lpad(doy,3,'0')).$(lpad(Int(round((timestamp - doy) * 10 ^ precision)),precision,'0'))"
 end
@@ -550,7 +550,7 @@ def unix2doty(s=0, ms=0, precision=0):
         return f"{year:0<4}+{round(doe - (365 * yoe + yoe / 4 - yoe / 100)):0<3}"
     timestamp = days - (
         year * 365 + year / 4 - year / 100 + year / 400
-    ).__floor__() + 1
+    ).__floor__()
     doy = int(timestamp.__floor__())
     return f"{year:0<4}+{doy:0<3}.{str(round((timestamp - doy) * 10 ** precision)).zfill(precision)}"
 
@@ -573,7 +573,7 @@ unix2doty <- function(s = 0, ms = 0, precision = 0) {
   }
     timestamp = days - floor(
         year * 365 + year / 4 - year / 100 + year / 400
-    ) + 1
+    )
   doty = floor(timestamp)
   paste0(sprintf("%04d", year),
          "+",
@@ -604,7 +604,7 @@ function unix2doty(ms = 0, precision = 0) {
     }
     const timestamp = days - Math.floor(
         year * 365 + year / 4 - year / 100 + year / 400
-    ) + 1,
+    ),
         doty = Math.floor(timestamp),
         time = Math.round(
             (timestamp - doty) * 10 ** precision

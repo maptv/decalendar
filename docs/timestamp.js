@@ -128,7 +128,7 @@ function unix2doty(ms = 0, precision = 0) {
     }
     const timestamp = days - Math.floor(
         year * 365 + year / 4 - year / 100 + year / 400
-    ) + 1,
+    ),
         doty = Math.floor(timestamp),
         time = Math.round(
             (timestamp - doty) * 10 ** precision
@@ -192,6 +192,7 @@ console.log(date2doty(2021, 9, 1));
 
 console.log(unix2doty());
 console.log(unix2doty(Date.now()));
+console.log(unix2doty(Date.now(), precision = 5));
 console.log(unix2doty(86400));
 console.log(unix2doty(0));
 console.log(unix2doty(0, 3));
