@@ -40,7 +40,7 @@ format:
 
 ### Coordinate analogy {#sec-coor}
 
-In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). `Decalendar` provides two coordinates in one number: the day-of-the-year (`doty`). The first two digits of the `doty` are the `dek` number. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The last digit of the `doty` is the day-of-the-`dek` (`dotd`) number, which serves as both the `dotm` and the day-of-the-week (`dotw`) in `Decalendar`. @tbl-coor shows the `doty` equivalents of all Gregorian calendar dates. To find a specific date in @tbl-coor, first find the month among the columns (think of the month as an x-axis value) and then find the `dotm` among the rows (the day is like a y-axis value).
+In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). `Decalendar` provides two coordinates in one number: the day-of-the-year (`doty`). The first two digits of the `doty` are the `dek` number. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The last digit of the `doty` is the day-of-the-`dek` (`dotd`) number, which serves as both the `dotm` and the day-of-the-week (`dotw`) in `Decalendar`. @tbl-coor shows the `doty` equivalents of all Gregorian calendar dates. To locate a specific date in @tbl-coor, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the correct day (the `dotm` is like a y-axis value).
 
 ::: {.callout-note collapse="true"}
 #### Click here to expand the Gregorian calendar date to `doty` conversion table
@@ -84,7 +84,7 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 
 ### Gregorian calendar date conversion {#sec-conv}
 
-In addition to using a conversion table like @tbl-coor, we can convert between Gregorian calendar dates and `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `date2doty` function is a `doty` number, while its inverse function, `doty2date`, returns an array containing the month and `dotm` numbers.
+In addition to using a conversion table like @tbl-coor, we can convert between Gregorian calendar dates and `Decalendar` `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `date2doty` function is a `doty` number, while its inverse function, `doty2date`, returns an array containing a month and a `dotm` number.
 
 :::::: {#exm-coor}
 
@@ -162,7 +162,7 @@ doty2date()
 
 ### Gregorian calendar months and years {#sec-gregm}
 
-January and February are the last months of the `Decalendar` year. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. The functions in @exm-coor convert between `Decalendar` and Gregorian calendar month numbers, which are shown in @tbl-gregm. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Both of these calculations are shown in @exm-gregm.
+`Decalendar` only uses months for converting to and from Gregorian calendar dates, as shown in @exm-coor. Nevertheless, discussing months can help to explain how `Decalendar` works. The `Decalendar` year ends with January and February as shown in @tbl-gregm. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Code to convert between `Decalendar` and Gregorian calendar years is provided in @exm-gregm.
 
 | dm | gm | Month     |
 | -- | -- | --------- |
@@ -298,13 +298,19 @@ is_leap()
 
 ## ISO 8601 {#sec-iso}
 
+### ISO 8601 years {#sec-isoy}
+
+[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) is the [international standard](https://en.wikipedia.org/wiki/ISO_8601) for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). Both `Decalendar` and ISO 8601 dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
+
 ### ISO 8601 ordinal dates {#sec-isoo}
 
-`Decalendar` dates (`year+day`) are most similar to [ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`) specified by the [ISO 8601 international standard](https://en.wikipedia.org/wiki/ISO_8601) for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). In fact, the `Decalendar` `doty` number can be obtained from the ISO 8601 ordinal day number using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the ordinal date by 60 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar. We use the `is_leap` function from @exm-gregl in @exm-isoo to correct for the fact that leap day shifts ISO 8601 ordinal dates by 1 day in leap years. `Decalendar` `doty` numbers never change, because leap day at the end of the `Decalendar` year.
+`Decalendar` dates (`year+day`) are most similar to [ISO 8601 ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar` `doty` numbers, ISO 8601 ordinal dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are  [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `Decalendar` date can be easily obtained from the ISO 8601 ordinal date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the ordinal date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
 
-$$(isoordinal + 305 - is_leap(year)) \mod 365$$ {#eq-isoo1}
+In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers, while the `isoo2year` and `doty2year` functions adjust the year if necessary. We use the `is_leap` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. Unlike ISO 8601 ordinal day numbers, `Decalendar` `doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
 
-$$(doty + 60 + is_leap(year + 1)) \mod 365$$ {#eq-isoo2}
+$$(isoordinal + 305 - isleap(year)) \mod 365$$ {#eq-isoo1}
+
+$$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 
 :::::: {#exm-isoo}
 
@@ -313,79 +319,90 @@ $$(doty + 60 + is_leap(year + 1)) \mod 365$$ {#eq-isoo2}
 #### JavaScript
 
 ```javascript
+function isoo2year(year = 1970, day = 1) {
+    return year - (day < (60 + is_leap(year - 1)))
+}
+
 function isoo2doty(year = 1970, day = 1) {
     return (day + 305 - is_leap(year)) % 365
 }
 
-console.log(isoo2doty())
+console.log(`${isoo2year()}+${isoo2doty()}`)
 
 function doty2isoo(year = 1970, doty = 0) {
     return (doty + 60 + is_leap(year + 1)) % 365
 }
 
-console.log(doty2isoo())
+console.log(`${doty2year()}+${doty2isoo()}`)
 ```
 
 #### Julia
 
 ```julia
+function isoo2year(year = 1970, day = 1)
+    year - (day < (60 + is_leap(year - 1)))
+end
+
 function isoo2doty(year=1970, day=1)
     (day + 305 - is_leap(year)) % 365
 end
 
-isoo2doty()
+"$(isoo2year())+$(isoo2doty())"
 
 function doty2isoo(year=1970, doty=0) {
     (doty + 60 + is_leap(year + 1)) % 365
 }
 
-doty2isoo()
+"$(doty2year())+$(doty2isoo())"
 ```
 
 #### Python
 
 ```python
+def function isoo2year(year = 1970, day = 1):
+    return year - (day < (60 + is_leap(year - 1)))
+
 def isoo2doty(year=1970, day=1):
     return (day + 305 - is_leap(year)) % 365
 
-isoo2doty()
+f"{isoo2year()}+{isoo2doty()}"
 
 def doty2isoo(year=1970, doty=0):
     return (doty + 60 + is_leap(year + 1)) % 365
 }
 
-doty2isoo()
+f"{doty2year()}+{doty2isoo()}"
 ```
 
 #### R
 
 ```r
+isoo2year <- function(year = 1970, day = 1) {
+    year - (day < (60 + is_leap(year - 1)))
+}
+
 isoo2doty <- function(year = 1970, day = 1) {
     (day + 305 - is_leap(year)) %% 365
 }
 
-isoo2doty()
+paste0(isoo2year(), "+", isoo2doty())
 
 doty2isoo <- function(year = 1970, doty = 0) {
     (doty + 60 + is_leap(year + 1)) %% 365
 }
 
-doty2isoo()
+paste0(doty2year(), "+", doty2isoo())
 ```
 
 :::
 
 ::::::
 
-### ISO 8601 years {#sec-isoy}
-
-Both `Decalendar` and ISO 8601 show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers, but unlike ISO 8601, years are not mandatory in `Decalendar` dates. As mentioned in @sec-gregm, the years in `Decalendar` and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 less than the ISO 8601 year. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar and `0000-061` in the ISO 8601 ordinal date format.
-
 ### ISO 8601 calendar dates {#sec-isoc}
 
-The most common ISO 8601 date format is `year-mm-dd`. Known as [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates), this format is the current widely accepted standard for displaying Gregorian calendar dates. In this format, the `mm` is the double-digit month number and the `dd` is the double-digit `dotm`. As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `.m` format (`year+m+dd`), which is very similar to the ISO 8601 calendar date format. The `.m` is described in @sec-dotm with examples provided in @sec-dotex. To be clear, the `.m` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
+ISO 8601 [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) consist of a four-digit year, a two-digit month, and a two-digit `dotm` separated by hyphens (`year-mm-dd`). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from @exm-coor and @exm-gregm to convert between `Decalendar` dates and ISO 8601 calendar dates, as shown in @exm-isoc. The code formats the output of the `date2year` and `date2doty` functions into `Decalendar` dates and the output of the `doty2year` and `doty2date` functions into ISO 8601 calendar dates.
 
-We can combine code from @exm-coor and @exm-gregm to convert between `Decalendar` dates and ISO 8601 calendar dates, as shown in @exm-isoc. `Decalendar` has its own version of the ISO 8601 calendar date format called the `.m` format
+As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `.m` format (`year+m+dd`), which is very similar to the ISO 8601 calendar date format. The `.m` format is described in @sec-dotm. Examples of the `.m` format are provided in @sec-dotex. To be clear, the `.m` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
 
 :::::: {#exm-isoc}
 
@@ -429,11 +446,15 @@ console.log(
 
 ### ISO 8601 times {#sec-isot}
 
-`Decalendar` seeks to make months and weeks obsolete. Similarly, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days). `Declock` and ISO 8601 each have 1 time format. Both of these formats can be appended to dates to form timestamps. `Declock` timestamps are more concise and easier to read than ISO 8601 timestamps. An ISO 8601 calendar date timestamp that includes seconds is 23 characters long (`year-mm-ddThh:mm:ss`), while a `Decalendar` timestamp with slightly greater precision is only 14 characters long (`year+day.ddddd`). Without delimiters, ISO 8601 timestamps become even more difficult to read (`yearmmddThhmmss`) and still cannot match the brevity of `Declock` timestamps.
+`Decalendar` seeks to make months and weeks obsolete. Similarly, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) (`.day`). The [ISO 8601 time format](https://en.wikipedia.org/wiki/ISO_8601#Times) is `hh:mm:ss`. Both `Declock` and ISO 8601 times can be appended to dates to form timestamps. `Decalendar` timestamps are more concise and easier to read than ISO 8601 timestamps.
+
+An ISO 8601 calendar date timestamp that includes seconds is 23 characters long (`year-mm-ddThh:mm:ss`), while a `Decalendar` timestamp with slightly greater precision is only 14 characters long (`year+day.ddddd`). ISO 8601 timestamps can omit delimiters except for the `T` which separates the date and the time (`yearmmddThhmmss`). Without delimiters, ISO 8601 timestamps become even more difficult to read and still cannot match the brevity of `Decalendar` timestamps.
 
 ### ISO 8601 time zone codes {#sec-isoz}
 
-ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC%2B00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time). `Declock` times that are synonymous with UTC should end in `Z` or `+0` (`year+day.dddddZ` or `year+day.ddddd+0`). The `+0` means that there is no offset from UTC. Noon UTC can be written `.5Z` or `.5+0` in `Declock` and 12:00Z or 12:00+00:00 in ISO 8601. The code in @exm-isoz converts a UTC offset to a one-letter military time zone code that can be used in `Declock` or ISO 8601 times.
+ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC%2B00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time). `Declock` times that are synonymous with UTC should end in `Z` (`year+day.dddddZ`). Noon UTC can be written `.5Z` in `Declock` and 12:00:00Z or 12:00:00+00:00 as per ISO 8601. The code in @exm-isoz converts between UTC offsets and military time zone codes.
+
+`Declock` times can also end with a numeric offset (`year+day.ddddd+o`) to indicate a `Declock` time zone. `Zone 0`, which is represented by the numeric offset `+0`, is the `Declock` time zone that is closest to UTC. `Declock` time zones do not include [leap seconds](https://en.wikipedia.org/wiki/Leap_second), therefore `Zone 0` is currently 27 seconds (`.0003125`) behind UTC. Noon in `Zone 0` can be written `.5+0`, `.5003125Z`, 12:00:27Z, and 12:00:27+00:00. @sec-unix shows how `Decalendar` functions without leap seconds and @sec-zone provides more information on `Declock` time zones.
 
 :::::: {#exm-isoz}
 
@@ -442,34 +463,60 @@ ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). T
 #### JavaScript
 
 ```javascript
-function hour2zone(hour) {
+function hour2zone(hour = 0) {
     return  hour == 0 ? "Z"
-        : hour > 0 && hour < 9 ? String.fromCharCode(hour + 64)
+        : hour > 0 && hour < 10 ? String.fromCharCode(hour + 64)
         : hour > 9 && hour < 13 ? String.fromCharCode(hour + 65)
         : hour < 0 && hour > -13 ? String.fromCharCode(Math.abs(hour) + 77)
         : "J";
 }
 
-console.log(hour2zone(-5)) // R
+console.log(hour2zone(-new Date().getTimezoneOffset() / 60))
+
+function zone2hour(zone = "Z") {
+    return  zone == "Z" ? 0
+        : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
+        : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
+        : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
+        : zone;
+}
+
+console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
+```
+
+#### Julia
+
+```julia
+
+```
+
+#### Python
+
+```python
+
+```
+
+#### R
+
+```r
+
 ```
 
 :::
 
 ::::::
 
-#### Standard Time to Decimal Time Conversion
+#### Standard Time to Decimal Time Conversion {#sec-isoc}
 
-The formula for conversion of standard time to `Declock` time is shown in @eq-isot. The value of `x` in @eq-isot can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into seconds using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert the seconds into hours with @eq-isot3, hours into minutes with @eq-isot4, and minutes into seconds with @eq-isot5.
+The formula for conversion of standard time to `Declock` time is shown in @eq-isot. The value of `x` in @eq-isot can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The  `time2doty` and `doty2time` functions in @exm-isot convert between standard time and `Declock` time. To create a full `Decalendar` timestamp, we can use the `date2year`, `date2doty`, `time2doty`, and `hour2zone` functions as shown in @exm-isot. Similarly, @exm-isot also shows how to create an ISO 8601 calendar date timestamp with the `doty2year`, `doty2date`, `doty2time`, and `hour2zone` functions.
 
 $$declock = \frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} \cdot 10^x$$ {#eq-isot1}
 
-$$seconds = declock \cdot 86400 \cdot 10^x$$ {#eq-isot2}
+$$hours = declock \cdot 24 \cdot 10^x$$ {#eq-isot2}
 
-$$hours = \frac{seconds}{3600} $$ {#eq-isot3}
+$$minutes = \frac{hours - \lfloor hours \rfloor}{60}$$ {#eq-isot3}
 
-$$minutes = \frac{hours - \lfloor hours \rfloor}{60} $$ {#eq-isot4}
-
-$$seconds = \frac{minutes - \lfloor minutes \rfloor}{60} $$ {#eq-isot5}
+$$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isot4}
 
 |  x | units     |
 | -- | ----------|
@@ -484,9 +531,59 @@ $$seconds = \frac{minutes - \lfloor minutes \rfloor}{60} $$ {#eq-isot5}
 
 : The powers of ten of units based on days {#tbl-isot}
 
-#### Standard Time Zone to Decimal Time Zone Conversion
+:::::: {#exm-isoc}
 
-These units can be combined together with
+::: {.panel-tabset group="language"}
+
+#### JavaScript
+
+```javascript
+function time2doty(hours = 1, minutes = 0, seconds = 0) {
+    return hours / 24 + minutes / 1440 + seconds / 86400
+}
+
+console.log(`${date2year()}+${
+    date2doty()+(Math.round(time2doty() * 1e5) / 1e5)
+}${hour2zone()}`)
+
+function doty2time(doty = 1/24) {
+    const hours = doty * 24,
+        floorHours = Math.floor(hours),
+        minutes = (hours - floorHours) / 60,
+        floorMinutes = Math.floor(minutes),
+        seconds = (minutes - floorMinutes) / 60;
+        return [floorHours, floorMinutes, Math.floor(seconds)]
+}
+
+console.log(`${doty2year()}+${
+        doty2date().map(
+        i => i.toString().padStart(2, "0")
+        ).join("-")}T${doty2time().map(
+        i => i.toString().padStart(2, "0")
+        ).join(":")}${zone2hour()}`)
+```
+
+#### Julia
+
+```julia
+
+```
+
+#### Python
+
+```python
+
+```
+
+#### R
+
+```r
+
+```
+
+:::
+
+::::::
 
 ### ISO 8601 recurring intervals {#sec-isoi}
 
@@ -519,7 +616,7 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 ### French Republican calendar time {#sec-frct}
 
-The French Republican calendar and `Declock` both the break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, _décimes_, and decimal seconds, respectively. @tbl-dime shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time. When converting between standard time and `Declock`, it is important to note that, unlike standard time, `Declock` does not include [leap seconds](https://en.wikipedia.org/wiki/Leap_second#Insertion_of_leap_seconds).
+The French Republican calendar and `Declock` both break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, _décimes_, and decimal seconds, respectively. @tbl-dime shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time. When converting times, it is important to note that standard time and `Declock` times with military time zone codes (`.dddddz`) include [leap seconds](https://en.wikipedia.org/wiki/Leap_second#Insertion_of_leap_seconds), while `Declock` times with numeric time zone offsets (`.ddddd+o`) do not.
 
 | ⅒ | 24-hour | 12-hour |
 | - | ------- | ------- |
@@ -1339,4 +1436,4 @@ console.log(date2doty());
 :::
 
 
-
+As mentioned in @sec-gregm, the years in `Decalendar` and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 less than the ISO 8601 year. 

@@ -236,3 +236,82 @@ console.log(
         i => i.toString().padStart(2, "0")
         ).join("-")}`);
         
+
+
+function isoo2year(year = 1970, day = 1) {
+    return year - (day < (60 + is_leap(year - 1)))
+}
+
+console.log(`${isoo2year(1970, 60)}+${isoo2doty()}`)
+console.log(isoo2year()) // R 
+
+
+console.log("R".charCodeAt())
+
+function hour2zone(hour) {
+    return  hour == 0 ? "Z"
+        : hour > 0 && hour < 10 ? String.fromCharCode(hour + 64)
+        : hour > 9 && hour < 13 ? String.fromCharCode(hour + 65)
+        : hour < 0 && hour > -13 ? String.fromCharCode(Math.abs(hour) + 77)
+        : "J";
+}
+
+console.log(is_leap(1970))
+console.log(hour2zone(9)) // R
+console.log(hour2zone(-new Date().getTimezoneOffset() / 60)) // R
+console.log() // R
+
+
+console.log("Z".charCodeAt())
+
+
+console.log(hour2zone(-2)) // R
+console.log(
+    `${date2year(0, 1)}+${
+        date2doty(1, 1).toString().padStart(3, "0")}`);
+
+console.log(
+    `${doty2year().toString().padStart(4, "0")}-${
+        doty2date().map(
+        i => i.toString().padStart(2, "0")
+        ).join("-")}`);
+
+
+function time2doty(hours = 1, minutes = 0, seconds = 0) {
+    return hours / 24 + minutes / 1440 + seconds / 86400
+}
+
+console.log(`${date2year()}+${
+    date2doty()+(Math.round(time2doty() * 1e5) / 1e5)
+}${hour2zone()}`)
+
+
+console.log(`${doty2year()}+${
+        doty2date().map(
+        i => i.toString().padStart(2, "0")
+        ).join("-")}T${doty2time().map(
+        i => i.toString().padStart(2, "0")
+        ).join(":")}${zone2hour()}`)
+
+function doty2time(doty = 1/24) {
+    const hours = doty * 24,
+        floorHours = Math.floor(hours),
+        minutes = (hours - floorHours) / 60,
+        floorMinutes = Math.floor(minutes),
+        seconds = (minutes - floorMinutes) / 60;
+        return [floorHours, floorMinutes, Math.floor(seconds)]
+}
+
+function zone2hour(zone = "Z") {
+    return  zone == "Z" ? 0
+        : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
+        : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
+        : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
+        : zone;
+}
+
+console.log(hour2zone(-new Date().getTimezoneOffset() / 60))
+console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
+console.log("?".charCodeAt())
+console.log(String.fromCharCode(64 + 27))
+console.log(zone2hour("Y"))
