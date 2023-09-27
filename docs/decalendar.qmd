@@ -162,8 +162,10 @@ doty2date()
 
 ### Gregorian calendar months and years {#sec-gregm}
 
-`Decalendar` only uses months for converting to and from Gregorian calendar dates, as shown in @exm-coor. Nevertheless, discussing months can help to explain how `Decalendar` works. The `Decalendar` year ends with January and February as shown in @tbl-gregm. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Code to convert between `Decalendar` and Gregorian calendar years is provided in @exm-gregm.
+`Decalendar` only uses months for converting to and from Gregorian calendar dates. Nevertheless, discussing months can help to explain how `Decalendar` works. The `Decalendar` year ends with January and February, as shown in @tbl-gregm. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Code to convert between `Decalendar` and Gregorian calendar years is provided in @exm-gregm.
 
+::: {.callout-note collapse="true"}
+#### Click here to expand the `Decalendar` and Gregorian calendar month table
 | dm | gm | Month     |
 | -- | -- | --------- |
 | 0  | 3  | March     |
@@ -180,6 +182,8 @@ doty2date()
 | 11 | 2  | February  |
 
 : The numeric values of months in `Decalendar` and the Gregorian calendar {#tbl-gregm}
+
+:::
 
 :::::: {#exm-gregm}
 
@@ -216,7 +220,7 @@ doty2year()
 #### Python
 
 ```python
-def date2doty(year=1969, month=1):
+def date2year(year=1969, month=1):
     return year - (month < 3)
 
 date2year()
@@ -426,6 +430,11 @@ console.log(
 
 ```julia
 
+"$(lpad(date2year(), 4, '0'))+$(lpad(date2doty(), 3, '0'))"
+
+"$(lpad(doty2year(), 4, '0'))-$(join(
+map((x) -> lpad(x, 2, "0"
+), doty2date()), "-"))"
 ```
 
 #### Python
@@ -506,17 +515,17 @@ console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
 
 ::::::
 
-#### Standard Time to Decimal Time Conversion {#sec-isoc}
+#### Standard Time to Decimal Time Conversion {#sec-isos}
 
-The formula for conversion of standard time to `Declock` time is shown in @eq-isot. The value of `x` in @eq-isot can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The  `time2doty` and `doty2time` functions in @exm-isot convert between standard time and `Declock` time. To create a full `Decalendar` timestamp, we can use the `date2year`, `date2doty`, `time2doty`, and `hour2zone` functions as shown in @exm-isot. Similarly, @exm-isot also shows how to create an ISO 8601 calendar date timestamp with the `doty2year`, `doty2date`, `doty2time`, and `hour2zone` functions.
+The formula for conversion of standard time to `Declock` time is shown in @eq-isos1. The value of `x` in @eq-isos1 can be modified to obtain different units, which are displayed in @tbl-isos. To convert `Declock` time into standard time, we first convert into hours using @eq-isos2 and the appropriate `x` value from @tbl-isos. Then, we convert hours into minutes with @eq-isos3 and minutes into seconds with @eq-isos4. The  `time2doty` and `doty2time` functions in @exm-isos convert between standard time and `Declock` time. To create a full `Decalendar` timestamp, we can use the `date2year`, `date2doty`, `time2doty`, and `hour2zone` functions as shown in @exm-isos. Similarly, @exm-isos also shows how to create an ISO 8601 calendar date timestamp with the `doty2year`, `doty2date`, `doty2time`, and `hour2zone` functions.
 
-$$declock = \frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} \cdot 10^x$$ {#eq-isot1}
+$$declock = \frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} \cdot 10^x$$ {#eq-isos1}
 
-$$hours = declock \cdot 24 \cdot 10^x$$ {#eq-isot2}
+$$hours = declock \cdot 24 \cdot 10^x$$ {#eq-isos2}
 
-$$minutes = \frac{hours - \lfloor hours \rfloor}{60}$$ {#eq-isot3}
+$$minutes = \frac{hours - \lfloor hours \rfloor}{60}$$ {#eq-isos3}
 
-$$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isot4}
+$$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isos4}
 
 |  x | units     |
 | -- | ----------|
@@ -529,9 +538,9 @@ $$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isot4}
 |  5 | beats     |
 |  6 | mics      |
 
-: The powers of ten of units based on days {#tbl-isot}
+: The powers of ten of units based on days {#tbl-isos}
 
-:::::: {#exm-isoc}
+:::::: {#exm-isos}
 
 ::: {.panel-tabset group="language"}
 
@@ -669,7 +678,10 @@ $$doty = \lfloor doe - (365 \cdot yoe + \frac{yoe}{4} - \frac{yoe}{100}) \rfloor
 
 To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` timestamp as shown in @eq-time. The code in @exm-time converts UNIX time into a `Decalendar` date or a `Decalendar` timestamp in the `Zone 0` time zone. The last line in @exm-time obtains the current `Decalendar` date by passing the current UNIX timestamp to the `unix2doty` function. If we call this function without arguments (`unix2doty()`) the result should be the UNIX Epoch: `1969+306`. To see @exm-time in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current timestamps in the `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamp formats.
 
-$$time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c} y \mod 4 = 0 \\ \land y \mod 100 \neq 0 \\ \lor y \mod 400 = 0 \end{array} \right]$$ {#eq-time}
+$$time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c}
+y \mod 4 = 0 \\
+\land y \mod 100 \neq 0 \\
+\lor y \mod 400 = 0 \end{array} \right]$$ {#eq-time}
 
 
 :::::: {#exm-time}
@@ -680,28 +692,15 @@ $$time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c} y \mod 4 = 0
 
 ```javascript
 
-function unix2doty(ms = 0, precision = 0) {
+function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         doe = days - era * 146097,
-        yoe = Math.floor((
-            doe - doe / 1460 + doe / 36524 - doe / 146096
-        ) / 365),
-        year = yoe + era * 400;
-    if (precision == 0) {
-        return `${year.toString().padStart(4, "0")}+${Math.round(
-            doe - (365 * yoe + yoe / 4 - yoe / 100)
-        ).toString().padStart(3, "0")}`
-    }
-    const timestamp = days - Math.floor(
-        year * 365 + year / 4 - year / 100 + year / 400
-    ) + 1,
-        doty = Math.floor(timestamp),
-        time = Math.round(
-            (timestamp - doty) * 10 ** precision
-        ).toString().padStart(precision, "0");
-    return `${year.toString().padStart(4, "0")
-        }+${doty.toString().padStart(3, "0")}.${time}`;
+        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
+        year = yoe + era * 400,
+        timestamp = days - Math.floor(year * 365 + year / 4 - year / 100 + year / 400),
+        doty = Math.floor(timestamp);
+    return [year, doty, timestamp - doty];
 }
 
 console.log(unix2doty(Date.now()));
@@ -711,20 +710,15 @@ console.log(unix2doty(Date.now()));
 
 ```julia
 
-function unix2doty(s=0, ms=0, precision=0)
+function unix2doty(s=0, ms=0)
     days = s / 86400 + ms / 86400000 + 719468
     era = floor((days >= 0 ? days : days - 146096) / 146097)
     doe = days - era * 146097
     yoe = floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365)
     year = Int(yoe + era * 400)
-    if precision == 0
-        return "$(lpad(year,4,'0'))+$(lpad(Int(round(doe - (365 * yoe + yoe / 4 - yoe / 100))),3,'0'))"
-    end
-    timestamp = days - floor(
-        year * 365 + year / 4 - year / 100 + year / 400
-    )
-    doy = Int(floor(timestamp))
-    return "$(lpad(year,4,'0'))+$(lpad(doy,3,'0')).$(lpad(Int(round((timestamp - doy) * 10 ^ precision)),precision,'0'))"
+    timestamp = days - floor(year * 365 + year / 4 - year / 100 + year / 400)
+    doty = Int(floor(timestamp))
+    return year, doty, timestamp - doty
 end
 
 unix2doty(time())
@@ -735,19 +729,15 @@ unix2doty(time())
 ```python
 from time import time
 
-def unix2doty(s=0, ms=0, precision=0):
+def unix2doty(s=0, ms=0):
     days = s / 86400 + ms / 86400000 + 719468
     era = (days if days >= 0 else days - 146096) // 146097
     doe = days - era * 146097
     yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) // 365
     year = int(yoe + era * 400)
-    if precision == 0:
-        return f"{year:0<4}+{round(doe - (365 * yoe + yoe / 4 - yoe / 100)):0<3}"
-    timestamp = days - (
-        year * 365 + year / 4 - year / 100 + year / 400
-    ).__floor__()
-    doy = int(timestamp.__floor__())
-    return f"{year:0<4}+{doy:0<3}.{str(round((timestamp - doy) * 10 ** precision)).zfill(precision)}"
+    timestamp = days - (year * 365 + year / 4 - year / 100 + year / 400).__floor__()
+    doty = int(timestamp.__floor__())
+    return year, doty, timestamp - doty
 
 unix2doty(time())
 ```
@@ -755,29 +745,22 @@ unix2doty(time())
 #### R
 
 ```r
-unix2doty <- function(s = 0, ms = 0, precision = 0) {
+unix2doty <- function(s = 0, ms = 0) {
   days = s / 86400 + ms / 86400000 + 719468
   era = floor(ifelse(days >= 0, days, days - 146096) / 146097)
   doe = days - era * 146097
   yoe = floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365)
   year = yoe + era * 400
-  years = 1:year
-  if (precision == 0) {
-    return(paste0(sprintf("%04d", year), "+", sprintf("%03d", round(
-                    doe - (365 * yoe + yoe / 4 - yoe / 100)))))
-  }
-    timestamp = days - floor(
-        year * 365 + year / 4 - year / 100 + year / 400
-    )
+  timestamp = days - floor(year * 365 + year / 4 - year / 100 + year / 400)
   doty = floor(timestamp)
   paste0(sprintf("%04d", year),
          "+",
          sprintf("%03d", doty),
          ".",
-         sprintf(paste0("%0", precision, "d"), round((timestamp - doty) * 10 ^ precision)))
+         sprintf(paste0("%0", precision, "d"), round(timestamp - doty)))
 }
 
-unix2doty(as.numeric(Sys.time()), precision = 5)
+unix2doty(as.numeric(Sys.time()))
 ```
 
 #### CopyQ
