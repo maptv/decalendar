@@ -246,7 +246,7 @@ console.log(isoo2year()) // R
 
 console.log("R".charCodeAt())
 
-function hour2zone(hour) {
+function hour2zone(hour = 0) {
     return hour == 0 ? "Z"
         : hour > 0 && hour < 10 ? String.fromCharCode(hour + 64)
             : hour > 9 && hour < 13 ? String.fromCharCode(hour + 65)
@@ -255,7 +255,7 @@ function hour2zone(hour) {
 }
 
 console.log(is_leap(1970))
-console.log(hour2zone(9)) // R
+console.log(hour2zone()) // R
 console.log(hour2zone(-new Date().getTimezoneOffset() / 60)) // R
 console.log() // R
 
@@ -325,3 +325,33 @@ function unix2doty(ms = 0) {
 
 
 console.log(unix2doty(Date.now()));
+
+function time2doty(hours = 1, minutes = 0, seconds = 0) {
+    return hours / 24 + minutes / 1440 + seconds / 86400
+}
+
+console.log(`${date2year().toString().padStart(4, '0')}+${
+    date2doty().toString().padStart(3, '0')}.${
+    (Math.round(time2doty(0) * 1e5) / 1e5).toString().padStart(5, '0')
+}${hour2zone(0)}`)
+
+function unix2doty(ms = 0) {
+    const days = ms / 86400000 + 719468,
+        era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        doe = days - era * 146097,
+        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
+        year = yoe + era * 400,
+        timestamp = days - Math.floor(year * 365 + year / 4 - year / 100 + year / 400),
+        doty = Math.floor(timestamp);
+    return [year, doty, timestamp - doty];
+}
+
+console.log(unix2doty(Date.now()));
+const [year, doty, time] = unix2doty(Date.now());
+console.log(
+    `${year.toString().padStart(4, "0")}+${
+    doty.toString().padStart(3, "0")}.${
+    (Math.round(time * 1e5)).toString().padStart(5, "0")}+0`
+    );
+
+

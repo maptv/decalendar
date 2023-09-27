@@ -225,7 +225,7 @@ def date2year(year=1969, month=1):
 
 date2year()
 
-def doty2date(year=1969, doty=306):
+def doty2year(year=1969, doty=306):
     return year + (doty > 305)
 
 doty2year()
@@ -291,8 +291,9 @@ is_leap()
 
 ```r
 is_leap <- function(year=1970) {
-  year %% 4 == 0 & year %% 100 != 0 | year %% 400 == 0
+    year %% 4 == 0 & year %% 100 != 0 | year %% 400 == 0
 }
+
 is_leap()
 ```
 
@@ -331,13 +332,17 @@ function isoo2doty(year = 1970, day = 1) {
     return (day + 305 - is_leap(year)) % 365
 }
 
-console.log(`${isoo2year()}+${isoo2doty()}`)
+console.log(
+    `${isoo2year().toString().padStart(4, "0")}+${
+    isoo2doty().toString().padStart(3, "0")}`);
 
 function doty2isoo(year = 1970, doty = 0) {
     return (doty + 60 + is_leap(year + 1)) % 365
 }
 
-console.log(`${doty2year()}+${doty2isoo()}`)
+console.log(
+    `${doty2year().toString().padStart(4, "0")}+${
+    doty2isoo().toString().padStart(3, "0")}`);
 ```
 
 #### Julia
@@ -357,7 +362,7 @@ function doty2isoo(year=1970, doty=0) {
     (doty + 60 + is_leap(year + 1)) % 365
 }
 
-"$(doty2year())+$(doty2isoo())"
+"$(lpad(doty2year(), 4, '0'))+$(lpad(doty2isoo(), 3, '0'))"
 ```
 
 #### Python
@@ -375,7 +380,7 @@ def doty2isoo(year=1970, doty=0):
     return (doty + 60 + is_leap(year + 1)) % 365
 }
 
-f"{doty2year()}+{doty2isoo()}"
+f"{doty2year():<04}+{doty2isoo():<03}"
 ```
 
 #### R
@@ -389,13 +394,13 @@ isoo2doty <- function(year = 1970, day = 1) {
     (day + 305 - is_leap(year)) %% 365
 }
 
-paste0(isoo2year(), "+", isoo2doty())
+paste0(sprintf("%04d", isoo2year()), "+", sprintf("%03d", isoo2doty()))
 
 doty2isoo <- function(year = 1970, doty = 0) {
     (doty + 60 + is_leap(year + 1)) %% 365
 }
 
-paste0(doty2year(), "+", doty2isoo())
+paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))
 ```
 
 :::
@@ -429,24 +434,30 @@ console.log(
 #### Julia
 
 ```julia
-
 "$(lpad(date2year(), 4, '0'))+$(lpad(date2doty(), 3, '0'))"
 
-"$(lpad(doty2year(), 4, '0'))-$(join(
-map((x) -> lpad(x, 2, "0"
-), doty2date()), "-"))"
+"$(lpad(doty2year(), 4, '0'))-$(join(map((x) -> lpad(x, 2, '0'), doty2date()), '-'))"
 ```
 
 #### Python
 
 ```python
+f"{date2year():<04}+{date2doty():<3}"
 
+f"{doty2year():<04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}"
 ```
 
 #### R
 
 ```r
+paste0(
+    sprintf("%04d", date2year()), "+",
+    sprintf("%03d", date2doty())
+    )
 
+paste0(sprintf("%04d", doty2year()), "-",
+    paste(sprintf("%02d", doty2date()), collapse = '-')
+    )
 ```
 
 :::
@@ -461,9 +472,7 @@ An ISO 8601 calendar date timestamp that includes seconds is 23 characters long 
 
 ### ISO 8601 time zone codes {#sec-isoz}
 
-ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC%2B00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time). `Declock` times that are synonymous with UTC should end in `Z` (`year+day.dddddZ`). Noon UTC can be written `.5Z` in `Declock` and 12:00:00Z or 12:00:00+00:00 as per ISO 8601. The code in @exm-isoz converts between UTC offsets and military time zone codes.
-
-`Declock` times can also end with a numeric offset (`year+day.ddddd+o`) to indicate a `Declock` time zone. `Zone 0`, which is represented by the numeric offset `+0`, is the `Declock` time zone that is closest to UTC. `Declock` time zones do not include [leap seconds](https://en.wikipedia.org/wiki/Leap_second), therefore `Zone 0` is currently 27 seconds (`.0003125`) behind UTC. Noon in `Zone 0` can be written `.5+0`, `.5003125Z`, 12:00:27Z, and 12:00:27+00:00. @sec-unix shows how `Decalendar` functions without leap seconds and @sec-zone provides more information on `Declock` time zones.
+ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC%2B00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time). `Declock` times that are synonymous with UTC can end in `Z` (`year+day.dddddZ`) or a `+0` (`year+day.ddddd+0`). Noon UTC can be written `.5Z` or `.5+0` in `Declock` and 12:00:00Z or 12:00:00+00:00 as per ISO 8601. The code in @exm-isoz converts between UTC offsets and military time zone codes. @sec-zone provides more information on `Declock` time zones.
 
 :::::: {#exm-isoz}
 
@@ -496,19 +505,77 @@ console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
 #### Julia
 
 ```julia
+# import Pkg; Pkg.add("TimeZones")
+# using TimeZones
+# localzone()
 
+function hour2zone(hour=0)
+    (
+        hour == 0 ? "Z" :
+        hour > 0 && hour < 10 ? Char(hour + 64) :
+        hour > 9 && hour < 13 ? Char(hour + 65) :
+        hour < 0 && hour > -13 ? Char(abs(hour) + 77) : "J";
+    )
+end
+
+hour2zone()
+
+function zone2hour(zone="Z")
+    (
+        (zone = string(zone)) == "Z" ? 0 :
+        zone > "@" && zone < "J" ? Int(codepoint(only(zone))) - 64 :
+        zone > "J" && zone < "N" ? Int(codepoint(only(zone))) - 65 :
+        zone < "Z" && zone > "M" ? -(Int(codepoint(only(zone))) - 77) : zone;
+    )
+end
+
+zone2hour()
 ```
 
 #### Python
 
 ```python
+def hour2zone(hour=0):
+    return (
+        "Z" if hour == 0 else
+        chr(hour + 64) if 0 < hour < 10 else
+        chr(hour + 65) if 9 < hour < 13 else
+        chr(abs(hour) + 77) if -13 < hour < 0 else "J"
+    )
 
+hour2zone()
+
+def zone2hour(zone="Z"):
+    return (
+        0 if zone == "Z" else
+        ord(zone) - 64 if "@" < zone < "J" else
+        ord(zone) - 65 if "J" < zone < "N" else
+        -(ord(zone) - 77) if "M" < zone < "Z" else zone
+    )
+
+zone2hour()
 ```
 
 #### R
 
 ```r
+hour2zone <- function(hour = 0) {
+    ifelse(hour == 0, "Z",
+    ifelse(hour > 0 && hour < 10, intToUtf8(hour + 64),
+    ifelse(hour > 9 && hour < 13, intToUtf8(hour + 65),
+    ifelse(hour < 0 && hour > -13, intToUtf8(abs(hour) + 77), "J"))))
+}
 
+hour2zone()
+
+zone2hour <- function(zone = "Z") {
+    ifelse(zone == "Z", 0,
+    ifelse(zone > "@" && zone < "J", utf8ToInt(zone) - 64,
+    ifelse(zone > "J" && zone < "N", utf8ToInt(zone) - 65,
+    ifelse(zone < "Z" && zone > "M", -(utf8ToInt(zone) - 77), zone))))
+}
+
+zone2hour()
 ```
 
 :::
@@ -551,43 +618,100 @@ function time2doty(hours = 1, minutes = 0, seconds = 0) {
     return hours / 24 + minutes / 1440 + seconds / 86400
 }
 
-console.log(`${date2year()}+${
-    date2doty()+(Math.round(time2doty() * 1e5) / 1e5)
+console.log(`${date2year().toString().padStart(4, '0')}+${
+    date2doty().toString().padStart(3, '0')}.${
+    (Math.round(time2doty(0) * 1e5) / 1e5).toString().padStart(5, '0')
 }${hour2zone()}`)
 
 function doty2time(doty = 1/24) {
     const hours = doty * 24,
         floorHours = Math.floor(hours),
         minutes = (hours - floorHours) / 60,
-        floorMinutes = Math.floor(minutes),
-        seconds = (minutes - floorMinutes) / 60;
-        return [floorHours, floorMinutes, Math.floor(seconds)]
+        floorMinutes = Math.floor(minutes);
+        return [floorHours, floorMinutes, (minutes - floorMinutes) / 60]
 }
 
 console.log(`${doty2year()}+${
         doty2date().map(
         i => i.toString().padStart(2, "0")
         ).join("-")}T${doty2time().map(
-        i => i.toString().padStart(2, "0")
+        i => Math.round(i).toString().padStart(2, "0")
         ).join(":")}${zone2hour()}`)
 ```
 
 #### Julia
 
 ```julia
+function time2doty(hours=1, minutes=0, seconds=0)
+    hours / 24 + minutes / 1440 + seconds / 86400
+end
 
+"$(lpad(date2year(), 4, '0'))+$(lpad(date2doty(), 3, '0')).$(
+    lpad(Int(round(time2doty(0) * 1e5)), 5, '0'))$(hour2zone())"
+
+function doty2time(doty=1/24)
+    hours = doty * 24
+    floorHours = floor(hours)
+    minutes = (hours - floorHours) / 60
+    floorMinutes = floor(minutes)
+    return floorHours, floorMinutes, (minutes - floorMinutes) / 60
+end
+
+
+"$(lpad(doty2year(), 4, '0'))-$(join(
+    map((x) -> lpad(x, 2, '0'
+), doty2date()), '-'))T$(join(
+    map((x) -> lpad(Int(x), 2, '0'
+), doty2time(0)), ':'))$(hour2zone())"
 ```
 
 #### Python
 
 ```python
+def time2doty(hours=1, minutes=0, seconds=0):
+    return hours / 24 + minutes / 1440 + seconds / 86400
 
+f"{date2year():<04}+{date2doty():<03}.{round(time2doty(0) * 1e6):<05}{hour2zone()}"
+
+def doty2time(doty = 1/24):
+    hours = doty * 24
+    floorHours = hours.__floor__()
+    minutes = (hours - floorHours) / 60
+    floorMinutes = minutes.__floor__()
+    return floorHours, floorMinutes, (minutes - floorMinutes) / 60
+
+(
+    f"{doty2year():<04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}"
+    f"T{':'.join(map(lambda i: str(round(i)).rjust(2, '0'), doty2time(0)))}{zone2hour()}"
+)
 ```
 
 #### R
 
 ```r
+time2doty <- function(hours = 1, minutes = 0, seconds = 0) {
+    hours / 24 + minutes / 1440 + seconds / 86400
+}
 
+paste0(
+    sprintf("%04d", date2year()), "+",
+    sprintf("%03d", date2doty()), ".",
+    sprintf("%05d", round(time2doty(0) * 1e5)),
+    hour2zone()
+)
+
+doty2time <- function(doty = 1 / 24) {
+    hours <- doty * 24
+    floorHours <- Math.floor(hours)
+    minutes <- (hours - floorHours) / 60
+    floorMinutes <- Math.floor(minutes)
+    c(floorHours, floorMinutes, (minutes - floorMinutes) / 60)
+}
+
+paste0(sprintf("%04d", doty2year()), "-",
+    paste(sprintf("%02d", doty2date()), collapse = "-"), "T",
+    paste(sprintf("%02d", doty2date()), collapse = ":")
+    )
 ```
 
 :::
@@ -625,7 +749,7 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 ### French Republican calendar time {#sec-frct}
 
-The French Republican calendar and `Declock` both break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, _décimes_, and decimal seconds, respectively. @tbl-dime shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time. When converting times, it is important to note that standard time and `Declock` times with military time zone codes (`.dddddz`) include [leap seconds](https://en.wikipedia.org/wiki/Leap_second#Insertion_of_leap_seconds), while `Declock` times with numeric time zone offsets (`.ddddd+o`) do not.
+The French Republican calendar and `Declock` both break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, _décimes_, and decimal seconds, respectively. @tbl-dime shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time.
 
 | ⅒ | 24-hour | 12-hour |
 | - | ------- | ------- |
@@ -691,7 +815,6 @@ y \mod 4 = 0 \\
 #### JavaScript
 
 ```javascript
-
 function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
@@ -703,13 +826,17 @@ function unix2doty(ms = 0) {
     return [year, doty, timestamp - doty];
 }
 
-console.log(unix2doty(Date.now()));
+const [year, doty, time] = unix2doty(Date.now());
+console.log(
+    `${year.toString().padStart(4, "0")}+${
+    doty.toString().padStart(3, "0")}.${
+    (Math.round(time * 1e5)).toString().padStart(5, "0")}${hour2zone()}`
+    );
 ```
 
 #### Julia
 
 ```julia
-
 function unix2doty(s=0, ms=0)
     days = s / 86400 + ms / 86400000 + 719468
     era = floor((days >= 0 ? days : days - 146096) / 146097)
@@ -718,10 +845,11 @@ function unix2doty(s=0, ms=0)
     year = Int(yoe + era * 400)
     timestamp = days - floor(year * 365 + year / 4 - year / 100 + year / 400)
     doty = Int(floor(timestamp))
-    return year, doty, timestamp - doty
+    year, doty, timestamp - doty
 end
 
-unix2doty(time())
+y, d, t = unix2doty(time())
+"$(lpad(y, 4, '0'))+$(lpad(d, 3, '0')).$(lpad(Int(round(t * 1e5)), 5, '0'))$(hour2zone())"
 ```
 
 #### Python
@@ -739,25 +867,28 @@ def unix2doty(s=0, ms=0):
     doty = int(timestamp.__floor__())
     return year, doty, timestamp - doty
 
-unix2doty(time())
+y, d, t = unix2doty(time())
+f"{y:<04}+{d:<03}.{t:<05}{hour2zone()}"
 ```
 
 #### R
 
 ```r
 unix2doty <- function(s = 0, ms = 0) {
-  days = s / 86400 + ms / 86400000 + 719468
-  era = floor(ifelse(days >= 0, days, days - 146096) / 146097)
-  doe = days - era * 146097
-  yoe = floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365)
-  year = yoe + era * 400
-  timestamp = days - floor(year * 365 + year / 4 - year / 100 + year / 400)
-  doty = floor(timestamp)
-  paste0(sprintf("%04d", year),
-         "+",
-         sprintf("%03d", doty),
-         ".",
-         sprintf("%05d"), round(timestamp - doty)))
+    days <- s / 86400 + ms / 86400000 + 719468
+    era <- floor(ifelse(days >= 0, days, days - 146096) / 146097)
+    doe <- days - era * 146097
+    yoe <- floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365)
+    year <- yoe + era * 400
+    timestamp <- days - floor(year * 365 + year / 4 - year / 100 + year / 400)
+    doty <- floor(timestamp)
+    paste0(
+        sprintf("%04d", year),
+        "+",
+        sprintf("%03d", doty),
+        ".",
+        sprintf("%05d", round(timestamp - doty))
+    )
 }
 
 unix2doty(as.numeric(Sys.time()))
