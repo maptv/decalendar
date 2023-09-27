@@ -757,7 +757,7 @@ unix2doty <- function(s = 0, ms = 0) {
          "+",
          sprintf("%03d", doty),
          ".",
-         sprintf(paste0("%0", precision, "d"), round(timestamp - doty)))
+         sprintf("%05d"), round(timestamp - doty)))
 }
 
 unix2doty(as.numeric(Sys.time()))
@@ -767,7 +767,7 @@ unix2doty(as.numeric(Sys.time()))
 
 ```javascript
 copyq:
-function unix2doty(ms = 0, precision = 0) {
+function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         doe = days - era * 146097,
@@ -775,18 +775,13 @@ function unix2doty(ms = 0, precision = 0) {
             doe - doe / 1460 + doe / 36524 - doe / 146096
         ) / 365),
         year = yoe + era * 400;
-    if (precision == 0) {
-        return `${year.toString().padStart(4, "0")}+${Math.round(
-            doe - (365 * yoe + yoe / 4 - yoe / 100)
-        ).toString().padStart(3, "0")}`
-    }
     const timestamp = days - Math.floor(
         year * 365 + year / 4 - year / 100 + year / 400
     ),
         doty = Math.floor(timestamp),
         time = Math.round(
-            (timestamp - doty) * 10 ** precision
-        ).toString().padStart(precision, "0");
+            (timestamp - doty) * 1e5
+        ).toString().padStart(5, "0");
     return `${year.toString().padStart(4, "0")
         }+${doty.toString().padStart(3, "0")}.${time}`;
 }
