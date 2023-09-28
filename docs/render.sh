@@ -1,14 +1,14 @@
 #! /bin/sh
 
-# quarto convert "$1"
+quarto convert "$1"
 
-# quarto render "$1" --profile javascript --metadata engine:jupyter --output "${1%.*}_javascript.ipynb"
+quarto render "$1" --profile javascript --metadata engine:jupyter --output "${1%.*}_javascript.ipynb"
 
-# quarto render "$1" --profile julia --metadata engine:jupyter --output "${1%.*}_julia.ipynb"
+quarto render "$1" --profile julia --metadata engine:jupyter --output "${1%.*}_julia.ipynb"
 
-# quarto render "$1" --profile python --metadata engine:jupyter --output "${1%.*}_python.ipynb"
+quarto render "$1" --profile python --metadata engine:jupyter --output "${1%.*}_python.ipynb"
 
-# quarto render "$1" --profile r --metadata engine:jupyter --output "${1%.*}_r.ipynb"
+quarto render "$1" --profile r --metadata engine:jupyter --output "${1%.*}_r.ipynb"
 
 # jupytext "${1%.*}_quarto_javascript.ipynb" --to js --output "${1%.*}.js" --set-kernel javascript
 
@@ -27,12 +27,12 @@
 # jupytext "${1%.*}.js" --output "${1%.*}_javascript.ipynb" --execute --set-kernel javascript
 
 # Replace code chunks with embed short codes
-# cat "${1%.*}.qmd"  | gsed '/^```{/,/^```$/ { # set a range and say what should happen in that range below
-#     /^```{.*}$\|#| tags:/!d; # delete all but the first line and tags line of all code chunks
-#     N;s/\n//g; # join pairs of lines in all code blocks
-#     s/^```{\(.*\)}#| tags: \[\(.*\)\]/{{< embed \1\.ipynb#\2 >}}/g; # replace code chunk and comment syntax with shortcode syntax
-#     /{{< embed .*\.ipynb#.* >}}/!d # delete anything that is not an embed shortcode with a tag
-# }' | sed "s/{{< embed \(.*\)\.ipynb#\(.*\) >}}/{{< embed ${1%.*}_\1\.ipynb#\2 echo=true >}}/g"> "${1%.*}_embed.qmd"
+cat "${1%.*}.qmd"  | gsed '/^```{/,/^```$/ { # set a range and say what should happen in that range below
+    /^```{.*}$\|#| tags:/!d; # delete all but the first line and tags line of all code chunks
+    N;s/\n//g; # join pairs of lines in all code blocks
+    s/^```{\(.*\)}#| tags: \[\(.*\)\]/{{< embed \1\.ipynb#\2 >}}/g; # replace code chunk and comment syntax with shortcode syntax
+    /{{< embed .*\.ipynb#.* >}}/!d # delete anything that is not an embed shortcode with a tag
+}' | sed "s/{{< embed \(.*\)\.ipynb#\(.*\) >}}/{{< embed ${1%.*}_\1\.ipynb#\2 echo=true >}}/g"> "${1%.*}_embed.qmd"
 
 # Here is the above command in a single line without inline comments
 # replace code chunks with embed short codes by setting a range, deleting all but two lines, joining the lines, substituting, and deleting anything that does not match the shortcode pattern
@@ -41,10 +41,7 @@
 # Ranges example: This deletes all code chunks
 # cat mulang.qmd | sed '/^```{/,/^```$/d'\n
 
-
-# This starts a tabset in front of every level-four (####) JavaScript header in the embed qmd
-# cat "${1%.*}_embed.qmd" | gsed '/#### JavaScript/i ::: {.panel-tabset group="language"}\n' > "${1%.*}_embed.qmd"
-
+# This inserts a tabset in front of every level-four (####) JavaScript header in the embed qmd
 cat "${1%.*}"_embed.qmd | gsed '/#### JavaScript/i ::: {.panel-tabset group="language"}\n'> "${1%.*}"_tabset.qmd
 
 # recreate html output file with embedded notebooks
