@@ -1,4 +1,4 @@
 jupyter: julia-1.9
 format: ipynb
 cache: true
-number-depth: 3
+number-sections: false

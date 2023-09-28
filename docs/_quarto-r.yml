@@ -1,4 +1,4 @@
 jupyter: ir
 format: ipynb
 cache: true
-number-depth: 3
+number-sections: false
