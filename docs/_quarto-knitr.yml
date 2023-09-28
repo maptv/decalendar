@@ -1,0 +1,27 @@
+toc: true
+number-depth: 3
+bibliography: ref.bib
+execute:
+  engine: knitr
+  cache: true
+format:
+  html:
+    anchor-sections: true
+    code-block-background: false
+    code-block-border-left: false
+    code-copy: true
+    code-fold: show
+    code-link: true
+    code-tools: true
+    link-external-icon: true
+    link-external-newwindow: true
+    theme:
+      dark: [darkly, dark.scss]
+      light: [flatly, light.scss]
+    output-file: index.html
+  pdf:
+    colorlinks: true
+    pdf-engine: wkhtmltopdf
+    output-file: decalendar.pdf
+  docx:
+    output-file: decalendar.docx

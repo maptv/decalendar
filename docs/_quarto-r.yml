@@ -1,0 +1,4 @@
+jupyter: ir
+format: ipynb
+cache: true
+number-depth: 3

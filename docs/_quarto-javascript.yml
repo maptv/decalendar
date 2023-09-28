@@ -1,0 +1,4 @@
+jupyter: javascript
+format: ipynb
+cache: true
+number-depth: 3
