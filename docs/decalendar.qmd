@@ -1,33 +1,6 @@
 ---
 title: "`Decalendar` and `Declock`"
 author: Martin Laptev
-execute:
-  eval: false
-  cache: false
-toc: true
-number-sections: true
-number-depth: 3
-bibliography: ref.bib
-keep-md: true
-format:
-  html:
-    anchor-sections: true
-    code-block-background: false
-    code-block-border-left: false
-    code-copy: true
-    code-link: true
-    code-tools: true
-    embed-resources: true
-    link-external-icon: true
-    link-external-newwindow: true
-    theme:
-      dark: [darkly, dark.scss]
-      light: [flatly, light.scss]
-    output-file: index.html
-  pdf:
-    colorlinks: true
-    pdf-engine: wkhtmltopdf
-  docx: default
 ---
 
 # Summary {#sec-summary}
@@ -92,31 +65,39 @@ In addition to using a conversion table like @tbl-coor, we can convert between G
 
 #### JavaScript
 
-```javascript
+```{javascript}
+#| tags: [date2doty]
 function date2doty(month = 1, day = 1) {
     return Math.floor(
         (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
 )}
 
-console.log(date2doty());
+date2doty()
+```
 
+```{javascript}
+#| tags: [doty2date]
 function doty2date(doty = 306) {
     const m = Math.floor((5 * doty + 2) / 153);
     return [Math.floor(m < 10 ? m + 3 : m - 9), Math.floor(doty - (153 * m + 2) / 5 + 2)];
 }
 
-console.log(doty2date());
+doty2date()
 ```
 
 #### Julia
 
-```julia
+```{julia}
+#| tags: [date2doty]
 function date2doty(month=1, day=1)
     Int(floor((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1))
 end
 
 date2doty()
+```
 
+```{julia}
+#| tags: [doty2date]
 function doty2date(doty = 306)
     m = floor((5 * doty + 2) / 153);
     return Int(m < 10 ? m + 3 : m - 9), Int(floor(doty - (153 * m + 2) / 5 + 2))
@@ -127,12 +108,16 @@ doty2date()
 
 #### Python
 
-```python
+```{python}
+#| tags: [date2doty]
 def date2doty(month=1, day=1):
     return (153 * (month - 3 if month > 2 else month + 9) + 2) // 5 + day - 1
 
 date2doty()
+```
 
+```{python}
+#| tags: [doty2date]
 def doty2date(doty=306):
     m = (5 * doty + 2) // 153
     return m + 3 if m < 10 else m - 9, doty - (153 * m + 2) // 5 + 1
@@ -142,13 +127,17 @@ doty2date()
 
 #### R
 
-```r
+```{r}
+#| tags: [date2doty]
 date2doty <- function(month = 1, day = 1) {
     floor((153 * (ifelse(month > 2, month - 3, month + 9)) + 2) / 5 + day - 1)
 }
 
 date2doty()
+```
 
+```{r}
+#| tags: [doty2date]
 doty2date <- function(doty = 306) {
     m <- floor((5 * doty + 2) / 153)
     c(ifelse(m < 10, m + 3, m - 9), floor(doty - (153 * m + 2) / 5 + 2))
@@ -191,11 +180,15 @@ doty2date()
 
 #### JavaScript
 
-```javascript
+```{javascript}
+#| tags: [date2year]
 function date2year(year = 1970, month = 1) { return year - (month < 3) }
 
 console.log(date2year());
+```
 
+```{javascript}
+#| tags: [doty2year]
 function doty2year(year = 1969, doty = 306) { return year + (doty > 305) }
 
 console.log(doty2year());
@@ -203,13 +196,17 @@ console.log(doty2year());
 
 #### Julia
 
-```julia
+```{julia}
+#| tags: [date2year]
 function date2year(year=1969, month=1)
     year - (month < 3)
 end
 
 date2year()
+```
 
+```{julia}
+#| tags: [doty2year]
 function doty2year(year=1969, doty=306)
     year + (doty > 305)
 end
@@ -219,12 +216,16 @@ doty2year()
 
 #### Python
 
-```python
+```{python}
+#| tags: [date2year]
 def date2year(year=1969, month=1):
     return year - (month < 3)
 
 date2year()
+```
 
+```{python}
+#| tags: [doty2year]
 def doty2year(year=1969, doty=306):
     return year + (doty > 305)
 
@@ -233,13 +234,17 @@ doty2year()
 
 #### R
 
-```r
+```{r}
+#| tags: [date2year]
 date2year <- function(year = 1970, month = 1) {
     year - (month < 3)
 }
 
 date2year()
+```
 
+```{r}
+#| tags: [doty2year]
 doty2year <- function(year = 1969, doty = 306) {
     year + (doty > 305)
 }
@@ -263,7 +268,8 @@ $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
 #### JavaScript
 
-```javascript
+```{javascript}
+#| tags: [leap]
 function is_leap(year=1970) {
     return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 }
@@ -272,7 +278,8 @@ is_leap()
 
 #### Julia
 
-```julia
+```{julia}
+#| tags: [leap]
 function is_leap(year=1970)
     year % 4 == 0 && year % 100 != 0 || year % 400 == 0
 end
@@ -281,7 +288,8 @@ is_leap()
 
 #### Python
 
-```python
+```{python}
+#| tags: [leap]
 def is_leap(year=1970):
     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
 is_leap()
@@ -289,7 +297,8 @@ is_leap()
 
 #### R
 
-```r
+```{r}
+#| tags: [leap]
 is_leap <- function(year=1970) {
     year %% 4 == 0 & year %% 100 != 0 | year %% 400 == 0
 }
@@ -323,11 +332,17 @@ $$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 
 #### JavaScript
 
-```javascript
+```{javascript}
+#| tags: [isoo2year]
 function isoo2year(year = 1970, day = 1) {
     return year - (day < (60 + is_leap(year - 1)))
 }
 
+isoo2year()
+```
+
+```{javascript}
+#| tags: [isoo2doty]
 function isoo2doty(year = 1970, day = 1) {
     return (day + 305 - is_leap(year)) % 365
 }
@@ -335,7 +350,10 @@ function isoo2doty(year = 1970, day = 1) {
 console.log(
     `${isoo2year().toString().padStart(4, "0")}+${
     isoo2doty().toString().padStart(3, "0")}`);
+```
 
+```{javascript}
+#| tags: [doty2isoo]
 function doty2isoo(year = 1970, doty = 0) {
     return (doty + 60 + is_leap(year + 1)) % 365
 }
@@ -347,55 +365,81 @@ console.log(
 
 #### Julia
 
-```julia
+```{julia}
+#| tags: [isoo2year]
 function isoo2year(year = 1970, day = 1)
     year - (day < (60 + is_leap(year - 1)))
 end
 
+isoo2year()
+```
+
+```{julia}
+#| tags: [isoo2doty]
 function isoo2doty(year=1970, day=1)
     (day + 305 - is_leap(year)) % 365
 end
 
 "$(isoo2year())+$(isoo2doty())"
+```
 
-function doty2isoo(year=1970, doty=0) {
+```{julia}
+#| tags: [doty2isoo]
+function doty2isoo(year=1970, doty=0)
     (doty + 60 + is_leap(year + 1)) % 365
-}
+end
 
 "$(lpad(doty2year(), 4, '0'))+$(lpad(doty2isoo(), 3, '0'))"
 ```
 
 #### Python
 
-```python
-def function isoo2year(year = 1970, day = 1):
+```{python}
+#| tags: [isoo2year]
+def isoo2year(year=1970, day=1):
     return year - (day < (60 + is_leap(year - 1)))
 
+isoo2year()
+```
+
+```{python}
+#| tags: [isoo2doty]
 def isoo2doty(year=1970, day=1):
     return (day + 305 - is_leap(year)) % 365
 
 f"{isoo2year()}+{isoo2doty()}"
+```
 
+```{python}
+#| tags: [doty2isoo]
 def doty2isoo(year=1970, doty=0):
     return (doty + 60 + is_leap(year + 1)) % 365
-}
 
 f"{doty2year():<04}+{doty2isoo():<03}"
 ```
 
 #### R
 
-```r
+```{r}
+#| tags: [isoo2year]
 isoo2year <- function(year = 1970, day = 1) {
     year - (day < (60 + is_leap(year - 1)))
 }
 
+isoo2year()
+```
+
+```{r}
+#| tags: [isoo2doty]
 isoo2doty <- function(year = 1970, day = 1) {
     (day + 305 - is_leap(year)) %% 365
 }
 
 paste0(sprintf("%04d", isoo2year()), "+", sprintf("%03d", isoo2doty()))
+```
 
+```{r}
+#| tags: [doty2isoo]
 doty2isoo <- function(year = 1970, doty = 0) {
     (doty + 60 + is_leap(year + 1)) %% 365
 }
@@ -419,11 +463,13 @@ As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of 
 
 #### JavaScript
 
-```javascript
+```{javascript}
 console.log(
     `${date2year().toString().padStart(4, "0")}+${
         date2doty().toString().padStart(3, "0")}`);
+```
 
+```{javascript}
 console.log(
     `${doty2year().toString().padStart(4, "0")}-${
         doty2date().map(
@@ -433,28 +479,35 @@ console.log(
 
 #### Julia
 
-```julia
+```{julia}
+#| tags: [stamp]
 "$(lpad(date2year(), 4, '0'))+$(lpad(date2doty(), 3, '0'))"
+```
 
+```{julia}
 "$(lpad(doty2year(), 4, '0'))-$(join(map((x) -> lpad(x, 2, '0'), doty2date()), '-'))"
 ```
 
 #### Python
 
-```python
+```{python}
 f"{date2year():<04}+{date2doty():<3}"
+```
 
+```{python}
 f"{doty2year():<04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}"
 ```
 
 #### R
 
-```r
+```{r}
 paste0(
     sprintf("%04d", date2year()), "+",
     sprintf("%03d", date2doty())
     )
+```
 
+```{r}
 paste0(sprintf("%04d", doty2year()), "-",
     paste(sprintf("%02d", doty2date()), collapse = '-')
     )
@@ -480,7 +533,7 @@ ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). T
 
 #### JavaScript
 
-```javascript
+```{javascript}
 function hour2zone(hour = 0) {
     return  hour == 0 ? "Z"
         : hour > 0 && hour < 10 ? String.fromCharCode(hour + 64)
@@ -504,7 +557,8 @@ console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
 
 #### Julia
 
-```julia
+```{julia}
+#| tags: [zone]
 # import Pkg; Pkg.add("TimeZones")
 # using TimeZones
 # localzone()
@@ -534,7 +588,7 @@ zone2hour()
 
 #### Python
 
-```python
+```{python}
 def hour2zone(hour=0):
     return (
         "Z" if hour == 0 else
@@ -558,7 +612,7 @@ zone2hour()
 
 #### R
 
-```r
+```{r}
 hour2zone <- function(hour = 0) {
     ifelse(hour == 0, "Z",
     ifelse(hour > 0 && hour < 10, intToUtf8(hour + 64),
@@ -613,7 +667,7 @@ $$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isos4}
 
 #### JavaScript
 
-```javascript
+```{javascript}
 function time2doty(hours = 1, minutes = 0, seconds = 0) {
     return hours / 24 + minutes / 1440 + seconds / 86400
 }
@@ -641,7 +695,8 @@ console.log(`${doty2year()}+${
 
 #### Julia
 
-```julia
+```{julia}
+#| tags: [time]
 function time2doty(hours=1, minutes=0, seconds=0)
     hours / 24 + minutes / 1440 + seconds / 86400
 end
@@ -667,7 +722,7 @@ end
 
 #### Python
 
-```python
+```{python}
 def time2doty(hours=1, minutes=0, seconds=0):
     return hours / 24 + minutes / 1440 + seconds / 86400
 
@@ -688,7 +743,7 @@ def doty2time(doty = 1/24):
 
 #### R
 
-```r
+```{r}
 time2doty <- function(hours = 1, minutes = 0, seconds = 0) {
     hours / 24 + minutes / 1440 + seconds / 86400
 }
@@ -814,7 +869,7 @@ y \mod 4 = 0 \\
 
 #### JavaScript
 
-```javascript
+```{javascript}
 function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
@@ -825,7 +880,6 @@ function unix2doty(ms = 0) {
         doty = Math.floor(timestamp);
     return [year, doty, timestamp - doty];
 }
-
 const [year, doty, time] = unix2doty(Date.now());
 console.log(
     `${year.toString().padStart(4, "0")}+${
@@ -836,7 +890,8 @@ console.log(
 
 #### Julia
 
-```julia
+```{julia}
+#| tags: [unix]
 function unix2doty(s=0, ms=0)
     days = s / 86400 + ms / 86400000 + 719468
     era = floor((days >= 0 ? days : days - 146096) / 146097)
@@ -854,7 +909,7 @@ y, d, t = unix2doty(time())
 
 #### Python
 
-```python
+```{python}
 from time import time
 
 def unix2doty(s=0, ms=0):
@@ -873,7 +928,7 @@ f"{y:<04}+{d:<03}.{t:<05}{hour2zone()}"
 
 #### R
 
-```r
+```{r}
 unix2doty <- function(s = 0, ms = 0) {
     days <- s / 86400 + ms / 86400000 + 719468
     era <- floor(ifelse(days >= 0, days, days - 146096) / 146097)
@@ -1416,22 +1471,6 @@ The basic elements of `Decalendar` include the `dot` formats (`.y`, `.m`, and `.
 
 Some programming languages provide direct access to ISO ordinal dates. Subtracting 1 from an ISO ordinal date yields the Dekalendar date:
 
-```python
-from datetime import datetime
-datetime("2023-12-25").timetuple().tm_yday - 1
-```
-
-```r
-as.integer(strftime("2023-12-25", format="%j")) - 1
-```
-
-```javascript
-const now = new Date(2023, 11, 25),
-start = new Date(now.getFullYear(), 0, 0),
-doy = Math.floor((now - start) / 86400000) - 1;
-console.log(doy);
-```
-
 Certain times of day are easier to express as fractions, rather than decimals. This can be done with the `Slash` operator. For example, 9PM (21:00) is `.416̅`, which is pronounced `Dot four one six vinculum`, or `5/12` which is read `five slash twelve`.
 
 ### References
@@ -1454,7 +1493,7 @@ $$doty = (153 \cdot \frac{\begin{cases}month - 3&{\text{if } month > 2;}\\m + 9&
 
 #### JavaScript
 
-```javascript
+```{javascript}
 function date2doty(year = 1970, month = 1, day = 1) {
     year -= month <= 2;
     const doty = Math.round((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1);
