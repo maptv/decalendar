@@ -59,14 +59,17 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 
 In addition to using a conversion table like @tbl-coor, we can convert between Gregorian calendar dates and `Decalendar` `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `date2doty` function is a `doty` number, while its inverse function, `doty2date`, returns an array containing a month and a `dotm` number.
 
-:::::: {#exm-coor}
-
-::: {.panel-tabset group="language"}
+::: {#exm-coor}
+:::
 
 #### JavaScript
 
+##### `date2doty`
+
 ```{javascript}
 #| tags: [date2doty]
+#| label: date2doty
+#| id: date2doty
 function date2doty(month = 1, day = 1) {
     return Math.floor(
         (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
@@ -75,8 +78,12 @@ function date2doty(month = 1, day = 1) {
 date2doty()
 ```
 
+##### `doty2date`
+
 ```{javascript}
 #| tags: [doty2date]
+#| label: doty2date
+#| id: doty2date
 function doty2date(doty = 306) {
     const m = Math.floor((5 * doty + 2) / 153);
     return [Math.floor(m < 10 ? m + 3 : m - 9), Math.floor(doty - (153 * m + 2) / 5 + 2)];
@@ -87,8 +94,12 @@ doty2date()
 
 #### Julia
 
+##### `date2doty`
+
 ```{julia}
 #| tags: [date2doty]
+#| label: date2doty
+#| id: date2doty
 function date2doty(month=1, day=1)
     Int(floor((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1))
 end
@@ -96,8 +107,12 @@ end
 date2doty()
 ```
 
+##### `doty2date`
+
 ```{julia}
 #| tags: [doty2date]
+#| label: doty2date
+#| id: doty2date
 function doty2date(doty = 306)
     m = floor((5 * doty + 2) / 153);
     return Int(m < 10 ? m + 3 : m - 9), Int(floor(doty - (153 * m + 2) / 5 + 2))
@@ -108,16 +123,24 @@ doty2date()
 
 #### Python
 
+##### `date2doty`
+
 ```{python}
 #| tags: [date2doty]
+#| label: date2doty
+#| id: date2doty
 def date2doty(month=1, day=1):
     return (153 * (month - 3 if month > 2 else month + 9) + 2) // 5 + day - 1
 
 date2doty()
 ```
 
+##### `doty2date`
+
 ```{python}
 #| tags: [doty2date]
+#| label: doty2date
+#| id: doty2date
 def doty2date(doty=306):
     m = (5 * doty + 2) // 153
     return m + 3 if m < 10 else m - 9, doty - (153 * m + 2) // 5 + 1
@@ -127,8 +150,12 @@ doty2date()
 
 #### R
 
+##### `date2doty`
+
 ```{r}
 #| tags: [date2doty]
+#| label: date2doty
+#| id: date2doty
 date2doty <- function(month = 1, day = 1) {
     floor((153 * (ifelse(month > 2, month - 3, month + 9)) + 2) / 5 + day - 1)
 }
@@ -136,8 +163,12 @@ date2doty <- function(month = 1, day = 1) {
 date2doty()
 ```
 
+##### `doty2date`
+
 ```{r}
 #| tags: [doty2date]
+#| label: doty2date
+#| id: doty2date
 doty2date <- function(doty = 306) {
     m <- floor((5 * doty + 2) / 153)
     c(ifelse(m < 10, m + 3, m - 9), floor(doty - (153 * m + 2) / 5 + 2))
@@ -145,9 +176,6 @@ doty2date <- function(doty = 306) {
 doty2date()
 ```
 
-:::
-
-::::::
 
 ### Gregorian calendar months and years {#sec-gregm}
 
@@ -174,21 +202,28 @@ doty2date()
 
 :::
 
-:::::: {#exm-gregm}
-
-::: {.panel-tabset group="language"}
+::: {#exm-gregm}
+:::
 
 #### JavaScript
 
+##### `date2year`
+
 ```{javascript}
 #| tags: [date2year]
+#| label: date2year
+#| id: date2year
 function date2year(year = 1970, month = 1) { return year - (month < 3) }
 
 console.log(date2year());
 ```
 
+##### `doty2year`
+
 ```{javascript}
 #| tags: [doty2year]
+#| label: doty2year
+#| id: doty2year
 function doty2year(year = 1969, doty = 306) { return year + (doty > 305) }
 
 console.log(doty2year());
@@ -196,8 +231,12 @@ console.log(doty2year());
 
 #### Julia
 
+##### `date2year`
+
 ```{julia}
 #| tags: [date2year]
+#| label: date2year
+#| id: date2year
 function date2year(year=1969, month=1)
     year - (month < 3)
 end
@@ -205,8 +244,12 @@ end
 date2year()
 ```
 
+##### `doty2year`
+
 ```{julia}
 #| tags: [doty2year]
+#| label: doty2year
+#| id: doty2year
 function doty2year(year=1969, doty=306)
     year + (doty > 305)
 end
@@ -216,16 +259,24 @@ doty2year()
 
 #### Python
 
+##### `date2year`
+
 ```{python}
 #| tags: [date2year]
+#| label: date2year
+#| id: date2year
 def date2year(year=1969, month=1):
     return year - (month < 3)
 
 date2year()
 ```
 
+##### `doty2year`
+
 ```{python}
 #| tags: [doty2year]
+#| label: doty2year
+#| id: doty2year
 def doty2year(year=1969, doty=306):
     return year + (doty > 305)
 
@@ -234,8 +285,12 @@ doty2year()
 
 #### R
 
+##### `date2year`
+
 ```{r}
 #| tags: [date2year]
+#| label: date2year
+#| id: date2year
 date2year <- function(year = 1970, month = 1) {
     year - (month < 3)
 }
@@ -243,8 +298,12 @@ date2year <- function(year = 1970, month = 1) {
 date2year()
 ```
 
+##### `doty2year`
+
 ```{r}
 #| tags: [doty2year]
+#| label: doty2year
+#| id: doty2year
 doty2year <- function(year = 1969, doty = 306) {
     year + (doty > 305)
 }
@@ -252,9 +311,6 @@ doty2year <- function(year = 1969, doty = 306) {
 doty2year()
 ```
 
-:::
-
-::::::
 
 ### Leap years {#sec-gregl}
 
@@ -262,14 +318,17 @@ The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian cal
 
 $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
-:::::: {#exm-gregl}
-
-::: {.panel-tabset group="language"}
+::: {#exm-gregl}
+:::
 
 #### JavaScript
 
+##### `leap`
+
 ```{javascript}
 #| tags: [leap]
+#| label: leap
+#| id: leap
 function is_leap(year=1970) {
     return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 }
@@ -278,8 +337,12 @@ is_leap()
 
 #### Julia
 
+##### `leap`
+
 ```{julia}
 #| tags: [leap]
+#| label: leap
+#| id: leap
 function is_leap(year=1970)
     year % 4 == 0 && year % 100 != 0 || year % 400 == 0
 end
@@ -288,8 +351,12 @@ is_leap()
 
 #### Python
 
+##### `leap`
+
 ```{python}
 #| tags: [leap]
+#| label: leap
+#| id: leap
 def is_leap(year=1970):
     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
 is_leap()
@@ -297,8 +364,12 @@ is_leap()
 
 #### R
 
+##### `leap`
+
 ```{r}
 #| tags: [leap]
+#| label: leap
+#| id: leap
 is_leap <- function(year=1970) {
     year %% 4 == 0 & year %% 100 != 0 | year %% 400 == 0
 }
@@ -306,9 +377,6 @@ is_leap <- function(year=1970) {
 is_leap()
 ```
 
-:::
-
-::::::
 
 ## ISO 8601 {#sec-iso}
 
@@ -326,14 +394,17 @@ $$(isoordinal + 305 - isleap(year)) \mod 365$$ {#eq-isoo1}
 
 $$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 
-:::::: {#exm-isoo}
-
-::: {.panel-tabset group="language"}
+::: {#exm-isoo}
+:::
 
 #### JavaScript
 
+##### `isoo2year`
+
 ```{javascript}
 #| tags: [isoo2year]
+#| label: isoo2year
+#| id: isoo2year
 function isoo2year(year = 1970, day = 1) {
     return year - (day < (60 + is_leap(year - 1)))
 }
@@ -341,8 +412,12 @@ function isoo2year(year = 1970, day = 1) {
 isoo2year()
 ```
 
+##### `isoo2doty`
+
 ```{javascript}
 #| tags: [isoo2doty]
+#| label: isoo2doty
+#| id: isoo2doty
 function isoo2doty(year = 1970, day = 1) {
     return (day + 305 - is_leap(year)) % 365
 }
@@ -352,8 +427,12 @@ console.log(
     isoo2doty().toString().padStart(3, "0")}`);
 ```
 
+##### `doty2isoo`
+
 ```{javascript}
 #| tags: [doty2isoo]
+#| label: doty2isoo
+#| id: doty2isoo
 function doty2isoo(year = 1970, doty = 0) {
     return (doty + 60 + is_leap(year + 1)) % 365
 }
@@ -365,8 +444,12 @@ console.log(
 
 #### Julia
 
+##### `isoo2year`
+
 ```{julia}
 #| tags: [isoo2year]
+#| label: isoo2year
+#| id: isoo2year
 function isoo2year(year = 1970, day = 1)
     year - (day < (60 + is_leap(year - 1)))
 end
@@ -374,8 +457,12 @@ end
 isoo2year()
 ```
 
+##### `isoo2doty`
+
 ```{julia}
 #| tags: [isoo2doty]
+#| label: isoo2doty
+#| id: isoo2doty
 function isoo2doty(year=1970, day=1)
     (day + 305 - is_leap(year)) % 365
 end
@@ -383,8 +470,12 @@ end
 "$(isoo2year())+$(isoo2doty())"
 ```
 
+##### `doty2isoo`
+
 ```{julia}
 #| tags: [doty2isoo]
+#| label: doty2isoo
+#| id: doty2isoo
 function doty2isoo(year=1970, doty=0)
     (doty + 60 + is_leap(year + 1)) % 365
 end
@@ -394,24 +485,36 @@ end
 
 #### Python
 
+##### `isoo2year`
+
 ```{python}
 #| tags: [isoo2year]
+#| label: isoo2year
+#| id: isoo2year
 def isoo2year(year=1970, day=1):
     return year - (day < (60 + is_leap(year - 1)))
 
 isoo2year()
 ```
 
+##### `isoo2doty`
+
 ```{python}
 #| tags: [isoo2doty]
+#| label: isoo2doty
+#| id: isoo2doty
 def isoo2doty(year=1970, day=1):
     return (day + 305 - is_leap(year)) % 365
 
 f"{isoo2year()}+{isoo2doty()}"
 ```
 
+##### `doty2isoo`
+
 ```{python}
 #| tags: [doty2isoo]
+#| label: doty2isoo
+#| id: doty2isoo
 def doty2isoo(year=1970, doty=0):
     return (doty + 60 + is_leap(year + 1)) % 365
 
@@ -420,8 +523,12 @@ f"{doty2year():<04}+{doty2isoo():<03}"
 
 #### R
 
+##### `isoo2year`
+
 ```{r}
 #| tags: [isoo2year]
+#| label: isoo2year
+#| id: isoo2year
 isoo2year <- function(year = 1970, day = 1) {
     year - (day < (60 + is_leap(year - 1)))
 }
@@ -429,8 +536,12 @@ isoo2year <- function(year = 1970, day = 1) {
 isoo2year()
 ```
 
+##### `isoo2doty`
+
 ```{r}
 #| tags: [isoo2doty]
+#| label: isoo2doty
+#| id: isoo2doty
 isoo2doty <- function(year = 1970, day = 1) {
     (day + 305 - is_leap(year)) %% 365
 }
@@ -438,8 +549,12 @@ isoo2doty <- function(year = 1970, day = 1) {
 paste0(sprintf("%04d", isoo2year()), "+", sprintf("%03d", isoo2doty()))
 ```
 
+##### `doty2isoo`
+
 ```{r}
 #| tags: [doty2isoo]
+#| label: doty2isoo
+#| id: doty2isoo
 doty2isoo <- function(year = 1970, doty = 0) {
     (doty + 60 + is_leap(year + 1)) %% 365
 }
@@ -447,9 +562,6 @@ doty2isoo <- function(year = 1970, doty = 0) {
 paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))
 ```
 
-:::
-
-::::::
 
 ### ISO 8601 calendar dates {#sec-isoc}
 
@@ -457,9 +569,8 @@ ISO 8601 [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates)
 
 As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `.m` format (`year+m+dd`), which is very similar to the ISO 8601 calendar date format. The `.m` format is described in @sec-dotm. Examples of the `.m` format are provided in @sec-dotex. To be clear, the `.m` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
 
-:::::: {#exm-isoc}
-
-::: {.panel-tabset group="language"}
+::: {#exm-isoc}
+:::
 
 #### JavaScript
 
@@ -479,8 +590,12 @@ console.log(
 
 #### Julia
 
+##### `stamp`
+
 ```{julia}
 #| tags: [stamp]
+#| label: stamp
+#| id: stamp
 "$(lpad(date2year(), 4, '0'))+$(lpad(date2doty(), 3, '0'))"
 ```
 
@@ -513,9 +628,6 @@ paste0(sprintf("%04d", doty2year()), "-",
     )
 ```
 
-:::
-
-::::::
 
 ### ISO 8601 times {#sec-isot}
 
@@ -527,9 +639,8 @@ An ISO 8601 calendar date timestamp that includes seconds is 23 characters long 
 
 ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC%2B00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time). `Declock` times that are synonymous with UTC can end in `Z` (`year+day.dddddZ`) or a `+0` (`year+day.ddddd+0`). Noon UTC can be written `.5Z` or `.5+0` in `Declock` and 12:00:00Z or 12:00:00+00:00 as per ISO 8601. The code in @exm-isoz converts between UTC offsets and military time zone codes. @sec-zone provides more information on `Declock` time zones.
 
-:::::: {#exm-isoz}
-
-::: {.panel-tabset group="language"}
+::: {#exm-isoz}
+:::
 
 #### JavaScript
 
@@ -557,8 +668,12 @@ console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
 
 #### Julia
 
+##### `zone`
+
 ```{julia}
 #| tags: [zone]
+#| label: zone
+#| id: zone
 # import Pkg; Pkg.add("TimeZones")
 # using TimeZones
 # localzone()
@@ -632,9 +747,6 @@ zone2hour <- function(zone = "Z") {
 zone2hour()
 ```
 
-:::
-
-::::::
 
 #### Standard Time to Decimal Time Conversion {#sec-isos}
 
@@ -661,9 +773,8 @@ $$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isos4}
 
 : The powers of ten of units based on days {#tbl-isos}
 
-:::::: {#exm-isos}
-
-::: {.panel-tabset group="language"}
+::: {#exm-isos}
+:::
 
 #### JavaScript
 
@@ -695,8 +806,12 @@ console.log(`${doty2year()}+${
 
 #### Julia
 
+##### `time`
+
 ```{julia}
 #| tags: [time]
+#| label: time
+#| id: time
 function time2doty(hours=1, minutes=0, seconds=0)
     hours / 24 + minutes / 1440 + seconds / 86400
 end
@@ -769,9 +884,6 @@ paste0(sprintf("%04d", doty2year()), "-",
     )
 ```
 
-:::
-
-::::::
 
 ### ISO 8601 recurring intervals {#sec-isoi}
 
@@ -863,9 +975,8 @@ y \mod 4 = 0 \\
 \lor y \mod 400 = 0 \end{array} \right]$$ {#eq-time}
 
 
-:::::: {#exm-time}
-
-::: {.panel-tabset group="language"}
+::: {#exm-time}
+:::
 
 #### JavaScript
 
@@ -890,8 +1001,12 @@ console.log(
 
 #### Julia
 
+##### `unix`
+
 ```{julia}
 #| tags: [unix]
+#| label: unix
+#| id: unix
 function unix2doty(s=0, ms=0)
     days = s / 86400 + ms / 86400000 + 719468
     era = floor((days >= 0 ? days : days - 146096) / 146097)
@@ -977,9 +1092,6 @@ copySelection(date)
 paste()
 ```
 
-:::
-
-::::::
 
 # Basic concepts {#sec-basics}
 
@@ -1487,9 +1599,8 @@ Negative `doty` numbers require two separate tables for common and leap years, @
 
 $$doty = (153 \cdot \frac{\begin{cases}month - 3&{\text{if } month > 2;}\\m + 9&{\text{otherwise.}}\end{cases}}{5} + d - 1$$ {#eq-doty1}
 
-:::::: {#exm-date2doty}
-
-::: {.panel-tabset group="language"}
+::: {#exm-date2doty}
+:::
 
 #### JavaScript
 
@@ -1501,10 +1612,6 @@ function date2doty(year = 1970, month = 1, day = 1) {
 }
 console.log(date2doty());
 ```
-
-:::
-
-::::::
 
 ::: {.callout-note collapse="true"}
 #### Expand To See Negative Number Conversion Tables
@@ -1581,7 +1688,7 @@ console.log(date2doty());
 
 : Gregorian calendar date to negative `doty` leap year conversion {#tbl-negl}
 
-:::
+
 
 
 As mentioned in @sec-gregm, the years in `Decalendar` and ISO 8601 ordinal dates will match except for in January and February when the `Decalendar` year will be 1 less than the ISO 8601 year. 
