@@ -690,54 +690,54 @@ In the `stamps` above, the time has 3 digits, because this is the best level of 
 
 ::: {.callout-note collapse="true" title="Click to expand" icon=false}
 
-| Base 10   | Name     | Symbol | Formal Name         |
-| --------- | -------  | ------ | -----------------   |
-| 10²       | `hekt`   | ρ      | `hectoday`          |
-| 9.1 x 10¹ | `delt`   | δ      | `deltakeraiayear`   |
-| 9 x 10¹   | `qop`    | ϟ      | `qoppaday`          |
-| 8 x 10¹   | `pi`     | π      | `piday`             |
-| 7.3 x 10¹ | `ep`     | ε      | `epsilonkeraiayear` |
-| 7 x 10¹   | `om`     | ο      | `omicronday`        |
-| 6.1 x 10¹ | `wau`    | ϛ      | `waukeraiayear`     |
-| 6 x 10¹   | `xi`     | ξ      | `xiday`             |
-| 5 x 10¹   | `nu`     | ν      | `nuday`             |
-| 4 x 10¹   | `mu`     | Μ      | `muday`             |
-| 3 x 10¹   | `lam`    | λ      | `lamdaday`          |
-| 2 x 10¹   | `kap`    | κ      | `kappaday`          |
-| 10¹       | `dek`    | ι, 旬  | `decaday`           |
-| 10⁰       | `day`    | d, 日  | `day`               |
-| 10⁻¹      | `dime`   | ⅒, 更  | `deciday`           |
-| 10⁻²      | `cent`   | ¢, %   | `centiday`          |
-| 10⁻³      | `mil`    | m, ‰   | `milliday`          |
-| 2 x 10⁻⁴  | `period` | .      | `didecimilliday`    |
-| 10⁻⁴      | `phrase` | , ‱    | `decimilliday`      |
-| 2 x 10⁻⁵  | `bar`    | \|     | `dicentimilliday`   |
-| 10⁻⁵      | `beat`   | ♫      | `centimilliday`     |
-| 10⁻⁶      | `mic`    | μ      | `microday`          |
-| 10⁻⁷      | `liph`   | m̑      | `decimicroday`      |
-| 10⁻⁸      | `lib`    | m̈      | `centimicroday`     |
-| 10⁻⁹      | `nan`    | n      | `nanoday`           |
-| 10⁻¹⁰     | `roph`   | μ̑      | `decinanoday`       |
-| 10⁻¹¹     | `rob`    | µ̈      | `centinanoday`      |
-| 10⁻¹²     | `pic`    | p      | `picoday`           |
-| 10⁻¹³     | `noph`   | n̑      | `decipicoday`       |
-| 10⁻¹⁴     | `nob`    | n̈      | `centipicoday`      |
-| 10⁻¹⁵     | `femt`   | f      | `femtoday`          |
-| 10⁻¹⁶     | `coph`   | p̑      | `decifemtoday`      |
-| 10⁻¹⁷     | `cob`    | p̈      | `centifemtoday`     |
-| 10⁻¹⁸     | `att`    | a      | `attoday`           |
-| 10⁻¹⁹     | `foph`   | f̑      | `deciattoday`       |
-| 10⁻²⁰     | `fob`    | f̈      | `centiattoday`      |
-| 10⁻²¹     | `zept`   | z      | `zeptoday`          |
-| 10⁻²²     | `toph`   | ȃ      | `decizeptoday`      |
-| 10⁻²³     | `tob`    | ä      | `centizeptoday`     |
-| 10⁻²⁴     | `yokt`   | y      | `yoctoday`          |
-| 10⁻²⁵     | `zoph`   | z̑      | `deciyoctoday`      |
-| 10⁻²⁶     | `zob`    | z̈      | `centiyoctoday`     |
-| 10⁻²⁷     | `ront`   | r      | `rontoday`          |
-| 10⁻²⁸     | `yoph`   | y̑      | `decirontoday`      |
-| 10⁻²⁹     | `yob`    | ÿ      | `centirontoday`     |
-| 10⁻³⁰     | `quek`   | q      | `quectoday`         |
+| Quantity           | Name     | Symbol    | Formal Name         |
+| ------------------ | -------- | --------- | ------------------- |
+| $100$              | `hekt`   | `ρ`       | `hectoday`          |
+| $91$               | `delt`   | `δ`       | `deltakeraiayear`   |
+| $90$               | `qop`    | `ϟ`       | `qoppaday`          |
+| $80$               | `pi`     | `π`       | `piday`             |
+| $73$               | `ep`     | `ε`       | `epsilonkeraiayear` |
+| $70$               | `om`     | `ο`       | `omicronday`        |
+| $61$               | `wau`    | `ϛ`       | `waukeraiayear`     |
+| $60$               | `xi`     | `ξ`       | `xiday`             |
+| $50$               | `nu`     | `ν`       | `nuday`             |
+| $40$               | `mu`     | `Μ`       | `muday`             |
+| $30$               | `lam`    | `λ`       | `lamdaday`          |
+| $20$               | `kap`    | `κ`       | `kappaday`          |
+| $10$               | `dek`    | `ι`, 旬   | `decaday`           |
+| $1$                | `day`    | `d`, 日   | `day`               |
+| $10^{-1}$          | `dime`   | `⅒`, 更   | `deciday`           |
+| $10^{-2}$          | `cent`   | `¢`, `%`  | `centiday`          |
+| $10^{-3}$          | `mil`    | `m`, `‰`  | `milliday`          |
+| $2 \times 10^{-4}$ | `period` | `.`       | `didecimilliday`    |
+| $10^{-4}$          | `phrase` | `◠ `, `‱` | `decimilliday`      |
+| $2 \times 10^{-5}$ | `bar`    | `|`       | `dicentimilliday`   |
+| $10^{-5}$          | `beat`   | `♫`       | `centimilliday`     |
+| $10^{-6}$          | `mic`    | `μ`       | `microday`          |
+| $10^{-7}$          | `liph`   | `m̑`       | `decimicroday`      |
+| $10^{-8}$          | `lib`    | `m̈`       | `centimicroday`     |
+| $10^{-9}$          | `nan`    | `n`       | `nanoday`           |
+| $10^{-10}$         | `roph`   | `μ̑`       | `decinanoday`       |
+| $10^{-11}$         | `rob`    | `µ̈`       | `centinanoday`      |
+| $10^{-12}$         | `pic`    | `p`       | `picoday`           |
+| $10^{-13}$         | `noph`   | `n̑`       | `decipicoday`       |
+| $10^{-14}$         | `nob`    | `n̈`       | `centipicoday`      |
+| $10^{-15}$         | `femt`   | `f`       | `femtoday`          |
+| $10^{-16}$         | `coph`   | `p̑`       | `decifemtoday`      |
+| $10^{-17}$         | `cob`    | `p̈`       | `centifemtoday`     |
+| $10^{-18}$         | `att`    | `a`       | `attoday`           |
+| $10^{-19}$         | `foph`   | `f̑`       | `deciattoday`       |
+| $10^{-20}$         | `fob`    | `f̈`       | `centiattoday`      |
+| $10^{-21}$         | `zept`   | `z`       | `zeptoday`          |
+| $10^{-22}$         | `toph`   | `ȃ`       | `decizeptoday`      |
+| $10^{-23}$         | `tob`    | `ä`       | `centizeptoday`     |
+| $10^{-24}$         | `yokt`   | `y`       | `yoctoday`          |
+| $10^{-25}$         | `zoph`   | `z̑`       | `deciyoctoday`      |
+| $10^{-26}$         | `zob`    | `z̈`       | `centiyoctoday`     |
+| $10^{-27}$         | `ront`   | `r`       | `rontoday`          |
+| $10^{-28}$         | `yoph`   | `y̑`       | `decirontoday`      |
+| $10^{-29}$         | `yob`    | `ÿ`       | `centirontoday`     |
+| $10^{-30}$         | `quek`   | `q`       | `quectoday`         |
 
 : The units of `Decalendar` and `Declock` {#tbl-unit}
 
@@ -745,7 +745,7 @@ In the `stamps` above, the time has 3 digits, because this is the best level of 
 
 In @tbl-unit, the units with positive exponents are used for `Decalendar`, while the ones with negative exponents are used for `Declock`. `Cents` (`¢`) can serve as a useful point of comparison to understand the scale of some of the units in @tbl-unit above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` (`⅒`) are ten times larger (10% = 144 minutes), and `deks` (`ι`) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
-`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` (` ̑`) and `beats` (`♫`), music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
+`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` (`◠`) and `beats` (`♫`), music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
 
 `Declock` units smaller than `beats` are too small for typical daily use. For example, a `mic` (`microday`, `μ`) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 `liphs` (`milliphrases`, `m̑`). A `lib` (`millibeat`, `m̈`) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person's ear to their other ear in about 7 `nans` (`nanodays`). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a `roph` (`microphrase`, `μ̑`) difference might be too fast to notice. In a `rob` (`microbeat`, `µ̈`), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.
 

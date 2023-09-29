@@ -2160,7 +2160,7 @@ y \mod 4 = 0 \\
 <span id="cb99-15"><a href="#cb99-15" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(time <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}${</span><span class="fu">hour2zone</span>()<span class="sc">}</span><span class="vs">`</span></span>
 <span id="cb99-16"><a href="#cb99-16" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>2023+212.02336Z</code></pre>
+<pre><code>2023+212.14627Z</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-57" href="decalendar_javascript.ipynb.html">Source: decalendar_javascript.ipynb</a></div>
@@ -2185,7 +2185,7 @@ y \mod 4 = 0 \\
 <span id="cb101-12"><a href="#cb101-12" aria-hidden="true" tabindex="-1"></a>y, d, t <span class="op">=</span> <span class="fu">unix2doty</span>(<span class="fu">time</span>())</span>
 <span id="cb101-13"><a href="#cb101-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(d, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>(t <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="sc">$</span>(<span class="fu">hour2zone</span>())<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+212.02349Z"</code></pre>
+<pre><code>"2023+212.14639Z"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-58" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -2210,7 +2210,7 @@ y \mod 4 = 0 \\
 <span id="cb103-13"><a href="#cb103-13" aria-hidden="true" tabindex="-1"></a>y, d, t <span class="op">=</span> unix2doty(time())</span>
 <span id="cb103-14"><a href="#cb103-14" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>d<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>(t <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}{</span>hour2zone()<span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+212.02359Z'</code></pre>
+<pre><code>'2023+212.14648Z'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-59" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -2241,7 +2241,7 @@ y \mod 4 = 0 \\
 <span>       <span class="fu">hour2zone</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+212.02368Z'
+'2023+212.14657Z'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-60" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -2316,286 +2316,295 @@ Click to expand
 <caption>Table&nbsp;6: The units of <code>Decalendar</code> and <code>Declock</code>
 </caption>
 <thead><tr class="header">
-<th>Base 10</th>
+<th>Quantity</th>
 <th>Name</th>
 <th>Symbol</th>
 <th>Formal Name</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>10²</td>
+<td><span class="math inline">\(100\)</span></td>
 <td><code>hekt</code></td>
-<td>ρ</td>
+<td><code>ρ</code></td>
 <td><code>hectoday</code></td>
 </tr>
 <tr class="even">
-<td>9.1 x 10¹</td>
+<td><span class="math inline">\(91\)</span></td>
 <td><code>delt</code></td>
-<td>δ</td>
+<td><code>δ</code></td>
 <td><code>deltakeraiayear</code></td>
 </tr>
 <tr class="odd">
-<td>9 x 10¹</td>
+<td><span class="math inline">\(90\)</span></td>
 <td><code>qop</code></td>
-<td>ϟ</td>
+<td><code>ϟ</code></td>
 <td><code>qoppaday</code></td>
 </tr>
 <tr class="even">
-<td>8 x 10¹</td>
+<td><span class="math inline">\(80\)</span></td>
 <td><code>pi</code></td>
-<td>π</td>
+<td><code>π</code></td>
 <td><code>piday</code></td>
 </tr>
 <tr class="odd">
-<td>7.3 x 10¹</td>
+<td><span class="math inline">\(73\)</span></td>
 <td><code>ep</code></td>
-<td>ε</td>
+<td><code>ε</code></td>
 <td><code>epsilonkeraiayear</code></td>
 </tr>
 <tr class="even">
-<td>7 x 10¹</td>
+<td><span class="math inline">\(70\)</span></td>
 <td><code>om</code></td>
-<td>ο</td>
+<td><code>ο</code></td>
 <td><code>omicronday</code></td>
 </tr>
 <tr class="odd">
-<td>6.1 x 10¹</td>
+<td><span class="math inline">\(61\)</span></td>
 <td><code>wau</code></td>
-<td>ϛ</td>
+<td><code>ϛ</code></td>
 <td><code>waukeraiayear</code></td>
 </tr>
 <tr class="even">
-<td>6 x 10¹</td>
+<td><span class="math inline">\(60\)</span></td>
 <td><code>xi</code></td>
-<td>ξ</td>
+<td><code>ξ</code></td>
 <td><code>xiday</code></td>
 </tr>
 <tr class="odd">
-<td>5 x 10¹</td>
+<td><span class="math inline">\(50\)</span></td>
 <td><code>nu</code></td>
-<td>ν</td>
+<td><code>ν</code></td>
 <td><code>nuday</code></td>
 </tr>
 <tr class="even">
-<td>4 x 10¹</td>
+<td><span class="math inline">\(40\)</span></td>
 <td><code>mu</code></td>
-<td>Μ</td>
+<td><code>Μ</code></td>
 <td><code>muday</code></td>
 </tr>
 <tr class="odd">
-<td>3 x 10¹</td>
+<td><span class="math inline">\(30\)</span></td>
 <td><code>lam</code></td>
-<td>λ</td>
+<td><code>λ</code></td>
 <td><code>lamdaday</code></td>
 </tr>
 <tr class="even">
-<td>2 x 10¹</td>
+<td><span class="math inline">\(20\)</span></td>
 <td><code>kap</code></td>
-<td>κ</td>
+<td><code>κ</code></td>
 <td><code>kappaday</code></td>
 </tr>
 <tr class="odd">
-<td>10¹</td>
+<td><span class="math inline">\(10\)</span></td>
 <td><code>dek</code></td>
-<td>ι, 旬</td>
+<td>
+<code>ι</code>, 旬</td>
 <td><code>decaday</code></td>
 </tr>
 <tr class="even">
-<td>10⁰</td>
+<td><span class="math inline">\(1\)</span></td>
 <td><code>day</code></td>
-<td>d, 日</td>
+<td>
+<code>d</code>, 日</td>
 <td><code>day</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻¹</td>
+<td><span class="math inline">\(10^{-1}\)</span></td>
 <td><code>dime</code></td>
-<td>⅒, 更</td>
+<td>
+<code>⅒</code>, 更</td>
 <td><code>deciday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻²</td>
+<td><span class="math inline">\(10^{-2}\)</span></td>
 <td><code>cent</code></td>
-<td>¢, %</td>
+<td>
+<code>¢</code>, <code>%</code>
+</td>
 <td><code>centiday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻³</td>
+<td><span class="math inline">\(10^{-3}\)</span></td>
 <td><code>mil</code></td>
-<td>m, ‰</td>
+<td>
+<code>m</code>, <code>‰</code>
+</td>
 <td><code>milliday</code></td>
 </tr>
 <tr class="even">
-<td>2 x 10⁻⁴</td>
+<td><span class="math inline">\(2 \times 10^{-4}\)</span></td>
 <td><code>period</code></td>
-<td>.</td>
+<td><code>.</code></td>
 <td><code>didecimilliday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻⁴</td>
+<td><span class="math inline">\(10^{-4}\)</span></td>
 <td><code>phrase</code></td>
-<td>, ‱</td>
+<td>
+<code>◠</code>, <code>‱</code>
+</td>
 <td><code>decimilliday</code></td>
 </tr>
 <tr class="even">
-<td>2 x 10⁻⁵</td>
+<td><span class="math inline">\(2 \times 10^{-5}\)</span></td>
 <td><code>bar</code></td>
-<td>|</td>
+<td><code>|</code></td>
 <td><code>dicentimilliday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻⁵</td>
+<td><span class="math inline">\(10^{-5}\)</span></td>
 <td><code>beat</code></td>
-<td>♫</td>
+<td><code>♫</code></td>
 <td><code>centimilliday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻⁶</td>
+<td><span class="math inline">\(10^{-6}\)</span></td>
 <td><code>mic</code></td>
-<td>μ</td>
+<td><code>μ</code></td>
 <td><code>microday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻⁷</td>
+<td><span class="math inline">\(10^{-7}\)</span></td>
 <td><code>liph</code></td>
-<td>m̑</td>
+<td><code>m̑</code></td>
 <td><code>decimicroday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻⁸</td>
+<td><span class="math inline">\(10^{-8}\)</span></td>
 <td><code>lib</code></td>
-<td>m̈</td>
+<td><code>m̈</code></td>
 <td><code>centimicroday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻⁹</td>
+<td><span class="math inline">\(10^{-9}\)</span></td>
 <td><code>nan</code></td>
-<td>n</td>
+<td><code>n</code></td>
 <td><code>nanoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻¹⁰</td>
+<td><span class="math inline">\(10^{-10}\)</span></td>
 <td><code>roph</code></td>
-<td>μ̑</td>
+<td><code>μ̑</code></td>
 <td><code>decinanoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻¹¹</td>
+<td><span class="math inline">\(10^{-11}\)</span></td>
 <td><code>rob</code></td>
-<td>µ̈</td>
+<td><code>µ̈</code></td>
 <td><code>centinanoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻¹²</td>
+<td><span class="math inline">\(10^{-12}\)</span></td>
 <td><code>pic</code></td>
-<td>p</td>
+<td><code>p</code></td>
 <td><code>picoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻¹³</td>
+<td><span class="math inline">\(10^{-13}\)</span></td>
 <td><code>noph</code></td>
-<td>n̑</td>
+<td><code>n̑</code></td>
 <td><code>decipicoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻¹⁴</td>
+<td><span class="math inline">\(10^{-14}\)</span></td>
 <td><code>nob</code></td>
-<td>n̈</td>
+<td><code>n̈</code></td>
 <td><code>centipicoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻¹⁵</td>
+<td><span class="math inline">\(10^{-15}\)</span></td>
 <td><code>femt</code></td>
-<td>f</td>
+<td><code>f</code></td>
 <td><code>femtoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻¹⁶</td>
+<td><span class="math inline">\(10^{-16}\)</span></td>
 <td><code>coph</code></td>
-<td>p̑</td>
+<td><code>p̑</code></td>
 <td><code>decifemtoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻¹⁷</td>
+<td><span class="math inline">\(10^{-17}\)</span></td>
 <td><code>cob</code></td>
-<td>p̈</td>
+<td><code>p̈</code></td>
 <td><code>centifemtoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻¹⁸</td>
+<td><span class="math inline">\(10^{-18}\)</span></td>
 <td><code>att</code></td>
-<td>a</td>
+<td><code>a</code></td>
 <td><code>attoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻¹⁹</td>
+<td><span class="math inline">\(10^{-19}\)</span></td>
 <td><code>foph</code></td>
-<td>f̑</td>
+<td><code>f̑</code></td>
 <td><code>deciattoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻²⁰</td>
+<td><span class="math inline">\(10^{-20}\)</span></td>
 <td><code>fob</code></td>
-<td>f̈</td>
+<td><code>f̈</code></td>
 <td><code>centiattoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻²¹</td>
+<td><span class="math inline">\(10^{-21}\)</span></td>
 <td><code>zept</code></td>
-<td>z</td>
+<td><code>z</code></td>
 <td><code>zeptoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻²²</td>
+<td><span class="math inline">\(10^{-22}\)</span></td>
 <td><code>toph</code></td>
-<td>ȃ</td>
+<td><code>ȃ</code></td>
 <td><code>decizeptoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻²³</td>
+<td><span class="math inline">\(10^{-23}\)</span></td>
 <td><code>tob</code></td>
-<td>ä</td>
+<td><code>ä</code></td>
 <td><code>centizeptoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻²⁴</td>
+<td><span class="math inline">\(10^{-24}\)</span></td>
 <td><code>yokt</code></td>
-<td>y</td>
+<td><code>y</code></td>
 <td><code>yoctoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻²⁵</td>
+<td><span class="math inline">\(10^{-25}\)</span></td>
 <td><code>zoph</code></td>
-<td>z̑</td>
+<td><code>z̑</code></td>
 <td><code>deciyoctoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻²⁶</td>
+<td><span class="math inline">\(10^{-26}\)</span></td>
 <td><code>zob</code></td>
-<td>z̈</td>
+<td><code>z̈</code></td>
 <td><code>centiyoctoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻²⁷</td>
+<td><span class="math inline">\(10^{-27}\)</span></td>
 <td><code>ront</code></td>
-<td>r</td>
+<td><code>r</code></td>
 <td><code>rontoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻²⁸</td>
+<td><span class="math inline">\(10^{-28}\)</span></td>
 <td><code>yoph</code></td>
-<td>y̑</td>
+<td><code>y̑</code></td>
 <td><code>decirontoday</code></td>
 </tr>
 <tr class="odd">
-<td>10⁻²⁹</td>
+<td><span class="math inline">\(10^{-29}\)</span></td>
 <td><code>yob</code></td>
-<td>ÿ</td>
+<td><code>ÿ</code></td>
 <td><code>centirontoday</code></td>
 </tr>
 <tr class="even">
-<td>10⁻³⁰</td>
+<td><span class="math inline">\(10^{-30}\)</span></td>
 <td><code>quek</code></td>
-<td>q</td>
+<td><code>q</code></td>
 <td><code>quectoday</code></td>
 </tr>
 </tbody>
@@ -2605,7 +2614,7 @@ Click to expand
 </div>
 </div>
 <p>In <a href="#tbl-unit">Table&nbsp;6</a>, the units with positive exponents are used for <code>Decalendar</code>, while the ones with negative exponents are used for <code>Declock</code>. <code>Cents</code> (<code>¢</code>) can serve as a useful point of comparison to understand the scale of some of the units in <a href="#tbl-unit">Table&nbsp;6</a> above, because each <code>cent</code> is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to <code>cents</code>, <code>mils</code> are ten times smaller (.1% = 1.4 minutes), <code>dimes</code> (<code>⅒</code>) are ten times larger (10% = 144 minutes), and <code>deks</code> (<code>ι</code>) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 <code>dek</code> contains 10 whole days while the other units are fractions of days.</p>
-<p><code>Declock</code> units smaller than <code>mils</code> are not easy to think of as percents of a day. For <code>phrases</code> (<code>̑</code>) and <code>beats</code> (<code>♫</code>), music serves as a much more useful analogy. In fact, <code>phrases</code> and <code>beats</code> are musical terms. The duration of a musical beat depends on the tempo, but a <code>Declock beat</code> is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. <code>Declock beats</code> are organized into groups of 2 called <code>bars</code> or <code>measures</code>, groups of 10 called <code>phrases</code>, and groups of 20 called <code>periods</code>. A real example of music that follows this exact pattern is Haydn’s <a href="https://en.wikipedia.org/wiki/Period_(music)">Feldpartita</a>.</p>
+<p><code>Declock</code> units smaller than <code>mils</code> are not easy to think of as percents of a day. For <code>phrases</code> (<code>◠</code>) and <code>beats</code> (<code>♫</code>), music serves as a much more useful analogy. In fact, <code>phrases</code> and <code>beats</code> are musical terms. The duration of a musical beat depends on the tempo, but a <code>Declock beat</code> is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. <code>Declock beats</code> are organized into groups of 2 called <code>bars</code> or <code>measures</code>, groups of 10 called <code>phrases</code>, and groups of 20 called <code>periods</code>. A real example of music that follows this exact pattern is Haydn’s <a href="https://en.wikipedia.org/wiki/Period_(music)">Feldpartita</a>.</p>
 <p><code>Declock</code> units smaller than <code>beats</code> are too small for typical daily use. For example, a <code>mic</code> (<code>microday</code>, <code>μ</code>) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 <code>liphs</code> (<code>milliphrases</code>, <code>m̑</code>). A <code>lib</code> (<code>millibeat</code>, <code>m̈</code>) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person’s ear to their other ear in about 7 <code>nans</code> (<code>nanodays</code>). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a <code>roph</code> (<code>microphrase</code>, <code>μ̑</code>) difference might be too fast to notice. In a <code>rob</code> (<code>microbeat</code>, <code>µ̈</code>), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.</p>
 </section></section><section id="sec-zone" class="level1" data-number="5"><h1 data-number="5">
 <span class="header-section-number">5</span> Time zones</h1>
@@ -5016,54 +5025,54 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb107-690"><a href="#cb107-690" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb107-691"><a href="#cb107-691" aria-hidden="true" tabindex="-1"></a><span class="op">:::</span> <span class="op">{.</span><span class="fu">callout</span><span class="op">-</span>note collapse<span class="op">=</span><span class="st">"true"</span> title<span class="op">=</span><span class="st">"Click to expand"</span> icon<span class="op">=</span><span class="kw">false</span><span class="op">}</span></span>
 <span id="cb107-692"><a href="#cb107-692" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-693"><a href="#cb107-693" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> Base <span class="dv">10</span>   <span class="op">|</span> <span class="bu">Name</span>     <span class="op">|</span> Symbol <span class="op">|</span> Formal <span class="bu">Name</span>         <span class="op">|</span></span>
-<span id="cb107-694"><a href="#cb107-694" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="op">---------</span> <span class="op">|</span> <span class="op">-------</span>  <span class="op">|</span> <span class="op">------</span> <span class="op">|</span> <span class="op">-----------------</span>   <span class="op">|</span></span>
-<span id="cb107-695"><a href="#cb107-695" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="er">10</span>²       <span class="op">|</span> `hekt`   <span class="op">|</span> ρ      <span class="op">|</span> `hectoday`          <span class="op">|</span></span>
-<span id="cb107-696"><a href="#cb107-696" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="fl">9.1</span> x <span class="er">10</span>¹ <span class="op">|</span> `delt`   <span class="op">|</span> δ      <span class="op">|</span> `deltakeraiayear`   <span class="op">|</span></span>
-<span id="cb107-697"><a href="#cb107-697" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">9</span> x <span class="er">10</span>¹   <span class="op">|</span> `qop`    <span class="op">|</span> ϟ      <span class="op">|</span> `qoppaday`          <span class="op">|</span></span>
-<span id="cb107-698"><a href="#cb107-698" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">8</span> x <span class="er">10</span>¹   <span class="op">|</span> `pi`     <span class="op">|</span> π      <span class="op">|</span> `piday`             <span class="op">|</span></span>
-<span id="cb107-699"><a href="#cb107-699" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="fl">7.3</span> x <span class="er">10</span>¹ <span class="op">|</span> `ep`     <span class="op">|</span> ε      <span class="op">|</span> `epsilonkeraiayear` <span class="op">|</span></span>
-<span id="cb107-700"><a href="#cb107-700" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">7</span> x <span class="er">10</span>¹   <span class="op">|</span> `om`     <span class="op">|</span> ο      <span class="op">|</span> `omicronday`        <span class="op">|</span></span>
-<span id="cb107-701"><a href="#cb107-701" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="fl">6.1</span> x <span class="er">10</span>¹ <span class="op">|</span> `wau`    <span class="op">|</span> ϛ      <span class="op">|</span> `waukeraiayear`     <span class="op">|</span></span>
-<span id="cb107-702"><a href="#cb107-702" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">6</span> x <span class="er">10</span>¹   <span class="op">|</span> `xi`     <span class="op">|</span> ξ      <span class="op">|</span> `xiday`             <span class="op">|</span></span>
-<span id="cb107-703"><a href="#cb107-703" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">5</span> x <span class="er">10</span>¹   <span class="op">|</span> `nu`     <span class="op">|</span> ν      <span class="op">|</span> `nuday`             <span class="op">|</span></span>
-<span id="cb107-704"><a href="#cb107-704" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">4</span> x <span class="er">10</span>¹   <span class="op">|</span> `mu`     <span class="op">|</span> Μ      <span class="op">|</span> `muday`             <span class="op">|</span></span>
-<span id="cb107-705"><a href="#cb107-705" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">3</span> x <span class="er">10</span>¹   <span class="op">|</span> `lam`    <span class="op">|</span> λ      <span class="op">|</span> `lamdaday`          <span class="op">|</span></span>
-<span id="cb107-706"><a href="#cb107-706" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">2</span> x <span class="er">10</span>¹   <span class="op">|</span> `kap`    <span class="op">|</span> κ      <span class="op">|</span> `kappaday`          <span class="op">|</span></span>
-<span id="cb107-707"><a href="#cb107-707" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="er">10</span>¹       <span class="op">|</span> `dek`    <span class="op">|</span> ι<span class="op">,</span> 旬  <span class="op">|</span> `decaday`           <span class="op">|</span></span>
-<span id="cb107-708"><a href="#cb107-708" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="er">10</span>⁰       <span class="op">|</span> `day`    <span class="op">|</span> d<span class="op">,</span> 日  <span class="op">|</span> `day`               <span class="op">|</span></span>
-<span id="cb107-709"><a href="#cb107-709" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹      <span class="op">|</span> `dime`   <span class="op">|</span> ⅒<span class="op">,</span> 更  <span class="op">|</span> `deciday`           <span class="op">|</span></span>
-<span id="cb107-710"><a href="#cb107-710" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²      <span class="op">|</span> `cent`   <span class="op">|</span> ¢<span class="op">,</span> <span class="op">%</span>   <span class="op">|</span> `centiday`          <span class="op">|</span></span>
-<span id="cb107-711"><a href="#cb107-711" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻³      <span class="op">|</span> `mil`    <span class="op">|</span> m<span class="op">,</span> ‰   <span class="op">|</span> `milliday`          <span class="op">|</span></span>
-<span id="cb107-712"><a href="#cb107-712" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">2</span> x <span class="dv">10</span>⁻⁴  <span class="op">|</span> `period` <span class="op">|</span> <span class="op">.</span>      <span class="op">|</span> `didecimilliday`    <span class="op">|</span></span>
-<span id="cb107-713"><a href="#cb107-713" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻⁴      <span class="op">|</span> `phrase` <span class="op">|</span> <span class="op">,</span> ‱    <span class="op">|</span> `decimilliday`      <span class="op">|</span></span>
-<span id="cb107-714"><a href="#cb107-714" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">2</span> x <span class="dv">10</span>⁻⁵  <span class="op">|</span> `bar`    <span class="op">|</span> \<span class="op">|</span>     <span class="op">|</span> `dicentimilliday`   <span class="op">|</span></span>
-<span id="cb107-715"><a href="#cb107-715" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻⁵      <span class="op">|</span> `beat`   <span class="op">|</span> ♫      <span class="op">|</span> `centimilliday`     <span class="op">|</span></span>
-<span id="cb107-716"><a href="#cb107-716" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻⁶      <span class="op">|</span> `mic`    <span class="op">|</span> μ      <span class="op">|</span> `microday`          <span class="op">|</span></span>
-<span id="cb107-717"><a href="#cb107-717" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻⁷      <span class="op">|</span> `liph`   <span class="op">|</span> m̑      <span class="op">|</span> `decimicroday`      <span class="op">|</span></span>
-<span id="cb107-718"><a href="#cb107-718" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻⁸      <span class="op">|</span> `lib`    <span class="op">|</span> m̈      <span class="op">|</span> `centimicroday`     <span class="op">|</span></span>
-<span id="cb107-719"><a href="#cb107-719" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻⁹      <span class="op">|</span> `nan`    <span class="op">|</span> n      <span class="op">|</span> `nanoday`           <span class="op">|</span></span>
-<span id="cb107-720"><a href="#cb107-720" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹⁰     <span class="op">|</span> `roph`   <span class="op">|</span> μ̑      <span class="op">|</span> `decinanoday`       <span class="op">|</span></span>
-<span id="cb107-721"><a href="#cb107-721" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹¹     <span class="op">|</span> `rob`    <span class="op">|</span> µ̈      <span class="op">|</span> `centinanoday`      <span class="op">|</span></span>
-<span id="cb107-722"><a href="#cb107-722" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹²     <span class="op">|</span> `pic`    <span class="op">|</span> p      <span class="op">|</span> `picoday`           <span class="op">|</span></span>
-<span id="cb107-723"><a href="#cb107-723" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹³     <span class="op">|</span> `noph`   <span class="op">|</span> n̑      <span class="op">|</span> `decipicoday`       <span class="op">|</span></span>
-<span id="cb107-724"><a href="#cb107-724" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹⁴     <span class="op">|</span> `nob`    <span class="op">|</span> n̈      <span class="op">|</span> `centipicoday`      <span class="op">|</span></span>
-<span id="cb107-725"><a href="#cb107-725" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹⁵     <span class="op">|</span> `femt`   <span class="op">|</span> f      <span class="op">|</span> `femtoday`          <span class="op">|</span></span>
-<span id="cb107-726"><a href="#cb107-726" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹⁶     <span class="op">|</span> `coph`   <span class="op">|</span> p̑      <span class="op">|</span> `decifemtoday`      <span class="op">|</span></span>
-<span id="cb107-727"><a href="#cb107-727" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹⁷     <span class="op">|</span> `cob`    <span class="op">|</span> p̈      <span class="op">|</span> `centifemtoday`     <span class="op">|</span></span>
-<span id="cb107-728"><a href="#cb107-728" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹⁸     <span class="op">|</span> `att`    <span class="op">|</span> a      <span class="op">|</span> `attoday`           <span class="op">|</span></span>
-<span id="cb107-729"><a href="#cb107-729" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻¹⁹     <span class="op">|</span> `foph`   <span class="op">|</span> f̑      <span class="op">|</span> `deciattoday`       <span class="op">|</span></span>
-<span id="cb107-730"><a href="#cb107-730" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²⁰     <span class="op">|</span> `fob`    <span class="op">|</span> f̈      <span class="op">|</span> `centiattoday`      <span class="op">|</span></span>
-<span id="cb107-731"><a href="#cb107-731" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²¹     <span class="op">|</span> `zept`   <span class="op">|</span> z      <span class="op">|</span> `zeptoday`          <span class="op">|</span></span>
-<span id="cb107-732"><a href="#cb107-732" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²²     <span class="op">|</span> `toph`   <span class="op">|</span> ȃ      <span class="op">|</span> `decizeptoday`      <span class="op">|</span></span>
-<span id="cb107-733"><a href="#cb107-733" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²³     <span class="op">|</span> `tob`    <span class="op">|</span> ä      <span class="op">|</span> `centizeptoday`     <span class="op">|</span></span>
-<span id="cb107-734"><a href="#cb107-734" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²⁴     <span class="op">|</span> `yokt`   <span class="op">|</span> y      <span class="op">|</span> `yoctoday`          <span class="op">|</span></span>
-<span id="cb107-735"><a href="#cb107-735" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²⁵     <span class="op">|</span> `zoph`   <span class="op">|</span> z̑      <span class="op">|</span> `deciyoctoday`      <span class="op">|</span></span>
-<span id="cb107-736"><a href="#cb107-736" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²⁶     <span class="op">|</span> `zob`    <span class="op">|</span> z̈      <span class="op">|</span> `centiyoctoday`     <span class="op">|</span></span>
-<span id="cb107-737"><a href="#cb107-737" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²⁷     <span class="op">|</span> `ront`   <span class="op">|</span> r      <span class="op">|</span> `rontoday`          <span class="op">|</span></span>
-<span id="cb107-738"><a href="#cb107-738" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²⁸     <span class="op">|</span> `yoph`   <span class="op">|</span> y̑      <span class="op">|</span> `decirontoday`      <span class="op">|</span></span>
-<span id="cb107-739"><a href="#cb107-739" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻²⁹     <span class="op">|</span> `yob`    <span class="op">|</span> ÿ      <span class="op">|</span> `centirontoday`     <span class="op">|</span></span>
-<span id="cb107-740"><a href="#cb107-740" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="dv">10</span>⁻³⁰     <span class="op">|</span> `quek`   <span class="op">|</span> q      <span class="op">|</span> `quectoday`         <span class="op">|</span></span>
+<span id="cb107-693"><a href="#cb107-693" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> Quantity           <span class="op">|</span> <span class="bu">Name</span>     <span class="op">|</span> Symbol    <span class="op">|</span> Formal <span class="bu">Name</span>         <span class="op">|</span></span>
+<span id="cb107-694"><a href="#cb107-694" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> <span class="op">------------------</span> <span class="op">|</span> <span class="op">--------</span> <span class="op">|</span> <span class="op">---------</span> <span class="op">|</span> <span class="op">-------------------</span> <span class="op">|</span></span>
+<span id="cb107-695"><a href="#cb107-695" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">100</span>$              <span class="op">|</span> `hekt`   <span class="op">|</span> `ρ`       <span class="op">|</span> `hectoday`          <span class="op">|</span></span>
+<span id="cb107-696"><a href="#cb107-696" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">91</span>$               <span class="op">|</span> `delt`   <span class="op">|</span> `δ`       <span class="op">|</span> `deltakeraiayear`   <span class="op">|</span></span>
+<span id="cb107-697"><a href="#cb107-697" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">90</span>$               <span class="op">|</span> `qop`    <span class="op">|</span> `ϟ`       <span class="op">|</span> `qoppaday`          <span class="op">|</span></span>
+<span id="cb107-698"><a href="#cb107-698" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">80</span>$               <span class="op">|</span> `pi`     <span class="op">|</span> `π`       <span class="op">|</span> `piday`             <span class="op">|</span></span>
+<span id="cb107-699"><a href="#cb107-699" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">73</span>$               <span class="op">|</span> `ep`     <span class="op">|</span> `ε`       <span class="op">|</span> `epsilonkeraiayear` <span class="op">|</span></span>
+<span id="cb107-700"><a href="#cb107-700" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">70</span>$               <span class="op">|</span> `om`     <span class="op">|</span> `ο`       <span class="op">|</span> `omicronday`        <span class="op">|</span></span>
+<span id="cb107-701"><a href="#cb107-701" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">61</span>$               <span class="op">|</span> `wau`    <span class="op">|</span> `ϛ`       <span class="op">|</span> `waukeraiayear`     <span class="op">|</span></span>
+<span id="cb107-702"><a href="#cb107-702" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">60</span>$               <span class="op">|</span> `xi`     <span class="op">|</span> `ξ`       <span class="op">|</span> `xiday`             <span class="op">|</span></span>
+<span id="cb107-703"><a href="#cb107-703" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">50</span>$               <span class="op">|</span> `nu`     <span class="op">|</span> `ν`       <span class="op">|</span> `nuday`             <span class="op">|</span></span>
+<span id="cb107-704"><a href="#cb107-704" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">40</span>$               <span class="op">|</span> `mu`     <span class="op">|</span> `Μ`       <span class="op">|</span> `muday`             <span class="op">|</span></span>
+<span id="cb107-705"><a href="#cb107-705" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">30</span>$               <span class="op">|</span> `lam`    <span class="op">|</span> `λ`       <span class="op">|</span> `lamdaday`          <span class="op">|</span></span>
+<span id="cb107-706"><a href="#cb107-706" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">20</span>$               <span class="op">|</span> `kap`    <span class="op">|</span> `κ`       <span class="op">|</span> `kappaday`          <span class="op">|</span></span>
+<span id="cb107-707"><a href="#cb107-707" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span>$               <span class="op">|</span> `dek`    <span class="op">|</span> `ι`<span class="op">,</span> 旬   <span class="op">|</span> `decaday`           <span class="op">|</span></span>
+<span id="cb107-708"><a href="#cb107-708" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">1</span>$                <span class="op">|</span> `day`    <span class="op">|</span> `d`<span class="op">,</span> 日   <span class="op">|</span> `day`               <span class="op">|</span></span>
+<span id="cb107-709"><a href="#cb107-709" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">1</span><span class="op">}</span>$          <span class="op">|</span> `dime`   <span class="op">|</span> `⅒`<span class="op">,</span> 更   <span class="op">|</span> `deciday`           <span class="op">|</span></span>
+<span id="cb107-710"><a href="#cb107-710" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">2</span><span class="op">}</span>$          <span class="op">|</span> `cent`   <span class="op">|</span> `¢`<span class="op">,</span> `<span class="op">%</span>`  <span class="op">|</span> `centiday`          <span class="op">|</span></span>
+<span id="cb107-711"><a href="#cb107-711" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">3</span><span class="op">}</span>$          <span class="op">|</span> `mil`    <span class="op">|</span> `m`<span class="op">,</span> `‰`  <span class="op">|</span> `milliday`          <span class="op">|</span></span>
+<span id="cb107-712"><a href="#cb107-712" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">2</span> \times <span class="dv">10</span><span class="op">^{-</span><span class="dv">4</span><span class="op">}</span>$ <span class="op">|</span> `period` <span class="op">|</span> `<span class="op">.</span>`       <span class="op">|</span> `didecimilliday`    <span class="op">|</span></span>
+<span id="cb107-713"><a href="#cb107-713" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">4</span><span class="op">}</span>$          <span class="op">|</span> `phrase` <span class="op">|</span> `◠ `<span class="op">,</span> `‱` <span class="op">|</span> `decimilliday`      <span class="op">|</span></span>
+<span id="cb107-714"><a href="#cb107-714" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">2</span> \times <span class="dv">10</span><span class="op">^{-</span><span class="dv">5</span><span class="op">}</span>$ <span class="op">|</span> `bar`    <span class="op">|</span> `<span class="op">|</span>`       <span class="op">|</span> `dicentimilliday`   <span class="op">|</span></span>
+<span id="cb107-715"><a href="#cb107-715" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">5</span><span class="op">}</span>$          <span class="op">|</span> `beat`   <span class="op">|</span> `♫`       <span class="op">|</span> `centimilliday`     <span class="op">|</span></span>
+<span id="cb107-716"><a href="#cb107-716" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">6</span><span class="op">}</span>$          <span class="op">|</span> `mic`    <span class="op">|</span> `μ`       <span class="op">|</span> `microday`          <span class="op">|</span></span>
+<span id="cb107-717"><a href="#cb107-717" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">7</span><span class="op">}</span>$          <span class="op">|</span> `liph`   <span class="op">|</span> `m̑`       <span class="op">|</span> `decimicroday`      <span class="op">|</span></span>
+<span id="cb107-718"><a href="#cb107-718" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">8</span><span class="op">}</span>$          <span class="op">|</span> `lib`    <span class="op">|</span> `m̈`       <span class="op">|</span> `centimicroday`     <span class="op">|</span></span>
+<span id="cb107-719"><a href="#cb107-719" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">9</span><span class="op">}</span>$          <span class="op">|</span> `nan`    <span class="op">|</span> `n`       <span class="op">|</span> `nanoday`           <span class="op">|</span></span>
+<span id="cb107-720"><a href="#cb107-720" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">10</span><span class="op">}</span>$         <span class="op">|</span> `roph`   <span class="op">|</span> `μ̑`       <span class="op">|</span> `decinanoday`       <span class="op">|</span></span>
+<span id="cb107-721"><a href="#cb107-721" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">11</span><span class="op">}</span>$         <span class="op">|</span> `rob`    <span class="op">|</span> `µ̈`       <span class="op">|</span> `centinanoday`      <span class="op">|</span></span>
+<span id="cb107-722"><a href="#cb107-722" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">12</span><span class="op">}</span>$         <span class="op">|</span> `pic`    <span class="op">|</span> `p`       <span class="op">|</span> `picoday`           <span class="op">|</span></span>
+<span id="cb107-723"><a href="#cb107-723" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">13</span><span class="op">}</span>$         <span class="op">|</span> `noph`   <span class="op">|</span> `n̑`       <span class="op">|</span> `decipicoday`       <span class="op">|</span></span>
+<span id="cb107-724"><a href="#cb107-724" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">14</span><span class="op">}</span>$         <span class="op">|</span> `nob`    <span class="op">|</span> `n̈`       <span class="op">|</span> `centipicoday`      <span class="op">|</span></span>
+<span id="cb107-725"><a href="#cb107-725" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">15</span><span class="op">}</span>$         <span class="op">|</span> `femt`   <span class="op">|</span> `f`       <span class="op">|</span> `femtoday`          <span class="op">|</span></span>
+<span id="cb107-726"><a href="#cb107-726" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">16</span><span class="op">}</span>$         <span class="op">|</span> `coph`   <span class="op">|</span> `p̑`       <span class="op">|</span> `decifemtoday`      <span class="op">|</span></span>
+<span id="cb107-727"><a href="#cb107-727" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">17</span><span class="op">}</span>$         <span class="op">|</span> `cob`    <span class="op">|</span> `p̈`       <span class="op">|</span> `centifemtoday`     <span class="op">|</span></span>
+<span id="cb107-728"><a href="#cb107-728" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">18</span><span class="op">}</span>$         <span class="op">|</span> `att`    <span class="op">|</span> `a`       <span class="op">|</span> `attoday`           <span class="op">|</span></span>
+<span id="cb107-729"><a href="#cb107-729" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">19</span><span class="op">}</span>$         <span class="op">|</span> `foph`   <span class="op">|</span> `f̑`       <span class="op">|</span> `deciattoday`       <span class="op">|</span></span>
+<span id="cb107-730"><a href="#cb107-730" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">20</span><span class="op">}</span>$         <span class="op">|</span> `fob`    <span class="op">|</span> `f̈`       <span class="op">|</span> `centiattoday`      <span class="op">|</span></span>
+<span id="cb107-731"><a href="#cb107-731" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">21</span><span class="op">}</span>$         <span class="op">|</span> `zept`   <span class="op">|</span> `z`       <span class="op">|</span> `zeptoday`          <span class="op">|</span></span>
+<span id="cb107-732"><a href="#cb107-732" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">22</span><span class="op">}</span>$         <span class="op">|</span> `toph`   <span class="op">|</span> `ȃ`       <span class="op">|</span> `decizeptoday`      <span class="op">|</span></span>
+<span id="cb107-733"><a href="#cb107-733" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">23</span><span class="op">}</span>$         <span class="op">|</span> `tob`    <span class="op">|</span> `ä`       <span class="op">|</span> `centizeptoday`     <span class="op">|</span></span>
+<span id="cb107-734"><a href="#cb107-734" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">24</span><span class="op">}</span>$         <span class="op">|</span> `yokt`   <span class="op">|</span> `y`       <span class="op">|</span> `yoctoday`          <span class="op">|</span></span>
+<span id="cb107-735"><a href="#cb107-735" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">25</span><span class="op">}</span>$         <span class="op">|</span> `zoph`   <span class="op">|</span> `z̑`       <span class="op">|</span> `deciyoctoday`      <span class="op">|</span></span>
+<span id="cb107-736"><a href="#cb107-736" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">26</span><span class="op">}</span>$         <span class="op">|</span> `zob`    <span class="op">|</span> `z̈`       <span class="op">|</span> `centiyoctoday`     <span class="op">|</span></span>
+<span id="cb107-737"><a href="#cb107-737" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">27</span><span class="op">}</span>$         <span class="op">|</span> `ront`   <span class="op">|</span> `r`       <span class="op">|</span> `rontoday`          <span class="op">|</span></span>
+<span id="cb107-738"><a href="#cb107-738" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">28</span><span class="op">}</span>$         <span class="op">|</span> `yoph`   <span class="op">|</span> `y̑`       <span class="op">|</span> `decirontoday`      <span class="op">|</span></span>
+<span id="cb107-739"><a href="#cb107-739" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">29</span><span class="op">}</span>$         <span class="op">|</span> `yob`    <span class="op">|</span> `ÿ`       <span class="op">|</span> `centirontoday`     <span class="op">|</span></span>
+<span id="cb107-740"><a href="#cb107-740" aria-hidden="true" tabindex="-1"></a><span class="op">|</span> $<span class="dv">10</span><span class="op">^{-</span><span class="dv">30</span><span class="op">}</span>$         <span class="op">|</span> `quek`   <span class="op">|</span> `q`       <span class="op">|</span> `quectoday`         <span class="op">|</span></span>
 <span id="cb107-741"><a href="#cb107-741" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb107-742"><a href="#cb107-742" aria-hidden="true" tabindex="-1"></a><span class="op">:</span> The units of `Decalendar` and `Declock` <span class="op">{</span>#tbl<span class="op">-</span>unit<span class="op">}</span></span>
 <span id="cb107-743"><a href="#cb107-743" aria-hidden="true" tabindex="-1"></a></span>
@@ -5071,7 +5080,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb107-745"><a href="#cb107-745" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb107-746"><a href="#cb107-746" aria-hidden="true" tabindex="-1"></a>In <span class="at">@tbl</span><span class="op">-</span>unit<span class="op">,</span> the units with positive exponents are used <span class="cf">for</span> `Decalendar`<span class="op">,</span> <span class="cf">while</span> the ones with negative exponents are used <span class="cf">for</span> `Declock`<span class="op">.</span> `Cents` <span class="op">(</span>`¢`<span class="op">)</span> can serve as a useful point of comparison to understand the scale of some of the units in <span class="at">@tbl</span><span class="op">-</span>unit above<span class="op">,</span> because each `cent` is <span class="dv">1</span> percent of the day<span class="op">,</span> which is about a quarter <span class="fu">hour</span> <span class="op">(</span><span class="dv">1</span><span class="op">%</span> <span class="op">=</span> <span class="fl">14.4</span> minutes<span class="op">).</span> <span class="fu">In</span> comparison to `cents`<span class="op">,</span> `mils` are ten times <span class="fu">smaller</span> <span class="op">(</span><span class="fl">.1</span><span class="op">%</span> <span class="op">=</span> <span class="fl">1.4</span> minutes<span class="op">),</span> `dimes` <span class="op">(</span>`⅒`<span class="op">)</span> are ten times <span class="fu">larger</span> <span class="op">(</span><span class="dv">10</span><span class="op">%</span> <span class="op">=</span> <span class="dv">144</span> minutes<span class="op">),</span> and `deks` <span class="op">(</span>`ι`<span class="op">)</span> are <span class="dv">1000</span> times <span class="fu">larger</span> <span class="op">(</span><span class="dv">1000</span><span class="op">%</span> <span class="op">=</span> <span class="dv">14400</span> minutes<span class="op">).</span> <span class="fu">To</span> be clear<span class="op">,</span> <span class="dv">1</span> `dek` contains <span class="dv">10</span> whole days <span class="cf">while</span> the other units are fractions of days<span class="op">.</span></span>
 <span id="cb107-747"><a href="#cb107-747" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-748"><a href="#cb107-748" aria-hidden="true" tabindex="-1"></a>`Declock` units smaller than `mils` are not easy to think of as percents of a day<span class="op">.</span> <span class="fu">For</span> `phrases` <span class="op">(</span>` ̑`<span class="op">)</span> and `beats` <span class="op">(</span>`♫`<span class="op">),</span> music serves as a much more useful analogy<span class="op">.</span> <span class="fu">In</span> fact<span class="op">,</span> `phrases` and `beats` are musical terms<span class="op">.</span> <span class="fu">The</span> duration of a musical beat depends on the tempo<span class="op">,</span> but a `Declock beat` is always precisely <span class="fl">0.864</span> seconds <span class="dt">long</span><span class="op">.</span> <span class="fu">This</span> translates to a tempo of <span class="fl">69.4</span>̅ <span class="op">(</span><span class="er">69</span>⁴<span class="op">/</span>₉ or <span class="dv">625</span><span class="op">/</span><span class="dv">9</span><span class="op">)</span> beats per minute<span class="op">,</span> which is coincidentally also within the normal range of a resting heart rate<span class="op">.</span> `Declock beats` are organized into groups of <span class="dv">2</span> called `bars` or `measures`<span class="op">,</span> groups of <span class="dv">10</span> called `phrases`<span class="op">,</span> and groups of <span class="dv">20</span> called `periods`<span class="op">.</span> <span class="fu">A</span> real example of music that follows <span class="kw">this</span> exact pattern is Haydn<span class="er">'</span>s <span class="op">[</span>Feldpartita<span class="op">](</span>https<span class="op">:</span><span class="co">//en.wikipedia.org/wiki/Period_(music)).</span></span>
+<span id="cb107-748"><a href="#cb107-748" aria-hidden="true" tabindex="-1"></a>`Declock` units smaller than `mils` are not easy to think of as percents of a day<span class="op">.</span> <span class="fu">For</span> `phrases` <span class="op">(</span>`◠`<span class="op">)</span> and `beats` <span class="op">(</span>`♫`<span class="op">),</span> music serves as a much more useful analogy<span class="op">.</span> <span class="fu">In</span> fact<span class="op">,</span> `phrases` and `beats` are musical terms<span class="op">.</span> <span class="fu">The</span> duration of a musical beat depends on the tempo<span class="op">,</span> but a `Declock beat` is always precisely <span class="fl">0.864</span> seconds <span class="dt">long</span><span class="op">.</span> <span class="fu">This</span> translates to a tempo of <span class="fl">69.4</span>̅ <span class="op">(</span><span class="er">69</span>⁴<span class="op">/</span>₉ or <span class="dv">625</span><span class="op">/</span><span class="dv">9</span><span class="op">)</span> beats per minute<span class="op">,</span> which is coincidentally also within the normal range of a resting heart rate<span class="op">.</span> `Declock beats` are organized into groups of <span class="dv">2</span> called `bars` or `measures`<span class="op">,</span> groups of <span class="dv">10</span> called `phrases`<span class="op">,</span> and groups of <span class="dv">20</span> called `periods`<span class="op">.</span> <span class="fu">A</span> real example of music that follows <span class="kw">this</span> exact pattern is Haydn<span class="er">'</span>s <span class="op">[</span>Feldpartita<span class="op">](</span>https<span class="op">:</span><span class="co">//en.wikipedia.org/wiki/Period_(music)).</span></span>
 <span id="cb107-749"><a href="#cb107-749" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb107-750"><a href="#cb107-750" aria-hidden="true" tabindex="-1"></a>`Declock` units smaller than `beats` are too small <span class="cf">for</span> typical daily use<span class="op">.</span> <span class="fu">For</span> example<span class="op">,</span> a `mic` <span class="op">(</span>`microday`<span class="op">,</span> `μ`<span class="op">)</span> is faster than a blink of an eye<span class="op">.</span> <span class="fu">Each</span> frame in a video playing at <span class="dv">60</span> frames per second will be shown <span class="cf">for</span> about <span class="fl">1.93</span> `liphs` <span class="op">(</span>`milliphrases`<span class="op">,</span> `m̑`<span class="op">).</span> <span class="fu">A</span> `lib` <span class="op">(</span>`millibeat`<span class="op">,</span> `m̈`<span class="op">)</span> is not enough time <span class="cf">for</span> a neuron in a human brain to fire and <span class="cf">return</span> to rest<span class="op">.</span> <span class="fu">Sound</span> can travel from a person<span class="er">'</span>s ear to their other ear in about <span class="dv">7</span> `nans` <span class="op">(</span>`nanodays`<span class="op">).</span> <span class="fu">Noticing</span> that a sound reaches one ear before the other can help humans to localize the source of the sound<span class="op">,</span> but a `roph` <span class="op">(</span>`microphrase`<span class="op">,</span> `μ̑`<span class="op">)</span> difference might be too fast to notice<span class="op">.</span> <span class="fu">In</span> a `rob` <span class="op">(</span>`microbeat`<span class="op">,</span> `µ̈`<span class="op">),</span> a USB <span class="fl">3.0</span> cable transferring <span class="dv">5</span> gigabytes per second can send <span class="fl">4.32</span> kilobytes<span class="op">,</span> the equivalent of a text file with <span class="dv">4320</span> characters<span class="op">.</span></span>
 <span id="cb107-751"><a href="#cb107-751" aria-hidden="true" tabindex="-1"></a></span>
