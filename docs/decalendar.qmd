@@ -15,8 +15,10 @@ author: Martin Laptev
 
 In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). `Decalendar` provides two coordinates in one number: the day-of-the-year (`doty`). The first two digits of the `doty` are the `dek` number. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The last digit of the `doty` is the day-of-the-`dek` (`dotd`) number, which serves as both the `dotm` and the day-of-the-week (`dotw`) in `Decalendar`. @tbl-coor shows the `doty` equivalents of all Gregorian calendar dates. To locate a specific date in @tbl-coor, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the correct day (the `dotm` is like a y-axis value).
 
-::: {.callout-note collapse="false"}
 #### @tbl-coor
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan  | Feb  |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
 |  1  |  0  |  31 |  61 |  92 | 122 | 153 | 184 | 214 | 245 | 275 | 306  | 337  |
@@ -166,8 +168,10 @@ doty2date()
 
 `Decalendar` only uses months for converting to and from Gregorian calendar dates. Nevertheless, discussing months can help to explain how `Decalendar` works. The `Decalendar` year ends with January and February, as shown in @tbl-gregm. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Code to convert between `Decalendar` and Gregorian calendar years is provided in @exm-gregm.
 
-::: {.callout-note collapse="false"}
 #### @tbl-gregm
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | dm | gm | Month     |
 | -- | -- | --------- |
 | 0  | 3  | March     |
@@ -216,7 +220,7 @@ console.log(doty2year());
 
 ```{julia}
 #| tags: [date2year]
-function date2year(year=1969, month=1)
+function date2year(year=1970, month=1)
     year - (month < 3)
 end
 
@@ -240,7 +244,7 @@ doty2year()
 
 ```{python}
 #| tags: [date2year]
-def date2year(year=1969, month=1):
+def date2year(year=1970, month=1):
     return year - (month < 3)
 
 date2year()
@@ -712,7 +716,6 @@ zone2hour()
 ```{r}
 #| tags: [hour2zone]
 # Sys.timezone()
-
 hour2zone <- function(hour = 0) {
     ifelse(hour == 0, "Z",
     ifelse(hour > 0 && hour < 10, intToUtf8(hour + 64),
@@ -751,8 +754,10 @@ $$minutes = \frac{hours - \lfloor hours \rfloor}{60}$$ {#eq-isos3}
 
 $$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isos4}
 
-::: {.callout-note collapse="false"}
 #### @tbl-isos
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 |  x | units     |
 | -- | ----------|
 | -1 | deks      |
@@ -804,7 +809,7 @@ console.log(`${doty2year()}+${
         i => i.toString().padStart(2, "0")
         ).join("-")}T${doty2time().map(
         i => Math.round(i).toString().padStart(2, "0")
-        ).join(":")}${zone2hour()}`)
+        ).join(":")}${hour2zone()}`)
 ```
 
 #### Julia
@@ -868,7 +873,7 @@ def doty2time(doty = 1/24):
 
 (
     f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}"
-    f"T{':'.join(map(lambda i: str(round(i)).rjust(2, '0'), doty2time(0)))}{zone2hour()}"
+    f"T{':'.join(map(lambda i: str(round(i)).rjust(2, '0'), doty2time(0)))}{hour2zone()}"
 )
 ```
 
@@ -896,15 +901,16 @@ paste0(
 #| tags: [doty2time]
 doty2time <- function(doty = 1 / 24) {
     hours <- doty * 24
-    floorHours <- Math.floor(hours)
+    floorHours <- floor(hours)
     minutes <- (hours - floorHours) / 60
-    floorMinutes <- Math.floor(minutes)
+    floorMinutes <- floor(minutes)
     c(floorHours, floorMinutes, (minutes - floorMinutes) / 60)
 }
 
 paste0(sprintf("%04d", doty2year()), "-",
     paste(sprintf("%02d", doty2date()), collapse = "-"), "T",
-    paste(sprintf("%02d", doty2date()), collapse = ":")
+    paste(sprintf("%02d", doty2time()), collapse = ":"),
+    hour2zone()
     )
 ```
 
@@ -924,8 +930,10 @@ Unlike `Decalendar strings`, ISO 8601 expressions cannot create non-consecutive 
 
 The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a _décade_, while a group of 10 days in `Decalendar` is called a `dek`. The names of the days in a `Decalendar` `dek` are derived from their [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) cardinal numbers (zero, one, two...), whereas the days of the _décade_ are named after their ordinal numbers (first, second, third...). @tbl-dotd provides the cardinal numbers, one-letter codes, names, and types of the days of the `dek` as well as the names of their French Republican calendar equivalents.
 
-::: {.callout-note collapse="false"}
 #### @tbl-dotd
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | # | Code | Name   | Type | French   |
 | - | ---- | ------ | ---- | -------- |
 | 0 | N    | Nulday | work | primidi  |
@@ -947,8 +955,10 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 The French Republican calendar and `Declock` both break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, _décimes_, and decimal seconds, respectively. @tbl-dime shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time.
 
-::: {.callout-note collapse="false"}
 #### @tbl-dime
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | ⅒ | 24-hour | 12-hour |
 | - | ------- | ------- |
 | 0 | 00:00   | 12:00AM |
@@ -1077,7 +1087,7 @@ def unix2doty(s=0, ms=0):
     return year, doty, timestamp - doty
 
 y, d, t = unix2doty(time())
-f"{y:>04}+{d:>03}.{t:>05}{hour2zone()}"
+f"{y:>04}+{d:>03}.{round(t * 1e5):>05}{hour2zone()}"
 ```
 
 #### R
@@ -1103,7 +1113,9 @@ paste0(sprintf("%04d", ydt[1]),
        "+",
        sprintf("%03d", ydt[2]),
        ".",
-       sprintf("%05d", round(ydt[3] * 1e5)))
+       sprintf("%05d", round(ydt[3] * 1e5)),
+       hour2zone()
+)
 ```
 
 #### CopyQ
@@ -1171,8 +1183,10 @@ The `.y` format can include positive and negative numbers, most commonly in the 
 
 In the `stamps` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each, as in @tbl-unit, highlights the relationship between the two:
 
-::: {.callout-note collapse="false"}
 #### @tbl-unit
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Base 10   | Name     | Symbol | Formal Name         |
 | --------- | -------  | ------ | -----------------   |
 | 10²       | `hekt`   | ρ      | `hectoday`          |
@@ -1244,8 +1258,10 @@ If we decide to prioritize the amount of sunlight at `Dot 5` over simplicity and
 
 The `stamps` shown above are in the decimal days of the year (`.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental `datetime` formats, which are based on decimal days of the month (`.m`), and decimal days of the week (`.w`). @tbl-format summarizes the three decimal day-of-the ( `dot` or `.`) formats:
 
-::: {.callout-note collapse="false"}
 #### @tbl-format
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Day of the |  `.`  | General Form      | Specific Example  |
 | ---------- | ----- | ----------------- | ----------------- |
 | Year       |  `y`  | `year±day.day±z`  | `1999+365.500-3`  |
@@ -1274,8 +1290,10 @@ $$m = \begin{cases}month + 3&{\text{if } month < 10;}\\month - 9&{\text{otherwis
 
 The week number in the `.w` format, `ww`, ranges from 0 to 53 or -54 to -1. Weeks in the `.w` format start from Sunday. @tbl-dotw shows the possible `dotw` values, which range from 0 to 6 or -7 to -1.
 
-::: {.callout-note collapse="false"}
 #### @tbl-dotw
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Day       | Pos | Neg |
 | --------- | --- | --- |
 | Sunday    | 0   | -7  |
@@ -1294,8 +1312,10 @@ The week number in the `.w` format, `ww`, ranges from 0 to 53 or -54 to -1. Week
 
 @tbl-dotex builds on the example from @sec-zone to compare all three `.` formats. The 3 `.` formats differ only in their approach to the date, not the time. Therefore, the times below are all shown to 1-digit `dime` precision (same as time zones) instead of the typical 3-digit `mil` precision. In Mexico City, the time is `+5-3` or `-5-3`, while the time in London is `+8+0` or `-2+0` and time in Tokyo is `+2+4` or `-8+4`.
 
-::: {.callout-note collapse="false"}
 #### @tbl-dotex
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Day of the |  `.`  | Mexico City     | London          | Tokyo           |
 | ---------  | ----- | --------------- | --------------- | --------------- |
 | Year       |  `y`  | `1999+365.5-3`  | `1999+365.8-3`  | `2000+000.2+4`  |
@@ -1333,8 +1353,10 @@ The Gregorian calendar has many more workdays, 260 in common years and 261 in le
 
 If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. As mentioned above, each half of the `dek` is called a `pent`. Each `pent` can have its own `pently` schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. @tbl-pently displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different `pently` schedules are named after the number of workdays per `pent`. People can switch between `pently` schedules every `pent` as needed, but unless there is a compelling reason to follow a different `pently` schedule, everyone should follow the `Schedule 3` by default. `Schedule 3` has 3 workdays and 2 restdays in each `pent`. Each `Schedule 3` workday starts at `Dot 3`, ends at `Dot 7`, and lasts 4 `dimes`.
 
-::: {.callout-note collapse="false"}
 #### @tbl-pently
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Schedule | Workdays | Restdays | Start | End | Duration |
 | -------- | -------- | -------- | ----- | --- | -------- |
 | 2        | 2        | 3        | .2    | .8  | .6       |
@@ -1350,8 +1372,10 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 
 `Decalendar` recommends waking up at `Dot 2` and going to bed at `Dot 8`. This recommendation allots 4 `dimes` (9.6 hours) for falling asleep and sleeping. To keep daily schedules symmetrical, the time spent awake should be split evenly before and after work. People following `Schedule 3` would thus have 10 `cents` (2.4 hours) to prepare for work and another 10 `cents` to prepare for bed. @tbl-daily shows the recommended `Schedule 3` daily schedule. `Schedule 4` and `Schedule 5` allot even more time, 15 `cents` (3.6 hours) and 18 `cents` (4.32 hours), respectively, for before-work and after-work activities. The recommended sleep schedule does not fit well with `Schedule 2`, but this incompatibility does not have to result in a sleep deficit. If the `Schedule 2` workdays are not consecutive, people following `Schedule 2` can catch up on sleep on their days off by going to bed early before and sleeping in after every workday.
 
-::: {.callout-note collapse="false"}
 #### @tbl-daily
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Start | End | Duration | Description                  |
 | ----- | --- | -------- | ---------------------------- |
 | .2    | .3  | .1       | Wake up and prepare for work |
@@ -1373,8 +1397,10 @@ We can use @tbl-coor to convert any Gregorian calendar date to a positive `doty`
 
 The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has its opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. @tbl-soleq lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.
 
-::: {.callout-note collapse="false"}
 #### @tbl-soleq
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Code | North  | South  | `doty` | `dotm` | Date         | Event              |
 | ---- | ------ | ------ | ----   | ------ | ------------ | ------------------ |
 | S0   | Spring | Fall   | 19     | 0+19   | March 20     | Northward Equinox  |
@@ -1390,8 +1416,10 @@ Using the information in @tbl-soleq, we can group the `deks` and `pents` in a ye
 
 We can round up the start of the first season and round down the start of the second season to obtain the division of `pents` by season as summarized in @tbl-season It is important to note that the last season starts in `Pent 59` of one year and ends with `Pent 3` of the subsequent year. In common years, each season in @tbl-season has 18 `pents` (90 days), except for the season in the second row, which has 19 `pents` (95 days). In leap years, the season in the last row of @tbl-season has 18.2 pents (91 days).
 
-::: {.callout-note collapse="false"}
 #### @tbl-season
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Code | North  | South  | First | Last | Duration |
 | ---- | -----  | -----  | ----- | ---- | -------- |
 | S0   | Spring | Fall   | 4     | 21   | 18       |
@@ -1409,8 +1437,10 @@ We can round up the start of the first season and round down the start of the se
 
 In contrast to the variable length of seasons, other `Decalendar` units are constant length. Of these constant length units, `qops` (`qoppas`, `ϟ`) are most like seasons. `Qops` divide the year into four parts, but unlike seasons, `qops` do not include `Pent 72`, the last `pent` of the year. `Pent 72` is not included in the last `qop` so that each `qop` is 9 `deks` and 90 days long. The omission of `Dek 36` also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because `Dek 36` overlaps with `Dek 0`. @tbl-q shows the division of `deks` by `qop`.
 
-::: {.callout-note collapse="false"}
 #### @tbl-q
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Code | First | Last |
 | ---- | ----- | ---- |
 | Q0   | 0     | 8    |
@@ -1426,8 +1456,10 @@ In contrast to the variable length of seasons, other `Decalendar` units are cons
 
 In addition to `qops` shown above, `Decalendar` describes 3 other similar units called `delts` (`deltas`, `δ`), `eps` (`epsilons`, `ε`), and `waus` (`ϛ`). These units do not leave out as many days in each year, because they split the year by day, rather than by `dek`. `Delts`, `eps`, and `wau` split the year into 4, 5, and 6 parts, respectively. `Delts` are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which `delts` start and end. @tbl-d list the numbers of the days that begin and end each `delt`. In @tbl-q, not only do rows alternate between even and odd numbers, but the `delt` number is the last digit of both the start and the end day of the `delt`.
 
-::: {.callout-note collapse="false"}
 #### @tbl-d
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Code | First | Last |
 | ---- | ----- | ---- |
 | D0   | 0     | 90   |
@@ -1443,8 +1475,10 @@ In addition to `qops` shown above, `Decalendar` describes 3 other similar units 
 
 Unlike `delts`, `eps` are 73 days long and do not leave out any days from common years. `Qops`, `delts`, and `eps` all leave out leap days in leap years. @tbl-e list the numbers of the days that begin and end each `ep`.
 
-::: {.callout-note collapse="false"}
 #### @tbl-e
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Code | First | Last |
 | ---- | ----- | ---- |
 | E0   | 0     | 72   |
@@ -1459,10 +1493,12 @@ Unlike `delts`, `eps` are 73 days long and do not leave out any days from common
 
 #### `Waus` {#sec-w}
 
-The only unit that can include the leap year is a `wau` (`ϛ`), which is 61 days long and follows a similar pattern as a `delt`, except the last `wau` in common years is 1 day short than all the others. @tbl-z list the numbers of the days that begin and end each `wau`. As with `delts`, the `wau` number is the last digit of the numbers of its first and last day.
+The only unit that can include the leap year is a `wau` (`ϛ`), which is 61 days long and follows a similar pattern as a `delt`, except the last `wau` in common years is 1 day short than all the others. @tbl-w list the numbers of the days that begin and end each `wau`. As with `delts`, the `wau` number is the last digit of the numbers of its first and last day.
 
-::: {.callout-note collapse="false"}
-#### @tbl-z
+#### @tbl-w
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Code | First | Last |
 | ---- | ----- | ---- |
 | W0   | 0     | 60   |
@@ -1472,7 +1508,7 @@ The only unit that can include the leap year is a `wau` (`ϛ`), which is 61 days
 | W4   | 244   | 304  |
 | W5   | 305   | 365  |
 
-: The days that begin and end each `wau` {#tbl-z}
+: The days that begin and end each `wau` {#tbl-w}
 
 :::
 
@@ -1488,8 +1524,10 @@ Instead of listing every single day in a `series`, we can "slice" from `Day 0` u
 
 In the context of `doty` dates, omitting the `stop` value obtains all of the days in the year after the `start`, because the default `stop` is the number of days in the year (`n`). For example, the `slice` `3:` has a `start` of `Day 3` and a `stop` of `n`, and thus represents every day in the year except the first 3. The number of items we obtain from a `slice` is called a `span`. To calculate the `span`, we subtract the `start` from the `stop` ($stop-start$). In a common year, the `span` of `003:` is $n-3=362$, while in a leap year it would be $n-3=363$. If both the `start` and the `stop` are omitted, every day is included ($span=n-0$). @tbl-4slice lists the seasons, `qops`, and `delts` in the form of `slices`. The superscript plus sign (⁺) in @tbl-4slice indicates a number that has to be incremented in leap years.
 
-::: {.callout-note collapse="false"}
 #### @tbl-4slice
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Index | Season   | Qop     | Delt    |
 | ----- | -------  | ------- | ------- |
 | 0     | 20:110   | :90     | :91     |
@@ -1515,8 +1553,10 @@ To create a `series` of times on days throughout the year, we can use a `slice` 
 
 To create `series` of consecutive items with breaks in between, it may be better to use a `spread` than a `slice`. `Simple spreads` consist of either a `start` and a `span` (`start>span`) separated by a greater-than sign (`>`) or a `stop` and a `span` (`stop<span`) separated by a less-than (`<`) sign. The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `>3`, which is synonymous with the `slice` `:3`. In this example, the `start` is 0, while the `stop` and the `span` are both 3. In addition to default `start` and `stop` values, `spreads` also have default `span` values. A `spread` that only uses default values (`>` or `<`) will include every day in the year ($span=n$). @tbl-4spread lists the seasons, `qops`, and `delts` in the form of `spreads`.
 
-::: {.callout-note collapse="false"}
 #### @tbl-4spread
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Index | Season  | Qop    | Delt   |
 | ----- | ------- | ------ | ------ |
 | 0     | 20>90   | >90    | >91    |
@@ -1544,8 +1584,10 @@ The patterns described above require that `splits` are separated by the default 
 
 A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `waus` can be summarized as `split spreads` as shown in @tbl-constant. When `space` is zero, the direction of the third sign does not matter. The `split spreads` `≫61>0`, `♢61>0`, `≫61<0`, and `♢61<0` all represents the `waus` in a year. `Waus` divide leap years evenly and `eps` divide common years evenly. Therefore, `x61>0` and `x61<0` can represent all of the `waus` in leap years, just like `x73>0` and `x73<0` can represent all of the `eps` in common years. The seasons can be described by a `spread` with a `series` of `splits` and a `space` of 0: `»90,95,90,90⁺>0`.
 
-::: {.callout-note collapse="false"}
 #### @tbl-constant
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Unit | Spread  |
 | ---- | ------- |
 | Delt | `≫91>0` |
@@ -1571,8 +1613,10 @@ We combine the two `spreads` with `>` because we want to move forward from the b
 
 The `seq slice` equivalent of `≫3>2>.3>.4` is `:365:1,1,3:.3:.7`. `Seq spreads` will always be a more succinct way for creating long consecutive sequences with breaks than `slices`. For example, to include a lunch break in the middle of work, we could simply add a `split` and a `space` to the `seq spread` above: `≫3>2>.3>.4>.18>.04`. To do the same with a `seq slice`, we have to create 17 steps of 0.01 and a step of .04: `:365:1,1,3:.3:.7:17*1%,4%`. Here, we are using the replication operator (`*`) to avoid writing 0.01 17 times and the percent operator (`%`) to save a few characters, but even so the `seq slice` is not as concise as the `seq spread`. @tbl-workday shows each part of this schedule in the form of `simple slices` and `simple spreads`.
 
-::: {.callout-note collapse="false"}
 #### @tbl-workday
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | slice   | spread  | spread  | label |
 | ------- | ------  | ------  | ----- |
 | .30:.48 | .30>.18 | .48<.18 | work0 |
@@ -1599,8 +1643,10 @@ We can make the `seq spread` above even shorter by using the `per` operators: `%
 
 We can use `seq spreads` to describe the [`pently `schedules](#sched). `Schedule 5` is particularly interesting because it includes all of the days of the year. `Spreads` that include every item can be written as `>` or `<`, but `seq spreads` must have at least 5 values. The `Schedule 5` `seq spread` `≫≫.38>.24` has 4 blank values, which represent the default `start`, `span`, `split`, and `space`. Similarly, the `Schedule 4` `seq spread` `≫4≫.35>.3` has 3 blank values, which represent the default `start`, `span`, and `space`. The `Schedule 2` and `Schedule 3` `seq spreads`, `≫2>3>.2>.6` and `≫3>2>.3>.4`, respectively, only have 2 blank values, the `start` and the `span`. As an alternative to `seq spreads` and `seq slices`, we can use `slice`-`spread` hybrids called `sleds` or `spread`-`slice` hybrids called `splices`. `Sleds` put the `slice` elements first (`start:stop:step:start>span>split>space`), while `splices` start with the `spread` elements (`start>span>split>space>start:stop:step`). The `pently `schedules are easiest to write as `seq spreads` and `splices`, as shown in @tbl-sched.
 
-::: {.callout-note collapse="false"}
 #### @tbl-sched
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Schedule | seq spread | splice     | sled              | seq slice          |
 | -------- | ---------- | ---------- | ----------------  | ----------------   |
 | 2        | ≫2>3>.2>.6 | ≫2>3>.2:.8 | :365:1,4:.2>.6    | :365:1,4:.2:.8     |
@@ -1618,8 +1664,10 @@ We can use `seq spreads` to describe the [`pently `schedules](#sched). `Schedule
 
 The `pently` schedules are important for the transition between years. In common years, the last `dek` of the year (`Dek 36`) contains the last `pent` of the current year (`Pent 72`), and the first `pent` of the subsequent year (`Pent 0`). If these two `pents` follow the default `pently` schedule, `Schedule 3`, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. @tbl-common shows the positive and negative `doty` numbers, names, and types (work or rest) of the days in `Dek 36` in common years. Notably, while the positive `doty` numbers continue counting past the end of the year, the negative `doty` numbers of the current year turn into the positive `doty` numbers of the subsequent year. The negative `doty` numbers in `Dek 36` can thus serve as the bridge from the one year to the next.
 
-::: {.callout-note collapse="false"}
 #### @tbl-common
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Pos | Neg | Name   | Type |
 | --- | --- | ------ | ---- |
 | 360 | -5  | Nulday | work |
@@ -1641,8 +1689,10 @@ The `pently` schedules are important for the transition between years. In common
 
 In leap years, `Dek 36` contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, `Dek 36` always contain 6 workdays and 4 restdays, just like every other `dek`, but in leaps years these days do not follow the typical order of `Schedule 3`. Leap years end in 3 restdays instead of 2, because Leap Day (`Day 365`) is always a holiday. Leap day is always a `Penday` and always followed by a `Nulday`. After Leap Day, the normal rhythm of `Schedule 3` resumes. @tbl-leap shows the positive and negative `doty` numbers of the days in `Dek 36` in leap years, as well as their names and their types (work or rest).
 
-::: {.callout-note collapse="false"}
 #### @tbl-leap
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Pos | Neg | Name   | Type |
 | --- | --- | ------ | ---- |
 | 360 | -6  | Nulday | work |
@@ -1664,8 +1714,10 @@ In leap years, `Dek 36` contains the last 6 days of the current year and the fir
 
 Leap Day is a important holiday because it occurs only once every four years except for years that start centuries not divisible by 400 and it results in the only time when there are 3 consecutive restdays in `Decalendar`. Another `Decalendar` holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative `.y` format `stamps` are the same (`+183.5` and `-183.5`), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Many Gregorian calendar holidays just so happen to also fall on the first day of a `Decalendar` `pent` (`Nulday` or `Quaday`). @tbl-holiday lists 8 such holidays and their `doty`, `dotm`, and Gregorian calendar dates.
 
-::: {.callout-note collapse="false"}
 #### @tbl-holiday
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
 | Name               | doty | dotm | date        |
 | ------------------ | ---- | ---- | ----------- |
 | Cinco de Mayo      |  65  | 2+04 | May 5       |

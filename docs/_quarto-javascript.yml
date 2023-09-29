@@ -1,4 +1,4 @@
 jupyter: javascript
 format: ipynb
-cache: true
+cache: false
 number-sections: false

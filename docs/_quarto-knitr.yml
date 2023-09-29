@@ -3,7 +3,7 @@ number-depth: 3
 bibliography: ref.bib
 execute:
   engine: knitr
-  cache: true
+  cache: false
 format:
   html:
     anchor-sections: true

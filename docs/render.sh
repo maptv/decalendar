@@ -2,13 +2,13 @@
 
 quarto convert "$1"
 
-quarto render "$1" --profile javascript --metadata engine:jupyter --output "${1%.*}_javascript.ipynb"
+quarto render "$1" --cache-refresh --profile javascript --metadata engine:jupyter --output "${1%.*}_javascript.ipynb"
 
-quarto render "$1" --profile julia --metadata engine:jupyter --output "${1%.*}_julia.ipynb"
+quarto render "$1" --cache-refresh --profile julia --metadata engine:jupyter --output "${1%.*}_julia.ipynb"
 
-quarto render "$1" --profile python --metadata engine:jupyter --output "${1%.*}_python.ipynb"
+quarto render "$1" --cache-refresh --profile python --metadata engine:jupyter --output "${1%.*}_python.ipynb"
 
-quarto render "$1" --profile r --metadata engine:jupyter --output "${1%.*}_r.ipynb"
+quarto render "$1" --cache-refresh --profile r --metadata engine:jupyter --output "${1%.*}_r.ipynb"
 
 # jupytext "${1%.*}_quarto_javascript.ipynb" --to js --output "${1%.*}.js" --set-kernel javascript
 
@@ -45,4 +45,4 @@ cat "${1%.*}.qmd"  | gsed '/^```{/,/^```$/ { # set a range and say what should h
 cat "${1%.*}"_embed.qmd | gsed '/#### JavaScript/i ::: {.panel-tabset group="language"}\n'> "${1%.*}"_tabset.qmd
 
 # recreate html output file with embedded notebooks
-quarto render "${1%.*}_tabset.qmd" --profile knitr --metadata engine:knitr
+quarto render "${1%.*}_tabset.qmd" --cache-refresh --profile knitr --metadata engine:knitr
