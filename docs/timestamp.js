@@ -93,22 +93,6 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
     }
 }
 
-const start = new Date("2007-03-01T13:00:00Z")
-const stop = new Date("2008-05-11T15:30:00Z")
-const test = new Date("2023-11-24T04:26:00")
-const julian = new Date(-4714, 10, 24, 12)
-const mar1 = new Date(1987, 6, 18, 0, 0)
-const now = new Date()
-const utc = new Date(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-    now.getUTCHours(),
-    now.getUTCMinutes(),
-    now.getUTCSeconds(),
-    now.getUTCMilliseconds(),
-)
-
 function is_leap(y) {
     return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
@@ -199,28 +183,10 @@ console.log(unix2doty(0, 3));
 console.log(unix2doty(-86400));
 console.log(unix2doty(1695340800, 4));
 console.log(unix2doty(1695327225999, 5));
-console.log(now);
 console.log((60 + 305) % 365);
 console.log((263 + 305) % 365);
 console.log((1 + 305) % 365);
-console.log(now);
-console.log(utc);
-console.log(julian);
-console.log(now.toISOString());
 console.log(is_leap(2000));
-console.log(myStamp(mar1, 0, "y", "+"));
-console.log(myStamp(start, 0, "y", "+"));
-console.log(myStamp(test, 0, "y", "+"));
-console.log(myStamp(julian, 0, "y", "+"));
-console.log(myStamp(stop, 0, "y", "+"));
-console.log(myStamp(now, 0, "y", "+"));
-console.log(myStamp(now, -4, "y", "+"));
-console.log(myStamp(now, -4, "y", "-"));
-console.log(myStamp(now, 0, "m", "+"));
-console.log(myStamp(now, -4, "m", "-"));
-console.log(myStamp(now, -4, "w", "+"));
-console.log(myStamp(now, -4, "w", "-"));
-console.log(myStamp(now, -now.getTimezoneOffset() / 60, "y", "+"));
 
 function doty2year(year = 1969, doty = 306) { return year + (doty > 305) }
 
@@ -297,18 +263,18 @@ function doty2time(doty = 1 / 24) {
 }
 
 function zone2hour(zone = "Z") {
-    return zone == "Z" ? 0
+    return (zone = zone.toUpperCase()) == "Z" ? 0
         : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
-            : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
-                : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
-                    : zone;
+        : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
+        : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
+        : zone;
 }
 
 console.log(hour2zone(-new Date().getTimezoneOffset() / 60))
 console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
 console.log("?".charCodeAt())
 console.log(String.fromCharCode(64 + 27))
-console.log(zone2hour("Y"))
+console.log(zone2hour("r"))
 
 
 function unix2doty(ms = 0) {
@@ -330,10 +296,8 @@ function time2doty(hours = 1, minutes = 0, seconds = 0) {
     return hours / 24 + minutes / 1440 + seconds / 86400
 }
 
-console.log(`${date2year().toString().padStart(4, '0')}+${
-    date2doty().toString().padStart(3, '0')}.${
-    (Math.round(time2doty(0) * 1e5) / 1e5).toString().padStart(5, '0')
-}${hour2zone(0)}`)
+console.log(`${date2year().toString().padStart(4, '0')}+${date2doty().toString().padStart(3, '0')}.${(Math.round(time2doty(0) * 1e5) / 1e5).toString().padStart(5, '0')
+    }${hour2zone(0)}`)
 
 function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
@@ -346,12 +310,85 @@ function unix2doty(ms = 0) {
     return [year, doty, timestamp - doty];
 }
 
-console.log(unix2doty(Date.now()));
-const [year, doty, time] = unix2doty(Date.now());
-console.log(
-    `${year.toString().padStart(4, "0")}+${
-    doty.toString().padStart(3, "0")}.${
-    (Math.round(time * 1e5)).toString().padStart(5, "0")}+0`
-    );
+function createTimestamp() {
+    const [year, doty, time] = unix2doty(Date.now());
+    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}.${(Math.round(time * 1e5)).toString().padStart(5, "0")}+0`
+}
 
 
+
+function date2link(
+    start,
+    stop,
+    title = "Event Title",
+    details = "Event Details",
+    location = "Event Location",
+    url = "http://example.com",
+    name = "Organizer Name",
+    calendar = "google"
+) {
+    switch (calendar.toLowerCase()) {
+        case "google":
+            return "https://www.google.com/calendar/event?action=TEMPLATE"
+            + `&dates=${encodeURIComponent(start + "/" + stop)
+            }&text=${encodeURIComponent(title)
+            }&details=${encodeURIComponent(details)
+            }&location=${encodeURIComponent(location)
+            }&sprop=website:${encodeURIComponent(url)
+            }&sprop=name:${encodeURIComponent(name)}`;
+        case "outlook":
+            
+        https://outlook.live.com/calendar/0/action/compose?allday=false&enddt=2023-09-30T13%3A45%3A00%2B00%3A00&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2023-09-30T13%3A15%3A00%2B00%3A00
+        url += '&dtstart=' + _getUTCTime(data.time.start, data.time.zone);
+        url += '&dtend=' + _getUTCTime(data.time.end, data.time.zone);
+        url += '&summary=' + encodeURIComponent(data.title);
+        url += '&location=' + encodeURIComponent(data.location);
+        url += '&description=' + encodeURIComponent(data.desc);
+        url += '&allday=' + "false";
+        url += '&uid=' + "";
+        return url;
+    }
+}
+
+function doty2link(
+    start = "1969+306.00000Z",
+    stop = "1969+307.00000Z",
+    title = "Event Title",
+    details = "Event Details",
+    location = "Event Location",
+    url = "http://example.com",
+    name = "Organizer Name",
+    calendar = "google"
+) {
+    const re = /(\d{4})[+-](\d{3})\.(\d+)([A-Z])/;
+    [startString, startYear, startDoty, startTime, startZone] = re.exec(start);
+    [stopString, stopYear, stopDoty, stopTime, stopZone] = re.exec(stop);
+    return date2link(start, stop, title, details, location, url, name, calendar);
+
+}
+
+function parse_doty(timestamp = "1969+306.00000Z") {
+    [input, year, doty, time, zone] =
+    /([+-]?\d{4})?([+-]?\d{0,3})?(\.?\d+)?([a-zA-Z]|[+-]\d+)?/.exec(timestamp);
+    return [input, parseInt(year), parseInt(doty),
+        parseFloat(/^\.\d+/.test(time) ? time : "." + time),
+        parseFloat(/^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) / 24
+            : zone.replace(/([+-])/, "$1\."))];
+}
+
+function parse_date(timestamp = "1970-01-01T00:00:00Z") {
+    [input, year, month, dotm, hour, minute, second, zone] =
+    /([+-]?\d{4})-?(\d{2})?-?(\d{2})?T?(\d{2}):?(\d{2}):?(\d{2})([a-zA-Z]|[+-]\d{2})?/.exec(timestamp);
+    return [input, parseInt(year), parseInt(month), parseInt(dotm), parseInt(hour), parseInt(minute),
+        parseInt(second), /^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) : parseInt(zone)]
+}
+
+console.log(parse_date())
+console.log(parse_date( "1970-01-01T00:00:00+03"))
+console.log(parse_doty("20231369307f"))
+console.log(parse_doty("20254000001-003"))
+console.log(parse_doty())
+console.log(parseFloat("-.03"))
+function parse_iso(timestamp) {
+    return /(\d{4})-(\d{2})-(\d+)([A-Z]?)/.exec(timestamp);
+}
