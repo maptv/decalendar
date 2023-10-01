@@ -744,7 +744,9 @@ zone2hour()
 
 ### ISO 8601 timestamp parsing {#sec-isop}
 
-To extract the components of the timestamps described above, we can use the code in @exm-isop. The `parse_date` and `parse_doty` functions can handle complete or partial timestamps with or without delimiters thanks to the string matching capabilities of [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). The `parse_doty` function returns a year, a `doty`, a fraction day time, and a fractional day time zone offset, while the return value of `parse_date` function consists of a year, a month, a `dotm`, hours, minutes, and seconds. Military time zone codes are processed with the `zone2hour` function.
+To extract the components of the timestamps described above, we can use the `parse_dec` and `parse_iso` functions in @exm-isop. Parsing timestamps is the first step before any later processes such as timestamp arithmetic or conversion between timestamp formats. The `parse_date` and `parse_doty` functions use [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) to handle incomplete timestamps with or without delimiters. These regular expressions are in essence succinct definitions of the ISO 8601 and `Decalendar` timestamp formats. The years in both timestamp formats must be 4 digits long (`\d{4}`).
+
+The `parse_doty` function returns a year, a `doty`, a fraction day time, and a fractional day time zone offset, while the return value of `parse_date` function consists of a year, a month, a `dotm`, hours, minutes, and seconds. Military time zone codes are processed with the `zone2hour` function.
 
 ::: {#exm-isop}
 :::
@@ -773,7 +775,7 @@ console.log(parse_doty())
 #| tags: [parse_date]
 function parse_date(timestamp = "1970-01-01T00:00:00Z") {
     [input, year, month, dotm, hour, minute, second, zone] =
-    /([+-]?\d{4})-?(\d{2})?-?(\d{2})?T?(\d{2}):?(\d{2}):?(\d{2})([a-zA-Z]|[+-]\d{2})?/.exec(timestamp);
+    /([+-]?\d{4})?-?(\d{2})?-?(\d{2})?T?(\d{2}):?(\d{2}):?(\d{2})([a-zA-Z]|[+-]\d{2})?/.exec(timestamp);
     return [input, parseInt(year), parseInt(month), parseInt(dotm), parseInt(hour), parseInt(minute),
         parseInt(second), /^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) : parseInt(zone)]
 }

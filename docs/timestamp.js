@@ -367,28 +367,29 @@ function doty2link(
 
 }
 
-function parse_doty(timestamp = "1969+306.00000Z") {
+function parse_iso(timestamp = "1970-01-01T00:00:00Z") {
+    [input, year, month, dotm, hour, minute, second, zone] =
+    /([+-]?\d{4})?-?(\d{2})?-?(\d{2})?T?(\d{2})?:?(\d{2})?:?(\d{2})?([a-zA-Z]|[+-]\d{2})?/.exec(timestamp);
+    return [input, parseInt(year), parseInt(month), parseInt(dotm), parseInt(hour), parseInt(minute),
+        parseInt(second), /^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) : parseInt(zone)]
+}
+
+function parse_dec(timestamp = "1969+306.00000Z") {
     [input, year, doty, time, zone] =
-    /([+-]?\d{4})?([+-]?\d{0,3})?(\.?\d+)?([a-zA-Z]|[+-]\d+)?/.exec(timestamp);
+    /([+-]?\d{4})?([+-]?\d{1,3})?(\.?\d+)?([a-zA-Z]|[+-]\d+)?/.exec(timestamp);
     return [input, parseInt(year), parseInt(doty),
         parseFloat(/^\.\d+/.test(time) ? time : "." + time),
         parseFloat(/^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) / 24
             : zone.replace(/([+-])/, "$1\."))];
 }
 
-function parse_date(timestamp = "1970-01-01T00:00:00Z") {
-    [input, year, month, dotm, hour, minute, second, zone] =
-    /([+-]?\d{4})-?(\d{2})?-?(\d{2})?T?(\d{2}):?(\d{2}):?(\d{2})([a-zA-Z]|[+-]\d{2})?/.exec(timestamp);
-    return [input, parseInt(year), parseInt(month), parseInt(dotm), parseInt(hour), parseInt(minute),
-        parseInt(second), /^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) : parseInt(zone)]
-}
+console.log(parse_dec(".334223-23543"))
 
-console.log(parse_date())
-console.log(parse_date( "1970-01-01T00:00:00+03"))
-console.log(parse_doty("20231369307f"))
-console.log(parse_doty("20254000001-003"))
-console.log(parse_doty())
+console.log(parse_iso("00:00:00C"))
+console.log(parse_iso( "1970-01-01T00:00:00+03"))
+console.log(parse_iso( "10:40:30"))
+console.log(parse_dec("202540001-003"))
+console.log(parse_dec())
+console.log(parse_iso())
 console.log(parseFloat("-.03"))
-function parse_iso(timestamp) {
-    return /(\d{4})-(\d{2})-(\d+)([A-Z]?)/.exec(timestamp);
-}
+console.log(parseInt("3z"))
