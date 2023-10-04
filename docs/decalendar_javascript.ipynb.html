@@ -1365,7 +1365,7 @@
 <section id="date2doty" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="date2doty"><code>date2doty</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-tags="[&quot;date2doty&quot;]" data-execution_count="1">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">date2doty</span>(month <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> day <span class="op">=</span> <span class="dv">1</span>) {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(</span>
@@ -1382,7 +1382,7 @@
 <section id="doty2date" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="doty2date"><code>doty2date</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell" data-tags="[&quot;doty2date&quot;]" data-execution_count="2">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2date</span>(doty <span class="op">=</span> <span class="dv">306</span>) {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> m <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((<span class="dv">5</span> <span class="op">*</span> doty <span class="op">+</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">153</span>)<span class="op">;</span></span>
@@ -1549,7 +1549,7 @@ doty2date()</code></pre>
 <section id="date2year" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="date2year"><code>date2year</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell" data-tags="[&quot;date2year&quot;]" data-execution_count="3">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">date2year</span>(year <span class="op">=</span> <span class="dv">1970</span><span class="op">,</span> month <span class="op">=</span> <span class="dv">1</span>) { <span class="cf">return</span> year <span class="op">-</span> (month <span class="op">&lt;</span> <span class="dv">3</span>) }</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1563,7 +1563,7 @@ doty2date()</code></pre>
 <section id="doty2year" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="doty2year"><code>doty2year</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell" data-tags="[&quot;doty2year&quot;]" data-execution_count="4">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2year</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">306</span>) { <span class="cf">return</span> year <span class="op">+</span> (doty <span class="op">&gt;</span> <span class="dv">305</span>) }</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1648,7 +1648,7 @@ doty2year()</code></pre>
 <section id="leap" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="leap"><code>leap</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell" data-tags="[&quot;leap&quot;]" data-execution_count="5">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">is_leap</span>(year<span class="op">=</span><span class="dv">1970</span>) {</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> year <span class="op">%</span> <span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span> <span class="op">||</span> year <span class="op">%</span> <span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
@@ -1715,7 +1715,7 @@ is_leap()</code></pre>
 <section id="isoo2year" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="isoo2year"><code>isoo2year</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell" data-tags="[&quot;isoo2year&quot;]" data-execution_count="6">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">isoo2year</span>(year <span class="op">=</span> <span class="dv">1970</span><span class="op">,</span> day <span class="op">=</span> <span class="dv">1</span>) {</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">-</span> (day <span class="op">&lt;</span> (<span class="dv">60</span> <span class="op">+</span> <span class="fu">is_leap</span>(year <span class="op">-</span> <span class="dv">1</span>)))</span>
@@ -1731,7 +1731,7 @@ is_leap()</code></pre>
 <section id="isoo2doty" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="isoo2doty"><code>isoo2doty</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [7]:</pre></div><div class="cell" data-tags="[&quot;isoo2doty&quot;]" data-execution_count="7">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">isoo2doty</span>(year <span class="op">=</span> <span class="dv">1970</span><span class="op">,</span> day <span class="op">=</span> <span class="dv">1</span>) {</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (day <span class="op">+</span> <span class="dv">305</span> <span class="op">-</span> <span class="fu">is_leap</span>(year)) <span class="op">%</span> <span class="dv">365</span></span>
@@ -1749,7 +1749,7 @@ is_leap()</code></pre>
 <section id="doty2isoo" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="doty2isoo"><code>doty2isoo</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [8]:</pre></div><div class="cell" data-tags="[&quot;doty2isoo&quot;]" data-execution_count="8">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2isoo</span>(year <span class="op">=</span> <span class="dv">1970</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">0</span>) {</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (doty <span class="op">+</span> <span class="dv">60</span> <span class="op">+</span> <span class="fu">is_leap</span>(year <span class="op">+</span> <span class="dv">1</span>)) <span class="op">%</span> <span class="dv">365</span></span>
@@ -1864,7 +1864,7 @@ paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))</code></
 <section id="decalendar-date" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="decalendar-date"><code>Decalendar</code> date</h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [9]:</pre></div><div class="cell" data-tags="[&quot;decdate&quot;]" data-execution_count="9">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`</span><span class="sc">${</span><span class="fu">date2year</span>()<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+</span><span class="sc">${</span></span>
@@ -1878,7 +1878,7 @@ paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))</code></
 <section id="iso-8601-date" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="iso-8601-date">ISO 8601 date</h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [10]:</pre></div><div class="cell" data-tags="[&quot;isodate&quot;]" data-execution_count="10">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`</span><span class="sc">${</span><span class="fu">doty2year</span>()<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">-</span><span class="sc">${</span></span>
@@ -2003,7 +2003,7 @@ paste0(sprintf("%04d", doty2year()), "-",
 <section id="time2doty" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="time2doty"><code>time2doty</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [11]:</pre></div><div class="cell" data-tags="[&quot;time2doty&quot;]" data-execution_count="11">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">time2doty</span>(hours <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> minutes <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> seconds <span class="op">=</span> <span class="dv">0</span>) {</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hours <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> minutes <span class="op">/</span> <span class="dv">1440</span> <span class="op">+</span> seconds <span class="op">/</span> <span class="dv">86400</span></span>
@@ -2021,7 +2021,7 @@ paste0(sprintf("%04d", doty2year()), "-",
 <section id="doty2time" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="doty2time"><code>doty2time</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [12]:</pre></div><div class="cell" data-tags="[&quot;doty2time&quot;]" data-execution_count="12">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2time</span>(doty <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">24</span>) {</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    doty <span class="op">=</span> doty <span class="op">-</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(doty)</span>
@@ -2150,7 +2150,7 @@ paste0(sprintf("%04d", doty2year()), "-",
 <section id="hour2zone" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="hour2zone">hour2zone</h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [13]:</pre></div><div class="cell" data-tags="[&quot;hour2zone&quot;]" data-execution_count="13">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">hour2zone</span>(hour <span class="op">=</span> <span class="dv">0</span>) {</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hour <span class="op">==</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"Z"</span></span>
@@ -2170,7 +2170,7 @@ paste0(sprintf("%04d", doty2year()), "-",
 <section id="zone2hour" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="zone2hour"><code>zone2hour</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [14]:</pre></div><div class="cell" data-tags="[&quot;zone2hour&quot;]" data-execution_count="14">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">zone2hour</span>(zone <span class="op">=</span> <span class="st">"Z"</span>) {</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (zone <span class="op">=</span> zone<span class="op">.</span><span class="fu">toUpperCase</span>()) <span class="op">==</span> <span class="st">"Z"</span> <span class="op">?</span> <span class="dv">0</span></span>
@@ -2505,7 +2505,7 @@ y \mod 4 = 0 \\
 <section id="unix2doty" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="unix2doty"><code>unix2doty</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [15]:</pre></div><div class="cell" data-tags="[&quot;unix2doty&quot;]" data-execution_count="15">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(ms <span class="op">=</span> <span class="dv">0</span>) {</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> days <span class="op">=</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span><span class="op">,</span></span>

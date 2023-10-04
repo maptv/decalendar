@@ -416,7 +416,7 @@ is_leap()
 
 ### Ordinal dates {#sec-isoo}
 
-`Decalendar` dates (`year+day`) are most similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar` `doty` numbers, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are  [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `Decalendar` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
+`Decalendar` ordinal (`deco`) dates (`year+day`) are most similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar` `doty` numbers, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are  [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
 
 In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers, while the `isoo2year` and `doty2year` functions adjust the year if necessary. We use the `is_leap` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. Unlike ISO 8601 ordinal day numbers, `Decalendar` `doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
 
@@ -572,16 +572,16 @@ paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))
 
 ### Calendar dates {#sec-isoc}
 
-ISO 8601 [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) consist of a four-digit year, a two-digit month, and a two-digit `dotm` separated by hyphens (`year-mm-dd`). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from @exm-coor and @exm-gregm to convert between `Decalendar` dates and ISO 8601 calendar dates, as shown in @exm-isoc. The code formats the output of the `date2year` and `date2doty` functions into `Decalendar` dates and the output of the `doty2year` and `doty2date` functions into ISO 8601 calendar dates.
+ISO 8601 [calendar dates (`isoc`)](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) consist of a four-digit year, a two-digit month, and a two-digit `dotm` separated by hyphens (`year-mm-dd`). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from @exm-coor and @exm-gregm to convert between `deco` dates and `isoc` dates, as shown in @exm-isoc. The code in @exm-isoc formats the output of the `date2year` and `date2doty` functions into `deco` dates and the output of the `doty2year` and `doty2date` functions into `isoc` dates.
 
-As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `Decalendar` calendar (`decc`, pronounced "deck-see") format (`year+m+dd`), which is very similar to the ISO 8601 calendar date format. The `decc` format is described in @sec-dotm. Examples of the `decc` format are provided in @sec-dotex. To be clear, the `decc` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
+As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `Decalendar` calendar (`decc`, pronounced "deck-see") format (`year+m+dd`), which is very similar to the `isoc` date format. The `decc` format is described in @sec-dotm. Examples of the `decc` format are provided in @sec-dotex. To be clear, the `decc` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
 
 ::: {#exm-isoc}
 :::
 
 #### JavaScript
 
-##### `Decalendar` date
+##### `deco` date
 
 ```{javascript}
 #| tags: [decdate]
@@ -590,7 +590,7 @@ console.log(
         date2doty().toString().padStart(3, "0")}`);
 ```
 
-##### ISO 8601 date
+##### `isoc` date
 
 ```{javascript}
 #| tags: [isodate]
@@ -603,7 +603,7 @@ console.log(
 
 #### Julia
 
-##### `Decalendar` date
+##### `deco` date
 
 ```{julia}
 #| tags: [decdate]
@@ -619,7 +619,7 @@ console.log(
 
 #### Python
 
-##### `Decalendar` date
+##### `deco` date
 
 ```{python}
 #| tags: [decdate]
@@ -635,7 +635,7 @@ f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}
 
 #### R
 
-##### `Decalendar` date
+##### `deco` date
 
 ```{r}
 #| tags: [decdate]
@@ -656,13 +656,160 @@ paste0(sprintf("%04d", doty2year()), "-",
 
 :::
 
+### Time zones {#sec-isoz}
+
+`Isoc` dates can be combined with the [ISO 8601 time (`isot`) format](https://en.wikipedia.org/wiki/ISO_8601#Times) (`hh:mm:ss`) to form `isoc` timestamps. Likewise, `deco` dates can be combined with `Declock` times to form `deco` timestamps. Both `deco` (`year+day.dddddZ`) and `isoc` (`year-mm-ddThh:mm:ssZ`) timestamps can end in a `Z`. This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC+00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+
+`Deco` timestamps that are synchronized with UTC can either end in `Z` (`year+day.dddddZ`) or `+0` (`year+day.ddddd+0`). Noon UTC can be written `.5Z` or `.5+0` in `Declock` and 12:00:00Z, 120000Z, 12:00:00+00, or 120000+00 as per ISO 8601. The code in @exm-isoz converts between UTC offsets and military time zone codes. @sec-zone provides more information on `Declock` time zones.
+
+::: {#exm-isoz}
+:::
+
+#### JavaScript
+
+##### hour2zone
+
+```{javascript}
+#| tags: [hour2zone]
+function hour2zone(hour = 0) {
+    return hour == 0 ? "Z"
+        : hour > 0 && hour < 10 ? String.fromCharCode(hour + 64)
+        : hour > 9 && hour < 13 ? String.fromCharCode(hour + 65)
+        : hour < 0 && hour > -13 ? String.fromCharCode(Math.abs(hour) + 77)
+        : "J";
+}
+
+console.log(hour2zone(-new Date().getTimezoneOffset() / 60))
+```
+
+##### `zone2hour`
+
+```{javascript}
+#| tags: [zone2hour]
+function zone2hour(zone = "Z") {
+    return (zone = zone.toUpperCase()) == "Z" ? 0
+        : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
+        : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
+        : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
+        : zone;
+}
+
+console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
+```
+
+#### Julia
+
+##### `hour2zone`
+
+```{julia}
+#| tags: [hour2zone]
+# import Pkg; Pkg.add("TimeZones")
+# using TimeZones
+# localzone()
+function hour2zone(hour=0)
+    (
+        hour == 0 ? "Z" :
+        hour > 0 && hour < 10 ? Char(hour + 64) :
+        hour > 9 && hour < 13 ? Char(hour + 65) :
+        hour < 0 && hour > -13 ? Char(abs(hour) + 77) : "J";
+    )
+end
+
+hour2zone()
+```
+
+##### `zone2hour`
+
+```{julia}
+#| tags: [zone2hour]
+function zone2hour(zone="Z")
+    (
+        (zone = uppercase(string(zone))) == "Z" ? 0 :
+        zone > "@" && zone < "J" ? Int(codepoint(only(zone))) - 64 :
+        zone > "J" && zone < "N" ? Int(codepoint(only(zone))) - 65 :
+        zone < "Z" && zone > "M" ? -(Int(codepoint(only(zone))) - 77) : zone;
+    )
+end
+
+zone2hour()
+```
+
+#### Python
+
+##### `hour2zone`
+
+```{python}
+#| tags: [hour2zone]
+# import time
+# print(int(-time.timezone / 3600))
+def hour2zone(hour=0):
+    return (
+        "Z" if hour == 0 else
+        chr(hour + 64) if 0 < hour < 10 else
+        chr(hour + 65) if 9 < hour < 13 else
+        chr(abs(hour) + 77) if -13 < hour < 0 else "J"
+    )
+
+hour2zone()
+```
+
+##### `zone2hour`
+
+```{python}
+#| tags: [zone2hour]
+def zone2hour(zone="Z"):
+    return (
+    0 if (zone := zone.upper()) == "Z" else
+        ord(zone) - 64 if "@" < zone < "J" else
+        ord(zone) - 65 if "J" < zone < "N" else
+        -(ord(zone) - 77) if "M" < zone < "Z" else zone
+    )
+
+zone2hour()
+```
+
+#### R
+
+##### `hour2zone`
+
+```{r}
+#| tags: [hour2zone]
+# Sys.timezone()
+hour2zone <- function(hour = 0) {
+    ifelse(hour == 0, "Z",
+    ifelse(hour > 0 && hour < 10, intToUtf8(hour + 64),
+    ifelse(hour > 9 && hour < 13, intToUtf8(hour + 65),
+    ifelse(hour < 0 && hour > -13, intToUtf8(abs(hour) + 77), "J"))))
+}
+
+hour2zone()
+```
+
+##### `zone2hour`
+
+```{r}
+#| tags: [zone2hour]
+zone2hour <- function(zone = "Z") {
+    ifelse((zone <- toupper(zone)) == "Z", 0,
+    ifelse(zone > "@" && zone < "J", utf8ToInt(zone) - 64,
+    ifelse(zone > "J" && zone < "N", utf8ToInt(zone) - 65,
+    ifelse(zone < "Z" && zone > "M", -(utf8ToInt(zone) - 77), zone))))
+}
+
+zone2hour()
+```
+
+:::
+
 ### Times {#sec-isot}
 
-`Decalendar` seeks to make months and weeks obsolete. Similarly, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) (`.day`). The [ISO 8601 time format](https://en.wikipedia.org/wiki/ISO_8601#Times) is `hh:mm:ss`. Both `Declock` and ISO 8601 times can be appended to dates to form timestamps. `Decalendar` timestamps are more concise and easier to read than ISO 8601 timestamps.
+`Decalendar` seeks to make months and weeks obsolete. Similarly, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) (`.day`). `Deco` timestamps, which combine `Decalendar` dates and `Declock` times, are more concise and easier to read than ISO 8601 timestamps. An `Isoc` timestamp that includes seconds is 20 characters long (`year-mm-ddThh:mm:ssZ`), while a `deco` timestamp with slightly greater precision is only 15 characters long (`year+day.dddddZ`). ISO 8601 timestamps can omit delimiters except for the `T` which separates the date and the time (`yearmmddThhmmssZ`). Without delimiters, `isoc` timestamps become even more difficult to read and still cannot match the brevity of `Decalendar` timestamps.
 
-An ISO 8601 calendar date timestamp that includes seconds is 19 characters long (`year-mm-ddThh:mm:ss`), while a `Decalendar` timestamp with slightly greater precision is only 14 characters long (`year+day.ddddd`). ISO 8601 timestamps can omit delimiters except for the `T` which separates the date and the time (`yearmmddThhmmss`). Without delimiters, ISO 8601 timestamps become even more difficult to read and still cannot match the brevity of `Decalendar` timestamps.
+Coincidentally, an ISO 8601 ordinal (`isoo`) timestamp (`year-dayThh:mm:ssZ`) without delimiters (`yeardayThhmmssZ`) is the same length as a `deco` timestamp (`year+day.dddddZ`). `Deco` timestamps cannot exist without delimiters, because removing the plus sign (`+`) from a `deco` timestamp turns it into a `doty` number (`ddddddd.ddddd`). If we removed the `+` from the `deco` timestamp `1969+306.00000`, we would obtain the `doty` number `1969306.00000` would represent midnight 1969306 days from the beginning of the current year. The rules for `deco` timestamp interpretation are summarized by the code in the `deco2doty` function in @exm-unixp.
 
-The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4.
+The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The  `time2doty` and `doty2time` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
+
+To create a `deco` timestamp, we can use the `doty2deco` or the `date2deco` functions as shown in @exm-isot. Similarly, @exm-isot also shows how to create an `isoc` timestamp with the `doty2isoc` and `doty2isoc` functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or `Zone 0` and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. @sec-unixb and @sec-unixp further discuss timestamps and provide functions for building, parsing, and converting timestamps.
 
 $$declock = \frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} \cdot 10^x$$ {#eq-isot1}
 
@@ -691,8 +838,6 @@ $$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isot4}
 
 :::
 
-The  `time2doty` and `doty2time` functions in @exm-isot convert between standard time and `Declock` time. To create a `Decalendar` timestamp, we can use the `date2year`, `date2doty`, and `time2doty` functions as shown in @exm-isot. Similarly, @exm-isot also shows how to create an ISO 8601 calendar date timestamp with the `doty2year`, `doty2date`, and `doty2time` functions.
-
 ::: {#exm-isot}
 :::
 
@@ -706,9 +851,12 @@ function time2doty(hours = 1, minutes = 0, seconds = 0) {
     return hours / 24 + minutes / 1440 + seconds / 86400
 }
 
-console.log(`${date2year().toString().padStart(4, '0')}+${
-    date2doty().toString().padStart(3, '0')}.${
-    (Math.round(time2doty(0) * 1e5) / 1e5).toString().padStart(5, '0')}`)
+function date2deco(year = 1969, month = 1, day = 1, hours = 0, minutes = 0, seconds = 0) {
+    return `${date2year(year, month).toString().padStart(4, '0')}+${
+        date2doty(month, day).toString().padStart(3, '0')}.${
+        (Math.round(time2doty(hours, minutes, seconds) * 1e5) / 1e5).toString().padStart(5, '0')}`)
+}
+
 ```
 
 ##### `doty2time`
@@ -724,6 +872,11 @@ function doty2time(doty = 1 / 24) {
         return [floorHours, floorMinutes, (minutes - floorMinutes) / 60]
 }
 
+function doty2isoc(year, doty) {
+    return `${date2year(year, month).toString().padStart(4, '0')}+${
+        date2doty(month, day).toString().padStart(3, '0')}.${
+        (Math.round(time2doty(hours, minutes, seconds) * 1e5) / 1e5).toString().padStart(5, '0')}`)
+}
 console.log(`${doty2year()}+${
         doty2date().map(
         i => i.toString().padStart(2, "0")
@@ -836,149 +989,6 @@ paste0(sprintf("%04d", doty2year()), "-",
 
 :::
 
-### Time zones {#sec-isoz}
-
-ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC+00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time). `Decalendar` timestamps and `Declock` times that are synchronized with UTC can end in `Z` (`year+day.dddddZ`) or a `+0` (`year+day.ddddd+0`). Noon UTC can be written `.5Z` or `.5+0` in `Declock` and 12:00:00Z, 120000Z, 12:00:00+00, or 120000+00 as per ISO 8601. The code in @exm-isoz converts between UTC offsets and military time zone codes. @sec-zone provides more information on `Declock` time zones.
-
-::: {#exm-isoz}
-:::
-
-#### JavaScript
-
-##### hour2zone
-
-```{javascript}
-#| tags: [hour2zone]
-function hour2zone(hour = 0) {
-    return hour == 0 ? "Z"
-        : hour > 0 && hour < 10 ? String.fromCharCode(hour + 64)
-        : hour > 9 && hour < 13 ? String.fromCharCode(hour + 65)
-        : hour < 0 && hour > -13 ? String.fromCharCode(Math.abs(hour) + 77)
-        : "J";
-}
-
-console.log(hour2zone(-new Date().getTimezoneOffset() / 60))
-```
-
-##### `zone2hour`
-
-```{javascript}
-#| tags: [zone2hour]
-function zone2hour(zone = "Z") {
-    return (zone = zone.toUpperCase()) == "Z" ? 0
-        : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
-        : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
-        : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
-        : zone;
-}
-
-console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))
-```
-
-#### Julia
-
-##### `hour2zone`
-
-```{julia}
-#| tags: [hour2zone]
-# import Pkg; Pkg.add("TimeZones")
-# using TimeZones
-# localzone()
-function hour2zone(hour=0)
-    (
-        hour == 0 ? "Z" :
-        hour > 0 && hour < 10 ? Char(hour + 64) :
-        hour > 9 && hour < 13 ? Char(hour + 65) :
-        hour < 0 && hour > -13 ? Char(abs(hour) + 77) : "J";
-    )
-end
-
-hour2zone()
-```
-
-##### `zone2hour`
-
-```{julia}
-#| tags: [zone2hour]
-function zone2hour(zone="Z")
-    (
-        (zone = string(zone)) == "Z" ? 0 :
-        zone > "@" && zone < "J" ? Int(codepoint(only(zone))) - 64 :
-        zone > "J" && zone < "N" ? Int(codepoint(only(zone))) - 65 :
-        zone < "Z" && zone > "M" ? -(Int(codepoint(only(zone))) - 77) : zone;
-    )
-end
-
-zone2hour()
-```
-
-#### Python
-
-##### `hour2zone`
-
-```{python}
-#| tags: [hour2zone]
-# import time
-# print(int(-time.timezone / 3600))
-def hour2zone(hour=0):
-    return (
-        "Z" if hour == 0 else
-        chr(hour + 64) if 0 < hour < 10 else
-        chr(hour + 65) if 9 < hour < 13 else
-        chr(abs(hour) + 77) if -13 < hour < 0 else "J"
-    )
-
-hour2zone()
-```
-
-##### `zone2hour`
-
-```{python}
-#| tags: [zone2hour]
-def zone2hour(zone="Z"):
-    return (
-        0 if zone == "Z" else
-        ord(zone) - 64 if "@" < zone < "J" else
-        ord(zone) - 65 if "J" < zone < "N" else
-        -(ord(zone) - 77) if "M" < zone < "Z" else zone
-    )
-
-zone2hour()
-```
-
-#### R
-
-##### `hour2zone`
-
-```{r}
-#| tags: [hour2zone]
-# Sys.timezone()
-hour2zone <- function(hour = 0) {
-    ifelse(hour == 0, "Z",
-    ifelse(hour > 0 && hour < 10, intToUtf8(hour + 64),
-    ifelse(hour > 9 && hour < 13, intToUtf8(hour + 65),
-    ifelse(hour < 0 && hour > -13, intToUtf8(abs(hour) + 77), "J"))))
-}
-
-hour2zone()
-```
-
-##### `zone2hour`
-
-```{r}
-#| tags: [zone2hour]
-zone2hour <- function(zone = "Z") {
-    ifelse(zone == "Z", 0,
-    ifelse(zone > "@" && zone < "J", utf8ToInt(zone) - 64,
-    ifelse(zone > "J" && zone < "N", utf8ToInt(zone) - 65,
-    ifelse(zone < "Z" && zone > "M", -(utf8ToInt(zone) - 77), zone))))
-}
-
-zone2hour()
-```
-
-:::
-
 ### Time intervals {#sec-isoi}
 
 ISO 8601 specifies three methods of unequivocally representing [time intervals](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals), `start/stop`, `start/span`, and `span/stop`. The `Decalendar` equivalents of these three time interval representations are `start:stop`, `start>span`, and `stop<span`. Notably, the `start/stop` syntax is used in Google Calendar "Add to Calendar" links (`https://calendar.google.com/calendar/render?action=TEMPLATE&dates=start/stop`). Clicking on an "Add to Calendar" link opens an web browser interface for adding an event to an online calendar. The `date2link` and `doty2link` functions in @exm-isoi create such links for Google, Outlook, Office 365, and Yahoo online calendars.
@@ -1068,13 +1078,13 @@ $$time = (JD - \lfloor JD \rfloor + .5) \mod 1$$ {#eq-jd}
 
 ### Julian time conversion to UNIX time {#sec-unixj}
 
-While it is possible to convert Julian dates into `Decalendar` dates and `Declock` times, the official definition of `Decalendar` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight in the [UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z) time zone on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `Decalendar` dates, and `Declock` times. To obtain UNIX time from a Julian Date, we subtract 2440587.5 from the Julian Date and multiply by 86400 as shown in @eq-unixj.
+While it is possible to convert Julian dates into `deco` dates and `Declock` times, the official definition of `deco` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight in the [UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z) time zone on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `deco` dates, and `Declock` times. To obtain UNIX time from a Julian Date, we subtract 2440587.5 from the Julian Date and multiply by 86400 as shown in @eq-unixj.
 
 $$unix = (JD − 2440587.5) \cdot 86400$$ {#eq-unixj}
 
-### UNIX time conversion to `Decalendar` date {#sec-unixd}
+### UNIX time conversion to `deco` date {#sec-unixd}
 
-To calculate `Decalendar` dates directly from UNIX time, we can use a calculation adapted the 2014 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) by [Howard Hinnant](https://howardhinnant.github.io/) [-@hinnant2014]. Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year` (@eq-year), and `doty` (@eq-doty).
+To calculate `deco` dates directly from UNIX time, we can use a calculation adapted the 2014 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) by [Howard Hinnant](https://howardhinnant.github.io/) [-@hinnant2014]. Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year` (@eq-year), and `doty` (@eq-doty).
 
 $$era = \frac{\begin{cases}days&{\text{if } days \geq 0;}\\days-146096&{\text{otherwise.}}\end{cases}}{146097}$$ {#eq-era}
 
@@ -1086,7 +1096,7 @@ $$doty = \lfloor doe - (365 \cdot year + \frac{year}{4} - \frac{year}{100} + \fr
 
 ### UNIX time conversion to `Decalendar` timestamp {#sec-unixt}
 
-To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` timestamp as shown in @eq-unixt The code in @exm-unixt converts UNIX time into a `Decalendar` date or a `Decalendar` timestamp in the `Zone 0` time zone. The last line in @exm-unixt obtains the current `Decalendar` date by passing the current UNIX timestamp to the `unix2doty` function. If we call this function without arguments (`unix2doty()`) the result should be the UNIX Epoch: `1969+306`. To see @exm-unixt in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current `Decalendar` (`year+day.ddddd`) and ISO 8601 (`year-mm-ddThh:mm:ss`) timestamps.
+To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` ordinal (`deco`) timestamp as shown in @eq-unixt. The code in @exm-unixt converts UNIX time into a `deco` timestamp in the `Zone 0` time zone by passing the current UNIX timestamp to the `unix2doty` function. If we call this function without arguments (`unix2doty()`) the result will be the year and `doty` of the UNIX Epoch: 1969 and 306. To see @exm-unixt in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current `deco` (`year+day.ddddd`) and `isoc` (`year-mm-ddThh:mm:ss`) timestamps.
 
 $$time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c}
 y \mod 4 = 0 \\
@@ -1201,13 +1211,131 @@ paste()
 
 ### Building timestamps {#sec-unixb}
 
-The code in @exm-unixt creates a `Decalendar` timestamp from UNIX time. 
+The code in @exm-unixt creates a `Decalendar` ordinal (`deco`) timestamp from UNIX time. @exm-unixb encapsulates this code in a function called `unix2deco`. The `deco` timestamps converted from UNIX time are all in the `Zone 0` time zone. To switch to a different time zone, we should pass the year and `doty` we obtain from the `unix2doty` function to the `doty2deco` function from @exm-isot along with the desired time zone.
+
+::: {#exm-unixb}
+:::
+
+#### JavaScript
+
+##### `unix2deco`
+
+```{javascript}
+#| tags: [unix2deco]
+function unix2deco(ms = 0) {
+    const [year, doty] = unix2doty(ms);
+    return `${year.toString().padStart(4, "0")}+${
+        (day = Math.floor(doty)).toString().padStart(3, "0")}.${
+        (Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
+};
+
+console.log(unix2deco())
+```
+
+#### Julia
+
+##### `unix`
+
+##### `unix2deco`
+
+```{julia}
+#| tags: [unix2deco]
+function unix2deco(s=0, ms=0)
+    y, d = unix2doty(time())
+    day = Int(floor(d))
+    "$(lpad(y, 4, '0'))+$(lpad(day, 3, '0')).$(lpad(Int(round((d - day) * 1e5)), 5, '0'))+0"
+end
+
+unix2deco()
+```
+
+#### Python
+
+##### `unix2deco`
+
+```{python}
+#| tags: [unix2deco]
+from time import time
+
+def unix2deco(s=0, ms=0):
+    y, d = unix2doty(time())
+    return f"{y:>04}+{(day := d.__floor__()):>03}.{round((d - day) * 1e5):>05}+0"
+
+unix2deco()
+```
+
+#### R
+
+##### `unix2deco`
+
+```{r}
+#| tags: [unix2deco]
+unix2deco <- function(s = 0, ms = 0) {
+    yd <- unix2deco(as.numeric(Sys.time()))
+    paste0(sprintf("%04d", yd[1]), "+",
+           sprintf("%03d", (day = floor(yd[2]))), ".",
+           sprintf("%05d", round((yd[2] - day) * 1e5)), "+0"
+    )
+}
+
+unix2deco()
+```
+
+:::
 
 ### Parsing timestamps {#sec-unixp}
 
 To extract the components of a `Decalendar` timestamp, we can use the `parse_dec` function in @exm-isos. Parsing timestamps is the first step before any later processes such as timestamp arithmetic or conversion between timestamp formats. The `parse_dec` function returns a year, a `doty`, and a fractional day time zone offset. The year and time zone offset can be omitted in the timestamp provided to `parse_dec`. If not specified in the timestamp, the year is the current year and the time zone offset is 0.
 
-::: {#exm-isos}
+::: {#exm-unixp}
+:::
+
+#### JavaScript
+
+##### `parse_dec`
+
+```{javascript}
+#| tags: [parse_dec]
+function parse_dec(timestamp = "1969+306.00000Z") {
+    const arr = timestamp.toString().split(/(?=[+-]|[a-zA-Z])/, 3);
+    switch (arr.length) {
+        case 1: return [unix2doty(Date.now())[0], parseFloat(arr[0]), 0];
+        case 2: return (/^[a-zA-Z]+$/.test(arr[1]))
+            ? [unix2doty(Date.now())[0], parseFloat(arr[0]), zone2hour(arr[1]) / 24]
+            : [parseInt(arr[0]), parseFloat(arr[1]), 0];
+    };
+    return [parseInt(arr[0]), parseFloat(arr[1]), /^[a-zA-Z]+$/.test(arr[2])
+        ? zone2hour(arr[2]) / 24
+        : parseFloat(arr[2].replace(/([+-])/, "$1\."))];
+}
+
+console.log(parse_dec());
+```
+
+#### Julia
+
+##### `parse_dec`
+
+```{julia}
+#| tags: [parse_dec]
+```
+
+#### Python
+
+##### `parse_dec`
+
+```{python}
+#| tags: [parse_dec]
+```
+
+#### R
+
+##### `parse_dec`
+
+```{r}
+#| tags: [parse_dec]
+```
+
 :::
 
 # Basic concepts {#sec-basics}

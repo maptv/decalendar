@@ -10,7 +10,7 @@ format:
     code-block-background: false
     code-block-border-left: false
     code-copy: true
-    code-fold: show
+    code-fold: true
     code-link: true
     code-tools: true
     link-external-icon: true

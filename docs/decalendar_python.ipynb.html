@@ -1410,7 +1410,7 @@ doty2date()</code></pre>
 <section id="date2doty-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="date2doty-2"><code>date2doty</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-tags="[&quot;date2doty&quot;]" data-execution_count="1">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> date2doty(month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">153</span> <span class="op">*</span> (month <span class="op">-</span> <span class="dv">3</span> <span class="cf">if</span> month <span class="op">&gt;</span> <span class="dv">2</span> <span class="cf">else</span> month <span class="op">+</span> <span class="dv">9</span>) <span class="op">+</span> <span class="dv">2</span>) <span class="op">//</span> <span class="dv">5</span> <span class="op">+</span> day <span class="op">-</span> <span class="dv">1</span></span>
@@ -1425,7 +1425,7 @@ doty2date()</code></pre>
 <section id="doty2date-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="doty2date-2"><code>doty2date</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell" data-tags="[&quot;doty2date&quot;]" data-execution_count="2">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2date(doty<span class="op">=</span><span class="dv">306</span>):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> (<span class="dv">5</span> <span class="op">*</span> doty <span class="op">+</span> <span class="dv">2</span>) <span class="op">//</span> <span class="dv">153</span></span>
@@ -1587,7 +1587,7 @@ doty2year()</code></pre>
 <section id="date2year-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="date2year-2"><code>date2year</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell" data-tags="[&quot;date2year&quot;]" data-execution_count="3">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> date2year(year<span class="op">=</span><span class="dv">1970</span>, month<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">-</span> (month <span class="op">&lt;</span> <span class="dv">3</span>)</span>
@@ -1602,7 +1602,7 @@ doty2year()</code></pre>
 <section id="doty2year-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="doty2year-2"><code>doty2year</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell" data-tags="[&quot;doty2year&quot;]" data-execution_count="4">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2year(year<span class="op">=</span><span class="dv">1969</span>, doty<span class="op">=</span><span class="dv">306</span>):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">+</span> (doty <span class="op">&gt;</span> <span class="dv">305</span>)</span>
@@ -1670,7 +1670,7 @@ is_leap()</code></pre>
 <section id="leap-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="leap-2"><code>leap</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell" data-tags="[&quot;leap&quot;]" data-execution_count="5">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_leap(year<span class="op">=</span><span class="dv">1970</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> year <span class="op">%</span> <span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span> <span class="kw">or</span> year <span class="op">%</span> <span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span></span>
@@ -1779,7 +1779,7 @@ end
 <section id="isoo2year-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="isoo2year-2"><code>isoo2year</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell" data-tags="[&quot;isoo2year&quot;]" data-execution_count="6">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> isoo2year(year<span class="op">=</span><span class="dv">1970</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">-</span> (day <span class="op">&lt;</span> (<span class="dv">60</span> <span class="op">+</span> is_leap(year <span class="op">-</span> <span class="dv">1</span>)))</span>
@@ -1794,7 +1794,7 @@ end
 <section id="isoo2doty-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="isoo2doty-2"><code>isoo2doty</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [7]:</pre></div><div class="cell" data-tags="[&quot;isoo2doty&quot;]" data-execution_count="7">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> isoo2doty(year<span class="op">=</span><span class="dv">1970</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (day <span class="op">+</span> <span class="dv">305</span> <span class="op">-</span> is_leap(year)) <span class="op">%</span> <span class="dv">365</span></span>
@@ -1809,7 +1809,7 @@ end
 <section id="doty2isoo-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="doty2isoo-2"><code>doty2isoo</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [8]:</pre></div><div class="cell" data-tags="[&quot;doty2isoo&quot;]" data-execution_count="8">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2isoo(year<span class="op">=</span><span class="dv">1970</span>, doty<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (doty <span class="op">+</span> <span class="dv">60</span> <span class="op">+</span> is_leap(year <span class="op">+</span> <span class="dv">1</span>)) <span class="op">%</span> <span class="dv">365</span></span>
@@ -1896,7 +1896,7 @@ console.log(
 <section id="decalendar-date-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="decalendar-date-2"><code>Decalendar</code> date</h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [9]:</pre></div><div class="cell" data-tags="[&quot;decdate&quot;]" data-execution_count="9">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>date2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>date2doty()<span class="sc">:&lt;3}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1908,7 +1908,7 @@ console.log(
 <section id="iso-8601-date-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="iso-8601-date-2">ISO 8601 date</h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [10]:</pre></div><div class="cell" data-tags="[&quot;isodate&quot;]" data-execution_count="10">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>doty2year()<span class="sc">:&gt;04}</span><span class="ss">-</span><span class="sc">{</span><span class="st">'-'</span><span class="sc">.</span>join(<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="bu">str</span>(i).rjust(<span class="dv">2</span>, <span class="st">'0'</span>), doty2date()))<span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -2071,7 +2071,7 @@ end
 <section id="time2doty-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="time2doty-2"><code>time2doty</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [11]:</pre></div><div class="cell" data-tags="[&quot;time2doty&quot;]" data-execution_count="11">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> time2doty(hours<span class="op">=</span><span class="dv">1</span>, minutes<span class="op">=</span><span class="dv">0</span>, seconds<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hours <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> minutes <span class="op">/</span> <span class="dv">1440</span> <span class="op">+</span> seconds <span class="op">/</span> <span class="dv">86400</span></span>
@@ -2086,7 +2086,7 @@ end
 <section id="doty2time-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="doty2time-2"><code>doty2time</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [12]:</pre></div><div class="cell" data-tags="[&quot;doty2time&quot;]" data-execution_count="12">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2time(doty <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">24</span>):</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    doty <span class="op">=</span> doty <span class="op">-</span> doty.<span class="fu">__floor__</span>()</span>
@@ -2213,7 +2213,7 @@ zone2hour()</code></pre>
 <section id="hour2zone-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="hour2zone-2"><code>hour2zone</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [13]:</pre></div><div class="cell" data-tags="[&quot;hour2zone&quot;]" data-execution_count="13">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import time</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print(int(-time.timezone / 3600))</span></span>
@@ -2235,7 +2235,7 @@ zone2hour()</code></pre>
 <section id="zone2hour-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="zone2hour-2"><code>zone2hour</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [14]:</pre></div><div class="cell" data-tags="[&quot;zone2hour&quot;]" data-execution_count="14">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zone2hour(zone<span class="op">=</span><span class="st">"Z"</span>):</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
@@ -2294,7 +2294,7 @@ zone2hour()</code></pre>
 <p>The <code>Decalendar</code> time interval representations above are called <code>spreads</code> and were inspired by the concept of <a href="https://en.wikipedia.org/wiki/Array_slicing">array slicing</a> from computer programming. <code>Decalendar</code> allows for the use of both <code>slices</code> (<code>start:stop:step</code>) and <code>spreads</code> (<code>start&gt;span&gt;split&gt;space</code>) to create time intervals. <a href="https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing">Slicing of dates and times</a> is fully implemented in the <a href="https://pandas.pydata.org/">Pandas Python library</a>. The pandas code shown in <a href="#exm-isor">Example&nbsp;10</a> uses slicing to obtain the start times of the last three 6-hour intervals in 1970, which is <code>1970+305&gt;.75&gt;.25&gt;0</code> in <code>Decalendar</code> and <code>R3/1970-12-31T06:00:00Z/T06</code> as per ISO 8601.</p>
 <p><span class="theorem-title"><strong>Example 10 </strong></span></p>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [15]:</pre></div><div class="cell" data-tags="[&quot;intervals&quot;]" data-execution_count="15">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2554,7 +2554,7 @@ day = Int(floor(d))
 <section id="unix2doty-2" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="unix2doty-2"><code>unix2doty</code></h5>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [16]:</pre></div><div class="cell" data-tags="[&quot;unix2doty&quot;]" data-execution_count="16">
-<details open="">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>

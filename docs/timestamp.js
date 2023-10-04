@@ -472,12 +472,14 @@ console.log(parse_dec("-38.8888888c"))
 console.log(parse_dec("-334223098-23543"))
 console.log(parse_dec("33+422.305-23543"))
 
-console.log(parse_iso("00:00:00C"))
-console.log(parse_iso("1970-01-01T00:00:00+03"))
-console.log(parse_iso("10:40:30"))
-console.log(parse_dec("202540001-003"))
-console.log(parse_dec())
-console.log(parse_iso())
 console.log(parseFloat("-.03"))
 console.log(parseInt("3z"))
 console.log(new Date(Date.parse("2023-01-01T12:00")))
+function unix2deco(ms = 0) {
+    const [year, doty] = unix2doty(ms);
+    return `${year.toString().padStart(4, "0")}+${
+        (day = Math.floor(doty)).toString().padStart(3, "0")}.${
+        (Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
+};
+
+console.log(unix2deco())
