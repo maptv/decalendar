@@ -10,6 +10,10 @@ centiday = seconds_since_midnight / 8640
 offset = round(time.timezone / 8640)
 sign = "-" if offset > 0 else "+"
 offset_centiday = centiday - offset
-normalized_centiday = offset_centiday - 10 * (offset_centiday > 10) + 10 * (offset_centiday < 0)
-print(f"{datetime.now().strftime('%H:%M')}{sign}{str(int(abs(time.timezone) / 3600)).zfill(2)}")
+normalized_centiday = (
+    offset_centiday - 10 * (offset_centiday > 10) + 10 * (offset_centiday < 0)
+)
+print(
+    f"{datetime.now().strftime('%H:%M')}{sign}{str(int(abs(time.timezone) / 3600)).zfill(2)}"
+)
 print(f" {normalized_centiday:.2f}{sign}{abs(offset)}")

@@ -97,29 +97,21 @@ function is_leap(y) {
     return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
 
-function unix2doty(ms = 0, precision = 0) {
+function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         doe = days - era * 146097,
-        yoe = Math.floor((
-            doe - doe / 1460 + doe / 36524 - doe / 146096
-        ) / 365),
-        year = yoe + era * 400;
-    if (precision == 0) {
-        return `${year.toString().padStart(4, "0")}+${Math.round(
-            doe - (365 * yoe + yoe / 4 - yoe / 100)
-        ).toString().padStart(3, "0")}`
-    }
-    const timestamp = days - Math.floor(
-        year * 365 + year / 4 - year / 100 + year / 400
-    ),
-        doty = Math.floor(timestamp),
-        time = Math.round(
-            (timestamp - doty) * 10 ** precision
-        ).toString().padStart(precision, "0");
-    return `${year.toString().padStart(4, "0")
-        }+${doty.toString().padStart(3, "0")}.${time}`;
+        year = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365) + era * 400;
+    return [year, days - Math.floor(year * 365 + year / 4 - year / 100 + year / 400)];
 }
+
+console.log(unix2doty(Date.now()))
+const [year, doty] = unix2doty(Date.now());
+console.log(doty)
+console.log(
+    `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${
+    (Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
+    );
 
 function leaps(year) {
     return Math.floor(year / 4 - year / 100 + year / 400)
@@ -254,6 +246,7 @@ console.log(`${doty2year()}+${doty2date().map(
 ).join(":")}${zone2hour()}`)
 
 function doty2time(doty = 1 / 24) {
+    doty = doty - Math.floor(doty)
     const hours = doty * 24,
         floorHours = Math.floor(hours),
         minutes = (hours - floorHours) / 60,
@@ -265,9 +258,9 @@ function doty2time(doty = 1 / 24) {
 function zone2hour(zone = "Z") {
     return (zone = zone.toUpperCase()) == "Z" ? 0
         : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
-        : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
-        : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
-        : zone;
+            : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
+                : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
+                    : zone;
 }
 
 console.log(hour2zone(-new Date().getTimezoneOffset() / 60))
@@ -277,16 +270,16 @@ console.log(String.fromCharCode(64 + 27))
 console.log(zone2hour("r"))
 
 
-function unix2doty(ms = 0) {
-    const days = ms / 86400000 + 719468,
-        era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
-        doe = days - era * 146097,
-        yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
-        year = yoe + era * 400,
-        timestamp = days - Math.floor(year * 365 + year / 4 - year / 100 + year / 400),
-        doty = Math.floor(timestamp);
-    return [year, doty, timestamp - doty];
-}
+// function unix2doty(ms = 0) {
+//     const days = ms / 86400000 + 719468,
+//         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+//         doe = days - era * 146097,
+//         yoe = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365),
+//         year = yoe + era * 400,
+//         timestamp = days - Math.floor(year * 365 + year / 4 - year / 100 + year / 400),
+//         doty = Math.floor(timestamp);
+//     return [year, doty, timestamp - doty];
+// }
 
 
 
@@ -318,8 +311,8 @@ function createTimestamp() {
 
 
 function date2link(
-    start,
-    stop,
+    start = "1970-01-01T00:00:00Z",
+    end = "1970-01-02T00:00:00Z",
     title = "Event Title",
     details = "Event Details",
     location = "Event Location",
@@ -330,29 +323,53 @@ function date2link(
     switch (calendar.toLowerCase()) {
         case "google":
             return "https://www.google.com/calendar/event?action=TEMPLATE"
-            + `&dates=${encodeURIComponent(start + "/" + stop)
-            }&text=${encodeURIComponent(title)
-            }&details=${encodeURIComponent(details)
-            }&location=${encodeURIComponent(location)
-            }&sprop=website:${encodeURIComponent(url)
-            }&sprop=name:${encodeURIComponent(name)}`;
-        case "outlook":
-            
-        https://outlook.live.com/calendar/0/action/compose?allday=false&enddt=2023-09-30T13%3A45%3A00%2B00%3A00&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2023-09-30T13%3A15%3A00%2B00%3A00
-        url += '&dtstart=' + _getUTCTime(data.time.start, data.time.zone);
-        url += '&dtend=' + _getUTCTime(data.time.end, data.time.zone);
-        url += '&summary=' + encodeURIComponent(data.title);
-        url += '&location=' + encodeURIComponent(data.location);
-        url += '&description=' + encodeURIComponent(data.desc);
-        url += '&allday=' + "false";
-        url += '&uid=' + "";
-        return url;
+                + `&dates=${encodeURIComponent(start + "/" + end)
+                }&text=${encodeURIComponent(title)
+                }&details=${encodeURIComponent(details)
+                }&location=${encodeURIComponent(location)
+                }&sprop=website:${encodeURIComponent(url)
+                }&sprop=name:${encodeURIComponent(name)}`;
+        case "yahoo":
+            return "https://calendar.yahoo.com/?v=60"
+                + `&st=${encodeURIComponent(start)
+                }&et=${encodeURIComponent(end)
+                }&title=${encodeURIComponent(title)
+                }&desc=${encodeURIComponent(details)
+                }&in_loc=${encodeURIComponent(location)
+                }&url=${encodeURIComponent(url)}`;
     }
+    return `https://outlook.${calendar}.com/calendar/action/compose`
+        + "?&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&allday=false"
+        + `&startdt=${encodeURIComponent(start)
+        }&enddt=${encodeURIComponent(end)
+        }&summary=${encodeURIComponent(title)
+        }&description=${encodeURIComponent(details)
+        }&location=${encodeURIComponent(location)}`;
 }
+
+function build_dec(year = 1970, month = 1, day = 1, hours = 0, minutes = 0, seconds = 0, zone = "Z") {
+    return `${date2year(year, month).toString().padStart(4, "0")
+        }+${date2doty(month, day).toString().padStart(3, "0")
+        }.${Math.round(time2doty(hours, minutes, seconds) * 1e5).toString().padStart(5, "0")
+        }${zone}`
+}
+
+console.log(build_dec())
+
+function build_iso(year = 1969, doty = 306, zone = "Z") {
+    return `${doty2year(year, doty).toString().padStart(4, "0")
+        }-${doty2date(doty).map(
+            i => i.toString().padStart(2, "0")
+        ).join("-")}T${doty2time(doty).map(
+            i => i.toString().padStart(2, "0")
+        ).join(":")}${zone}`
+}
+
+console.log(build_dec())
 
 function doty2link(
     start = "1969+306.00000Z",
-    stop = "1969+307.00000Z",
+    end = "1969+307.00000Z",
     title = "Event Title",
     details = "Event Details",
     location = "Event Location",
@@ -360,36 +377,107 @@ function doty2link(
     name = "Organizer Name",
     calendar = "google"
 ) {
-    const re = /(\d{4})[+-](\d{3})\.(\d+)([A-Z])/;
-    [startString, startYear, startDoty, startTime, startZone] = re.exec(start);
-    [stopString, stopYear, stopDoty, stopTime, stopZone] = re.exec(stop);
-    return date2link(start, stop, title, details, location, url, name, calendar);
+    [start_year, start_doty, start_zone] = parse_dec(start);
+    [end_year, end_doty, end_zone] = parse_dec(end);
+    return date2link(
+        start = `${doty2year(start_year, start_doty).toString().padStart(4, "0")
+        }-${doty2date(start_doty).map(
+            i => i.toString().padStart(2, "0")
+        ).join("-")}T${doty2time(start_doty).map(
+            i => i.toString().padStart(2, "0")
+        ).join(":")}${start_zone}`,
+        title = title,
+        details = details,
+        location = location,
+        url = url,
+        name = name,
+        calendar = calendar,
+    )
 
 }
 
 function parse_iso(timestamp = "1970-01-01T00:00:00Z") {
     [input, year, month, dotm, hour, minute, second, zone] =
-    /([+-]?\d{4})?-?(\d{2})?-?(\d{2})?T?(\d{2})?:?(\d{2})?:?(\d{2})?([a-zA-Z]|[+-]\d{2})?/.exec(timestamp);
+        /([+-]?\d{4})?-?(\d{2})?-?(\d{2})?T?(\d{2})?:?(\d{2})?:?(\d{2})?([a-zA-Z]|[+-]\d{2})?/.exec(timestamp);
     return [input, parseInt(year), parseInt(month), parseInt(dotm), parseInt(hour), parseInt(minute),
         parseInt(second), /^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) : parseInt(zone)]
 }
 
 function parse_dec(timestamp = "1969+306.00000Z") {
     [input, year, doty, time, zone] =
-    /([+-]?\d{4})?([+-]?\d{1,3})?(\.?\d+)?([a-zA-Z]|[+-]\d+)?/.exec(timestamp);
-    return [input, parseInt(year), parseInt(doty),
-        parseFloat(/^\.\d+/.test(time) ? time : "." + time),
+        /([+-]?\d{1,4})?([+-]?\d{1,3})?\.?(\d+)?([a-zA-Z]|[+-]\d+)?/.exec(timestamp);
+    return [input, parseInt(year), parseInt(doty), parseFloat("." + time),
         parseFloat(/^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) / 24
             : zone.replace(/([+-])/, "$1\."))];
 }
 
-console.log(parse_dec(".334223-23543"))
+function parse_dec(timestamp = "1969+306.00000Z") {
+    [input, year, doty, zone] =
+        /([+-]?\d{1,4})?(?:[+-])?(\2\d{1,3}?\.?\d*)?([a-zA-Z]|[+-]\d+)?/.exec(timestamp);
+    return [input, parseInt(year), parseFloat(doty),
+        parseFloat(/^[a-zA-Z]+$/.test(zone) ? zone2hour(zone) / 24 : zone.replace(/([+-])/, "$1\."))];
+}
+
+// function parse_dec(timestamp = "1969+306.00000Z") {
+//     return /([+-]?\d{1,4})?(?(?=[+-])[+-]\d+|(?![+-])\d{3})?([a-zA-Z]|[+-]\d+)?/.exec(timestamp);
+// }
+
+// function parse_dec(timestamp = "1969+306.00000Z") {
+//     return /([+-]?(?=[+-])|\d+(?![+-])?|\d{4})(?<=[+-])|\d+\.?\d*(?<![+-])|\d{3}\.?\d*)/.exec(timestamp);
+// }
+
+function parse_dec(timestamp = "1969+306.00000Z") {
+    return /([+-](?<=[+-])\d{1,4}|(?<![+-])\d*)((?=[+-])[+-]\d*|(?![+-])\d{1,3})/.exec(timestamp);
+}
+
+function parse_dec(timestamp = "1969+306.00000Z") {
+    return /(^[+-]*(?<=[+-])\d{1,4}|(?<![+-])\d*)((?=[+-])[+-]\d*|(?![+-])\d{1,3})/.exec(timestamp);
+}
+
+function parse_dec(timestamp = "1969+306.00000Z") {
+    return /((?=[+-])[+-]\d{1,3}|(?![+-])\d*)/.exec(timestamp);
+}
+
+function parse_dec(timestamp = "1969+306.00000Z") {
+    return /(?<year>(?<=[+-])[+-]?\d*)?(?<doty>[+-]?\d*\.?\d*)(?<zone>[+-]\d*|[a-zA-Z])?/.exec(timestamp);
+}
+
+function parse_dec(timestamp = "1969+306.00000Z") {
+    const arr = timestamp.toString().split(/(?=[+-]|[a-zA-Z])/, 3);
+    switch (arr.length) {
+        case 1: return [unix2doty(Date.now())[0], parseFloat(arr[0]), 0];
+        case 2: return (/^[a-zA-Z]+$/.test(arr[1]))
+            ? [unix2doty(Date.now())[0], parseFloat(arr[0]), zone2hour(arr[1]) / 24]
+            : [parseInt(arr[0]), parseFloat(arr[1]), 0];
+    };
+    return [parseInt(arr[0]), parseFloat(arr[1]), /^[a-zA-Z]+$/.test(arr[2])
+        ? zone2hour(arr[2]) / 24
+        : parseFloat(arr[2].replace(/([+-])/, "$1\."))];
+}
+
+console.log(parse_dec(.20202))
+
+console.log(parse_dec("a2a+-1"))
+console.log(parse_dec("203.09c"))
+console.log(parse_dec("2020202.09"))
+console.log(parse_dec("-20209-9c"))
+console.log(parse_dec("-2021+22344"))
+console.log(parse_dec("-202122334.403"))
+console.log(parse_dec("-2021-223.3+403"))
+console.log(parse_dec())
+console.log(parse_dec("2021-334.2203s"))
+console.log(parse_dec("-20211231.2238-23543"))
+console.log(parse_dec("3-328.8888888c"))
+console.log(parse_dec("-38.8888888c"))
+console.log(parse_dec("-334223098-23543"))
+console.log(parse_dec("33+422.305-23543"))
 
 console.log(parse_iso("00:00:00C"))
-console.log(parse_iso( "1970-01-01T00:00:00+03"))
-console.log(parse_iso( "10:40:30"))
+console.log(parse_iso("1970-01-01T00:00:00+03"))
+console.log(parse_iso("10:40:30"))
 console.log(parse_dec("202540001-003"))
 console.log(parse_dec())
 console.log(parse_iso())
 console.log(parseFloat("-.03"))
 console.log(parseInt("3z"))
+console.log(new Date(Date.parse("2023-01-01T12:00")))
