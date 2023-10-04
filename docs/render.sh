@@ -1,14 +1,16 @@
 #! /bin/sh
 
+jupytext schedules.py --output "schedules.ipynb" --execute --set-kernel python3
+
 quarto convert "$1"
 
-quarto render "$1" --cache-refresh --profile javascript --metadata engine:jupyter --output "${1%.*}_javascript.ipynb"
+quarto render "$1" --cache-refresh --profile javascript --metadata engine:jupyter --output embed_javascript.ipynb
 
-quarto render "$1" --cache-refresh --profile julia --metadata engine:jupyter --output "${1%.*}_julia.ipynb"
+quarto render "$1" --cache-refresh --profile julia --metadata engine:jupyter --output embed_julia.ipynb
 
-quarto render "$1" --cache-refresh --profile python --metadata engine:jupyter --output "${1%.*}_python.ipynb"
+quarto render "$1" --cache-refresh --profile python --metadata engine:jupyter --output embed_python.ipynb
 
-quarto render "$1" --cache-refresh --profile r --metadata engine:jupyter --output "${1%.*}_r.ipynb"
+quarto render "$1" --cache-refresh --profile r --metadata engine:jupyter --output embed_r.ipynb
 
 # jupytext "${1%.*}_quarto_javascript.ipynb" --to js --output "${1%.*}.js" --set-kernel javascript
 
@@ -30,9 +32,9 @@ quarto render "$1" --cache-refresh --profile r --metadata engine:jupyter --outpu
 cat "${1%.*}.qmd"  | gsed '/^```{/,/^```$/ { # set a range and say what should happen in that range below
     /^```{.*}$\|#| tags:/!d; # delete all but the first line and tags line of all code chunks
     N;s/\n//g; # join pairs of lines in all code blocks
-    s/^```{\(.*\)}#| tags: \[\(.*\)\]/{{< embed \1\.ipynb#\2 >}}/g; # replace code chunk and comment syntax with shortcode syntax
-    /{{< embed .*\.ipynb#.* >}}/!d # delete anything that is not an embed shortcode with a tag
-}' | sed "s/{{< embed \(.*\)\.ipynb#\(.*\) >}}/{{< embed ${1%.*}_\1\.ipynb#\2 echo=true >}}/g"> "${1%.*}_embed.qmd"
+    s/^```{\(.*\)}#| tags: \[\(.*\)\]/{{< embed embed_\1\.ipynb#\2 echo=true >}}/g; # replace code chunk and comment syntax with shortcode syntax
+    /{{< embed .*\.ipynb#.* .* >}}/!d # delete anything that is not an embed shortcode with a tag
+}'> "${1%.*}"_embed.qmd
 
 # Here is the above command in a single line without inline comments
 # replace code chunks with embed short codes by setting a range, deleting all but two lines, joining the lines, substituting, and deleting anything that does not match the shortcode pattern

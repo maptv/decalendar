@@ -18,11 +18,7 @@ In contrast, the proportions of the day in `pently` schedules are never [repeati
 ::: {#exm-glance}
 :::
 
-{{< embed decalendar_python.ipynb#weekly echo=true >}}
-{#fig-weekly}
-
-{{< embed decalendar_python.ipynb#pently echo=true >}}
-{#fig-pently}
+{{< embed schedules.ipynb#fig-schedules echo=true >}}
 
 # Related systems {#sec-related}
 
@@ -137,41 +133,41 @@ In addition to using a conversion table like @tbl-greg2doty, we can convert betw
 
 ##### `date2doty`
 
-{{< embed decalendar_javascript.ipynb#date2doty echo=true >}}
+{{< embed embed_javascript.ipynb#date2doty echo=true >}}
 
 ##### `doty2date`
 
-{{< embed decalendar_javascript.ipynb#doty2date echo=true >}}
+{{< embed embed_javascript.ipynb#doty2date echo=true >}}
 
 #### Julia
 
 ##### `date2doty`
 
-{{< embed decalendar_julia.ipynb#date2doty echo=true >}}
+{{< embed embed_julia.ipynb#date2doty echo=true >}}
 
 ##### `doty2date`
 
-{{< embed decalendar_julia.ipynb#doty2date echo=true >}}
+{{< embed embed_julia.ipynb#doty2date echo=true >}}
 
 #### Python
 
 ##### `date2doty`
 
-{{< embed decalendar_python.ipynb#date2doty echo=true >}}
+{{< embed embed_python.ipynb#date2doty echo=true >}}
 
 ##### `doty2date`
 
-{{< embed decalendar_python.ipynb#doty2date echo=true >}}
+{{< embed embed_python.ipynb#doty2date echo=true >}}
 
 #### R
 
 ##### `date2doty`
 
-{{< embed decalendar_r.ipynb#date2doty echo=true >}}
+{{< embed embed_r.ipynb#date2doty echo=true >}}
 
 ##### `doty2date`
 
-{{< embed decalendar_r.ipynb#doty2date echo=true >}}
+{{< embed embed_r.ipynb#doty2date echo=true >}}
 
 :::
 
@@ -211,41 +207,41 @@ In addition to using a conversion table like @tbl-greg2doty, we can convert betw
 
 ##### `date2year`
 
-{{< embed decalendar_javascript.ipynb#date2year echo=true >}}
+{{< embed embed_javascript.ipynb#date2year echo=true >}}
 
 ##### `doty2year`
 
-{{< embed decalendar_javascript.ipynb#doty2year echo=true >}}
+{{< embed embed_javascript.ipynb#doty2year echo=true >}}
 
 #### Julia
 
 ##### `date2year`
 
-{{< embed decalendar_julia.ipynb#date2year echo=true >}}
+{{< embed embed_julia.ipynb#date2year echo=true >}}
 
 ##### `doty2year`
 
-{{< embed decalendar_julia.ipynb#doty2year echo=true >}}
+{{< embed embed_julia.ipynb#doty2year echo=true >}}
 
 #### Python
 
 ##### `date2year`
 
-{{< embed decalendar_python.ipynb#date2year echo=true >}}
+{{< embed embed_python.ipynb#date2year echo=true >}}
 
 ##### `doty2year`
 
-{{< embed decalendar_python.ipynb#doty2year echo=true >}}
+{{< embed embed_python.ipynb#doty2year echo=true >}}
 
 #### R
 
 ##### `date2year`
 
-{{< embed decalendar_r.ipynb#date2year echo=true >}}
+{{< embed embed_r.ipynb#date2year echo=true >}}
 
 ##### `doty2year`
 
-{{< embed decalendar_r.ipynb#doty2year echo=true >}}
+{{< embed embed_r.ipynb#doty2year echo=true >}}
 
 :::
 
@@ -264,25 +260,25 @@ $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
 ##### `leap`
 
-{{< embed decalendar_javascript.ipynb#leap echo=true >}}
+{{< embed embed_javascript.ipynb#leap echo=true >}}
 
 #### Julia
 
 ##### `leap`
 
-{{< embed decalendar_julia.ipynb#leap echo=true >}}
+{{< embed embed_julia.ipynb#leap echo=true >}}
 
 #### Python
 
 ##### `leap`
 
-{{< embed decalendar_python.ipynb#leap echo=true >}}
+{{< embed embed_python.ipynb#leap echo=true >}}
 
 #### R
 
 ##### `leap`
 
-{{< embed decalendar_r.ipynb#leap echo=true >}}
+{{< embed embed_r.ipynb#leap echo=true >}}
 
 :::
 
@@ -311,57 +307,57 @@ $$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 
 ##### `isoo2year`
 
-{{< embed decalendar_javascript.ipynb#isoo2year echo=true >}}
+{{< embed embed_javascript.ipynb#isoo2year echo=true >}}
 
 ##### `isoo2doty`
 
-{{< embed decalendar_javascript.ipynb#isoo2doty echo=true >}}
+{{< embed embed_javascript.ipynb#isoo2doty echo=true >}}
 
 ##### `doty2isoo`
 
-{{< embed decalendar_javascript.ipynb#doty2isoo echo=true >}}
+{{< embed embed_javascript.ipynb#doty2isoo echo=true >}}
 
 #### Julia
 
 ##### `isoo2year`
 
-{{< embed decalendar_julia.ipynb#isoo2year echo=true >}}
+{{< embed embed_julia.ipynb#isoo2year echo=true >}}
 
 ##### `isoo2doty`
 
-{{< embed decalendar_julia.ipynb#isoo2doty echo=true >}}
+{{< embed embed_julia.ipynb#isoo2doty echo=true >}}
 
 ##### `doty2isoo`
 
-{{< embed decalendar_julia.ipynb#doty2isoo echo=true >}}
+{{< embed embed_julia.ipynb#doty2isoo echo=true >}}
 
 #### Python
 
 ##### `isoo2year`
 
-{{< embed decalendar_python.ipynb#isoo2year echo=true >}}
+{{< embed embed_python.ipynb#isoo2year echo=true >}}
 
 ##### `isoo2doty`
 
-{{< embed decalendar_python.ipynb#isoo2doty echo=true >}}
+{{< embed embed_python.ipynb#isoo2doty echo=true >}}
 
 ##### `doty2isoo`
 
-{{< embed decalendar_python.ipynb#doty2isoo echo=true >}}
+{{< embed embed_python.ipynb#doty2isoo echo=true >}}
 
 #### R
 
 ##### `isoo2year`
 
-{{< embed decalendar_r.ipynb#isoo2year echo=true >}}
+{{< embed embed_r.ipynb#isoo2year echo=true >}}
 
 ##### `isoo2doty`
 
-{{< embed decalendar_r.ipynb#isoo2doty echo=true >}}
+{{< embed embed_r.ipynb#isoo2doty echo=true >}}
 
 ##### `doty2isoo`
 
-{{< embed decalendar_r.ipynb#doty2isoo echo=true >}}
+{{< embed embed_r.ipynb#doty2isoo echo=true >}}
 
 :::
 
@@ -380,41 +376,41 @@ As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of 
 
 ##### `Decalendar` date
 
-{{< embed decalendar_javascript.ipynb#decdate echo=true >}}
+{{< embed embed_javascript.ipynb#decdate echo=true >}}
 
 ##### ISO 8601 date
 
-{{< embed decalendar_javascript.ipynb#isodate echo=true >}}
+{{< embed embed_javascript.ipynb#isodate echo=true >}}
 
 #### Julia
 
 ##### `Decalendar` date
 
-{{< embed decalendar_julia.ipynb#decdate echo=true >}}
+{{< embed embed_julia.ipynb#decdate echo=true >}}
 
 ##### ISO 8601 date
 
-{{< embed decalendar_julia.ipynb#isodate echo=true >}}
+{{< embed embed_julia.ipynb#isodate echo=true >}}
 
 #### Python
 
 ##### `Decalendar` date
 
-{{< embed decalendar_python.ipynb#decdate echo=true >}}
+{{< embed embed_python.ipynb#decdate echo=true >}}
 
 ##### ISO 8601 date
 
-{{< embed decalendar_python.ipynb#isodate echo=true >}}
+{{< embed embed_python.ipynb#isodate echo=true >}}
 
 #### R
 
 ##### `Decalendar` date
 
-{{< embed decalendar_r.ipynb#decdate echo=true >}}
+{{< embed embed_r.ipynb#decdate echo=true >}}
 
 ##### ISO 8601 date
 
-{{< embed decalendar_r.ipynb#isodate echo=true >}}
+{{< embed embed_r.ipynb#isodate echo=true >}}
 
 :::
 
@@ -464,11 +460,11 @@ The  `time2doty` and `doty2time` functions in @exm-isot convert between standard
 
 ##### `time2doty`
 
-{{< embed decalendar_javascript.ipynb#time2doty echo=true >}}
+{{< embed embed_javascript.ipynb#time2doty echo=true >}}
 
 ##### `doty2time`
 
-{{< embed decalendar_javascript.ipynb#doty2time echo=true >}}
+{{< embed embed_javascript.ipynb#doty2time echo=true >}}
 
 #### Julia
 
@@ -476,31 +472,31 @@ The  `time2doty` and `doty2time` functions in @exm-isot convert between standard
 
 ##### `time2doty`
 
-{{< embed decalendar_julia.ipynb#time2doty echo=true >}}
+{{< embed embed_julia.ipynb#time2doty echo=true >}}
 
 ##### `doty2time`
 
-{{< embed decalendar_julia.ipynb#doty2time echo=true >}}
+{{< embed embed_julia.ipynb#doty2time echo=true >}}
 
 #### Python
 
 ##### `time2doty`
 
-{{< embed decalendar_python.ipynb#time2doty echo=true >}}
+{{< embed embed_python.ipynb#time2doty echo=true >}}
 
 ##### `doty2time`
 
-{{< embed decalendar_python.ipynb#doty2time echo=true >}}
+{{< embed embed_python.ipynb#doty2time echo=true >}}
 
 #### R
 
 ##### `time2doty`
 
-{{< embed decalendar_r.ipynb#time2doty echo=true >}}
+{{< embed embed_r.ipynb#time2doty echo=true >}}
 
 ##### `doty2time`
 
-{{< embed decalendar_r.ipynb#doty2time echo=true >}}
+{{< embed embed_r.ipynb#doty2time echo=true >}}
 
 :::
 
@@ -517,41 +513,41 @@ ISO 8601 timestamps will often have a `Z` at the end (`year-mm-ddThh:mm:ssZ`). T
 
 ##### hour2zone
 
-{{< embed decalendar_javascript.ipynb#hour2zone echo=true >}}
+{{< embed embed_javascript.ipynb#hour2zone echo=true >}}
 
 ##### `zone2hour`
 
-{{< embed decalendar_javascript.ipynb#zone2hour echo=true >}}
+{{< embed embed_javascript.ipynb#zone2hour echo=true >}}
 
 #### Julia
 
 ##### `hour2zone`
 
-{{< embed decalendar_julia.ipynb#hour2zone echo=true >}}
+{{< embed embed_julia.ipynb#hour2zone echo=true >}}
 
 ##### `zone2hour`
 
-{{< embed decalendar_julia.ipynb#zone2hour echo=true >}}
+{{< embed embed_julia.ipynb#zone2hour echo=true >}}
 
 #### Python
 
 ##### `hour2zone`
 
-{{< embed decalendar_python.ipynb#hour2zone echo=true >}}
+{{< embed embed_python.ipynb#hour2zone echo=true >}}
 
 ##### `zone2hour`
 
-{{< embed decalendar_python.ipynb#zone2hour echo=true >}}
+{{< embed embed_python.ipynb#zone2hour echo=true >}}
 
 #### R
 
 ##### `hour2zone`
 
-{{< embed decalendar_r.ipynb#hour2zone echo=true >}}
+{{< embed embed_r.ipynb#hour2zone echo=true >}}
 
 ##### `zone2hour`
 
-{{< embed decalendar_r.ipynb#zone2hour echo=true >}}
+{{< embed embed_r.ipynb#zone2hour echo=true >}}
 
 :::
 
@@ -571,7 +567,7 @@ The `Decalendar` time interval representations above are called `spreads` and we
 ::: {#exm-isor}
 :::
 
-{{< embed decalendar_python.ipynb#intervals echo=true >}}
+{{< embed embed_python.ipynb#intervals echo=true >}}
 
 ## French Republican calendar {#sec-frc}
 
@@ -673,7 +669,7 @@ y \mod 4 = 0 \\
 
 ##### `unix2doty`
 
-{{< embed decalendar_javascript.ipynb#unix2doty echo=true >}}
+{{< embed embed_javascript.ipynb#unix2doty echo=true >}}
 
 #### Julia
 
@@ -681,19 +677,19 @@ y \mod 4 = 0 \\
 
 ##### `unix2doty`
 
-{{< embed decalendar_julia.ipynb#unix2doty echo=true >}}
+{{< embed embed_julia.ipynb#unix2doty echo=true >}}
 
 #### Python
 
 ##### `unix2doty`
 
-{{< embed decalendar_python.ipynb#unix2doty echo=true >}}
+{{< embed embed_python.ipynb#unix2doty echo=true >}}
 
 #### R
 
 ##### `unix2doty`
 
-{{< embed decalendar_r.ipynb#unix2doty echo=true >}}
+{{< embed embed_r.ipynb#unix2doty echo=true >}}
 
 #### CopyQ
 
@@ -977,7 +973,7 @@ In addition to serving as a part of the Gregorian date coordinate system describ
 
 ### Seasons {#sec-season}
 
-We can use @tbl-coor to convert any Gregorian calendar date to a positive `doty` number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact `doty` number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
+We can use @tbl-greg2doty to convert any Gregorian calendar date to a positive `doty` number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact `doty` number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as [Nowruz](https://en.wikipedia.org/wiki/Nowruz).
 
 The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has its opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. @tbl-soleq lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.
 
