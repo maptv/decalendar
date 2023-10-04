@@ -32,7 +32,7 @@ quarto render "$1" --cache-refresh --profile r --metadata engine:jupyter --outpu
 cat "${1%.*}.qmd"  | gsed '/^```{/,/^```$/ { # set a range and say what should happen in that range below
     /^```{.*}$\|#| tags:/!d; # delete all but the first line and tags line of all code chunks
     N;s/\n//g; # join pairs of lines in all code blocks
-    s/^```{\(.*\)}#| tags: \[\(.*\)\]/{{< embed embed_\1\.ipynb#\2 echo=true >}}/g; # replace code chunk and comment syntax with shortcode syntax
+    s/^```{\(.*\)}#| tags: \[\(.*\)\]/{{< embed '"${1%.*}"'_\1\.ipynb#\2 echo=true >}}/g; # replace code chunk and comment syntax with shortcode syntax
     /{{< embed .*\.ipynb#.* .* >}}/!d # delete anything that is not an embed shortcode with a tag
 }'> "${1%.*}"_embed.qmd
 
