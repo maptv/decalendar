@@ -803,13 +803,7 @@ zone2hour()
 
 ### Times {#sec-isot}
 
-`Decalendar` seeks to make months and weeks obsolete. Similarly, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) (`.day`). `Deco` timestamps, which combine `Decalendar` dates and `Declock` times, are more concise and easier to read than ISO 8601 timestamps. An `Isoc` timestamp that includes seconds is 20 characters long (`year-mm-ddThh:mm:ssZ`), while a `deco` timestamp with slightly greater precision is only 15 characters long (`year+day.dddddZ`). ISO 8601 timestamps can omit delimiters except for the `T` which separates the date and the time (`yearmmddThhmmssZ`). Without delimiters, `isoc` timestamps become even more difficult to read and still cannot match the brevity of `Decalendar` timestamps.
-
-Coincidentally, an ISO 8601 ordinal (`isoo`) timestamp (`year-dayThh:mm:ssZ`) without delimiters (`yeardayThhmmssZ`) is the same length as a `deco` timestamp (`year+day.dddddZ`). `Deco` timestamps cannot exist without delimiters, because removing the plus sign (`+`) from a `deco` timestamp turns it into a `doty` number (`ddddddd.ddddd`). If we removed the `+` from the `deco` timestamp `1969+306.00000`, we would obtain the `doty` number `1969306.00000` would represent midnight 1969306 days from the beginning of the current year. The rules for `deco` timestamp interpretation are summarized by the code in the `deco2doty` function in @exm-unixp.
-
 The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The  `time2doty` and `doty2time` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
-
-To create a `deco` timestamp, we can use the `doty2deco` or the `date2deco` functions as shown in @exm-isot. Similarly, @exm-isot also shows how to create an `isoc` timestamp with the `doty2isoc` and `doty2isoc` functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or `Zone 0` and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. @sec-unixb and @sec-unixp further discuss timestamps and provide functions for building, parsing, and converting timestamps.
 
 $$declock = \frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} \cdot 10^x$$ {#eq-isot1}
 
@@ -851,12 +845,145 @@ function time2doty(hours = 1, minutes = 0, seconds = 0) {
     return hours / 24 + minutes / 1440 + seconds / 86400
 }
 
+console.log(time2doty())
+```
+
+##### `doty2time`
+
+```{javascript}
+#| tags: [doty2time]
+function doty2time(doty = 1 / 24) {
+    doty = doty - Math.floor(doty)
+    const hours = doty * 24,
+        floorHours = Math.floor(hours),
+        minutes = (hours - floorHours) / 60,
+        floorMinutes = Math.floor(minutes);
+        return [floorHours, floorMinutes, (minutes - floorMinutes) / 60]
+}
+
+console.log(doty2time())
+```
+
+#### Julia
+
+##### `time`
+
+##### `time2doty`
+
+```{julia}
+#| tags: [time2doty]
+function time2doty(hours=1, minutes=0, seconds=0)
+    hours / 24 + minutes / 1440 + seconds / 86400
+end
+
+time2doty()
+```
+
+##### `doty2time`
+
+```{julia}
+#| tags: [doty2time]
+function doty2time(doty=1/24)
+    doty = doty - floor(doty)
+    hours = doty * 24
+    floorHours = floor(hours)
+    minutes = (hours - floorHours) / 60
+    floorMinutes = floor(minutes)
+    return floorHours, floorMinutes, (minutes - floorMinutes) / 60
+end
+
+doty2time()
+```
+
+#### Python
+
+##### `time2doty`
+
+```{python}
+#| tags: [time2doty]
+def time2doty(hours=1, minutes=0, seconds=0):
+    return hours / 24 + minutes / 1440 + seconds / 86400
+
+time2doty()
+```
+
+##### `doty2time`
+
+```{python}
+#| tags: [doty2time]
+def doty2time(doty = 1/24):
+    doty = doty - doty.__floor__()
+    hours = doty * 24
+    floorHours = hours.__floor__()
+    minutes = (hours - floorHours) / 60
+    floorMinutes = minutes.__floor__()
+    return floorHours, floorMinutes, (minutes - floorMinutes) / 60
+
+doty2time()
+```
+
+#### R
+
+##### `time2doty`
+
+```{r}
+#| tags: [time2doty]
+time2doty <- function(hours = 1, minutes = 0, seconds = 0) {
+    hours / 24 + minutes / 1440 + seconds / 86400
+}
+
+time2doty()
+```
+
+##### `doty2time`
+
+```{r}
+#| tags: [doty2time]
+doty2time <- function(doty = 1 / 24) {
+    doty <- doty - floor(doty)
+    hours <- doty * 24
+    floorHours <- floor(hours)
+    minutes <- (hours - floorHours) / 60
+    floorMinutes <- floor(minutes)
+    c(floorHours, floorMinutes, (minutes - floorMinutes) / 60)
+}
+
+doty2time()
+```
+
+:::
+
+### Timestamps {#sec-isos}
+
+`Decalendar` seeks to make months and weeks obsolete. Similarly, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) (`.day`). `Deco` timestamps, which combine `Decalendar` dates and `Declock` times, are more concise and easier to read than ISO 8601 timestamps. An `isoc` timestamp that includes seconds is 20 characters long (`year-mm-ddThh:mm:ssZ`), while a `deco` timestamp with slightly greater precision is only 15 characters long (`year+day.dddddZ`). ISO 8601 timestamps can omit delimiters except for the `T` which separates the date and the time (`yearmmddThhmmssZ`). Without delimiters, `isoc` timestamps become even more difficult to read and still cannot match the brevity of `Decalendar` timestamps.
+
+Coincidentally, an ISO 8601 ordinal (`isoo`) timestamp (`year-dayThh:mm:ssZ`) without delimiters (`yeardayThhmmssZ`) is the same length as a `deco` timestamp (`year+day.dddddZ`). `Deco` timestamps cannot exist without delimiters, because removing the plus sign (`+`) from a `deco` timestamp turns it into a `doty` number (`ddddddd.ddddd`). If we removed the `+` from the `deco` timestamp `1969+306.00000`, we would obtain the `doty` number `1969306.00000` would represent midnight 1969306 days from the beginning of the current year. The rules for `deco` timestamp interpretation are summarized by the code in the `deco2doty` function in @exm-unixp.
+
+To create a `deco` timestamp, we can use the `doty2deco` or the `date2deco` functions as shown in @exm-isos. Similarly, @exm-isos also shows how to create an `isoc` timestamp with the `doty2isoc` and `doty2isoc` functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or `Zone 0` and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. @sec-unixb and @sec-unixp further discuss timestamps and provide functions for building, parsing, and converting timestamps.
+
+::: {#exm-isos}
+:::
+
+#### JavaScript
+
+##### `time2doty`
+
+```{javascript}
+#| tags: [time2doty]
+function time2doty(hours = 1, minutes = 0, seconds = 0) {
+    return hours / 24 + minutes / 1440 + seconds / 86400
+}
+```
+
+##### `date2deco`
+
+```{javascript}
+#| tags: [date2deco]
 function date2deco(year = 1969, month = 1, day = 1, hours = 0, minutes = 0, seconds = 0) {
     return `${date2year(year, month).toString().padStart(4, '0')}+${
         date2doty(month, day).toString().padStart(3, '0')}.${
         (Math.round(time2doty(hours, minutes, seconds) * 1e5) / 1e5).toString().padStart(5, '0')}`)
 }
-
 ```
 
 ##### `doty2time`
