@@ -7,8 +7,22 @@ author: Martin Laptev
 
 `Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to take the place of [standard time](https://en.wikipedia.org/wiki/Standard_time). Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use days as their base unit and derive other units from days using metric, Roman, and Greek [numeral prefixes](https://en.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English). In essence, `Decalendar` units group days together, while `Declock` units divide days up.
 
-# At a glance
+# At a glance {#sec-glance}
 
+The `Decalendar` ordinal (`deco`) date format consists of a year and a day-of-the-year (`doty`) delimited by a plus sign (`year+day`). As shown in @fig-glance, the last digit of the `doty` number is the day-of-the-`dek` (`dotd`) number, which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The first two digits of the `doty` are the `dek` number.
+
+Each `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates two bar charts that compare the typical weekly schedule and the `Schedule 3` `pently` schedule. @sec-pently provides more information on the `pently` schedules. Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into the proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅).
+
+In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. `Schedule 3` splits workdays up symmetrically into proportions of .3, .4, and .3. `Declock` uses such proportions of the day instead of hours, minutes, or seconds. The `Schedule 3` workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). `Schedule 3` compensates longer workdays with more frequent restdays. In `Schedule 3`, the are 3 workdays separated by a 2-day `pentend`.
+
+::: {#exm-glance}
+:::
+
+{{< embed decalendar_python.ipynb#weekly echo=true >}}
+{#fig-weekly}
+
+{{< embed decalendar_python.ipynb#pently echo=true >}}
+{#fig-pently}
 
 # Related systems {#sec-related}
 
@@ -16,14 +30,16 @@ author: Martin Laptev
 
 ### Coordinate analogy {#sec-coor}
 
-In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). `Decalendar` provides two coordinates in one number: the day-of-the-year (`doty`). The first two digits of the `doty` are the `dek` number. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The last digit of the `doty` is the day-of-the-`dek` (`dotd`) number, which serves as both the `dotm` and the day-of-the-week (`dotw`) in `Decalendar`. @tbl-coor shows the `doty` equivalents of all Gregorian calendar dates. To locate a specific date in @tbl-coor, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the correct day (the `dotm` is like a y-axis value).
+In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). The `Decalendar` ordinal (`deco`) date format provides two coordinates in one number: the day-of-the-year (`doty`). @tbl-greg2doty shows the `doty` number of all Gregorian calendar dates.
 
-#### @tbl-coor
+To locate a specific date in @tbl-greg2doty, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the `dotm` (which is like a y-axis value). To convert a `doty` number to a Gregorian calendar date, we first find the `dek` number (the first two digits of the `doty`) among the rows in @tbl-doty2greg and then move to the right to the `dotd` (the last digit of the `doty`). The dates in @tbl-doty2greg are shown in `mm-dd` format.
+
+#### @tbl-greg2doty
 
 ::: {.callout-note collapse="true" title="Click to expand" icon=false}
 
 | Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan  | Feb  |
-|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
+|---- |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----| ---- | ---- |
 |  1  |  0  |  31 |  61 |  92 | 122 | 153 | 184 | 214 | 245 | 275 | 306  | 337  |
 |  2  |  1  |  32 |  62 |  93 | 123 | 154 | 185 | 215 | 246 | 276 | 307  | 338  |
 |  3  |  2  |  33 |  63 |  94 | 124 | 155 | 186 | 216 | 247 | 277 | 308  | 339  |
@@ -56,13 +72,61 @@ In the Gregorian calendar, dates are like a set of coordinates, where the month 
 | 30  | 29  |  60 |  90 | 121 | 151 | 182 | 213 | 243 | 274 | 304 | 335  |      |
 | 31  | 30  |     |  91 |     | 152 | 183 |     | 244 |     | 305 | 336  |      |
 
-: Gregorian calendar date to positive `doty` conversion {#tbl-coor}
+: Gregorian calendar date to `doty` conversion {#tbl-greg2doty}
+
+:::
+
+#### @tbl-doty2greg
+
+::: {.callout-note collapse="true" title="Click to expand" icon=false}
+
+| Dek | 0     | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     |
+| --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| 0   | 03-01 | 03-02 | 03-03 | 03-04 | 03-05 | 03-06 | 03-07 | 03-08 | 03-09 | 03-10 |
+| 1   | 03-11 | 03-12 | 03-13 | 03-14 | 03-15 | 03-16 | 03-17 | 03-18 | 03-19 | 03-20 |
+| 2   | 03-21 | 03-22 | 03-23 | 03-24 | 03-25 | 03-26 | 03-27 | 03-28 | 03-29 | 03-30 |
+| 3   | 03-31 | 04-01 | 04-02 | 04-03 | 04-04 | 04-05 | 04-06 | 04-07 | 04-08 | 04-09 |
+| 4   | 04-10 | 04-11 | 04-12 | 04-13 | 04-14 | 04-15 | 04-16 | 04-17 | 04-18 | 04-19 |
+| 5   | 04-20 | 04-21 | 04-22 | 04-23 | 04-24 | 04-25 | 04-26 | 04-27 | 04-28 | 04-29 |
+| 6   | 04-30 | 05-01 | 05-02 | 05-03 | 05-04 | 05-05 | 05-06 | 05-07 | 05-08 | 05-09 |
+| 7   | 05-10 | 05-11 | 05-12 | 05-13 | 05-14 | 05-15 | 05-16 | 05-17 | 05-18 | 05-19 |
+| 8   | 05-20 | 05-21 | 05-22 | 05-23 | 05-24 | 05-25 | 05-26 | 05-27 | 05-28 | 05-29 |
+| 9   | 05-30 | 05-31 | 06-01 | 06-02 | 06-03 | 06-04 | 06-05 | 06-06 | 06-07 | 06-08 |
+| 10  | 06-09 | 06-10 | 06-11 | 06-12 | 06-13 | 06-14 | 06-15 | 06-16 | 06-17 | 06-18 |
+| 11  | 06-19 | 06-20 | 06-21 | 06-22 | 06-23 | 06-24 | 06-25 | 06-26 | 06-27 | 06-28 |
+| 12  | 06-29 | 06-30 | 07-01 | 07-02 | 07-03 | 07-04 | 07-05 | 07-06 | 07-07 | 07-08 |
+| 13  | 07-09 | 07-10 | 07-11 | 07-12 | 07-13 | 07-14 | 07-15 | 07-16 | 07-17 | 07-18 |
+| 14  | 07-19 | 07-20 | 07-21 | 07-22 | 07-23 | 07-24 | 07-25 | 07-26 | 07-27 | 07-28 |
+| 15  | 07-29 | 07-30 | 07-31 | 08-01 | 08-02 | 08-03 | 08-04 | 08-05 | 08-06 | 08-07 |
+| 16  | 08-08 | 08-09 | 08-10 | 08-11 | 08-12 | 08-13 | 08-14 | 08-15 | 08-16 | 08-17 |
+| 17  | 08-18 | 08-19 | 08-20 | 08-21 | 08-22 | 08-23 | 08-24 | 08-25 | 08-26 | 08-27 |
+| 18  | 08-28 | 08-29 | 08-30 | 08-31 | 09-01 | 09-02 | 09-03 | 09-04 | 09-05 | 09-06 |
+| 19  | 09-07 | 09-08 | 09-09 | 09-10 | 09-11 | 09-12 | 09-13 | 09-14 | 09-15 | 09-16 |
+| 20  | 09-17 | 09-18 | 09-19 | 09-20 | 09-21 | 09-22 | 09-23 | 09-24 | 09-25 | 09-26 |
+| 21  | 09-27 | 09-28 | 09-29 | 09-30 | 10-01 | 10-02 | 10-03 | 10-04 | 10-05 | 10-06 |
+| 22  | 10-07 | 10-08 | 10-09 | 10-10 | 10-11 | 10-12 | 10-13 | 10-14 | 10-15 | 10-16 |
+| 23  | 10-17 | 10-18 | 10-19 | 10-20 | 10-21 | 10-22 | 10-23 | 10-24 | 10-25 | 10-26 |
+| 24  | 10-27 | 10-28 | 10-29 | 10-30 | 10-31 | 11-01 | 11-02 | 11-03 | 11-04 | 11-05 |
+| 25  | 11-06 | 11-07 | 11-08 | 11-09 | 11-10 | 11-11 | 11-12 | 11-13 | 11-14 | 11-15 |
+| 26  | 11-16 | 11-17 | 11-18 | 11-19 | 11-20 | 11-21 | 11-22 | 11-23 | 11-24 | 11-25 |
+| 27  | 11-26 | 11-27 | 11-28 | 11-29 | 11-30 | 12-01 | 12-02 | 12-03 | 12-04 | 12-05 |
+| 28  | 12-06 | 12-07 | 12-08 | 12-09 | 12-10 | 12-11 | 12-12 | 12-13 | 12-14 | 12-15 |
+| 29  | 12-16 | 12-17 | 12-18 | 12-19 | 12-20 | 12-21 | 12-22 | 12-23 | 12-24 | 12-25 |
+| 30  | 12-26 | 12-27 | 12-28 | 12-29 | 12-30 | 12-31 | 01-01 | 01-02 | 01-03 | 01-04 |
+| 31  | 01-05 | 01-06 | 01-07 | 01-08 | 01-09 | 01-10 | 01-11 | 01-12 | 01-13 | 01-14 |
+| 32  | 01-15 | 01-16 | 01-17 | 01-18 | 01-19 | 01-20 | 01-21 | 01-22 | 01-23 | 01-24 |
+| 33  | 01-25 | 01-26 | 01-27 | 01-28 | 01-29 | 01-30 | 01-31 | 02-01 | 02-02 | 02-03 |
+| 34  | 02-04 | 02-05 | 02-06 | 02-07 | 02-08 | 02-09 | 02-10 | 02-11 | 02-12 | 02-13 |
+| 35  | 02-14 | 02-15 | 02-16 | 02-17 | 02-18 | 02-19 | 02-20 | 02-21 | 02-22 | 02-23 |
+| 36  | 02-24 | 02-25 | 02-26 | 02-27 | 02-28 | 02-29 |       |       |       |       |
+
+: `Doty` number to Gregorian calendar date conversion {#tbl-doty2greg}
 
 :::
 
 ### Gregorian calendar date conversion {#sec-conv}
 
-In addition to using a conversion table like @tbl-coor, we can convert between Gregorian calendar dates and `Decalendar` `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `date2doty` function is a `doty` number, while its inverse function, `doty2date`, returns an array containing a month and a `dotm` number.
+In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar` `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `date2doty` function is a `doty` number, while its inverse function, `doty2date`, returns an array containing a month and a `dotm` number.
 
 ::: {#exm-coor}
 :::
@@ -224,7 +288,7 @@ $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
 ### Ordinal dates {#sec-isoo}
 
-`Decalendar` dates (`year+day`) are most similar to [ISO 8601 ordinal dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar` `doty` numbers, ISO 8601 ordinal dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are  [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `Decalendar` date can be easily obtained from the ISO 8601 ordinal date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the ordinal date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
+`Decalendar` dates (`year+day`) are most similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar` `doty` numbers, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are  [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `Decalendar` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
 
 In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers, while the `isoo2year` and `doty2year` functions adjust the year if necessary. We use the `is_leap` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. Unlike ISO 8601 ordinal day numbers, `Decalendar` `doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
 
@@ -297,7 +361,7 @@ $$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 
 ISO 8601 [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) consist of a four-digit year, a two-digit month, and a two-digit `dotm` separated by hyphens (`year-mm-dd`). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from @exm-coor and @exm-gregm to convert between `Decalendar` dates and ISO 8601 calendar dates, as shown in @exm-isoc. The code formats the output of the `date2year` and `date2doty` functions into `Decalendar` dates and the output of the `doty2year` and `doty2date` functions into ISO 8601 calendar dates.
 
-As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `.m` format (`year+m+dd`), which is very similar to the ISO 8601 calendar date format. The `.m` format is described in @sec-dotm. Examples of the `.m` format are provided in @sec-dotex. To be clear, the `.m` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
+As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `Decalendar` calendar (`decc`, pronounced "deck-see") format (`year+m+dd`), which is very similar to the ISO 8601 calendar date format. The `decc` format is described in @sec-dotm. Examples of the `decc` format are provided in @sec-dotex. To be clear, the `decc` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
 
 ::: {#exm-isoc}
 :::
@@ -488,11 +552,12 @@ ISO 8601 specifies three methods of unequivocally representing [time intervals](
 
 ISO 8601 time intervals can be made to repeat with the `Rn/` prefix (`Rn/start/stop`, `Rn/start/span`, `Rn/span/stop`), where `n` is the number of repetitions. Such [repeating time intervals](https://en.wikipedia.org/wiki/ISO_8601#Repeating_intervals) are always consecutive and never overlap. The first three 6-hour intervals of 1970 could be written `R3/1970-01-01T00:00:00Z/T06` as per ISO 8601. This time interval in `Decalendar` could be written `1969+306>.75>.25>0`. Unlike ISO 8601, `Decalendar` allows for the creation of non-consecutive and overlapping recurring intervals. If we wanted to include 3-hour breaks in between the three 6-hour intervals, we could write `1969+306>1>.25>.125`. Similarly, the three 6-hour intervals could be made to overlap by 3 hours by writing `1969+306>.5>.25<.125`.
 
-The `Decalendar` time interval representations above are called `spreads` and were inspired by the concept of [array slicing](https://en.wikipedia.org/wiki/Array_slicing) from computer programming. `Decalendar` allows for the use of both `slices` (`start:stop:step`) and `spreads` (`start>span>split>space`) to create time intervals. [Slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/). The pandas code shown in @exm-isor obtains the start times of the last three 6-hour intervals in 1970, which is `1970+305>.75>.25>0` in `Decalendar` and `R3/1970-12-31T06:00:00Z/T06` as per ISO 8601.
+The `Decalendar` time interval representations above are called `spreads` and were inspired by the concept of [array slicing](https://en.wikipedia.org/wiki/Array_slicing) from computer programming. `Decalendar` allows for the use of both `slices` (`start:stop:step`) and `spreads` (`start>span>split>space`) to create time intervals. [Slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/). The pandas code shown in @exm-isor uses slicing to obtain the start times of the last three 6-hour intervals in 1970, which is `1970+305>.75>.25>0` in `Decalendar` and `R3/1970-12-31T06:00:00Z/T06` as per ISO 8601.
 
 ::: {#exm-isor}
 :::
 
+{{< embed decalendar_python.ipynb#intervals echo=true >}}
 
 ## French Republican calendar {#sec-frc}
 
@@ -626,7 +691,9 @@ function unix2doty(ms = 0) {
 }
 
 const [year, doty] = unix2doty(Date.now()),
-    datetime = `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`;
+    datetime = `${year.toString().padStart(4, "0")}+${
+    (day = Math.floor(doty)).toString().padStart(3, "0")}.${
+    (Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`;
 
 copy(datetime)
 copySelection(datetime)
@@ -635,8 +702,11 @@ paste()
 
 :::
 
+### Building timestamps {#sec-unixb}
 
-### Parsing timestamps {#sec-unixs}
+The code in @exm-unixt creates a `Decalendar` timestamp from UNIX time. 
+
+### Parsing timestamps {#sec-unixp}
 
 To extract the components of a `Decalendar` timestamp, we can use the `parse_dec` function in @exm-isos. Parsing timestamps is the first step before any later processes such as timestamp arithmetic or conversion between timestamp formats. The `parse_dec` function returns a year, a `doty`, and a fractional day time zone offset. The year and time zone offset can be omitted in the timestamp provided to `parse_dec`. If not specified in the timestamp, the year is the current year and the time zone offset is 0.
 
@@ -754,7 +824,7 @@ If we decide to prioritize the amount of sunlight at `Dot 5` over simplicity and
 
 # Dot formats {#sec-format}
 
-The `stamps` shown above are in the decimal days of the year (`.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental `datetime` formats, which are based on decimal days of the month (`.m`), and decimal days of the week (`.w`). @tbl-format summarizes the three decimal day-of-the ( `dot` or `.`) formats:
+The `stamps` shown above are in the decimal days of the year (`.y`) format, which is the main `Decalendar` format. In addition to the `.y` format, there are 2 other supplemental `datetime` formats, which are based on decimal days of the month (`decc`), and decimal days of the week (`.w`). @tbl-format summarizes the three decimal day-of-the ( `dot` or `.`) formats:
 
 #### @tbl-format
 
@@ -784,9 +854,9 @@ $$m = \begin{cases}mm - 3&{\text{if } month > 2;}\\mm + 9&{\text{otherwise.}}\en
 
 $$m = \begin{cases}month + 3&{\text{if } month < 10;}\\month - 9&{\text{otherwise.}}\end{cases}$$ {#eq-dotm2}
 
-## The `.w` format {#sec-dotw}
+## The `decw` format {#sec-dotw}
 
-The week number in the `.w` format, `ww`, ranges from 0 to 53 or -54 to -1. Weeks in the `.w` format start from Sunday. @tbl-dotw shows the possible `dotw` values, which range from 0 to 6 or -7 to -1.
+The week number in the `decw` format, `ww`, ranges from 0 to 53 or -54 to -1. Weeks in the `decw` format start from Sunday. @tbl-dotw shows the possible `dotw` values, which range from 0 to 6 or -7 to -1.
 
 #### @tbl-dotw
 
@@ -802,7 +872,7 @@ The week number in the `.w` format, `ww`, ranges from 0 to 53 or -54 to -1. Week
 | Friday    | 5   | -2  |
 | Saturday  | 6   | -1  |
 
-: The weeks in the `.w` format {#tbl-dotw}
+: The weeks in the `decw` format {#tbl-dotw}
 
 :::
 
@@ -829,9 +899,9 @@ The week number in the `.w` format, `ww`, ranges from 0 to 53 or -54 to -1. Week
 
 In @tbl-dotex, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City and London is December (`Month B`). We could say the `.m` dates in Mexico City and London as "`Year 1999 Month B Day 29`" or "`Year 1999 Month -1 Day -1`" and the Tokyo date as "`Year 2000 Month 0 Day 0`" or" `Year 2000 Month -C Day -31`".
 
-The `.w` format always starts the year with `Week 0`, but the year can start on any day of the week. @tbl-dotex shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `.w` dates in Mexico City and London could be said "`Year 1999 Week 52 Day 2`" or "`Year 1999 Week -1 Day -5`", while the date in Tokyo could be pronounced "`Year 2000 Week 0 Day 3`" or "`Year 2000 Week -52 Day -4`" in Tokyo.
+The `decw` format always starts the year with `Week 0`, but the year can start on any day of the week. @tbl-dotex shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `decw` dates in Mexico City and London could be said "`Year 1999 Week 52 Day 2`" or "`Year 1999 Week -1 Day -5`", while the date in Tokyo could be pronounced "`Year 2000 Week 0 Day 3`" or "`Year 2000 Week -52 Day -4`" in Tokyo.
 
-In contrast to the `.m` and the `.w` formats, the dates in the `.y` format are one character shorter and a little easier to say. The spoken form of the `.y` date in Mexico City and London is  "`Year 1999 Day 365`" or "`Year 1999 Day -1`" and the spoken form of the Tokyo date is "`Year 2000 Day 0`" or "`Year 2000 Day -365`".
+In contrast to the `.m` and the `decw` formats, the dates in the `.y` format are one character shorter and a little easier to say. The spoken form of the `.y` date in Mexico City and London is  "`Year 1999 Day 365`" or "`Year 1999 Day -1`" and the spoken form of the Tokyo date is "`Year 2000 Day 0`" or "`Year 2000 Day -365`".
 
 ## `Deks` {#sec-dek}
 

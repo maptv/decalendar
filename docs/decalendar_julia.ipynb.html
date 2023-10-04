@@ -155,7 +155,8 @@
   <li><a href="#julian-time-conversion-to-unix-time" id="toc-julian-time-conversion-to-unix-time" class="nav-link" data-scroll-target="#julian-time-conversion-to-unix-time"><span class="header-section-number">3.6.1</span> Julian time conversion to UNIX time</a></li>
   <li><a href="#unix-time-conversion-to-decalendar-date" id="toc-unix-time-conversion-to-decalendar-date" class="nav-link" data-scroll-target="#unix-time-conversion-to-decalendar-date"><span class="header-section-number">3.6.2</span> UNIX time conversion to <code>Decalendar</code> date</a></li>
   <li><a href="#unix-time-conversion-to-decalendar-timestamp" id="toc-unix-time-conversion-to-decalendar-timestamp" class="nav-link" data-scroll-target="#unix-time-conversion-to-decalendar-timestamp"><span class="header-section-number">3.6.3</span> UNIX time conversion to <code>Decalendar</code> timestamp</a></li>
-  <li><a href="#parsing-timestamps" id="toc-parsing-timestamps" class="nav-link" data-scroll-target="#parsing-timestamps"><span class="header-section-number">3.6.4</span> Parsing timestamps</a></li>
+  <li><a href="#building-timestamps" id="toc-building-timestamps" class="nav-link" data-scroll-target="#building-timestamps"><span class="header-section-number">3.6.4</span> Building timestamps</a></li>
+  <li><a href="#parsing-timestamps" id="toc-parsing-timestamps" class="nav-link" data-scroll-target="#parsing-timestamps"><span class="header-section-number">3.6.5</span> Parsing timestamps</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#basic-concepts" id="toc-basic-concepts" class="nav-link" data-scroll-target="#basic-concepts"><span class="header-section-number">4</span> Basic concepts</a>
@@ -172,7 +173,7 @@
   <li><a href="#dot-formats" id="toc-dot-formats" class="nav-link" data-scroll-target="#dot-formats"><span class="header-section-number">7</span> Dot formats</a>
   <ul class="collapse">
   <li><a href="#the-.m-format" id="toc-the-.m-format" class="nav-link" data-scroll-target="#the-.m-format"><span class="header-section-number">7.1</span> The <code>.m</code> format</a></li>
-  <li><a href="#the-.w-format" id="toc-the-.w-format" class="nav-link" data-scroll-target="#the-.w-format"><span class="header-section-number">7.2</span> The <code>.w</code> format</a></li>
+  <li><a href="#the-decw-format" id="toc-the-decw-format" class="nav-link" data-scroll-target="#the-decw-format"><span class="header-section-number">7.2</span> The <code>decw</code> format</a></li>
   <li><a href="#dot-format-examples" id="toc-dot-format-examples" class="nav-link" data-scroll-target="#dot-format-examples"><span class="header-section-number">7.3</span> Dot format examples</a></li>
   <li><a href="#deks" id="toc-deks" class="nav-link" data-scroll-target="#deks"><span class="header-section-number">7.4</span> <code>Deks</code></a>
   <ul class="collapse">
@@ -233,8 +234,11 @@
 </section>
 <section id="at-a-glance" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> At a glance</h1>
-<pre class="{python}"><code>#| layout-ncol: 2
-#| code-fold: true
+<p>The <code>Decalendar</code> ordinal (<code>deco</code>) date format consists of a year and a day-of-the-year (<code>doty</code>) delimited by a plus sign (<code>year+day</code>). As shown in <strong>?<strong>?@fig-glance</strong></strong>, the last digit of the <code>doty</code> number is the day-of-the-<code>dek</code> (<code>dotd</code>) number, which serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The first two digits of the <code>doty</code> are the <code>dek</code> number.</p>
+<p>Each <code>dek</code> consists of 2 groups of 5 days called <code>pents.</code> Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule. The code in <a href="#exm-glance">Example&nbsp;1</a> generates two bar charts that compare the typical weekly schedule and the <code>Schedule 3</code> <code>pently</code> schedule. <a href="#sec-pently">Section&nbsp;7.4.3.1</a> provides more information on the <code>pently</code> schedules. Unlike <code>Schedule 3</code> and the other <code>pently</code> schedules, the weekly schedule is asymmetric and divides up workdays into the proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅).</p>
+<p>In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. <code>Schedule 3</code> splits workdays up symmetrically into proportions of .3, .4, and .3. <code>Declock</code> uses such proportions of the day instead of hours, minutes, or seconds. The <code>Schedule 3</code> workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). <code>Schedule 3</code> compensates longer workdays with more frequent restdays. In <code>Schedule 3</code>, the are 3 workdays separated by a 2-day <code>pentend</code>.</p>
+<p><span class="theorem-title"><strong>Example 1 </strong></span>&nbsp;</p>
+<pre class="{python}"><code>#| tags: [weekly]
 import pandas as pd
 
 ax = pd.DataFrame(
@@ -261,8 +265,9 @@ ax.legend(['Rest', 'Work'], bbox_to_anchor=(1.2, 0.6))
 for c in ax.containers:
     labels = [round(v.get_height(), 3) if v.get_height() &gt; 0 else '' for v in c]
     labels = [str(l)[1:] for l in labels if l != 1]
-    ax.bar_label(c, labels=labels, label_type='center', color="white", fontsize=15);
-
+    ax.bar_label(c, labels=labels, label_type='center', color="white", fontsize=15);</code></pre>
+<p>{#fig-weekly}</p>
+<pre class="{python}"><code>#| tags: [pently]
 ax = pd.DataFrame(
     {
         "Days": ["0\n5", "1\n6", "2\n7", "3\n8", "4\n9"],
@@ -288,6 +293,7 @@ for c in ax.containers:
     labels = [round(v.get_height(), 1) if v.get_height() &gt; 0 else '' for v in c]
     labels = [str(l)[1:] for l in labels if l != 1]
     ax.bar_label(c, labels=labels, label_type='center', color="white", fontsize=18);</code></pre>
+<p>{#fig-pently}</p>
 </section>
 <section id="related-systems" class="level1 page-columns page-full" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Related systems</h1>
@@ -295,9 +301,10 @@ for c in ax.containers:
 <h2 data-number="3.1" class="anchored" data-anchor-id="gregorian-calendar"><span class="header-section-number">3.1</span> Gregorian calendar</h2>
 <section id="coordinate-analogy" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="coordinate-analogy"><span class="header-section-number">3.1.1</span> Coordinate analogy</h3>
-<p>In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (<code>dotm</code>) are like longitude and latitude in the <a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system">geographic coordinate system</a> or x and y in the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system">Cartesian coordinate system</a>. <code>Decalendar</code> provides two coordinates in one number: the day-of-the-year (<code>doty</code>). The first two digits of the <code>doty</code> are the <code>dek</code> number. <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The last digit of the <code>doty</code> is the day-of-the-<code>dek</code> (<code>dotd</code>) number, which serves as both the <code>dotm</code> and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. <a href="#tbl-coor">Table&nbsp;1</a> shows the <code>doty</code> equivalents of all Gregorian calendar dates. To locate a specific date in <a href="#tbl-coor">Table&nbsp;1</a>, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the correct day (the <code>dotm</code> is like a y-axis value).</p>
+<p>In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (<code>dotm</code>) are like longitude and latitude in the <a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system">geographic coordinate system</a> or x and y in the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system">Cartesian coordinate system</a>. The <code>Decalendar</code> ordinal (<code>deco</code>) date format provides two coordinates in one number: the day-of-the-year (<code>doty</code>). <a href="#tbl-greg2doty">Table&nbsp;1</a> shows the <code>doty</code> number of all Gregorian calendar dates.</p>
+<p>To locate a specific date in <a href="#tbl-greg2doty">Table&nbsp;1</a>, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the <code>dotm</code> (which is like a y-axis value). To convert a <code>doty</code> number to a Gregorian calendar date, we first find the <code>dek</code> number (the first two digits of the <code>doty</code>) among the rows in <a href="#tbl-doty2greg">Table&nbsp;2</a> and then move to the right to the <code>dotd</code> (the last digit of the <code>doty</code>). The dates in <a href="#tbl-doty2greg">Table&nbsp;2</a> are shown in <code>mm-dd</code> format.</p>
 <section id="table-1" class="level4">
-<h4 class="anchored" data-anchor-id="table-1"><a href="#tbl-coor">Table&nbsp;1</a></h4>
+<h4 class="anchored" data-anchor-id="table-1"><a href="#tbl-greg2doty">Table&nbsp;1</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -801,14 +808,534 @@ for c in ax.containers:
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;1: Gregorian calendar date to positive <code>doty</code> conversion</p>
+<p>Table&nbsp;1: Gregorian calendar date to <code>doty</code> conversion</p>
+</blockquote>
+</section>
+<section id="table-2" class="level4">
+<h4 class="anchored" data-anchor-id="table-2"><a href="#tbl-doty2greg">Table&nbsp;2</a></h4>
+<blockquote class="blockquote">
+<p><strong>Click to expand</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dek</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>03-01</td>
+<td>03-02</td>
+<td>03-03</td>
+<td>03-04</td>
+<td>03-05</td>
+<td>03-06</td>
+<td>03-07</td>
+<td>03-08</td>
+<td>03-09</td>
+<td>03-10</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>03-11</td>
+<td>03-12</td>
+<td>03-13</td>
+<td>03-14</td>
+<td>03-15</td>
+<td>03-16</td>
+<td>03-17</td>
+<td>03-18</td>
+<td>03-19</td>
+<td>03-20</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>03-21</td>
+<td>03-22</td>
+<td>03-23</td>
+<td>03-24</td>
+<td>03-25</td>
+<td>03-26</td>
+<td>03-27</td>
+<td>03-28</td>
+<td>03-29</td>
+<td>03-30</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>03-31</td>
+<td>04-01</td>
+<td>04-02</td>
+<td>04-03</td>
+<td>04-04</td>
+<td>04-05</td>
+<td>04-06</td>
+<td>04-07</td>
+<td>04-08</td>
+<td>04-09</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>04-10</td>
+<td>04-11</td>
+<td>04-12</td>
+<td>04-13</td>
+<td>04-14</td>
+<td>04-15</td>
+<td>04-16</td>
+<td>04-17</td>
+<td>04-18</td>
+<td>04-19</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>04-20</td>
+<td>04-21</td>
+<td>04-22</td>
+<td>04-23</td>
+<td>04-24</td>
+<td>04-25</td>
+<td>04-26</td>
+<td>04-27</td>
+<td>04-28</td>
+<td>04-29</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>04-30</td>
+<td>05-01</td>
+<td>05-02</td>
+<td>05-03</td>
+<td>05-04</td>
+<td>05-05</td>
+<td>05-06</td>
+<td>05-07</td>
+<td>05-08</td>
+<td>05-09</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>05-10</td>
+<td>05-11</td>
+<td>05-12</td>
+<td>05-13</td>
+<td>05-14</td>
+<td>05-15</td>
+<td>05-16</td>
+<td>05-17</td>
+<td>05-18</td>
+<td>05-19</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>05-20</td>
+<td>05-21</td>
+<td>05-22</td>
+<td>05-23</td>
+<td>05-24</td>
+<td>05-25</td>
+<td>05-26</td>
+<td>05-27</td>
+<td>05-28</td>
+<td>05-29</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>05-30</td>
+<td>05-31</td>
+<td>06-01</td>
+<td>06-02</td>
+<td>06-03</td>
+<td>06-04</td>
+<td>06-05</td>
+<td>06-06</td>
+<td>06-07</td>
+<td>06-08</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>06-09</td>
+<td>06-10</td>
+<td>06-11</td>
+<td>06-12</td>
+<td>06-13</td>
+<td>06-14</td>
+<td>06-15</td>
+<td>06-16</td>
+<td>06-17</td>
+<td>06-18</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>06-19</td>
+<td>06-20</td>
+<td>06-21</td>
+<td>06-22</td>
+<td>06-23</td>
+<td>06-24</td>
+<td>06-25</td>
+<td>06-26</td>
+<td>06-27</td>
+<td>06-28</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>06-29</td>
+<td>06-30</td>
+<td>07-01</td>
+<td>07-02</td>
+<td>07-03</td>
+<td>07-04</td>
+<td>07-05</td>
+<td>07-06</td>
+<td>07-07</td>
+<td>07-08</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>07-09</td>
+<td>07-10</td>
+<td>07-11</td>
+<td>07-12</td>
+<td>07-13</td>
+<td>07-14</td>
+<td>07-15</td>
+<td>07-16</td>
+<td>07-17</td>
+<td>07-18</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>07-19</td>
+<td>07-20</td>
+<td>07-21</td>
+<td>07-22</td>
+<td>07-23</td>
+<td>07-24</td>
+<td>07-25</td>
+<td>07-26</td>
+<td>07-27</td>
+<td>07-28</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>07-29</td>
+<td>07-30</td>
+<td>07-31</td>
+<td>08-01</td>
+<td>08-02</td>
+<td>08-03</td>
+<td>08-04</td>
+<td>08-05</td>
+<td>08-06</td>
+<td>08-07</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>08-08</td>
+<td>08-09</td>
+<td>08-10</td>
+<td>08-11</td>
+<td>08-12</td>
+<td>08-13</td>
+<td>08-14</td>
+<td>08-15</td>
+<td>08-16</td>
+<td>08-17</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>08-18</td>
+<td>08-19</td>
+<td>08-20</td>
+<td>08-21</td>
+<td>08-22</td>
+<td>08-23</td>
+<td>08-24</td>
+<td>08-25</td>
+<td>08-26</td>
+<td>08-27</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>08-28</td>
+<td>08-29</td>
+<td>08-30</td>
+<td>08-31</td>
+<td>09-01</td>
+<td>09-02</td>
+<td>09-03</td>
+<td>09-04</td>
+<td>09-05</td>
+<td>09-06</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>09-07</td>
+<td>09-08</td>
+<td>09-09</td>
+<td>09-10</td>
+<td>09-11</td>
+<td>09-12</td>
+<td>09-13</td>
+<td>09-14</td>
+<td>09-15</td>
+<td>09-16</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>09-17</td>
+<td>09-18</td>
+<td>09-19</td>
+<td>09-20</td>
+<td>09-21</td>
+<td>09-22</td>
+<td>09-23</td>
+<td>09-24</td>
+<td>09-25</td>
+<td>09-26</td>
+</tr>
+<tr class="even">
+<td>21</td>
+<td>09-27</td>
+<td>09-28</td>
+<td>09-29</td>
+<td>09-30</td>
+<td>10-01</td>
+<td>10-02</td>
+<td>10-03</td>
+<td>10-04</td>
+<td>10-05</td>
+<td>10-06</td>
+</tr>
+<tr class="odd">
+<td>22</td>
+<td>10-07</td>
+<td>10-08</td>
+<td>10-09</td>
+<td>10-10</td>
+<td>10-11</td>
+<td>10-12</td>
+<td>10-13</td>
+<td>10-14</td>
+<td>10-15</td>
+<td>10-16</td>
+</tr>
+<tr class="even">
+<td>23</td>
+<td>10-17</td>
+<td>10-18</td>
+<td>10-19</td>
+<td>10-20</td>
+<td>10-21</td>
+<td>10-22</td>
+<td>10-23</td>
+<td>10-24</td>
+<td>10-25</td>
+<td>10-26</td>
+</tr>
+<tr class="odd">
+<td>24</td>
+<td>10-27</td>
+<td>10-28</td>
+<td>10-29</td>
+<td>10-30</td>
+<td>10-31</td>
+<td>11-01</td>
+<td>11-02</td>
+<td>11-03</td>
+<td>11-04</td>
+<td>11-05</td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>11-06</td>
+<td>11-07</td>
+<td>11-08</td>
+<td>11-09</td>
+<td>11-10</td>
+<td>11-11</td>
+<td>11-12</td>
+<td>11-13</td>
+<td>11-14</td>
+<td>11-15</td>
+</tr>
+<tr class="odd">
+<td>26</td>
+<td>11-16</td>
+<td>11-17</td>
+<td>11-18</td>
+<td>11-19</td>
+<td>11-20</td>
+<td>11-21</td>
+<td>11-22</td>
+<td>11-23</td>
+<td>11-24</td>
+<td>11-25</td>
+</tr>
+<tr class="even">
+<td>27</td>
+<td>11-26</td>
+<td>11-27</td>
+<td>11-28</td>
+<td>11-29</td>
+<td>11-30</td>
+<td>12-01</td>
+<td>12-02</td>
+<td>12-03</td>
+<td>12-04</td>
+<td>12-05</td>
+</tr>
+<tr class="odd">
+<td>28</td>
+<td>12-06</td>
+<td>12-07</td>
+<td>12-08</td>
+<td>12-09</td>
+<td>12-10</td>
+<td>12-11</td>
+<td>12-12</td>
+<td>12-13</td>
+<td>12-14</td>
+<td>12-15</td>
+</tr>
+<tr class="even">
+<td>29</td>
+<td>12-16</td>
+<td>12-17</td>
+<td>12-18</td>
+<td>12-19</td>
+<td>12-20</td>
+<td>12-21</td>
+<td>12-22</td>
+<td>12-23</td>
+<td>12-24</td>
+<td>12-25</td>
+</tr>
+<tr class="odd">
+<td>30</td>
+<td>12-26</td>
+<td>12-27</td>
+<td>12-28</td>
+<td>12-29</td>
+<td>12-30</td>
+<td>12-31</td>
+<td>01-01</td>
+<td>01-02</td>
+<td>01-03</td>
+<td>01-04</td>
+</tr>
+<tr class="even">
+<td>31</td>
+<td>01-05</td>
+<td>01-06</td>
+<td>01-07</td>
+<td>01-08</td>
+<td>01-09</td>
+<td>01-10</td>
+<td>01-11</td>
+<td>01-12</td>
+<td>01-13</td>
+<td>01-14</td>
+</tr>
+<tr class="odd">
+<td>32</td>
+<td>01-15</td>
+<td>01-16</td>
+<td>01-17</td>
+<td>01-18</td>
+<td>01-19</td>
+<td>01-20</td>
+<td>01-21</td>
+<td>01-22</td>
+<td>01-23</td>
+<td>01-24</td>
+</tr>
+<tr class="even">
+<td>33</td>
+<td>01-25</td>
+<td>01-26</td>
+<td>01-27</td>
+<td>01-28</td>
+<td>01-29</td>
+<td>01-30</td>
+<td>01-31</td>
+<td>02-01</td>
+<td>02-02</td>
+<td>02-03</td>
+</tr>
+<tr class="odd">
+<td>34</td>
+<td>02-04</td>
+<td>02-05</td>
+<td>02-06</td>
+<td>02-07</td>
+<td>02-08</td>
+<td>02-09</td>
+<td>02-10</td>
+<td>02-11</td>
+<td>02-12</td>
+<td>02-13</td>
+</tr>
+<tr class="even">
+<td>35</td>
+<td>02-14</td>
+<td>02-15</td>
+<td>02-16</td>
+<td>02-17</td>
+<td>02-18</td>
+<td>02-19</td>
+<td>02-20</td>
+<td>02-21</td>
+<td>02-22</td>
+<td>02-23</td>
+</tr>
+<tr class="odd">
+<td>36</td>
+<td>02-24</td>
+<td>02-25</td>
+<td>02-26</td>
+<td>02-27</td>
+<td>02-28</td>
+<td>02-29</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Table&nbsp;2: <code>Doty</code> number to Gregorian calendar date conversion</p>
 </blockquote>
 </section>
 </section>
 <section id="gregorian-calendar-date-conversion" class="level3 page-columns page-full" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="gregorian-calendar-date-conversion"><span class="header-section-number">3.1.2</span> Gregorian calendar date conversion</h3>
-<p>In addition to using a conversion table like <a href="#tbl-coor">Table&nbsp;1</a>, we can convert between Gregorian calendar dates and <code>Decalendar</code> <code>doty</code> numbers programmatically. The code in <a href="#exm-coor">Example&nbsp;1</a> is derived from the <a href="http://howardhinnant.github.io/date_algorithms.html#days_from_civil"><code>days_from_civil</code></a> and <a href="http://howardhinnant.github.io/date_algorithms.html#civil_from_days"><code>civil_from_days</code></a> algorithms described by <a href="https://howardhinnant.github.io/">Howard Hinnant</a> in <a href="http://howardhinnant.github.io/date_algorithms.html"><em>chrono-Compatible Low-Level Date Algorithms</em></a> [-<span class="citation" data-cites="hinnant2014">Hinnant (<a href="#ref-hinnant2014" role="doc-biblioref">2014</a>)</span>]. The output of the <code>date2doty</code> function is a <code>doty</code> number, while its inverse function, <code>doty2date</code>, returns an array containing a month and a <code>dotm</code> number.</p>
-<p><span class="theorem-title"><strong>Example 1 </strong></span>&nbsp;</p>
+<p>In addition to using a conversion table like <a href="#tbl-greg2doty">Table&nbsp;1</a>, we can convert between Gregorian calendar dates and <code>Decalendar</code> <code>doty</code> numbers programmatically. The code in <a href="#exm-coor">Example&nbsp;2</a> is derived from the <a href="http://howardhinnant.github.io/date_algorithms.html#days_from_civil"><code>days_from_civil</code></a> and <a href="http://howardhinnant.github.io/date_algorithms.html#civil_from_days"><code>civil_from_days</code></a> algorithms described by <a href="https://howardhinnant.github.io/">Howard Hinnant</a> in <a href="http://howardhinnant.github.io/date_algorithms.html"><em>chrono-Compatible Low-Level Date Algorithms</em></a> [-<span class="citation" data-cites="hinnant2014">Hinnant (<a href="#ref-hinnant2014" role="doc-biblioref">2014</a>)</span>]. The output of the <code>date2doty</code> function is a <code>doty</code> number, while its inverse function, <code>doty2date</code>, returns an array containing a month and a <code>dotm</code> number.</p>
+<p><span class="theorem-title"><strong>Example 2 </strong></span>&nbsp;</p>
 <section id="javascript" class="level4">
 <h4 class="anchored" data-anchor-id="javascript">JavaScript</h4>
 <section id="date2doty" class="level5">
@@ -839,11 +1366,11 @@ doty2date()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-tags="[&quot;date2doty&quot;]" data-execution_count="1">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">date2doty</span>(month<span class="op">=</span><span class="fl">1</span>, day<span class="op">=</span><span class="fl">1</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Int</span>(<span class="fu">floor</span>((<span class="fl">153</span> <span class="op">*</span> (month <span class="op">&gt;</span> <span class="fl">2</span> ? month <span class="op">-</span> <span class="fl">3</span> <span class="op">:</span> month <span class="op">+</span> <span class="fl">9</span>) <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> <span class="fl">5</span> <span class="op">+</span> day <span class="op">-</span> <span class="fl">1</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date2doty</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">date2doty</span>(month<span class="op">=</span><span class="fl">1</span>, day<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Int</span>(<span class="fu">floor</span>((<span class="fl">153</span> <span class="op">*</span> (month <span class="op">&gt;</span> <span class="fl">2</span> ? month <span class="op">-</span> <span class="fl">3</span> <span class="op">:</span> month <span class="op">+</span> <span class="fl">9</span>) <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> <span class="fl">5</span> <span class="op">+</span> day <span class="op">-</span> <span class="fl">1</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date2doty</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>306</code></pre>
@@ -855,12 +1382,12 @@ doty2date()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell" data-tags="[&quot;doty2date&quot;]" data-execution_count="2">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2date</span>(doty <span class="op">=</span> <span class="fl">306</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> <span class="fu">floor</span>((<span class="fl">5</span> <span class="op">*</span> doty <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> <span class="fl">153</span>);</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">Int</span>(m <span class="op">&lt;</span> <span class="fl">10</span> ? m <span class="op">+</span> <span class="fl">3</span> <span class="op">:</span> m <span class="op">-</span> <span class="fl">9</span>), <span class="fu">Int</span>(<span class="fu">floor</span>(doty <span class="op">-</span> (<span class="fl">153</span> <span class="op">*</span> m <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">2</span>))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">doty2date</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2date</span>(doty <span class="op">=</span> <span class="fl">306</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> <span class="fu">floor</span>((<span class="fl">5</span> <span class="op">*</span> doty <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> <span class="fl">153</span>);</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">Int</span>(m <span class="op">&lt;</span> <span class="fl">10</span> ? m <span class="op">+</span> <span class="fl">3</span> <span class="op">:</span> m <span class="op">-</span> <span class="fl">9</span>), <span class="fu">Int</span>(<span class="fu">floor</span>(doty <span class="op">-</span> (<span class="fl">153</span> <span class="op">*</span> m <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> <span class="fl">5</span> <span class="op">+</span> <span class="fl">2</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">doty2date</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>(1, 1)</code></pre>
@@ -913,9 +1440,9 @@ doty2date()</code></pre>
 </section>
 <section id="gregorian-calendar-months-and-years" class="level3 page-columns page-full" data-number="3.1.3">
 <h3 data-number="3.1.3" class="anchored" data-anchor-id="gregorian-calendar-months-and-years"><span class="header-section-number">3.1.3</span> Gregorian calendar months and years</h3>
-<p><code>Decalendar</code> only uses months for converting to and from Gregorian calendar dates. Nevertheless, discussing months can help to explain how <code>Decalendar</code> works. The <code>Decalendar</code> year ends with January and February, as shown in <a href="#tbl-gregm">Table&nbsp;2</a>. During these two months, the <code>Decalendar</code> year is 1 less than the Gregorian calendar year. To obtain a <code>Decalendar</code> year (<code>dy</code>) from a Gregorian calendar year (<code>gy</code>) and month number (<code>gm</code>), we subtract 1 from <code>gy</code> if <code>gm</code> is less than 3 (<span class="math inline">\(dy = gy - [gm &lt; 3]\)</span>). To obtain a Gregorian calendar year (<code>gy</code>) from a <code>Decalendar</code> year (<code>dy</code>) and <code>Decalendar</code> <code>doty</code> (<code>doty</code>), we add 1 to <code>dy</code> if <code>doty</code> is greater than 305 (<span class="math inline">\(gy = dy + [dm &gt; 305]\)</span>). Code to convert between <code>Decalendar</code> and Gregorian calendar years is provided in <a href="#exm-gregm">Example&nbsp;2</a>.</p>
-<section id="table-2" class="level4">
-<h4 class="anchored" data-anchor-id="table-2"><a href="#tbl-gregm">Table&nbsp;2</a></h4>
+<p><code>Decalendar</code> only uses months for converting to and from Gregorian calendar dates. Nevertheless, discussing months can help to explain how <code>Decalendar</code> works. The <code>Decalendar</code> year ends with January and February, as shown in <a href="#tbl-gregm">Table&nbsp;3</a>. During these two months, the <code>Decalendar</code> year is 1 less than the Gregorian calendar year. To obtain a <code>Decalendar</code> year (<code>dy</code>) from a Gregorian calendar year (<code>gy</code>) and month number (<code>gm</code>), we subtract 1 from <code>gy</code> if <code>gm</code> is less than 3 (<span class="math inline">\(dy = gy - [gm &lt; 3]\)</span>). To obtain a Gregorian calendar year (<code>gy</code>) from a <code>Decalendar</code> year (<code>dy</code>) and <code>Decalendar</code> <code>doty</code> (<code>doty</code>), we add 1 to <code>dy</code> if <code>doty</code> is greater than 305 (<span class="math inline">\(gy = dy + [dm &gt; 305]\)</span>). Code to convert between <code>Decalendar</code> and Gregorian calendar years is provided in <a href="#exm-gregm">Example&nbsp;3</a>.</p>
+<section id="table-3" class="level4">
+<h4 class="anchored" data-anchor-id="table-3"><a href="#tbl-gregm">Table&nbsp;3</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -989,9 +1516,9 @@ doty2date()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;2: The numeric values of months in <code>Decalendar</code> and the Gregorian calendar</p>
+<p>Table&nbsp;3: The numeric values of months in <code>Decalendar</code> and the Gregorian calendar</p>
 </blockquote>
-<p><span class="theorem-title"><strong>Example 2 </strong></span>&nbsp;</p>
+<p><span class="theorem-title"><strong>Example 3 </strong></span>&nbsp;</p>
 </section>
 <section id="javascript-1" class="level4">
 <h4 class="anchored" data-anchor-id="javascript-1">JavaScript</h4>
@@ -1017,11 +1544,11 @@ console.log(doty2year());</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell" data-tags="[&quot;date2year&quot;]" data-execution_count="3">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">date2year</span>(year<span class="op">=</span><span class="fl">1970</span>, month<span class="op">=</span><span class="fl">1</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">-</span> (month <span class="op">&lt;</span> <span class="fl">3</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date2year</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">date2year</span>(year<span class="op">=</span><span class="fl">1970</span>, month<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">-</span> (month <span class="op">&lt;</span> <span class="fl">3</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date2year</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>1969</code></pre>
@@ -1033,11 +1560,11 @@ console.log(doty2year());</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell" data-tags="[&quot;doty2year&quot;]" data-execution_count="4">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2year</span>(year<span class="op">=</span><span class="fl">1969</span>, doty<span class="op">=</span><span class="fl">306</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">+</span> (doty <span class="op">&gt;</span> <span class="fl">305</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">doty2year</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2year</span>(year<span class="op">=</span><span class="fl">1969</span>, doty<span class="op">=</span><span class="fl">306</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">+</span> (doty <span class="op">&gt;</span> <span class="fl">305</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">doty2year</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>1970</code></pre>
@@ -1089,9 +1616,9 @@ doty2year()</code></pre>
 </section>
 <section id="leap-years" class="level3 page-columns page-full" data-number="3.1.4">
 <h3 data-number="3.1.4" class="anchored" data-anchor-id="leap-years"><span class="header-section-number">3.1.4</span> Leap years</h3>
-<p>The first day of the <code>Decalendar</code> year, <code>Day 0</code>, is March 1 in the Gregorian calendar. Starting the year on March 1 positions Leap Day, <code>Day 365</code> in <code>Decalendar</code> and February 29 in the Gregorian calendar, at the end of the year. <code>Decalendar</code> leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a <code>Decalendar</code> leap year, we add 1 to the year and proceed with the <a href="http://howardhinnant.github.io/date_algorithms.html#is_leap"><code>is_leap</code></a> algorithm as described by [<span class="citation" data-cites="hinnant2014">Hinnant (<a href="#ref-hinnant2014" role="doc-biblioref">2014</a>)</span>] and shown in <a href="#eq-gregl">Equation&nbsp;1</a> and <a href="#exm-gregl">Example&nbsp;3</a>.</p>
+<p>The first day of the <code>Decalendar</code> year, <code>Day 0</code>, is March 1 in the Gregorian calendar. Starting the year on March 1 positions Leap Day, <code>Day 365</code> in <code>Decalendar</code> and February 29 in the Gregorian calendar, at the end of the year. <code>Decalendar</code> leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a <code>Decalendar</code> leap year, we add 1 to the year and proceed with the <a href="http://howardhinnant.github.io/date_algorithms.html#is_leap"><code>is_leap</code></a> algorithm as described by [<span class="citation" data-cites="hinnant2014">Hinnant (<a href="#ref-hinnant2014" role="doc-biblioref">2014</a>)</span>] and shown in <a href="#eq-gregl">Equation&nbsp;1</a> and <a href="#exm-gregl">Example&nbsp;4</a>.</p>
 <p><span id="eq-gregl"><span class="math display">\[y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0 \qquad(1)\]</span></span></p>
-<p><span class="theorem-title"><strong>Example 3 </strong></span>&nbsp;</p>
+<p><span class="theorem-title"><strong>Example 4 </strong></span>&nbsp;</p>
 <section id="javascript-2" class="level4">
 <h4 class="anchored" data-anchor-id="javascript-2">JavaScript</h4>
 <section id="leap" class="level5">
@@ -1110,10 +1637,10 @@ is_leap()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell" data-tags="[&quot;leap&quot;]" data-execution_count="5">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">is_leap</span>(year<span class="op">=</span><span class="fl">1970</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">%</span> <span class="fl">4</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> year <span class="op">%</span> <span class="fl">100</span> <span class="op">!=</span> <span class="fl">0</span> <span class="op">||</span> year <span class="op">%</span> <span class="fl">400</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is_leap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">is_leap</span>(year<span class="op">=</span><span class="fl">1970</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">%</span> <span class="fl">4</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> year <span class="op">%</span> <span class="fl">100</span> <span class="op">!=</span> <span class="fl">0</span> <span class="op">||</span> year <span class="op">%</span> <span class="fl">400</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is_leap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>false</code></pre>
@@ -1154,11 +1681,11 @@ is_leap()</code></pre>
 </section>
 <section id="ordinal-dates" class="level3 page-columns page-full" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="ordinal-dates"><span class="header-section-number">3.2.2</span> Ordinal dates</h3>
-<p><code>Decalendar</code> dates (<code>year+day</code>) are most similar to <a href="https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates">ISO 8601 ordinal dates</a> (<code>year-day</code>). Like <code>Decalendar</code> <code>doty</code> numbers, ISO 8601 ordinal dates count the number of days since the start of the year. Unlike ordinal dates, <code>doty</code> numbers are <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero-based</a> and do not differ across common and leap years. The <code>Decalendar</code> date can be easily obtained from the ISO 8601 ordinal date using the calculations shown in <a href="#eq-isoo1">Equation&nbsp;2</a>, <a href="#eq-isoo2">Equation&nbsp;3</a>, and <a href="#exm-isoo">Example&nbsp;4</a>. These calculation shift the ordinal date by 60 or 61 days to account for the 2-month difference between <code>Decalendar</code> and the Gregorian calendar.</p>
-<p>In <a href="#exm-isoo">Example&nbsp;4</a>, the <code>isoo2doty</code> and <code>doty2isoo</code> functions convert between ISO 8601 ordinal day numbers and <code>doty</code> numbers, while the <code>isoo2year</code> and <code>doty2year</code> functions adjust the year if necessary. We use the <code>is_leap</code> function from <a href="#exm-gregl">Example&nbsp;3</a> in <a href="#exm-isoo">Example&nbsp;4</a> to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. Unlike ISO 8601 ordinal day numbers, <code>Decalendar</code> <code>doty</code> numbers are the same in common and leap years, because Leap Day is at the end of the <code>Decalendar</code> year.</p>
+<p><code>Decalendar</code> dates (<code>year+day</code>) are most similar to <a href="https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates">ISO 8601 ordinal (<code>isoo</code>) dates</a> (<code>year-day</code>). Like <code>Decalendar</code> <code>doty</code> numbers, <code>isoo</code> dates count the number of days since the start of the year. Unlike ordinal dates, <code>doty</code> numbers are <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero-based</a> and do not differ across common and leap years. The <code>Decalendar</code> date can be easily obtained from the <code>isoo</code> date using the calculations shown in <a href="#eq-isoo1">Equation&nbsp;2</a>, <a href="#eq-isoo2">Equation&nbsp;3</a>, and <a href="#exm-isoo">Example&nbsp;5</a>. These calculation shift the <code>isoo</code> date by 60 or 61 days to account for the 2-month difference between <code>Decalendar</code> and the Gregorian calendar.</p>
+<p>In <a href="#exm-isoo">Example&nbsp;5</a>, the <code>isoo2doty</code> and <code>doty2isoo</code> functions convert between ISO 8601 ordinal day numbers and <code>doty</code> numbers, while the <code>isoo2year</code> and <code>doty2year</code> functions adjust the year if necessary. We use the <code>is_leap</code> function from <a href="#exm-gregl">Example&nbsp;4</a> in <a href="#exm-isoo">Example&nbsp;5</a> to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. Unlike ISO 8601 ordinal day numbers, <code>Decalendar</code> <code>doty</code> numbers are the same in common and leap years, because Leap Day is at the end of the <code>Decalendar</code> year.</p>
 <p><span id="eq-isoo1"><span class="math display">\[(isoordinal + 305 - isleap(year)) \mod 365 \qquad(2)\]</span></span></p>
 <p><span id="eq-isoo2"><span class="math display">\[(doty + 60 + isleap(year + 1)) \mod 365 \qquad(3)\]</span></span></p>
-<p><span class="theorem-title"><strong>Example 4 </strong></span>&nbsp;</p>
+<p><span class="theorem-title"><strong>Example 5 </strong></span>&nbsp;</p>
 <section id="javascript-3" class="level4">
 <h4 class="anchored" data-anchor-id="javascript-3">JavaScript</h4>
 <section id="isoo2year" class="level5">
@@ -1200,11 +1727,11 @@ console.log(
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell" data-tags="[&quot;isoo2year&quot;]" data-execution_count="6">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">isoo2year</span>(year <span class="op">=</span> <span class="fl">1970</span>, day <span class="op">=</span> <span class="fl">1</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">-</span> (day <span class="op">&lt;</span> (<span class="fl">60</span> <span class="op">+</span> <span class="fu">is_leap</span>(year <span class="op">-</span> <span class="fl">1</span>)))</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">isoo2year</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">isoo2year</span>(year <span class="op">=</span> <span class="fl">1970</span>, day <span class="op">=</span> <span class="fl">1</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    year <span class="op">-</span> (day <span class="op">&lt;</span> (<span class="fl">60</span> <span class="op">+</span> <span class="fu">is_leap</span>(year <span class="op">-</span> <span class="fl">1</span>)))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">isoo2year</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>1969</code></pre>
@@ -1216,11 +1743,11 @@ console.log(
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [7]:</pre></div><div class="cell" data-tags="[&quot;isoo2doty&quot;]" data-execution_count="7">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">isoo2doty</span>(year<span class="op">=</span><span class="fl">1970</span>, day<span class="op">=</span><span class="fl">1</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    (day <span class="op">+</span> <span class="fl">305</span> <span class="op">-</span> <span class="fu">is_leap</span>(year)) <span class="op">%</span> <span class="fl">365</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">isoo2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">isoo2doty</span>(), <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">isoo2doty</span>(year<span class="op">=</span><span class="fl">1970</span>, day<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    (day <span class="op">+</span> <span class="fl">305</span> <span class="op">-</span> <span class="fu">is_leap</span>(year)) <span class="op">%</span> <span class="fl">365</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">isoo2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">isoo2doty</span>(), <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>"1969+306"</code></pre>
@@ -1232,11 +1759,11 @@ console.log(
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [8]:</pre></div><div class="cell" data-tags="[&quot;doty2isoo&quot;]" data-execution_count="8">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2isoo</span>(year<span class="op">=</span><span class="fl">1970</span>, doty<span class="op">=</span><span class="fl">0</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    (doty <span class="op">+</span> <span class="fl">60</span> <span class="op">+</span> <span class="fu">is_leap</span>(year <span class="op">+</span> <span class="fl">1</span>)) <span class="op">%</span> <span class="fl">365</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">doty2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">doty2isoo</span>(), <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2isoo</span>(year<span class="op">=</span><span class="fl">1970</span>, doty<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    (doty <span class="op">+</span> <span class="fl">60</span> <span class="op">+</span> <span class="fu">is_leap</span>(year <span class="op">+</span> <span class="fl">1</span>)) <span class="op">%</span> <span class="fl">365</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">doty2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">doty2isoo</span>(), <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>"1970+060"</code></pre>
@@ -1305,9 +1832,9 @@ paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))</code></
 </section>
 <section id="calendar-dates" class="level3 page-columns page-full" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="calendar-dates"><span class="header-section-number">3.2.3</span> Calendar dates</h3>
-<p>ISO 8601 <a href="https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates">calendar dates</a> consist of a four-digit year, a two-digit month, and a two-digit <code>dotm</code> separated by hyphens (<code>year-mm-dd</code>). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from <a href="#exm-coor">Example&nbsp;1</a> and <a href="#exm-gregm">Example&nbsp;2</a> to convert between <code>Decalendar</code> dates and ISO 8601 calendar dates, as shown in <a href="#exm-isoc">Example&nbsp;5</a>. The code formats the output of the <code>date2year</code> and <code>date2doty</code> functions into <code>Decalendar</code> dates and the output of the <code>doty2year</code> and <code>doty2date</code> functions into ISO 8601 calendar dates.</p>
-<p>As mentioned in <a href="#sec-coor">Section&nbsp;3.1.1</a>, <code>Decalendar</code> uses <code>doty</code> numbers as dates instead of month and day-of-the-month (<code>dotm</code>) numbers, but if required, Gregorian calendar dates can be provided in the <code>.m</code> format (<code>year+m+dd</code>), which is very similar to the ISO 8601 calendar date format. The <code>.m</code> format is described in <a href="#sec-dotm">Section&nbsp;7.1</a>. Examples of the <code>.m</code> format are provided in <a href="#sec-dotex">Section&nbsp;7.3</a>. To be clear, the <code>.m</code> format is only used to display Gregorian calendar dates and otherwise does not play any role in <code>Decalendar</code>.</p>
-<p><span class="theorem-title"><strong>Example 5 </strong></span>&nbsp;</p>
+<p>ISO 8601 <a href="https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates">calendar dates</a> consist of a four-digit year, a two-digit month, and a two-digit <code>dotm</code> separated by hyphens (<code>year-mm-dd</code>). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from <a href="#exm-coor">Example&nbsp;2</a> and <a href="#exm-gregm">Example&nbsp;3</a> to convert between <code>Decalendar</code> dates and ISO 8601 calendar dates, as shown in <a href="#exm-isoc">Example&nbsp;6</a>. The code formats the output of the <code>date2year</code> and <code>date2doty</code> functions into <code>Decalendar</code> dates and the output of the <code>doty2year</code> and <code>doty2date</code> functions into ISO 8601 calendar dates.</p>
+<p>As mentioned in <a href="#sec-coor">Section&nbsp;3.1.1</a>, <code>Decalendar</code> uses <code>doty</code> numbers as dates instead of month and day-of-the-month (<code>dotm</code>) numbers, but if required, Gregorian calendar dates can be provided in the <code>Decalendar</code> calendar (<code>decc</code>, pronounced “deck-see”) format (<code>year+m+dd</code>), which is very similar to the ISO 8601 calendar date format. The <code>decc</code> format is described in <a href="#sec-dotm">Section&nbsp;7.1</a>. Examples of the <code>decc</code> format are provided in <a href="#sec-dotex">Section&nbsp;7.3</a>. To be clear, the <code>decc</code> format is only used to display Gregorian calendar dates and otherwise does not play any role in <code>Decalendar</code>.</p>
+<p><span class="theorem-title"><strong>Example 6 </strong></span>&nbsp;</p>
 <section id="javascript-4" class="level4">
 <h4 class="anchored" data-anchor-id="javascript-4">JavaScript</h4>
 <section id="decalendar-date" class="level5">
@@ -1334,7 +1861,7 @@ console.log(
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [9]:</pre></div><div class="cell" data-tags="[&quot;decdate&quot;]" data-execution_count="9">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">date2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">date2doty</span>(), <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">date2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">date2doty</span>(), <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>"1969+306"</code></pre>
@@ -1346,7 +1873,7 @@ console.log(
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [10]:</pre></div><div class="cell" data-tags="[&quot;isodate&quot;]" data-execution_count="10">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">doty2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">-</span><span class="sc">$</span>(<span class="fu">join</span>(<span class="fu">map</span>((x) <span class="op">-&gt;</span> <span class="fu">lpad</span>(x, <span class="fl">2</span>, <span class="ch">'0'</span>), <span class="fu">doty2date</span>()), <span class="ch">'-'</span>))<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">doty2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">-</span><span class="sc">$</span>(<span class="fu">join</span>(<span class="fu">map</span>((x) <span class="op">-&gt;</span> <span class="fu">lpad</span>(x, <span class="fl">2</span>, <span class="ch">'0'</span>), <span class="fu">doty2date</span>()), <span class="ch">'-'</span>))<span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>"1970-01-01"</code></pre>
@@ -1391,13 +1918,13 @@ paste0(sprintf("%04d", doty2year()), "-",
 <h3 data-number="3.2.4" class="anchored" data-anchor-id="times"><span class="header-section-number">3.2.4</span> Times</h3>
 <p><code>Decalendar</code> seeks to make months and weeks obsolete. Similarly, <code>Declock</code> aims to deprecate hours, minutes, and seconds in favor of <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> (<code>.day</code>). The <a href="https://en.wikipedia.org/wiki/ISO_8601#Times">ISO 8601 time format</a> is <code>hh:mm:ss</code>. Both <code>Declock</code> and ISO 8601 times can be appended to dates to form timestamps. <code>Decalendar</code> timestamps are more concise and easier to read than ISO 8601 timestamps.</p>
 <p>An ISO 8601 calendar date timestamp that includes seconds is 19 characters long (<code>year-mm-ddThh:mm:ss</code>), while a <code>Decalendar</code> timestamp with slightly greater precision is only 14 characters long (<code>year+day.ddddd</code>). ISO 8601 timestamps can omit delimiters except for the <code>T</code> which separates the date and the time (<code>yearmmddThhmmss</code>). Without delimiters, ISO 8601 timestamps become even more difficult to read and still cannot match the brevity of <code>Decalendar</code> timestamps.</p>
-<p>The formula for conversion of standard time to <code>Declock</code> time is shown in <a href="#eq-isot1">Equation&nbsp;4</a>. The value of <code>x</code> in <a href="#eq-isot1">Equation&nbsp;4</a> can be modified to obtain different units, which are displayed in <a href="#tbl-isot">Table&nbsp;3</a>. To convert <code>Declock</code> time into standard time, we first convert into hours using <a href="#eq-isot2">Equation&nbsp;5</a> and the appropriate <code>x</code> value from <a href="#tbl-isot">Table&nbsp;3</a>. Then, we convert hours into minutes with <a href="#eq-isot3">Equation&nbsp;6</a> and minutes into seconds with <a href="#eq-isot4">Equation&nbsp;7</a>.</p>
+<p>The formula for conversion of standard time to <code>Declock</code> time is shown in <a href="#eq-isot1">Equation&nbsp;4</a>. The value of <code>x</code> in <a href="#eq-isot1">Equation&nbsp;4</a> can be modified to obtain different units, which are displayed in <a href="#tbl-isot">Table&nbsp;4</a>. To convert <code>Declock</code> time into standard time, we first convert into hours using <a href="#eq-isot2">Equation&nbsp;5</a> and the appropriate <code>x</code> value from <a href="#tbl-isot">Table&nbsp;4</a>. Then, we convert hours into minutes with <a href="#eq-isot3">Equation&nbsp;6</a> and minutes into seconds with <a href="#eq-isot4">Equation&nbsp;7</a>.</p>
 <p><span id="eq-isot1"><span class="math display">\[declock = \frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} \cdot 10^x \qquad(4)\]</span></span></p>
 <p><span id="eq-isot2"><span class="math display">\[hours = declock \cdot 24 \cdot 10^x \qquad(5)\]</span></span></p>
 <p><span id="eq-isot3"><span class="math display">\[minutes = \frac{hours - \lfloor hours \rfloor}{60} \qquad(6)\]</span></span></p>
 <p><span id="eq-isot4"><span class="math display">\[seconds = \frac{minutes - \lfloor minutes \rfloor}{60} \qquad(7)\]</span></span></p>
-<section id="table-3" class="level4">
-<h4 class="anchored" data-anchor-id="table-3"><a href="#tbl-isot">Table&nbsp;3</a></h4>
+<section id="table-4" class="level4">
+<h4 class="anchored" data-anchor-id="table-4"><a href="#tbl-isot">Table&nbsp;4</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -1442,10 +1969,10 @@ paste0(sprintf("%04d", doty2year()), "-",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;3: The powers of ten of units based on days</p>
+<p>Table&nbsp;4: The powers of ten of units based on days</p>
 </blockquote>
-<p>The <code>time2doty</code> and <code>doty2time</code> functions in <a href="#exm-isot">Example&nbsp;6</a> convert between standard time and <code>Declock</code> time. To create a <code>Decalendar</code> timestamp, we can use the <code>date2year</code>, <code>date2doty</code>, and <code>time2doty</code> functions as shown in <a href="#exm-isot">Example&nbsp;6</a>. Similarly, <a href="#exm-isot">Example&nbsp;6</a> also shows how to create an ISO 8601 calendar date timestamp with the <code>doty2year</code>, <code>doty2date</code>, and <code>doty2time</code> functions.</p>
-<p><span class="theorem-title"><strong>Example 6 </strong></span>&nbsp;</p>
+<p>The <code>time2doty</code> and <code>doty2time</code> functions in <a href="#exm-isot">Example&nbsp;7</a> convert between standard time and <code>Declock</code> time. To create a <code>Decalendar</code> timestamp, we can use the <code>date2year</code>, <code>date2doty</code>, and <code>time2doty</code> functions as shown in <a href="#exm-isot">Example&nbsp;7</a>. Similarly, <a href="#exm-isot">Example&nbsp;7</a> also shows how to create an ISO 8601 calendar date timestamp with the <code>doty2year</code>, <code>doty2date</code>, and <code>doty2time</code> functions.</p>
+<p><span class="theorem-title"><strong>Example 7 </strong></span>&nbsp;</p>
 </section>
 <section id="javascript-5" class="level4">
 <h4 class="anchored" data-anchor-id="javascript-5">JavaScript</h4>
@@ -1490,12 +2017,12 @@ console.log(`${doty2year()}+${
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [11]:</pre></div><div class="cell" data-tags="[&quot;time2doty&quot;]" data-execution_count="11">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">time2doty</span>(hours<span class="op">=</span><span class="fl">1</span>, minutes<span class="op">=</span><span class="fl">0</span>, seconds<span class="op">=</span><span class="fl">0</span>)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    hours <span class="op">/</span> <span class="fl">24</span> <span class="op">+</span> minutes <span class="op">/</span> <span class="fl">1440</span> <span class="op">+</span> seconds <span class="op">/</span> <span class="fl">86400</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">date2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">date2doty</span>(), <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(</span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>(<span class="fu">time2doty</span>(<span class="fl">0</span>) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">time2doty</span>(hours<span class="op">=</span><span class="fl">1</span>, minutes<span class="op">=</span><span class="fl">0</span>, seconds<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    hours <span class="op">/</span> <span class="fl">24</span> <span class="op">+</span> minutes <span class="op">/</span> <span class="fl">1440</span> <span class="op">+</span> seconds <span class="op">/</span> <span class="fl">86400</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">date2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">date2doty</span>(), <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>(<span class="fu">time2doty</span>(<span class="fl">0</span>) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>"1969+306.00000)"</code></pre>
@@ -1507,21 +2034,21 @@ console.log(`${doty2year()}+${
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [12]:</pre></div><div class="cell" data-tags="[&quot;doty2time&quot;]" data-execution_count="12">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2time</span>(doty<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="fl">24</span>)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    doty <span class="op">=</span> doty <span class="op">-</span> <span class="fu">floor</span>(doty)</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    hours <span class="op">=</span> doty <span class="op">*</span> <span class="fl">24</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    floorHours <span class="op">=</span> <span class="fu">floor</span>(hours)</span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>    minutes <span class="op">=</span> (hours <span class="op">-</span> floorHours) <span class="op">/</span> <span class="fl">60</span></span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>    floorMinutes <span class="op">=</span> <span class="fu">floor</span>(minutes)</span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> floorHours, floorMinutes, (minutes <span class="op">-</span> floorMinutes) <span class="op">/</span> <span class="fl">60</span></span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">doty2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">-</span><span class="sc">$</span>(<span class="fu">join</span>(</span>
-<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>((x) <span class="op">-&gt;</span> <span class="fu">lpad</span>(x, <span class="fl">2</span>, <span class="ch">'0'</span></span>
-<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>), <span class="fu">doty2date</span>()), <span class="ch">'-'</span>))<span class="st">T</span><span class="sc">$</span>(<span class="fu">join</span>(</span>
-<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>((x) <span class="op">-&gt;</span> <span class="fu">lpad</span>(<span class="fu">Int</span>(x), <span class="fl">2</span>, <span class="ch">'0'</span></span>
-<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a>), <span class="fu">doty2time</span>(<span class="fl">0</span>)), <span class="ch">':'</span>))<span class="st">)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2time</span>(doty<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="fl">24</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    doty <span class="op">=</span> doty <span class="op">-</span> <span class="fu">floor</span>(doty)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    hours <span class="op">=</span> doty <span class="op">*</span> <span class="fl">24</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    floorHours <span class="op">=</span> <span class="fu">floor</span>(hours)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    minutes <span class="op">=</span> (hours <span class="op">-</span> floorHours) <span class="op">/</span> <span class="fl">60</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    floorMinutes <span class="op">=</span> <span class="fu">floor</span>(minutes)</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> floorHours, floorMinutes, (minutes <span class="op">-</span> floorMinutes) <span class="op">/</span> <span class="fl">60</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">doty2year</span>(), <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">-</span><span class="sc">$</span>(<span class="fu">join</span>(</span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>((x) <span class="op">-&gt;</span> <span class="fu">lpad</span>(x, <span class="fl">2</span>, <span class="ch">'0'</span></span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>), <span class="fu">doty2date</span>()), <span class="ch">'-'</span>))<span class="st">T</span><span class="sc">$</span>(<span class="fu">join</span>(</span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>((x) <span class="op">-&gt;</span> <span class="fu">lpad</span>(<span class="fu">Int</span>(x), <span class="fl">2</span>, <span class="ch">'0'</span></span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>), <span class="fu">doty2time</span>(<span class="fl">0</span>)), <span class="ch">':'</span>))<span class="st">)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>"1970-01-01T00:00:00)"</code></pre>
@@ -1592,8 +2119,8 @@ paste0(sprintf("%04d", doty2year()), "-",
 </section>
 <section id="time-zones" class="level3 page-columns page-full" data-number="3.2.5">
 <h3 data-number="3.2.5" class="anchored" data-anchor-id="time-zones"><span class="header-section-number">3.2.5</span> Time zones</h3>
-<p>ISO 8601 timestamps will often have a <code>Z</code> at the end (<code>year-mm-ddThh:mm:ssZ</code>). This <code>Z</code> is a <a href="https://en.wikipedia.org/wiki/Military_time_zone#Description">military time zone code</a> that represents the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone, which is the basis of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>. <code>Decalendar</code> timestamps and <code>Declock</code> times that are synchronized with UTC can end in <code>Z</code> (<code>year+day.dddddZ</code>) or a <code>+0</code> (<code>year+day.ddddd+0</code>). Noon UTC can be written <code>.5Z</code> or <code>.5+0</code> in <code>Declock</code> and 12:00:00Z, 120000Z, 12:00:00+00, or 120000+00 as per ISO 8601. The code in <a href="#exm-isoz">Example&nbsp;7</a> converts between UTC offsets and military time zone codes. <a href="#sec-zone">Section&nbsp;6</a> provides more information on <code>Declock</code> time zones.</p>
-<p><span class="theorem-title"><strong>Example 7 </strong></span>&nbsp;</p>
+<p>ISO 8601 timestamps will often have a <code>Z</code> at the end (<code>year-mm-ddThh:mm:ssZ</code>). This <code>Z</code> is a <a href="https://en.wikipedia.org/wiki/Military_time_zone#Description">military time zone code</a> that represents the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone, which is the basis of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>. <code>Decalendar</code> timestamps and <code>Declock</code> times that are synchronized with UTC can end in <code>Z</code> (<code>year+day.dddddZ</code>) or a <code>+0</code> (<code>year+day.ddddd+0</code>). Noon UTC can be written <code>.5Z</code> or <code>.5+0</code> in <code>Declock</code> and 12:00:00Z, 120000Z, 12:00:00+00, or 120000+00 as per ISO 8601. The code in <a href="#exm-isoz">Example&nbsp;8</a> converts between UTC offsets and military time zone codes. <a href="#sec-zone">Section&nbsp;6</a> provides more information on <code>Declock</code> time zones.</p>
+<p><span class="theorem-title"><strong>Example 8 </strong></span>&nbsp;</p>
 <section id="javascript-6" class="level4">
 <h4 class="anchored" data-anchor-id="javascript-6">JavaScript</h4>
 <section id="hour2zone" class="level5">
@@ -1630,19 +2157,19 @@ console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))</code></
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [13]:</pre></div><div class="cell" data-tags="[&quot;hour2zone&quot;]" data-execution_count="13">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import Pkg; Pkg.add("TimeZones")</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using TimeZones</span></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># localzone()</span></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">hour2zone</span>(hour<span class="op">=</span><span class="fl">0</span>)</span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">==</span> <span class="fl">0</span> ? <span class="st">"Z"</span> <span class="op">:</span></span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> hour <span class="op">&lt;</span> <span class="fl">10</span> ? <span class="fu">Char</span>(hour <span class="op">+</span> <span class="fl">64</span>) <span class="op">:</span></span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">&gt;</span> <span class="fl">9</span> <span class="op">&amp;&amp;</span> hour <span class="op">&lt;</span> <span class="fl">13</span> ? <span class="fu">Char</span>(hour <span class="op">+</span> <span class="fl">65</span>) <span class="op">:</span></span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> hour <span class="op">&gt;</span> <span class="op">-</span><span class="fl">13</span> ? <span class="fu">Char</span>(<span class="fu">abs</span>(hour) <span class="op">+</span> <span class="fl">77</span>) <span class="op">:</span> <span class="st">"J"</span>;</span>
-<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a><span class="fu">hour2zone</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import Pkg; Pkg.add("TimeZones")</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co"># using TimeZones</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="co"># localzone()</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">hour2zone</span>(hour<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">==</span> <span class="fl">0</span> ? <span class="st">"Z"</span> <span class="op">:</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> hour <span class="op">&lt;</span> <span class="fl">10</span> ? <span class="fu">Char</span>(hour <span class="op">+</span> <span class="fl">64</span>) <span class="op">:</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">&gt;</span> <span class="fl">9</span> <span class="op">&amp;&amp;</span> hour <span class="op">&lt;</span> <span class="fl">13</span> ? <span class="fu">Char</span>(hour <span class="op">+</span> <span class="fl">65</span>) <span class="op">:</span></span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>        hour <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> hour <span class="op">&gt;</span> <span class="op">-</span><span class="fl">13</span> ? <span class="fu">Char</span>(<span class="fu">abs</span>(hour) <span class="op">+</span> <span class="fl">77</span>) <span class="op">:</span> <span class="st">"J"</span>;</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="fu">hour2zone</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>"Z"</code></pre>
@@ -1654,16 +2181,16 @@ console.log(zone2hour(hour2zone(-new Date().getTimezoneOffset() / 60)))</code></
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [14]:</pre></div><div class="cell" data-tags="[&quot;zone2hour&quot;]" data-execution_count="14">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">zone2hour</span>(zone<span class="op">=</span><span class="st">"Z"</span>)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    (</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>        (zone <span class="op">=</span> <span class="fu">string</span>(zone)) <span class="op">==</span> <span class="st">"Z"</span> ? <span class="fl">0</span> <span class="op">:</span></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>        zone <span class="op">&gt;</span> <span class="st">"@"</span> <span class="op">&amp;&amp;</span> zone <span class="op">&lt;</span> <span class="st">"J"</span> ? <span class="fu">Int</span>(<span class="fu">codepoint</span>(<span class="fu">only</span>(zone))) <span class="op">-</span> <span class="fl">64</span> <span class="op">:</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>        zone <span class="op">&gt;</span> <span class="st">"J"</span> <span class="op">&amp;&amp;</span> zone <span class="op">&lt;</span> <span class="st">"N"</span> ? <span class="fu">Int</span>(<span class="fu">codepoint</span>(<span class="fu">only</span>(zone))) <span class="op">-</span> <span class="fl">65</span> <span class="op">:</span></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>        zone <span class="op">&lt;</span> <span class="st">"Z"</span> <span class="op">&amp;&amp;</span> zone <span class="op">&gt;</span> <span class="st">"M"</span> ? <span class="fu">-</span>(<span class="fu">Int</span>(<span class="fu">codepoint</span>(<span class="fu">only</span>(zone))) <span class="op">-</span> <span class="fl">77</span>) <span class="op">:</span> zone;</span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="fu">zone2hour</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">zone2hour</span>(zone<span class="op">=</span><span class="st">"Z"</span>)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>        (zone <span class="op">=</span> <span class="fu">string</span>(zone)) <span class="op">==</span> <span class="st">"Z"</span> ? <span class="fl">0</span> <span class="op">:</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>        zone <span class="op">&gt;</span> <span class="st">"@"</span> <span class="op">&amp;&amp;</span> zone <span class="op">&lt;</span> <span class="st">"J"</span> ? <span class="fu">Int</span>(<span class="fu">codepoint</span>(<span class="fu">only</span>(zone))) <span class="op">-</span> <span class="fl">64</span> <span class="op">:</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>        zone <span class="op">&gt;</span> <span class="st">"J"</span> <span class="op">&amp;&amp;</span> zone <span class="op">&lt;</span> <span class="st">"N"</span> ? <span class="fu">Int</span>(<span class="fu">codepoint</span>(<span class="fu">only</span>(zone))) <span class="op">-</span> <span class="fl">65</span> <span class="op">:</span></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>        zone <span class="op">&lt;</span> <span class="st">"Z"</span> <span class="op">&amp;&amp;</span> zone <span class="op">&gt;</span> <span class="st">"M"</span> ? <span class="fu">-</span>(<span class="fu">Int</span>(<span class="fu">codepoint</span>(<span class="fu">only</span>(zone))) <span class="op">-</span> <span class="fl">77</span>) <span class="op">:</span> zone;</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="fu">zone2hour</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>0</code></pre>
@@ -1734,15 +2261,16 @@ zone2hour()</code></pre>
 </section>
 <section id="time-intervals" class="level3" data-number="3.2.6">
 <h3 data-number="3.2.6" class="anchored" data-anchor-id="time-intervals"><span class="header-section-number">3.2.6</span> Time intervals</h3>
-<p>ISO 8601 specifies three methods of unequivocally representing <a href="https://en.wikipedia.org/wiki/ISO_8601#Time_intervals">time intervals</a>, <code>start/stop</code>, <code>start/span</code>, and <code>span/stop</code>. The <code>Decalendar</code> equivalents of these three time interval representations are <code>start:stop</code>, <code>start&gt;span</code>, and <code>stop&lt;span</code>. Notably, the <code>start/stop</code> syntax is used in Google Calendar “Add to Calendar” links (<code>https://calendar.google.com/calendar/render?action=TEMPLATE&amp;dates=start/stop</code>). Clicking on an “Add to Calendar” link opens an web browser interface for adding an event to an online calendar. The <code>date2link</code> and <code>doty2link</code> functions in <a href="#exm-isoi">Example&nbsp;8</a> create such links for Google, Outlook, Office 365, and Yahoo online calendars.</p>
-<p><span class="theorem-title"><strong>Example 8 </strong></span>&nbsp;</p>
+<p>ISO 8601 specifies three methods of unequivocally representing <a href="https://en.wikipedia.org/wiki/ISO_8601#Time_intervals">time intervals</a>, <code>start/stop</code>, <code>start/span</code>, and <code>span/stop</code>. The <code>Decalendar</code> equivalents of these three time interval representations are <code>start:stop</code>, <code>start&gt;span</code>, and <code>stop&lt;span</code>. Notably, the <code>start/stop</code> syntax is used in Google Calendar “Add to Calendar” links (<code>https://calendar.google.com/calendar/render?action=TEMPLATE&amp;dates=start/stop</code>). Clicking on an “Add to Calendar” link opens an web browser interface for adding an event to an online calendar. The <code>date2link</code> and <code>doty2link</code> functions in <a href="#exm-isoi">Example&nbsp;9</a> create such links for Google, Outlook, Office 365, and Yahoo online calendars.</p>
+<p><span class="theorem-title"><strong>Example 9 </strong></span>&nbsp;</p>
 </section>
 <section id="repeating-time-intervals" class="level3" data-number="3.2.7">
 <h3 data-number="3.2.7" class="anchored" data-anchor-id="repeating-time-intervals"><span class="header-section-number">3.2.7</span> Repeating time intervals</h3>
 <p>ISO 8601 time intervals can be made to repeat with the <code>Rn/</code> prefix (<code>Rn/start/stop</code>, <code>Rn/start/span</code>, <code>Rn/span/stop</code>), where <code>n</code> is the number of repetitions. Such <a href="https://en.wikipedia.org/wiki/ISO_8601#Repeating_intervals">repeating time intervals</a> are always consecutive and never overlap. The first three 6-hour intervals of 1970 could be written <code>R3/1970-01-01T00:00:00Z/T06</code> as per ISO 8601. This time interval in <code>Decalendar</code> could be written <code>1969+306&gt;.75&gt;.25&gt;0</code>. Unlike ISO 8601, <code>Decalendar</code> allows for the creation of non-consecutive and overlapping recurring intervals. If we wanted to include 3-hour breaks in between the three 6-hour intervals, we could write <code>1969+306&gt;1&gt;.25&gt;.125</code>. Similarly, the three 6-hour intervals could be made to overlap by 3 hours by writing <code>1969+306&gt;.5&gt;.25&lt;.125</code>.</p>
-<p>The <code>Decalendar</code> time interval representations above are called <code>spreads</code> and were inspired by the concept of <a href="https://en.wikipedia.org/wiki/Array_slicing">array slicing</a> from computer programming. <code>Decalendar</code> allows for the use of both <code>slices</code> (<code>start:stop:step</code>) and <code>spreads</code> (<code>start&gt;span&gt;split&gt;space</code>) to create time intervals. <a href="https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing">Slicing of dates and times</a> is fully implemented in the <a href="https://pandas.pydata.org/">Pandas Python library</a>. The pandas code shown in <a href="#exm-isor">Example&nbsp;9</a> obtains the start times of the last three 6-hour intervals in 1970, which is <code>1970+305&gt;.75&gt;.25&gt;0</code> in <code>Decalendar</code> and <code>R3/1970-12-31T06:00:00Z/T06</code> as per ISO 8601.</p>
-<p><span class="theorem-title"><strong>Example 9 </strong></span>&nbsp;</p>
-<pre class="{python}"><code>import pandas as pd
+<p>The <code>Decalendar</code> time interval representations above are called <code>spreads</code> and were inspired by the concept of <a href="https://en.wikipedia.org/wiki/Array_slicing">array slicing</a> from computer programming. <code>Decalendar</code> allows for the use of both <code>slices</code> (<code>start:stop:step</code>) and <code>spreads</code> (<code>start&gt;span&gt;split&gt;space</code>) to create time intervals. <a href="https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing">Slicing of dates and times</a> is fully implemented in the <a href="https://pandas.pydata.org/">Pandas Python library</a>. The pandas code shown in <a href="#exm-isor">Example&nbsp;10</a> uses slicing to obtain the start times of the last three 6-hour intervals in 1970, which is <code>1970+305&gt;.75&gt;.25&gt;0</code> in <code>Decalendar</code> and <code>R3/1970-12-31T06:00:00Z/T06</code> as per ISO 8601.</p>
+<p><span class="theorem-title"><strong>Example 10 </strong></span>&nbsp;</p>
+<pre class="{python}"><code>#| tags: [intervals]
+import pandas as pd
 
 pd.date_range("1970", "1971", freq="6H")[-4:-1]</code></pre>
 </section>
@@ -1751,9 +2279,9 @@ pd.date_range("1970", "1971", freq="6H")[-4:-1]</code></pre>
 <h2 data-number="3.3" class="anchored" data-anchor-id="french-republican-calendar"><span class="header-section-number">3.3</span> French Republican calendar</h2>
 <section id="french-republican-calendar-décades" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="french-republican-calendar-décades"><span class="header-section-number">3.3.1</span> French Republican calendar <em>décades</em></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/French_Republican_calendar">French Republican calendar</a> and <code>Decalendar</code> both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a <em>décade</em>, while a group of 10 days in <code>Decalendar</code> is called a <code>dek</code>. The names of the days in a <code>Decalendar</code> <code>dek</code> are derived from their <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero-based</a> cardinal numbers (zero, one, two…), whereas the days of the <em>décade</em> are named after their ordinal numbers (first, second, third…). <a href="#tbl-dotd">Table&nbsp;4</a> provides the cardinal numbers, one-letter codes, names, and types of the days of the <code>dek</code> as well as the names of their French Republican calendar equivalents.</p>
-<section id="table-4" class="level4">
-<h4 class="anchored" data-anchor-id="table-4"><a href="#tbl-dotd">Table&nbsp;4</a></h4>
+<p>The <a href="https://en.wikipedia.org/wiki/French_Republican_calendar">French Republican calendar</a> and <code>Decalendar</code> both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a <em>décade</em>, while a group of 10 days in <code>Decalendar</code> is called a <code>dek</code>. The names of the days in a <code>Decalendar</code> <code>dek</code> are derived from their <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero-based</a> cardinal numbers (zero, one, two…), whereas the days of the <em>décade</em> are named after their ordinal numbers (first, second, third…). <a href="#tbl-dotd">Table&nbsp;5</a> provides the cardinal numbers, one-letter codes, names, and types of the days of the <code>dek</code> as well as the names of their French Republican calendar equivalents.</p>
+<section id="table-5" class="level4">
+<h4 class="anchored" data-anchor-id="table-5"><a href="#tbl-dotd">Table&nbsp;5</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -1839,15 +2367,15 @@ pd.date_range("1970", "1971", freq="6H")[-4:-1]</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;4: The days of the <code>dek</code> and their French Republican calendar equivalents</p>
+<p>Table&nbsp;5: The days of the <code>dek</code> and their French Republican calendar equivalents</p>
 </blockquote>
 </section>
 </section>
 <section id="french-republican-calendar-time" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="french-republican-calendar-time"><span class="header-section-number">3.3.2</span> French Republican calendar time</h3>
-<p>The French Republican calendar and <code>Declock</code> both break the day down into decimal portions. In <code>Declock</code>, a <code>dime</code> is a tenth (⅒) of a day, a <code>cent</code> is a hundredth (10⁻²) of a day, a <code>mil</code> is a thousandth (10⁻³) of a day, and a <code>beat</code> is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, <em>décimes</em>, and decimal seconds, respectively. <a href="#tbl-dime">Table&nbsp;5</a> shows the start times of each <code>dime</code> (⅒) in a day and their equivalents in 24-hour and 12-hour standard time.</p>
-<section id="table-5" class="level4">
-<h4 class="anchored" data-anchor-id="table-5"><a href="#tbl-dime">Table&nbsp;5</a></h4>
+<p>The French Republican calendar and <code>Declock</code> both break the day down into decimal portions. In <code>Declock</code>, a <code>dime</code> is a tenth (⅒) of a day, a <code>cent</code> is a hundredth (10⁻²) of a day, a <code>mil</code> is a thousandth (10⁻³) of a day, and a <code>beat</code> is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, <em>décimes</em>, and decimal seconds, respectively. <a href="#tbl-dime">Table&nbsp;6</a> shows the start times of each <code>dime</code> (⅒) in a day and their equivalents in 24-hour and 12-hour standard time.</p>
+<section id="table-6" class="level4">
+<h4 class="anchored" data-anchor-id="table-6"><a href="#tbl-dime">Table&nbsp;6</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -1911,7 +2439,7 @@ pd.date_range("1970", "1971", freq="6H")[-4:-1]</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;5: The start times of each <code>dime</code> in a day and their standard time equivalents</p>
+<p>Table&nbsp;6: The start times of each <code>dime</code> in a day and their standard time equivalents</p>
 </blockquote>
 </section>
 </section>
@@ -1942,12 +2470,12 @@ pd.date_range("1970", "1971", freq="6H")[-4:-1]</code></pre>
 </section>
 <section id="unix-time-conversion-to-decalendar-timestamp" class="level3 page-columns page-full" data-number="3.6.3">
 <h3 data-number="3.6.3" class="anchored" data-anchor-id="unix-time-conversion-to-decalendar-timestamp"><span class="header-section-number">3.6.3</span> UNIX time conversion to <code>Decalendar</code> timestamp</h3>
-<p>To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from <code>days</code> to obtain the current <code>Decalendar</code> timestamp as shown in <a href="#eq-unixt">Equation&nbsp;14</a> The code in <a href="#exm-unixt">Example&nbsp;10</a> converts UNIX time into a <code>Decalendar</code> date or a <code>Decalendar</code> timestamp in the <code>Zone 0</code> time zone. The last line in <a href="#exm-unixt">Example&nbsp;10</a> obtains the current <code>Decalendar</code> date by passing the current UNIX timestamp to the <code>unix2doty</code> function. If we call this function without arguments (<code>unix2doty()</code>) the result should be the UNIX Epoch: <code>1969+306</code>. To see <a href="#exm-unixt">Example&nbsp;10</a> in action, visit this <a href="https://codepen.io/maptv/pen/oNJZeea">CodePen</a> which displays the current <code>Decalendar</code> (<code>year+day.ddddd</code>) and ISO 8601 (<code>year-mm-ddThh:mm:ss</code>) timestamps.</p>
+<p>To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from <code>days</code> to obtain the current <code>Decalendar</code> timestamp as shown in <a href="#eq-unixt">Equation&nbsp;14</a> The code in <a href="#exm-unixt">Example&nbsp;11</a> converts UNIX time into a <code>Decalendar</code> date or a <code>Decalendar</code> timestamp in the <code>Zone 0</code> time zone. The last line in <a href="#exm-unixt">Example&nbsp;11</a> obtains the current <code>Decalendar</code> date by passing the current UNIX timestamp to the <code>unix2doty</code> function. If we call this function without arguments (<code>unix2doty()</code>) the result should be the UNIX Epoch: <code>1969+306</code>. To see <a href="#exm-unixt">Example&nbsp;11</a> in action, visit this <a href="https://codepen.io/maptv/pen/oNJZeea">CodePen</a> which displays the current <code>Decalendar</code> (<code>year+day.ddddd</code>) and ISO 8601 (<code>year-mm-ddThh:mm:ss</code>) timestamps.</p>
 <p><span id="eq-unixt"><span class="math display">\[time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c}
 y \mod 4 = 0 \\
 \land y \mod 100 \neq 0 \\
 \lor y \mod 400 = 0 \end{array} \right] \qquad(14)\]</span></span></p>
-<p><span class="theorem-title"><strong>Example 10 </strong></span>&nbsp;</p>
+<p><span class="theorem-title"><strong>Example 11 </strong></span>&nbsp;</p>
 <section id="javascript-7" class="level4">
 <h4 class="anchored" data-anchor-id="javascript-7">JavaScript</h4>
 <section id="unix2doty" class="level5">
@@ -1962,7 +2490,8 @@ function unix2doty(ms = 0) {
 
 const [year, doty] = unix2doty(Date.now());
 console.log(
-    `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${
+    `${year.toString().padStart(4, "0")}+${
+    (day = Math.floor(doty)).toString().padStart(3, "0")}.${
     (Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
     );</code></pre>
 </section>
@@ -1977,19 +2506,19 @@ console.log(
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [15]:</pre></div><div class="cell" data-tags="[&quot;unix2doty&quot;]" data-execution_count="15">
 <details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(s<span class="op">=</span><span class="fl">0</span>, ms<span class="op">=</span><span class="fl">0</span>)</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    days <span class="op">=</span> s <span class="op">/</span> <span class="fl">86400</span> <span class="op">+</span> ms <span class="op">/</span> <span class="fl">86400000</span> <span class="op">+</span> <span class="fl">719468</span></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>    doe <span class="op">=</span> days <span class="op">-</span> (era <span class="op">=</span> <span class="fu">floor</span>((days <span class="op">&gt;=</span> <span class="fl">0</span> ? days <span class="op">:</span> days <span class="op">-</span> <span class="fl">146096</span>) <span class="op">/</span> <span class="fl">146097</span>)) <span class="op">*</span> <span class="fl">146097</span></span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>((doe <span class="op">-</span> doe <span class="op">/</span> <span class="fl">1460</span> <span class="op">+</span> doe <span class="op">/</span> <span class="fl">36524</span> <span class="op">-</span> doe <span class="op">/</span> <span class="fl">146096</span>) <span class="op">/</span> <span class="fl">365</span>) <span class="op">+</span> era <span class="op">*</span> <span class="fl">400</span>)</span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>    year, days <span class="op">-</span> <span class="fu">floor</span>(year <span class="op">*</span> <span class="fl">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="fl">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="fl">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="fl">400</span>)</span>
-<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> <span class="fu">unix2doty</span>(<span class="fu">time</span>())</span>
-<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
-<span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(s<span class="op">=</span><span class="fl">0</span>, ms<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>    days <span class="op">=</span> s <span class="op">/</span> <span class="fl">86400</span> <span class="op">+</span> ms <span class="op">/</span> <span class="fl">86400000</span> <span class="op">+</span> <span class="fl">719468</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>    doe <span class="op">=</span> days <span class="op">-</span> (era <span class="op">=</span> <span class="fu">floor</span>((days <span class="op">&gt;=</span> <span class="fl">0</span> ? days <span class="op">:</span> days <span class="op">-</span> <span class="fl">146096</span>) <span class="op">/</span> <span class="fl">146097</span>)) <span class="op">*</span> <span class="fl">146097</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>((doe <span class="op">-</span> doe <span class="op">/</span> <span class="fl">1460</span> <span class="op">+</span> doe <span class="op">/</span> <span class="fl">36524</span> <span class="op">-</span> doe <span class="op">/</span> <span class="fl">146096</span>) <span class="op">/</span> <span class="fl">365</span>) <span class="op">+</span> era <span class="op">*</span> <span class="fl">400</span>)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>    year, days <span class="op">-</span> <span class="fu">floor</span>(year <span class="op">*</span> <span class="fl">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="fl">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="fl">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="fl">400</span>)</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> <span class="fu">unix2doty</span>(<span class="fu">time</span>())</span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+217.04343+0"</code></pre>
+<pre><code>"2023+217.69996+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -2033,27 +2562,33 @@ paste0(sprintf("%04d", yd[1]), "+",
 </section>
 <section id="copyq" class="level4">
 <h4 class="anchored" data-anchor-id="copyq">CopyQ</h4>
-<div class="sourceCode" id="cb78"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>copyq<span class="op">:</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(ms <span class="op">=</span> <span class="dv">0</span>) {</span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> days <span class="op">=</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span><span class="op">,</span></span>
-<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>        doe <span class="op">=</span> days <span class="op">-</span> (era <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((days <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> days <span class="op">:</span> days <span class="op">-</span> <span class="dv">146096</span>) <span class="op">/</span> <span class="dv">146097</span>)) <span class="op">*</span> <span class="dv">146097</span><span class="op">,</span></span>
-<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>        year <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((doe <span class="op">-</span> doe <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> doe <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> doe <span class="op">/</span> <span class="dv">146096</span>) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> era <span class="op">*</span> <span class="dv">400</span><span class="op">;</span></span>
-<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [year<span class="op">,</span> days <span class="op">-</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">400</span>)]<span class="op">;</span></span>
-<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [year<span class="op">,</span> doty] <span class="op">=</span> <span class="fu">unix2doty</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>())<span class="op">,</span></span>
-<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>    datetime <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>year<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+</span><span class="sc">${</span>(day <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(doty))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">3</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">.</span><span class="sc">${</span>(<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span><span class="op">;</span></span>
-<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a><span class="fu">copy</span>(datetime)</span>
-<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a><span class="fu">copySelection</span>(datetime)</span>
-<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>copyq<span class="op">:</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(ms <span class="op">=</span> <span class="dv">0</span>) {</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> days <span class="op">=</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span><span class="op">,</span></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>        doe <span class="op">=</span> days <span class="op">-</span> (era <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((days <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> days <span class="op">:</span> days <span class="op">-</span> <span class="dv">146096</span>) <span class="op">/</span> <span class="dv">146097</span>)) <span class="op">*</span> <span class="dv">146097</span><span class="op">,</span></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>        year <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((doe <span class="op">-</span> doe <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> doe <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> doe <span class="op">/</span> <span class="dv">146096</span>) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> era <span class="op">*</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [year<span class="op">,</span> days <span class="op">-</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">400</span>)]<span class="op">;</span></span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [year<span class="op">,</span> doty] <span class="op">=</span> <span class="fu">unix2doty</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>())<span class="op">,</span></span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>    datetime <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>year<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+</span><span class="sc">${</span></span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>    (day <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(doty))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">3</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">.</span><span class="sc">${</span></span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span><span class="op">;</span></span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a><span class="fu">copy</span>(datetime)</span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a><span class="fu">copySelection</span>(datetime)</span>
+<span id="cb79-16"><a href="#cb79-16" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>:::</p>
 </section>
 </section>
-<section id="parsing-timestamps" class="level3" data-number="3.6.4">
-<h3 data-number="3.6.4" class="anchored" data-anchor-id="parsing-timestamps"><span class="header-section-number">3.6.4</span> Parsing timestamps</h3>
-<p>To extract the components of a <code>Decalendar</code> timestamp, we can use the <code>parse_dec</code> function in <a href="#exm-isos">Example&nbsp;11</a>. Parsing timestamps is the first step before any later processes such as timestamp arithmetic or conversion between timestamp formats. The <code>parse_dec</code> function returns a year, a <code>doty</code>, and a fractional day time zone offset. The year and time zone offset can be omitted in the timestamp provided to <code>parse_dec</code>. If not specified in the timestamp, the year is the current year and the time zone offset is 0.</p>
-<p><span class="theorem-title"><strong>Example 11 </strong></span>&nbsp;</p>
+<section id="building-timestamps" class="level3" data-number="3.6.4">
+<h3 data-number="3.6.4" class="anchored" data-anchor-id="building-timestamps"><span class="header-section-number">3.6.4</span> Building timestamps</h3>
+<p>The code in <a href="#exm-unixt">Example&nbsp;11</a> creates a <code>Decalendar</code> timestamp from UNIX time.</p>
+</section>
+<section id="parsing-timestamps" class="level3" data-number="3.6.5">
+<h3 data-number="3.6.5" class="anchored" data-anchor-id="parsing-timestamps"><span class="header-section-number">3.6.5</span> Parsing timestamps</h3>
+<p>To extract the components of a <code>Decalendar</code> timestamp, we can use the <code>parse_dec</code> function in <a href="#exm-isos">Example&nbsp;12</a>. Parsing timestamps is the first step before any later processes such as timestamp arithmetic or conversion between timestamp formats. The <code>parse_dec</code> function returns a year, a <code>doty</code>, and a fractional day time zone offset. The year and time zone offset can be omitted in the timestamp provided to <code>parse_dec</code>. If not specified in the timestamp, the year is the current year and the time zone offset is 0.</p>
+<p><span class="theorem-title"><strong>Example 12 </strong></span>&nbsp;</p>
 </section>
 </section>
 </section>
@@ -2090,9 +2625,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 </section>
 <section id="units" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Units</h1>
-<p>In the <code>stamps</code> above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the desired precision level. <code>Declock</code> provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both <code>Declock</code> and <code>Decalendar</code>. Listing the units of each, as in <a href="#tbl-unit">Table&nbsp;6</a>, highlights the relationship between the two:</p>
-<section id="table-6" class="level4">
-<h4 class="anchored" data-anchor-id="table-6"><a href="#tbl-unit">Table&nbsp;6</a></h4>
+<p>In the <code>stamps</code> above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the desired precision level. <code>Declock</code> provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both <code>Declock</code> and <code>Decalendar</code>. Listing the units of each, as in <a href="#tbl-unit">Table&nbsp;7</a>, highlights the relationship between the two:</p>
+<section id="table-7" class="level4">
+<h4 class="anchored" data-anchor-id="table-7"><a href="#tbl-unit">Table&nbsp;7</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2383,9 +2918,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;6: The units of <code>Decalendar</code> and <code>Declock</code></p>
+<p>Table&nbsp;7: The units of <code>Decalendar</code> and <code>Declock</code></p>
 </blockquote>
-<p>In <a href="#tbl-unit">Table&nbsp;6</a>, the units with positive exponents are used for <code>Decalendar</code>, while the ones with negative exponents are used for <code>Declock</code>. <code>Cents</code> (<code>¢</code>) can serve as a useful point of comparison to understand the scale of some of the units in <a href="#tbl-unit">Table&nbsp;6</a> above, because each <code>cent</code> is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to <code>cents</code>, <code>mils</code> are ten times smaller (.1% = 1.4 minutes), <code>dimes</code> (<code>⅒</code>) are ten times larger (10% = 144 minutes), and <code>deks</code> (<code>ι</code>) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 <code>dek</code> contains 10 whole days while the other units are fractions of days.</p>
+<p>In <a href="#tbl-unit">Table&nbsp;7</a>, the units with positive exponents are used for <code>Decalendar</code>, while the ones with negative exponents are used for <code>Declock</code>. <code>Cents</code> (<code>¢</code>) can serve as a useful point of comparison to understand the scale of some of the units in <a href="#tbl-unit">Table&nbsp;7</a> above, because each <code>cent</code> is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to <code>cents</code>, <code>mils</code> are ten times smaller (.1% = 1.4 minutes), <code>dimes</code> (<code>⅒</code>) are ten times larger (10% = 144 minutes), and <code>deks</code> (<code>ι</code>) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 <code>dek</code> contains 10 whole days while the other units are fractions of days.</p>
 <p><code>Declock</code> units smaller than <code>mils</code> are not easy to think of as percents of a day. For <code>phrases</code> (<code>◠</code>) and <code>beats</code> (<code>♫</code>), music serves as a much more useful analogy. In fact, <code>phrases</code> and <code>beats</code> are musical terms. The duration of a musical beat depends on the tempo, but a <code>Declock beat</code> is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. <code>Declock beats</code> are organized into groups of 2 called <code>bars</code> or <code>measures</code>, groups of 10 called <code>phrases</code>, and groups of 20 called <code>periods</code>. A real example of music that follows this exact pattern is Haydn’s <a href="https://en.wikipedia.org/wiki/Period_(music)">Feldpartita</a>.</p>
 <p><code>Declock</code> units smaller than <code>beats</code> are too small for typical daily use. For example, a <code>mic</code> (<code>microday</code>, <code>μ</code>) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 <code>liphs</code> (<code>milliphrases</code>, <code>m̑</code>). A <code>lib</code> (<code>millibeat</code>, <code>m̈</code>) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person’s ear to their other ear in about 7 <code>nans</code> (<code>nanodays</code>). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a <code>roph</code> (<code>microphrase</code>, <code>μ̑</code>) difference might be too fast to notice. In a <code>rob</code> (<code>microbeat</code>, <code>µ̈</code>), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.</p>
 </section>
@@ -2398,9 +2933,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 </section>
 <section id="dot-formats" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Dot formats</h1>
-<p>The <code>stamps</code> shown above are in the decimal days of the year (<code>.y</code>) format, which is the main <code>Decalendar</code> format. In addition to the <code>.y</code> format, there are 2 other supplemental <code>datetime</code> formats, which are based on decimal days of the month (<code>.m</code>), and decimal days of the week (<code>.w</code>). <a href="#tbl-format">Table&nbsp;7</a> summarizes the three decimal day-of-the ( <code>dot</code> or <code>.</code>) formats:</p>
-<section id="table-7" class="level4">
-<h4 class="anchored" data-anchor-id="table-7"><a href="#tbl-format">Table&nbsp;7</a></h4>
+<p>The <code>stamps</code> shown above are in the decimal days of the year (<code>.y</code>) format, which is the main <code>Decalendar</code> format. In addition to the <code>.y</code> format, there are 2 other supplemental <code>datetime</code> formats, which are based on decimal days of the month (<code>decc</code>), and decimal days of the week (<code>.w</code>). <a href="#tbl-format">Table&nbsp;8</a> summarizes the three decimal day-of-the ( <code>dot</code> or <code>.</code>) formats:</p>
+<section id="table-8" class="level4">
+<h4 class="anchored" data-anchor-id="table-8"><a href="#tbl-format">Table&nbsp;8</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2433,9 +2968,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;7: The three dot formats</p>
+<p>Table&nbsp;8: The three dot formats</p>
 </blockquote>
-<p>In <a href="#tbl-format">Table&nbsp;7</a> , <code>day</code> is the 3-digit day of the year (<code>doty</code>) number, <code>dd</code> is the 2-digit day of the month (<code>dotm</code>) number, <code>d</code> is the 1-digit day of the week (<code>dotw</code>) number, and <code>.day</code> is the time in <code>mils</code>.</p>
+<p>In <a href="#tbl-format">Table&nbsp;8</a> , <code>day</code> is the 3-digit day of the year (<code>doty</code>) number, <code>dd</code> is the 2-digit day of the month (<code>dotm</code>) number, <code>d</code> is the 1-digit day of the week (<code>dotw</code>) number, and <code>.day</code> is the time in <code>mils</code>.</p>
 </section>
 <section id="the-.m-format" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="the-.m-format"><span class="header-section-number">7.1</span> The <code>.m</code> format</h2>
@@ -2445,11 +2980,11 @@ paste0(sprintf("%04d", yd[1]), "+",
 <p><span id="eq-dotm1"><span class="math display">\[m = \begin{cases}mm - 3&amp;{\text{if } month &gt; 2;}\\mm + 9&amp;{\text{otherwise.}}\end{cases} \qquad(15)\]</span></span></p>
 <p><span id="eq-dotm2"><span class="math display">\[m = \begin{cases}month + 3&amp;{\text{if } month &lt; 10;}\\month - 9&amp;{\text{otherwise.}}\end{cases} \qquad(16)\]</span></span></p>
 </section>
-<section id="the-.w-format" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="the-.w-format"><span class="header-section-number">7.2</span> The <code>.w</code> format</h2>
-<p>The week number in the <code>.w</code> format, <code>ww</code>, ranges from 0 to 53 or -54 to -1. Weeks in the <code>.w</code> format start from Sunday. <a href="#tbl-dotw">Table&nbsp;8</a> shows the possible <code>dotw</code> values, which range from 0 to 6 or -7 to -1.</p>
-<section id="table-8" class="level4">
-<h4 class="anchored" data-anchor-id="table-8"><a href="#tbl-dotw">Table&nbsp;8</a></h4>
+<section id="the-decw-format" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="the-decw-format"><span class="header-section-number">7.2</span> The <code>decw</code> format</h2>
+<p>The week number in the <code>decw</code> format, <code>ww</code>, ranges from 0 to 53 or -54 to -1. Weeks in the <code>decw</code> format start from Sunday. <a href="#tbl-dotw">Table&nbsp;9</a> shows the possible <code>dotw</code> values, which range from 0 to 6 or -7 to -1.</p>
+<section id="table-9" class="level4">
+<h4 class="anchored" data-anchor-id="table-9"><a href="#tbl-dotw">Table&nbsp;9</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2498,15 +3033,15 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;8: The weeks in the <code>.w</code> format</p>
+<p>Table&nbsp;9: The weeks in the <code>decw</code> format</p>
 </blockquote>
 </section>
 </section>
 <section id="dot-format-examples" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="dot-format-examples"><span class="header-section-number">7.3</span> Dot format examples</h2>
-<p><a href="#tbl-dotex">Table&nbsp;9</a> builds on the example from <a href="#sec-zone">Section&nbsp;6</a> to compare all three <code>.</code> formats. The 3 <code>.</code> formats differ only in their approach to the date, not the time. Therefore, the times below are all shown to 1-digit <code>dime</code> precision (same as time zones) instead of the typical 3-digit <code>mil</code> precision. In Mexico City, the time is <code>+5-3</code> or <code>-5-3</code>, while the time in London is <code>+8+0</code> or <code>-2+0</code> and time in Tokyo is <code>+2+4</code> or <code>-8+4</code>.</p>
-<section id="table-9" class="level4">
-<h4 class="anchored" data-anchor-id="table-9"><a href="#tbl-dotex">Table&nbsp;9</a></h4>
+<p><a href="#tbl-dotex">Table&nbsp;10</a> builds on the example from <a href="#sec-zone">Section&nbsp;6</a> to compare all three <code>.</code> formats. The 3 <code>.</code> formats differ only in their approach to the date, not the time. Therefore, the times below are all shown to 1-digit <code>dime</code> precision (same as time zones) instead of the typical 3-digit <code>mil</code> precision. In Mexico City, the time is <code>+5-3</code> or <code>-5-3</code>, while the time in London is <code>+8+0</code> or <code>-2+0</code> and time in Tokyo is <code>+2+4</code> or <code>-8+4</code>.</p>
+<section id="table-10" class="level4">
+<h4 class="anchored" data-anchor-id="table-10"><a href="#tbl-dotex">Table&nbsp;10</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2571,11 +3106,11 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;9: The time in Mexico City, London, and Tokyo in all three dot formats</p>
+<p>Table&nbsp;10: The time in Mexico City, London, and Tokyo in all three dot formats</p>
 </blockquote>
-<p>In <a href="#tbl-dotex">Table&nbsp;9</a>, the <code>.m</code> format tells us that the month in Tokyo is January (<code>Month 0</code>) and the month in Mexico City and London is December (<code>Month B</code>). We could say the <code>.m</code> dates in Mexico City and London as “<code>Year 1999 Month B Day 29</code>” or “<code>Year 1999 Month -1 Day -1</code>” and the Tokyo date as “<code>Year 2000 Month 0 Day 0</code>” or” <code>Year 2000 Month -C Day -31</code>“.</p>
-<p>The <code>.w</code> format always starts the year with <code>Week 0</code>, but the year can start on any day of the week. <a href="#tbl-dotex">Table&nbsp;9</a> shows that the year 2000 starts on a Saturday (<code>Week 0 Day 6</code>). The <code>.w</code> dates in Mexico City and London could be said “<code>Year 1999 Week 52 Day 2</code>” or “<code>Year 1999 Week -1 Day -5</code>”, while the date in Tokyo could be pronounced “<code>Year 2000 Week 0 Day 3</code>” or “<code>Year 2000 Week -52 Day -4</code>” in Tokyo.</p>
-<p>In contrast to the <code>.m</code> and the <code>.w</code> formats, the dates in the <code>.y</code> format are one character shorter and a little easier to say. The spoken form of the <code>.y</code> date in Mexico City and London is “<code>Year 1999 Day 365</code>” or “<code>Year 1999 Day -1</code>” and the spoken form of the Tokyo date is “<code>Year 2000 Day 0</code>” or “<code>Year 2000 Day -365</code>”.</p>
+<p>In <a href="#tbl-dotex">Table&nbsp;10</a>, the <code>.m</code> format tells us that the month in Tokyo is January (<code>Month 0</code>) and the month in Mexico City and London is December (<code>Month B</code>). We could say the <code>.m</code> dates in Mexico City and London as “<code>Year 1999 Month B Day 29</code>” or “<code>Year 1999 Month -1 Day -1</code>” and the Tokyo date as “<code>Year 2000 Month 0 Day 0</code>” or” <code>Year 2000 Month -C Day -31</code>“.</p>
+<p>The <code>decw</code> format always starts the year with <code>Week 0</code>, but the year can start on any day of the week. <a href="#tbl-dotex">Table&nbsp;10</a> shows that the year 2000 starts on a Saturday (<code>Week 0 Day 6</code>). The <code>decw</code> dates in Mexico City and London could be said “<code>Year 1999 Week 52 Day 2</code>” or “<code>Year 1999 Week -1 Day -5</code>”, while the date in Tokyo could be pronounced “<code>Year 2000 Week 0 Day 3</code>” or “<code>Year 2000 Week -52 Day -4</code>” in Tokyo.</p>
+<p>In contrast to the <code>.m</code> and the <code>decw</code> formats, the dates in the <code>.y</code> format are one character shorter and a little easier to say. The spoken form of the <code>.y</code> date in Mexico City and London is “<code>Year 1999 Day 365</code>” or “<code>Year 1999 Day -1</code>” and the spoken form of the Tokyo date is “<code>Year 2000 Day 0</code>” or “<code>Year 2000 Day -365</code>”.</p>
 </section>
 </section>
 <section id="deks" class="level2" data-number="7.4">
@@ -2593,10 +3128,10 @@ paste0(sprintf("%04d", yd[1]), "+",
 <h3 data-number="7.4.3" class="anchored" data-anchor-id="schedules"><span class="header-section-number">7.4.3</span> Schedules</h3>
 <section id="pently-schedules" class="level4">
 <h4 class="anchored" data-anchor-id="pently-schedules">Pently schedules</h4>
-<p>If necessary, the length of the workday and the number of workdays in the <code>dek</code> can be adjusted according to different schedules. As mentioned above, each half of the <code>dek</code> is called a <code>pent</code>. Each <code>pent</code> can have its own <code>pently</code> schedule. The expectation is that workers will work for 12 <code>dimes</code> per <code>pent</code>. It is possible to split those 12 <code>dimes</code> over the course of 5, 4, 3, or 2 days in each <code>pent</code>. <a href="#tbl-pently">Table&nbsp;10</a> displays how the number of workdays and restdays in a <code>pent</code> affects the start time, end time, and duration of the workday. The different <code>pently</code> schedules are named after the number of workdays per <code>pent</code>. People can switch between <code>pently</code> schedules every <code>pent</code> as needed, but unless there is a compelling reason to follow a different <code>pently</code> schedule, everyone should follow the <code>Schedule 3</code> by default. <code>Schedule 3</code> has 3 workdays and 2 restdays in each <code>pent</code>. Each <code>Schedule 3</code> workday starts at <code>Dot 3</code>, ends at <code>Dot 7</code>, and lasts 4 <code>dimes</code>.</p>
+<p>If necessary, the length of the workday and the number of workdays in the <code>dek</code> can be adjusted according to different schedules. As mentioned above, each half of the <code>dek</code> is called a <code>pent</code>. Each <code>pent</code> can have its own <code>pently</code> schedule. The expectation is that workers will work for 12 <code>dimes</code> per <code>pent</code>. It is possible to split those 12 <code>dimes</code> over the course of 5, 4, 3, or 2 days in each <code>pent</code>. <a href="#tbl-pently">Table&nbsp;11</a> displays how the number of workdays and restdays in a <code>pent</code> affects the start time, end time, and duration of the workday. The different <code>pently</code> schedules are named after the number of workdays per <code>pent</code>. People can switch between <code>pently</code> schedules every <code>pent</code> as needed, but unless there is a compelling reason to follow a different <code>pently</code> schedule, everyone should follow the <code>Schedule 3</code> by default. <code>Schedule 3</code> has 3 workdays and 2 restdays in each <code>pent</code>. Each <code>Schedule 3</code> workday starts at <code>Dot 3</code>, ends at <code>Dot 7</code>, and lasts 4 <code>dimes</code>.</p>
 </section>
-<section id="table-10" class="level4">
-<h4 class="anchored" data-anchor-id="table-10"><a href="#tbl-pently">Table&nbsp;10</a></h4>
+<section id="table-11" class="level4">
+<h4 class="anchored" data-anchor-id="table-11"><a href="#tbl-pently">Table&nbsp;11</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2645,15 +3180,15 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;10: The characteristics of the pently schedules</p>
+<p>Table&nbsp;11: The characteristics of the pently schedules</p>
 </blockquote>
 </section>
 <section id="daily-schedules" class="level4">
 <h4 class="anchored" data-anchor-id="daily-schedules">Daily schedules</h4>
-<p><code>Decalendar</code> recommends waking up at <code>Dot 2</code> and going to bed at <code>Dot 8</code>. This recommendation allots 4 <code>dimes</code> (9.6 hours) for falling asleep and sleeping. To keep daily schedules symmetrical, the time spent awake should be split evenly before and after work. People following <code>Schedule 3</code> would thus have 10 <code>cents</code> (2.4 hours) to prepare for work and another 10 <code>cents</code> to prepare for bed. <a href="#tbl-daily">Table&nbsp;11</a> shows the recommended <code>Schedule 3</code> daily schedule. <code>Schedule 4</code> and <code>Schedule 5</code> allot even more time, 15 <code>cents</code> (3.6 hours) and 18 <code>cents</code> (4.32 hours), respectively, for before-work and after-work activities. The recommended sleep schedule does not fit well with <code>Schedule 2</code>, but this incompatibility does not have to result in a sleep deficit. If the <code>Schedule 2</code> workdays are not consecutive, people following <code>Schedule 2</code> can catch up on sleep on their days off by going to bed early before and sleeping in after every workday.</p>
+<p><code>Decalendar</code> recommends waking up at <code>Dot 2</code> and going to bed at <code>Dot 8</code>. This recommendation allots 4 <code>dimes</code> (9.6 hours) for falling asleep and sleeping. To keep daily schedules symmetrical, the time spent awake should be split evenly before and after work. People following <code>Schedule 3</code> would thus have 10 <code>cents</code> (2.4 hours) to prepare for work and another 10 <code>cents</code> to prepare for bed. <a href="#tbl-daily">Table&nbsp;12</a> shows the recommended <code>Schedule 3</code> daily schedule. <code>Schedule 4</code> and <code>Schedule 5</code> allot even more time, 15 <code>cents</code> (3.6 hours) and 18 <code>cents</code> (4.32 hours), respectively, for before-work and after-work activities. The recommended sleep schedule does not fit well with <code>Schedule 2</code>, but this incompatibility does not have to result in a sleep deficit. If the <code>Schedule 2</code> workdays are not consecutive, people following <code>Schedule 2</code> can catch up on sleep on their days off by going to bed early before and sleeping in after every workday.</p>
 </section>
-<section id="table-11" class="level4">
-<h4 class="anchored" data-anchor-id="table-11"><a href="#tbl-daily">Table&nbsp;11</a></h4>
+<section id="table-12" class="level4">
+<h4 class="anchored" data-anchor-id="table-12"><a href="#tbl-daily">Table&nbsp;12</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2692,7 +3227,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;11: The workday schedule</p>
+<p>Table&nbsp;12: The workday schedule</p>
 </blockquote>
 </section>
 </section>
@@ -2702,10 +3237,10 @@ paste0(sprintf("%04d", yd[1]), "+",
 <p>In addition to serving as a part of the Gregorian date coordinate system described above, months can also indicate the current season or quarter. <code>Deks</code> can also serve as indicator of subyear units like seasons.</p>
 <section id="seasons" class="level3" data-number="7.5.1">
 <h3 data-number="7.5.1" class="anchored" data-anchor-id="seasons"><span class="header-section-number">7.5.1</span> Seasons</h3>
-<p>We can use <a href="#tbl-coor">Table&nbsp;1</a> to convert any Gregorian calendar date to a positive <code>doty</code> number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact <code>doty</code> number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as <a href="https://en.wikipedia.org/wiki/Nowruz">Nowruz</a>.</p>
-<p>The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has its opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. <a href="#tbl-soleq">Table&nbsp;12</a> lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.</p>
-<section id="table-12" class="level4">
-<h4 class="anchored" data-anchor-id="table-12"><a href="#tbl-soleq">Table&nbsp;12</a></h4>
+<p>We can use <strong>?<strong>?@tbl-coor</strong></strong> to convert any Gregorian calendar date to a positive <code>doty</code> number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact <code>doty</code> number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as <a href="https://en.wikipedia.org/wiki/Nowruz">Nowruz</a>.</p>
+<p>The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has its opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. <a href="#tbl-soleq">Table&nbsp;13</a> lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.</p>
+<section id="table-13" class="level4">
+<h4 class="anchored" data-anchor-id="table-13"><a href="#tbl-soleq">Table&nbsp;13</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2768,13 +3303,13 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;12: Solstice and equinox Gregorian calendar and <code>doty</code> dates</p>
+<p>Table&nbsp;13: Solstice and equinox Gregorian calendar and <code>doty</code> dates</p>
 </blockquote>
-<p>Using the information in <a href="#tbl-soleq">Table&nbsp;12</a>, we can group the <code>deks</code> and <code>pents</code> in a year according to the seasons in which they occur. We identify <code>deks</code> using the first 2 digits of the 3-digit day number of any day in that <code>dek</code>. The <code>pent</code> number is twice the <code>dek</code> number plus one if the <code>dotd</code> is greater than 4 (<span class="math inline">\(dek \cdot 2 + dotd &gt; 4\)</span>). For example, <code>Day 19</code> is the last day in <code>Dek 1</code> and <code>Pent 3</code>, while <code>Day 111</code> is the second day in <code>Dek 11</code> and <code>Pent 22</code>.</p>
-<p>We can round up the start of the first season and round down the start of the second season to obtain the division of <code>pents</code> by season as summarized in <a href="#tbl-season">Table&nbsp;13</a> It is important to note that the last season starts in <code>Pent 59</code> of one year and ends with <code>Pent 3</code> of the subsequent year. In common years, each season in <a href="#tbl-season">Table&nbsp;13</a> has 18 <code>pents</code> (90 days), except for the season in the second row, which has 19 <code>pents</code> (95 days). In leap years, the season in the last row of <a href="#tbl-season">Table&nbsp;13</a> has 18.2 pents (91 days).</p>
+<p>Using the information in <a href="#tbl-soleq">Table&nbsp;13</a>, we can group the <code>deks</code> and <code>pents</code> in a year according to the seasons in which they occur. We identify <code>deks</code> using the first 2 digits of the 3-digit day number of any day in that <code>dek</code>. The <code>pent</code> number is twice the <code>dek</code> number plus one if the <code>dotd</code> is greater than 4 (<span class="math inline">\(dek \cdot 2 + dotd &gt; 4\)</span>). For example, <code>Day 19</code> is the last day in <code>Dek 1</code> and <code>Pent 3</code>, while <code>Day 111</code> is the second day in <code>Dek 11</code> and <code>Pent 22</code>.</p>
+<p>We can round up the start of the first season and round down the start of the second season to obtain the division of <code>pents</code> by season as summarized in <a href="#tbl-season">Table&nbsp;14</a> It is important to note that the last season starts in <code>Pent 59</code> of one year and ends with <code>Pent 3</code> of the subsequent year. In common years, each season in <a href="#tbl-season">Table&nbsp;14</a> has 18 <code>pents</code> (90 days), except for the season in the second row, which has 19 <code>pents</code> (95 days). In leap years, the season in the last row of <a href="#tbl-season">Table&nbsp;14</a> has 18.2 pents (91 days).</p>
 </section>
-<section id="table-13" class="level4">
-<h4 class="anchored" data-anchor-id="table-13"><a href="#tbl-season">Table&nbsp;13</a></h4>
+<section id="table-14" class="level4">
+<h4 class="anchored" data-anchor-id="table-14"><a href="#tbl-season">Table&nbsp;14</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2823,7 +3358,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;13: The <code>pents</code> that begin and end each season</p>
+<p>Table&nbsp;14: The <code>pents</code> that begin and end each season</p>
 </blockquote>
 </section>
 </section>
@@ -2831,10 +3366,10 @@ paste0(sprintf("%04d", yd[1]), "+",
 <h3 data-number="7.5.2" class="anchored" data-anchor-id="qops-delts-eps-and-waus"><span class="header-section-number">7.5.2</span> <code>Qops</code>, <code>Delts</code>, <code>Eps</code> and <code>Waus</code></h3>
 <section id="qops" class="level4">
 <h4 class="anchored" data-anchor-id="qops"><code>Qops</code></h4>
-<p>In contrast to the variable length of seasons, other <code>Decalendar</code> units are constant length. Of these constant length units, <code>qops</code> (<code>qoppas</code>, <code>ϟ</code>) are most like seasons. <code>Qops</code> divide the year into four parts, but unlike seasons, <code>qops</code> do not include <code>Pent 72</code>, the last <code>pent</code> of the year. <code>Pent 72</code> is not included in the last <code>qop</code> so that each <code>qop</code> is 9 <code>deks</code> and 90 days long. The omission of <code>Dek 36</code> also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because <code>Dek 36</code> overlaps with <code>Dek 0</code>. <a href="#tbl-q">Table&nbsp;14</a> shows the division of <code>deks</code> by <code>qop</code>.</p>
+<p>In contrast to the variable length of seasons, other <code>Decalendar</code> units are constant length. Of these constant length units, <code>qops</code> (<code>qoppas</code>, <code>ϟ</code>) are most like seasons. <code>Qops</code> divide the year into four parts, but unlike seasons, <code>qops</code> do not include <code>Pent 72</code>, the last <code>pent</code> of the year. <code>Pent 72</code> is not included in the last <code>qop</code> so that each <code>qop</code> is 9 <code>deks</code> and 90 days long. The omission of <code>Dek 36</code> also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because <code>Dek 36</code> overlaps with <code>Dek 0</code>. <a href="#tbl-q">Table&nbsp;15</a> shows the division of <code>deks</code> by <code>qop</code>.</p>
 </section>
-<section id="table-14" class="level4">
-<h4 class="anchored" data-anchor-id="table-14"><a href="#tbl-q">Table&nbsp;14</a></h4>
+<section id="table-15" class="level4">
+<h4 class="anchored" data-anchor-id="table-15"><a href="#tbl-q">Table&nbsp;15</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2868,15 +3403,15 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;14: The <code>deks</code> that begin and end each <code>qop</code></p>
+<p>Table&nbsp;15: The <code>deks</code> that begin and end each <code>qop</code></p>
 </blockquote>
 </section>
 <section id="delts" class="level4">
 <h4 class="anchored" data-anchor-id="delts"><code>Delts</code></h4>
-<p>In addition to <code>qops</code> shown above, <code>Decalendar</code> describes 3 other similar units called <code>delts</code> (<code>deltas</code>, <code>δ</code>), <code>eps</code> (<code>epsilons</code>, <code>ε</code>), and <code>waus</code> (<code>ϛ</code>). These units do not leave out as many days in each year, because they split the year by day, rather than by <code>dek</code>. <code>Delts</code>, <code>eps</code>, and <code>wau</code> split the year into 4, 5, and 6 parts, respectively. <code>Delts</code> are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which <code>delts</code> start and end. <a href="#tbl-d">Table&nbsp;15</a> list the numbers of the days that begin and end each <code>delt</code>. In <a href="#tbl-q">Table&nbsp;14</a>, not only do rows alternate between even and odd numbers, but the <code>delt</code> number is the last digit of both the start and the end day of the <code>delt</code>.</p>
+<p>In addition to <code>qops</code> shown above, <code>Decalendar</code> describes 3 other similar units called <code>delts</code> (<code>deltas</code>, <code>δ</code>), <code>eps</code> (<code>epsilons</code>, <code>ε</code>), and <code>waus</code> (<code>ϛ</code>). These units do not leave out as many days in each year, because they split the year by day, rather than by <code>dek</code>. <code>Delts</code>, <code>eps</code>, and <code>wau</code> split the year into 4, 5, and 6 parts, respectively. <code>Delts</code> are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which <code>delts</code> start and end. <a href="#tbl-d">Table&nbsp;16</a> list the numbers of the days that begin and end each <code>delt</code>. In <a href="#tbl-q">Table&nbsp;15</a>, not only do rows alternate between even and odd numbers, but the <code>delt</code> number is the last digit of both the start and the end day of the <code>delt</code>.</p>
 </section>
-<section id="table-15" class="level4">
-<h4 class="anchored" data-anchor-id="table-15"><a href="#tbl-d">Table&nbsp;15</a></h4>
+<section id="table-16" class="level4">
+<h4 class="anchored" data-anchor-id="table-16"><a href="#tbl-d">Table&nbsp;16</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2910,15 +3445,15 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;15: The days that begin and end each <code>delt</code></p>
+<p>Table&nbsp;16: The days that begin and end each <code>delt</code></p>
 </blockquote>
 </section>
 <section id="eps" class="level4">
 <h4 class="anchored" data-anchor-id="eps"><code>Eps</code></h4>
-<p>Unlike <code>delts</code>, <code>eps</code> are 73 days long and do not leave out any days from common years. <code>Qops</code>, <code>delts</code>, and <code>eps</code> all leave out leap days in leap years. <a href="#tbl-e">Table&nbsp;16</a> list the numbers of the days that begin and end each <code>ep</code>.</p>
+<p>Unlike <code>delts</code>, <code>eps</code> are 73 days long and do not leave out any days from common years. <code>Qops</code>, <code>delts</code>, and <code>eps</code> all leave out leap days in leap years. <a href="#tbl-e">Table&nbsp;17</a> list the numbers of the days that begin and end each <code>ep</code>.</p>
 </section>
-<section id="table-16" class="level4">
-<h4 class="anchored" data-anchor-id="table-16"><a href="#tbl-e">Table&nbsp;16</a></h4>
+<section id="table-17" class="level4">
+<h4 class="anchored" data-anchor-id="table-17"><a href="#tbl-e">Table&nbsp;17</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -2957,15 +3492,15 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;16: The days that begin and end each <code>ep</code></p>
+<p>Table&nbsp;17: The days that begin and end each <code>ep</code></p>
 </blockquote>
 </section>
 <section id="waus" class="level4">
 <h4 class="anchored" data-anchor-id="waus"><code>Waus</code></h4>
-<p>The only unit that can include the leap year is a <code>wau</code> (<code>ϛ</code>), which is 61 days long and follows a similar pattern as a <code>delt</code>, except the last <code>wau</code> in common years is 1 day short than all the others. <a href="#tbl-w">Table&nbsp;17</a> list the numbers of the days that begin and end each <code>wau</code>. As with <code>delts</code>, the <code>wau</code> number is the last digit of the numbers of its first and last day.</p>
+<p>The only unit that can include the leap year is a <code>wau</code> (<code>ϛ</code>), which is 61 days long and follows a similar pattern as a <code>delt</code>, except the last <code>wau</code> in common years is 1 day short than all the others. <a href="#tbl-w">Table&nbsp;18</a> list the numbers of the days that begin and end each <code>wau</code>. As with <code>delts</code>, the <code>wau</code> number is the last digit of the numbers of its first and last day.</p>
 </section>
-<section id="table-17" class="level4">
-<h4 class="anchored" data-anchor-id="table-17"><a href="#tbl-w">Table&nbsp;17</a></h4>
+<section id="table-18" class="level4">
+<h4 class="anchored" data-anchor-id="table-18"><a href="#tbl-w">Table&nbsp;18</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3009,7 +3544,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;17: The days that begin and end each <code>wau</code></p>
+<p>Table&nbsp;18: The days that begin and end each <code>wau</code></p>
 </blockquote>
 <p>All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of <code>Delt 2</code>, <code>D2+00.5</code> or <code>+182.5</code>, and the midpoint of leap years is midnight of the first day of <code>Wau 3</code>, <code>W3+00.0</code> or <code>+183.0</code>. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is <code>2000S0+00</code> or <code>2000+020</code>, while the last day of this season is <code>2000S0+89</code> or <code>2000+109</code>. The subyear units are essentially date intervals, series of contiguous dates. <code>Decalendar</code> includes very powerful approaches to describing series of dates, times, and <code>stamps</code>.</p>
 </section>
@@ -3022,9 +3557,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 <section id="slices" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="slices"><span class="header-section-number">8.1</span> Slices</h2>
 <p>Instead of listing every single day in a <code>series</code>, we can “slice” from <code>Day 0</code> up to but not including <code>Day 3</code> by writing <code>:3</code>. <code>Simple slices</code> consist of a <code>start</code> and a <code>stop</code> separated by a colon (<code>start:stop</code>). When the <code>start</code> is omitted, <code>slices</code> begin at the first value, which in the context of a year is <code>Day 0</code> and in the context of a day is midnight. Therefore, writing <code>:3</code> is the same as writing <code>0:3</code>, both represent the first 3 days of the year: <code>0,1,2</code>. Using this approach, we can shorten the series <code>0,.1,.2,.3,.4</code> to <code>:.5</code>. If we omit the <code>stop</code>, instead of the <code>start</code>, we would “slice” up to and including the last value.</p>
-<p>In the context of <code>doty</code> dates, omitting the <code>stop</code> value obtains all of the days in the year after the <code>start</code>, because the default <code>stop</code> is the number of days in the year (<code>n</code>). For example, the <code>slice</code> <code>3:</code> has a <code>start</code> of <code>Day 3</code> and a <code>stop</code> of <code>n</code>, and thus represents every day in the year except the first 3. The number of items we obtain from a <code>slice</code> is called a <code>span</code>. To calculate the <code>span</code>, we subtract the <code>start</code> from the <code>stop</code> (<span class="math inline">\(stop-start\)</span>). In a common year, the <code>span</code> of <code>003:</code> is <span class="math inline">\(n-3=362\)</span>, while in a leap year it would be <span class="math inline">\(n-3=363\)</span>. If both the <code>start</code> and the <code>stop</code> are omitted, every day is included (<span class="math inline">\(span=n-0\)</span>). <a href="#tbl-4slice">Table&nbsp;18</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>slices</code>. The superscript plus sign (⁺) in <a href="#tbl-4slice">Table&nbsp;18</a> indicates a number that has to be incremented in leap years.</p>
-<section id="table-18" class="level4">
-<h4 class="anchored" data-anchor-id="table-18"><a href="#tbl-4slice">Table&nbsp;18</a></h4>
+<p>In the context of <code>doty</code> dates, omitting the <code>stop</code> value obtains all of the days in the year after the <code>start</code>, because the default <code>stop</code> is the number of days in the year (<code>n</code>). For example, the <code>slice</code> <code>3:</code> has a <code>start</code> of <code>Day 3</code> and a <code>stop</code> of <code>n</code>, and thus represents every day in the year except the first 3. The number of items we obtain from a <code>slice</code> is called a <code>span</code>. To calculate the <code>span</code>, we subtract the <code>start</code> from the <code>stop</code> (<span class="math inline">\(stop-start\)</span>). In a common year, the <code>span</code> of <code>003:</code> is <span class="math inline">\(n-3=362\)</span>, while in a leap year it would be <span class="math inline">\(n-3=363\)</span>. If both the <code>start</code> and the <code>stop</code> are omitted, every day is included (<span class="math inline">\(span=n-0\)</span>). <a href="#tbl-4slice">Table&nbsp;19</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>slices</code>. The superscript plus sign (⁺) in <a href="#tbl-4slice">Table&nbsp;19</a> indicates a number that has to be incremented in leap years.</p>
+<section id="table-19" class="level4">
+<h4 class="anchored" data-anchor-id="table-19"><a href="#tbl-4slice">Table&nbsp;19</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3063,7 +3598,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;18: The slices that represent the 4-part subyear units</p>
+<p>Table&nbsp;19: The slices that represent the 4-part subyear units</p>
 </blockquote>
 </section>
 </section>
@@ -3076,9 +3611,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 </section>
 <section id="spreads" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="spreads"><span class="header-section-number">8.3</span> Spreads</h2>
-<p>To create <code>series</code> of consecutive items with breaks in between, it may be better to use a <code>spread</code> than a <code>slice</code>. <code>Simple spreads</code> consist of either a <code>start</code> and a <code>span</code> (<code>start&gt;span</code>) separated by a greater-than sign (<code>&gt;</code>) or a <code>stop</code> and a <code>span</code> (<code>stop&lt;span</code>) separated by a less-than (<code>&lt;</code>) sign. The default <code>start</code> and <code>stop</code> values are the same for both <code>slices</code> and <code>spreads</code>. We can <code>spread</code> forward from the default <code>start</code> to capture the first <code>span</code> days in a year. For example, the first 3 days in a year can be represented by the <code>spread</code> <code>&gt;3</code>, which is synonymous with the <code>slice</code> <code>:3</code>. In this example, the <code>start</code> is 0, while the <code>stop</code> and the <code>span</code> are both 3. In addition to default <code>start</code> and <code>stop</code> values, <code>spreads</code> also have default <code>span</code> values. A <code>spread</code> that only uses default values (<code>&gt;</code> or <code>&lt;</code>) will include every day in the year (<span class="math inline">\(span=n\)</span>). <a href="#tbl-4spread">Table&nbsp;19</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>spreads</code>.</p>
-<section id="table-19" class="level4">
-<h4 class="anchored" data-anchor-id="table-19"><a href="#tbl-4spread">Table&nbsp;19</a></h4>
+<p>To create <code>series</code> of consecutive items with breaks in between, it may be better to use a <code>spread</code> than a <code>slice</code>. <code>Simple spreads</code> consist of either a <code>start</code> and a <code>span</code> (<code>start&gt;span</code>) separated by a greater-than sign (<code>&gt;</code>) or a <code>stop</code> and a <code>span</code> (<code>stop&lt;span</code>) separated by a less-than (<code>&lt;</code>) sign. The default <code>start</code> and <code>stop</code> values are the same for both <code>slices</code> and <code>spreads</code>. We can <code>spread</code> forward from the default <code>start</code> to capture the first <code>span</code> days in a year. For example, the first 3 days in a year can be represented by the <code>spread</code> <code>&gt;3</code>, which is synonymous with the <code>slice</code> <code>:3</code>. In this example, the <code>start</code> is 0, while the <code>stop</code> and the <code>span</code> are both 3. In addition to default <code>start</code> and <code>stop</code> values, <code>spreads</code> also have default <code>span</code> values. A <code>spread</code> that only uses default values (<code>&gt;</code> or <code>&lt;</code>) will include every day in the year (<span class="math inline">\(span=n\)</span>). <a href="#tbl-4spread">Table&nbsp;20</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>spreads</code>.</p>
+<section id="table-20" class="level4">
+<h4 class="anchored" data-anchor-id="table-20"><a href="#tbl-4spread">Table&nbsp;20</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3117,7 +3652,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;19: The spreads that represent the 4-part subyear units</p>
+<p>Table&nbsp;20: The spreads that represent the 4-part subyear units</p>
 </blockquote>
 <p>If we “spread” forward from a positive <code>start</code>, the default <code>span</code> is <span class="math inline">\(n-start\)</span>. If we spread backward from a positive <code>stop</code>, the default <code>span</code> is <code>stop</code>. We can <code>spread</code> backward from the default <code>stop</code> to capture the last <code>span</code> days in a year. For example, <code>&lt;3</code> represents the last 3 days of any year. We could also use a negative <code>start</code> of <code>-3</code>, the third to last day of any year, to create the <code>slice</code> <code>-3:</code> and the <code>spread</code> <code>-3&gt;</code>, both of which are synonymous with <code>&lt;3</code>. One advantage of <code>spreads</code> over <code>slices</code> is the ability to access days from the end of a year without negative numbers. A <code>span</code> value of zero does not return any items. Negative <code>span</code> values reverse the direction of the first sign, turning <code>start</code> into <code>stop</code> and vice versa.</p>
 </section>
@@ -3131,9 +3666,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 <section id="spaces" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="spaces"><span class="header-section-number">8.5</span> Spaces</h2>
 <p>The patterns described above require that <code>splits</code> are separated by the default <code>space</code> value of 1. We can specify a different <code>space</code> value in the form <code>start&gt;span&gt;split&gt;space</code>. The <code>split spreads</code> <code>≫3&gt;2</code> and <code>♢3&gt;2</code> create 3-day <code>splits</code> separated by 2-day <code>spaces</code>. This is the pattern of workdays in the <code>Decalendar</code> system. The first <code>segment</code> of <code>≫3&gt;2</code> and <code>♢3&gt;2</code> can be written as <code>:3</code>, <code>&gt;3</code>, or <code>3&lt;</code>, while the last <code>segment</code> is <code>360:363</code>, <code>360&gt;3</code>, or <code>363&lt;3</code>. The workdays in the first <code>dek</code> of <code>≫3&gt;2</code> and <code>♢3&gt;2</code> can be written as the following <code>series</code> of <code>segments</code>: <code>:4,5:8</code>, <code>&gt;3,5&gt;3</code>, or <code>3&lt;,8&lt;3</code>. Unlike <code>stepped slices</code> and <code>split spreads</code>, <code>simple slices</code> and <code>simple spreads</code> can be used in <code>series</code>.</p>
-<p>A <code>space</code> value of 0 may also be useful. For example, <code>delts</code>, <code>qops</code>, <code>eps</code>, and <code>waus</code> can be summarized as <code>split spreads</code> as shown in <a href="#tbl-constant">Table&nbsp;20</a>. When <code>space</code> is zero, the direction of the third sign does not matter. The <code>split spreads</code> <code>≫61&gt;0</code>, <code>♢61&gt;0</code>, <code>≫61&lt;0</code>, and <code>♢61&lt;0</code> all represents the <code>waus</code> in a year. <code>Waus</code> divide leap years evenly and <code>eps</code> divide common years evenly. Therefore, <code>x61&gt;0</code> and <code>x61&lt;0</code> can represent all of the <code>waus</code> in leap years, just like <code>x73&gt;0</code> and <code>x73&lt;0</code> can represent all of the <code>eps</code> in common years. The seasons can be described by a <code>spread</code> with a <code>series</code> of <code>splits</code> and a <code>space</code> of 0: <code>»90,95,90,90⁺&gt;0</code>.</p>
-<section id="table-20" class="level4">
-<h4 class="anchored" data-anchor-id="table-20"><a href="#tbl-constant">Table&nbsp;20</a></h4>
+<p>A <code>space</code> value of 0 may also be useful. For example, <code>delts</code>, <code>qops</code>, <code>eps</code>, and <code>waus</code> can be summarized as <code>split spreads</code> as shown in <a href="#tbl-constant">Table&nbsp;21</a>. When <code>space</code> is zero, the direction of the third sign does not matter. The <code>split spreads</code> <code>≫61&gt;0</code>, <code>♢61&gt;0</code>, <code>≫61&lt;0</code>, and <code>♢61&lt;0</code> all represents the <code>waus</code> in a year. <code>Waus</code> divide leap years evenly and <code>eps</code> divide common years evenly. Therefore, <code>x61&gt;0</code> and <code>x61&lt;0</code> can represent all of the <code>waus</code> in leap years, just like <code>x73&gt;0</code> and <code>x73&lt;0</code> can represent all of the <code>eps</code> in common years. The seasons can be described by a <code>spread</code> with a <code>series</code> of <code>splits</code> and a <code>space</code> of 0: <code>»90,95,90,90⁺&gt;0</code>.</p>
+<section id="table-21" class="level4">
+<h4 class="anchored" data-anchor-id="table-21"><a href="#tbl-constant">Table&nbsp;21</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3162,7 +3697,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;20: The spreads that represent the constant length subyear units</p>
+<p>Table&nbsp;21: The spreads that represent the constant length subyear units</p>
 </blockquote>
 <p>If <code>space</code> is greater than zero and the second and third sign are pointing in opposite directions, the resulting time <code>segments</code> will overlap. The <code>split spreads</code> <code>&gt;1&gt;.4&lt;.2</code> and <code>&lt;1&lt;.4&gt;.2</code> both result in the same 4 overlapping time <code>segments</code>: <code>:.4</code>, <code>.2:.6</code>, <code>.4:.8</code>, <code>.6:1</code>. Negative values can be used in a <code>series</code> of <code>spaces</code> to temporarily reverse the direction and intersperse overlapping and non-overlapping <code>segments</code>. The <code>split spread</code> <code>&gt;1&gt;.4&lt;.2,-.1</code> yields two <code>segments</code> that overlap and one <code>segment</code> that does not overlap: <code>:.4</code>, <code>.2:.6</code>, <code>.6:1</code>.</p>
 <p>Overlapping segments could be used to plan work shifts that require a hand-off between teams. The segments created by <code>&gt;1&gt;.4&lt;.2</code> are shifted by two <code>dimes</code> in relation to each other and overlap by 2 <code>dimes</code>. If these segments are in <code>Zone 0</code> time, they represent the normal workday (<code>.3:.7</code>) for <code>Zone 3</code> (<code>:.4</code>), <code>Zone 1</code>(<code>.2:.6</code>), <code>Zone -1</code>(<code>.4:.8</code>), and <code>Zone -3</code>(<code>.6:1</code>). Each of these 4 segments could represent a team working during the normal workday in their respective time zone. All but the last team would have two dimes of overlap with the subsequent team.</p>
@@ -3173,9 +3708,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 <p><code>Split spreads</code> can be combined with other <code>spreads</code> into <code>sequences</code> called <code>seq spreads</code> (<code>sequential spreads</code>). The intuition behind <code>seq spreads</code> and is that each item in the first (outer) <code>spread</code> serves as a starting point for the second (inner) <code>spread</code>. The main use of <code>seq spreads</code> is to first “spread” across days and then “spread” across times in those days. We can combine <code>≫3&gt;2</code>, a <code>split spread</code> that represents the <code>Decalendar</code> workdays, with <code>.3&gt;.4</code>, a <code>simple spread</code> that provides the <code>start</code> and <code>span</code> of the <code>Decalendar</code> workday, to obtain <code>≫3&gt;2&gt;.3&gt;.4</code>, a <code>seq spread</code> that represents the time spent at work in a <code>Decalendar</code> year.</p>
 <p>In this <code>seq spread</code>, the <code>split</code> is the number of workdays (<code>3</code>), the space is the number of restdays (<code>2</code>), the second-to-last number is the <code>start</code> of the workday (<code>.3</code>) and the last number is the workday <code>span</code> (<code>.4</code>). The <code>spread</code> <code>≫3&gt;2&gt;.3&gt;.4</code> first starts at midnight of each workday, then moves forward 3 <code>dimes</code> to the new <code>start</code> of <code>Dot 3</code>, and then “spreads” forward by a <code>span</code> of 4 <code>dimes</code> to the new <code>stop</code> of <code>Dot 7</code>. We could replace the start of the workday in <code>≫3&gt;2&gt;.3&gt;.4</code> with the end of workday if we reverse the last sign: <code>≫3&gt;2&gt;.7&lt;.4</code>, because <code>.3&gt;.4</code> and <code>.7&lt;.4</code> are synonymous.</p>
 <p>We combine the two <code>spreads</code> with <code>&gt;</code> because we want to move forward from the beginning of each workday, instead of backward to the previous day. If we combined <code>≫3&gt;2</code> and <code>.3&gt;.4</code> with <code>&lt;</code>, the resulting <code>spread</code> <code>≫3&gt;2&lt;.3&gt;.4</code> would move backward from midnight of each workday to <code>Dot 7</code> of each previous day and then “spread” forward to <code>Dot 1</code> of each workday. We may want to use such a mixed direction <code>seq spreads</code> when dealing with time zones. If we lived in <code>Zone -3</code> and wanted to know how the workdays in <code>Zone 4</code> translated into our time zone, we could take the <code>spread</code> <code>≫3&gt;2&gt;.3&gt;.4</code> and move its <code>start</code> to 7 <code>dimes</code> earlier: <code>≫3&gt;2&lt;.4&gt;.4</code>. <code>Seq spreads</code> enable such time zone conversions without the use of negative numbers.</p>
-<p>The <code>seq slice</code> equivalent of <code>≫3&gt;2&gt;.3&gt;.4</code> is <code>:365:1,1,3:.3:.7</code>. <code>Seq spreads</code> will always be a more succinct way for creating long consecutive sequences with breaks than <code>slices</code>. For example, to include a lunch break in the middle of work, we could simply add a <code>split</code> and a <code>space</code> to the <code>seq spread</code> above: <code>≫3&gt;2&gt;.3&gt;.4&gt;.18&gt;.04</code>. To do the same with a <code>seq slice</code>, we have to create 17 steps of 0.01 and a step of .04: <code>:365:1,1,3:.3:.7:17*1%,4%</code>. Here, we are using the replication operator (<code>*</code>) to avoid writing 0.01 17 times and the percent operator (<code>%</code>) to save a few characters, but even so the <code>seq slice</code> is not as concise as the <code>seq spread</code>. <a href="#tbl-workday">Table&nbsp;21</a> shows each part of this schedule in the form of <code>simple slices</code> and <code>simple spreads</code>.</p>
-<section id="table-21" class="level4">
-<h4 class="anchored" data-anchor-id="table-21"><a href="#tbl-workday">Table&nbsp;21</a></h4>
+<p>The <code>seq slice</code> equivalent of <code>≫3&gt;2&gt;.3&gt;.4</code> is <code>:365:1,1,3:.3:.7</code>. <code>Seq spreads</code> will always be a more succinct way for creating long consecutive sequences with breaks than <code>slices</code>. For example, to include a lunch break in the middle of work, we could simply add a <code>split</code> and a <code>space</code> to the <code>seq spread</code> above: <code>≫3&gt;2&gt;.3&gt;.4&gt;.18&gt;.04</code>. To do the same with a <code>seq slice</code>, we have to create 17 steps of 0.01 and a step of .04: <code>:365:1,1,3:.3:.7:17*1%,4%</code>. Here, we are using the replication operator (<code>*</code>) to avoid writing 0.01 17 times and the percent operator (<code>%</code>) to save a few characters, but even so the <code>seq slice</code> is not as concise as the <code>seq spread</code>. <a href="#tbl-workday">Table&nbsp;22</a> shows each part of this schedule in the form of <code>simple slices</code> and <code>simple spreads</code>.</p>
+<section id="table-22" class="level4">
+<h4 class="anchored" data-anchor-id="table-22"><a href="#tbl-workday">Table&nbsp;22</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3208,7 +3743,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;21: A workday schedule with a lunch break</p>
+<p>Table&nbsp;22: A workday schedule with a lunch break</p>
 </blockquote>
 </section>
 </section>
@@ -3225,9 +3760,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 </section>
 <section id="pently-schedules-as-seq-spreads-splices-and-sleds" class="level3" data-number="8.7.3">
 <h3 data-number="8.7.3" class="anchored" data-anchor-id="pently-schedules-as-seq-spreads-splices-and-sleds"><span class="header-section-number">8.7.3</span> Pently schedules as seq spreads, splices, and sleds</h3>
-<p>We can use <code>seq spreads</code> to describe the <a href="#sched"><code>pently</code>schedules</a>. <code>Schedule 5</code> is particularly interesting because it includes all of the days of the year. <code>Spreads</code> that include every item can be written as <code>&gt;</code> or <code>&lt;</code>, but <code>seq spreads</code> must have at least 5 values. The <code>Schedule 5</code> <code>seq spread</code> <code>≫≫.38&gt;.24</code> has 4 blank values, which represent the default <code>start</code>, <code>span</code>, <code>split</code>, and <code>space</code>. Similarly, the <code>Schedule 4</code> <code>seq spread</code> <code>≫4≫.35&gt;.3</code> has 3 blank values, which represent the default <code>start</code>, <code>span</code>, and <code>space</code>. The <code>Schedule 2</code> and <code>Schedule 3</code> <code>seq spreads</code>, <code>≫2&gt;3&gt;.2&gt;.6</code> and <code>≫3&gt;2&gt;.3&gt;.4</code>, respectively, only have 2 blank values, the <code>start</code> and the <code>span</code>. As an alternative to <code>seq spreads</code> and <code>seq slices</code>, we can use <code>slice</code>-<code>spread</code> hybrids called <code>sleds</code> or <code>spread</code>-<code>slice</code> hybrids called <code>splices</code>. <code>Sleds</code> put the <code>slice</code> elements first (<code>start:stop:step:start&gt;span&gt;split&gt;space</code>), while <code>splices</code> start with the <code>spread</code> elements (<code>start&gt;span&gt;split&gt;space&gt;start:stop:step</code>). The <code>pently</code>schedules are easiest to write as <code>seq spreads</code> and <code>splices</code>, as shown in <a href="#tbl-sched">Table&nbsp;22</a>.</p>
-<section id="table-22" class="level4">
-<h4 class="anchored" data-anchor-id="table-22"><a href="#tbl-sched">Table&nbsp;22</a></h4>
+<p>We can use <code>seq spreads</code> to describe the <a href="#sched"><code>pently</code>schedules</a>. <code>Schedule 5</code> is particularly interesting because it includes all of the days of the year. <code>Spreads</code> that include every item can be written as <code>&gt;</code> or <code>&lt;</code>, but <code>seq spreads</code> must have at least 5 values. The <code>Schedule 5</code> <code>seq spread</code> <code>≫≫.38&gt;.24</code> has 4 blank values, which represent the default <code>start</code>, <code>span</code>, <code>split</code>, and <code>space</code>. Similarly, the <code>Schedule 4</code> <code>seq spread</code> <code>≫4≫.35&gt;.3</code> has 3 blank values, which represent the default <code>start</code>, <code>span</code>, and <code>space</code>. The <code>Schedule 2</code> and <code>Schedule 3</code> <code>seq spreads</code>, <code>≫2&gt;3&gt;.2&gt;.6</code> and <code>≫3&gt;2&gt;.3&gt;.4</code>, respectively, only have 2 blank values, the <code>start</code> and the <code>span</code>. As an alternative to <code>seq spreads</code> and <code>seq slices</code>, we can use <code>slice</code>-<code>spread</code> hybrids called <code>sleds</code> or <code>spread</code>-<code>slice</code> hybrids called <code>splices</code>. <code>Sleds</code> put the <code>slice</code> elements first (<code>start:stop:step:start&gt;span&gt;split&gt;space</code>), while <code>splices</code> start with the <code>spread</code> elements (<code>start&gt;span&gt;split&gt;space&gt;start:stop:step</code>). The <code>pently</code>schedules are easiest to write as <code>seq spreads</code> and <code>splices</code>, as shown in <a href="#tbl-sched">Table&nbsp;23</a>.</p>
+<section id="table-23" class="level4">
+<h4 class="anchored" data-anchor-id="table-23"><a href="#tbl-sched">Table&nbsp;23</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3278,7 +3813,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;22: The seq spreads, splices, and sleds that represent the 4 pently schedules</p>
+<p>Table&nbsp;23: The seq spreads, splices, and sleds that represent the 4 pently schedules</p>
 </blockquote>
 </section>
 </section>
@@ -3287,9 +3822,9 @@ paste0(sprintf("%04d", yd[1]), "+",
 <h2 data-number="8.8" class="anchored" data-anchor-id="yearly-transition"><span class="header-section-number">8.8</span> Yearly transition</h2>
 <section id="common-years" class="level3" data-number="8.8.1">
 <h3 data-number="8.8.1" class="anchored" data-anchor-id="common-years"><span class="header-section-number">8.8.1</span> Common years</h3>
-<p>The <code>pently</code> schedules are important for the transition between years. In common years, the last <code>dek</code> of the year (<code>Dek 36</code>) contains the last <code>pent</code> of the current year (<code>Pent 72</code>), and the first <code>pent</code> of the subsequent year (<code>Pent 0</code>). If these two <code>pents</code> follow the default <code>pently</code> schedule, <code>Schedule 3</code>, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. <a href="#tbl-common">Table&nbsp;23</a> shows the positive and negative <code>doty</code> numbers, names, and types (work or rest) of the days in <code>Dek 36</code> in common years. Notably, while the positive <code>doty</code> numbers continue counting past the end of the year, the negative <code>doty</code> numbers of the current year turn into the positive <code>doty</code> numbers of the subsequent year. The negative <code>doty</code> numbers in <code>Dek 36</code> can thus serve as the bridge from the one year to the next.</p>
-<section id="table-23" class="level4">
-<h4 class="anchored" data-anchor-id="table-23"><a href="#tbl-common">Table&nbsp;23</a></h4>
+<p>The <code>pently</code> schedules are important for the transition between years. In common years, the last <code>dek</code> of the year (<code>Dek 36</code>) contains the last <code>pent</code> of the current year (<code>Pent 72</code>), and the first <code>pent</code> of the subsequent year (<code>Pent 0</code>). If these two <code>pents</code> follow the default <code>pently</code> schedule, <code>Schedule 3</code>, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. <a href="#tbl-common">Table&nbsp;24</a> shows the positive and negative <code>doty</code> numbers, names, and types (work or rest) of the days in <code>Dek 36</code> in common years. Notably, while the positive <code>doty</code> numbers continue counting past the end of the year, the negative <code>doty</code> numbers of the current year turn into the positive <code>doty</code> numbers of the subsequent year. The negative <code>doty</code> numbers in <code>Dek 36</code> can thus serve as the bridge from the one year to the next.</p>
+<section id="table-24" class="level4">
+<h4 class="anchored" data-anchor-id="table-24"><a href="#tbl-common">Table&nbsp;24</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3364,15 +3899,15 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;23: The days in Dek 36 in common years</p>
+<p>Table&nbsp;24: The days in Dek 36 in common years</p>
 </blockquote>
 </section>
 </section>
 <section id="leap-years-1" class="level3" data-number="8.8.2">
 <h3 data-number="8.8.2" class="anchored" data-anchor-id="leap-years-1"><span class="header-section-number">8.8.2</span> Leap years</h3>
-<p>In leap years, <code>Dek 36</code> contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, <code>Dek 36</code> always contain 6 workdays and 4 restdays, just like every other <code>dek</code>, but in leaps years these days do not follow the typical order of <code>Schedule 3</code>. Leap years end in 3 restdays instead of 2, because Leap Day (<code>Day 365</code>) is always a holiday. Leap day is always a <code>Penday</code> and always followed by a <code>Nulday</code>. After Leap Day, the normal rhythm of <code>Schedule 3</code> resumes. <a href="#tbl-leap">Table&nbsp;24</a> shows the positive and negative <code>doty</code> numbers of the days in <code>Dek 36</code> in leap years, as well as their names and their types (work or rest).</p>
-<section id="table-24" class="level4">
-<h4 class="anchored" data-anchor-id="table-24"><a href="#tbl-leap">Table&nbsp;24</a></h4>
+<p>In leap years, <code>Dek 36</code> contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, <code>Dek 36</code> always contain 6 workdays and 4 restdays, just like every other <code>dek</code>, but in leaps years these days do not follow the typical order of <code>Schedule 3</code>. Leap years end in 3 restdays instead of 2, because Leap Day (<code>Day 365</code>) is always a holiday. Leap day is always a <code>Penday</code> and always followed by a <code>Nulday</code>. After Leap Day, the normal rhythm of <code>Schedule 3</code> resumes. <a href="#tbl-leap">Table&nbsp;25</a> shows the positive and negative <code>doty</code> numbers of the days in <code>Dek 36</code> in leap years, as well as their names and their types (work or rest).</p>
+<section id="table-25" class="level4">
+<h4 class="anchored" data-anchor-id="table-25"><a href="#tbl-leap">Table&nbsp;25</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3447,16 +3982,16 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;24: The days in Dek 36 in leap years</p>
+<p>Table&nbsp;25: The days in Dek 36 in leap years</p>
 </blockquote>
 </section>
 </section>
 </section>
 <section id="holidays" class="level2" data-number="8.9">
 <h2 data-number="8.9" class="anchored" data-anchor-id="holidays"><span class="header-section-number">8.9</span> Holidays</h2>
-<p>Leap Day is a important holiday because it occurs only once every four years except for years that start centuries not divisible by 400 and it results in the only time when there are 3 consecutive restdays in <code>Decalendar</code>. Another <code>Decalendar</code> holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative <code>.y</code> format <code>stamps</code> are the same (<code>+183.5</code> and <code>-183.5</code>), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Many Gregorian calendar holidays just so happen to also fall on the first day of a <code>Decalendar</code> <code>pent</code> (<code>Nulday</code> or <code>Quaday</code>). <a href="#tbl-holiday">Table&nbsp;25</a> lists 8 such holidays and their <code>doty</code>, <code>dotm</code>, and Gregorian calendar dates.</p>
-<section id="table-25" class="level4">
-<h4 class="anchored" data-anchor-id="table-25"><a href="#tbl-holiday">Table&nbsp;25</a></h4>
+<p>Leap Day is a important holiday because it occurs only once every four years except for years that start centuries not divisible by 400 and it results in the only time when there are 3 consecutive restdays in <code>Decalendar</code>. Another <code>Decalendar</code> holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative <code>.y</code> format <code>stamps</code> are the same (<code>+183.5</code> and <code>-183.5</code>), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Many Gregorian calendar holidays just so happen to also fall on the first day of a <code>Decalendar</code> <code>pent</code> (<code>Nulday</code> or <code>Quaday</code>). <a href="#tbl-holiday">Table&nbsp;26</a> lists 8 such holidays and their <code>doty</code>, <code>dotm</code>, and Gregorian calendar dates.</p>
+<section id="table-26" class="level4">
+<h4 class="anchored" data-anchor-id="table-26"><a href="#tbl-holiday">Table&nbsp;26</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to expand</strong></p>
 <table class="table">
@@ -3519,7 +4054,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;25: Gregorian calendar holidays that happen to fall on <code>Decalendar</code> restdays</p>
+<p>Table&nbsp;26: Gregorian calendar holidays that happen to fall on <code>Decalendar</code> restdays</p>
 </blockquote>
 <p>Any holiday with a fixed (rather than floating) date in the Gregorian calendar can easily be added to <code>Decalendar</code>. Holidays with floating dates do not follow easily recognizable patterns. <code>Decalendar</code> recommends redefining such dates to always be on the same <code>doty</code> every year. For example, November 25 (<code>Day 269</code>) is a sensible fixed date for Thanksgiving, because it is exactly 30 days before Christmas (December 25, <code>Day 299</code>) and falls on a <code>Decalendar</code> restday. When assigning fixed dates to floating date holidays, we should choose <code>Decalendar</code> restdays to avoid disrupting the normal rhythm of the <code>pently</code> schedules. Instead of gaining days off because of holidays, workers should gain additional time off from their employers. In the United States, the 11 federal holidays (88 hours = 3.6̅ dimes) would translate to 9 <code>Schedule 3</code> days offs (3.6 dimes).</p>
 </section>
