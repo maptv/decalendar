@@ -241,7 +241,7 @@
 <p>The main <code>Decalendar</code> date format consists of a year and a day-of-the-year (<code>doty</code>) delimited by a plus sign (<code>year+day</code>). As shown in <a href="#fig-date">Figure&nbsp;1</a>, the last digit of the <code>doty</code> number is the day-of-the-<code>dek</code> (<code>dotd</code>) number, which serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The first two digits of the <code>doty</code> are the <code>dek</code> number.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_r_files/figure-html/9875fb1e-5009-493c-92d0-a75484e95b01-3-fig-date.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_r_files/figure-html/791eb42c-ba4a-455c-9018-414b1f86ad3d-3-fig-date.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: The components of a Decalendar date</figcaption>
 </figure>
 </div>
@@ -313,14 +313,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/9875fb1e-5009-493c-92d0-a75484e95b01-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_r_files/figure-html/791eb42c-ba4a-455c-9018-414b1f86ad3d-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/9875fb1e-5009-493c-92d0-a75484e95b01-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_r_files/figure-html/791eb42c-ba4a-455c-9018-414b1f86ad3d-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -332,7 +332,7 @@
 <p>In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. In <code>Schedule 3</code>, there are 3 workdays separated by a 2-day <code>pentend</code>. Each <code>Schedule 3</code> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). <code>Declock</code> uses such proportions of the day instead of hours, minutes, or seconds. <a href="#fig-time">Figure&nbsp;3</a> shows midnight, the first moment of a new <code>Declock</code> day, with labels for the most important <code>Declock</code> units. More information on <code>Declock</code> units is provided in <a href="#sec-unit">Section&nbsp;4</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_r_files/figure-html/9875fb1e-5009-493c-92d0-a75484e95b01-4-fig-time.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_r_files/figure-html/791eb42c-ba4a-455c-9018-414b1f86ad3d-4-fig-time.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: The components of a Decalendar time</figcaption>
 </figure>
 </div>
@@ -342,16 +342,16 @@
 <section id="fractions-analogy" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="fractions-analogy"><span class="header-section-number">3.1</span> Fractions analogy</h2>
 <p>In the simplest terms, <code>Decalendar</code> counts fractions of a year, while <code>Declock</code> counts fractions of a day. The denominator for <code>Decalendar</code> is the number of days in the year, and the <code>Declock</code> denominator is <span class="math inline">\(10^x\)</span>, where <span class="math inline">\(x\)</span> is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of<code>Decalendar</code>, the numerator is the days that have passed in the year, while in the context of<code>Declock</code>, the numerator is the parts of the day that have passed in the day.</p>
-<p>To avoid any confusion between the two, we can say “<code>Day 5</code>” to mean the date when 5 days have passed this year or <code>Day 0</code> to mean the first day-of-the-year (<code>doty</code>). This is like the use of the term “day zero” in other contexts, such as epidemiology. The analogous term for times is <code>Dot</code>. The word <code>Dot</code> conveys that at its core <code>Declock</code> is a system built on <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> expressed as decimal numbers. The 5 in <code>Dot 5</code> can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.</p>
+<p>To avoid any confusion between the two, we can say “Day 5” to mean the date when 5 days have passed this year or <code>Day 0</code> to mean the first day-of-the-year (<code>doty</code>). This is like the use of the term “day zero” in other contexts, such as epidemiology. The analogous term for times is <code>Dot</code>. The word <code>Dot</code> conveys that at its core <code>Declock</code> is a system built on <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> expressed as decimal numbers. The 5 in <code>Dot 5</code> can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.</p>
 </section>
 <section id="implied-tolerance-and-duration" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="implied-tolerance-and-duration"><span class="header-section-number">3.2</span> Implied tolerance and duration</h2>
 <p>The analogy to decimals or fractions is important, because it explains why adding a zero at the end of a time does not change the time, only the implied tolerance of time points or the implied duration of time intervals. If <code>Dot 5</code> is a time point, it has an implied tolerance of 5% of the day (<span class="math inline">\(.5±.05\)</span>), because any time after <code>Dot 45</code> and before <code>Dot 55</code> (<span class="math inline">\([.45, .55)\)</span>) would round to <code>Dot 5</code>. On the other hand, if <code>Dot 5</code> is the start time for a time interval, that interval is implied to start at <code>Dot 5</code> and end before <code>Dot 6</code> (<span class="math inline">\([.5, .6)\)</span>) and thus have a duration of 10% of the day (<code>Dot 6</code>-<code>Dot 5</code>). Every additional digit we add decreases the implied tolerance and the implied duration 10-fold.</p>
-<p>If we really want to insist on punctuality, we could include up to 5 digits in a time. Specifying times with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing <a href="https://xkcd.com/2170/">extremely long GPS coordinates</a>; at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word “sharp” or the <code>#</code> symbol to the time. Saying “<code>5 Sharp</code>” or writing <code>5#</code> means as close as possible to noon. Times that include <code>#</code> cannot have an implied duration. We can only add <code>#</code> to a time, so there is no need say “<code>Dot 5 Sharp</code>” or write <code>.5#</code>.</p>
+<p>If we really want to insist on punctuality, we could include up to 5 digits in a time. Specifying times with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing <a href="https://xkcd.com/2170/">extremely long GPS coordinates</a>; at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word “sharp” or the <code>#</code> symbol to the time. Saying “5 Sharp” or writing <code>5#</code> means as close as possible to noon. Times that include <code>#</code> cannot have an implied duration. We can only add <code>#</code> to a time, so there is no need say “Dot 5 Sharp” or write <code>.5#</code>.</p>
 </section>
 <section id="context-clues" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="context-clues"><span class="header-section-number">3.3</span> Context clues</h2>
-<p>Not saying “<code>Day</code>” or “<code>Dot</code>” in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says “let’s have lunch at 5”, it is clear that they are referring to noon (<code>Dot 5</code>) and not the sixth <code>doty</code> (<code>Day 5</code>). Also, the number itself may provide a clue. Numbers greater than 365 could still be a <code>doty</code>, but it would represent a day in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying “500” could mean <code>Day 134</code> (if n=366) or <code>Day 135</code> (if n=365) of the subsequent year, but it would most likely mean noon (<code>Dot 500</code>).</p>
+<p>Not saying “Day” or “Dot” in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says “let’s have lunch at 5”, it is clear that they are referring to noon (<code>Dot 5</code>) and not the sixth <code>doty</code> (<code>Day 5</code>). Also, the number itself may provide a clue. Numbers greater than 365 could still be a <code>doty</code>, but it would represent a day in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying “500” could mean <code>Day 134</code> (if n=366) or <code>Day 135</code> (if n=365) of the subsequent year, but it would most likely mean noon (<code>Dot 500</code>).</p>
 </section>
 <section id="negative-numbers" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="negative-numbers"><span class="header-section-number">3.4</span> Negative numbers</h2>
@@ -365,7 +365,7 @@
 </section>
 <section id="specific-dates-and-times" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="specific-dates-and-times"><span class="header-section-number">3.6</span> Specific dates and times</h2>
-<p>The <code>stamp</code> in <a href="#sec-stamp">Section&nbsp;3.5</a> assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The first <code>doty</code> of 1969, would be written <code>1969+000</code> and said “<code>Year 1969 Day 0</code>” or simply “<code>1969 0</code>”, while midnight in <code>Zone 0</code> would be written <code>.000+0</code> and said “<code>Dot 0 Zone 0</code>”, “<code>0 Zone 0</code>”, or “<code>0 0</code>”. Combined together, this date and time form the <code>stamp</code> <code>1969+000.000+0</code>.</p>
+<p>The <code>stamp</code> in <a href="#sec-stamp">Section&nbsp;3.5</a> assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The first <code>doty</code> of 1969, would be written <code>1969+000</code> and said “Year 1969 Day 0” or simply “1969 0”, while midnight in <code>Zone 0</code> would be written <code>.000+0</code> and said “Dot 0 Zone 0”, “0 Zone 0”, or “0 0”. Combined together, this date and time form the <code>stamp</code> <code>1969+000.000+0</code>.</p>
 </section>
 </section>
 <section id="units" class="level1" data-number="4">
@@ -3111,7 +3111,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb74-13"><a href="#cb74-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+218.93440+0'
+'2023+218.94088+0'
 </div>
 </div></div>
 </section>
@@ -3415,9 +3415,9 @@ console.log(parse_dec());</code></pre>
 </table>
 <p>Table&nbsp;10: The time in Mexico City, London, and Tokyo in all three dot formats</p>
 </blockquote>
-<p>In <a href="#tbl-dotex">Table&nbsp;10</a>, the <code>.m</code> format tells us that the month in Tokyo is January (<code>Month 0</code>) and the month in Mexico City and London is December (<code>Month B</code>). We could say the <code>.m</code> dates in Mexico City and London as “<code>Year 1999 Month B Day 29</code>” or “<code>Year 1999 Month -1 Day -1</code>” and the Tokyo date as “<code>Year 2000 Month 0 Day 0</code>” or” <code>Year 2000 Month -C Day -31</code>“.</p>
-<p>The <code>decw</code> format always starts the year with <code>Week 0</code>, but the year can start on any day of the week. <a href="#tbl-dotex">Table&nbsp;10</a> shows that the year 2000 starts on a Saturday (<code>Week 0 Day 6</code>). The <code>decw</code> dates in Mexico City and London could be said “<code>Year 1999 Week 52 Day 2</code>” or “<code>Year 1999 Week -1 Day -5</code>”, while the date in Tokyo could be pronounced “<code>Year 2000 Week 0 Day 3</code>” or “<code>Year 2000 Week -52 Day -4</code>” in Tokyo.</p>
-<p>In contrast to the <code>.m</code> and the <code>decw</code> formats, the dates in the <code>.y</code> format are one character shorter and a little easier to say. The spoken form of the <code>.y</code> date in Mexico City and London is “<code>Year 1999 Day 365</code>” or “<code>Year 1999 Day -1</code>” and the spoken form of the Tokyo date is “<code>Year 2000 Day 0</code>” or “<code>Year 2000 Day -365</code>”.</p>
+<p>In <a href="#tbl-dotex">Table&nbsp;10</a>, the <code>.m</code> format tells us that the month in Tokyo is January (<code>Month 0</code>) and the month in Mexico City and London is December (<code>Month B</code>). We could say the <code>.m</code> dates in Mexico City and London as “Year 1999 Month B Day 29” or “Year 1999 Month -1 Day -1” and the Tokyo date as “Year 2000 Month 0 Day 0” or “Year 2000 Month -C Day -31”.</p>
+<p>The <code>decw</code> format always starts the year with <code>Week 0</code>, but the year can start on any day of the week. <a href="#tbl-dotex">Table&nbsp;10</a> shows that the year 2000 starts on a Saturday (<code>Week 0 Day 6</code>). The <code>decw</code> dates in Mexico City and London could be said “Year 1999 Week 52 Day 2” or “Year 1999 Week -1 Day -5”, while the date in Tokyo could be pronounced “Year 2000 Week 0 Day 3” or “Year 2000 Week -52 Day -4`” in Tokyo.</p>
+<p>In contrast to the <code>.m</code> and the <code>decw</code> formats, the dates in the <code>.y</code> format are one character shorter and a little easier to say. The spoken form of the <code>.y</code> date in Mexico City and London is “Year 1999 Day 365” or “Year 1999 Day -1” and the spoken form of the Tokyo date is “Year 2000 Day 0” or “Year 2000 Day -365”.</p>
 </section>
 </section>
 <section id="deks" class="level2" data-number="7.4">
