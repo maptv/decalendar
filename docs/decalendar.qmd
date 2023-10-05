@@ -864,16 +864,6 @@ function time2doty(hour = 1, minute = 0, second = 0) {
 console.log(time2doty())
 ```
 
-##### `doty2deco`
-
-```{javascript}
-#| tags: [doty2deco]
-function doty2deco(year = 1969, doty = 306, zone = 0) {
-    return `${year.toString().padStart(4, "0")}+${
-        doty.toString().padStart(3, "0")}`);
-}
-```
-
 ##### `time2isot`
 
 ```{javascript}
@@ -1003,6 +993,16 @@ To create a `deco` timestamp, we can use the `doty2deco` or the `greg2deco` func
 
 #### JavaScript
 
+##### `doty2deco`
+
+```{javascript}
+#| tags: [doty2deco]
+function doty2deco(year = 1969, doty = 306, zone = 0) {
+    return `${year.toString().padStart(4, "0")}+${
+        doty.toString().padStart(3, "0")}`);
+}
+```
+
 ##### `time2doty`
 
 ```{javascript}
@@ -1012,14 +1012,13 @@ function time2doty(hour = 1, minute = 0, second = 0) {
 }
 ```
 
-##### `greg2deco`
+##### `time2deco`
 
 ```{javascript}
-#| tags: [greg2deco]
-function greg2deco(year = 1969, month = 1, day = 1, hour = 0, minute = 0, second = 0) {
-    return `${greg2year(year, month).toString().padStart(4, '0')}+${
-        greg2doty(month, day).toString().padStart(3, '0')}.${
-        (Math.round(time2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`)
+#| tags: [time2deco]
+function time2deco(hour = 0, minute = 0, second = 0) {
+    return (Math.round(time2doty(hour, minute, second)
+        * 1e5) / 1e5).toString().padStart(5, '0')
 }
 ```
 
