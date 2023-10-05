@@ -13,7 +13,7 @@ The `Decalendar` ordinal (`deco`) date format consists of a year and a day-of-th
 
 Each `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates two bar charts that compare the typical weekly schedule and the `Schedule 3` `pently` schedule. @sec-pently provides more information on the `pently` schedules. Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into the proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅).
 
-In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. `Schedule 3` splits workdays up symmetrically into proportions of .3, .4, and .3. `Declock` uses such proportions of the day instead of hours, minutes, or seconds. The `Schedule 3` workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). `Schedule 3` compensates longer workdays with more frequent restdays. In `Schedule 3`, the are 3 workdays separated by a 2-day `pentend`.
+In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. `Schedule 3` splits workdays up symmetrically into proportions of .3, .4, and .3. `Declock` uses such proportions of the day instead of hours, minutes, or seconds. The `Schedule 3` workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). `Schedule 3` compensates longer workdays with more frequent restdays. In `Schedule 3`, there are 3 workdays separated by a 2-day `pentend`.
 
 ::: {#exm-glance}
 :::
@@ -351,7 +351,7 @@ doty2year()
 
 ### Leap years {#sec-gregl}
 
-The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions Leap Day, `Day 365` in `Decalendar` and February 29 in the Gregorian calendar, at the end of the year. `Decalendar` leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the [`is_leap`](http://howardhinnant.github.io/date_algorithms.html#is_leap) algorithm as described by [@hinnant2014] and shown in @eq-gregl and @exm-gregl.
+The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions Leap Day, `Day 365` in `Decalendar` and February 29 in the Gregorian calendar, at the end of the year. `Decalendar` leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the [`leap_year`](http://howardhinnant.github.io/date_algorithms.html#is_leap) algorithm as described by [@hinnant2014] and shown in @eq-gregl and @exm-gregl.
 
 $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
@@ -364,10 +364,11 @@ $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
 ```{javascript}
 #| tags: [leap]
-function is_leap(year=1970) {
+function leap_year(year = 1970) {
     return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 }
-is_leap()
+
+leap_year()
 ```
 
 #### Julia
@@ -376,10 +377,11 @@ is_leap()
 
 ```{julia}
 #| tags: [leap]
-function is_leap(year=1970)
+function leap_year(year=1970)
     year % 4 == 0 && year % 100 != 0 || year % 400 == 0
 end
-is_leap()
+
+leap_year()
 ```
 
 #### Python
@@ -388,9 +390,10 @@ is_leap()
 
 ```{python}
 #| tags: [leap]
-def is_leap(year=1970):
+def leap_year(year=1970):
     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
-is_leap()
+
+leap_year()
 ```
 
 #### R
@@ -399,11 +402,11 @@ is_leap()
 
 ```{r}
 #| tags: [leap]
-is_leap <- function(year=1970) {
+leap_year <- function(year = 1970) {
     year %% 4 == 0 & year %% 100 != 0 | year %% 400 == 0
 }
 
-is_leap()
+leap_year()
 ```
 
 :::
@@ -418,7 +421,7 @@ is_leap()
 
 `Decalendar` ordinal (`deco`) dates (`year+day`) are most similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar` `doty` numbers, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are  [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
 
-In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers, while the `isoo2year` and `doty2year` functions adjust the year if necessary. We use the `is_leap` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. Unlike ISO 8601 ordinal day numbers, `Decalendar` `doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
+In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers, while the `isoo2year` and `doty2year` functions adjust the year if necessary. We use the `leap_year` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. Unlike ISO 8601 ordinal day numbers, `Decalendar` `doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
 
 $$(isoordinal + 305 - isleap(year)) \mod 365$$ {#eq-isoo1}
 
@@ -433,8 +436,9 @@ $$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 
 ```{javascript}
 #| tags: [isoo2year]
-function isoo2year(year = 1970, day = 1) {
-    return year - (day < (60 + is_leap(year - 1)))
+function isoo2deco(yd = "1970-001") {
+    const [year, day] = yd.split("-")
+    return year - (day < (60 + leap_year(year - 1)))
 }
 
 isoo2year()
@@ -445,7 +449,7 @@ isoo2year()
 ```{javascript}
 #| tags: [isoo2doty]
 function isoo2doty(year = 1970, day = 1) {
-    return (day + 305 - is_leap(year)) % 365
+    return (day + 305 - leap_year(year)) % 365
 }
 
 console.log(
@@ -458,7 +462,7 @@ console.log(
 ```{javascript}
 #| tags: [doty2isoo]
 function doty2isoo(year = 1970, doty = 0) {
-    return (doty + 60 + is_leap(year + 1)) % 365
+    return (doty + 60 + leap_year(year + 1)) % 365
 }
 
 console.log(
@@ -473,7 +477,7 @@ console.log(
 ```{julia}
 #| tags: [isoo2year]
 function isoo2year(year = 1970, day = 1)
-    year - (day < (60 + is_leap(year - 1)))
+    year - (day < (60 + leap_year(year - 1)))
 end
 
 isoo2year()
@@ -484,7 +488,7 @@ isoo2year()
 ```{julia}
 #| tags: [isoo2doty]
 function isoo2doty(year=1970, day=1)
-    (day + 305 - is_leap(year)) % 365
+    (day + 305 - leap_year(year)) % 365
 end
 
 "$(lpad(isoo2year(), 4, '0'))+$(lpad(isoo2doty(), 3, '0'))"
@@ -495,7 +499,7 @@ end
 ```{julia}
 #| tags: [doty2isoo]
 function doty2isoo(year=1970, doty=0)
-    (doty + 60 + is_leap(year + 1)) % 365
+    (doty + 60 + leap_year(year + 1)) % 365
 end
 
 "$(lpad(doty2year(), 4, '0'))+$(lpad(doty2isoo(), 3, '0'))"
@@ -508,7 +512,7 @@ end
 ```{python}
 #| tags: [isoo2year]
 def isoo2year(year=1970, day=1):
-    return year - (day < (60 + is_leap(year - 1)))
+    return year - (day < (60 + leap_year(year - 1)))
 
 isoo2year()
 ```
@@ -518,7 +522,7 @@ isoo2year()
 ```{python}
 #| tags: [isoo2doty]
 def isoo2doty(year=1970, day=1):
-    return (day + 305 - is_leap(year)) % 365
+    return (day + 305 - leap_year(year)) % 365
 
 f"{isoo2year():>04}+{isoo2doty():>03}"
 ```
@@ -528,7 +532,7 @@ f"{isoo2year():>04}+{isoo2doty():>03}"
 ```{python}
 #| tags: [doty2isoo]
 def doty2isoo(year=1970, doty=0):
-    return (doty + 60 + is_leap(year + 1)) % 365
+    return (doty + 60 + leap_year(year + 1)) % 365
 
 f"{doty2year():>04}+{doty2isoo():>03}"
 ```
@@ -540,7 +544,7 @@ f"{doty2year():>04}+{doty2isoo():>03}"
 ```{r}
 #| tags: [isoo2year]
 isoo2year <- function(year = 1970, day = 1) {
-    year - (day < (60 + is_leap(year - 1)))
+    year - (day < (60 + leap_year(year - 1)))
 }
 
 isoo2year()
@@ -551,7 +555,7 @@ isoo2year()
 ```{r}
 #| tags: [isoo2doty]
 isoo2doty <- function(year = 1970, day = 1) {
-    (day + 305 - is_leap(year)) %% 365
+    (day + 305 - leap_year(year)) %% 365
 }
 
 paste0(sprintf("%04d", isoo2year()), "+", sprintf("%03d", isoo2doty()))
@@ -562,7 +566,7 @@ paste0(sprintf("%04d", isoo2year()), "+", sprintf("%03d", isoo2doty()))
 ```{r}
 #| tags: [doty2isoo]
 doty2isoo <- function(year = 1970, doty = 0) {
-    (doty + 60 + is_leap(year + 1)) %% 365
+    (doty + 60 + leap_year(year + 1)) %% 365
 }
 
 paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))
@@ -585,9 +589,10 @@ As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of 
 
 ```{javascript}
 #| tags: [decdate]
-console.log(
-    `${date2year().toString().padStart(4, "0")}+${
-        date2doty().toString().padStart(3, "0")}`);
+function date2deco(year = 1970, month = 1, day = 1) {
+    return `${date2year(year, month).toString().padStart(4, "0")}+${
+        date2doty(month, day).toString().padStart(3, "0")}`);
+}
 ```
 
 ##### `isoc` date
@@ -805,13 +810,13 @@ zone2hour()
 
 The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The  `time2doty` and `doty2time` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
 
-$$declock = \frac{hours}{24} + \frac{minutes}{1440} + \frac{seconds}{86400} \cdot 10^x$$ {#eq-isot1}
+$$declock = \frac{hour}{24} + \frac{minute}{1440} + \frac{second}{86400} \cdot 10^x$$ {#eq-isot1}
 
-$$hours = declock \cdot 24 \cdot 10^x$$ {#eq-isot2}
+$$hour = declock \cdot 24 \cdot 10^x$$ {#eq-isot2}
 
-$$minutes = \frac{hours - \lfloor hours \rfloor}{60}$$ {#eq-isot3}
+$$minute = \frac{hour - \lfloor hour \rfloor}{60}$$ {#eq-isot3}
 
-$$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isot4}
+$$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-isot4}
 
 #### @tbl-isot
 
@@ -841,11 +846,22 @@ $$seconds = \frac{minutes - \lfloor minutes \rfloor}{60}$$ {#eq-isot4}
 
 ```{javascript}
 #| tags: [time2doty]
-function time2doty(hours = 1, minutes = 0, seconds = 0) {
-    return hours / 24 + minutes / 1440 + seconds / 86400
+function time2doty(hour = 1, minute = 0, second = 0) {
+    return hour / 24 + minute / 1440 + second / 86400
 }
 
 console.log(time2doty())
+```
+
+##### `time2isot`
+
+```{javascript}
+#| tags: [time2isot]
+function time2isot(hour = 1, minute = 0, second = 0) {
+    return hour / 24 + minute / 1440 + second / 86400
+}
+
+console.log(time2isot())
 ```
 
 ##### `doty2time`
@@ -854,11 +870,11 @@ console.log(time2doty())
 #| tags: [doty2time]
 function doty2time(doty = 1 / 24) {
     doty = doty - Math.floor(doty)
-    const hours = doty * 24,
-        floorHours = Math.floor(hours),
-        minutes = (hours - floorHours) / 60,
-        floorMinutes = Math.floor(minutes);
-        return [floorHours, floorMinutes, (minutes - floorMinutes) / 60]
+    const hour = doty * 24,
+        floorHour = Math.floor(hour),
+        minute = (hour - floorHour) / 60,
+        floorMinute = Math.floor(minute);
+        return [floorHour, floorMinute, (minute - floorMinute) / 60]
 }
 
 console.log(doty2time())
@@ -872,8 +888,8 @@ console.log(doty2time())
 
 ```{julia}
 #| tags: [time2doty]
-function time2doty(hours=1, minutes=0, seconds=0)
-    hours / 24 + minutes / 1440 + seconds / 86400
+function time2doty(hour=1, minute=0, second=0)
+    hour / 24 + minute / 1440 + second / 86400
 end
 
 time2doty()
@@ -885,11 +901,11 @@ time2doty()
 #| tags: [doty2time]
 function doty2time(doty=1/24)
     doty = doty - floor(doty)
-    hours = doty * 24
-    floorHours = floor(hours)
-    minutes = (hours - floorHours) / 60
-    floorMinutes = floor(minutes)
-    return floorHours, floorMinutes, (minutes - floorMinutes) / 60
+    hour = doty * 24
+    floorHour = floor(hour)
+    minute = (hour - floorHour) / 60
+    floorMinute = floor(minute)
+    return floorHour, floorMinute, (minute - floorMinute) / 60
 end
 
 doty2time()
@@ -901,8 +917,8 @@ doty2time()
 
 ```{python}
 #| tags: [time2doty]
-def time2doty(hours=1, minutes=0, seconds=0):
-    return hours / 24 + minutes / 1440 + seconds / 86400
+def time2doty(hour=1, minute=0, second=0):
+    return hour / 24 + minute / 1440 + second / 86400
 
 time2doty()
 ```
@@ -913,11 +929,11 @@ time2doty()
 #| tags: [doty2time]
 def doty2time(doty = 1/24):
     doty = doty - doty.__floor__()
-    hours = doty * 24
-    floorHours = hours.__floor__()
-    minutes = (hours - floorHours) / 60
-    floorMinutes = minutes.__floor__()
-    return floorHours, floorMinutes, (minutes - floorMinutes) / 60
+    hour = doty * 24
+    floorHour = hour.__floor__()
+    minute = (hour - floorHour) / 60
+    floorMinute = minutes.__floor__()
+    return floorHour, floorMinute, (minute - floorMinute) / 60
 
 doty2time()
 ```
@@ -928,8 +944,8 @@ doty2time()
 
 ```{r}
 #| tags: [time2doty]
-time2doty <- function(hours = 1, minutes = 0, seconds = 0) {
-    hours / 24 + minutes / 1440 + seconds / 86400
+time2doty <- function(hour = 1, minute = 0, second = 0) {
+    hour / 24 + minute / 1440 + second / 86400
 }
 
 time2doty()
@@ -941,11 +957,11 @@ time2doty()
 #| tags: [doty2time]
 doty2time <- function(doty = 1 / 24) {
     doty <- doty - floor(doty)
-    hours <- doty * 24
-    floorHours <- floor(hours)
-    minutes <- (hours - floorHours) / 60
-    floorMinutes <- floor(minutes)
-    c(floorHours, floorMinutes, (minutes - floorMinutes) / 60)
+    hour <- doty * 24
+    floorHour <- floor(hour)
+    minute <- (hour - floorHour) / 60
+    floorMinute <- floor(minute)
+    c(floorHour, floorMinute, (minute - floorMinute) / 60)
 }
 
 doty2time()
@@ -970,8 +986,8 @@ To create a `deco` timestamp, we can use the `doty2deco` or the `date2deco` func
 
 ```{javascript}
 #| tags: [time2doty]
-function time2doty(hours = 1, minutes = 0, seconds = 0) {
-    return hours / 24 + minutes / 1440 + seconds / 86400
+function time2doty(hour = 1, minute = 0, second = 0) {
+    return hour / 24 + minute / 1440 + second / 86400
 }
 ```
 
@@ -979,10 +995,10 @@ function time2doty(hours = 1, minutes = 0, seconds = 0) {
 
 ```{javascript}
 #| tags: [date2deco]
-function date2deco(year = 1969, month = 1, day = 1, hours = 0, minutes = 0, seconds = 0) {
+function date2deco(year = 1969, month = 1, day = 1, hour = 0, minute = 0, second = 0) {
     return `${date2year(year, month).toString().padStart(4, '0')}+${
         date2doty(month, day).toString().padStart(3, '0')}.${
-        (Math.round(time2doty(hours, minutes, seconds) * 1e5) / 1e5).toString().padStart(5, '0')}`)
+        (Math.round(time2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`)
 }
 ```
 
@@ -992,17 +1008,17 @@ function date2deco(year = 1969, month = 1, day = 1, hours = 0, minutes = 0, seco
 #| tags: [doty2time]
 function doty2time(doty = 1 / 24) {
     doty = doty - Math.floor(doty)
-    const hours = doty * 24,
-        floorHours = Math.floor(hours),
-        minutes = (hours - floorHours) / 60,
-        floorMinutes = Math.floor(minutes);
-        return [floorHours, floorMinutes, (minutes - floorMinutes) / 60]
+    const hour = doty * 24,
+        floorHour = Math.floor(hour),
+        minute = (hour - floorHour) / 60,
+        floorMinute = Math.floor(minute);
+        return [floorHour, floorMinute, (minute - floorMinute) / 60]
 }
 
 function doty2isoc(year, doty) {
     return `${date2year(year, month).toString().padStart(4, '0')}+${
         date2doty(month, day).toString().padStart(3, '0')}.${
-        (Math.round(time2doty(hours, minutes, seconds) * 1e5) / 1e5).toString().padStart(5, '0')}`)
+        (Math.round(time2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`)
 }
 console.log(`${doty2year()}+${
         doty2date().map(
@@ -1020,8 +1036,8 @@ console.log(`${doty2year()}+${
 
 ```{julia}
 #| tags: [time2doty]
-function time2doty(hours=1, minutes=0, seconds=0)
-    hours / 24 + minutes / 1440 + seconds / 86400
+function time2doty(hour=1, minute=0, second=0)
+    hour / 24 + minute / 1440 + second / 86400
 end
 
 "$(lpad(date2year(), 4, '0'))+$(lpad(date2doty(), 3, '0')).$(
@@ -1034,11 +1050,11 @@ end
 #| tags: [doty2time]
 function doty2time(doty=1/24)
     doty = doty - floor(doty)
-    hours = doty * 24
-    floorHours = floor(hours)
-    minutes = (hours - floorHours) / 60
-    floorMinutes = floor(minutes)
-    return floorHours, floorMinutes, (minutes - floorMinutes) / 60
+    hour = doty * 24
+    floorHour = floor(hour)
+    minute = (hour - floorHour) / 60
+    floorMinute = floor(minute)
+    return floorHour, floorMinute, (minute - floorMinute) / 60
 end
 
 
@@ -1055,8 +1071,8 @@ end
 
 ```{python}
 #| tags: [time2doty]
-def time2doty(hours=1, minutes=0, seconds=0):
-    return hours / 24 + minutes / 1440 + seconds / 86400
+def time2doty(hour=1, minute=0, second=0):
+    return hour / 24 + minute / 1440 + second / 86400
 
 f"{date2year():>04}+{date2doty():>03}.{round(time2doty(0) * 1e6):>05}"
 ```
@@ -1067,11 +1083,11 @@ f"{date2year():>04}+{date2doty():>03}.{round(time2doty(0) * 1e6):>05}"
 #| tags: [doty2time]
 def doty2time(doty = 1/24):
     doty = doty - doty.__floor__()
-    hours = doty * 24
-    floorHours = hours.__floor__()
-    minutes = (hours - floorHours) / 60
-    floorMinutes = minutes.__floor__()
-    return floorHours, floorMinutes, (minutes - floorMinutes) / 60
+    hour = doty * 24
+    floorHour = hour.__floor__()
+    minute = (hour - floorHour) / 60
+    floorMinute = minutes.__floor__()
+    return floorHour, floorMinute, (minute - floorMinute) / 60
 
 (
     f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}"
@@ -1085,8 +1101,8 @@ def doty2time(doty = 1/24):
 
 ```{r}
 #| tags: [time2doty]
-time2doty <- function(hours = 1, minutes = 0, seconds = 0) {
-    hours / 24 + minutes / 1440 + seconds / 86400
+time2doty <- function(hour = 1, minute = 0, second = 0) {
+    hour / 24 + minute / 1440 + second / 86400
 }
 
 paste0(
@@ -1101,11 +1117,11 @@ paste0(
 #| tags: [doty2time]
 doty2time <- function(doty = 1 / 24) {
     doty <- doty - floor(doty)
-    hours <- doty * 24
-    floorHours <- floor(hours)
-    minutes <- (hours - floorHours) / 60
-    floorMinutes <- floor(minutes)
-    c(floorHours, floorMinutes, (minutes - floorMinutes) / 60)
+    hour <- doty * 24
+    floorHour <- floor(hour)
+    minute <- (hour - floorHour) / 60
+    floorMinute <- floor(minute)
+    c(floorHour, floorMinute, (minute - floorMinute) / 60)
 }
 
 paste0(sprintf("%04d", doty2year()), "-",

@@ -93,7 +93,7 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
     }
 }
 
-function is_leap(y) {
+function leap_year(y) {
     return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
 
@@ -135,14 +135,14 @@ function doty2date(doty = 306) {
 console.log(doty2date());
 
 function isoo2doty(year = 1970, day = 1) {
-    return (day + 305 - is_leap(year)) % 365
+    return (day + 305 - leap_year(year)) % 365
 }
 
 console.log(isoo2doty(2024, 61))
 console.log(isoo2doty())
 
 function doty2isoo(year = 1970, doty = 0) {
-    return (doty + 60 + is_leap(year + 1)) % 365
+    return (doty + 60 + leap_year(year + 1)) % 365
 }
 
 
@@ -178,7 +178,7 @@ console.log(unix2doty(1695327225999, 5));
 console.log((60 + 305) % 365);
 console.log((263 + 305) % 365);
 console.log((1 + 305) % 365);
-console.log(is_leap(2000));
+console.log(leap_year(2000));
 
 function doty2year(year = 1969, doty = 306) { return year + (doty > 305) }
 
@@ -195,7 +195,7 @@ console.log(
 
 
 function isoo2year(year = 1970, day = 1) {
-    return year - (day < (60 + is_leap(year - 1)))
+    return year - (day < (60 + leap_year(year - 1)))
 }
 
 console.log(`${isoo2year(1970, 60)}+${isoo2doty()}`)
@@ -212,7 +212,7 @@ function hour2zone(hour = 0) {
                     : "J";
 }
 
-console.log(is_leap(1970))
+console.log(leap_year(1970))
 console.log(hour2zone()) // R
 console.log(hour2zone(-new Date().getTimezoneOffset() / 60)) // R
 console.log() // R
@@ -475,6 +475,7 @@ console.log(parse_dec("33+422.305-23543"))
 console.log(parseFloat("-.03"))
 console.log(parseInt("3z"))
 console.log(new Date(Date.parse("2023-01-01T12:00")))
+
 function unix2deco(ms = 0) {
     const [year, doty] = unix2doty(ms);
     return `${year.toString().padStart(4, "0")}+${
@@ -483,3 +484,11 @@ function unix2deco(ms = 0) {
 };
 
 console.log(unix2deco())
+
+function isoo2deco(yd = "1970-001") {
+    const [year, day] = yd.includes("-") ? yd.split("-") : yd.split(/(?=\d{4})/);
+    return `${parseInt(year) - (parseInt(day) < (60 + leap_year(year - 1)))}+${
+        (parseInt(day) + 305 - leap_year(year)) % 365}`
+}
+
+console.log(isoo2deco())
