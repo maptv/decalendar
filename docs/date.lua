@@ -1,17 +1,19 @@
-local function replace_mon_with_season(date)
-  local season_table = {
-    Jan = "Winter", Feb = "Winter", Mar = "Spring",
-    Apr = "Spring", May = "Spring", Jun = "Summer",
-    Jul = "Summer", Aug = "Summer", Sep = "Autumn",
-    Oct = "Autumn", Nov = "Autumn", Dec = "Spring"
-  }
-  local date = pandoc.utils.stringify(date)
-  local mon = date:match("%%(%a+)%%")
-  local season = season_table[mon]
-  return date:gsub("%%" .. mon .. "%%", season)
+local function unix2deco(ms)
+    local days = ms / 86400000 + 719468
+    local era = (days >= 0 and days or days - 146096) // 146097
+    local doe = days - era * 146097
+    local year = math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365) + era * 400
+    local doty = days - math.floor(year * 365 + year / 4 - year / 100 + year / 400)
+    return string.format("%s+%s", math.floor(year), math.floor(doty))
 end
 
+local function to_decalendar(date)
+  local date = pandoc.utils.stringify(date)
+  local unix = date:match("(%d+)")
+  return date:gsub(unix, unix2deco(unix))
+end
 
 function Meta(m)
-  m.date = replace_mon_with_season(m.date)
+  m.date = to_decalendar(m.date)
   return m
+end

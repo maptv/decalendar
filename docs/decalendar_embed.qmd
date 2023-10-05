@@ -1,6 +1,10 @@
 ---
 title: "`Decalendar` and `Declock`"
 author: Martin Laptev
+date: now
+date-format: x
+filters:
+  - date.lua
 ---
 
 # Summary {#sec-summary}

@@ -228,7 +228,8 @@
   </div>
   
 
-</header>     <p>Martin Laptev</p>
+</header>     <p>Martin Laptev<br>
+2023+218</p>
 <section id="summary" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Summary</h1>
 <p><code>Decalendar</code> is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the <a href="https://en.wikipedia.org/wiki/Gregorian_calendar">Gregorian calendar</a>. Similarly, <code>Declock</code> is a timekeeping system designed to take the place of <a href="https://en.wikipedia.org/wiki/Standard_time">standard time</a>. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use days as their base unit and derive other units from days using metric, Roman, and Greek <a href="https://en.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English">numeral prefixes</a>. In essence, <code>Decalendar</code> units group days together, while <code>Declock</code> units divide days up.</p>
@@ -238,7 +239,7 @@
 <p>The main <code>Decalendar</code> date format consists of a year and a day-of-the-year (<code>doty</code>) delimited by a plus sign (<code>year+day</code>). As shown in <a href="#fig-date">Figure&nbsp;1</a>, the last digit of the <code>doty</code> number is the day-of-the-<code>dek</code> (<code>dotd</code>) number, which serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The first two digits of the <code>doty</code> are the <code>dek</code> number.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_python_files/figure-html/7b51e335-cd2a-4a36-a24a-43d0927f1000-3-fig-date.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_python_files/figure-html/b0d6199a-b1d8-4152-9070-cb89703b56f1-3-fig-date.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: The components of a Decalendar date</figcaption>
 </figure>
 </div>
@@ -310,14 +311,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_python_files/figure-html/7b51e335-cd2a-4a36-a24a-43d0927f1000-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_python_files/figure-html/b0d6199a-b1d8-4152-9070-cb89703b56f1-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_python_files/figure-html/7b51e335-cd2a-4a36-a24a-43d0927f1000-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_python_files/figure-html/b0d6199a-b1d8-4152-9070-cb89703b56f1-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -329,7 +330,7 @@
 <p>In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. In <code>Schedule 3</code>, there are 3 workdays separated by a 2-day <code>pentend</code>. Each <code>Schedule 3</code> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). <code>Declock</code> uses such proportions of the day instead of hours, minutes, or seconds. <a href="#fig-time">Figure&nbsp;3</a> shows midnight, the first moment of a new <code>Declock</code> day, with labels for the most important <code>Declock</code> units. More information on <code>Declock</code> units is provided in <a href="#sec-unit">Section&nbsp;4</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_python_files/figure-html/7b51e335-cd2a-4a36-a24a-43d0927f1000-4-fig-time.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_python_files/figure-html/b0d6199a-b1d8-4152-9070-cb89703b56f1-4-fig-time.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: The components of a Decalendar time</figcaption>
 </figure>
 </div>
@@ -3087,7 +3088,7 @@ day = Int(floor(d))
 <span id="cb90-10"><a href="#cb90-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>'2023+218.85802+0'</code></pre>
+<pre><code>'2023+218.93431+0'</code></pre>
 </div>
 </div></div>
 </section>
@@ -3185,7 +3186,7 @@ unix2deco()</code></pre>
 <span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>'2023+218.85802+0'</code></pre>
+<pre><code>'2023+218.93431+0'</code></pre>
 </div>
 </div></div>
 </section>

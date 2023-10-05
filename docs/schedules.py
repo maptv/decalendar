@@ -3,7 +3,9 @@
 # title: Weekly and Pently Schedule Comparison
 # author: Martin Laptev
 # date: now
-# date-format: "x"
+# date-format: x
+# filters:
+#   - date.lua
 # ---
 
 # %%
