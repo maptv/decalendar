@@ -122,107 +122,107 @@ To locate a specific date in @tbl-greg2doty, first find the month among the colu
 
 ### Gregorian calendar date conversion {#sec-conv}
 
-In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar` `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `date2doty` function is a `doty` number, while its inverse function, `doty2date`, returns an array containing a month and a `dotm` number.
+In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar` `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [_chrono-Compatible Low-Level Date Algorithms_](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `greg2doty` function is a `doty` number, while its inverse function, `doty2greg`, returns an array containing a month and a `dotm` number.
 
 ::: {#exm-coor}
 :::
 
 #### JavaScript
 
-##### `date2doty`
+##### `greg2doty`
 
 ```{javascript}
-#| tags: [date2doty]
-function date2doty(month = 1, day = 1) {
+#| tags: [greg2doty]
+function greg2doty(month = 1, day = 1) {
     return Math.floor(
         (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
 )}
 
-date2doty()
+greg2doty()
 ```
 
-##### `doty2date`
+##### `doty2greg`
 
 ```{javascript}
-#| tags: [doty2date]
-function doty2date(doty = 306) {
+#| tags: [doty2greg]
+function doty2greg(doty = 306) {
     const m = Math.floor((5 * doty + 2) / 153);
     return [Math.floor(m < 10 ? m + 3 : m - 9), Math.floor(doty - (153 * m + 2) / 5 + 2)];
 }
 
-doty2date()
+doty2greg()
 ```
 
 #### Julia
 
-##### `date2doty`
+##### `greg2doty`
 
 ```{julia}
-#| tags: [date2doty]
-function date2doty(month=1, day=1)
+#| tags: [greg2doty]
+function greg2doty(month=1, day=1)
     Int(floor((153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1))
 end
 
-date2doty()
+greg2doty()
 ```
 
-##### `doty2date`
+##### `doty2greg`
 
 ```{julia}
-#| tags: [doty2date]
-function doty2date(doty = 306)
+#| tags: [doty2greg]
+function doty2greg(doty = 306)
     m = floor((5 * doty + 2) / 153);
     return Int(m < 10 ? m + 3 : m - 9), Int(floor(doty - (153 * m + 2) / 5 + 2))
 end
 
-doty2date()
+doty2greg()
 ```
 
 #### Python
 
-##### `date2doty`
+##### `greg2doty`
 
 ```{python}
-#| tags: [date2doty]
-def date2doty(month=1, day=1):
+#| tags: [greg2doty]
+def greg2doty(month=1, day=1):
     return (153 * (month - 3 if month > 2 else month + 9) + 2) // 5 + day - 1
 
-date2doty()
+greg2doty()
 ```
 
-##### `doty2date`
+##### `doty2greg`
 
 ```{python}
-#| tags: [doty2date]
-def doty2date(doty=306):
+#| tags: [doty2greg]
+def doty2greg(doty=306):
     m = (5 * doty + 2) // 153
     return m + 3 if m < 10 else m - 9, doty - (153 * m + 2) // 5 + 1
 
-doty2date()
+doty2greg()
 ```
 
 #### R
 
-##### `date2doty`
+##### `greg2doty`
 
 ```{r}
-#| tags: [date2doty]
-date2doty <- function(month = 1, day = 1) {
+#| tags: [greg2doty]
+greg2doty <- function(month = 1, day = 1) {
     floor((153 * (ifelse(month > 2, month - 3, month + 9)) + 2) / 5 + day - 1)
 }
 
-date2doty()
+greg2doty()
 ```
 
-##### `doty2date`
+##### `doty2greg`
 
 ```{r}
-#| tags: [doty2date]
-doty2date <- function(doty = 306) {
+#| tags: [doty2greg]
+doty2greg <- function(doty = 306) {
     m <- floor((5 * doty + 2) / 153)
     c(ifelse(m < 10, m + 3, m - 9), floor(doty - (153 * m + 2) / 5 + 2))
 }
-doty2date()
+doty2greg()
 ```
 
 :::
@@ -259,13 +259,13 @@ doty2date()
 
 #### JavaScript
 
-##### `date2year`
+##### `greg2year`
 
 ```{javascript}
-#| tags: [date2year]
-function date2year(year = 1970, month = 1) { return year - (month < 3) }
+#| tags: [greg2year]
+function greg2year(year = 1970, month = 1) { return year - (month < 3) }
 
-console.log(date2year());
+console.log(greg2year());
 ```
 
 ##### `doty2year`
@@ -279,15 +279,15 @@ console.log(doty2year());
 
 #### Julia
 
-##### `date2year`
+##### `greg2year`
 
 ```{julia}
-#| tags: [date2year]
-function date2year(year=1970, month=1)
+#| tags: [greg2year]
+function greg2year(year=1970, month=1)
     year - (month < 3)
 end
 
-date2year()
+greg2year()
 ```
 
 ##### `doty2year`
@@ -303,14 +303,14 @@ doty2year()
 
 #### Python
 
-##### `date2year`
+##### `greg2year`
 
 ```{python}
-#| tags: [date2year]
-def date2year(year=1970, month=1):
+#| tags: [greg2year]
+def greg2year(year=1970, month=1):
     return year - (month < 3)
 
-date2year()
+greg2year()
 ```
 
 ##### `doty2year`
@@ -325,15 +325,15 @@ doty2year()
 
 #### R
 
-##### `date2year`
+##### `greg2year`
 
 ```{r}
-#| tags: [date2year]
-date2year <- function(year = 1970, month = 1) {
+#| tags: [greg2year]
+greg2year <- function(year = 1970, month = 1) {
     year - (month < 3)
 }
 
-date2year()
+greg2year()
 ```
 
 ##### `doty2year`
@@ -432,42 +432,41 @@ $$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 
 #### JavaScript
 
-##### `isoo2year`
-
-```{javascript}
-#| tags: [isoo2year]
-function isoo2deco(yd = "1970-001") {
-    const [year, day] = yd.split("-")
-    return year - (day < (60 + leap_year(year - 1)))
-}
-
-isoo2year()
-```
-
 ##### `isoo2doty`
 
 ```{javascript}
 #| tags: [isoo2doty]
-function isoo2doty(year = 1970, day = 1) {
-    return (day + 305 - leap_year(year)) % 365
+function isoo2doty(yd = "1970-001") {
+    const [year, day] = yd.includes("-") ? yd.split("-") : yd.split(/(?=\d{4})/);
+    return [parseInt(year) - (parseInt(day) < (60 + leap_year(year - 1))),
+        (parseInt(day) + 305 - leap_year(year)) % 365]
 }
 
-console.log(
-    `${isoo2year().toString().padStart(4, "0")}+${
-    isoo2doty().toString().padStart(3, "0")}`);
+console.log(isoo2doty())
+```
+
+##### `isoo2deco`
+
+```{javascript}
+#| tags: [isoo2deco]
+function isoo2deco(yd = "1970-001") {
+    const [year, doty] = isoo2doty(yd).map(i => i.toString())
+    return `${year.padStart(4, "0")}+${doty.padStart(3, "0")}`
+}
+
+console.log(isoo2deco())
 ```
 
 ##### `doty2isoo`
 
 ```{javascript}
 #| tags: [doty2isoo]
-function doty2isoo(year = 1970, doty = 0) {
-    return (doty + 60 + leap_year(year + 1)) % 365
+function doty2isoo(year = 1969, doty = 306) {
+    return `${doty2year(year, doty).toString().padStart(4, "0")}-${
+    ((doty + 60 + leap_year(year + 1)) % 365).toString().padStart(3, "0")}`
 }
 
-console.log(
-    `${doty2year().toString().padStart(4, "0")}+${
-    doty2isoo().toString().padStart(3, "0")}`);
+console.log(doty2isoo());
 ```
 
 #### Julia
@@ -576,7 +575,7 @@ paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))
 
 ### Calendar dates {#sec-isoc}
 
-ISO 8601 [calendar dates (`isoc`)](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) consist of a four-digit year, a two-digit month, and a two-digit `dotm` separated by hyphens (`year-mm-dd`). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from @exm-coor and @exm-gregm to convert between `deco` dates and `isoc` dates, as shown in @exm-isoc. The code in @exm-isoc formats the output of the `date2year` and `date2doty` functions into `deco` dates and the output of the `doty2year` and `doty2date` functions into `isoc` dates.
+ISO 8601 [calendar dates (`isoc`)](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) consist of a four-digit year, a two-digit month, and a two-digit `dotm` separated by hyphens (`year-mm-dd`). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from @exm-coor and @exm-gregm to convert between `deco` dates and `isoc` dates, as shown in @exm-isoc. The code in @exm-isoc formats the output of the `greg2year` and `greg2doty` functions into `deco` dates and the output of the `doty2year` and `doty2greg` functions into `isoc` dates.
 
 As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `Decalendar` calendar (`decc`, pronounced "deck-see") format (`year+m+dd`), which is very similar to the `isoc` date format. The `decc` format is described in @sec-dotm. Examples of the `decc` format are provided in @sec-dotex. To be clear, the `decc` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
 
@@ -589,9 +588,9 @@ As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of 
 
 ```{javascript}
 #| tags: [decdate]
-function date2deco(year = 1970, month = 1, day = 1) {
-    return `${date2year(year, month).toString().padStart(4, "0")}+${
-        date2doty(month, day).toString().padStart(3, "0")}`);
+function greg2deco(year = 1970, month = 1, day = 1) {
+    return `${greg2year(year, month).toString().padStart(4, "0")}+${
+        greg2doty(month, day).toString().padStart(3, "0")}`);
 }
 ```
 
@@ -601,7 +600,7 @@ function date2deco(year = 1970, month = 1, day = 1) {
 #| tags: [isodate]
 console.log(
     `${doty2year().toString().padStart(4, "0")}-${
-        doty2date().map(
+        doty2greg().map(
         i => i.toString().padStart(2, "0")
         ).join("-")}`);
 ```
@@ -612,14 +611,14 @@ console.log(
 
 ```{julia}
 #| tags: [decdate]
-"$(lpad(date2year(), 4, '0'))+$(lpad(date2doty(), 3, '0'))"
+"$(lpad(greg2year(), 4, '0'))+$(lpad(greg2doty(), 3, '0'))"
 ```
 
 ##### ISO 8601 date
 
 ```{julia}
 #| tags: [isodate]
-"$(lpad(doty2year(), 4, '0'))-$(join(map((x) -> lpad(x, 2, '0'), doty2date()), '-'))"
+"$(lpad(doty2year(), 4, '0'))-$(join(map((x) -> lpad(x, 2, '0'), doty2greg()), '-'))"
 ```
 
 #### Python
@@ -628,14 +627,14 @@ console.log(
 
 ```{python}
 #| tags: [decdate]
-f"{date2year():>04}+{date2doty():<3}"
+f"{greg2year():>04}+{greg2doty():<3}"
 ```
 
 ##### ISO 8601 date
 
 ```{python}
 #| tags: [isodate]
-f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}"
+f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2greg()))}"
 ```
 
 #### R
@@ -645,8 +644,8 @@ f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}
 ```{r}
 #| tags: [decdate]
 paste0(
-    sprintf("%04d", date2year()), "+",
-    sprintf("%03d", date2doty())
+    sprintf("%04d", greg2year()), "+",
+    sprintf("%03d", greg2doty())
     )
 ```
 
@@ -655,7 +654,7 @@ paste0(
 ```{r}
 #| tags: [isodate]
 paste0(sprintf("%04d", doty2year()), "-",
-    paste(sprintf("%02d", doty2date()), collapse = '-')
+    paste(sprintf("%02d", doty2greg()), collapse = '-')
     )
 ```
 
@@ -975,7 +974,7 @@ doty2time()
 
 Coincidentally, an ISO 8601 ordinal (`isoo`) timestamp (`year-dayThh:mm:ssZ`) without delimiters (`yeardayThhmmssZ`) is the same length as a `deco` timestamp (`year+day.dddddZ`). `Deco` timestamps cannot exist without delimiters, because removing the plus sign (`+`) from a `deco` timestamp turns it into a `doty` number (`ddddddd.ddddd`). If we removed the `+` from the `deco` timestamp `1969+306.00000`, we would obtain the `doty` number `1969306.00000` would represent midnight 1969306 days from the beginning of the current year. The rules for `deco` timestamp interpretation are summarized by the code in the `deco2doty` function in @exm-unixp.
 
-To create a `deco` timestamp, we can use the `doty2deco` or the `date2deco` functions as shown in @exm-isos. Similarly, @exm-isos also shows how to create an `isoc` timestamp with the `doty2isoc` and `doty2isoc` functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or `Zone 0` and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. @sec-unixb and @sec-unixp further discuss timestamps and provide functions for building, parsing, and converting timestamps.
+To create a `deco` timestamp, we can use the `doty2deco` or the `greg2deco` functions as shown in @exm-isos. Similarly, @exm-isos also shows how to create an `isoc` timestamp with the `doty2isoc` and `doty2isoc` functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or `Zone 0` and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. @sec-unixb and @sec-unixp further discuss timestamps and provide functions for building, parsing, and converting timestamps.
 
 ::: {#exm-isos}
 :::
@@ -991,13 +990,13 @@ function time2doty(hour = 1, minute = 0, second = 0) {
 }
 ```
 
-##### `date2deco`
+##### `greg2deco`
 
 ```{javascript}
-#| tags: [date2deco]
-function date2deco(year = 1969, month = 1, day = 1, hour = 0, minute = 0, second = 0) {
-    return `${date2year(year, month).toString().padStart(4, '0')}+${
-        date2doty(month, day).toString().padStart(3, '0')}.${
+#| tags: [greg2deco]
+function greg2deco(year = 1969, month = 1, day = 1, hour = 0, minute = 0, second = 0) {
+    return `${greg2year(year, month).toString().padStart(4, '0')}+${
+        greg2doty(month, day).toString().padStart(3, '0')}.${
         (Math.round(time2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`)
 }
 ```
@@ -1016,12 +1015,12 @@ function doty2time(doty = 1 / 24) {
 }
 
 function doty2isoc(year, doty) {
-    return `${date2year(year, month).toString().padStart(4, '0')}+${
-        date2doty(month, day).toString().padStart(3, '0')}.${
+    return `${greg2year(year, month).toString().padStart(4, '0')}+${
+        greg2doty(month, day).toString().padStart(3, '0')}.${
         (Math.round(time2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`)
 }
 console.log(`${doty2year()}+${
-        doty2date().map(
+        doty2greg().map(
         i => i.toString().padStart(2, "0")
         ).join("-")}T${doty2time().map(
         i => Math.round(i).toString().padStart(2, "0")
@@ -1040,7 +1039,7 @@ function time2doty(hour=1, minute=0, second=0)
     hour / 24 + minute / 1440 + second / 86400
 end
 
-"$(lpad(date2year(), 4, '0'))+$(lpad(date2doty(), 3, '0')).$(
+"$(lpad(greg2year(), 4, '0'))+$(lpad(greg2doty(), 3, '0')).$(
     lpad(Int(round(time2doty(0) * 1e5)), 5, '0')))"
 ```
 
@@ -1060,7 +1059,7 @@ end
 
 "$(lpad(doty2year(), 4, '0'))-$(join(
     map((x) -> lpad(x, 2, '0'
-), doty2date()), '-'))T$(join(
+), doty2greg()), '-'))T$(join(
     map((x) -> lpad(Int(x), 2, '0'
 ), doty2time(0)), ':')))"
 ```
@@ -1074,7 +1073,7 @@ end
 def time2doty(hour=1, minute=0, second=0):
     return hour / 24 + minute / 1440 + second / 86400
 
-f"{date2year():>04}+{date2doty():>03}.{round(time2doty(0) * 1e6):>05}"
+f"{greg2year():>04}+{greg2doty():>03}.{round(time2doty(0) * 1e6):>05}"
 ```
 
 ##### `doty2time`
@@ -1090,7 +1089,7 @@ def doty2time(doty = 1/24):
     return floorHour, floorMinute, (minute - floorMinute) / 60
 
 (
-    f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2date()))}"
+    f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2greg()))}"
     f"T{':'.join(map(lambda i: str(round(i)).rjust(2, '0'), doty2time(0)))}"
 )
 ```
@@ -1106,8 +1105,8 @@ time2doty <- function(hour = 1, minute = 0, second = 0) {
 }
 
 paste0(
-    sprintf("%04d", date2year()), "+",
-    sprintf("%03d", date2doty()), ".",
+    sprintf("%04d", greg2year()), "+",
+    sprintf("%03d", greg2doty()), ".",
     sprintf("%05d", round(time2doty(0) * 1e5)))
 ```
 
@@ -1125,7 +1124,7 @@ doty2time <- function(doty = 1 / 24) {
 }
 
 paste0(sprintf("%04d", doty2year()), "-",
-    paste(sprintf("%02d", doty2date()), collapse = "-"), "T",
+    paste(sprintf("%02d", doty2greg()), collapse = "-"), "T",
     paste(sprintf("%02d", doty2time()), collapse = ":")
     )
 ```

@@ -134,13 +134,6 @@ function doty2date(doty = 306) {
 
 console.log(doty2date());
 
-function isoo2doty(year = 1970, day = 1) {
-    return (day + 305 - leap_year(year)) % 365
-}
-
-console.log(isoo2doty(2024, 61))
-console.log(isoo2doty())
-
 function doty2isoo(year = 1970, doty = 0) {
     return (doty + 60 + leap_year(year + 1)) % 365
 }
@@ -152,7 +145,6 @@ console.log(date2year());
 
 
 console.log(doty2isoo())
-console.log(isoo2doty(2024, 61))
 console.log(doty2isoo(2023, 0))
 console.log(306 - 59)
 
@@ -485,10 +477,18 @@ function unix2deco(ms = 0) {
 
 console.log(unix2deco())
 
-function isoo2deco(yd = "1970-001") {
+function isoo2doty(yd = "1970-001") {
     const [year, day] = yd.includes("-") ? yd.split("-") : yd.split(/(?=\d{4})/);
-    return `${parseInt(year) - (parseInt(day) < (60 + leap_year(year - 1)))}+${
-        (parseInt(day) + 305 - leap_year(year)) % 365}`
+    return [parseInt(year) - (parseInt(day) < (60 + leap_year(year - 1))),
+        (parseInt(day) + 305 - leap_year(year)) % 365]
+}
+
+console.log(isoo2doty())
+
+function isoo2deco(yd = "1970-001") {
+    const [year, doty] = isoo2doty(yd)
+    return `${year.toString().padStart(4, "0")}+${
+        doty.toString().padStart(3, "0")}`
 }
 
 console.log(isoo2deco())
