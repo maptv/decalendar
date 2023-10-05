@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="207.46118mm"
+   height="91.15461mm"
+   viewBox="0 0 207.46118 91.15461"
+   version="1.1"
+   id="svg45734"
+   inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
+   sodipodi:docname="fig-glance.svg"
+   inkscape:export-filename="fig-glance.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview45736"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.99191319"
+     inkscape:cx="486.4337"
+     inkscape:cy="315.55181"
+     inkscape:window-width="1512"
+     inkscape:window-height="916"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs45731">
+    <rect
+       x="42.132469"
+       y="269.17966"
+       width="808.6825"
+       height="321.55923"
+       id="rect3141" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-43.891985,-57.751741)">
+    <rect
+       x="168.08475"
+       y="81.957397"
+       stroke="#70ad47"
+       fill="none"
+       width="50.672993"
+       height="51.346527"
+       id="rect250"
+       style="stroke:#c8cf2d;stroke-width:3.9987;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       x="218.75359"
+       y="81.904083"
+       stroke="#70ad47"
+       fill="none"
+       width="25.358469"
+       height="51.445854"
+       id="rect250-7"
+       style="stroke:#0dcfda;stroke-width:3.93203;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="m 48.594398,125.44394 a 14.159141,5.2916666 0 0 0 14.159139,5.29166 h 17.698927 a 14.159141,5.2916666 0 0 1 14.159142,5.29167 14.159141,5.2916666 0 0 1 14.159134,-5.29167 h 17.69893 a 14.159141,5.2916666 0 0 0 14.15914,-5.29166"
+       id="path266"
+       style="fill:none;stroke:#419bf9;stroke-width:1.32292px;stroke-opacity:1" />
+    <text
+       y="145.1875"
+       x="84.333611"
+       id="text268"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#419bf9;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan1632"
+         x="84.333611"
+         y="145.1875"
+         style="fill:#419bf9;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1">Year</tspan></text>
+    <path
+       d="m 171.25738,124.7353 a 5.2532629,5.2916666 0 0 0 5.25326,5.29167 h 24.69034 a 5.2532629,5.2916666 0 0 1 5.25326,5.29166 5.2532629,5.2916666 0 0 1 5.25326,-5.29166 h 24.69035 a 5.2532629,5.2916666 0 0 0 5.25325,-5.29167"
+       id="path304"
+       style="fill:none;stroke:#f69833;stroke-width:1.32292px;stroke-opacity:1" />
+    <text
+       y="146.60365"
+       x="171.90263"
+       id="text306"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#f69833;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan8350"
+         style="fill:#f69833;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"
+         x="171.90263"
+         y="146.60365">Day of the year</tspan></text>
+    <text
+       y="78.631325"
+       x="184.73033"
+       id="text306-6"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#c8cf2d;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan34767"
+         style="fill:#c8cf2d;fill-opacity:1;stroke-width:0.264583"
+         x="184.73033"
+         y="78.631325">Dek</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,29.930237,8.4135036)"
+       id="text3139"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:Ewka;-inkscape-font-specification:'Ewka, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect3141);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:110;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="42.132812"
+         y="443.24689"
+         id="tspan71218"><tspan
+           style="fill:#419bf9;stroke:#888888"
+           id="tspan71212">1968</tspan><tspan
+           style="fill:#888888"
+           id="tspan71214">+</tspan><tspan
+           style="fill:#f69833;stroke:#888888"
+           id="tspan71216">306</tspan></tspan></text>
+    <text
+       y="65.687149"
+       x="215.27486"
+       id="text306-3"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#0dcfda;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan68945"
+         x="215.27486"
+         y="65.687149">Day of </tspan><tspan
+         sodipodi:role="line"
+         id="tspan68947"
+         x="215.27486"
+         y="78.916275">the dek</tspan></text>
+  </g>
+</svg>

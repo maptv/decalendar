@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="156.1781mm"
+   height="75.029388mm"
+   viewBox="0 0 156.1781 75.029389"
+   version="1.1"
+   id="svg45734"
+   inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
+   sodipodi:docname="fig-glance1.svg"
+   inkscape:export-filename="../../../fig-glance1.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview45736"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.62018895"
+     inkscape:cx="289.42792"
+     inkscape:cy="361.18025"
+     inkscape:window-width="1512"
+     inkscape:window-height="916"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs45731">
+    <rect
+       x="42.132469"
+       y="269.17966"
+       width="1463.1152"
+       height="314.43033"
+       id="rect3141" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-89.899965,-70.013523)">
+    <text
+       y="144.80727"
+       x="157.48282"
+       id="text306"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#f69833;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan50512"
+         x="157.48282"
+         y="144.80727">Time</tspan></text>
+    <text
+       y="78.092133"
+       x="181.78238"
+       id="text306-6"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#c8cf2d;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan34767"
+         style="fill:#c8cf2d;fill-opacity:1;stroke-width:0.264583"
+         x="181.78238"
+         y="78.092133">Beats</tspan></text>
+    <text
+       y="77.773232"
+       x="89.562996"
+       id="text306-6-3-5-1"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#cc99ff;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan63206"
+         x="89.562996"
+         y="77.773232">Dimes</tspan></text>
+    <text
+       y="78.431274"
+       x="147.51753"
+       id="text306-6-3"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#419bf9;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan61642"
+         x="147.51753"
+         y="78.431274">Mils</tspan></text>
+    <text
+       y="78.063202"
+       x="118.73633"
+       id="text306-6-3-5"
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:10.5833px;font-family:'Trebuchet MS', Helvetica, sans-serif;-inkscape-font-specification:'Trebuchet MS, Helvetica, sans-serif, Ultra-Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#cc00ff;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan61683"
+         x="118.73633"
+         y="78.063202">Cents</tspan></text>
+    <text
+       y="78.122589"
+       x="218.30046"
+       id="text306-3"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;fill:#0dcfda;fill-opacity:1;stroke:#888888;stroke-width:0.264583;stroke-opacity:1"><tspan
+         sodipodi:role="line"
+         id="tspan66353"
+         x="218.30046"
+         y="78.122589">Zone</tspan></text>
+    <rect
+       x="92.083733"
+       y="82.008614"
+       stroke="#70ad47"
+       fill="none"
+       width="126.65542"
+       height="51.009312"
+       id="rect250"
+       style="stroke:#c8cf2d;stroke-width:4.14851;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       x="91.928375"
+       y="81.983002"
+       stroke="#70ad47"
+       fill="none"
+       width="76.096245"
+       height="51.001408"
+       id="rect250-9-7"
+       style="stroke:#419bf9;stroke-width:4.05682;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       x="91.955856"
+       y="81.986954"
+       stroke="#70ad47"
+       fill="none"
+       width="50.6772"
+       height="51.147373"
+       id="rect250-9"
+       style="stroke:#cc00ff;stroke-width:3.9911;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,80.73024,8.4135036)"
+       id="text3139"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:192px;font-family:Ewka;-inkscape-font-specification:'Ewka, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect3141);display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:110;stroke-dasharray:none;stroke-opacity:1"><tspan
+         x="42.132812"
+         y="443.24689"
+         id="tspan71973"><tspan
+           style="fill:#f69833;stroke:#888888"
+           id="tspan71971">00000Z</tspan></tspan></text>
+    <rect
+       x="91.980522"
+       y="81.891739"
+       stroke="#70ad47"
+       fill="none"
+       width="25.367702"
+       height="51.189953"
+       id="rect250-7-5"
+       style="stroke:#cc99ff;stroke-width:3.99077;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       x="218.74832"
+       y="81.898819"
+       stroke="#70ad47"
+       fill="none"
+       width="25.368992"
+       height="51.149628"
+       id="rect250-7"
+       style="stroke:#0dcfda;stroke-width:3.92151;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="m 95.61498,126.32309 a 10.845699,5.2913867 0 0 0 10.84569,5.29139 h 50.9748 a 10.845699,5.2913867 0 0 1 10.84569,5.29138 10.845699,5.2913867 0 0 1 10.84569,-5.29138 h 50.97481 a 10.845699,5.2913867 0 0 0 10.84568,-5.29139"
+       id="path304"
+       style="fill:none;stroke:#f69833;stroke-width:1.9008px;stroke-opacity:1" />
+  </g>
+</svg>
