@@ -104,7 +104,7 @@
 </div>
 <main class="content page-columns page-full" id="quarto-document-content">      <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Weekly and Pently Schedule Comparison</h1>
+<div class="quarto-title-block"><div><h1 class="title">Weekly and Pently Schedule Comparison</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 </div>
 
 
@@ -121,7 +121,7 @@
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">1696538168000</p>
     </div>
   </div>
   
@@ -129,84 +129,107 @@
   </div>
   
 
-</header>   <div class="page-columns page-full">
+</header>   <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-05T20:35:05.396795Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-05T20:35:05.396265Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-05T20:35:05.638756Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-05T20:35:05.638446Z&quot;}" data-execution_count="1">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Days"</span>: [<span class="st">"Mon"</span>, <span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thur"</span>, <span class="st">"Fri"</span>, <span class="st">"Sat"</span>, <span class="st">"Sun"</span>],</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Evening rest"</span>: [<span class="dv">7</span> <span class="op">/</span> <span class="dv">24</span>] <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Work"</span>: [<span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span>] <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Morning rest"</span>: [<span class="dv">3</span> <span class="op">/</span> <span class="dv">8</span>] <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>).set_index(<span class="st">"Days"</span>).plot.bar(</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    stacked<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"crimson"</span>, <span class="st">"blue"</span>],</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Weekly schedule"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">15</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Days of the week"</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Proportion of the day"</span>,</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    rot<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="fl">.8</span>,</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>ax.invert_yaxis()</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'Rest'</span>, <span class="st">'Work'</span>], bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.6</span>))</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> ax.containers:</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">3</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">''</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">'center'</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">15</span>)<span class="op">;</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Days"</span>: [<span class="st">"0</span><span class="ch">\n</span><span class="st">5"</span>, <span class="st">"1</span><span class="ch">\n</span><span class="st">6"</span>, <span class="st">"2</span><span class="ch">\n</span><span class="st">7"</span>, <span class="st">"3</span><span class="ch">\n</span><span class="st">8"</span>, <span class="st">"4</span><span class="ch">\n</span><span class="st">9"</span>],</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Evening rest"</span>: [<span class="fl">0.3</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Work"</span>: [<span class="fl">0.4</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Morning rest"</span>: [<span class="fl">0.3</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>).set_index(<span class="st">"Days"</span>).plot.bar(</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    stacked<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"crimson"</span>, <span class="st">"blue"</span>],</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Dekly schedule"</span>,</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">15</span>,</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Days of the dek"</span>,</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Proportion of the day"</span>,</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    rot<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="fl">.8</span>,</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>ax.invert_yaxis()</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'Rest'</span>, <span class="st">'Work'</span>], bbox_to_anchor<span class="op">=</span>(<span class="fl">1.2</span>, <span class="fl">0.6</span>))</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> ax.containers:</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">1</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">''</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">'center'</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text.color"</span>: <span class="st">"black"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.facecolor"</span>: <span class="st">"white"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.edgecolor"</span>: <span class="st">"lightgray"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.labelcolor"</span>: <span class="st">"white"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"legend.labelcolor"</span>: <span class="st">"white"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"legend.edgecolor"</span>: <span class="st">"lightgray"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"legend.facecolor"</span>: <span class="st">"black"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"xtick.color"</span>: <span class="st">"white"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ytick.color"</span>: <span class="st">"white"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.facecolor"</span>: <span class="st">"black"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.edgecolor"</span>: <span class="st">"black"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"savefig.facecolor"</span>: <span class="st">"black"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"savefig.edgecolor"</span>: <span class="st">"black"</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-04T17:38:46.521144Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-04T17:38:46.521008Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-04T17:38:47.077483Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-04T17:38:47.077212Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="1">
+</div></div>
+<div class="page-columns page-full">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Days"</span>: [<span class="st">"Mon"</span>, <span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thur"</span>, <span class="st">"Fri"</span>, <span class="st">"Sat"</span>, <span class="st">"Sun"</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Evening rest"</span>: [<span class="dv">7</span> <span class="op">/</span> <span class="dv">24</span>] <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Work"</span>: [<span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span>] <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Morning rest"</span>: [<span class="dv">3</span> <span class="op">/</span> <span class="dv">8</span>] <span class="op">*</span> <span class="dv">5</span> <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>).set_index(<span class="st">"Days"</span>).plot.bar(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    stacked<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"crimson"</span>, <span class="st">"blue"</span>],</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Weekly schedule"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Days of the week"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Proportion of the day"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    rot<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="fl">.8</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>ax.invert_yaxis()</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'Rest'</span>, <span class="st">'Work'</span>], loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>ax.patch.set_alpha(<span class="dv">0</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> ax.containers:</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">3</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">''</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">'center'</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">15</span>)<span class="op">;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Days"</span>: [<span class="st">"0 or 5"</span>, <span class="st">"1 or 6"</span>, <span class="st">"2 or 7"</span>, <span class="st">"3 or 8"</span>, <span class="st">"4 or 9"</span>],</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Evening rest"</span>: [<span class="fl">0.3</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Work"</span>: [<span class="fl">0.4</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Morning rest"</span>: [<span class="fl">0.3</span>] <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>).set_index(<span class="st">"Days"</span>).plot.bar(</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    stacked<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"crimson"</span>, <span class="st">"blue"</span>],</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Pently schedule"</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">15</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Days of the dek"</span>,</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Proportion of the day"</span>,</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    rot<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="fl">.8</span>,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>ax.invert_yaxis()</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>ax.legend([<span class="st">'Rest'</span>, <span class="st">'Work'</span>], loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>ax.patch.set_alpha(<span class="dv">0</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> ax.containers:</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">1</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">''</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">'center'</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-05T20:35:05.640389Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-05T20:35:05.640286Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-05T20:35:05.956870Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-05T20:35:05.956612Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
 <figure class="figure">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-schedules-1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="schedules_files/figure-html/fig-schedules-output-1.png" class="img-fluid figure-img" alt="Density plot of bill depth by species." data-ref-parent="fig-schedules"></p>
-<figcaption class="figure-caption">(a) Gentoo penguins tend to have thinner bills,</figcaption>
+<p><img src="schedules_files/figure-html/fig-schedules-output-1.png" class="img-fluid figure-img" alt="Bar chart showing work in red and rest in blue across 7 days" data-ref-parent="fig-schedules"></p>
+<figcaption class="figure-caption">(a) Proportion of the day spent working and resting every day of the week</figcaption>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-schedules-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="schedules_files/figure-html/fig-schedules-output-2.png" class="img-fluid figure-img" alt="Density plot of bill length by species." data-ref-parent="fig-schedules"></p>
-<figcaption class="figure-caption">(b) and Adelie penguins tend to have shorter bills.</figcaption>
+<p><img src="schedules_files/figure-html/fig-schedules-output-2.png" class="img-fluid figure-img" alt="Bar chart showing work in red and rest in blue across 5 days" data-ref-parent="fig-schedules"></p>
+<figcaption class="figure-caption">(b) Proportion of the day spent working and resting every day of the pent</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: Marginal distributions of bill dimensions</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Weekly and pently schedule comparison</figcaption><p></p>
 </figure>
 </div></div>
 </div>

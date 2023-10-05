@@ -9,18 +9,18 @@ author: Martin Laptev
 
 # At a glance {#sec-glance}
 
-The `Decalendar` ordinal (`deco`) date format consists of a year and a day-of-the-year (`doty`) delimited by a plus sign (`year+day`). As shown in @fig-date, the last digit of the `doty` number is the day-of-the-`dek` (`dotd`) number, which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The first two digits of the `doty` are the `dek` number.
+The main `Decalendar` date format consists of a year and a day-of-the-year (`doty`) delimited by a plus sign (`year+day`). As shown in @fig-date, the last digit of the `doty` number is the day-of-the-`dek` (`dotd`) number, which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The first two digits of the `doty` are the `dek` number.
 
 ![The components of a Decalendar date](fig-date.png){#fig-date fig-alt="A date consisting a year and a day of the year separated by a plus sign. The first two digits of the day of the year are labeled as the dek, while the last digit is labeled as the day of the dek."}
 
-Each `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates two bar charts that compare the typical weekly schedule and the `Schedule 3` `pently` schedule. @sec-pently provides more information on the `pently` schedules. Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into the proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅).
+Each `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates two bar charts that compare the typical weekly schedule and the `Schedule 3` `pently` schedule. @sec-pently provides more information on the `pently` schedules. Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅).
 
 ::: {#exm-glance}
 :::
 
 {{< embed schedules.ipynb#fig-schedules echo=true >}}
 
-In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. In `Schedule 3`, there are 3 workdays separated by a 2-day `pentend`. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). `Declock` uses such proportions of the day instead of hours, minutes, or seconds. @fig-time shows midnight, the first moment of a new `Declock` day, with labels for the most important `Declock` units.
+In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. In `Schedule 3`, there are 3 workdays separated by a 2-day `pentend`. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). `Declock` uses such proportions of the day instead of hours, minutes, or seconds. @fig-time shows midnight, the first moment of a new `Declock` day, with labels for the most important `Declock` units. More information on `Declock` units is provided in @sec-unit.
 
 ![The components of a Decalendar time](fig-time.png){#fig-time fig-alt="A time shown as a five-digit number with a one-letter time zone code at the end. The first digit is labeled 'dimes', the first two 'cents', the first three 'mils', and all five 'beats'."}
 
@@ -28,39 +28,39 @@ In contrast, the proportions of the day in `pently` schedules are never [repeati
 
 ## Fractions analogy {#sec-frac}
 
-In the simplest terms, `Decalendar` counts fractions of a year, while `Declock` counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, and the `Declock` denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of`Decalendar`, the numerator is the days that have passed in the year, while in the context of`Declock`, the numerator is the parts of the day that have passed.
+In the simplest terms, `Decalendar` counts fractions of a year, while `Declock` counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, and the `Declock` denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of`Decalendar`, the numerator is the days that have passed in the year, while in the context of`Declock`, the numerator is the parts of the day that have passed in the day.
 
-To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day of the year (`doty`). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on fractional days expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
+To avoid any confusion between the two, we can say "`Day 5`" to mean the date when 5 days have passed this year or `Day 0` to mean the first day-of-the-year (`doty`). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) expressed as decimal numbers. The 5 in `Dot 5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
 ## Implied tolerance and duration {#sec-imp}
 
-The analogy to decimals or fractions is important, because it explains why adding a zero at the end of a time does not change the time, only the implied tolerance of time points or the implied duration of time intervals. If `Dot 5` is a time point, it has an implied tolerance of 5% of the day (`.5±.05`), because any time after `Dot 45` and before `Dot 55` (`[.45, .55)`) would round to `Dot 5`. On the other hand, if `Dot 5` is the start time for a time interval, that interval is implied to start at `Dot 5` and end before `Dot 6` (`[.5, .6)`) and thus have a duration of 10% of the day (`Dot 6`-`Dot 5`). Every additional digit we add decreases the implied tolerance and the implied duration 10-fold.
+The analogy to decimals or fractions is important, because it explains why adding a zero at the end of a time does not change the time, only the implied tolerance of time points or the implied duration of time intervals. If `Dot 5` is a time point, it has an implied tolerance of 5% of the day ($.5±.05$), because any time after `Dot 45` and before `Dot 55` ($[.45, .55)$) would round to `Dot 5`. On the other hand, if `Dot 5` is the start time for a time interval, that interval is implied to start at `Dot 5` and end before `Dot 6` ($[.5, .6)$) and thus have a duration of 10% of the day (`Dot 6`-`Dot 5`). Every additional digit we add decreases the implied tolerance and the implied duration 10-fold.
 
 If we really want to insist on punctuality, we could include up to 5 digits in a time. Specifying times with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing [extremely long GPS coordinates](https://xkcd.com/2170/); at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word "sharp" or the `#` symbol to the time. Saying "`5 Sharp`" or writing `5#` means as close as possible to noon. Times that include `#` cannot have an implied duration. We can only add `#` to a time, so there is no need say "`Dot 5 Sharp`" or write `.5#`.
 
 ## Context clues {#sec-context}
 
-Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (`Dot 5`) and not the sixth `doty` (`Day 5`). Also, the number itself may provide a clue. Numbers greater than 365 could still be a `doty` date, but such dates would be in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean `Day 134` (if n=366) or `Day 135` (if n=365) of the subsequent year, but it would most likely mean noon (`Dot 500`).
-
-## `Stamps` {#sec-stamp}
-
-If a date and a time are combined they form a time `stamp`. The date always goes before the time in any `stamp`. When said together, the numbers "0" and "500" mean the first `doty` (`Day 0`) at noon (`Dot 500`). In written form, this would be `000.500`. This format is called `.y`, which is read the same way as `doty`, but emphasizes that the `.` is used in a floating point decimal `doty`. In other words, `doty` can be used instead of "day of the year" in a sentence, whereas `.y` indicates a `stamp`, such as `000.500`. Ideally, a stamp will include all of the information needed to identify a singular point in time, and thus should include a year and time zone.
-
-## Specific dates and times {#sec-specific}
-
-The dates and times above assume that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once a day, rather than once in every time zone per day. The first `doty` 2000, would be written `2000+000` and said "`Year 2000 Day 0`" or simply "`2000 0`", while noon in `Zone 0` would be written `.500+0` or `500+0` and said "`Dot 500 Zone 0`", "`500 Zone 0`", or "`500 0`".
+Not saying "`Day`" or "`Dot`" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (`Dot 5`) and not the sixth `doty` (`Day 5`). Also, the number itself may provide a clue. Numbers greater than 365 could still be a `doty`, but it would represent a day in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean `Day 134` (if n=366) or `Day 135` (if n=365) of the subsequent year, but it would most likely mean noon (`Dot 500`).
 
 ## Negative numbers {#sec-neg}
 
-The plus signs in the date and time above indicate that the `doty` date and the time zone can also be negative. In fact, all of the units above can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. Negative dates and times show the number of parts that are left in the whole (day or year). To extend the fractions analogy used above to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction. Essentially, these numbers arrive at the same answer from opposite directions.
+Every component of `Decalender` dates and `Declock` times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative `doty` numbers work like [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) in [computer programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming) in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first `doty` is indexed by both $0$ and $-N$, while the last `doty ` is indexed by both $-1$ and $N$.
 
-Negative `doty` numbers can be especially useful at the end of the year, because `Day -1` is always the last `doty`, regardless of whether the year has 365 or 366 days. In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous `Declock` times, the former could highlight that there is only 1 tenth (⅒ or .1) of the day remaining before midnight. `Dot 5` and `Dot -5` both mean noon, like saying that a glass is half-empty or half-full.
+In general, negative numbers show the number of parts that are left in the whole. A negative `doty` shows how many days remain in the year and a negative time [counts down](https://en.wikipedia.org/wiki/Countdown) to the end of the day. To extend the fractions analogy in @sec-frac to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction ($pos = N + neg$). Positive and negative numbers arrive at the same answer from opposite directions.
 
-The `.y` format can include positive and negative numbers, most commonly in the form `±year±day.day±z`, where `.day` is the time and `z` is the time zone. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE. The other two signs are required in written form, but plus signs can be omitted when speaking. For example, the `stamp` `2000+000.500+0` is pronounced "`Year 2000 Day 0 Dot 500 Zone 0`" or "`2000 0 500 0`", while `2000-366.600-1` (the same `stamp` in negative form and in `Zone -1`) would be said "`Year 2000 Day Minus 366 Dot 600 Zone Minus 1`" or "`2000 -366 600 -1`".
+In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous `Declock` times, the former could highlight that there is only 1 tenth (⅒ or .1) of the day remaining before midnight. `Dot 5` and `Dot -5` both mean noon, like saying that a glass is half-empty or half-full.
+
+## `Stamps` {#sec-stamp}
+
+If a `Decalender` date and a `Declock` time are combined, they form a time `stamp`. The date always goes before the time in any `stamp`. When said together, the numbers "0" and "5" mean the first `doty` (`Day 0`) at noon (`Dot 5`). In written form, this would be `000.5`. This format is called `.y`, which is read the same way as `doty`, but emphasizes that the `.` is used in a floating point decimal `doty`. In other words, `doty` can be used instead of "day of the year" in a sentence, whereas `.y` indicates a `stamp`, such as `000.5`. Ideally, a `stamp` will include all of the information needed to identify a singular point in time, and thus should include a year and time zone.
+
+## Specific dates and times {#sec-specific}
+
+The `stamp` in @sec-stamp assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The first `doty` of 1969, would be written `1969+000` and said "`Year 1969 Day 0`" or simply "`1969 0`", while midnight in `Zone 0` would be written `.000+0` and said "`Dot 0 Zone 0`", "`0 Zone 0`", or "`0 0`". Combined together, this date and time form the `stamp` `1969+000.000+0`.
 
 # Units {#sec-unit}
 
-In the `stamps` above, the time has 3 digits, because this is the best level of precision for displaying time on clocks and watches, but times can have any number of digits, depending on the desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each, as in @tbl-unit, highlights the relationship between the two:
+The `stamp` in @sec-specific use three digits for the times because is the best level of precision for displaying time on clocks and watches. While 3 digits are often best, `Declock` times can have any number of digits, depending on the desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each, as in @tbl-unit, highlights the relationship between the two:
 
 #### @tbl-unit
 
@@ -695,7 +695,7 @@ As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of 
 #| tags: [greg2deco]
 function greg2deco(year = 1970, month = 1, day = 1) {
     return `${greg2year(year, month).toString().padStart(4, "0")}+${
-        greg2doty(month, day).toString().padStart(3, "0")}`);
+        greg2doty(month, day).toString().padStart(3, "0")}`;
 }
 ```
 
@@ -718,7 +718,7 @@ function doty2isoc(year = 1969, doty = 306) {
 function greg2isoc(year = 1970, month = 1, day = 1) {
     return `${year.toString().padStart(4, "0")}-${
         month.toString().padStart(2, "0")}-${
-        day.toString().padStart(2, "0")}`);
+        day.toString().padStart(2, "0")}`;
 }
 ```
 
@@ -1046,7 +1046,7 @@ def doty2time(doty = 1/24):
     hour = doty * 24
     floorHour = hour.__floor__()
     minute = (hour - floorHour) / 60
-    floorMinute = minutes.__floor__()
+    floorMinute = minute.__floor__()
     return floorHour, floorMinute, (minute - floorMinute) / 60
 
 doty2time()
@@ -1102,7 +1102,7 @@ To create a `deco` timestamp, we can use the `doty2deco` or the `greg2deco` func
 #| tags: [doty2deco]
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     return `${year.toString().padStart(4, "0")}+${
-        doty.toString().padStart(3, "0")}`);
+        doty.toString().padStart(3, "0")}`;
 }
 ```
 
@@ -1141,7 +1141,7 @@ function doty2time(doty = 1 / 24) {
 function doty2isoc(year, doty) {
     return `${greg2year(year, month).toString().padStart(4, '0')}+${
         greg2doty(month, day).toString().padStart(3, '0')}.${
-        (Math.round(time2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`)
+        (Math.round(time2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`
 }
 console.log(`${doty2year()}+${
         doty2greg().map(
@@ -1209,7 +1209,7 @@ def doty2time(doty = 1/24):
     hour = doty * 24
     floorHour = hour.__floor__()
     minute = (hour - floorHour) / 60
-    floorMinute = minutes.__floor__()
+    floorMinute = minute.__floor__()
     return floorHour, floorMinute, (minute - floorMinute) / 60
 
 (
@@ -1572,30 +1572,6 @@ function parse_dec(timestamp = "1969+306.00000Z") {
 }
 
 console.log(parse_dec());
-```
-
-#### Julia
-
-##### `parse_dec`
-
-```{julia}
-#| tags: [parse_dec]
-```
-
-#### Python
-
-##### `parse_dec`
-
-```{python}
-#| tags: [parse_dec]
-```
-
-#### R
-
-##### `parse_dec`
-
-```{r}
-#| tags: [parse_dec]
 ```
 
 :::

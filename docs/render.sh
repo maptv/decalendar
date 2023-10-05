@@ -4,13 +4,13 @@ jupytext schedules.py --output "schedules.ipynb" --execute --set-kernel python3
 
 quarto convert "$1"
 
-quarto render "$1" --cache-refresh --profile javascript --metadata engine:jupyter --output embed_javascript.ipynb
+quarto render "$1" --cache-refresh --profile javascript --metadata engine:jupyter --output "${1%.*}_javascript.ipynb"
 
-quarto render "$1" --cache-refresh --profile julia --metadata engine:jupyter --output embed_julia.ipynb
+quarto render "$1" --cache-refresh --profile julia --metadata engine:jupyter --output "${1%.*}_julia.ipynb"
 
-quarto render "$1" --cache-refresh --profile python --metadata engine:jupyter --output embed_python.ipynb
+quarto render "$1" --cache-refresh --profile python --metadata engine:jupyter --output "${1%.*}_python.ipynb"
 
-quarto render "$1" --cache-refresh --profile r --metadata engine:jupyter --output embed_r.ipynb
+quarto render "$1" --cache-refresh --profile r --metadata engine:jupyter --output "${1%.*}_r.ipynb"
 
 # jupytext "${1%.*}_quarto_javascript.ipynb" --to js --output "${1%.*}.js" --set-kernel javascript
 
