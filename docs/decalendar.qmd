@@ -584,25 +584,37 @@ As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of 
 
 #### JavaScript
 
-##### `deco` date
+##### `greg2deco`
 
 ```{javascript}
-#| tags: [decdate]
+#| tags: [greg2deco]
 function greg2deco(year = 1970, month = 1, day = 1) {
     return `${greg2year(year, month).toString().padStart(4, "0")}+${
         greg2doty(month, day).toString().padStart(3, "0")}`);
 }
 ```
 
-##### `isoc` date
+##### `doty2isoc`
 
 ```{javascript}
-#| tags: [isodate]
-console.log(
-    `${doty2year().toString().padStart(4, "0")}-${
+#| tags: [doty2isoc]
+function doty2isoc(year = 1969, doty = 306) {
+    return `${doty2year().toString().padStart(4, "0")}-${
         doty2greg().map(
-        i => i.toString().padStart(2, "0")
-        ).join("-")}`);
+            i => i.toString().padStart(2, "0")
+        ).join("-")}`;
+}
+```
+
+##### `greg2isoc`
+
+```{javascript}
+#| tags: [greg2isoc]
+function greg2isoc(year = 1970, month = 1, day = 1) {
+    return `${year.toString().padStart(4, "0")}-${
+        month.toString().padStart(2, "0")}-${
+        day.toString().padStart(2, "0")}`);
+}
 ```
 
 #### Julia
@@ -850,6 +862,16 @@ function time2doty(hour = 1, minute = 0, second = 0) {
 }
 
 console.log(time2doty())
+```
+
+##### `doty2deco`
+
+```{javascript}
+#| tags: [doty2deco]
+function doty2deco(year = 1969, doty = 306, zone = 0) {
+    return `${year.toString().padStart(4, "0")}+${
+        doty.toString().padStart(3, "0")}`);
+}
 ```
 
 ##### `time2isot`
@@ -1133,7 +1155,7 @@ paste0(sprintf("%04d", doty2year()), "-",
 
 ### Time intervals {#sec-isoi}
 
-ISO 8601 specifies three methods of unequivocally representing [time intervals](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals), `start/stop`, `start/span`, and `span/stop`. The `Decalendar` equivalents of these three time interval representations are `start:stop`, `start>span`, and `stop<span`. Notably, the `start/stop` syntax is used in Google Calendar "Add to Calendar" links (`https://calendar.google.com/calendar/render?action=TEMPLATE&dates=start/stop`). Clicking on an "Add to Calendar" link opens an web browser interface for adding an event to an online calendar. The `date2link` and `doty2link` functions in @exm-isoi create such links for Google, Outlook, Office 365, and Yahoo online calendars.
+ISO 8601 specifies three methods of unequivocally representing [time intervals](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals), `start/stop`, `start/span`, and `span/stop`. The `Decalendar` equivalents of these three time interval representations are `start:stop`, `start>span`, and `stop<span`. Notably, the `start/stop` syntax is used in Google Calendar "Add to Calendar" links (`https://calendar.google.com/calendar/render?action=TEMPLATE&dates=start/stop`). Clicking on an "Add to Calendar" link opens an web browser interface for adding an event to an online calendar. The `greg2link` and `doty2link` functions in @exm-isoi create such links for Google, Outlook, Office 365, and Yahoo online calendars.
 
 ::: {#exm-isoi}
 :::
