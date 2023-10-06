@@ -7,13 +7,13 @@ author: Martin Laptev
 
 `Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar system and `Declock` is decimal timekeeping system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). The most prevalent calendar system in use today, the Gregorian calendar, has roughly [trigesimal](https://en.wiktionary.org/wiki/trigesimal) (\~base30) months and [septimal](https://en.wiktionary.org/wiki/septimal) (base7) weeks, while our current timekeeping system uses [quadravigesimal](https://en.wiktionary.org/wiki/quadravigesimal) (base24) hours and [sexagesimal](https://en.wikipedia.org/wiki/Sexagesimal) (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
 
-# Day of the year {#sec-summary-doty}
+## Day of the year {#sec-summary-doty}
 
 @fig-doty shows the components of the `doty` number that corresponds to midnight on January 1st in the Gregorian calendar. The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
 
 ![The components of a day-of-the-year (`doty`)](fig-doty.png){#fig-doty fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'."}
 
-# Deks {#sec-summary-dek}
+## Deks {#sec-summary-dek}
 
 As mentioned in @sec-summary-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
 
@@ -24,13 +24,13 @@ Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asy
 
 {{< embed schedules.ipynb#fig-schedules echo=true >}}
 
-# `Declock` time {#sec-summary-time}
+## `Declock` time {#sec-summary-time}
 
 The digits after the decimal in the `doty` are `Declock` units. Of these units, `mils` are notable because they provide the right level of precision for displaying time on clocks and watches. `Dimes` are also noteworthy because they are used for time zone offsets. @fig-time shows how a `Declock` [fractional day](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) time can be combined with a time zone offset. The `+0` at the end of the time in @fig-time indicates that the time is in the `Zone 0` time zone, which is equivalent to the [UTC+00:00](https://en.wikipedia.org/wiki/UTC+00:00) time zone of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
 ![The components of a `Declock` time](fig-time.png){#fig-time fig-alt="A time shown as a 3-digit number with a one-digit time zone offset at the end separated by a plus sign. The first digit is labeled 'Dimes', the first two digits are labeled 'Cents', and the first three digits are labeled 'Mils'."}
 
-# `Decalendar` ordinal date {#sec-summary-deco}
+## `Decalendar` ordinal date {#sec-summary-deco}
 
 In addition to being combined with a time zone offset as in @fig-time, a `doty` can be combined with a year to form a `Decalendar` ordinal (`deco`) date. @fig-date shows a `deco` date that is equivalent to January 1st, 1969 in the Gregorian calendar. The `Declock` time in @fig-time and the `deco` date in @fig-date both use a plus sign (`+`) as a delimiter. If we combined the `deco` date from @fig-date and the `Declock` time from @fig-time, we would obtain a `deco stamp`: `1960+306.000+0`. @tbl-2x2 compares `doty` and `deco` dates in its first column and `doty` and `deco stamps` in its second column.
 
@@ -449,7 +449,7 @@ $$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 
 ##### `isoo2year`
 
-{{< embed decalendar_julia.ipynb#isoo2year echo=true >}}
+{{< embed decalendar_julia.ipynb#isoo2doty echo=true >}}
 
 ##### `isoo2doty`
 
@@ -881,6 +881,29 @@ y \mod 4 = 0 \\
 ##### `unix2doty`
 
 {{< embed decalendar_r.ipynb#unix2doty echo=true >}}
+
+#### Lua
+
+``` lua
+function unix2doty(ms)
+    local days = ms / 86400000 + 719468
+    local era = (days >= 0 and days or days - 146096) // 146097
+    local doe = days - era * 146097
+    local year = math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365) + era * 400
+    return math.floor(year), days - math.floor(year * 365 + year / 4 - year / 100 + year / 400)
+end
+
+print(unix2doty(0))
+```
+
+``` lua
+function unix2deco(ms)
+    year, doty = unix2doty(ms)
+    return string.format("%s+%s", math.floor(year), math.floor(doty))
+end
+
+print(unix2deco(0))
+```
 
 #### CopyQ
 

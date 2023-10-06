@@ -2,3 +2,7 @@ jupyter: julia-1.9
 format: ipynb
 cache: false
 number-sections: false
+date: now
+date-format: x
+filters:
+  - date.lua

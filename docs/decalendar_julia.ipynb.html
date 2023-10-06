@@ -237,7 +237,8 @@
   </div>
   
 
-</header>     <p>Martin Laptev</p>
+</header>     <p>Martin Laptev<br>
+2023+219</p>
 <section id="summary" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Summary</h1>
 <p><code>Decalendar</code> is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar system and <code>Declock</code> is decimal timekeeping system. The goal of <code>Decalendar</code> and <code>Declock</code> is to replace all calendar and timekeeping systems that are based on non-decimal <a href="https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems">numeral systems</a>. The most prevalent calendar system in use today, the Gregorian calendar, has roughly <a href="https://en.wiktionary.org/wiki/trigesimal">trigesimal</a> (~base30) months and <a href="https://en.wiktionary.org/wiki/septimal">septimal</a> (base7) weeks, while our current timekeeping system uses <a href="https://en.wiktionary.org/wiki/quadravigesimal">quadravigesimal</a> (base24) hours and <a href="https://en.wikipedia.org/wiki/Sexagesimal">sexagesimal</a> (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a single decimal number called the <code>day-of-the-year</code> (<code>doty</code>).</p>
@@ -247,7 +248,7 @@
 <p><a href="#fig-doty">Figure&nbsp;1</a> shows the components of the <code>doty</code> number that corresponds to midnight on January 1st in the Gregorian calendar. The first two <a href="https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values">digits</a> (hundreds and tens) of the <code>doty</code> are the <code>dek</code> number (30 in <a href="#fig-doty">Figure&nbsp;1</a>). <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The next digit (ones) of the <code>doty</code> number is the day-of-the-<code>dek</code> (<code>dotd</code>) number (6 in <a href="#fig-doty">Figure&nbsp;1</a>), which serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. Gregorian calendar dates require us to look up the day of the week, while the <code>doty</code> contains all of the analogous information for <code>Decalendar</code> in its first 3 digits (hundreds, tens, and ones).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_julia_files/figure-html/6e8af330-bebf-4803-8e47-d977129a69cf-4-fig-doty.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_julia_files/figure-html/805be9b0-374c-4e9d-9b5d-4eb16512d6d9-4-fig-doty.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: The components of a day-of-the-year (<code>doty</code>)</figcaption>
 </figure>
 </div>
@@ -331,14 +332,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/6e8af330-bebf-4803-8e47-d977129a69cf-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_julia_files/figure-html/805be9b0-374c-4e9d-9b5d-4eb16512d6d9-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/6e8af330-bebf-4803-8e47-d977129a69cf-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_julia_files/figure-html/805be9b0-374c-4e9d-9b5d-4eb16512d6d9-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -353,7 +354,7 @@
 <p>The digits after the decimal in the <code>doty</code> are <code>Declock</code> units. Of these units, <code>mils</code> are notable because they provide the right level of precision for displaying time on clocks and watches. <code>Dimes</code> are also noteworthy because they are used for time zone offsets. <a href="#fig-time">Figure&nbsp;3</a> shows how a <code>Declock</code> <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional day</a> time can be combined with a time zone offset. The <code>+0</code> at the end of the time in <a href="#fig-time">Figure&nbsp;3</a> indicates that the time is in the <code>Zone 0</code> time zone, which is equivalent to the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_julia_files/figure-html/6e8af330-bebf-4803-8e47-d977129a69cf-5-fig-time.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_julia_files/figure-html/805be9b0-374c-4e9d-9b5d-4eb16512d6d9-5-fig-time.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: The components of a <code>Declock</code> time</figcaption>
 </figure>
 </div>
@@ -363,7 +364,7 @@
 <p>In addition to being combined with a time zone offset as in <a href="#fig-time">Figure&nbsp;3</a>, a <code>doty</code> can be combined with a year to form a <code>Decalendar</code> ordinal (<code>deco</code>) date. <a href="#fig-date">Figure&nbsp;4</a> shows a <code>deco</code> date that is equivalent to January 1st, 1969 in the Gregorian calendar. The <code>Declock</code> time in <a href="#fig-time">Figure&nbsp;3</a> and the <code>deco</code> date in <a href="#fig-date">Figure&nbsp;4</a> both use a plus sign (<code>+</code>) as a delimiter. If we combined the <code>deco</code> date from <a href="#fig-date">Figure&nbsp;4</a> and the <code>Declock</code> time from <a href="#fig-time">Figure&nbsp;3</a>, we would obtain a <code>deco stamp</code>: <code>1960+306.000+0</code>. <a href="#tbl-2x2">Table&nbsp;1</a> compares <code>doty</code> and <code>deco</code> dates in its first column and <code>doty</code> and <code>deco stamps</code> in its second column.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_julia_files/figure-html/6e8af330-bebf-4803-8e47-d977129a69cf-3-fig-date.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_julia_files/figure-html/805be9b0-374c-4e9d-9b5d-4eb16512d6d9-3-fig-date.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: The components of a <code>Decalendar</code> ordinal (<code>deco</code>) date</figcaption>
 </figure>
 </div>
@@ -3115,7 +3116,7 @@ console.log(
 <span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+219.95452+0"</code></pre>
+<pre><code>"2023+219.95897+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3216,7 +3217,7 @@ console.log(unix2deco())</code></pre>
 <span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+219.95452+0"</code></pre>
+<pre><code>"2023+219.95897+0"</code></pre>
 </div>
 </div></div>
 </section>
