@@ -5,13 +5,13 @@ author: Martin Laptev
 
 # Summary {#sec-summary}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar system and `Declock` is decimal timekeeping system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). The most prevalent calendar system in use today, the Gregorian calendar, has roughly [trigesimal](https://en.wiktionary.org/wiki/trigesimal) (~base30) months and [septimal](https://en.wiktionary.org/wiki/septimal) (base7) weeks, while our current timekeeping system uses [quadravigesimal](https://en.wiktionary.org/wiki/quadravigesimal) (base24) hours and [sexagesimal](https://en.wikipedia.org/wiki/Sexagesimal) (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar system and `Declock` is decimal timekeeping system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). The most prevalent calendar system in use today, the Gregorian calendar, has roughly [trigesimal](https://en.wiktionary.org/wiki/trigesimal) (\~base30) months and [septimal](https://en.wiktionary.org/wiki/septimal) (base7) weeks, while our current timekeeping system uses [quadravigesimal](https://en.wiktionary.org/wiki/quadravigesimal) (base24) hours and [sexagesimal](https://en.wikipedia.org/wiki/Sexagesimal) (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
 
 # Day of the year {#sec-summary-doty}
 
 @fig-doty shows the components of the `doty` number that corresponds to midnight on January 1st in the Gregorian calendar. The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
 
-![The components of a day-of-the-year (`doty`)](fig-time.png){#fig-time fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'."}
+![The components of a day-of-the-year (`doty`)](fig-doty.png){#fig-doty fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'."}
 
 # Deks {#sec-summary-dek}
 
@@ -40,7 +40,7 @@ In addition to being combined with a time zone offset as in @fig-time, a `doty` 
 
 ::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
 |      | date     | stamp         |
-| ---- | -------- | ------------  |
+|------|----------|---------------|
 | doty | 306      | 306.000Z      |
 | deco | 1969+306 | 1969+306.000Z |
 
@@ -67,7 +67,7 @@ Not saying "Day" or "Dot" in general is acceptable, because it is convenient and
 
 ## Negative numbers {#sec-neg}
 
-Every component of `Decalender` dates and `Declock` times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative `doty` numbers work like [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) in [computer programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming) in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first `doty` is indexed by both $0$ and $-N$, while the last `doty ` is indexed by both $-1$ and $N$.
+Every component of `Decalender` dates and `Declock` times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative `doty` numbers work like [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) in [computer programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming) in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first `doty` is indexed by both $0$ and $-N$, while the last `doty` is indexed by both $-1$ and $N$.
 
 In general, negative numbers show the number of parts that are left in the whole. A negative `doty` shows how many days remain in the year and a negative time [counts down](https://en.wikipedia.org/wiki/Countdown) to the end of the day. To extend the fractions analogy in @sec-frac to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction ($pos = N + neg$). Positive and negative numbers arrive at the same answer from opposite directions.
 
@@ -1662,7 +1662,7 @@ The week number in the `decw` format, `ww`, ranges from 0 to 53 or -54 to -1. We
 
 In @tbl-dotex, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City and London is December (`Month B`). We could say the `.m` dates in Mexico City and London as "Year 1999 Month B Day 29" or "Year 1999 Month -1 Day -1" and the Tokyo date as "Year 2000 Month 0 Day 0" or "Year 2000 Month -C Day -31".
 
-The `decw` format always starts the year with `Week 0`, but the year can start on any day of the week. @tbl-dotex shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `decw` dates in Mexico City and London could be said "Year 1999 Week 52 Day 2" or "Year 1999 Week -1 Day -5", while the date in Tokyo could be pronounced "Year 2000 Week 0 Day 3" or "Year 2000 Week -52 Day -4`" in Tokyo.
+The `decw` format always starts the year with `Week 0`, but the year can start on any day of the week. @tbl-dotex shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `decw` dates in Mexico City and London could be said "Year 1999 Week 52 Day 2" or "Year 1999 Week -1 Day -5", while the date in Tokyo could be pronounced "Year 2000 Week 0 Day 3" or "Year 2000 Week -52 Day -4" in Tokyo.
 
 In contrast to the `.m` and the `decw` formats, the dates in the `.y` format are one character shorter and a little easier to say. The spoken form of the `.y` date in Mexico City and London is "Year 1999 Day 365" or "Year 1999 Day -1" and the spoken form of the Tokyo date is "Year 2000 Day 0" or "Year 2000 Day -365".
 
