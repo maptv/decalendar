@@ -5,36 +5,44 @@ author: Martin Laptev
 
 # Summary {#sec-summary}
 
-`Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to take the place of [standard time](https://en.wikipedia.org/wiki/Standard_time). Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use days as their base unit and derive other units from days using metric, Roman, and Greek [numeral prefixes](https://en.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English). In essence, `Decalendar` units group days together, while `Declock` units divide days up.
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar system and `Declock` is decimal timekeeping system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). The most prevalent calendar system in use today, the Gregorian calendar, has roughly [trigesimal](https://en.wiktionary.org/wiki/trigesimal) (~base30) months and [septimal](https://en.wiktionary.org/wiki/septimal) (base7) weeks, while our current timekeeping system uses [quadravigesimal](https://en.wiktionary.org/wiki/quadravigesimal) (base24) hours and [sexagesimal](https://en.wikipedia.org/wiki/Sexagesimal) (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
 
-# At a glance {#sec-glance}
+# Day of the year {#sec-summary-doty}
 
-The main `Decalendar` date format consists of a year and a day-of-the-year (`doty`) delimited by a plus sign (`year+day`). As shown in @fig-date, the last digit of the `doty` number is the day-of-the-`dek` (`dotd`) number, which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The first two digits of the `doty` are the `dek` number.
+@fig-doty shows the components of the `doty` number that corresponds to midnight on January 1st in the Gregorian calendar. The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
 
-![The components of a Decalendar date](fig-date.png){#fig-date fig-alt="A date consisting a year and a day of the year separated by a plus sign. The first two digits of the day of the year are labeled as the dek, while the last digit is labeled as the day of the dek."}
+![The components of a day-of-the-year (`doty`)](fig-time.png){#fig-time fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'."}
 
-Each `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. @sec-pently provides more information on the `pently` schedules. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+# Deks {#sec-summary-dek}
 
-Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours).
+As mentioned in @sec-summary-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+
+Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-pently provides more information on `Schedule 3` and the other `pently` schedules.
 
 ::: {#exm-glance}
 :::
 
 {{< embed schedules.ipynb#fig-schedules echo=true >}}
 
-`Declock` uses proportions of the day instead of hours, minutes, or seconds. @fig-time shows midnight, the first moment of a new `Declock` day, with labels for the most important `Declock` units. More information on `Declock` units is provided in @sec-unit. Briefly, `Declock` time zones use `dimes`, `cents` are roughly a quarter-hour, clocks and watches use `mils`, and `beats` fulfill the role of seconds. The `Z` at the end of the time in @fig-time is synonymous with `+0`, which means there is no time zone offset and that the time is in `Zone 0` time zone.
+# `Declock` time {#sec-summary-time}
 
-![The components of a Decalendar time](fig-time.png){#fig-time fig-alt="A time shown as a five-digit number with a one-letter time zone code at the end. The first digit is labeled 'dimes', the first two 'cents', the first three 'mils', and all five 'beats'."}
+The digits after the decimal in the `doty` are `Declock` units. Of these units, `mils` are notable because they provide the right level of precision for displaying time on clocks and watches. `Dimes` are also noteworthy because they are used for time zone offsets. @fig-time shows how a `Declock` [fractional day](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) time can be combined with a time zone offset. The `+0` at the end of the time in @fig-time indicates that the time is in the `Zone 0` time zone, which is equivalent to the [UTC+00:00](https://en.wikipedia.org/wiki/UTC+00:00) time zone of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
-The top row of @tbl-2x2 shows how a `Declock` time (`.00000Z`) can be appended to a `Decalendar doty` date (`306`) to form a `Decalendar stamp`. If we prepend a year to a `doty` it becomes a `Decalender` ordinal (`deco`) date, which is analogous to an [ISO 8601 ordinal (`isoo`) date](https://en.wikipedia.org/wiki/ISO_8601#:~:text=Ordinal%20dates,-YYYY%2DDDD&text=An%20ordinal%20date%20is%20an,as%20%221981%2D095%22.). Similarities between `Decalender` and the ISO 8601 international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times) are discussed in @sec-iso.
+![The components of a `Declock` time](fig-time.png){#fig-time fig-alt="A time shown as a 3-digit number with a one-digit time zone offset at the end separated by a plus sign. The first digit is labeled 'Dimes', the first two digits are labeled 'Cents', and the first three digits are labeled 'Mils'."}
+
+# `Decalendar` ordinal date {#sec-summary-deco}
+
+In addition to being combined with a time zone offset as in @fig-time, a `doty` can be combined with a year to form a `Decalendar` ordinal (`deco`) date. @fig-date shows a `deco` date that is equivalent to January 1st, 1969 in the Gregorian calendar. The `Declock` time in @fig-time and the `deco` date in @fig-date both use a plus sign (`+`) as a delimiter. If we combined the `deco` date from @fig-date and the `Declock` time from @fig-time, we would obtain a `deco stamp`: `1960+306.000+0`. @tbl-2x2 compares `doty` and `deco` dates in its first column and `doty` and `deco stamps` in its second column.
+
+![The components of a `Decalendar` ordinal (`deco`) date](fig-date.png){#fig-date fig-alt="A date consisting a year and a day-of-the-year separated by a plus sign. The first two digits of the day of the year are labeled as the Dek, while the last digit is labeled as the day of the dek."}
 
 #### @tbl-2x2
 
 ::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
-|      | date     | stamp           |
-| ---- | -------- | ------------    |
-| doty | 306      | 306.00000Z      |
-| deco | 1969+306 | 1969+306.00000Z |
+|      | date     | stamp         |
+| ---- | -------- | ------------  |
+| doty | 306      | 306.000Z      |
+| deco | 1969+306 | 1969+306.000Z |
 
 : Comparison of `doty` and `deco` dates and `stamps` {#tbl-2x2}
 :::
@@ -939,7 +947,7 @@ zone2hour()
 
 ### Times {#sec-isot}
 
-The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The `time2doty` and `doty2time` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
+The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The `hmso2doty` and `doty2hmso` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
 
 $$declock = \frac{hour}{24} + \frac{minute}{1440} + \frac{second}{86400} \cdot 10^x$$ {#eq-isot1}
 
@@ -971,33 +979,33 @@ $$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-isot4}
 
 #### JavaScript
 
-##### `time2doty`
+##### `hmso2doty`
 
 ```{javascript}
-#| tags: [time2doty]
-function time2doty(hour = 1, minute = 0, second = 0) {
+#| tags: [hmso2doty]
+function hmso2doty(hour = 1, minute = 0, second = 0) {
     return hour / 24 + minute / 1440 + second / 86400
 }
 
-console.log(time2doty())
+console.log(hmso2doty())
 ```
 
-##### `time2isot`
+##### `hmso2isot`
 
 ```{javascript}
-#| tags: [time2isot]
-function time2isot(hour = 1, minute = 0, second = 0) {
+#| tags: [hmso2isot]
+function hmso2isot(hour = 1, minute = 0, second = 0) {
     return hour / 24 + minute / 1440 + second / 86400
 }
 
-console.log(time2isot())
+console.log(hmso2isot())
 ```
 
-##### `doty2time`
+##### `doty2hmso`
 
 ```{javascript}
-#| tags: [doty2time]
-function doty2time(doty = 1 / 24) {
+#| tags: [doty2hmso]
+function doty2hmso(doty = 1 / 24) {
     const hour = doty * 24,
         floorHour = Math.floor(hour),
         minute = (hour - floorHour) / 60,
@@ -1005,29 +1013,29 @@ function doty2time(doty = 1 / 24) {
         return [floorHour, floorMinute, (minute - floorMinute) / 60]
 }
 
-console.log(doty2time())
+console.log(doty2hmso())
 ```
 
 #### Julia
 
 ##### `time`
 
-##### `time2doty`
+##### `hmso2doty`
 
 ```{julia}
-#| tags: [time2doty]
-function time2doty(hour=1, minute=0, second=0)
+#| tags: [hmso2doty]
+function hmso2doty(hour=1, minute=0, second=0)
     hour / 24 + minute / 1440 + second / 86400
 end
 
-time2doty()
+hmso2doty()
 ```
 
-##### `doty2time`
+##### `doty2hmso`
 
 ```{julia}
-#| tags: [doty2time]
-function doty2time(doty=1/24)
+#| tags: [doty2hmso]
+function doty2hmso(doty=1/24)
     hour = doty * 24
     floorHour = floor(hour)
     minute = (hour - floorHour) / 60
@@ -1035,53 +1043,53 @@ function doty2time(doty=1/24)
     return floorHour, floorMinute, (minute - floorMinute) / 60
 end
 
-doty2time()
+doty2hmso()
 ```
 
 #### Python
 
-##### `time2doty`
+##### `hmso2doty`
 
 ```{python}
-#| tags: [time2doty]
-def time2doty(hour=1, minute=0, second=0):
+#| tags: [hmso2doty]
+def hmso2doty(hour=1, minute=0, second=0):
     return hour / 24 + minute / 1440 + second / 86400
 
-time2doty()
+hmso2doty()
 ```
 
-##### `doty2time`
+##### `doty2hmso`
 
 ```{python}
-#| tags: [doty2time]
-def doty2time(doty = 1/24):
+#| tags: [doty2hmso]
+def doty2hmso(doty = 1/24):
     hour = doty * 24
     floorHour = hour.__floor__()
     minute = (hour - floorHour) / 60
     floorMinute = minute.__floor__()
     return floorHour, floorMinute, (minute - floorMinute) / 60
 
-doty2time()
+doty2hmso()
 ```
 
 #### R
 
-##### `time2doty`
+##### `hmso2doty`
 
 ```{r}
-#| tags: [time2doty]
-time2doty <- function(hour = 1, minute = 0, second = 0) {
+#| tags: [hmso2doty]
+hms2doty <- function(hour = 1, minute = 0, second = 0) {
     hour / 24 + minute / 1440 + second / 86400
 }
 
-time2doty()
+hmso2doty()
 ```
 
-##### `doty2time`
+##### `doty2hmso`
 
 ```{r}
-#| tags: [doty2time]
-doty2time <- function(doty = 1 / 24) {
+#| tags: [doty2hmso]
+doty2hmso <- function(doty = 1 / 24) {
     hour <- doty * 24
     floorHour <- floor(hour)
     minute <- (hour - floorHour) / 60
@@ -1089,7 +1097,7 @@ doty2time <- function(doty = 1 / 24) {
     c(floorHour, floorMinute, (minute - floorMinute) / 60)
 }
 
-doty2time()
+doty2hmso()
 ```
 
 :::
@@ -1117,30 +1125,30 @@ function doty2deco(year = 1969, doty = 306, zone = 0) {
 }
 ```
 
-##### `time2doty`
+##### `hmso2doty`
 
 ```{javascript}
-#| tags: [time2doty]
-function time2doty(hour = 1, minute = 0, second = 0) {
+#| tags: [hmso2doty]
+function hmso2doty(hour = 1, minute = 0, second = 0) {
     return hour / 24 + minute / 1440 + second / 86400
 }
 ```
 
-##### `time2deco`
+##### `hmso2deco`
 
 ```{javascript}
-#| tags: [time2deco]
-function time2deco(hour = 0, minute = 0, second = 0) {
-    return (Math.round(time2doty(hour, minute, second)
+#| tags: [hmso2deco]
+function hmso2deco(hour = 0, minute = 0, second = 0) {
+    return (Math.round(hmso2doty(hour, minute, second)
         * 1e5) / 1e5).toString().padStart(5, '0')
 }
 ```
 
-##### `doty2time`
+##### `doty2hmso`
 
 ```{javascript}
-#| tags: [doty2time]
-function doty2time(doty = 1 / 24) {
+#| tags: [doty2hmso]
+function doty2hmso(doty = 1 / 24) {
     const hour = doty * 24,
         floorHour = Math.floor(hour),
         minute = (hour - floorHour) / 60,
@@ -1151,12 +1159,12 @@ function doty2time(doty = 1 / 24) {
 function doty2isoc(year, doty) {
     return `${greg2year(year, month).toString().padStart(4, '0')}+${
         greg2doty(month, day).toString().padStart(3, '0')}.${
-        (Math.round(time2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`
+        (Math.round(hmso2doty(hour, minute, second) * 1e5) / 1e5).toString().padStart(5, '0')}`
 }
 console.log(`${doty2year()}+${
         doty2greg().map(
         i => i.toString().padStart(2, "0")
-        ).join("-")}T${doty2time().map(
+        ).join("-")}T${doty2hmso().map(
         i => Math.round(i).toString().padStart(2, "0")
         ).join(":")}`)
 ```
@@ -1165,23 +1173,23 @@ console.log(`${doty2year()}+${
 
 ##### `time`
 
-##### `time2doty`
+##### `hmso2doty`
 
 ```{julia}
-#| tags: [time2doty]
-function time2doty(hour=1, minute=0, second=0)
+#| tags: [hmso2doty]
+function hmso2doty(hour=1, minute=0, second=0)
     hour / 24 + minute / 1440 + second / 86400
 end
 
 "$(lpad(greg2year(), 4, '0'))+$(lpad(greg2doty(), 3, '0')).$(
-    lpad(Int(round(time2doty(0) * 1e5)), 5, '0')))"
+    lpad(Int(round(hmso2doty(0) * 1e5)), 5, '0')))"
 ```
 
-##### `doty2time`
+##### `doty2hmso`
 
 ```{julia}
-#| tags: [doty2time]
-function doty2time(doty=1/24)
+#| tags: [doty2hmso]
+function doty2hmso(doty=1/24)
     hour = doty * 24
     floorHour = floor(hour)
     minute = (hour - floorHour) / 60
@@ -1194,26 +1202,26 @@ end
     map((x) -> lpad(x, 2, '0'
 ), doty2greg()), '-'))T$(join(
     map((x) -> lpad(Int(x), 2, '0'
-), doty2time(0)), ':')))"
+), doty2hmso(0)), ':')))"
 ```
 
 #### Python
 
-##### `time2doty`
+##### `hmso2doty`
 
 ```{python}
-#| tags: [time2doty]
-def time2doty(hour=1, minute=0, second=0):
+#| tags: [hmso2doty]
+def hmso2doty(hour=1, minute=0, second=0):
     return hour / 24 + minute / 1440 + second / 86400
 
-f"{greg2year():>04}+{greg2doty():>03}.{round(time2doty(0) * 1e6):>05}"
+f"{greg2year():>04}+{greg2doty():>03}.{round(hmso2doty(0) * 1e6):>05}"
 ```
 
-##### `doty2time`
+##### `doty2hmso`
 
 ```{python}
-#| tags: [doty2time]
-def doty2time(doty = 1/24):
+#| tags: [doty2hmso]
+def doty2hmso(doty = 1/24):
     hour = doty * 24
     floorHour = hour.__floor__()
     minute = (hour - floorHour) / 60
@@ -1222,31 +1230,31 @@ def doty2time(doty = 1/24):
 
 (
     f"{doty2year():>04}-{'-'.join(map(lambda i: str(i).rjust(2, '0'), doty2greg()))}"
-    f"T{':'.join(map(lambda i: str(round(i)).rjust(2, '0'), doty2time(0)))}"
+    f"T{':'.join(map(lambda i: str(round(i)).rjust(2, '0'), doty2hmso(0)))}"
 )
 ```
 
 #### R
 
-##### `time2doty`
+##### `hmso2doty`
 
 ```{r}
-#| tags: [time2doty]
-time2doty <- function(hour = 1, minute = 0, second = 0) {
+#| tags: [hmso2doty]
+hmso2doty <- function(hour = 1, minute = 0, second = 0) {
     hour / 24 + minute / 1440 + second / 86400
 }
 
 paste0(
     sprintf("%04d", greg2year()), "+",
     sprintf("%03d", greg2doty()), ".",
-    sprintf("%05d", round(time2doty(0) * 1e5)))
+    sprintf("%05d", round(hmso2doty(0) * 1e5)))
 ```
 
-##### `doty2time`
+##### `doty2hmso`
 
 ```{r}
-#| tags: [doty2time]
-doty2time <- function(doty = 1 / 24) {
+#| tags: [doty2hmso]
+doty2hmso <- function(doty = 1 / 24) {
     hour <- doty * 24
     floorHour <- floor(hour)
     minute <- (hour - floorHour) / 60
@@ -1256,7 +1264,7 @@ doty2time <- function(doty = 1 / 24) {
 
 paste0(sprintf("%04d", doty2year()), "-",
     paste(sprintf("%02d", doty2greg()), collapse = "-"), "T",
-    paste(sprintf("%02d", doty2time()), collapse = ":")
+    paste(sprintf("%02d", doty2hmso()), collapse = ":")
     )
 ```
 
