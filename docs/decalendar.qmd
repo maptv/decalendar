@@ -1078,7 +1078,7 @@ doty2hmso()
 
 ```{r}
 #| tags: [hmso2doty]
-hms2doty <- function(hour = 1, minute = 0, second = 0) {
+hmso2doty <- function(hour = 1, minute = 0, second = 0) {
     hour / 24 + minute / 1440 + second / 86400
 }
 

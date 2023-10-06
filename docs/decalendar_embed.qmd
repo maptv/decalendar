@@ -5,36 +5,44 @@ author: Martin Laptev
 
 # Summary {#sec-summary}
 
-`Decalendar` is a calendar system that aims to first peacefully co-exist with, but then ultimately replace the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar). Similarly, `Declock` is a timekeeping system designed to take the place of [standard time](https://en.wikipedia.org/wiki/Standard_time). Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use days as their base unit and derive other units from days using metric, Roman, and Greek [numeral prefixes](https://en.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English). In essence, `Decalendar` units group days together, while `Declock` units divide days up.
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar system and `Declock` is decimal timekeeping system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). The most prevalent calendar system in use today, the Gregorian calendar, has roughly [trigesimal](https://en.wiktionary.org/wiki/trigesimal) (\~base30) months and [septimal](https://en.wiktionary.org/wiki/septimal) (base7) weeks, while our current timekeeping system uses [quadravigesimal](https://en.wiktionary.org/wiki/quadravigesimal) (base24) hours and [sexagesimal](https://en.wikipedia.org/wiki/Sexagesimal) (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
 
-# At a glance {#sec-glance}
+# Day of the year {#sec-summary-doty}
 
-The main `Decalendar` date format consists of a year and a day-of-the-year (`doty`) delimited by a plus sign (`year+day`). As shown in @fig-date, the last digit of the `doty` number is the day-of-the-`dek` (`dotd`) number, which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The first two digits of the `doty` are the `dek` number.
+@fig-doty shows the components of the `doty` number that corresponds to midnight on January 1st in the Gregorian calendar. The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
 
-![The components of a Decalendar date](fig-date.png){#fig-date fig-alt="A date consisting a year and a day of the year separated by a plus sign. The first two digits of the day of the year are labeled as the dek, while the last digit is labeled as the day of the dek."}
+![The components of a day-of-the-year (`doty`)](fig-doty.png){#fig-doty fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'."}
 
-Each `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. @sec-pently provides more information on the `pently` schedules. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+# Deks {#sec-summary-dek}
 
-Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours).
+As mentioned in @sec-summary-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+
+Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-pently provides more information on `Schedule 3` and the other `pently` schedules.
 
 ::: {#exm-glance}
 :::
 
 {{< embed schedules.ipynb#fig-schedules echo=true >}}
 
-`Declock` uses proportions of the day instead of hours, minutes, or seconds. @fig-time shows midnight, the first moment of a new `Declock` day, with labels for the most important `Declock` units. More information on `Declock` units is provided in @sec-unit. Briefly, `Declock` time zones use `dimes`, `cents` are roughly a quarter-hour, clocks and watches use `mils`, and `beats` fulfill the role of seconds. The `Z` at the end of the time in @fig-time is synonymous with `+0`, which means there is no time zone offset and that the time is in `Zone 0` time zone.
+# `Declock` time {#sec-summary-time}
 
-![The components of a Decalendar time](fig-time.png){#fig-time fig-alt="A time shown as a five-digit number with a one-letter time zone code at the end. The first digit is labeled 'dimes', the first two 'cents', the first three 'mils', and all five 'beats'."}
+The digits after the decimal in the `doty` are `Declock` units. Of these units, `mils` are notable because they provide the right level of precision for displaying time on clocks and watches. `Dimes` are also noteworthy because they are used for time zone offsets. @fig-time shows how a `Declock` [fractional day](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) time can be combined with a time zone offset. The `+0` at the end of the time in @fig-time indicates that the time is in the `Zone 0` time zone, which is equivalent to the [UTC+00:00](https://en.wikipedia.org/wiki/UTC+00:00) time zone of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
-The top row of @tbl-2x2 shows how a `Declock` time (`.00000Z`) can be appended to a `Decalendar doty` date (`306`) to form a `Decalendar stamp`. If we prepend a year to a `doty` it becomes a `Decalender` ordinal (`deco`) date, which is analogous to an [ISO 8601 ordinal (`isoo`) date](https://en.wikipedia.org/wiki/ISO_8601#:~:text=Ordinal%20dates,-YYYY%2DDDD&text=An%20ordinal%20date%20is%20an,as%20%221981%2D095%22.). Similarities between `Decalender` and the ISO 8601 international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times) are discussed in @sec-iso.
+![The components of a `Declock` time](fig-time.png){#fig-time fig-alt="A time shown as a 3-digit number with a one-digit time zone offset at the end separated by a plus sign. The first digit is labeled 'Dimes', the first two digits are labeled 'Cents', and the first three digits are labeled 'Mils'."}
+
+# `Decalendar` ordinal date {#sec-summary-deco}
+
+In addition to being combined with a time zone offset as in @fig-time, a `doty` can be combined with a year to form a `Decalendar` ordinal (`deco`) date. @fig-date shows a `deco` date that is equivalent to January 1st, 1969 in the Gregorian calendar. The `Declock` time in @fig-time and the `deco` date in @fig-date both use a plus sign (`+`) as a delimiter. If we combined the `deco` date from @fig-date and the `Declock` time from @fig-time, we would obtain a `deco stamp`: `1960+306.000+0`. @tbl-2x2 compares `doty` and `deco` dates in its first column and `doty` and `deco stamps` in its second column.
+
+![The components of a `Decalendar` ordinal (`deco`) date](fig-date.png){#fig-date fig-alt="A date consisting a year and a day-of-the-year separated by a plus sign. The first two digits of the day of the year are labeled as the Dek, while the last digit is labeled as the day of the dek."}
 
 #### @tbl-2x2
 
 ::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
-|      | date     | stamp           |
-| ---- | -------- | ------------    |
-| doty | 306      | 306.00000Z      |
-| deco | 1969+306 | 1969+306.00000Z |
+|      | date     | stamp         |
+|------|----------|---------------|
+| doty | 306      | 306.000Z      |
+| deco | 1969+306 | 1969+306.000Z |
 
 : Comparison of `doty` and `deco` dates and `stamps` {#tbl-2x2}
 :::
@@ -59,7 +67,7 @@ Not saying "Day" or "Dot" in general is acceptable, because it is convenient and
 
 ## Negative numbers {#sec-neg}
 
-Every component of `Decalender` dates and `Declock` times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative `doty` numbers work like [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) in [computer programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming) in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first `doty` is indexed by both $0$ and $-N$, while the last `doty ` is indexed by both $-1$ and $N$.
+Every component of `Decalender` dates and `Declock` times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative `doty` numbers work like [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) in [computer programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming) in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first `doty` is indexed by both $0$ and $-N$, while the last `doty` is indexed by both $-1$ and $N$.
 
 In general, negative numbers show the number of parts that are left in the whole. A negative `doty` shows how many days remain in the year and a negative time [counts down](https://en.wikipedia.org/wiki/Countdown) to the end of the day. To extend the fractions analogy in @sec-frac to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction ($pos = N + neg$). Positive and negative numbers arrive at the same answer from opposite directions.
 
@@ -581,7 +589,7 @@ As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of 
 
 ### Times {#sec-isot}
 
-The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The `time2doty` and `doty2time` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
+The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The `hmso2doty` and `doty2hmso` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
 
 $$declock = \frac{hour}{24} + \frac{minute}{1440} + \frac{second}{86400} \cdot 10^x$$ {#eq-isot1}
 
@@ -613,49 +621,49 @@ $$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-isot4}
 
 #### JavaScript
 
-##### `time2doty`
+##### `hmso2doty`
 
-{{< embed decalendar_javascript.ipynb#time2doty echo=true >}}
+{{< embed decalendar_javascript.ipynb#hmso2doty echo=true >}}
 
-##### `time2isot`
+##### `hmso2isot`
 
-{{< embed decalendar_javascript.ipynb#time2isot echo=true >}}
+{{< embed decalendar_javascript.ipynb#hmso2isot echo=true >}}
 
-##### `doty2time`
+##### `doty2hmso`
 
-{{< embed decalendar_javascript.ipynb#doty2time echo=true >}}
+{{< embed decalendar_javascript.ipynb#doty2hmso echo=true >}}
 
 #### Julia
 
 ##### `time`
 
-##### `time2doty`
+##### `hmso2doty`
 
-{{< embed decalendar_julia.ipynb#time2doty echo=true >}}
+{{< embed decalendar_julia.ipynb#hmso2doty echo=true >}}
 
-##### `doty2time`
+##### `doty2hmso`
 
-{{< embed decalendar_julia.ipynb#doty2time echo=true >}}
+{{< embed decalendar_julia.ipynb#doty2hmso echo=true >}}
 
 #### Python
 
-##### `time2doty`
+##### `hmso2doty`
 
-{{< embed decalendar_python.ipynb#time2doty echo=true >}}
+{{< embed decalendar_python.ipynb#hmso2doty echo=true >}}
 
-##### `doty2time`
+##### `doty2hmso`
 
-{{< embed decalendar_python.ipynb#doty2time echo=true >}}
+{{< embed decalendar_python.ipynb#doty2hmso echo=true >}}
 
 #### R
 
-##### `time2doty`
+##### `hmso2doty`
 
-{{< embed decalendar_r.ipynb#time2doty echo=true >}}
+{{< embed decalendar_r.ipynb#hmso2doty echo=true >}}
 
-##### `doty2time`
+##### `doty2hmso`
 
-{{< embed decalendar_r.ipynb#doty2time echo=true >}}
+{{< embed decalendar_r.ipynb#doty2hmso echo=true >}}
 
 :::
 
@@ -676,49 +684,49 @@ To create a `deco` timestamp, we can use the `doty2deco` or the `greg2deco` func
 
 {{< embed decalendar_javascript.ipynb#doty2deco echo=true >}}
 
-##### `time2doty`
+##### `hmso2doty`
 
-{{< embed decalendar_javascript.ipynb#time2doty echo=true >}}
+{{< embed decalendar_javascript.ipynb#hmso2doty echo=true >}}
 
-##### `time2deco`
+##### `hmso2deco`
 
-{{< embed decalendar_javascript.ipynb#time2deco echo=true >}}
+{{< embed decalendar_javascript.ipynb#hmso2deco echo=true >}}
 
-##### `doty2time`
+##### `doty2hmso`
 
-{{< embed decalendar_javascript.ipynb#doty2time echo=true >}}
+{{< embed decalendar_javascript.ipynb#doty2hmso echo=true >}}
 
 #### Julia
 
 ##### `time`
 
-##### `time2doty`
+##### `hmso2doty`
 
-{{< embed decalendar_julia.ipynb#time2doty echo=true >}}
+{{< embed decalendar_julia.ipynb#hmso2doty echo=true >}}
 
-##### `doty2time`
+##### `doty2hmso`
 
-{{< embed decalendar_julia.ipynb#doty2time echo=true >}}
+{{< embed decalendar_julia.ipynb#doty2hmso echo=true >}}
 
 #### Python
 
-##### `time2doty`
+##### `hmso2doty`
 
-{{< embed decalendar_python.ipynb#time2doty echo=true >}}
+{{< embed decalendar_python.ipynb#hmso2doty echo=true >}}
 
-##### `doty2time`
+##### `doty2hmso`
 
-{{< embed decalendar_python.ipynb#doty2time echo=true >}}
+{{< embed decalendar_python.ipynb#doty2hmso echo=true >}}
 
 #### R
 
-##### `time2doty`
+##### `hmso2doty`
 
-{{< embed decalendar_r.ipynb#time2doty echo=true >}}
+{{< embed decalendar_r.ipynb#hmso2doty echo=true >}}
 
-##### `doty2time`
+##### `doty2hmso`
 
-{{< embed decalendar_r.ipynb#doty2time echo=true >}}
+{{< embed decalendar_r.ipynb#doty2hmso echo=true >}}
 
 :::
 
@@ -1000,7 +1008,7 @@ The week number in the `decw` format, `ww`, ranges from 0 to 53 or -54 to -1. We
 
 In @tbl-dotex, the `.m` format tells us that the month in Tokyo is January (`Month 0`) and the month in Mexico City and London is December (`Month B`). We could say the `.m` dates in Mexico City and London as "Year 1999 Month B Day 29" or "Year 1999 Month -1 Day -1" and the Tokyo date as "Year 2000 Month 0 Day 0" or "Year 2000 Month -C Day -31".
 
-The `decw` format always starts the year with `Week 0`, but the year can start on any day of the week. @tbl-dotex shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `decw` dates in Mexico City and London could be said "Year 1999 Week 52 Day 2" or "Year 1999 Week -1 Day -5", while the date in Tokyo could be pronounced "Year 2000 Week 0 Day 3" or "Year 2000 Week -52 Day -4`" in Tokyo.
+The `decw` format always starts the year with `Week 0`, but the year can start on any day of the week. @tbl-dotex shows that the year 2000 starts on a Saturday (`Week 0 Day 6`). The `decw` dates in Mexico City and London could be said "Year 1999 Week 52 Day 2" or "Year 1999 Week -1 Day -5", while the date in Tokyo could be pronounced "Year 2000 Week 0 Day 3" or "Year 2000 Week -52 Day -4" in Tokyo.
 
 In contrast to the `.m` and the `decw` formats, the dates in the `.y` format are one character shorter and a little easier to say. The spoken form of the `.y` date in Mexico City and London is "Year 1999 Day 365" or "Year 1999 Day -1" and the spoken form of the Tokyo date is "Year 2000 Day 0" or "Year 2000 Day -365".
 
