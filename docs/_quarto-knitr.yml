@@ -1,5 +1,9 @@
 toc: true
 number-depth: 3
+date: now
+date-format: x
+filters:
+  - date.lua
 bibliography: ref.bib
 execute:
   engine: knitr
@@ -21,7 +25,6 @@ format:
     output-file: index.html
   pdf:
     colorlinks: true
-    pdf-engine: wkhtmltopdf
     output-file: decalendar.pdf
   docx:
     output-file: decalendar.docx
