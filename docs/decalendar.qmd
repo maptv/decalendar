@@ -26,15 +26,15 @@ Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asy
 
 ![The components of a Decalendar time](fig-time.png){#fig-time fig-alt="A time shown as a five-digit number with a one-letter time zone code at the end. The first digit is labeled 'dimes', the first two 'cents', the first three 'mils', and all five 'beats'."}
 
-@tbl-2x2 shows how `Declock` times can be appended to `Decalendar` dates to form `stamps`. If we prepend a year to a `doty` it becomes a `Decalender` ordinal (`deco`) date, which is analogous to an [ISO 8601 ordinal (`isoo`) date](https://en.wikipedia.org/wiki/ISO_8601#:~:text=Ordinal%20dates,-YYYY%2DDDD&text=An%20ordinal%20date%20is%20an,as%20%221981%2D095%22.). Similarities between `Decalender` and the ISO 8601 international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times) are discussed in @sec-iso.
+The top row of @tbl-2x2 shows how a `Declock` time (`.00000Z`) can be appended to a `Decalendar doty` date (`306`) to form a `Decalendar stamp`. If we prepend a year to a `doty` it becomes a `Decalender` ordinal (`deco`) date, which is analogous to an [ISO 8601 ordinal (`isoo`) date](https://en.wikipedia.org/wiki/ISO_8601#:~:text=Ordinal%20dates,-YYYY%2DDDD&text=An%20ordinal%20date%20is%20an,as%20%221981%2D095%22.). Similarities between `Decalender` and the ISO 8601 international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times) are discussed in @sec-iso.
 
 #### @tbl-2x2
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
-|      | date     | stamp        |
-| ---- | -------- | ------------ |
-| doty | 306      | 306.000      |
-| deco | 1969+306 | 1969+306.000 |
+::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
+|      | date     | stamp           |
+| ---- | -------- | ------------    |
+| doty | 306      | 306.00000Z      |
+| deco | 1969+306 | 1969+306.00000Z |
 
 : Comparison of `doty` and `deco` dates and `stamps` {#tbl-2x2}
 :::
@@ -79,7 +79,7 @@ The `stamp` in @sec-specific use three digits for the times because is the best 
 
 #### @tbl-unit
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Quantity           | Name     | Symbol   | Formal Name         |
 |--------------------|----------|----------|---------------------|
 | $100$              | `hekt`   | `ρ`      | `hectoday`          |
@@ -158,7 +158,7 @@ To locate a specific date in @tbl-greg2doty, first find the month among the colu
 
 #### @tbl-greg2doty
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan | Feb |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 | 1   | 0   | 31  | 61  | 92  | 122 | 153 | 184 | 214 | 245 | 275 | 306 | 337 |
@@ -198,7 +198,7 @@ To locate a specific date in @tbl-greg2doty, first find the month among the colu
 
 #### @tbl-doty2greg
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Dek | 0     | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     |
 |-----|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
 | 0   | 03-01 | 03-02 | 03-03 | 03-04 | 03-05 | 03-06 | 03-07 | 03-08 | 03-09 | 03-10 |
@@ -355,7 +355,7 @@ doty2greg()
 
 #### @tbl-gregm
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | dm  | gm  | Month     |
 |-----|-----|-----------|
 | 0   | 3   | March     |
@@ -951,7 +951,7 @@ $$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-isot4}
 
 #### @tbl-isot
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | x   | units   |
 |-----|---------|
 | -1  | deks    |
@@ -998,7 +998,6 @@ console.log(time2isot())
 ```{javascript}
 #| tags: [doty2time]
 function doty2time(doty = 1 / 24) {
-    doty = doty - Math.floor(doty)
     const hour = doty * 24,
         floorHour = Math.floor(hour),
         minute = (hour - floorHour) / 60,
@@ -1029,7 +1028,6 @@ time2doty()
 ```{julia}
 #| tags: [doty2time]
 function doty2time(doty=1/24)
-    doty = doty - floor(doty)
     hour = doty * 24
     floorHour = floor(hour)
     minute = (hour - floorHour) / 60
@@ -1057,7 +1055,6 @@ time2doty()
 ```{python}
 #| tags: [doty2time]
 def doty2time(doty = 1/24):
-    doty = doty - doty.__floor__()
     hour = doty * 24
     floorHour = hour.__floor__()
     minute = (hour - floorHour) / 60
@@ -1085,7 +1082,6 @@ time2doty()
 ```{r}
 #| tags: [doty2time]
 doty2time <- function(doty = 1 / 24) {
-    doty <- doty - floor(doty)
     hour <- doty * 24
     floorHour <- floor(hour)
     minute <- (hour - floorHour) / 60
@@ -1145,7 +1141,6 @@ function time2deco(hour = 0, minute = 0, second = 0) {
 ```{javascript}
 #| tags: [doty2time]
 function doty2time(doty = 1 / 24) {
-    doty = doty - Math.floor(doty)
     const hour = doty * 24,
         floorHour = Math.floor(hour),
         minute = (hour - floorHour) / 60,
@@ -1187,7 +1182,6 @@ end
 ```{julia}
 #| tags: [doty2time]
 function doty2time(doty=1/24)
-    doty = doty - floor(doty)
     hour = doty * 24
     floorHour = floor(hour)
     minute = (hour - floorHour) / 60
@@ -1220,7 +1214,6 @@ f"{greg2year():>04}+{greg2doty():>03}.{round(time2doty(0) * 1e6):>05}"
 ```{python}
 #| tags: [doty2time]
 def doty2time(doty = 1/24):
-    doty = doty - doty.__floor__()
     hour = doty * 24
     floorHour = hour.__floor__()
     minute = (hour - floorHour) / 60
@@ -1254,7 +1247,6 @@ paste0(
 ```{r}
 #| tags: [doty2time]
 doty2time <- function(doty = 1 / 24) {
-    doty <- doty - floor(doty)
     hour <- doty * 24
     floorHour <- floor(hour)
     minute <- (hour - floorHour) / 60
@@ -1301,7 +1293,7 @@ The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican
 
 #### @tbl-dotd
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | \#  | Code | Name   | Type | French   |
 |-----|------|--------|------|----------|
 | 0   | N    | Nulday | work | primidi  |
@@ -1324,7 +1316,7 @@ The French Republican calendar and `Declock` both break the day down into decima
 
 #### @tbl-dime
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | ⅒   | 24-hour | 12-hour |
 |-----|---------|---------|
 | 0   | 00:00   | 12:00AM |
@@ -1597,7 +1589,7 @@ The `stamps` shown above are in the decimal days of the year (`.y`) format, whic
 
 #### @tbl-format
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day of the | `.` | General Form      | Specific Example  |
 |------------|-----|-------------------|-------------------|
 | Year       | `y` | `year±day.day±z`  | `1999+365.500-3`  |
@@ -1627,7 +1619,7 @@ The week number in the `decw` format, `ww`, ranges from 0 to 53 or -54 to -1. We
 
 #### @tbl-dotw
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day       | Pos | Neg |
 |-----------|-----|-----|
 | Sunday    | 0   | -7  |
@@ -1647,7 +1639,7 @@ The week number in the `decw` format, `ww`, ranges from 0 to 53 or -54 to -1. We
 
 #### @tbl-dotex
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day of the | `.` | Mexico City     | London          | Tokyo           |
 |------------|-----|-----------------|-----------------|-----------------|
 | Year       | `y` | `1999+365.5-3`  | `1999+365.8-3`  | `2000+000.2+4`  |
@@ -1686,7 +1678,7 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 
 #### @tbl-pently
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Schedule | Workdays | Restdays | Start | End | Duration |
 |----------|----------|----------|-------|-----|----------|
 | 2        | 2        | 3        | .2    | .8  | .6       |
@@ -1703,7 +1695,7 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 
 #### @tbl-daily
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Start | End | Duration | Description                  |
 |-------|-----|----------|------------------------------|
 | .2    | .3  | .1       | Wake up and prepare for work |
@@ -1726,7 +1718,7 @@ The dates of the solstices and the equinoxes can be used as definitions of the s
 
 #### @tbl-soleq
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | North  | South  | `doty` | `dotm` | Date         | Event              |
 |------|--------|--------|--------|--------|--------------|--------------------|
 | S0   | Spring | Fall   | 19     | 0+19   | March 20     | Northward Equinox  |
@@ -1743,7 +1735,7 @@ We can round up the start of the first season and round down the start of the se
 
 #### @tbl-season
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | North  | South  | First | Last | Duration |
 |------|--------|--------|-------|------|----------|
 | S0   | Spring | Fall   | 4     | 21   | 18       |
@@ -1762,7 +1754,7 @@ In contrast to the variable length of seasons, other `Decalendar` units are cons
 
 #### @tbl-q
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | First | Last |
 |------|-------|------|
 | Q0   | 0     | 8    |
@@ -1779,7 +1771,7 @@ In addition to `qops` shown above, `Decalendar` describes 3 other similar units 
 
 #### @tbl-d
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | First | Last |
 |------|-------|------|
 | D0   | 0     | 90   |
@@ -1796,7 +1788,7 @@ Unlike `delts`, `eps` are 73 days long and do not leave out any days from common
 
 #### @tbl-e
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | First | Last |
 |------|-------|------|
 | E0   | 0     | 72   |
@@ -1814,7 +1806,7 @@ The only unit that can include the leap year is a `wau` (`ϛ`), which is 61 days
 
 #### @tbl-w
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | First | Last |
 |------|-------|------|
 | W0   | 0     | 60   |
@@ -1841,7 +1833,7 @@ In the context of `doty` dates, omitting the `stop` value obtains all of the day
 
 #### @tbl-4slice
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Index | Season   | Qop     | Delt    |
 |-------|----------|---------|---------|
 | 0     | 20:110   | :90     | :91     |
@@ -1868,7 +1860,7 @@ To create `series` of consecutive items with breaks in between, it may be better
 
 #### @tbl-4spread
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Index | Season   | Qop     | Delt    |
 |-------|----------|---------|---------|
 | 0     | 20\>90   | \>90    | \>91    |
@@ -1897,7 +1889,7 @@ A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, an
 
 #### @tbl-constant
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Unit | Spread  |
 |------|---------|
 | Delt | `≫91>0` |
@@ -1924,7 +1916,7 @@ The `seq slice` equivalent of `≫3>2>.3>.4` is `:365:1,1,3:.3:.7`. `Seq spreads
 
 #### @tbl-workday
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | slice   | spread   | spread   | label |
 |---------|----------|----------|-------|
 | .30:.48 | .30\>.18 | .48\<.18 | work0 |
@@ -1952,7 +1944,7 @@ We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule 
 
 #### @tbl-sched
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Schedule | seq spread    | splice       | sled                | seq slice           |
 |----------|---------------|--------------|---------------------|---------------------|
 | 2        | ≫2\>3\>.2\>.6 | ≫2\>3\>.2:.8 | :365:1,4:.2\>.6     | :365:1,4:.2:.8      |
@@ -1971,7 +1963,7 @@ The `pently` schedules are important for the transition between years. In common
 
 #### @tbl-common
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Pos | Neg | Name   | Type |
 |-----|-----|--------|------|
 | 360 | -5  | Nulday | work |
@@ -1994,7 +1986,7 @@ In leap years, `Dek 36` contains the last 6 days of the current year and the fir
 
 #### @tbl-leap
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Pos | Neg | Name   | Type |
 |-----|-----|--------|------|
 | 360 | -6  | Nulday | work |
@@ -2017,7 +2009,7 @@ Leap Day is a important holiday because it occurs only once every four years exc
 
 #### @tbl-holiday
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Name             | doty | dotm | date        |
 |------------------|------|------|-------------|
 | Cinco de Mayo    | 65   | 2+04 | May 5       |

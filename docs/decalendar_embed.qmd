@@ -1,10 +1,6 @@
 ---
 title: "`Decalendar` and `Declock`"
 author: Martin Laptev
-date: now
-date-format: x
-filters:
-  - date.lua
 ---
 
 # Summary {#sec-summary}
@@ -17,16 +13,31 @@ The main `Decalendar` date format consists of a year and a day-of-the-year (`dot
 
 ![The components of a Decalendar date](fig-date.png){#fig-date fig-alt="A date consisting a year and a day of the year separated by a plus sign. The first two digits of the day of the year are labeled as the dek, while the last digit is labeled as the day of the dek."}
 
-Each `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates two bar charts that compare the typical weekly schedule and the `Schedule 3` `pently` schedule. @sec-pently provides more information on the `pently` schedules. Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅).
+Each `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. @sec-pently provides more information on the `pently` schedules. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+
+Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours).
 
 ::: {#exm-glance}
 :::
 
 {{< embed schedules.ipynb#fig-schedules echo=true >}}
 
-In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. In `Schedule 3`, there are 3 workdays separated by a 2-day `pentend`. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). `Declock` uses such proportions of the day instead of hours, minutes, or seconds. @fig-time shows midnight, the first moment of a new `Declock` day, with labels for the most important `Declock` units. More information on `Declock` units is provided in @sec-unit.
+`Declock` uses proportions of the day instead of hours, minutes, or seconds. @fig-time shows midnight, the first moment of a new `Declock` day, with labels for the most important `Declock` units. More information on `Declock` units is provided in @sec-unit. Briefly, `Declock` time zones use `dimes`, `cents` are roughly a quarter-hour, clocks and watches use `mils`, and `beats` fulfill the role of seconds. The `Z` at the end of the time in @fig-time is synonymous with `+0`, which means there is no time zone offset and that the time is in `Zone 0` time zone.
 
 ![The components of a Decalendar time](fig-time.png){#fig-time fig-alt="A time shown as a five-digit number with a one-letter time zone code at the end. The first digit is labeled 'dimes', the first two 'cents', the first three 'mils', and all five 'beats'."}
+
+The top row of @tbl-2x2 shows how a `Declock` time (`.00000Z`) can be appended to a `Decalendar doty` date (`306`) to form a `Decalendar stamp`. If we prepend a year to a `doty` it becomes a `Decalender` ordinal (`deco`) date, which is analogous to an [ISO 8601 ordinal (`isoo`) date](https://en.wikipedia.org/wiki/ISO_8601#:~:text=Ordinal%20dates,-YYYY%2DDDD&text=An%20ordinal%20date%20is%20an,as%20%221981%2D095%22.). Similarities between `Decalender` and the ISO 8601 international standard for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times) are discussed in @sec-iso.
+
+#### @tbl-2x2
+
+::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
+|      | date     | stamp           |
+| ---- | -------- | ------------    |
+| doty | 306      | 306.00000Z      |
+| deco | 1969+306 | 1969+306.00000Z |
+
+: Comparison of `doty` and `deco` dates and `stamps` {#tbl-2x2}
+:::
 
 # Basic concepts {#sec-basics}
 
@@ -60,7 +71,7 @@ If a `Decalender` date and a `Declock` time are combined, they form a time `stam
 
 ## Specific dates and times {#sec-specific}
 
-The `stamp` in @sec-stamp assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The first `doty` of 1969, would be written `1969+000` and said "Year 1969 Day 0" or simply "1969 0", while midnight in `Zone 0` would be written `.000+0` and said "Dot 0 Zone 0", "0 Zone 0", or "0 0". Combined together, this date and time form the `stamp` `1969+000.000+0`.
+The `stamp` in @sec-stamp assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The first `doty` of 1969, would be written `1969+000` and said "Year 1969 Day 0" or simply "1969 0", while midnight in `Zone 0` would be written `.000+0` and said "Dot 0 Zone 0", "0 Zone 0", or "0 0". Combined together, this date and time form the `stamp 1969+000.000+0`.
 
 # Units {#sec-unit}
 
@@ -68,7 +79,7 @@ The `stamp` in @sec-specific use three digits for the times because is the best 
 
 #### @tbl-unit
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Quantity           | Name     | Symbol   | Formal Name         |
 |--------------------|----------|----------|---------------------|
 | $100$              | `hekt`   | `ρ`      | `hectoday`          |
@@ -147,7 +158,7 @@ To locate a specific date in @tbl-greg2doty, first find the month among the colu
 
 #### @tbl-greg2doty
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan | Feb |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 | 1   | 0   | 31  | 61  | 92  | 122 | 153 | 184 | 214 | 245 | 275 | 306 | 337 |
@@ -187,7 +198,7 @@ To locate a specific date in @tbl-greg2doty, first find the month among the colu
 
 #### @tbl-doty2greg
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Dek | 0     | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     |
 |-----|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
 | 0   | 03-01 | 03-02 | 03-03 | 03-04 | 03-05 | 03-06 | 03-07 | 03-08 | 03-09 | 03-10 |
@@ -233,7 +244,7 @@ To locate a specific date in @tbl-greg2doty, first find the month among the colu
 
 ### Gregorian calendar date conversion {#sec-conv}
 
-In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar` `doty` numbers programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [*chrono-Compatible Low-Level Date Algorithms*](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `greg2doty` function is a `doty` number, while its inverse function, `doty2greg`, returns an array containing a month and a `dotm` number.
+In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar doty` dates programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [*chrono-Compatible Low-Level Date Algorithms*](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `greg2doty` function is a `doty` number, while its inverse function, `doty2greg`, returns an array containing a month and a `dotm` number.
 
 ::: {#exm-coor}
 :::
@@ -282,11 +293,11 @@ In addition to using a conversion table like @tbl-greg2doty, we can convert betw
 
 ### Gregorian calendar months and years {#sec-gregm}
 
-`Decalendar` only uses months for converting to and from Gregorian calendar dates. Nevertheless, discussing months can help to explain how `Decalendar` works. The `Decalendar` year ends with January and February, as shown in @tbl-gregm. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `Decalendar` `doty` (`doty`), we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Code to convert between `Decalendar` and Gregorian calendar years is provided in @exm-gregm.
+`Decalendar` only uses months for converting to and from Gregorian calendar dates. Nevertheless, discussing months can help to explain how `Decalendar` works. The `Decalendar` year ends with January and February, as shown in @tbl-gregm. During these two months, the `Decalendar` year is 1 less than the Gregorian calendar year. To obtain a `Decalendar` year (`dy`) from a Gregorian calendar year (`gy`) and month number (`gm`), we subtract 1 from `gy` if `gm` is less than 3 ($dy = gy - [gm < 3]$). To obtain a Gregorian calendar year (`gy`) from a `Decalendar` year (`dy`) and `doty`, we add 1 to `dy` if `doty` is greater than 305 ($gy = dy + [dm > 305]$). Code to convert between `Decalendar` and Gregorian calendar years is provided in @exm-gregm.
 
 #### @tbl-gregm
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | dm  | gm  | Month     |
 |-----|-----|-----------|
 | 0   | 3   | March     |
@@ -389,13 +400,13 @@ $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
 ### Years {#sec-isoy}
 
-[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) is the [international standard](https://en.wikipedia.org/wiki/ISO_8601) for [dates](https://en.wikipedia.org/wiki/ISO_8601#Dates) and [times](https://en.wikipedia.org/wiki/ISO_8601#Times). Both `Decalendar` and ISO 8601 dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
+Both `Decalendar` and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. As shown in @tbl-2x2, `Decalendar deco` dates include years while `doty` dates do not. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
 
 ### Ordinal dates {#sec-isoo}
 
-`Decalendar` ordinal (`deco`) dates (`year+day`) are most similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar` `doty` numbers, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
+`Deco` dates (`year+day`) are very similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar doty` numbers, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
 
-In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers, while the `isoo2year` and `doty2year` functions adjust the year if necessary. We use the `leap_year` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. Unlike ISO 8601 ordinal day numbers, `Decalendar` `doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
+In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers, while the `isoo2year` and `doty2year` functions adjust the year if necessary. We use the `leap_year` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. To be clear, we only have to take Leap Day into account when dealing with `isoo` dates. `Decalendar doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
 
 $$(isoordinal + 305 - isleap(year)) \mod 365$$ {#eq-isoo1}
 
@@ -582,7 +593,7 @@ $$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-isot4}
 
 #### @tbl-isot
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | x   | units   |
 |-----|---------|
 | -1  | deks    |
@@ -733,11 +744,11 @@ The `Decalendar` time interval representations above are called `spreads` and we
 
 ### French Republican calendar *décades* {#sec-frcd}
 
-The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a *décade*, while a group of 10 days in `Decalendar` is called a `dek`. The names of the days in a `Decalendar` `dek` are derived from their [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) cardinal numbers (zero, one, two...), whereas the days of the *décade* are named after their ordinal numbers (first, second, third...). @tbl-dotd provides the cardinal numbers, one-letter codes, names, and types of the days of the `dek` as well as the names of their French Republican calendar equivalents.
+The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a *décade*, while a group of 10 days in `Decalendar` is called a `dek`. The names of the days in a `dek` are derived from their [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) cardinal numbers (zero, one, two...), whereas the days of the *décade* are named after their ordinal numbers (first, second, third...). @tbl-dotd provides the cardinal numbers, one-letter codes, names, and types of the days of the `dek` as well as the names of their French Republican calendar equivalents.
 
 #### @tbl-dotd
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | \#  | Code | Name   | Type | French   |
 |-----|------|--------|------|----------|
 | 0   | N    | Nulday | work | primidi  |
@@ -760,7 +771,7 @@ The French Republican calendar and `Declock` both break the day down into decima
 
 #### @tbl-dime
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | ⅒   | 24-hour | 12-hour |
 |-----|---------|---------|
 | 0   | 00:00   | 12:00AM |
@@ -924,7 +935,7 @@ The `stamps` shown above are in the decimal days of the year (`.y`) format, whic
 
 #### @tbl-format
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day of the | `.` | General Form      | Specific Example  |
 |------------|-----|-------------------|-------------------|
 | Year       | `y` | `year±day.day±z`  | `1999+365.500-3`  |
@@ -942,7 +953,7 @@ The `m` in the `.m` format is the 1-digit month number and is the double-digit `
 
 The [ordinal numerals](https://en.wikipedia.org/wiki/Ordinal_numeral) of September, October, November, and December in `Decalendar` (Sep=7th, Oct=8th, Nov=9th, Dec=10th) match the [numeral prefixes](https://en.m.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English) in their names (Sep=7, Oct=8, Nov=9, Dec=10). The `m` value of a month is based on its cardinal number in `Decalendar`, which is 1 less than its ordinal number (Sep=6, Oct=7, Nov=8, Dec=9).
 
-To convert a double-digit Gregorian calendar month number (`mm`) into a single-digit `Decalendar` `m` value, we subtract 3 if `mm` is greater than 2, add 9 if not, as shown in @eq-dotm1, and then encode into hexadecimal (Base16). To do the inverse (convert `m` to `mm`), we decode from hexadecimal, add 3 to `m` values less than 10 and subtract 9 from other `m` values, as shown in @eq-dotm2. After hexadecimal encoding, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February).
+To convert a double-digit Gregorian calendar month number (`mm`) into a single-digit `Decalendar m` value, we subtract 3 if `mm` is greater than 2, add 9 if not, as shown in @eq-dotm1, and then encode into hexadecimal (Base16). To do the inverse (convert `m` to `mm`), we decode from hexadecimal, add 3 to `m` values less than 10 and subtract 9 from other `m` values, as shown in @eq-dotm2. After hexadecimal encoding, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February).
 
 $$m = \begin{cases}mm - 3&{\text{if } month > 2;}\\mm + 9&{\text{otherwise.}}\end{cases}$$ {#eq-dotm1}
 
@@ -954,7 +965,7 @@ The week number in the `decw` format, `ww`, ranges from 0 to 53 or -54 to -1. We
 
 #### @tbl-dotw
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day       | Pos | Neg |
 |-----------|-----|-----|
 | Sunday    | 0   | -7  |
@@ -974,7 +985,7 @@ The week number in the `decw` format, `ww`, ranges from 0 to 53 or -54 to -1. We
 
 #### @tbl-dotex
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day of the | `.` | Mexico City     | London          | Tokyo           |
 |------------|-----|-----------------|-----------------|-----------------|
 | Year       | `y` | `1999+365.5-3`  | `1999+365.8-3`  | `2000+000.2+4`  |
@@ -1013,7 +1024,7 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 
 #### @tbl-pently
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Schedule | Workdays | Restdays | Start | End | Duration |
 |----------|----------|----------|-------|-----|----------|
 | 2        | 2        | 3        | .2    | .8  | .6       |
@@ -1030,7 +1041,7 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 
 #### @tbl-daily
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Start | End | Duration | Description                  |
 |-------|-----|----------|------------------------------|
 | .2    | .3  | .1       | Wake up and prepare for work |
@@ -1053,7 +1064,7 @@ The dates of the solstices and the equinoxes can be used as definitions of the s
 
 #### @tbl-soleq
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | North  | South  | `doty` | `dotm` | Date         | Event              |
 |------|--------|--------|--------|--------|--------------|--------------------|
 | S0   | Spring | Fall   | 19     | 0+19   | March 20     | Northward Equinox  |
@@ -1070,7 +1081,7 @@ We can round up the start of the first season and round down the start of the se
 
 #### @tbl-season
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | North  | South  | First | Last | Duration |
 |------|--------|--------|-------|------|----------|
 | S0   | Spring | Fall   | 4     | 21   | 18       |
@@ -1089,7 +1100,7 @@ In contrast to the variable length of seasons, other `Decalendar` units are cons
 
 #### @tbl-q
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | First | Last |
 |------|-------|------|
 | Q0   | 0     | 8    |
@@ -1106,7 +1117,7 @@ In addition to `qops` shown above, `Decalendar` describes 3 other similar units 
 
 #### @tbl-d
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | First | Last |
 |------|-------|------|
 | D0   | 0     | 90   |
@@ -1123,7 +1134,7 @@ Unlike `delts`, `eps` are 73 days long and do not leave out any days from common
 
 #### @tbl-e
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | First | Last |
 |------|-------|------|
 | E0   | 0     | 72   |
@@ -1141,7 +1152,7 @@ The only unit that can include the leap year is a `wau` (`ϛ`), which is 61 days
 
 #### @tbl-w
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | First | Last |
 |------|-------|------|
 | W0   | 0     | 60   |
@@ -1164,11 +1175,11 @@ A single `doty` number, such as `Day 0`, implies a duration on 1 day. We can ind
 
 Instead of listing every single day in a `series`, we can "slice" from `Day 0` up to but not including `Day 3` by writing `:3`. `Simple slices` consist of a `start` and a `stop` separated by a colon (`start:stop`). When the `start` is omitted, `slices` begin at the first value, which in the context of a year is `Day 0` and in the context of a day is midnight. Therefore, writing `:3` is the same as writing `0:3`, both represent the first 3 days of the year: `0,1,2`. Using this approach, we can shorten the series `0,.1,.2,.3,.4` to `:.5`. If we omit the `stop`, instead of the `start`, we would "slice" up to and including the last value.
 
-In the context of `doty` dates, omitting the `stop` value obtains all of the days in the year after the `start`, because the default `stop` is the number of days in the year (`n`). For example, the `slice` `3:` has a `start` of `Day 3` and a `stop` of `n`, and thus represents every day in the year except the first 3. The number of items we obtain from a `slice` is called a `span`. To calculate the `span`, we subtract the `start` from the `stop` ($stop-start$). In a common year, the `span` of `003:` is $n-3=362$, while in a leap year it would be $n-3=363$. If both the `start` and the `stop` are omitted, every day is included ($span=n-0$). @tbl-4slice lists the seasons, `qops`, and `delts` in the form of `slices`. The superscript plus sign (⁺) in @tbl-4slice indicates a number that has to be incremented in leap years.
+In the context of `doty` dates, omitting the `stop` value obtains all of the days in the year after the `start`, because the default `stop` is the number of days in the year (`n`). For example, the `slice 3:` has a `start` of `Day 3` and a `stop` of `n`, and thus represents every day in the year except the first 3. The number of items we obtain from a `slice` is called a `span`. To calculate the `span`, we subtract the `start` from the `stop` ($stop-start$). In a common year, the `span` of `003:` is $n-3=362$, while in a leap year it would be $n-3=363$. If both the `start` and the `stop` are omitted, every day is included ($span=n-0$). @tbl-4slice lists the seasons, `qops`, and `delts` in the form of `slices`. The superscript plus sign (⁺) in @tbl-4slice indicates a number that has to be incremented in leap years.
 
 #### @tbl-4slice
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Index | Season   | Qop     | Delt    |
 |-------|----------|---------|---------|
 | 0     | 20:110   | :90     | :91     |
@@ -1183,19 +1194,19 @@ In the context of `doty` dates, omitting the `stop` value obtains all of the day
 
 The `simple slices` (`start:stop`) described above are a type of time `segment`, an unbroken time interval. To break up a `simple slice` into a non-consecutive `series`, we can add a `step` value and create a `stepped slice` (`start:stop:step`). `Stepped slices` move in `step`-sized "steps" starting from `start`, skipping over $step-1$ items with each "step", keeping only items that are "stepped" on.
 
-In other words, `stepped slices` keep items whose index (zero-based position) in the `slice` is evenly divisible by `step`. A `step` value of 1 keeps every item, because every index is divisible by 1, and a `step` of 2 keeps every other item, those with even-numbered indexes. `Day 0` and every other third day in the year thereafter (`Day 3`, `Day 6`, etc.) can be represented by the `slice` `::3`.
+In other words, `stepped slices` keep items whose index (zero-based position) in the `slice` is evenly divisible by `step`. A `step` value of 1 keeps every item, because every index is divisible by 1, and a `step` of 2 keeps every other item, those with even-numbered indexes. `Day 0` and every other third day in the year thereafter (`Day 3`, `Day 6`, etc.) can be represented by the `slice ::3`.
 
-To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of `steps`. The `slice` `:365:1,1,3` represents all of the `Decalendar` workdays in a year. It is necessary to specify 365 as the `stop`, so that Leap Day (`Day 365`) is not included as a workday in leap years. Similarly, `3::1,4` is a `seq` that represents all of the regular restdays, not including the Leap Day holiday.
+To create a `series` of times on days throughout the year, we can use a `slice` with a `series` of `steps`. The `slice :365:1,1,3` represents all of the `Decalendar` workdays in a year. It is necessary to specify 365 as the `stop`, so that Leap Day (`Day 365`) is not included as a workday in leap years. Similarly, `3::1,4` is a `seq` that represents all of the regular restdays, not including the Leap Day holiday.
 
 `Stepped slices` cannot be included in `series`, because both use commas (`,`) and it would not possible to differentiate a `series` of `steps` from subsequent items in the `series`. The simple rule is that `slices` with more than 1 colon (`:`) cannot be part of a series. For example, `:365:1,1,3` is a `stepped slice` with a `series` of 3 `steps` rather than a series consisting of a `slice` and two numbers.
 
 ## Spreads {#sec-spread}
 
-To create `series` of consecutive items with breaks in between, it may be better to use a `spread` than a `slice`. `Simple spreads` consist of either a `start` and a `span` (`start>span`) separated by a greater-than sign (`>`) or a `stop` and a `span` (`stop<span`) separated by a less-than (`<`) sign. The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread` `>3`, which is synonymous with the `slice` `:3`. In this example, the `start` is 0, while the `stop` and the `span` are both 3. In addition to default `start` and `stop` values, `spreads` also have default `span` values. A `spread` that only uses default values (`>` or `<`) will include every day in the year ($span=n$). @tbl-4spread lists the seasons, `qops`, and `delts` in the form of `spreads`.
+To create `series` of consecutive items with breaks in between, it may be better to use a `spread` than a `slice`. `Simple spreads` consist of either a `start` and a `span` (`start>span`) separated by a greater-than sign (`>`) or a `stop` and a `span` (`stop<span`) separated by a less-than (`<`) sign. The default `start` and `stop` values are the same for both `slices` and `spreads`. We can `spread` forward from the default `start` to capture the first `span` days in a year. For example, the first 3 days in a year can be represented by the `spread >3`, which is synonymous with the `slice :3`. In this example, the `start` is 0, while the `stop` and the `span` are both 3. In addition to default `start` and `stop` values, `spreads` also have default `span` values. A `spread` that only uses default values (`>` or `<`) will include every day in the year ($span=n$). @tbl-4spread lists the seasons, `qops`, and `delts` in the form of `spreads`.
 
 #### @tbl-4spread
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Index | Season   | Qop     | Delt    |
 |-------|----------|---------|---------|
 | 0     | 20\>90   | \>90    | \>91    |
@@ -1206,7 +1217,7 @@ To create `series` of consecutive items with breaks in between, it may be better
 : The spreads that represent the 4-part subyear units {#tbl-4spread}
 :::
 
-If we "spread" forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `<3` represents the last 3 days of any year. We could also use a negative `start` of `-3`, the third to last day of any year, to create the `slice` `-3:` and the `spread` `-3>`, both of which are synonymous with `<3`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers. A `span` value of zero does not return any items. Negative `span` values reverse the direction of the first sign, turning `start` into `stop` and vice versa.
+If we "spread" forward from a positive `start`, the default `span` is $n-start$. If we spread backward from a positive `stop`, the default `span` is `stop`. We can `spread` backward from the default `stop` to capture the last `span` days in a year. For example, `<3` represents the last 3 days of any year. We could also use a negative `start` of `-3`, the third to last day of any year, to create the `slice -3:` and the `spread -3>`, both of which are synonymous with `<3`. One advantage of `spreads` over `slices` is the ability to access days from the end of a year without negative numbers. A `span` value of zero does not return any items. Negative `span` values reverse the direction of the first sign, turning `start` into `stop` and vice versa.
 
 ## Splits {#sec-split}
 
@@ -1218,13 +1229,13 @@ The direction of the second sign in `split spreads` determines whether we begin 
 
 ## Spaces {#sec-space}
 
-The patterns described above require that `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start>span>split>space`. The `split spreads` `≫3>2` and `♢3>2` create 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `≫3>2` and `♢3>2` can be written as `:3`, `>3`, or `3<`, while the last `segment` is `360:363`, `360>3`, or `363<3`. The workdays in the first `dek` of `≫3>2` and `♢3>2` can be written as the following `series` of `segments`: `:4,5:8`, `>3,5>3`, or `3<,8<3`. Unlike `stepped slices` and `split spreads`, `simple slices` and `simple spreads` can be used in `series`.
+The patterns described above require that `splits` are separated by the default `space` value of 1. We can specify a different `space` value in the form `start>span>split>space`. The `split spreads ≫3>2` and `♢3>2` create 3-day `splits` separated by 2-day `spaces`. This is the pattern of workdays in the `Decalendar` system. The first `segment` of `≫3>2` and `♢3>2` can be written as `:3`, `>3`, or `3<`, while the last `segment` is `360:363`, `360>3`, or `363<3`. The workdays in the first `dek` of `≫3>2` and `♢3>2` can be written as the following `series` of `segments`: `:4,5:8`, `>3,5>3`, or `3<,8<3`. Unlike `stepped slices` and `split spreads`, `simple slices` and `simple spreads` can be used in `series`.
 
-A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `waus` can be summarized as `split spreads` as shown in @tbl-constant. When `space` is zero, the direction of the third sign does not matter. The `split spreads` `≫61>0`, `♢61>0`, `≫61<0`, and `♢61<0` all represents the `waus` in a year. `Waus` divide leap years evenly and `eps` divide common years evenly. Therefore, `x61>0` and `x61<0` can represent all of the `waus` in leap years, just like `x73>0` and `x73<0` can represent all of the `eps` in common years. The seasons can be described by a `spread` with a `series` of `splits` and a `space` of 0: `»90,95,90,90⁺>0`.
+A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, and `waus` can be summarized as `split spreads` as shown in @tbl-constant. When `space` is zero, the direction of the third sign does not matter. The `split spreads ≫61>0`, `♢61>0`, `≫61<0`, and `♢61<0` all represents the `waus` in a year. `Waus` divide leap years evenly and `eps` divide common years evenly. Therefore, `x61>0` and `x61<0` can represent all of the `waus` in leap years, just like `x73>0` and `x73<0` can represent all of the `eps` in common years. The seasons can be described by a `spread` with a `series` of `splits` and a `space` of 0: `»90,95,90,90⁺>0`.
 
 #### @tbl-constant
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Unit | Spread  |
 |------|---------|
 | Delt | `≫91>0` |
@@ -1235,7 +1246,7 @@ A `space` value of 0 may also be useful. For example, `delts`, `qops`, `eps`, an
 : The spreads that represent the constant length subyear units {#tbl-constant}
 :::
 
-If `space` is greater than zero and the second and third sign are pointing in opposite directions, the resulting time `segments` will overlap. The `split spreads` `>1>.4<.2` and `<1<.4>.2` both result in the same 4 overlapping time `segments`: `:.4`, `.2:.6`, `.4:.8`, `.6:1`. Negative values can be used in a `series` of `spaces` to temporarily reverse the direction and intersperse overlapping and non-overlapping `segments`. The `split spread` `>1>.4<.2,-.1` yields two `segments` that overlap and one `segment` that does not overlap: `:.4`, `.2:.6`, `.6:1`.
+If `space` is greater than zero and the second and third sign are pointing in opposite directions, the resulting time `segments` will overlap. The `split spreads >1>.4<.2` and `<1<.4>.2` both result in the same 4 overlapping time `segments`: `:.4`, `.2:.6`, `.4:.8`, `.6:1`. Negative values can be used in a `series` of `spaces` to temporarily reverse the direction and intersperse overlapping and non-overlapping `segments`. The `split spread >1>.4<.2,-.1` yields two `segments` that overlap and one `segment` that does not overlap: `:.4`, `.2:.6`, `.6:1`.
 
 Overlapping segments could be used to plan work shifts that require a hand-off between teams. The segments created by `>1>.4<.2` are shifted by two `dimes` in relation to each other and overlap by 2 `dimes`. If these segments are in `Zone 0` time, they represent the normal workday (`.3:.7`) for `Zone 3` (`:.4`), `Zone 1`(`.2:.6`), `Zone -1`(`.4:.8`), and `Zone -3`(`.6:1`). Each of these 4 segments could represent a team working during the normal workday in their respective time zone. All but the last team would have two dimes of overlap with the subsequent team.
 
@@ -1243,15 +1254,15 @@ Overlapping segments could be used to plan work shifts that require a hand-off b
 
 `Split spreads` can be combined with other `spreads` into `sequences` called `seq spreads` (`sequential spreads`). The intuition behind `seq spreads` and is that each item in the first (outer) `spread` serves as a starting point for the second (inner) `spread`. The main use of `seq spreads` is to first "spread" across days and then "spread" across times in those days. We can combine `≫3>2`, a `split spread` that represents the `Decalendar` workdays, with `.3>.4`, a `simple spread` that provides the `start` and `span` of the `Decalendar` workday, to obtain `≫3>2>.3>.4`, a `seq spread` that represents the time spent at work in a `Decalendar` year.
 
-In this `seq spread`, the `split` is the number of workdays (`3`), the space is the number of restdays (`2`), the second-to-last number is the `start` of the workday (`.3`) and the last number is the workday `span` (`.4`). The `spread` `≫3>2>.3>.4` first starts at midnight of each workday, then moves forward 3 `dimes` to the new `start` of `Dot 3`, and then "spreads" forward by a `span` of 4 `dimes` to the new `stop` of `Dot 7`. We could replace the start of the workday in `≫3>2>.3>.4` with the end of workday if we reverse the last sign: `≫3>2>.7<.4`, because `.3>.4` and `.7<.4` are synonymous.
+In this `seq spread`, the `split` is the number of workdays (`3`), the space is the number of restdays (`2`), the second-to-last number is the `start` of the workday (`.3`) and the last number is the workday `span` (`.4`). The `spread ≫3>2>.3>.4` first starts at midnight of each workday, then moves forward 3 `dimes` to the new `start` of `Dot 3`, and then "spreads" forward by a `span` of 4 `dimes` to the new `stop` of `Dot 7`. We could replace the start of the workday in `≫3>2>.3>.4` with the end of workday if we reverse the last sign: `≫3>2>.7<.4`, because `.3>.4` and `.7<.4` are synonymous.
 
-We combine the two `spreads` with `>` because we want to move forward from the beginning of each workday, instead of backward to the previous day. If we combined `≫3>2` and `.3>.4` with `<`, the resulting `spread` `≫3>2<.3>.4` would move backward from midnight of each workday to `Dot 7` of each previous day and then "spread" forward to `Dot 1` of each workday. We may want to use such a mixed direction `seq spreads` when dealing with time zones. If we lived in `Zone -3` and wanted to know how the workdays in `Zone 4` translated into our time zone, we could take the `spread` `≫3>2>.3>.4` and move its `start` to 7 `dimes` earlier: `≫3>2<.4>.4`. `Seq spreads` enable such time zone conversions without the use of negative numbers.
+We combine the two `spreads` with `>` because we want to move forward from the beginning of each workday, instead of backward to the previous day. If we combined `≫3>2` and `.3>.4` with `<`, the resulting `spread ≫3>2<.3>.4` would move backward from midnight of each workday to `Dot 7` of each previous day and then "spread" forward to `Dot 1` of each workday. We may want to use such a mixed direction `seq spreads` when dealing with time zones. If we lived in `Zone -3` and wanted to know how the workdays in `Zone 4` translated into our time zone, we could take the `spread ≫3>2>.3>.4` and move its `start` to 7 `dimes` earlier: `≫3>2<.4>.4`. `Seq spreads` enable such time zone conversions without the use of negative numbers.
 
 The `seq slice` equivalent of `≫3>2>.3>.4` is `:365:1,1,3:.3:.7`. `Seq spreads` will always be a more succinct way for creating long consecutive sequences with breaks than `slices`. For example, to include a lunch break in the middle of work, we could simply add a `split` and a `space` to the `seq spread` above: `≫3>2>.3>.4>.18>.04`. To do the same with a `seq slice`, we have to create 17 steps of 0.01 and a step of .04: `:365:1,1,3:.3:.7:17*1%,4%`. Here, we are using the replication operator (`*`) to avoid writing 0.01 17 times and the percent operator (`%`) to save a few characters, but even so the `seq slice` is not as concise as the `seq spread`. @tbl-workday shows each part of this schedule in the form of `simple slices` and `simple spreads`.
 
 #### @tbl-workday
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | slice   | spread   | spread   | label |
 |---------|----------|----------|-------|
 | .30:.48 | .30\>.18 | .48\<.18 | work0 |
@@ -1267,7 +1278,7 @@ Another real-life application of `spreads` can be to intersperse breaks in betwe
 
 ### Replication operator {#sec-rep}
 
-The replication operator (`*`) is very useful for replacing repetitive values. For example, to divide any year into six parts we could use the `spread` `≫5*61,60⁺>0` to create 5 "splits" that are all 61 days long and one last "split" that is `60⁺` days (60 days in a common year or 61 days in a leap year) long. The `*` helps us avoid the repetitiveness of writing `≫61,61,61,61,61,60⁺>0`. In addition to being used in the `split` and `space` of a `split spread` or the `step` of a `stepped slice`, the `*` can also be used in the `span` of a `split spread` or the `stop` of a `stepped slice` to indicate has many cycles of `splits` or `steps` we want to complete. For example, `>4*>5*61,60⁺>0` indicates that we want 4 years (the current year and the 3 subsequent years) "split" into 6 parts for a total of 24 parts. In other words, `4*` means that we want to stop cycling after completing four yearly cycles. We can read `4*` out loud as "four times" because it means we intend to go through the yearly cycle "four times".
+The replication operator (`*`) is very useful for replacing repetitive values. For example, to divide any year into six parts we could use the `spread ≫5*61,60⁺>0` to create 5 "splits" that are all 61 days long and one last "split" that is `60⁺` days (60 days in a common year or 61 days in a leap year) long. The `*` helps us avoid the repetitiveness of writing `≫61,61,61,61,61,60⁺>0`. In addition to being used in the `split` and `space` of a `split spread` or the `step` of a `stepped slice`, the `*` can also be used in the `span` of a `split spread` or the `stop` of a `stepped slice` to indicate has many cycles of `splits` or `steps` we want to complete. For example, `>4*>5*61,60⁺>0` indicates that we want 4 years (the current year and the 3 subsequent years) "split" into 6 parts for a total of 24 parts. In other words, `4*` means that we want to stop cycling after completing four yearly cycles. We can read `4*` out loud as "four times" because it means we intend to go through the yearly cycle "four times".
 
 ### Percent, permil, and permyr operators {#sec-per}
 
@@ -1275,11 +1286,11 @@ We can make the `seq spread` above even shorter by using the `per` operators: `%
 
 ### Pently schedules as seq spreads, splices, and sleds {#sec-3s}
 
-We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule 5` is particularly interesting because it includes all of the days of the year. `Spreads` that include every item can be written as `>` or `<`, but `seq spreads` must have at least 5 values. The `Schedule 5` `seq spread` `≫≫.38>.24` has 4 blank values, which represent the default `start`, `span`, `split`, and `space`. Similarly, the `Schedule 4` `seq spread` `≫4≫.35>.3` has 3 blank values, which represent the default `start`, `span`, and `space`. The `Schedule 2` and `Schedule 3` `seq spreads`, `≫2>3>.2>.6` and `≫3>2>.3>.4`, respectively, only have 2 blank values, the `start` and the `span`. As an alternative to `seq spreads` and `seq slices`, we can use `slice`-`spread` hybrids called `sleds` or `spread`-`slice` hybrids called `splices`. `Sleds` put the `slice` elements first (`start:stop:step:start>span>split>space`), while `splices` start with the `spread` elements (`start>span>split>space>start:stop:step`). The `pently`schedules are easiest to write as `seq spreads` and `splices`, as shown in @tbl-sched.
+We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule 5` is particularly interesting because it includes all of the days of the year. `Spreads` that include every item can be written as `>` or `<`, but `seq spreads` must have at least 5 values. The `Schedule 5 seq spread ≫≫.38>.24` has 4 blank values, which represent the default `start`, `span`, `split`, and `space`. Similarly, the `Schedule 4 seq spread ≫4≫.35>.3` has 3 blank values, which represent the default `start`, `span`, and `space`. The `Schedule 2` and `Schedule 3 seq spreads`, `≫2>3>.2>.6` and `≫3>2>.3>.4`, respectively, only have 2 blank values, the `start` and the `span`. As an alternative to `seq spreads` and `seq slices`, we can use `slice`-`spread` hybrids called `sleds` or `spread`-`slice` hybrids called `splices`. `Sleds` put the `slice` elements first (`start:stop:step:start>span>split>space`), while `splices` start with the `spread` elements (`start>span>split>space>start:stop:step`). The `pently`schedules are easiest to write as `seq spreads` and `splices`, as shown in @tbl-sched.
 
 #### @tbl-sched
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Schedule | seq spread    | splice       | sled                | seq slice           |
 |----------|---------------|--------------|---------------------|---------------------|
 | 2        | ≫2\>3\>.2\>.6 | ≫2\>3\>.2:.8 | :365:1,4:.2\>.6     | :365:1,4:.2:.8      |
@@ -1298,7 +1309,7 @@ The `pently` schedules are important for the transition between years. In common
 
 #### @tbl-common
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Pos | Neg | Name   | Type |
 |-----|-----|--------|------|
 | 360 | -5  | Nulday | work |
@@ -1321,7 +1332,7 @@ In leap years, `Dek 36` contains the last 6 days of the current year and the fir
 
 #### @tbl-leap
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Pos | Neg | Name   | Type |
 |-----|-----|--------|------|
 | 360 | -6  | Nulday | work |
@@ -1340,11 +1351,11 @@ In leap years, `Dek 36` contains the last 6 days of the current year and the fir
 
 ## Holidays {#sec-holiday}
 
-Leap Day is a important holiday because it occurs only once every four years except for years that start centuries not divisible by 400 and it results in the only time when there are 3 consecutive restdays in `Decalendar`. Another `Decalendar` holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative `.y` format `stamps` are the same (`+183.5` and `-183.5`), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Many Gregorian calendar holidays just so happen to also fall on the first day of a `Decalendar` `pent` (`Nulday` or `Quaday`). @tbl-holiday lists 8 such holidays and their `doty`, `dotm`, and Gregorian calendar dates.
+Leap Day is a important holiday because it occurs only once every four years except for years that start centuries not divisible by 400 and it results in the only time when there are 3 consecutive restdays in `Decalendar`. Another `Decalendar` holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative `.y` format `stamps` are the same (`+183.5` and `-183.5`), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Many Gregorian calendar holidays just so happen to also fall on the first day of a `pent` (`Nulday` or `Quaday`). @tbl-holiday lists 8 such holidays and their `doty`, `dotm`, and Gregorian calendar dates.
 
 #### @tbl-holiday
 
-::: {.callout-note collapse="true" title="Click to expand" icon="false"}
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Name             | doty | dotm | date        |
 |------------------|------|------|-------------|
 | Cinco de Mayo    | 65   | 2+04 | May 5       |
