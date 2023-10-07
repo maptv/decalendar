@@ -39,10 +39,10 @@ In addition to being combined with a time zone offset as in @fig-time, a `doty` 
 #### @tbl-2x2
 
 ::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
-|      | date     | stamp         |
-|------|----------|---------------|
-| doty | 306      | 306.000Z      |
-| deco | 1969+306 | 1969+306.000Z |
+|      | date     | stamp          |
+|------|----------|----------------|
+| doty | 306      | 306.000+0      |
+| deco | 1969+306 | 1969+306.000+0 |
 
 : Comparison of `doty` and `deco` dates and `stamps` {#tbl-2x2}
 :::
@@ -73,15 +73,19 @@ In general, negative numbers show the number of parts that are left in the whole
 
 In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot -1` and `Dot 9` are synonymous `Declock` times, the former could highlight that there is only 1 tenth (⅒ or .1) of the day remaining before midnight. `Dot 5` and `Dot -5` both mean noon, like saying that a glass is half-empty or half-full.
 
+The negative equivalent of `1969+306.000`, the `deco` stamp in @fig-date and @tbl-2x2, is `1970-059.000`. This negative `deco` date literally subtracts 59 days from the beginning of year 1970 to arrive at `Day 306` of 1969. The year in negative `deco` dates is always 1 greater than the year in the equivalent positive `deco` date. Immediately after midnight, the negative `doty` will changed from -59 to -58, while the positive `doty` will remain the same. At noon, the positive `deco` date will be `1969+306.5` and the negative `deco` date will be `1970-058.5`.
+
+Both `1969+306` and `1970-059` translate to January 1, 1970 in the Gregorian calendar. The first day of `Decalendar` year 1969, , is March 1 in the Gregorian calendar. which is  and therefore  the Gregorian calendar year will match the year in the negative `deco` date, but the not the year in the positive `deco` date, in January and February.
+
 ## `Stamps` {#sec-stamp}
 
 If a `Decalender` date and a `Declock` time are combined, they form a time `stamp`. The date always goes before the time in any `stamp`. When said together, the numbers "0" and "5" mean the first `doty` (`Day 0`) at noon (`Dot 5`). In written form, this would be `000.5`. This format is called `.y`, which is read the same way as `doty`, but emphasizes that the `.` is used in a floating point decimal `doty`. In other words, `doty` can be used instead of "day of the year" in a sentence, whereas `.y` indicates a `stamp`, such as `000.5`. Ideally, a `stamp` will include all of the information needed to identify a singular point in time, and thus should include a year and time zone.
 
 ## Specific dates and times {#sec-specific}
 
-The `stamp` in @sec-stamp assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The first `doty` of 1969, would be written `1969+000` and said "Year 1969 Day 0" or simply "1969 0", while midnight in `Zone 0` would be written `.000+0` and said "Dot 0 Zone 0", "0 Zone 0", or "0 0". Combined together, this date and time form the `stamp 1969+000.000+0`.
+The `stamp` in @sec-stamp assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The `Day 306` of 1969, would be written `1969+306` and said "Year 1969 Day 306" or simply "1969 306", while midnight in `Zone 0` would be written `.000+0` and said "Dot 0 Zone 0", "0 Zone 0", or "0 0". Combined together, this date and time form the `stamp 1969+306.000+0`.
 
-# Units {#sec-unit}
+## Units {#sec-unit}
 
 The `stamp` in @sec-specific use three digits for the times because is the best level of precision for displaying time on clocks and watches. While 3 digits are often best, `Declock` times can have any number of digits, depending on the desired precision level. `Declock` provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both `Declock` and `Decalendar`. Listing the units of each, as in @tbl-unit, highlights the relationship between the two:
 
@@ -155,6 +159,58 @@ Of the units discussed above, `dimes` are notable, because they are the units of
 If we decide to prioritize the amount of sunlight at `Dot 5` over simplicity and ease of conversion, we could convert degrees of longitude into `cents` or `mils`, instead of converting hours into `dimes`. For example, we could say that Mexico City is in `Zone -275` instead of `Zone -3`, because the longitude of Mexico City is 99 degrees West, which translates to an offset of -275 `mils` ($mils = degrees \div .36$). Essentially, we could create as many additional `Declock` time zones are desired simply by adding digits to the end of each time zone. Adding one digit yields 110 double-digit `cent` time zones, adding two digits creates 1100 triple-digit `mil` time zones, and so on.
 
 # Related systems {#sec-related}
+
+## French Republican calendar {#sec-frc}
+
+### French Republican calendar *décades* {#sec-frcd}
+
+The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a *décade*, while a group of 10 days in `Decalendar` is called a `dek`. The names of the days in a `dek` are derived from their [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) cardinal numbers (zero, one, two...), whereas the days of the *décade* are named after their ordinal numbers (first, second, third...). In both cases, the names are based on Roman and Greek [numeral prefixes](https://en.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English). @tbl-dotd provides the cardinal numbers, one-letter codes, names, and types of the days of the `dek` as well as the names of their French Republican calendar equivalents.
+
+#### @tbl-dotd
+
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
+| \#  | Code | Name   | Type | French     |
+|-----|------|--------|------|------------|
+| 0   | N    | Nulday | work | *primidi*  |
+| 1   | U    | Unoday | work | *duodi*    |
+| 2   | D    | Duoday | work | *tridi*    |
+| 3   | T    | Triday | rest | *quartidi* |
+| 4   | Q    | Quaday | rest | *quintidi* |
+| 5   | P    | Penday | work | *sextidi*  |
+| 6   | H    | Hexday | work | *septidi*  |
+| 7   | S    | Sepday | work | *octidi*   |
+| 8   | O    | Octday | rest | *nonidi*   |
+| 9   | E    | Ennday | rest | *décadi*   |
+
+: The days of the `dek` and their French Republican calendar equivalents {#tbl-dotd}
+:::
+
+### French Republican calendar time {#sec-frct}
+
+The French Republican calendar and `Declock` both break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, *décimes*, and decimal seconds, respectively. @tbl-dime shows the start times of each `dime` (⅒) in a day and its equivalent in 24-hour and 12-hour standard time.
+
+#### @tbl-dime
+
+::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
+| ⅒   | 24-hour | 12-hour |
+|-----|---------|---------|
+| 0   | 00:00   | 12:00AM |
+| 1   | 02:24   | 2:24AM  |
+| 2   | 04:48   | 4:48AM  |
+| 3   | 07:12   | 7:12AM  |
+| 4   | 09:36   | 9:36AM  |
+| 5   | 12:00   | 12:00PM |
+| 6   | 14:24   | 2:24PM  |
+| 7   | 16:48   | 4:48PM  |
+| 8   | 19:12   | 7:12PM  |
+| 9   | 21:36   | 9:36PM  |
+
+: The `dimes` in a day and their standard time equivalents {#tbl-dime}
+:::
+
+## Swatch Internet Time {#sec-sit}
+
+[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, [UTC+1](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC+01:00,_A), limiting its utility outside of Central Europe or West Africa. `Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits. More information on `Declock` time zones can be found in @sec-zone.
 
 ## Gregorian calendar {#sec-greg}
 
@@ -479,7 +535,7 @@ doty2year()
 
 ### Leap years {#sec-gregl}
 
-The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions Leap Day, `Day 365` in `Decalendar` and February 29 in the Gregorian calendar, at the end of the year. `Decalendar` leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with the [`leap_year`](http://howardhinnant.github.io/date_algorithms.html#is_leap) algorithm as described by [@hinnant2014] and shown in @eq-gregl and @exm-gregl.
+The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions Leap Day, `Day 365` in `Decalendar` and February 29 in the Gregorian calendar, at the end of the year. `Decalendar` leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with an [`algorithm`](http://howardhinnant.github.io/date_algorithms.html#is_leap) described by [@hinnant2014] and shown in @eq-gregl. In @exm-gregl, this algorithm is called `year2bool` to highlight that its input is a year and its output is a boolean (true or false).
 
 $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
@@ -492,11 +548,11 @@ $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
 ```{javascript}
 #| tags: [leap]
-function leap_year(year = 1970) {
+function year2bool(year = 1970) {
     return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 }
 
-leap_year()
+year2bool()
 ```
 
 #### Julia
@@ -505,11 +561,11 @@ leap_year()
 
 ```{julia}
 #| tags: [leap]
-function leap_year(year=1970)
+function year2bool(year=1970)
     year % 4 == 0 && year % 100 != 0 || year % 400 == 0
 end
 
-leap_year()
+year2bool()
 ```
 
 #### Python
@@ -518,10 +574,10 @@ leap_year()
 
 ```{python}
 #| tags: [leap]
-def leap_year(year=1970):
+def year2bool(year=1970):
     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
 
-leap_year()
+year2bool()
 ```
 
 #### R
@@ -530,11 +586,11 @@ leap_year()
 
 ```{r}
 #| tags: [leap]
-leap_year <- function(year = 1970) {
+year2bool <- function(year = 1970) {
     year %% 4 == 0 & year %% 100 != 0 | year %% 400 == 0
 }
 
-leap_year()
+year2bool()
 ```
 
 :::
@@ -543,17 +599,17 @@ leap_year()
 
 ### Years {#sec-isoy}
 
-Both `Decalendar` and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. As shown in @tbl-2x2, `Decalendar deco` dates include years while `doty` dates do not. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
+Both `Decalendar` and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. As shown in @tbl-2x2, `Decalendar deco` dates include years while `doty` dates do not. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is called the `Decalendar` epoch and translates to March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
 
 ### Ordinal dates {#sec-isoo}
 
 `Deco` dates (`year+day`) are very similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar doty` numbers, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
 
-In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers, while the `isoo2year` and `doty2year` functions adjust the year if necessary. We use the `leap_year` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. To be clear, we only have to take Leap Day into account when dealing with `isoo` dates. `Decalendar doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
+In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers. We use the `year2bool` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. To be clear, we only have to take Leap Day into account when dealing with `isoo` dates. `Decalendar doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
 
-$$(isoordinal + 305 - isleap(year)) \mod 365$$ {#eq-isoo1}
+$$(isoordinal + 305 - year2bool(year)) \mod 365$$ {#eq-isoo1}
 
-$$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
+$$(doty + 60 + year2bool(year + 1)) \mod 365$$ {#eq-isoo2}
 
 ::: {#exm-isoo}
 :::
@@ -566,8 +622,8 @@ $$(doty + 60 + isleap(year + 1)) \mod 365$$ {#eq-isoo2}
 #| tags: [isoo2doty]
 function isoo2doty(yd = "1970-001") {
     const [year, day] = yd.includes("-") ? yd.split("-") : yd.split(/(?=\d{4})/);
-    return [parseInt(year) - (parseInt(day) < (60 + leap_year(year - 1))),
-        (parseInt(day) + 305 - leap_year(year)) % 365]
+    return [parseInt(year) - (parseInt(day) < (60 + year2bool(year - 1))),
+        (parseInt(day) + 305 - year2bool(year)) % 365]
 }
 
 console.log(isoo2doty())
@@ -591,7 +647,7 @@ console.log(isoo2deco())
 #| tags: [doty2isoo]
 function doty2isoo(year = 1969, doty = 306) {
     return `${doty2year(year, doty).toString().padStart(4, "0")}-${
-    ((doty + 60 + leap_year(year + 1)) % 365).toString().padStart(3, "0")}`
+    ((doty + 60 + year2bool(year + 1)) % 365).toString().padStart(3, "0")}`
 }
 
 console.log(doty2isoo());
@@ -604,7 +660,7 @@ console.log(doty2isoo());
 ```{julia}
 #| tags: [isoo2doty]
 function isoo2year(yd="1970-001")
-    year - (day < (60 + leap_year(year - 1)))
+    year - (day < (60 + year2bool(year - 1)))
 end
 
 isoo2year()
@@ -615,7 +671,7 @@ isoo2year()
 ```{julia}
 #| tags: [isoo2doty]
 function isoo2doty(year=1970, day=1)
-    (day + 305 - leap_year(year)) % 365
+    (day + 305 - year2bool(year)) % 365
 end
 
 "$(lpad(isoo2year(), 4, '0'))+$(lpad(isoo2doty(), 3, '0'))"
@@ -626,7 +682,7 @@ end
 ```{julia}
 #| tags: [doty2isoo]
 function doty2isoo(year=1970, doty=0)
-    (doty + 60 + leap_year(year + 1)) % 365
+    (doty + 60 + year2bool(year + 1)) % 365
 end
 
 "$(lpad(doty2year(), 4, '0'))+$(lpad(doty2isoo(), 3, '0'))"
@@ -639,7 +695,7 @@ end
 ```{python}
 #| tags: [isoo2year]
 def isoo2year(year=1970, day=1):
-    return year - (day < (60 + leap_year(year - 1)))
+    return year - (day < (60 + year2bool(year - 1)))
 
 isoo2year()
 ```
@@ -649,7 +705,7 @@ isoo2year()
 ```{python}
 #| tags: [isoo2doty]
 def isoo2doty(year=1970, day=1):
-    return (day + 305 - leap_year(year)) % 365
+    return (day + 305 - year2bool(year)) % 365
 
 f"{isoo2year():>04}+{isoo2doty():>03}"
 ```
@@ -659,7 +715,7 @@ f"{isoo2year():>04}+{isoo2doty():>03}"
 ```{python}
 #| tags: [doty2isoo]
 def doty2isoo(year=1970, doty=0):
-    return (doty + 60 + leap_year(year + 1)) % 365
+    return (doty + 60 + year2bool(year + 1)) % 365
 
 f"{doty2year():>04}+{doty2isoo():>03}"
 ```
@@ -671,7 +727,7 @@ f"{doty2year():>04}+{doty2isoo():>03}"
 ```{r}
 #| tags: [isoo2year]
 isoo2year <- function(year = 1970, day = 1) {
-    year - (day < (60 + leap_year(year - 1)))
+    year - (day < (60 + year2bool(year - 1)))
 }
 
 isoo2year()
@@ -682,7 +738,7 @@ isoo2year()
 ```{r}
 #| tags: [isoo2doty]
 isoo2doty <- function(year = 1970, day = 1) {
-    (day + 305 - leap_year(year)) %% 365
+    (day + 305 - year2bool(year)) %% 365
 }
 
 paste0(sprintf("%04d", isoo2year()), "+", sprintf("%03d", isoo2doty()))
@@ -693,7 +749,7 @@ paste0(sprintf("%04d", isoo2year()), "+", sprintf("%03d", isoo2doty()))
 ```{r}
 #| tags: [doty2isoo]
 doty2isoo <- function(year = 1970, doty = 0) {
-    (doty + 60 + leap_year(year + 1)) %% 365
+    (doty + 60 + year2bool(year + 1)) %% 365
 }
 
 paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))
@@ -1293,63 +1349,23 @@ import pandas as pd
 pd.date_range("1970", "1971", freq="6H")[-4:-1]
 ```
 
-## French Republican calendar {#sec-frc}
-
-### French Republican calendar *décades* {#sec-frcd}
-
-The [French Republican calendar](https://en.wikipedia.org/wiki/French_Republican_calendar) and `Decalendar` both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a *décade*, while a group of 10 days in `Decalendar` is called a `dek`. The names of the days in a `dek` are derived from their [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) cardinal numbers (zero, one, two...), whereas the days of the *décade* are named after their ordinal numbers (first, second, third...). @tbl-dotd provides the cardinal numbers, one-letter codes, names, and types of the days of the `dek` as well as the names of their French Republican calendar equivalents.
-
-#### @tbl-dotd
-
-::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
-| \#  | Code | Name   | Type | French   |
-|-----|------|--------|------|----------|
-| 0   | N    | Nulday | work | primidi  |
-| 1   | U    | Unoday | work | duodi    |
-| 2   | D    | Duoday | work | tridi    |
-| 3   | T    | Triday | rest | quartidi |
-| 4   | Q    | Quaday | rest | quintidi |
-| 5   | P    | Penday | work | sextidi  |
-| 6   | H    | Hexday | work | septidi  |
-| 7   | S    | Sepday | work | octidi   |
-| 8   | O    | Octday | rest | nonidi   |
-| 9   | E    | Ennday | rest | décadi   |
-
-: The days of the `dek` and their French Republican calendar equivalents {#tbl-dotd}
-:::
-
-### French Republican calendar time {#sec-frct}
-
-The French Republican calendar and `Declock` both break the day down into decimal portions. In `Declock`, a `dime` is a tenth (⅒) of a day, a `cent` is a hundredth (10⁻²) of a day, a `mil` is a thousandth (10⁻³) of a day, and a `beat` is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, *décimes*, and decimal seconds, respectively. @tbl-dime shows the start times of each `dime` (⅒) in a day and their equivalents in 24-hour and 12-hour standard time.
-
-#### @tbl-dime
-
-::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
-| ⅒   | 24-hour | 12-hour |
-|-----|---------|---------|
-| 0   | 00:00   | 12:00AM |
-| 1   | 02:24   | 2:24AM  |
-| 2   | 04:48   | 4:48AM  |
-| 3   | 07:12   | 7:12AM  |
-| 4   | 09:36   | 9:36AM  |
-| 5   | 12:00   | 12:00PM |
-| 6   | 14:24   | 2:24PM  |
-| 7   | 16:48   | 4:48PM  |
-| 8   | 19:12   | 7:12PM  |
-| 9   | 21:36   | 9:36PM  |
-
-: The start times of each `dime` in a day and their standard time equivalents {#tbl-dime}
-:::
-
-## Swatch Internet Time {#sec-sit}
-
-[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, [UTC+1](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC+01:00,_A), limiting its utility outside of Central Europe or West Africa. `Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits. More information on `Declock` time zones can be found in @sec-zone.
-
 ## Julian dates {#sec-jd}
 
-Julian dates are the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. Julian days start at noon, whereas `Decalendar` days, and some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants), start at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we subtract the Julian day number ($\lfloor JD \rfloor$) from the Julian date ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 as shown in @eq-jd.
+ Julian dates The `Decalendar` day-of-the-era (`dote`) dates are analogous to. Both track the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since a starting point called an epoch. The Julian date epoch is `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. The `Decalendar` epoch is `0000+000.0`, which is midnight on March 1, 1 BC in the Gregorian calendar.
+
+Like Julian dates, `Decalendar dote` dates are very useful for date and time calculations that span more than one year. If we want to find the number of fractional days in between two dates, we first convert both dates into `dotes` and subtract the earlier `dote` from the later `dote`. @eq-dote shows how a year and a `doty` can be turned into a `dote`. To convert a `dote` back into a year and `doty`
+
+$$dote = \lfloor doty + (365 \cdot year + \frac{year}{4} - \frac{year}{100} + \frac{year}{400}) \rfloor$$ {#eq-dote}
+
+$$dote - doty = \lfloor (365 \cdot year + \frac{year}{4} - \frac{year}{100} + \frac{year}{400}) \rfloor$$ {#eq-dote}
+
+$$year = \lfloor \frac{doe - \frac{doe}{1460} + \frac{doe}{36524} - \frac{doe}{146096}}{365} \rfloor + era * 400$$ {#eq-year}
+
+Like `Decalendar`, some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants) start the day at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we subtract the Julian day number ($\lfloor JD \rfloor$) from the Julian date ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 as shown in @eq-jd.
 
 $$time = (JD - \lfloor JD \rfloor + .5) \mod 1$$ {#eq-jd}
+
+Bo that tracks the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since 
 
 ## UNIX time {#sec-unix}
 
@@ -1361,15 +1377,15 @@ $$unix = (JD − 2440587.5) \cdot 86400$$ {#eq-unixj}
 
 ### UNIX time conversion to `deco` date {#sec-unixd}
 
-To calculate `deco` dates directly from UNIX time, we can use a calculation adapted the 2014 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) by [Howard Hinnant](https://howardhinnant.github.io/) [-@hinnant2014]. Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-era` (@eq-doe), `year` (@eq-year), and `doty` (@eq-doty).
+To calculate `deco` dates directly from UNIX time, we can use a calculation adapted the 2014 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) by [Howard Hinnant](https://howardhinnant.github.io/) [-@hinnant2014]. Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-the-era` (@eq-dote), `year` (@eq-year), and `doty` (@eq-doty).
 
 $$era = \frac{\begin{cases}days&{\text{if } days \geq 0;}\\days-146096&{\text{otherwise.}}\end{cases}}{146097}$$ {#eq-era}
 
-$$doe = days - era \cdot 146097$$ {#eq-doe}
+$$dote = days - era \cdot 146097$$ {#eq-dote}
 
-$$year = \lfloor \frac{doe - \frac{doe}{1460} + \frac{doe}{36524} - \frac{doe}{146096}}{365} \rfloor + era * 400$$ {#eq-year}
+$$year = \lfloor \frac{dote - \frac{dote}{1460} + \frac{dote}{36524} - \frac{dote}{146096}}{365} \rfloor + era * 400$$ {#eq-year}
 
-$$doty = \lfloor doe - (365 \cdot year + \frac{year}{4} - \frac{year}{100} + \frac{year}{400}) \rfloor$$ {#eq-doty}
+$$doty = \lfloor dote - (365 \cdot year + \frac{year}{4} - \frac{year}{100} + \frac{year}{400}) \rfloor$$ {#eq-doty}
 
 ### UNIX time conversion to `Decalendar` timestamp {#sec-unixt}
 
@@ -1391,8 +1407,8 @@ y \mod 4 = 0 \\
 #| tags: [unix2doty]
 function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
-        doe = days - (era = Math.floor((days >= 0 ? days : days - 146096) / 146097)) * 146097,
-        year = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365) + era * 400;
+        dote = days - (era = Math.floor((days >= 0 ? days : days - 146096) / 146097)) * 146097,
+        year = Math.floor((dote - dote / 1460 + dote / 36524 - dote / 146096) / 365) + era * 400;
     return [year, days - Math.floor(year * 365 + year / 4 - year / 100 + year / 400)];
 }
 
@@ -1414,8 +1430,8 @@ console.log(
 #| tags: [unix2doty]
 function unix2doty(s=0, ms=0)
     days = s / 86400 + ms / 86400000 + 719468
-    doe = days - (era = floor((days >= 0 ? days : days - 146096) / 146097)) * 146097
-    year = Int(floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365) + era * 400)
+    dote = days - (era = floor((days >= 0 ? days : days - 146096) / 146097)) * 146097
+    year = Int(floor((dote - dote / 1460 + dote / 36524 - dote / 146096) / 365) + era * 400)
     year, days - floor(year * 365 + year / 4 - year / 100 + year / 400)
 end
 
@@ -1434,8 +1450,8 @@ from time import time
 
 def unix2doty(s=0, ms=0):
     days = s / 86400 + ms / 86400000 + 719468
-    doe = days - (era := (days if days >= 0 else days - 146096) // 146097) * 146097
-    year = int((doe - doe / 1460 + doe / 36524 - doe / 146096) // 365 + era * 400)
+    dote = days - (era := (days if days >= 0 else days - 146096) // 146097) * 146097
+    year = int((dote - dote / 1460 + dote / 36524 - dote / 146096) // 365 + era * 400)
     return year, days - (year * 365 + year / 4 - year / 100 + year / 400).__floor__()
 
 y, d = unix2doty(time())
@@ -1450,8 +1466,8 @@ f"{y:>04}+{(day := d.__floor__()):>03}.{round((d - day) * 1e5):>05}+0"
 #| tags: [unix2doty]
 unix2doty <- function(s = 0, ms = 0) {
     days = s / 86400 + ms / 86400000 + 719468
-    doe = days - (era = floor(ifelse(days >= 0, days, days - 146096) / 146097)) * 146097
-    year = floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365) + era * 400
+    dote = days - (era = floor(ifelse(days >= 0, days, days - 146096) / 146097)) * 146097
+    year = floor((dote - dote / 1460 + dote / 36524 - dote / 146096) / 365) + era * 400
     c(year, days - floor(year * 365 + year / 4 - year / 100 + year / 400))
 }
 
@@ -1469,8 +1485,8 @@ paste0(sprintf("%04d", yd[1]), "+",
 function unix2doty(ms)
     local days = ms / 86400000 + 719468
     local era = (days >= 0 and days or days - 146096) // 146097
-    local doe = days - era * 146097
-    local year = math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365) + era * 400
+    local dote = days - era * 146097
+    local year = math.floor((dote - dote / 1460 + dote / 36524 - dote / 146096) / 365) + era * 400
     return math.floor(year), days - math.floor(year * 365 + year / 4 - year / 100 + year / 400)
 end
 
@@ -1492,8 +1508,8 @@ print(unix2deco(0))
 copyq:
 function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
-        doe = days - (era = Math.floor((days >= 0 ? days : days - 146096) / 146097)) * 146097,
-        year = Math.floor((doe - doe / 1460 + doe / 36524 - doe / 146096) / 365) + era * 400;
+        dote = days - (era = Math.floor((days >= 0 ? days : days - 146096) / 146097)) * 146097,
+        year = Math.floor((dote - dote / 1460 + dote / 36524 - dote / 146096) / 365) + era * 400;
     return [year, days - Math.floor(year * 365 + year / 4 - year / 100 + year / 400)];
 }
 

@@ -324,7 +324,7 @@ div.csl-indent {
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">1</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-06T23:23:08.327767Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-06T23:23:08.327673Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-06T23:23:08.649811Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-06T23:23:08.649556Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
+</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-06T23:25:46.040352Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-06T23:25:46.040265Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-06T23:25:46.364640Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-06T23:25:46.364379Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-schedules-1" class="quarto-figure quarto-figure-center anchored">
@@ -3408,7 +3408,7 @@ y \mod 4 = 0 \\
 <span id="cb119-12"><a href="#cb119-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span></span>
 <span id="cb119-13"><a href="#cb119-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>2023+219.97447+0</code></pre>
+<pre><code>2023+219.97630+0</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-71" href="decalendar_javascript.ipynb.html">Source: decalendar_javascript.ipynb</a></div>
@@ -3451,7 +3451,7 @@ y \mod 4 = 0 \\
 <span id="cb123-9"><a href="#cb123-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> unix2doty(time())</span>
 <span id="cb123-10"><a href="#cb123-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+219.97467+0'</code></pre>
+<pre><code>'2023+219.97650+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-73" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -3475,7 +3475,7 @@ y \mod 4 = 0 \\
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+219.97477+0'
+'2023+219.97660+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-74" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3582,7 +3582,7 @@ y \mod 4 = 0 \\
 <span id="cb133-6"><a href="#cb133-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb133-7"><a href="#cb133-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+219.97467+0'</code></pre>
+<pre><code>'2023+219.97650+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-77" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -5369,7 +5369,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb138-11"><a href="#cb138-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-12"><a href="#cb138-12" aria-hidden="true" tabindex="-1"></a>@fig-doty shows the components of the <span class="in">`doty`</span> number that corresponds to midnight on January 1st in the Gregorian calendar. The first two <span class="co">[</span><span class="ot">digits</span><span class="co">](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values)</span> (hundreds and tens) of the <span class="in">`doty`</span> are the <span class="in">`dek`</span> number (30 in @fig-doty). <span class="in">`Deks`</span> are groups of 10 days that fulfill the role of both months and weeks in <span class="in">`Decalendar`</span>. The next digit (ones) of the <span class="in">`doty`</span> number is the day-of-the-<span class="in">`dek`</span> (<span class="in">`dotd`</span>) number (6 in @fig-doty), which serves as both the day-of-the-month (<span class="in">`dotm`</span>) and the day-of-the-week (<span class="in">`dotw`</span>) in <span class="in">`Decalendar`</span>. Gregorian calendar dates require us to look up the day of the week, while the <span class="in">`doty`</span> contains all of the analogous information for <span class="in">`Decalendar`</span> in its first 3 digits (hundreds, tens, and ones).</span>
 <span id="cb138-13"><a href="#cb138-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-14"><a href="#cb138-14" aria-hidden="true" tabindex="-1"></a><span class="al">![The components of a day-of-the-year (`doty`)](fig-doty.png)</span>{#fig-doty fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'."}</span>
+<span id="cb138-14"><a href="#cb138-14" aria-hidden="true" tabindex="-1"></a><span class="al">![The components of a day-of-the-year (`doty`)](fig-doty.png)</span>{#fig-doty fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'." fig-align="center"}</span>
 <span id="cb138-15"><a href="#cb138-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-16"><a href="#cb138-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Deks {#sec-summary-dek}</span></span>
 <span id="cb138-17"><a href="#cb138-17" aria-hidden="true" tabindex="-1"></a></span>

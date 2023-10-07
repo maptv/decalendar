@@ -97,6 +97,8 @@ function leap_year(y) {
     return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
 
+console.log(leap_year(1972))
+
 function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
         era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
@@ -492,3 +494,57 @@ function isoo2deco(yd = "1970-001") {
 }
 
 console.log(isoo2deco())
+
+
+function doty2dote(year = 1969, doty=306) {
+    return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
+}
+
+console.log(doty2dote(1969, -10.1))
+
+// function dote2doty(days = 719468) {
+//     const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+//         dotc = days - era * 146097,
+//         year = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365) + era * 400;
+//     return [year, days - (year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400))];
+// }
+
+function dote2doty(days = 719468) {
+    const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        dotc = days - era * 146097,
+        yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
+    return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
+}
+
+console.log(dote2doty(730485))
+console.log(dote2doty(730849))
+console.log(dote2doty(719468))
+console.log(dote2doty(719468.9))
+console.log(dote2doty(doty2dote(1970, -363.5)))
+console.log(dote2doty(doty2dote(1970, 0.5)))
+console.log(dote2doty(doty2dote(1971, -364.5)))
+
+
+// function dote2doty(days = 719468) {
+//     const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+//         doe = days - era * 146097,
+//         yoe = Math.floor((doe - Math.floor(doe/1460) + Math.floor(doe/36524) - Math.floor(doe/146096)) / 365),
+//         year = yoe + era * 400,
+//         doy = doe - (365*yoe + Math.floor(yoe/4) - Math.floor(yoe/100));
+//     return [year, doy, era, doe, yoe];
+// }
+
+console.log(dote2doty(730485))
+console.log(dote2doty(719526))
+console.log(dote2doty(719891))
+console.log(dote2doty(720258))
+console.log(dote2doty(720623))
+console.log(dote2doty())
+
+function unix2doty(ms = 0) {
+    const days = ms / 86400000 + 719468;
+    return dote2doty(days)
+}
+
+console.log(unix2doty(Date.now()))
+console.log(unix2doty(5161600000))

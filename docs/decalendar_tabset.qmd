@@ -11,7 +11,7 @@ author: Martin Laptev
 
 @fig-doty shows the components of the `doty` number that corresponds to midnight on January 1st in the Gregorian calendar. The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
 
-![The components of a day-of-the-year (`doty`)](fig-doty.png){#fig-doty fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'."}
+![The components of a day-of-the-year (`doty`)](fig-doty.png){#fig-doty fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'." fig-align="center"}
 
 ## Deks {#sec-summary-dek}
 
