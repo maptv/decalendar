@@ -537,7 +537,7 @@ doty2year()
 
 A leap year has 366 days in both `Decalendar` and the Gregorian calendar. `Day 365` is Leap Day in `Decalendar` and is synonymous with February 29, the Gregorian calendar leap day. `Decalendar` positions Leap Day, `Day 365`, at the end of the year, which requires an adjustment of the Gregorian calendar definition of a leap year. To check if a `Decalendar` year is a leap, we must first add 1 to the year before plugging it into @eq-gregl or the [`year2bool`](http://howardhinnant.github.io/date_algorithms.html#is_leap) function in @exm-gregl [@hinnant2014].
 
-Interestingly, years from negative `deco` dates do not need any adjustment. The last day of `Year 1999` is `1999+365` or `2000-001` in `Decalendar` and February 29, 2000 in the Gregorian calendar. `Year 1999` is a leap year from the perspective of the positive `deco` date, because it's . The first day of `Year 1999` is `1999+000` or `2000-366` in `Decalendar` and March 1, 1999 in the Gregorian calendar. `Year 2000` is thus a leap year from the point-of-view  of the negative `deco` date, because pthe negative `deco` date and the while `Year 2000` is the leap year from the of the Gregorian calendar date. 
+Interestingly, years from negative `deco` dates do not need any adjustment. The first day of `Year 1999` is `1999+000` or `2000-366`, while the last day is `1999+365` or `2000-001`. `Year 1999` is a leap year from the perspective of the positive `deco` dates, `1999+000` and `1999+365`, because it goes from `Day 0` to `Day 365`. In the context of the negative `deco` dates,`2000-366` and `2000-001`, `Year 2000` is a leap year because it goes from `Day -366` to `Day -1`.
 
 $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 

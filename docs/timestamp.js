@@ -551,3 +551,20 @@ function unix2doty(ms = 0) {
 
 console.log(unix2doty(Date.now()))
 console.log(unix2doty(5161600000))
+
+
+function greg2doty(month = 1, day = 1) {
+    return Math.floor(
+        (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
+)}
+
+console.log(greg2doty())
+
+function doty2greg(doty = 306) {
+    const m = Math.floor((5 * doty + 2) / 153);
+    return [Math.floor(m < 10 ? m + 3 : m - 9), Math.floor(doty - (153 * m + 2) / 5 + 2)];
+}
+
+console.log(doty2greg())
+
+console.log(greg2doty(doty2greg(123)))
