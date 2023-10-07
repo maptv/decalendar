@@ -111,9 +111,8 @@ console.log(unix2doty(Date.now()))
 const [year, doty] = unix2doty(Date.now());
 console.log(doty)
 console.log(
-    `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${
-    (Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
-    );
+    `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
+);
 
 function leaps(year) {
     return Math.floor(year / 4 - year / 100 + year / 400)
@@ -472,9 +471,7 @@ console.log(new Date(Date.parse("2023-01-01T12:00")))
 
 function unix2deco(ms = 0) {
     const [year, doty] = unix2doty(ms);
-    return `${year.toString().padStart(4, "0")}+${
-        (day = Math.floor(doty)).toString().padStart(3, "0")}.${
-        (Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
+    return `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
 };
 
 console.log(unix2deco())
@@ -482,25 +479,25 @@ console.log(unix2deco())
 function isoo2doty(yd = "1970-001") {
     const [year, day] = yd.includes("-") ? yd.split("-") : yd.split(/(?=\d{4})/);
     return [parseInt(year) - (parseInt(day) < (60 + leap_year(year - 1))),
-        (parseInt(day) + 305 - leap_year(year)) % 365]
+    (parseInt(day) + 305 - leap_year(year)) % 365]
 }
 
 console.log(isoo2doty())
 
 function isoo2deco(yd = "1970-001") {
     const [year, doty] = isoo2doty(yd)
-    return `${year.toString().padStart(4, "0")}+${
-        doty.toString().padStart(3, "0")}`
+    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}`
 }
 
 console.log(isoo2deco())
 
 
-function doty2dote(year = 1969, doty=306) {
+function doty2dote(year = 1969, doty = 306) {
     return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
 }
 
 console.log(doty2dote(1969, -10.1))
+console.log(doty2dote())
 
 // function dote2doty(days = 719468) {
 //     const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
@@ -509,6 +506,7 @@ console.log(doty2dote(1969, -10.1))
 //     return [year, days - (year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400))];
 // }
 
+console.log(2440587.5 - 719468)
 function dote2doty(days = 719468) {
     const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         dotc = days - era * 146097,
@@ -516,12 +514,17 @@ function dote2doty(days = 719468) {
     return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
 }
 
+console.log(dote2doty(2440587.5 - 719468))
+console.log(dote2doty(-1721120.5))
 console.log(dote2doty(730485))
 console.log(dote2doty(730849))
 console.log(dote2doty(719468))
 console.log(dote2doty(719468.9))
-console.log(dote2doty(doty2dote(1970, -363.5)))
-console.log(dote2doty(doty2dote(1970, 0.5)))
+console.log(dote2doty(doty2dote(2000, -366)))
+console.log(dote2doty(doty2dote(1999, 0)))
+console.log(dote2doty(doty2dote(2000, -1)))
+console.log(dote2doty(doty2dote(1999, 365)))
+console.log(dote2doty(doty2dote(1971, -364.5)))
 console.log(dote2doty(doty2dote(1971, -364.5)))
 
 

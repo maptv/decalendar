@@ -535,7 +535,9 @@ doty2year()
 
 ### Leap years {#sec-gregl}
 
-The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 positions Leap Day, `Day 365` in `Decalendar` and February 29 in the Gregorian calendar, at the end of the year. `Decalendar` leap years therefore occur one year earlier than Gregorian calendar leap years. To check if a year is a `Decalendar` leap year, we add 1 to the year and proceed with an [`algorithm`](http://howardhinnant.github.io/date_algorithms.html#is_leap) described by [@hinnant2014] and shown in @eq-gregl. In @exm-gregl, this algorithm is called `year2bool` to highlight that its input is a year and its output is a boolean (true or false).
+A leap year has 366 days in both `Decalendar` and the Gregorian calendar. `Day 365` is Leap Day in `Decalendar` and is synonymous with February 29, the Gregorian calendar leap day. `Decalendar` positions Leap Day, `Day 365`, at the end of the year, which requires an adjustment of the Gregorian calendar definition of a leap year. To check if a `Decalendar` year is a leap, we must first add 1 to the year before plugging it into @eq-gregl or the [`year2bool`](http://howardhinnant.github.io/date_algorithms.html#is_leap) function in @exm-gregl [@hinnant2014].
+
+Interestingly, years from negative `deco` dates do not need any adjustment. The first day of the `Decalendar` year, `Day 0`, is March 1 in the Gregorian calendar. Starting the year on March 1 The last day of `Year 1999` is `1999+365` or `2000-001` in `Decalendar` and February 29, 2000 in the Gregorian calendar. `Year 1999` is thus a leap year from the perspective of the positive `deco` date, while `Year 2000` is the leap year from the point-of-view of the negative `deco` date and the Gregorian calendar date.
 
 $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
@@ -1337,7 +1339,7 @@ ISO 8601 specifies three methods of unequivocally representing [time intervals](
 
 ISO 8601 time intervals can be made to repeat with the `Rn/` prefix (`Rn/start/stop`, `Rn/start/span`, `Rn/span/stop`), where `n` is the number of repetitions. Such [repeating time intervals](https://en.wikipedia.org/wiki/ISO_8601#Repeating_intervals) are always consecutive and never overlap. The first three 6-hour intervals of 1970 could be written `R3/1970-01-01T00:00:00Z/T06` as per ISO 8601. This time interval in `Decalendar` could be written `1969+306>.75>.25>0`. Unlike ISO 8601, `Decalendar` allows for the creation of non-consecutive and overlapping recurring intervals. If we wanted to include 3-hour breaks in between the three 6-hour intervals, we could write `1969+306>1>.25>.125`. Similarly, the three 6-hour intervals could be made to overlap by 3 hours by writing `1969+306>.5>.25<.125`.
 
-The `Decalendar` time interval representations above are called `spreads` and were inspired by the concept of [array slicing](https://en.wikipedia.org/wiki/Array_slicing) from computer programming. `Decalendar` allows for the use of both `slices` (`start:stop:step`) and `spreads` (`start>span>split>space`) to create time intervals. [Slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/). The pandas code shown in @exm-isor uses slicing to obtain the start times of the last three 6-hour intervals in 1970, which is `1970+305>.75>.25>0` in `Decalendar` and `R3/1970-12-31T06:00:00Z/T06` as per ISO 8601.
+The `Decalendar` time interval representations above are called `spreads` and were inspired by the concept of [array slicing](https://en.wikipedia.org/wiki/Array_slicing) from computer programming. `Decalendar` allows for the use of both `slices` (`start:stop:step`) and `spreads` (`start>span>split>space`) to create time intervals. [Slicing of dates and times](https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/timeseries.html#indexing) is fully implemented in the [Pandas Python library](https://pandas.pydata.org/). The pandas code shown in @exm-isor uses slicing to obtain the start times of the last three 6-hour intervals in Gregorian calendar year 1970, which is `1970+305>.75>.25>0` in `Decalendar` and `R3/1970-12-31T06:00:00Z/T06` as per ISO 8601.
 
 ::: {#exm-isor}
 :::
@@ -1351,41 +1353,108 @@ pd.date_range("1970", "1971", freq="6H")[-4:-1]
 
 ## Julian dates {#sec-jd}
 
- Julian dates The `Decalendar` day-of-the-era (`dote`) dates are analogous to. Both track the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since a starting point called an epoch. The Julian date epoch is `-4713+327.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. The `Decalendar` epoch is `0000+000.0`, which is midnight on March 1, 1 BC in the Gregorian calendar.
+A [Julian date](https://en.wikipedia.org/wiki/Julian_day#:~:text=The%20Julian%20date%20(JD)%20of%20any%20instant%20is%20the%20Julian%20day%20number%20plus%20the%20fraction%20of%20a%20day%20since%20the%20preceding%20noon%20in%20Universal%20Time.) is the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+268.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. The analogous date format in `Decalendar` is the day-of-the-[era](https://en.wikipedia.org/wiki/Calendar_era) (`dote`). Both Julian and `dote` dates count days from a starting point called an [epoch](https://en.wikipedia.org/wiki/Epoch). The `Decalendar` epoch is `0000+000.0`, which is midnight on March 1, 1 BC in the Gregorian calendar. To convert a Julian date into a `dote`, we simply subtract 1721120.5 days ($dote = julian - 1721120.5$).
 
-Like Julian dates, `Decalendar dote` dates are very useful for date and time calculations that span more than one year. If we want to find the number of fractional days in between two dates, we first convert both dates into `dotes` and subtract the earlier `dote` from the later `dote`. @eq-dote shows how a year and a `doty` can be turned into a `dote`. To convert a `dote` back into a year and `doty`
+Like Julian dates, `dote` dates are very useful for date and time calculations. To find the number of fractional days in between two dates, we first convert both into `dote` numbers and subtract the earlier `dote` from the later `dote`. @eq-dote and @exm-jd show how a year and a `doty` can be turned into a `dote`. The conversion of a `dote` into a year and `doty` requires calculations adapted from the ["civil_from_days" algorithm](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) from [@hinnant2014]. Briefly, the `dote` is used to obtain the [solar cycle](https://en.wikipedia.org/wiki/Solar_cycle_(calendar)#:~:text=400%2Dyear%20cycle%20of%20the%20Gregorian%20calendar%20with%20respect%20to%20the%20week.) in @eq-cycl, which is then plugged into @eq-dotc and @eq-yotc to calculate the `day-of-the-cycle` in (`dotc`) and the `year-of-the-cycle` (`yotc`) in @eq-yotc. @eq-year takes the `yotc` and the solar cycle and yields the year, while @eq-doty generates the `doty` from the `yotc` and the `dotc`.
 
-$$dote = \lfloor doty + (365 \cdot year + \frac{year}{4} - \frac{year}{100} + \frac{year}{400}) \rfloor$$ {#eq-dote}
+$$dote = doty + (365 \cdot year + \lfloor \frac{year}{4} \rfloor - \lfloor \frac{year}{100} \rfloor + \lfloor \frac{year}{400} \rfloor)$$ {#eq-dote}
 
-$$dote - doty = \lfloor (365 \cdot year + \frac{year}{4} - \frac{year}{100} + \frac{year}{400}) \rfloor$$ {#eq-dote}
+$$cycle = \lfloor \frac{\begin{cases}dote&{\text{if } dote \geq 0;}\\dote-146096&{\text{otherwise.}}\end{cases}}{146097} \rfloor$$ {#eq-cycl}
 
-$$year = \lfloor \frac{doe - \frac{doe}{1460} + \frac{doe}{36524} - \frac{doe}{146096}}{365} \rfloor + era * 400$$ {#eq-year}
+$$dotc = days - cycle \cdot 146097$$ {#eq-dotc}
 
-Like `Decalendar`, some [Julian day variants](https://en.wikipedia.org/wiki/Julian_day#Variants) start the day at midnight. Like Swatch Internet Time, Julian dates only use a single time zone ([UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z)). To obtain a `Declock` time from a Julian date, we subtract the Julian day number ($\lfloor JD \rfloor$) from the Julian date ($JD$), add 0.5, and then obtaining the remainder after dividing by 1 as shown in @eq-jd.
+$$yotc = \lfloor \frac{dotc - \lfloor \frac{dotc}{1460} \rfloor + \lfloor \frac{dotc}{36524} \rfloor - \lfloor \frac{dotc}{146096} \rfloor}{365} \rfloor$$ {#eq-yotc}
 
-$$time = (JD - \lfloor JD \rfloor + .5) \mod 1$$ {#eq-jd}
+$$year = yotc + cycle * 400$$ {#eq-year}
 
-Bo that tracks the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since 
+$$doty = \lfloor dotc - (365 \cdot yotc + \lfloor \frac{yotc}{4} \rfloor - \lfloor \frac{yotc}{100} \rfloor + \lfloor \frac{yotc}{400} \rfloor) \rfloor$$ {#eq-doty}
+
+::: {#exm-jd}
+:::
+
+#### JavaScript
+
+##### `doty2dote`
+
+```{javascript}
+#| tags: [doty2dote]
+function doty2dote(year = 1969, doty = 306) {
+    return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
+}
+
+console.log(doty2dote());
+```
+
+#### Julia
+
+##### `unix`
+
+##### `doty2dote`
+
+```{julia}
+#| tags: [doty2dote]
+function doty2dote(s=0, ms=0)
+    days = s / 86400 + ms / 86400000 + 719468
+    dote = days - (era = floor((days >= 0 ? days : days - 146096) / 146097)) * 146097
+    year = Int(floor((dote - dote / 1460 + dote / 36524 - dote / 146096) / 365) + era * 400)
+    year, days - floor(year * 365 + year / 4 - year / 100 + year / 400)
+end
+
+y, d = doty2dote(time())
+day = Int(floor(d))
+"$(lpad(y, 4, '0'))+$(lpad(day, 3, '0')).$(lpad(Int(round((d - day) * 1e5)), 5, '0'))+0"
+```
+
+#### Python
+
+##### `doty2dote`
+
+```{python}
+#| tags: [doty2dote]
+from doty2dote(s=0, ms=0):
+    days = s / 86400 + ms / 86400000 + 719468
+    dote = days - (era := (days if days >= 0 else days - 146096) // 146097) * 146097
+    year = int((dote - dote / 1460 + dote / 36524 - dote / 146096) // 365 + era * 400)
+    return year, days - (year * 365 + year / 4 - year / 100 + year / 400).__floor__()
+
+y, d = doty2dote(time())
+f"{y:>04}+{(day := d.__floor__()):>03}.{round((d - day) * 1e5):>05}+0"
+```
+
+#### R
+
+##### `doty2dote`
+
+```{r}
+#| tags: [doty2dote]
+unix2doty doty2dote(s = 0, ms = 0) {
+    days = s / 86400 + ms / 86400000 + 719468
+    dote = days - (era = floor(ifelse(days >= 0, days, days - 146096) / 146097)) * 146097
+    year = floor((dote - dote / 1460 + dote / 36524 - dote / 146096) / 365) + era * 400
+    c(year, days - floor(year * 365 + year / 4 - year / 100 + year / 400))
+}
+
+yd <- doty2dote(as.numeric(Sys.time()))
+
+paste0(sprintf("%04d", yd[1]), "+",
+       sprintf("%03d", (day = floor(yd[2]))), ".",
+       sprintf("%05d", round((yd[2] - day) * 1e5)), "+0"
+)
+```
+
+:::
 
 ## UNIX time {#sec-unix}
 
 ### Julian time conversion to UNIX time {#sec-unixj}
 
-While it is possible to convert Julian dates into `deco` dates and `Declock` times, the official definition of `deco` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight in the [UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z) time zone on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `deco` dates, and `Declock` times. To obtain UNIX time from a Julian Date, we subtract 2440587.5 from the Julian Date and multiply by 86400 as shown in @eq-unixj.
+Building on the conversion of Julian dates into `dote` and `doty` numbers, it may be easiest to obtain the official definition of `deco` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight in the [UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z) time zone on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `deco` dates, and `Declock` times. To obtain UNIX time from a Julian Date, we subtract 2440587.5 from the Julian Date and multiply by 86400 as shown in @eq-unixj.
 
 $$unix = (JD − 2440587.5) \cdot 86400$$ {#eq-unixj}
 
 ### UNIX time conversion to `deco` date {#sec-unixd}
 
 To calculate `deco` dates directly from UNIX time, we can use a calculation adapted the 2014 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) by [Howard Hinnant](https://howardhinnant.github.io/) [-@hinnant2014]. Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-the-era` (@eq-dote), `year` (@eq-year), and `doty` (@eq-doty).
-
-$$era = \frac{\begin{cases}days&{\text{if } days \geq 0;}\\days-146096&{\text{otherwise.}}\end{cases}}{146097}$$ {#eq-era}
-
-$$dote = days - era \cdot 146097$$ {#eq-dote}
-
-$$year = \lfloor \frac{dote - \frac{dote}{1460} + \frac{dote}{36524} - \frac{dote}{146096}}{365} \rfloor + era * 400$$ {#eq-year}
-
-$$doty = \lfloor dote - (365 \cdot year + \frac{year}{4} - \frac{year}{100} + \frac{year}{400}) \rfloor$$ {#eq-doty}
 
 ### UNIX time conversion to `Decalendar` timestamp {#sec-unixt}
 
