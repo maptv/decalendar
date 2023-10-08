@@ -15,12 +15,12 @@ author: Martin Laptev
 
 The `Decalendar` timestamp below shows the year and `doty` at the time this webpage was loaded. This timestamp is slightly more **precise** and much more **concise** than a timestamp with hours, minutes, and seconds.
 
-<div id="observablehq-pageLoadTimestamp-f4158f4c"></div>
+<div id="observablehq-load-edeeed26"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@104.js?v=3";
-new Runtime().module(define, name => { if (name === "pageLoadTimestamp") return new Inspector(document.querySelector("#observablehq-pageLoadTimestamp-f4158f4c")); });
+import define from "https://api.observablehq.com/@decalender/decalendar@150.js?v=3";
+new Runtime().module(define, name => { if (name === "load") return new Inspector(document.querySelector("#observablehq-load-edeeed26")); });
 </script>
 
 #### Now {#sec-demo-stamp-now}
@@ -39,12 +39,12 @@ new Runtime().module(define, name => { if (name === "now") return new Inspector(
 
 If we subtract the first timestamp from the second, we can see how long this webpage has been open. You don't have to read it all in one sitting, it's not a speed-reading🏎️competition, so please feel free to take breaks😄.
 
-<div id="observablehq-diffDoty-798a81c1"></div>
+<div id="observablehq-diff-edeeed26"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@137.js?v=3";
-new Runtime().module(define, name => { if (name === "diffDoty") return new Inspector(document.querySelector("#observablehq-diffDoty-798a81c1")); });
+import define from "https://api.observablehq.com/@decalender/decalendar@150.js?v=3";
+new Runtime().module(define, name => { if (name === "diff") return new Inspector(document.querySelector("#observablehq-diff-edeeed26")); });
 </script>
 
 ### Date conversion {#sec-demo-conv}
