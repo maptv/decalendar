@@ -7,6 +7,15 @@ author: Martin Laptev
 
 `Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar system and `Declock` is decimal timekeeping system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). The most prevalent calendar system in use today, the Gregorian calendar, has roughly [trigesimal](https://en.wiktionary.org/wiki/trigesimal) (\~base30) months and [septimal](https://en.wiktionary.org/wiki/septimal) (base7) weeks, while our current timekeeping system uses [quadravigesimal](https://en.wiktionary.org/wiki/quadravigesimal) (base24) hours and [sexagesimal](https://en.wikipedia.org/wiki/Sexagesimal) (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
 
+In addition to being much easier to read, `doty` numbers are much easier to manipulate.
+<div id="observablehq-e9dd75f6"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/@decalender/decalendar@84.js?v=3";
+new Runtime().module(define, Inspector.into("#observablehq-e9dd75f6"));
+</script>
+
 ## Day of the year {#sec-summary-doty}
 
 @fig-doty shows the components of the `doty` number that corresponds to midnight on January 1st in the Gregorian calendar. The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
@@ -661,7 +670,7 @@ console.log(doty2isoo());
 
 ```{julia}
 #| tags: [isoo2doty]
-function isoo2year(yd="1970-001")
+function isoo2year(year=1970, day=1)
     year - (day < (60 + year2bool(year - 1)))
 end
 
@@ -1005,15 +1014,15 @@ zone2hour()
 
 ### Times {#sec-isot}
 
-The formula for conversion of standard time to `Declock` time is shown in @eq-isot1. The value of `x` in @eq-isot1 can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-isot2 and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-isot3 and minutes into seconds with @eq-isot4. The `hmso2doty` and `doty2hmso` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
+The formula for conversion of standard time to `Declock` time is shown in @eq-declock. The value of `x` in @eq-declock. can be modified to obtain different units, which are displayed in @tbl-isot. To convert `Declock` time into standard time, we first convert into hours using @eq-hour and the appropriate `x` value from @tbl-isot. Then, we convert hours into minutes with @eq-minute and minutes into seconds with @eq-second The `hmso2doty` and `doty2hmso` functions in @exm-isot uses these formulas to convert between standard time and `Declock` time.
 
-$$declock = \frac{hour}{24} + \frac{minute}{1440} + \frac{second}{86400} \cdot 10^x$$ {#eq-isot1}
+$$declock = \frac{hour}{24} + \frac{minute}{1440} + \frac{second}{86400} \cdot 10^x$$ {#eq-declock}
 
-$$hour = declock \cdot 24 \cdot 10^x$$ {#eq-isot2}
+$$hour = declock \cdot 24 \cdot 10^x$$ {#eq-hour}
 
-$$minute = \frac{hour - \lfloor hour \rfloor}{60}$$ {#eq-isot3}
+$$minute = \frac{hour - \lfloor hour \rfloor}{60}$$ {#eq-minute}
 
-$$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-isot4}
+$$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-second}
 
 #### @tbl-isot
 
@@ -1355,7 +1364,7 @@ pd.date_range("1970", "1971", freq="6H")[-4:-1]
 
 A [Julian date](https://en.wikipedia.org/wiki/Julian_day#:~:text=The%20Julian%20date%20(JD)%20of%20any%20instant%20is%20the%20Julian%20day%20number%20plus%20the%20fraction%20of%20a%20day%20since%20the%20preceding%20noon%20in%20Universal%20Time.) is the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+268.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. The analogous date format in `Decalendar` is the day-of-the-[era](https://en.wikipedia.org/wiki/Calendar_era) (`dote`). Both Julian and `dote` dates count days from a starting point called an [epoch](https://en.wikipedia.org/wiki/Epoch). The `Decalendar` epoch is `0000+000.0`, which is midnight on March 1, 1 BC in the Gregorian calendar. To convert a Julian date into a `dote`, we simply subtract 1721120.5 days ($dote = julian - 1721120.5$).
 
-Like Julian dates, `dote` dates are very useful for date and time calculations. To find the number of fractional days in between two dates, we first convert both into `dote` numbers and subtract the earlier `dote` from the later `dote`. @eq-dote and @exm-jd show how a year and a `doty` can be turned into a `dote`. The conversion of a `dote` into a year and `doty` requires calculations adapted from the ["civil_from_days" algorithm](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) from [@hinnant2014]. Briefly, the `dote` is used to obtain the [solar cycle](https://en.wikipedia.org/wiki/Solar_cycle_(calendar)#:~:text=400%2Dyear%20cycle%20of%20the%20Gregorian%20calendar%20with%20respect%20to%20the%20week.) in @eq-cycl, which is then plugged into @eq-dotc and @eq-yotc to calculate the `day-of-the-cycle` in (`dotc`) and the `year-of-the-cycle` (`yotc`) in @eq-yotc. @eq-year takes the `yotc` and the solar cycle and yields the year, while @eq-doty generates the `doty` from the `yotc` and the `dotc`.
+Like Julian dates, `dote` dates are very useful for date and time calculations. @eq-dote shows how a year and a `doty` can be turned into a `dote`. The conversion of a `dote` into a year and `doty` requires calculations adapted from the ["civil_from_days" algorithm](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) from [@hinnant2014]. Briefly, the `dote` is used to obtain the [solar cycle](https://en.wikipedia.org/wiki/Solar_cycle_(calendar)#:~:text=400%2Dyear%20cycle%20of%20the%20Gregorian%20calendar%20with%20respect%20to%20the%20week.) in @eq-cycl, which is then plugged into @eq-dotc and @eq-yotc to calculate the `day-of-the-cycle` in (`dotc`) and the `year-of-the-cycle` (`yotc`) in @eq-yotc. @eq-year takes the `yotc` and the solar cycle and yields the year, while @eq-doty generates the `doty` from the `yotc` and the `dotc`.
 
 $$dote = doty + (365 \cdot year + \lfloor \frac{year}{4} \rfloor - \lfloor \frac{year}{100} \rfloor + \lfloor \frac{year}{400} \rfloor)$$ {#eq-dote}
 
@@ -1368,6 +1377,8 @@ $$yotc = \lfloor \frac{dotc - \lfloor \frac{dotc}{1460} \rfloor + \lfloor \frac{
 $$year = yotc + cycle * 400$$ {#eq-year}
 
 $$doty = \lfloor dotc - (365 \cdot yotc + \lfloor \frac{yotc}{4} \rfloor - \lfloor \frac{yotc}{100} \rfloor + \lfloor \frac{yotc}{400} \rfloor) \rfloor$$ {#eq-doty}
+
+The conversion between `doty` and `dote` is the most important calculation in `Decalendar` because it defines the behavior of positive and negative `deco` dates and stamps. The arithmetic
 
 ::: {#exm-jd}
 :::
@@ -1411,7 +1422,9 @@ day = Int(floor(d))
 
 ```{python}
 #| tags: [doty2dote]
-from doty2dote(s=0, ms=0):
+from time import time
+
+def doty2dote(s=0, ms=0):
     days = s / 86400 + ms / 86400000 + 719468
     dote = days - (era := (days if days >= 0 else days - 146096) // 146097) * 146097
     year = int((dote - dote / 1460 + dote / 36524 - dote / 146096) // 365 + era * 400)
@@ -1427,7 +1440,7 @@ f"{y:>04}+{(day := d.__floor__()):>03}.{round((d - day) * 1e5):>05}+0"
 
 ```{r}
 #| tags: [doty2dote]
-unix2doty doty2dote(s = 0, ms = 0) {
+doty2dote <- function(s = 0, ms = 0) {
     days = s / 86400 + ms / 86400000 + 719468
     dote = days - (era = floor(ifelse(days >= 0, days, days - 146096) / 146097)) * 146097
     year = floor((dote - dote / 1460 + dote / 36524 - dote / 146096) / 365) + era * 400
@@ -1454,7 +1467,7 @@ $$unix = (JD − 2440587.5) \cdot 86400$$ {#eq-unixj}
 
 ### UNIX time conversion to `deco` date {#sec-unixd}
 
-To calculate `deco` dates directly from UNIX time, we can use a calculation adapted the 2014 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) by [Howard Hinnant](https://howardhinnant.github.io/) [-@hinnant2014]. Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-era), `day-of-the-era` (@eq-dote), `year` (@eq-year), and `doty` (@eq-doty).
+To calculate `deco` dates directly from UNIX time, we can use a calculation adapted the 2014 article entitled ["chrono-Compatible Low-Level Date Algorithms"](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) by [Howard Hinnant](https://howardhinnant.github.io/) [-@hinnant2014]. Briefly, the seconds (or milliseconds) in UNIX time are first converted to `days` ($days = seconds \div 86400$). Then, the `days` are used to obtain the `era` (@eq-cycl), `day-of-the-era` (@eq-dote), `year` (@eq-year), and `doty` (@eq-doty).
 
 ### UNIX time conversion to `Decalendar` timestamp {#sec-unixt}
 
