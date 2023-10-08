@@ -15,36 +15,36 @@ author: Martin Laptev
 
 The `Decalendar` timestamp below shows the year and `doty` at the time this webpage was loaded. This timestamp is slightly more **precise** and much more **concise** than a timestamp with hours, minutes, and seconds.
 
-<div id="observablehq-load-edeeed26"></div>
+<div id="observablehq-load-a38e03d2"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@150.js?v=3";
-new Runtime().module(define, name => { if (name === "load") return new Inspector(document.querySelector("#observablehq-load-edeeed26")); });
+import define from "https://api.observablehq.com/@dec/dec.js?v=3";
+new Runtime().module(define, name => { if (name === "load") return new Inspector(document.querySelector("#observablehq-load-a38e03d2")); });
 </script>
 
 #### Now {#sec-demo-stamp-now}
 
-A timestamp that doesn't move isn't much fun, so here's one that increments every one ten thousandth ($10^{-5}$) of a day (`centimilliday`), which in `Decalendar` is called a `beat`. It's like a heart❤️beat! Or if you prefer, a musical🎵beat!
+A timestamp that doesn't move isn't much fun, so here's one that increments every one ten thousandth ($10^{-5}$) of a day (`centimilliday`), which in `Decalendar` is called a `beat`. It's like a heart❤️beat! Or if you prefer, a musical♫beat!
 
-<div id="observablehq-now-2322ea1c"></div>
+<div id="observablehq-now-a38e03d2"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@107.js?v=3";
-new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-2322ea1c")); });
+import define from "https://api.observablehq.com/@dec/dec.js?v=3";
+new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-a38e03d2")); });
 </script>
 
 #### Diff {#sec-demo-stamp-diff}
 
 If we subtract the first timestamp from the second, we can see how long this webpage has been open. You don't have to read it all in one sitting, it's not a speed-reading🏎️competition, so please feel free to take breaks😄.
 
-<div id="observablehq-diff-edeeed26"></div>
+<div id="observablehq-diff-a38e03d2"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@150.js?v=3";
-new Runtime().module(define, name => { if (name === "diff") return new Inspector(document.querySelector("#observablehq-diff-edeeed26")); });
+import define from "https://api.observablehq.com/@dec/dec.js?v=3";
+new Runtime().module(define, name => { if (name === "diff") return new Inspector(document.querySelector("#observablehq-diff-a38e03d2")); });
 </script>
 
 ### Date conversion {#sec-demo-conv}

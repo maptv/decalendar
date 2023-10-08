@@ -259,34 +259,34 @@ div.csl-indent {
 <span class="header-section-number">1.1.1</span> Timestamps</h3>
 <section id="sec-demo-stamp-load" class="level4"><h4 class="anchored" data-anchor-id="sec-demo-stamp-load">Page load</h4>
 <p>The <code>Decalendar</code> timestamp below shows the year and <code>doty</code> at the time this webpage was loaded. This timestamp is slightly more <strong>precise</strong> and much more <strong>concise</strong> than a timestamp with hours, minutes, and seconds.</p>
-<div id="observablehq-load-edeeed26">
+<div id="observablehq-load-a38e03d2">
 
 </div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@150.js?v=3";
-new Runtime().module(define, name => { if (name === "load") return new Inspector(document.querySelector("#observablehq-load-edeeed26")); });
+import define from "https://api.observablehq.com/@dec/dec.js?v=3";
+new Runtime().module(define, name => { if (name === "load") return new Inspector(document.querySelector("#observablehq-load-a38e03d2")); });
 </script></section><section id="sec-demo-stamp-now" class="level4"><h4 class="anchored" data-anchor-id="sec-demo-stamp-now">Now</h4>
-<p>A timestamp that doesn’t move isn’t much fun, so here’s one that increments every one ten thousandth (<span class="math inline">\(10^{-5}\)</span>) of a day (<code>centimilliday</code>), which in <code>Decalendar</code> is called a <code>beat</code>. It’s like a heart❤️beat! Or if you prefer, a musical🎵beat!</p>
-<div id="observablehq-now-2322ea1c">
+<p>A timestamp that doesn’t move isn’t much fun, so here’s one that increments every one ten thousandth (<span class="math inline">\(10^{-5}\)</span>) of a day (<code>centimilliday</code>), which in <code>Decalendar</code> is called a <code>beat</code>. It’s like a heart❤️beat! Or if you prefer, a musical♫beat!</p>
+<div id="observablehq-now-a38e03d2">
 
 </div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@107.js?v=3";
-new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-2322ea1c")); });
+import define from "https://api.observablehq.com/@dec/dec.js?v=3";
+new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-a38e03d2")); });
 </script></section><section id="sec-demo-stamp-diff" class="level4"><h4 class="anchored" data-anchor-id="sec-demo-stamp-diff">Diff</h4>
 <p>If we subtract the first timestamp from the second, we can see how long this webpage has been open. You don’t have to read it all in one sitting, it’s not a speed-reading🏎️competition, so please feel free to take breaks😄.</p>
-<div id="observablehq-diff-edeeed26">
+<div id="observablehq-diff-a38e03d2">
 
 </div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@150.js?v=3";
-new Runtime().module(define, name => { if (name === "diff") return new Inspector(document.querySelector("#observablehq-diff-edeeed26")); });
+import define from "https://api.observablehq.com/@dec/dec.js?v=3";
+new Runtime().module(define, name => { if (name === "diff") return new Inspector(document.querySelector("#observablehq-diff-a38e03d2")); });
 </script></section></section><section id="sec-demo-conv" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="sec-demo-conv">
 <span class="header-section-number">1.1.2</span> Date conversion</h3>
 <p>Enter a <a href="https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.">Gregorian calendar</a> date below to see the equivalent <code>Decalendar</code> date in <code>doty</code> date format (<code>year+day</code>) and decimal year format (<code>year.yyy</code>). Try special dates like birthdays and anniversaries.</p>
@@ -372,7 +372,7 @@ new Runtime().module(define, name => { if (name === "diff") return new Inspector
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">1</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-08T14:25:34.890367Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-08T14:25:34.890273Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-08T14:25:35.236283Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-08T14:25:35.235899Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
+</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-08T15:34:24.939942Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-08T15:34:24.939835Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-08T15:34:25.265977Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-08T15:34:25.265694Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-schedules-1" class="quarto-figure quarto-figure-center anchored">
@@ -3458,7 +3458,7 @@ Click to toggle table expansion
 <span id="cb121-9"><a href="#cb121-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb121-10"><a href="#cb121-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+221.60132+0"</code></pre>
+<pre><code>"2023+221.64911+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-72" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3479,7 +3479,7 @@ Click to toggle table expansion
 <span id="cb123-9"><a href="#cb123-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> doty2dote(time())</span>
 <span id="cb123-10"><a href="#cb123-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+221.60144+0'</code></pre>
+<pre><code>'2023+221.64921+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-73" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -3503,7 +3503,7 @@ Click to toggle table expansion
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+221.60154+0'
+'2023+221.64931+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-74" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3558,7 +3558,7 @@ y \mod 4 = 0 \\
 <span id="cb126-12"><a href="#cb126-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span></span>
 <span id="cb126-13"><a href="#cb126-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>2023+221.60117+0</code></pre>
+<pre><code>2023+221.64897+0</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-75" href="decalendar_javascript.ipynb.html">Source: decalendar_javascript.ipynb</a></div>
@@ -3580,7 +3580,7 @@ y \mod 4 = 0 \\
 <span id="cb128-9"><a href="#cb128-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb128-10"><a href="#cb128-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+221.60132+0"</code></pre>
+<pre><code>"2023+221.64911+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-76" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3601,7 +3601,7 @@ y \mod 4 = 0 \\
 <span id="cb130-9"><a href="#cb130-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> unix2doty(time())</span>
 <span id="cb130-10"><a href="#cb130-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+221.60144+0'</code></pre>
+<pre><code>'2023+221.64921+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-77" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -3625,7 +3625,7 @@ y \mod 4 = 0 \\
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+221.60154+0'
+'2023+221.64931+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-78" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3714,7 +3714,7 @@ y \mod 4 = 0 \\
 <span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-7"><a href="#cb138-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+221.60132+0"</code></pre>
+<pre><code>"2023+221.64911+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-80" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3732,7 +3732,7 @@ y \mod 4 = 0 \\
 <span id="cb140-6"><a href="#cb140-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb140-7"><a href="#cb140-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+221.60144+0'</code></pre>
+<pre><code>'2023+221.64921+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-81" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -5523,36 +5523,36 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb145-15"><a href="#cb145-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb145-16"><a href="#cb145-16" aria-hidden="true" tabindex="-1"></a>The <span class="in">`Decalendar`</span> timestamp below shows the year and <span class="in">`doty`</span> at the time this webpage was loaded. This timestamp is slightly more **precise** and much more **concise** than a timestamp with hours, minutes, and seconds.</span>
 <span id="cb145-17"><a href="#cb145-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-18"><a href="#cb145-18" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"observablehq-load-edeeed26"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb145-18"><a href="#cb145-18" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"observablehq-load-a38e03d2"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb145-19"><a href="#cb145-19" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css"</span><span class="kw">&gt;</span></span>
 <span id="cb145-20"><a href="#cb145-20" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="kw">&gt;</span></span>
 <span id="cb145-21"><a href="#cb145-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {Runtime<span class="op">,</span> Inspector} <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js"</span><span class="op">;</span></span>
-<span id="cb145-22"><a href="#cb145-22" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> define <span class="im">from</span> <span class="st">"https://api.observablehq.com/@decalender/decalendar@150.js?v=3"</span><span class="op">;</span></span>
-<span id="cb145-23"><a href="#cb145-23" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">Runtime</span>()<span class="op">.</span><span class="fu">module</span>(define<span class="op">,</span> name <span class="kw">=&gt;</span> { <span class="cf">if</span> (name <span class="op">===</span> <span class="st">"load"</span>) <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Inspector</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">"#observablehq-load-edeeed26"</span>))<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb145-22"><a href="#cb145-22" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> define <span class="im">from</span> <span class="st">"https://api.observablehq.com/@dec/dec.js?v=3"</span><span class="op">;</span></span>
+<span id="cb145-23"><a href="#cb145-23" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">Runtime</span>()<span class="op">.</span><span class="fu">module</span>(define<span class="op">,</span> name <span class="kw">=&gt;</span> { <span class="cf">if</span> (name <span class="op">===</span> <span class="st">"load"</span>) <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Inspector</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">"#observablehq-load-a38e03d2"</span>))<span class="op">;</span> })<span class="op">;</span></span>
 <span id="cb145-24"><a href="#cb145-24" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span>
 <span id="cb145-25"><a href="#cb145-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb145-26"><a href="#cb145-26" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Now {#sec-demo-stamp-now}</span></span>
 <span id="cb145-27"><a href="#cb145-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-28"><a href="#cb145-28" aria-hidden="true" tabindex="-1"></a>A timestamp that doesn't move isn't much fun, so here's one that increments every one ten thousandth ($10^{-5}$) of a day (<span class="in">`centimilliday`</span>), which in <span class="in">`Decalendar`</span> is called a <span class="in">`beat`</span>. It's like a heart❤️beat! Or if you prefer, a musical🎵beat!</span>
+<span id="cb145-28"><a href="#cb145-28" aria-hidden="true" tabindex="-1"></a>A timestamp that doesn't move isn't much fun, so here's one that increments every one ten thousandth ($10^{-5}$) of a day (<span class="in">`centimilliday`</span>), which in <span class="in">`Decalendar`</span> is called a <span class="in">`beat`</span>. It's like a heart❤️beat! Or if you prefer, a musical♫beat!</span>
 <span id="cb145-29"><a href="#cb145-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-30"><a href="#cb145-30" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"observablehq-now-2322ea1c"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb145-30"><a href="#cb145-30" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"observablehq-now-a38e03d2"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb145-31"><a href="#cb145-31" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css"</span><span class="kw">&gt;</span></span>
 <span id="cb145-32"><a href="#cb145-32" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="kw">&gt;</span></span>
 <span id="cb145-33"><a href="#cb145-33" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {Runtime<span class="op">,</span> Inspector} <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js"</span><span class="op">;</span></span>
-<span id="cb145-34"><a href="#cb145-34" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> define <span class="im">from</span> <span class="st">"https://api.observablehq.com/@decalender/decalendar@107.js?v=3"</span><span class="op">;</span></span>
-<span id="cb145-35"><a href="#cb145-35" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">Runtime</span>()<span class="op">.</span><span class="fu">module</span>(define<span class="op">,</span> name <span class="kw">=&gt;</span> { <span class="cf">if</span> (name <span class="op">===</span> <span class="st">"now"</span>) <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Inspector</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">"#observablehq-now-2322ea1c"</span>))<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb145-34"><a href="#cb145-34" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> define <span class="im">from</span> <span class="st">"https://api.observablehq.com/@dec/dec.js?v=3"</span><span class="op">;</span></span>
+<span id="cb145-35"><a href="#cb145-35" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">Runtime</span>()<span class="op">.</span><span class="fu">module</span>(define<span class="op">,</span> name <span class="kw">=&gt;</span> { <span class="cf">if</span> (name <span class="op">===</span> <span class="st">"now"</span>) <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Inspector</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">"#observablehq-now-a38e03d2"</span>))<span class="op">;</span> })<span class="op">;</span></span>
 <span id="cb145-36"><a href="#cb145-36" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span>
 <span id="cb145-37"><a href="#cb145-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb145-38"><a href="#cb145-38" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Diff {#sec-demo-stamp-diff}</span></span>
 <span id="cb145-39"><a href="#cb145-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb145-40"><a href="#cb145-40" aria-hidden="true" tabindex="-1"></a>If we subtract the first timestamp from the second, we can see how long this webpage has been open. You don't have to read it all in one sitting, it's not a speed-reading🏎️competition, so please feel free to take breaks😄.</span>
 <span id="cb145-41"><a href="#cb145-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-42"><a href="#cb145-42" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"observablehq-diff-edeeed26"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb145-42"><a href="#cb145-42" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"observablehq-diff-a38e03d2"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb145-43"><a href="#cb145-43" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css"</span><span class="kw">&gt;</span></span>
 <span id="cb145-44"><a href="#cb145-44" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">"module"</span><span class="kw">&gt;</span></span>
 <span id="cb145-45"><a href="#cb145-45" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {Runtime<span class="op">,</span> Inspector} <span class="im">from</span> <span class="st">"https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js"</span><span class="op">;</span></span>
-<span id="cb145-46"><a href="#cb145-46" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> define <span class="im">from</span> <span class="st">"https://api.observablehq.com/@decalender/decalendar@150.js?v=3"</span><span class="op">;</span></span>
-<span id="cb145-47"><a href="#cb145-47" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">Runtime</span>()<span class="op">.</span><span class="fu">module</span>(define<span class="op">,</span> name <span class="kw">=&gt;</span> { <span class="cf">if</span> (name <span class="op">===</span> <span class="st">"diff"</span>) <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Inspector</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">"#observablehq-diff-edeeed26"</span>))<span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb145-46"><a href="#cb145-46" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> define <span class="im">from</span> <span class="st">"https://api.observablehq.com/@dec/dec.js?v=3"</span><span class="op">;</span></span>
+<span id="cb145-47"><a href="#cb145-47" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">Runtime</span>()<span class="op">.</span><span class="fu">module</span>(define<span class="op">,</span> name <span class="kw">=&gt;</span> { <span class="cf">if</span> (name <span class="op">===</span> <span class="st">"diff"</span>) <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Inspector</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">"#observablehq-diff-a38e03d2"</span>))<span class="op">;</span> })<span class="op">;</span></span>
 <span id="cb145-48"><a href="#cb145-48" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span>
 <span id="cb145-49"><a href="#cb145-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb145-50"><a href="#cb145-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Date conversion {#sec-demo-conv}</span></span>
