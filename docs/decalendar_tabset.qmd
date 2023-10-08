@@ -7,14 +7,27 @@ author: Martin Laptev
 
 `Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
 
-## Demonstration {#sec-demo}
+## Demonstrations {#sec-demo}
+
+### Page load timestamp {#sec-demo-load}
 
 The `Decalendar` timestamp below shows the year and `doty` at the time this webpage was loaded. This timestamp is slightly more **precise** and much more **concise** than a timestamp with hours, minutes, and seconds.
 
-<iframe width="100%" height="105" frameborder="0"
-  src="https://observablehq.com/embed/@decalender/decalendar@103?cells=pageLoadTimestamp"></iframe>
+<div id="observablehq-pageLoadTimestamp-f4158f4c"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/@decalender/decalendar@104.js?v=3";
+new Runtime().module(define, name => { if (name === "pageLoadTimestamp") return new Inspector(document.querySelector("#observablehq-pageLoadTimestamp-f4158f4c")); });
+</script>
 
-In addition to being much easier to read, `doty` numbers make working with dates a breeze🎐. Use the input below to add numbers to the current year and `doty`. Try adding both positive and negative numbers to see both future and past dates. You can even use decimal `doty` numbers and decimal years! ✨🤩✨ For example, the year `1969.84` is equivalent to the date `1969+306`.
+### Date conversion {#sec-demo-conv}
+
+Enter a [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.) date below to see the equivalent `Decalendar` date in `doty` date format (`year+day`) and fractional year format (`year.yyy`). Try special dates like birthdays and anniversaries.
+
+### Timestamp arithmetic {#sec-demo-arith}
+
+`Doty` numbers make working with dates and times a breeze🎐. Use the inputs below to add numbers to the current year and `doty`. Add a positive number to see a future date or add a negative number to get a past date. You can use decimal `doty` numbers for times and even decimal years for dates! ✨🤩✨ For example, the fractional year date `1969.84` ($1969+306/365$) is equivalent to the `doty` date `1969+306`.
 
 ## Day of the year {#sec-summary-doty}
 
