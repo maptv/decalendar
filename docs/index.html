@@ -268,10 +268,10 @@ import define from "https://api.observablehq.com/@decalender/decalendar@104.js?v
 new Runtime().module(define, name => { if (name === "pageLoadTimestamp") return new Inspector(document.querySelector("#observablehq-pageLoadTimestamp-f4158f4c")); });
 </script></section><section id="sec-demo-conv" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="sec-demo-conv">
 <span class="header-section-number">1.1.2</span> Date conversion</h3>
-<p>Enter a <a href="https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.">Gregorian calendar</a> date below to see the equivalent <code>Decalendar</code> date in <code>doty</code> date format (<code>year+day</code>) and fractional year format (<code>year.yyy</code>). Try special dates like birthdays and anniversaries.</p>
+<p>Enter a <a href="https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.">Gregorian calendar</a> date below to see the equivalent <code>Decalendar</code> date in <code>doty</code> date format (<code>year+day</code>) and decimal year format (<code>year.yyy</code>). Try special dates like birthdays and anniversaries.</p>
 </section><section id="sec-demo-arith" class="level3" data-number="1.1.3"><h3 data-number="1.1.3" class="anchored" data-anchor-id="sec-demo-arith">
 <span class="header-section-number">1.1.3</span> Timestamp arithmetic</h3>
-<p><code>Doty</code> numbers make working with dates and times a breeze🎐. Use the inputs below to add numbers to the current year and <code>doty</code>. Add a positive number to see a future date or add a negative number to get a past date. You can use decimal <code>doty</code> numbers for times and even decimal years for dates! ✨🤩✨ For example, the fractional year date <code>1969.84</code> (<span class="math inline">\(1969+306/365\)</span>) is equivalent to the <code>doty</code> date <code>1969+306</code>.</p>
+<p><code>Doty</code> numbers make working with dates and times a breeze🎐. Use the inputs below to add numbers to the current year and <code>doty</code>. Add a positive number to see a future date or add a negative number to get a past date. You can use decimal <code>doty</code> numbers for times and even decimal years for dates! ✨🤩✨ For example, the decimal year date <code>1969.84</code> (<span class="math inline">\(1969+306/365\)</span>) is equivalent to the <code>doty</code> date <code>1969+306</code>.</p>
 </section></section><section id="sec-summary-doty" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="sec-summary-doty">
 <span class="header-section-number">1.2</span> Day of the year</h2>
 <p><a href="#fig-doty">Figure&nbsp;1</a> shows the components of the <code>doty</code> number that corresponds to midnight on January 1st in the Gregorian calendar. The first two <a href="https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values">digits</a> (hundreds and tens) of the <code>doty</code> are the <code>dek</code> number (30 in <a href="#fig-doty">Figure&nbsp;1</a>). <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The next digit (ones) of the <code>doty</code> number is the day-of-the-<code>dek</code> (<code>dotd</code>) number (6 in <a href="#fig-doty">Figure&nbsp;1</a>), which serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. Gregorian calendar dates require us to look up the day of the week, while the <code>doty</code> contains all of the analogous information for <code>Decalendar</code> in its first 3 digits (hundreds, tens, and ones).</p>
@@ -351,7 +351,7 @@ new Runtime().module(define, name => { if (name === "pageLoadTimestamp") return 
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">1</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-08T07:44:49.869186Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-08T07:44:49.869079Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-08T07:44:50.205183Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-08T07:44:50.204879Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
+</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-08T07:51:52.325340Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-08T07:51:52.325235Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-08T07:51:52.649482Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-08T07:51:52.649233Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-schedules-1" class="quarto-figure quarto-figure-center anchored">
@@ -3437,7 +3437,7 @@ Click to toggle table expansion
 <span id="cb121-9"><a href="#cb121-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb121-10"><a href="#cb121-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+221.32302+0"</code></pre>
+<pre><code>"2023+221.32790+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-72" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3458,7 +3458,7 @@ Click to toggle table expansion
 <span id="cb123-9"><a href="#cb123-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> doty2dote(time())</span>
 <span id="cb123-10"><a href="#cb123-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+221.32312+0'</code></pre>
+<pre><code>'2023+221.32801+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-73" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -3482,7 +3482,7 @@ Click to toggle table expansion
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+221.32322+0'
+'2023+221.32811+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-74" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3537,7 +3537,7 @@ y \mod 4 = 0 \\
 <span id="cb126-12"><a href="#cb126-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span></span>
 <span id="cb126-13"><a href="#cb126-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>2023+221.32287+0</code></pre>
+<pre><code>2023+221.32776+0</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-75" href="decalendar_javascript.ipynb.html">Source: decalendar_javascript.ipynb</a></div>
@@ -3559,7 +3559,7 @@ y \mod 4 = 0 \\
 <span id="cb128-9"><a href="#cb128-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb128-10"><a href="#cb128-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+221.32302+0"</code></pre>
+<pre><code>"2023+221.32790+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-76" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3580,7 +3580,7 @@ y \mod 4 = 0 \\
 <span id="cb130-9"><a href="#cb130-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> unix2doty(time())</span>
 <span id="cb130-10"><a href="#cb130-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+221.32312+0'</code></pre>
+<pre><code>'2023+221.32801+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-77" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -3604,7 +3604,7 @@ y \mod 4 = 0 \\
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+221.32322+0'
+'2023+221.32811+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-78" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3693,7 +3693,7 @@ y \mod 4 = 0 \\
 <span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb138-7"><a href="#cb138-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+221.32302+0"</code></pre>
+<pre><code>"2023+221.32790+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-80" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3711,7 +3711,7 @@ y \mod 4 = 0 \\
 <span id="cb140-6"><a href="#cb140-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb140-7"><a href="#cb140-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+221.32312+0'</code></pre>
+<pre><code>'2023+221.32801+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-81" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -5510,11 +5510,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb145-23"><a href="#cb145-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb145-24"><a href="#cb145-24" aria-hidden="true" tabindex="-1"></a><span class="fu">### Date conversion {#sec-demo-conv}</span></span>
 <span id="cb145-25"><a href="#cb145-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-26"><a href="#cb145-26" aria-hidden="true" tabindex="-1"></a>Enter a <span class="co">[</span><span class="ot">Gregorian calendar</span><span class="co">](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.)</span> date below to see the equivalent <span class="in">`Decalendar`</span> date in <span class="in">`doty`</span> date format (<span class="in">`year+day`</span>) and fractional year format (<span class="in">`year.yyy`</span>). Try special dates like birthdays and anniversaries.</span>
+<span id="cb145-26"><a href="#cb145-26" aria-hidden="true" tabindex="-1"></a>Enter a <span class="co">[</span><span class="ot">Gregorian calendar</span><span class="co">](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.)</span> date below to see the equivalent <span class="in">`Decalendar`</span> date in <span class="in">`doty`</span> date format (<span class="in">`year+day`</span>) and decimal year format (<span class="in">`year.yyy`</span>). Try special dates like birthdays and anniversaries.</span>
 <span id="cb145-27"><a href="#cb145-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb145-28"><a href="#cb145-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Timestamp arithmetic {#sec-demo-arith}</span></span>
 <span id="cb145-29"><a href="#cb145-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-30"><a href="#cb145-30" aria-hidden="true" tabindex="-1"></a><span class="in">`Doty`</span> numbers make working with dates and times a breeze🎐. Use the inputs below to add numbers to the current year and <span class="in">`doty`</span>. Add a positive number to see a future date or add a negative number to get a past date. You can use decimal <span class="in">`doty`</span> numbers for times and even decimal years for dates! ✨🤩✨ For example, the fractional year date <span class="in">`1969.84`</span> ($1969+306/365$) is equivalent to the <span class="in">`doty`</span> date <span class="in">`1969+306`</span>.</span>
+<span id="cb145-30"><a href="#cb145-30" aria-hidden="true" tabindex="-1"></a><span class="in">`Doty`</span> numbers make working with dates and times a breeze🎐. Use the inputs below to add numbers to the current year and <span class="in">`doty`</span>. Add a positive number to see a future date or add a negative number to get a past date. You can use decimal <span class="in">`doty`</span> numbers for times and even decimal years for dates! ✨🤩✨ For example, the decimal year date <span class="in">`1969.84`</span> ($1969+306/365$) is equivalent to the <span class="in">`doty`</span> date <span class="in">`1969+306`</span>.</span>
 <span id="cb145-31"><a href="#cb145-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb145-32"><a href="#cb145-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Day of the year {#sec-summary-doty}</span></span>
 <span id="cb145-33"><a href="#cb145-33" aria-hidden="true" tabindex="-1"></a></span>
