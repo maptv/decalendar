@@ -21,6 +21,16 @@ import define from "https://api.observablehq.com/@decalender/decalendar@104.js?v
 new Runtime().module(define, name => { if (name === "pageLoadTimestamp") return new Inspector(document.querySelector("#observablehq-pageLoadTimestamp-f4158f4c")); });
 </script>
 
+This `Decalendar` timestamp increments every one ten thousandth ($10^{-5}$) of a day (centimilliday), which is `Decalendar` is called a `beat`.
+
+<div id="observablehq-now-2322ea1c"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/@decalender/decalendar@107.js?v=3";
+new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-2322ea1c")); });
+</script>
+
 ### Date conversion {#sec-demo-conv}
 
 Enter a [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.) date below to see the equivalent `Decalendar` date in `doty` date format (`year+day`) and decimal year format (`year.yyy`). Try special dates like birthdays and anniversaries.
@@ -1108,12 +1118,12 @@ The week number in the `decw` format, `ww`, ranges from 0 to 53 or -54 to -1. We
 ::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Day of the | `.` | Mexico City     | London          | Tokyo           |
 |------------|-----|-----------------|-----------------|-----------------|
-| Year       | `y` | `1999+365.5-3`  | `1999+365.8-3`  | `2000+000.2+4`  |
-| Year       | `y` | `1999-001.5-3`  | `1999-001.2-3`  | `2000-365.8+4`  |
-| Month      | `m` | `1999+B+29.5-3` | `1999+B+29.8-3` | `2000+0+00.2+4` |
-| Month      | `m` | `1999-1-01.5-3` | `1999-1-01.2-3` | `2000-C-31.8+4` |
-| Week       | `w` | `1999+52+2.5-3` | `1999+52+2.8-3` | `2000+00+3.2+4` |
-| Week       | `w` | `1999-01-5.5-3` | `1999-01-5.2-3` | `2000-53-4.8+4` |
+| Year       | `y` | `1999+365.5-3`  | `1999+365.8+0`  | `2000+000.2+4`  |
+| Year       | `y` | `2000-001.5-3`  | `2000-001.2+0`  | `2001-365.8+4`  |
+| Month      | `m` | `1999+B+29.5-3` | `1999+B+29.8+0` | `2000+0+00.2+4` |
+| Month      | `m` | `2000-1-01.5-3` | `2000-1-01.2+0` | `2001-C-31.8+4` |
+| Week       | `w` | `1999+52+2.5-3` | `1999+52+2.8+0` | `2000+00+3.2+4` |
+| Week       | `w` | `2000-01-5.5-3` | `2000-01-5.2+0` | `2001-53-4.8+4` |
 
 : The time in Mexico City, London, and Tokyo in all three dot formats {#tbl-dotex}
 :::
@@ -1134,7 +1144,7 @@ A major difficulty with the Gregorian calendar is that the date is disconnected 
 
 ### Workdays {#sec-work}
 
-The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 4 `dimes` (9.6 hours) long, 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In other words, this work schedule starts 75 `mils` (1.8 hours) earlier than 9AM (`Dot 375`) and ends 8.3̅ `mils` (12 minutes) earlier than 5PM (`Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` (261*8/240) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 8.76 `deks` (219\*.04) spent at work every year. The default approach of `Decalendar` is to compensate for having more restdays with longer workdays.
+The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 4 `dimes` (9.6 hours) long, 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In other words, this work schedule starts 75 `mils` (1.8 hours) earlier than 9AM (`Dot 375`) and ends 8.3̅ `mils` (12 minutes) earlier than 5PM (`Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` ($261 \times 8 \div 240$) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 87.6 `days` ($219 \times .4$) spent at work every year. The default approach of `Decalendar` is to compensate for having more restdays with longer workdays.
 
 ### Schedules {#sec-sched}
 
