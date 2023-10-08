@@ -472,6 +472,10 @@ console.log(new Date(Date.parse("2023-01-01T12:00")))
 function doty2deco(year = 1969, doty = 0) {
     return `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
 };
+function doty2deco(year = 1969, doty = 0) {
+    const day = Math.floor(doty);
+    return `${year.toString().padStart(4, "0")}+${day.toString().padStart(3, "0")}.${(doty - day).toString().padStart(5, "0").slice(2, 7)}`
+}
 function unix2deco(ms = 0) {
     return doty2deco(...unix2doty(ms));
 };

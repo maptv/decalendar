@@ -19,10 +19,9 @@ The `Decalendar` timestamp below shows the year and `doty` at the time this webp
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@decalender/decalendar@104.js?v=3";
 new Runtime().module(define, name => { if (name === "pageLoadTimestamp") return new Inspector(document.querySelector("#observablehq-pageLoadTimestamp-f4158f4c")); });
-</script>
+</script><br>
 
-  
-A timestamp that doesn't move isn't much fun, so here's one that increments every one ten thousandth ($10^{-5}$) of a day (centimilliday), which is `Decalendar` is called a `beat`. It's like a heart❤️beat!  Or if you prefer, a musical🎵beat!
+A timestamp that doesn't move isn't much fun, so here's one that increments every one ten thousandth ($10^{-5}$) of a day (`centimilliday`), which in `Decalendar` is called a `beat`. It's like a heart❤️beat! Or if you prefer, a musical🎵beat!
 
 <div id="observablehq-now-2322ea1c"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
@@ -30,9 +29,9 @@ A timestamp that doesn't move isn't much fun, so here's one that increments ever
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@decalender/decalendar@107.js?v=3";
 new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-2322ea1c")); });
-</script>
-  
-If subtract the second timestamp from the first, we can see how long this page has been open. You don't have to read it all in one sitting, it's not a speed-reading competition, so please feel free to take breaks😄.
+</script><br>
+
+If we subtract the first timestamp from the second, we can see how long this webpage has been open. You don't have to read it all in one sitting, it's not a speed-reading🏎️competition, so please feel free to take breaks😄.
 
 <div id="observablehq-diffDoty-798a81c1"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
