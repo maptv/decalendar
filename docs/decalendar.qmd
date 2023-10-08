@@ -21,6 +21,16 @@ import define from "https://api.observablehq.com/@decalender/decalendar@104.js?v
 new Runtime().module(define, name => { if (name === "pageLoadTimestamp") return new Inspector(document.querySelector("#observablehq-pageLoadTimestamp-f4158f4c")); });
 </script>
 
+This `Decalendar` timestamp increments every one ten thousandth ($10^{-5}$) of a day (centimilliday), which is `Decalendar` is called a `beat`.
+
+<div id="observablehq-now-2322ea1c"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/@decalender/decalendar@107.js?v=3";
+new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-2322ea1c")); });
+</script>
+
 ### Date conversion {#sec-demo-conv}
 
 Enter a [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.) date below to see the equivalent `Decalendar` date in `doty` date format (`year+day`) and decimal year format (`year.yyy`). Try special dates like birthdays and anniversaries.
