@@ -5,16 +5,16 @@ author: Martin Laptev
 
 # Summary {#sec-summary}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar system and `Declock` is decimal timekeeping system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). The most prevalent calendar system in use today, the Gregorian calendar, has roughly [trigesimal](https://en.wiktionary.org/wiki/trigesimal) (\~base30) months and [septimal](https://en.wiktionary.org/wiki/septimal) (base7) weeks, while our current timekeeping system uses [quadravigesimal](https://en.wiktionary.org/wiki/quadravigesimal) (base24) hours and [sexagesimal](https://en.wikipedia.org/wiki/Sexagesimal) (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
 
-In addition to being much easier to read, `doty` numbers are much easier to manipulate.
-<div id="observablehq-e9dd75f6"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-<script type="module">
-import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@84.js?v=3";
-new Runtime().module(define, Inspector.into("#observablehq-e9dd75f6"));
-</script>
+## Demonstration {#sec-demo}
+
+The `Decalendar` timestamp below shows the year and `doty` at the time this webpage was loaded. This timestamp is slightly more **precise** and much more **concise** than a timestamp with hours, minutes, and seconds.
+
+<iframe width="100%" height="105" frameborder="0"
+  src="https://observablehq.com/embed/@decalender/decalendar@103?cells=pageLoadTimestamp"></iframe>
+
+In addition to being much easier to read, `doty` numbers make working with dates a breeze🎐. Use the input below to add numbers to the current year and `doty`. Try adding both positive and negative numbers to see both future and past dates. You can even use decimal `doty` numbers and decimal years! ✨🤩✨ For example, the year `1969.84` is equivalent to the date `1969+306`.
 
 ## Day of the year {#sec-summary-doty}
 

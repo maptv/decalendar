@@ -128,7 +128,7 @@ function date2doty(month = 1, day = 1) {
 
 console.log(date2doty());
 
-function doty2date(doty = 306) {
+function doty2date(doty = 0) {
     const m = Math.floor((5 * doty + 2) / 153);
     return [Math.floor(m < 10 ? m + 3 : m - 9), Math.floor(doty - (153 * m + 2) / 5 + 2)];
 }
@@ -173,7 +173,7 @@ console.log((263 + 305) % 365);
 console.log((1 + 305) % 365);
 console.log(leap_year(2000));
 
-function doty2year(year = 1969, doty = 306) { return year + (doty > 305) }
+function doty2year(year = 1969, doty = 0) { return year + (doty > 305) }
 
 console.log(doty2year());
 
@@ -349,7 +349,7 @@ function build_dec(year = 1970, month = 1, day = 1, hours = 0, minutes = 0, seco
 
 console.log(build_dec())
 
-function build_iso(year = 1969, doty = 306, zone = "Z") {
+function build_iso(year = 1969, doty = 0, zone = "Z") {
     return `${doty2year(year, doty).toString().padStart(4, "0")
         }-${doty2date(doty).map(
             i => i.toString().padStart(2, "0")
@@ -469,12 +469,14 @@ console.log(parseFloat("-.03"))
 console.log(parseInt("3z"))
 console.log(new Date(Date.parse("2023-01-01T12:00")))
 
-function unix2deco(ms = 0) {
-    const [year, doty] = unix2doty(ms);
+function doty2deco(year = 1969, doty = 0) {
     return `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
 };
+function unix2deco(ms = 0) {
+    return doty2deco(...unix2doty(ms));
+};
 
-console.log(unix2deco())
+console.log(unix2deco(Date.now()))
 
 function isoo2doty(yd = "1970-001") {
     const [year, day] = yd.includes("-") ? yd.split("-") : yd.split(/(?=\d{4})/);
@@ -499,7 +501,7 @@ console.log(isoo2deco())
 //     return [year, days - (year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400))];
 // }
 
-function doty2dote(year = 1969, doty = 306) {
+function doty2dote(year = 1969, doty = 0) {
     return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
 }
 
@@ -510,7 +512,7 @@ function dote2doty(days = 719468) {
     return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
 }
 
-function doty2doty(year = 1969, doty = 306) {
+function doty2doty(year = 1969, doty = 0) {
     return dote2doty(doty2dote(year, doty));
 }
 
@@ -529,13 +531,13 @@ console.log(dote2doty(730484))
 console.log(dote2doty(730849))
 console.log(dote2doty(719468))
 console.log(dote2doty(719468.9))
-console.log(dote2doty(doty2dote(2000, -366)))
-console.log(dote2doty(doty2dote(1999, 0)))
-console.log(dote2doty(doty2dote(2000, -1)))
-console.log(dote2doty(doty2dote(1999, 374)))
-console.log(dote2doty(doty2dote(1971, -364.5)))
-console.log(dote2doty(doty2dote(1970, .5)))
-console.log(dote2doty(doty2dote(2023, 221-600)))
+console.log(doty2doty(2000, 0))
+console.log(doty2doty(1999, 0))
+console.log(doty2doty(2000, -1))
+console.log(doty2doty(1969.84))
+console.log(doty2doty(1971, -364.5))
+console.log(doty2doty(1970, .5))
+console.log(doty2doty(2023, 221-600))
 2023+221
 2023+221.17200+0
 2023+221.17212+0
@@ -561,11 +563,6 @@ function unix2doty(ms = 0) {
     return dote2doty(days)
 }
 
-function unix2deco(ms = 0) {
-    const [year, doty] = unix2doty(ms);
-    return `${year.toString().padStart(4, "0")}+${doty.toString().padStart(3, "0")}`
-  }
-  
 function greg2doty(month = 1, day = 1) {
     return Math.floor(
         (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
@@ -573,7 +570,7 @@ function greg2doty(month = 1, day = 1) {
 
 console.log(greg2doty())
 
-function doty2greg(doty = 306) {
+function doty2greg(doty = 0) {
     const m = Math.floor((5 * doty + 2) / 153);
     return [Math.floor(m < 10 ? m + 3 : m - 9), doty - Math.floor((153 * m + 2) / 5) + 1];
 }

@@ -124,10 +124,11 @@
   <ul>
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary"><span class="header-section-number">1</span> Summary</a>
   <ul class="collapse">
-  <li><a href="#day-of-the-year" id="toc-day-of-the-year" class="nav-link" data-scroll-target="#day-of-the-year"><span class="header-section-number">1.1</span> Day of the year</a></li>
-  <li><a href="#deks" id="toc-deks" class="nav-link" data-scroll-target="#deks"><span class="header-section-number">1.2</span> Deks</a></li>
-  <li><a href="#declock-time" id="toc-declock-time" class="nav-link" data-scroll-target="#declock-time"><span class="header-section-number">1.3</span> <code>Declock</code> time</a></li>
-  <li><a href="#decalendar-ordinal-date" id="toc-decalendar-ordinal-date" class="nav-link" data-scroll-target="#decalendar-ordinal-date"><span class="header-section-number">1.4</span> <code>Decalendar</code> ordinal date</a></li>
+  <li><a href="#demonstration" id="toc-demonstration" class="nav-link" data-scroll-target="#demonstration"><span class="header-section-number">1.1</span> Demonstration</a></li>
+  <li><a href="#day-of-the-year" id="toc-day-of-the-year" class="nav-link" data-scroll-target="#day-of-the-year"><span class="header-section-number">1.2</span> Day of the year</a></li>
+  <li><a href="#deks" id="toc-deks" class="nav-link" data-scroll-target="#deks"><span class="header-section-number">1.3</span> Deks</a></li>
+  <li><a href="#declock-time" id="toc-declock-time" class="nav-link" data-scroll-target="#declock-time"><span class="header-section-number">1.4</span> <code>Declock</code> time</a></li>
+  <li><a href="#decalendar-ordinal-date" id="toc-decalendar-ordinal-date" class="nav-link" data-scroll-target="#decalendar-ordinal-date"><span class="header-section-number">1.5</span> <code>Decalendar</code> ordinal date</a></li>
   </ul></li>
   <li><a href="#basic-concepts" id="toc-basic-concepts" class="nav-link" data-scroll-target="#basic-concepts"><span class="header-section-number">2</span> Basic concepts</a>
   <ul class="collapse">
@@ -242,26 +243,27 @@
 </header>     <p>Martin Laptev</p>
 <section id="summary" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Summary</h1>
-<p><code>Decalendar</code> is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar system and <code>Declock</code> is decimal timekeeping system. The goal of <code>Decalendar</code> and <code>Declock</code> is to replace all calendar and timekeeping systems that are based on non-decimal <a href="https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems">numeral systems</a>. The most prevalent calendar system in use today, the Gregorian calendar, has roughly <a href="https://en.wiktionary.org/wiki/trigesimal">trigesimal</a> (~base30) months and <a href="https://en.wiktionary.org/wiki/septimal">septimal</a> (base7) weeks, while our current timekeeping system uses <a href="https://en.wiktionary.org/wiki/quadravigesimal">quadravigesimal</a> (base24) hours and <a href="https://en.wikipedia.org/wiki/Sexagesimal">sexagesimal</a> (base60) minutes and seconds. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a single decimal number called the <code>day-of-the-year</code> (<code>doty</code>).</p>
-<p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css"></p>
-<script type="module">
-import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@decalender/decalendar@84.js?v=3";
-new Runtime().module(define, Inspector.into("#observablehq-e9dd75f6"));
-</script>
-<section id="day-of-the-year" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="day-of-the-year"><span class="header-section-number">1.1</span> Day of the year</h2>
+<p><code>Decalendar</code> is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar🗓️system and <code>Declock</code> is a decimal timekeeping⏳system. The goal of <code>Decalendar</code> and <code>Declock</code> is to replace all calendar and timekeeping systems that are based on non-decimal <a href="https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems">numeral systems</a>. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a single decimal number called the <code>day-of-the-year</code> (<code>doty</code>).</p>
+<section id="demonstration" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="demonstration"><span class="header-section-number">1.1</span> Demonstration</h2>
+<p>The <code>Decalendar</code> timestamp below shows the year and <code>doty</code> at the time this webpage was loaded. This timestamp is slightly more <strong>precise</strong> and much more <strong>concise</strong> than a timestamp with hours, minutes, and seconds.</p>
+<iframe width="100%" height="105" frameborder="0" src="https://observablehq.com/embed/@decalender/decalendar@103?cells=pageLoadTimestamp">
+</iframe>
+<p>In addition to being much easier to read, <code>doty</code> numbers make working with dates a breeze🎐. Use the input below to add numbers to the current year and <code>doty</code>. Try adding both positive and negative numbers to see both future and past dates. You can even use decimal <code>doty</code> numbers and decimal years! ✨🤩✨ For example, the year <code>1969.84</code> is equivalent to the date <code>1969+306</code>.</p>
+</section>
+<section id="day-of-the-year" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="day-of-the-year"><span class="header-section-number">1.2</span> Day of the year</h2>
 <p><a href="#fig-doty">Figure&nbsp;1</a> shows the components of the <code>doty</code> number that corresponds to midnight on January 1st in the Gregorian calendar. The first two <a href="https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values">digits</a> (hundreds and tens) of the <code>doty</code> are the <code>dek</code> number (30 in <a href="#fig-doty">Figure&nbsp;1</a>). <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The next digit (ones) of the <code>doty</code> number is the day-of-the-<code>dek</code> (<code>dotd</code>) number (6 in <a href="#fig-doty">Figure&nbsp;1</a>), which serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. Gregorian calendar dates require us to look up the day of the week, while the <code>doty</code> contains all of the analogous information for <code>Decalendar</code> in its first 3 digits (hundreds, tens, and ones).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_javascript_files/figure-html/b73989dd-5128-427e-9987-2fb01f3d593b-4-fig-doty.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_javascript_files/figure-html/99be0ebc-35eb-4a2e-8bf4-b211ce2f57ad-4-fig-doty.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: The components of a day-of-the-year (<code>doty</code>)</figcaption>
 </figure>
 </div>
 </section>
-<section id="deks" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="deks"><span class="header-section-number">1.2</span> Deks</h2>
-<p>As mentioned in <a href="#sec-summary-doty">Section&nbsp;1.1</a>, <code>deks</code> function as both months and weeks in <code>Decalendar</code>. A <code>dek</code> consists of 2 groups of 5 days called <code>pents.</code> Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule. The code in <a href="#exm-glance">Example&nbsp;1</a> generates <a href="#fig-schedules">Figure&nbsp;2</a> which compares the typical weekly schedule and the <code>Schedule 3 pently</code> schedule. Like other <code>pently</code> schedules, <code>Schedule 3</code> is named after the number of workdays it contains. The 3 workdays in <code>Schedule 3</code> are followed by a 2-day <code>pentend</code>, the <code>Decalender</code> equivalent of a weekend.</p>
+<section id="deks" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="deks"><span class="header-section-number">1.3</span> Deks</h2>
+<p>As mentioned in <a href="#sec-summary-doty">Section&nbsp;1.2</a>, <code>deks</code> function as both months and weeks in <code>Decalendar</code>. A <code>dek</code> consists of 2 groups of 5 days called <code>pents.</code> Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule. The code in <a href="#exm-glance">Example&nbsp;1</a> generates <a href="#fig-schedules">Figure&nbsp;2</a> which compares the typical weekly schedule and the <code>Schedule 3 pently</code> schedule. Like other <code>pently</code> schedules, <code>Schedule 3</code> is named after the number of workdays it contains. The 3 workdays in <code>Schedule 3</code> are followed by a 2-day <code>pentend</code>, the <code>Decalender</code> equivalent of a weekend.</p>
 <p>Unlike <code>Schedule 3</code> and the other <code>pently</code> schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. Each <code>Schedule 3</code> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). <a href="#sec-pently">Section&nbsp;5.4.3.1</a> provides more information on <code>Schedule 3</code> and the other <code>pently</code> schedules.</p>
 <p><span class="theorem-title"><strong>Example 1 </strong></span>&nbsp;</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -338,14 +340,14 @@ new Runtime().module(define, Inspector.into("#observablehq-e9dd75f6"));
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_javascript_files/figure-html/b73989dd-5128-427e-9987-2fb01f3d593b-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_javascript_files/figure-html/99be0ebc-35eb-4a2e-8bf4-b211ce2f57ad-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_javascript_files/figure-html/b73989dd-5128-427e-9987-2fb01f3d593b-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_javascript_files/figure-html/99be0ebc-35eb-4a2e-8bf4-b211ce2f57ad-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -355,22 +357,22 @@ new Runtime().module(define, Inspector.into("#observablehq-e9dd75f6"));
 </table>
 <p>Figure&nbsp;2: Weekly and pently schedule comparison</p>
 </section>
-<section id="declock-time" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="declock-time"><span class="header-section-number">1.3</span> <code>Declock</code> time</h2>
+<section id="declock-time" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="declock-time"><span class="header-section-number">1.4</span> <code>Declock</code> time</h2>
 <p>The digits after the decimal in the <code>doty</code> are <code>Declock</code> units. Of these units, <code>mils</code> are notable because they provide the right level of precision for displaying time on clocks and watches. <code>Dimes</code> are also noteworthy because they are used for time zone offsets. <a href="#fig-time">Figure&nbsp;3</a> shows how a <code>Declock</code> <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional day</a> time can be combined with a time zone offset. The <code>+0</code> at the end of the time in <a href="#fig-time">Figure&nbsp;3</a> indicates that the time is in the <code>Zone 0</code> time zone, which is equivalent to the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_javascript_files/figure-html/b73989dd-5128-427e-9987-2fb01f3d593b-5-fig-time.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_javascript_files/figure-html/99be0ebc-35eb-4a2e-8bf4-b211ce2f57ad-5-fig-time.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: The components of a <code>Declock</code> time</figcaption>
 </figure>
 </div>
 </section>
-<section id="decalendar-ordinal-date" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="decalendar-ordinal-date"><span class="header-section-number">1.4</span> <code>Decalendar</code> ordinal date</h2>
+<section id="decalendar-ordinal-date" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="decalendar-ordinal-date"><span class="header-section-number">1.5</span> <code>Decalendar</code> ordinal date</h2>
 <p>In addition to being combined with a time zone offset as in <a href="#fig-time">Figure&nbsp;3</a>, a <code>doty</code> can be combined with a year to form a <code>Decalendar</code> ordinal (<code>deco</code>) date. <a href="#fig-date">Figure&nbsp;4</a> shows a <code>deco</code> date that is equivalent to January 1st, 1969 in the Gregorian calendar. The <code>Declock</code> time in <a href="#fig-time">Figure&nbsp;3</a> and the <code>deco</code> date in <a href="#fig-date">Figure&nbsp;4</a> both use a plus sign (<code>+</code>) as a delimiter. If we combined the <code>deco</code> date from <a href="#fig-date">Figure&nbsp;4</a> and the <code>Declock</code> time from <a href="#fig-time">Figure&nbsp;3</a>, we would obtain a <code>deco stamp</code>: <code>1960+306.000+0</code>. <a href="#tbl-2x2">Table&nbsp;1</a> compares <code>doty</code> and <code>deco</code> dates in its first column and <code>doty</code> and <code>deco stamps</code> in its second column.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_javascript_files/figure-html/b73989dd-5128-427e-9987-2fb01f3d593b-3-fig-date.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_javascript_files/figure-html/99be0ebc-35eb-4a2e-8bf4-b211ce2f57ad-3-fig-date.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: The components of a <code>Decalendar</code> ordinal (<code>deco</code>) date</figcaption>
 </figure>
 </div>
@@ -3197,7 +3199,7 @@ y \mod 4 = 0 \\
 <span id="cb90-13"><a href="#cb90-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023+221.23850+0</code></pre>
+<pre><code>2023+221.28470+0</code></pre>
 </div>
 </div></div>
 </section>
