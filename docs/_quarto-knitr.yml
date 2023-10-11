@@ -23,8 +23,3 @@ format:
       dark: [darkly, dark.scss]
       light: [flatly, light.scss]
     output-file: index.html
-  pdf:
-    colorlinks: true
-    output-file: decalendar.pdf
-  docx:
-    output-file: decalendar.docx

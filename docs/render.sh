@@ -29,7 +29,7 @@ quarto render "$1" --cache-refresh --profile r --metadata engine:jupyter --outpu
 # jupytext "${1%.*}.js" --output "${1%.*}_javascript.ipynb" --execute --set-kernel javascript
 
 # Replace code chunks with embed short codes
-cat "${1%.*}.qmd"  | gsed '/^```{/,/^```$/ { # set a range and say what should happen in that range below
+cat "${1%.*}.qmd"  | gsed '/^```{python}\|^```{r}\|^```{julia}\|^```{javascript}/,/^```$/ { # set a range and say what should happen in that range below
     /^```{.*}$\|#| tags:/!d; # delete all but the first line and tags line of all code chunks
     N;s/\n//g; # join pairs of lines in all code blocks
     s/^```{\(.*\)}#| tags: \[\(.*\)\]/{{< embed '"${1%.*}"'_\1\.ipynb#\2 echo=true >}}/g; # replace code chunk and comment syntax with shortcode syntax
