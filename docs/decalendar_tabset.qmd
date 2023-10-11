@@ -18,9 +18,8 @@ The `Decalendar` timestamp below shows the year and `doty` at the time this webp
 ::: {#observablehq-load-a38e03d2}
 :::
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-
 ```{=html}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@dec/dec.js?v=3";
@@ -34,9 +33,8 @@ A timestamp that doesn't move isn't much fun, so here's one that increments ever
 ::: {#observablehq-now-a38e03d2}
 :::
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-
 ```{=html}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@dec/dec.js?v=3";
@@ -50,9 +48,8 @@ If we subtract the first timestamp from the second, we can see how long this web
 ::: {#observablehq-diff-a38e03d2}
 :::
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-
 ```{=html}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@dec/dec.js?v=3";
