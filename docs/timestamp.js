@@ -585,3 +585,36 @@ function doty2greg(doty = 0) {
 console.log(doty2greg(-122))
 
 console.log(greg2doty(doty2greg(123)))
+
+function doty2dote(year = 1969, doty = 0) {
+  return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
+}
+function dote2doty(days = 719468) {
+  const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+    dotc = days - era * 146097,
+    yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
+  return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
+}
+function dote2deco(days = 719468) {
+  return doty2deco(dote2doty(days))
+}
+function doty2doty(year = 1969, doty = 0) {
+  return dote2doty(doty2dote(year, doty));
+}
+function unix2doty(ms = 0) {
+  const days = ms / 86400000 + 719468;
+  return dote2doty(days)
+}
+function doty2deco(year = 1969, doty = 0) {
+  const day = Math.floor(doty);
+  return `${year.toString().padStart(4, "0")}+${day.toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}`
+};
+function unix2deco(ms = 0) {
+    return doty2deco(...unix2doty(ms));
+};
+function unix2dote(ms = 0) {
+    return doty2dote(...unix2doty(ms));
+};
+
+
+load = unix2deco(Date.now());

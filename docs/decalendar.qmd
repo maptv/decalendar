@@ -15,113 +15,50 @@ author: Martin Laptev
 
 The `Decalendar` timestamp below shows the year and `doty` at the time this webpage was loaded. This timestamp is slightly more **precise** and much more **concise** than a timestamp with hours, minutes, and seconds.
 
-```{ojs}
-//| echo: false
-//| output: false
-function doty2dote(year = 1969, doty = 0) {
-  return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
-}
-function dote2doty(days = 719468) {
-  const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
-    dotc = days - era * 146097,
-    yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
-  return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
-}
-function dote2deco(days = 719468) {
-  return doty2deco(dote2doty(days))
-}
-function doty2doty(year = 1969, doty = 0) {
-  return dote2doty(doty2dote(year, doty));
-}
-function unix2doty(ms = 0) {
-  const days = ms / 86400000 + 719468;
-  return dote2doty(days)
-}
-function doty2deco(year = 1969, doty = 0) {
-  const day = Math.floor(doty);
-  return `${year.toString().padStart(4, "0")}+${day.toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}`
-};
-function unix2deco(ms = 0) {
-    return doty2deco(...unix2doty(ms));
-};
-function unix2dote(ms = 0) {
-    return doty2dote(...unix2doty(ms));
-};
-```
+::: {#observablehq-load-a38e03d2}
+:::
 
-```{ojs}
-//| output: all
-load = unix2deco(Date.now());
-```
-
-<div id="observablehq-load-a38e03d2"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+
+```{=html}
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@dec/dec.js?v=3";
 new Runtime().module(define, name => { if (name === "load") return new Inspector(document.querySelector("#observablehq-load-a38e03d2")); });
 </script>
-
+```
 #### Now {#sec-demo-stamp-now}
 
 A timestamp that doesn't move isn't much fun, so here's one that increments every one ten thousandth ($10^{-5}$) of a day (`centimilliday`), which in `Decalendar` is called a `beat`. It's like a heart❤️beat! Or if you prefer, a musical♫beat!
 
-```{ojs}
-//| output: all
-now = {
-  while(true) {
-    yield unix2deco(Date.now());
-  }
-}
-```
+::: {#observablehq-now-a38e03d2}
+:::
 
-<div id="observablehq-now-a38e03d2"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+
+```{=html}
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@dec/dec.js?v=3";
 new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-a38e03d2")); });
 </script>
-
-```{ojs}
-//| output: all
-now = {
-  while(true) {
-    yield unix2deco(Date.now());
-  }
-}
 ```
-
 #### Diff {#sec-demo-stamp-diff}
 
 If we subtract the first timestamp from the second, we can see how long this webpage has been open. You don't have to read it all in one sitting, it's not a speed-reading🏎️competition, so please feel free to take breaks😄.
 
-```{ojs}
-nowDote = {
-  while(true) {
-    yield unix2dote(Date.now());
-  }
-}
-loadDote = unix2dote(Date.now());
-```
+::: {#observablehq-diff-a38e03d2}
+:::
 
-```{ojs}
-//| output: all
-diff = {
-  while(true) {
-    yield dote2deco(nowDote - loadDote).slice(2, 9);
-  }
-}
-```
-
-<div id="observablehq-diff-a38e03d2"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+
+```{=html}
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@dec/dec.js?v=3";
 new Runtime().module(define, name => { if (name === "diff") return new Inspector(document.querySelector("#observablehq-diff-a38e03d2")); });
 </script>
-
+```
 ### Date conversion {#sec-demo-conv}
 
 Enter a [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.) date below to see the equivalent `Decalendar` date in `doty` date format (`year+day`) and decimal year format (`year.yyy`). Try special dates like birthdays and anniversaries.
@@ -658,7 +595,7 @@ doty2year()
 
 ### Leap years {#sec-gregl}
 
-A leap year has 366 days in both `Decalendar` and the Gregorian calendar. `Day 365` is Leap Day in `Decalendar` and is synonymous with February 29, the Gregorian calendar leap day. `Decalendar` positions Leap Day, `Day 365`, at the end of the year, which requires an adjustment of the Gregorian calendar definition of a leap year. To check if a `Decalendar` year is a leap, we must first add 1 to the year before plugging it into @eq-gregl or the [`year2bool`](http://howardhinnant.github.io/date_algorithms.html#is_leap) function in @exm-gregl [@hinnant2014].
+A leap year has 366 days in both `Decalendar` and the Gregorian calendar. `Day 365` is Leap Day in `Decalendar` and is synonymous with February 29, the Gregorian calendar leap day. `Decalendar` positions Leap Day, `Day 365`, at the end of the year, which requires an adjustment of the Gregorian calendar definition of a leap year. To check if a `Decalendar` year is a leap, we must first add 1 to the year before plugging it into @eq-gregl or the [`year2bool`](http://howardhinnant.github.io/date_algorithms.html#is_leap) function in [@exm-gregl; @hinnant2014].
 
 Interestingly, years from negative `deco` dates do not need any adjustment. The first day of `Year 1999` is `1999+000` or `2000-366`, while the last day is `1999+365` or `2000-001`. `Year 1999` is a leap year from the perspective of the positive `deco` dates, `1999+000` and `1999+365`, because it goes from `Day 0` to `Day 365`. In the context of the negative `deco` dates,`2000-366` and `2000-001`, `Year 2000` is a leap year because it goes from `Day -366` to `Day -1`.
 
@@ -1911,7 +1848,7 @@ A major difficulty with the Gregorian calendar is that the date is disconnected 
 
 ### Workdays {#sec-work}
 
-The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 4 `dimes` (9.6 hours) long, 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In other words, this work schedule starts 75 `mils` (1.8 hours) earlier than 9AM (`Dot 375`) and ends 8.3̅ `mils` (12 minutes) earlier than 5PM (`Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260*8/240) per common year and 8.7 `deks` ($261 \times 8 \div 240$) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 87.6 `days` ($219 \times .4$) spent at work every year. The default approach of `Decalendar` is to compensate for having more restdays with longer workdays.
+The Gregorian calendar has many more workdays, 260 in common years and 261 in leap year. Despite having many fewer workdays and many more restdays, workers following `Decalendar` would actually spent slightly more time at work overall, because the `Decalendar` workday goes from `Dot 3` to `Dot 7` and thus is 4 `dimes` (9.6 hours) long, 6.6̅ `cents` (96 minutes) longer than the typical 9-to-5 work schedule (`Dot 375` to `Dot 7083̅`). In other words, this work schedule starts 75 `mils` (1.8 hours) earlier than 9AM (`Dot 375`) and ends 8.3̅ `mils` (12 minutes) earlier than 5PM (`Dot 7083̅`). In a typical 40-hour workweek, workers spend 23.80952381 `cents` per day at work on average, which adds up to 8.6̅ `deks` (260\*8/240) per common year and 8.7 `deks` ($261 \times 8 \div 240$) per leap year. In contrast, workers following `Decalendar` spend 24 `cents` per day at work on average, which totals up to 87.6 `days` ($219 \times .4$) spent at work every year. The default approach of `Decalendar` is to compensate for having more restdays with longer workdays.
 
 ### Schedules {#sec-sched}
 
