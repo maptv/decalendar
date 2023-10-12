@@ -9,11 +9,12 @@ author: Martin Laptev
 
 ## Day-of-the-year {#sec-summary-doty}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). @exm-doty shows code that can be used to obtain the current `doty` date and time: ${setStyle(dotyDate, d3.schemePaired[0])}\.${setStyle(dotyTime, d3.schemePaired[3])}.
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). @exm-doty shows code that can be used to obtain the current `doty` date and time: ${setStyle(dotyDate, d3.schemePaired[0])} ${setStyle(dotyTime, d3.schemePaired[3])}.
 
 The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date:
 \${setStyle(dotyDate, d3.schemePaired[0])}.
-The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: .${setStyle(dotyTime, d3.schemePaired[3])}.
+The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time:
+.\${setStyle(dotyTime, d3.schemePaired[3])}.
 
 `Doty` numbers are slightly more **precise** and much more **concise** than dates and times in the form of a month, day, hour, minute, and second. Compare the current `doty` to the current date and time in `mm-ddThh:mm:ss` format: ${setStyle(isoDate, d3.schemePaired[4])} ${setStyle(isoTime, d3.schemePaired[5])}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
 
@@ -137,6 +138,8 @@ beat
 ```
 :::
 
+Now it's your turn! Enter a month and `dotm` below to see the equivalent `doty` date: ${setStyle(outputDoty, d3.schemePaired[0])}. Try special dates like birthdays🎂and🥂anniversaries!
+
 ```{ojs}
 viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
 ```
@@ -144,6 +147,8 @@ viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
 ```{ojs}
 viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day"})
 ```
+
+You can also enter a `doty` below to get the current month and `dotm`: ${setStyle(monthAndDay, d3.schemePaired[4])}. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
 
 ```{ojs}
 viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
@@ -170,12 +175,21 @@ outputDoty
 ```
 
 ```{ojs}
-monthAndDay = doty2greg(inputDoty);
+monthAndDay = doty2greg(inputDoty).map(i => i.toString().padStart(2, "0")).join("-");
 monthAndDay
 ```
 :::
 
 ## Year {#sec-summary-year}
+
+`Doty` numbers can can be combined with years to form `Decalendar` ordinal (`deco`) dates (`year+day`) and timestamps (`year+day.ddddd`). The current `deco` timestamp is
+${setStyle(decoYear, d3.schemePaired[7])}
+${setStyle(dotyDate, d3.schemePaired[0])}
+${setStyle(dotyTime, d3.schemePaired[3])}. Enter a timestamp in `year-mm-dd hh:mm` format below to see the equivalent `deco` timestamp: 
+${setStyle(dtYear, d3.schemePaired[7])}
+${setStyle(dtDotyDate, d3.schemePaired[0])}
+${setStyle(dtDotyTime, d3.schemePaired[3])}.
+You can also enter a `year-mm-dd` date and `hh:mm` time to see the synonymous `deco` date and time (`year+day.ddddd`): ${outputDatetime}.
 
 ```{ojs}
 viewof inputDate = Inputs.date({label: "Date", value: "1970-01-01"})
@@ -188,14 +202,15 @@ viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"
 Parsing `deco` dates and times:
 
 
+
 ::: {#exm-deco}
 :::
 
 ::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 
 ```{ojs}
-year = deco.slice(0, 4)
-year
+decoYear = deco.slice(0, 4)
+decoYear
 ```
 
 ```{ojs}
