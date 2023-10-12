@@ -516,6 +516,21 @@ function dote2doty(days = 719468) {
     return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
 }
 
+function dote2year(days = 719468) {
+    const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        dotc = days - era * 146097,
+        yotc = (dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365;
+    return yotc + era * 400;
+}
+
+function doty2year(year = 1969, doty = 0) {
+    return dote2year(doty2dote(year, doty));
+}
+
+console.log(dote2year(730485))
+
+console.log(Math.ceil(doty2year(1969, 306) * 1e3) / 1e3)
+
 function doty2doty(year = 1969, doty = 0) {
     return dote2doty(doty2dote(year, doty));
 }
@@ -538,13 +553,15 @@ console.log(dote2doty(719468.9))
 console.log(doty2doty(2000, 0))
 console.log(doty2doty(1999, 0))
 console.log(doty2doty(2000, -1))
-console.log(doty2doty(1969.381))
-console.log(doty2doty(1969 + (Math.ceil(144 / 365 * 1e3)/ 1e3)))
-console.log(doty2doty(1999 + (Math.ceil(144 / 365 * 1e3)/ 1e3)))
+console.log(doty2doty(1951.957))
+console.log(doty2doty(1969 + (Math.ceil(2 / 365 * 1e3)/ 1e3)))
+console.log(doty2doty(1969 + (Math.ceil(2 / 366 * 1e3)/ 1e3)))
 console.log(Math.ceil(139 / 365 * 1e3)/ 1e3)
 console.log(doty2doty(1971, -364.5))
 console.log(doty2doty(1970, .5))
 console.log(doty2doty(2023, 221-600))
+const dotytest = 17;
+console.log((Math.round(dotytest / 366 * 1e3)/ 1e3) === (Math.round(dotytest / 365 * 1e3)/ 1e3))
 2023+221
 2023+221.17200+0
 2023+221.17212+0
