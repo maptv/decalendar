@@ -5,7 +5,70 @@ author: Martin Laptev
 
 # Summary {#sec-summary}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. The goal of `Decalendar` and `Declock` is to replace all calendar and timekeeping systems that are based on non-decimal [numeral systems](https://en.wikipedia.org/wiki/List_of_numeral_systems#Standard_positional_numeral_systems). Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the `day-of-the-year` (`doty`).
+## Day-of-the-year {#sec-summary-doty}
+
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` shows the `Decalendar` date, while the [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) displays the `Declock` time.
+
+The current `doty` date and time is shown in @exm-doty. The code used to create @exm-doty is available in the [Observable](https://observablehq.com/) notebook version of this document: <https://observablehq.com/@dec/dec>.
+
+::: {#exm-doty}
+:::
+
+```{ojs}
+import { doty } from "@dec/dec"
+doty
+```
+
+## Dates {#sec-summary-date}
+
+ @fig-doty shows the `doty` number that corresponds to midnight on January 1st (`306.0`) in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.). Any Gregorian calendar date and any time of day can be represented by a single `doty` number.
+
+![The components of a day-of-the-year (`doty`)](fig-doty.svg){#fig-doty fig-alt="A 4-digit number with 3 digits before the decimal and 1 digit after the decimal. The three digits before the decimal are labeled 'January 1st'. The digit after the decimal is labeled 'Midnight'." fig-align="center"}
+
+Enter a month and day in @exm-date to see the equivalent `Decalendar doty` date. Try special dates like birthdays🎂and🥂anniversaries!
+
+::: {#exm-date}
+:::
+
+```{ojs}
+import { greg2doty } from "@dec/dec"
+```
+
+```{ojs}
+viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
+```
+
+```{ojs}
+viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day of the month"})
+```
+
+```{ojs}
+greg2doty(month, dotm)
+```
+
+## Times {#sec-summary-time}
+
+`Declock` measures time in [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days). The current `Declock` time is shown in @exm-time. `Declock` times are slightly more **precise** and much more **concise** than a times in hours, minutes, and seconds. The last digit of the time in @exm-time increments every one ten thousandth ($10^{-5}$) of a day (`centimilliday`), which in `Decalendar` is called a `beat`. A `beat` lasts 0.864 seconds. It's like a heart❤️beat! Or if you prefer, a musical♫beat!
+
+::: {#exm-time}
+:::
+
+<div id="observablehq-time-4b9037e0"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/@dec/dec@311.js?v=4";
+new Runtime().module(define, name => { if (name === "time") return new Inspector(document.querySelector("#observablehq-time-4b9037e0")); });
+</script>
+
+## Fractional years {#sec-summary-frac-days}
+
+`Decalendar` typically displays dates as year and `doty` integers separated by a plus sign (`year+day`), but `Decalendar` dates can also be shown as a fractional year. The current `Decalendar` date in both of these formats is shown in @exm-year
+
+::: {#exm-year}
+:::
+
+`Doty` numbers can can be combined with a year to form a `Decalendar` ordinal (`deco`) date. @fig-year shows the `doty` number that corresponds to midnight on January 1st (`306.0`) in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.).January 1st, 1970 is `1969+306`. Any `deco` date can also be represented by a fractional year.
 
 ## Demonstrations {#sec-demo}
 
@@ -13,7 +76,7 @@ author: Martin Laptev
 
 #### Page load {#sec-demo-stamp-load}
 
-The `Decalendar` timestamp below shows the year and `doty` at the time this webpage was loaded. This timestamp is slightly more **precise** and much more **concise** than a timestamp with hours, minutes, and seconds.
+The `Decalendar` timestamp below shows the year and `doty` at the time this webpage was loaded.
 
 ::: {#observablehq-load-a38e03d2}
 :::
@@ -26,9 +89,10 @@ import define from "https://api.observablehq.com/@dec/dec.js?v=3";
 new Runtime().module(define, name => { if (name === "load") return new Inspector(document.querySelector("#observablehq-load-a38e03d2")); });
 </script>
 ```
+
 #### Now {#sec-demo-stamp-now}
 
-A timestamp that doesn't move isn't much fun, so here's one that increments every one ten thousandth ($10^{-5}$) of a day (`centimilliday`), which in `Decalendar` is called a `beat`. It's like a heart❤️beat! Or if you prefer, a musical♫beat!
+A timestamp that doesn't move isn't much fun, so here's one that
 
 ::: {#observablehq-now-a38e03d2}
 :::
@@ -41,6 +105,7 @@ import define from "https://api.observablehq.com/@dec/dec.js?v=3";
 new Runtime().module(define, name => { if (name === "now") return new Inspector(document.querySelector("#observablehq-now-a38e03d2")); });
 </script>
 ```
+
 #### Diff {#sec-demo-stamp-diff}
 
 If we subtract the first timestamp from the second, we can see how long this webpage has been open. You don't have to read it all in one sitting, it's not a speed-reading🏎️competition, so please feel free to take breaks😄.
@@ -56,21 +121,33 @@ import define from "https://api.observablehq.com/@dec/dec.js?v=3";
 new Runtime().module(define, name => { if (name === "diff") return new Inspector(document.querySelector("#observablehq-diff-a38e03d2")); });
 </script>
 ```
+
 ### Date conversion {#sec-demo-conv}
 
-Enter a [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.) date below to see the equivalent `Decalendar` date in `doty` date format (`year+day`) and decimal year format (`year.yyy`). Try special dates like birthdays and anniversaries.
+<div id="observablehq-viewof-date-1b8dfe0d"></div>
+<div id="observablehq-deco-1b8dfe0d"></div>
+<div id="observablehq-year-1b8dfe0d"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/@dec/dec@229.js?v=3";
+new Runtime().module(define, name => {
+  if (name === "viewof date") return new Inspector(document.querySelector("#observablehq-viewof-date-1b8dfe0d"));
+  if (name === "deco") return new Inspector(document.querySelector("#observablehq-deco-1b8dfe0d"));
+  if (name === "year") return new Inspector(document.querySelector("#observablehq-year-1b8dfe0d"));
+  return ["time"].includes(name);
+});
+</script>
 
 ### Timestamp arithmetic {#sec-demo-arith}
 
-`Doty` numbers make working with dates and times a breeze🎐. Use the inputs below to add numbers to the current year and `doty`. Add a positive number to see a future date or add a negative number to get a past date. You can use decimal `doty` numbers for times and even decimal years for dates! ✨🤩✨ For example, the decimal year date `1969.84` ($1969+306/365$) is equivalent to the `doty` date `1969+306`.
-
-## Day of the year {#sec-summary-doty}
-
-@fig-doty shows the components of the `doty` number that corresponds to midnight on January 1st in the Gregorian calendar. The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
-
-![The components of a day-of-the-year (`doty`)](fig-doty.png){#fig-doty fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'." fig-align="center"}
+`Doty` numbers make working with dates and times a breeze🎐. Use the inputs below to add numbers to the current year and `doty`. Add a positive number to see a future date or add a negative number to get a past date. You can use decimal `doty` numbers for times and even decimal years for dates! ✨🤩✨ For example, the decimal year date `1969.839` ($\lceil 1969+306/365 \rceil$) is equivalent to the `doty` date `1969+306`.
 
 ## Deks {#sec-summary-dek}
+
+The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
+
+![The dek components of a day-of-the-year (`doty`)](fig-deks.png){#fig-deks fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'." fig-align="center"}
 
 As mentioned in @sec-summary-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
 
@@ -267,7 +344,7 @@ The French Republican calendar and `Declock` both break the day down into decima
 
 ## Swatch Internet Time {#sec-sit}
 
-[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, [UTC+1](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC+01:00,_A), limiting its utility outside of Central Europe or West Africa. `Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits. More information on `Declock` time zones can be found in @sec-zone.
+[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, [UTC+1](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC+01:00,_A), limiting its utility outside of Central Europe or West Africa. Swatch Internet Time is 41.6̅ `mils` ahead of UTC and the `Declock Zone 0` time zone.`Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits. More information on `Declock` time zones can be found in @sec-zone.
 
 ## Gregorian calendar {#sec-greg}
 
@@ -1423,7 +1500,7 @@ We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule 
 
 ::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Schedule | seq spread    | splice       | sled                | seq slice           |
-|----------|---------------|--------------|---------------------|---------------------|
+|---------------|---------------|---------------|---------------|---------------|
 | 2        | ≫2\>3\>.2\>.6 | ≫2\>3\>.2:.8 | :365:1,4:.2\>.6     | :365:1,4:.2:.8      |
 | 3        | ≫3\>2\>.3\>.4 | ≫3\>2\>.3:.7 | :365:1,1,3:.3\>.4   | :365:1,1,3:.3:.7    |
 | 4        | ≫4≫.35\>.3    | ≫4≫.35:.65   | :365:3\*1,2:.35\>.3 | :365:3\*1,2:.35:.65 |
