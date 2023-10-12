@@ -51,7 +51,7 @@ doty
 ```
 
 ```{ojs}
-dotyDate = doty.slice(0, 2)
+dotyDate = doty.slice(0, 3)
 dotyDate
 ```
 
