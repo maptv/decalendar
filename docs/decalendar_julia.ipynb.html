@@ -259,9 +259,49 @@
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">{ </span>doty } from <span class="st">"@dec/dec"</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>doty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">dote2doty</span>(days <span class="op">=</span> <span class="fl">719468</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> era <span class="op">=</span> <span class="bu">Math</span>.<span class="fu">floor</span>((days <span class="op">&gt;=</span> <span class="fl">0</span> ? days <span class="op">:</span> days <span class="op">-</span> <span class="fl">146096</span>) <span class="op">/</span> <span class="fl">146097</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    dotc <span class="op">=</span> days <span class="op">-</span> era <span class="op">*</span> <span class="fl">146097</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    yotc <span class="op">=</span> <span class="bu">Math</span>.<span class="fu">floor</span>((dotc <span class="op">-</span> <span class="bu">Math</span>.<span class="fu">floor</span>(dotc <span class="op">/</span> <span class="fl">1460</span>) <span class="op">+</span> <span class="bu">Math</span>.<span class="fu">floor</span>(dotc <span class="op">/</span> <span class="fl">36524</span>) <span class="op">-</span> <span class="bu">Math</span>.<span class="fu">floor</span>(dotc <span class="op">/</span> <span class="fl">146096</span>)) <span class="op">/</span> <span class="fl">365</span>);</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> [yotc <span class="op">+</span> era <span class="op">*</span> <span class="fl">400</span>, dotc <span class="op">-</span> (yotc <span class="op">*</span> <span class="fl">365</span> <span class="op">+</span> <span class="bu">Math</span>.<span class="fu">floor</span>(yotc <span class="op">/</span> <span class="fl">4</span>) <span class="op">-</span> <span class="bu">Math</span>.<span class="fu">floor</span>(yotc <span class="op">/</span> <span class="fl">100</span>))];</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(ms <span class="op">=</span> <span class="fl">0</span>) {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">dote2doty</span>(ms <span class="op">/</span> <span class="fl">86400000</span> <span class="op">+</span> <span class="fl">719468</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2deco</span>(year <span class="op">=</span> <span class="fl">1969</span>, doty <span class="op">=</span> <span class="fl">0</span>) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> day <span class="op">=</span> <span class="bu">Math</span>.<span class="fu">floor</span>(doty);</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="ss">`${year.toString().padStart(4, "0")}+${day.toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}`</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2deco</span>(ms <span class="op">=</span> <span class="fl">0</span>) {</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">doty2deco</span>(<span class="op">...</span><span class="fu">unix2doty</span>(ms));</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>unix <span class="op">=</span> {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(<span class="cn">true</span>) {</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    yield <span class="dt">Date</span>.<span class="fu">now</span>();</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>deco <span class="op">=</span> <span class="fu">unix2deco</span>(unix)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>doty <span class="op">=</span> deco.<span class="fu">slice</span>(<span class="fl">5</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>doty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -275,7 +315,7 @@
 <p><a href="#fig-doty">Figure&nbsp;1</a> shows the <code>doty</code> number that corresponds to midnight on January 1st (<code>306.0</code>) in the <a href="https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.">Gregorian calendar</a>. Any Gregorian calendar date and any time of day can be represented by a single <code>doty</code> number.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_julia_files/figure-html/bdaab808-709e-4c65-a2ec-b55f7b13233b-1-fig-doty.svg" class="img-fluid figure-img"></p>
+<p><img src="decalendar_julia_files/figure-html/76b9b9e6-78dc-4642-89fe-fa6c7d4baa00-1-fig-doty.svg" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: The components of a day-of-the-year (<code>doty</code>)</figcaption>
 </figure>
 </div>
@@ -284,7 +324,10 @@
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">{ </span>greg2doty } from <span class="st">"@dec/dec"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">greg2doty</span>(month <span class="op">=</span> <span class="fl">1</span>, day <span class="op">=</span> <span class="fl">1</span>) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span>.<span class="fu">floor</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        (<span class="fl">153</span> <span class="op">*</span> (month <span class="op">&gt;</span> <span class="fl">2</span> ? month <span class="op">-</span> <span class="fl">3</span> <span class="op">:</span> month <span class="op">+</span> <span class="fl">9</span>) <span class="op">+</span> <span class="fl">2</span>) <span class="op">/</span> <span class="fl">5</span> <span class="op">+</span> day <span class="op">-</span> <span class="fl">1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
@@ -331,7 +374,7 @@ new Runtime().module(define, name => { if (name === "time") return new Inspector
 </section>
 <section id="fractional-years" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="fractional-years"><span class="header-section-number">1.4</span> Fractional years</h2>
-<p><code>Decalendar</code> typically displays dates as year and <code>doty</code> integers separated by a plus sign (<code>year+day</code>), but <code>Decalendar</code> dates can also be shown as a fractional year. The current <code>Decalendar</code> date in both of these formats is shown in <a href="#exm-year">Example&nbsp;4</a></p>
+<p><code>Decalendar</code> typically displays dates as year and <code>doty</code> integers separated by a plus sign (<code>year+day</code>), but <code>Decalendar</code> dates can also be shown as a fractional year. The current <code>Decalendar</code> date in both of these formats is shown in <a href="#exm-year">Example&nbsp;4</a>.</p>
 <p><span class="theorem-title"><strong>Example 4 </strong></span>&nbsp;</p>
 <p><code>Doty</code> numbers can can be combined with a year to form a <code>Decalendar</code> ordinal (<code>deco</code>) date. <strong>?<strong>?@fig-year</strong></strong> shows the <code>doty</code> number that corresponds to midnight on January 1st (<code>306.0</code>) in the <a href="https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.">Gregorian calendar</a>.January 1st, 1970 is <code>1969+306</code>. Any <code>deco</code> date can also be represented by a fractional year.</p>
 </section>
@@ -394,7 +437,7 @@ new Runtime().module(define, name => {
 <p>The first two <a href="https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values">digits</a> (hundreds and tens) of the <code>doty</code> are the <code>dek</code> number (30 in <a href="#fig-doty">Figure&nbsp;1</a>). <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The next digit (ones) of the <code>doty</code> number is the day-of-the-<code>dek</code> (<code>dotd</code>) number (6 in <a href="#fig-doty">Figure&nbsp;1</a>), which serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. Gregorian calendar dates require us to look up the day of the week, while the <code>doty</code> contains all of the analogous information for <code>Decalendar</code> in its first 3 digits (hundreds, tens, and ones).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_julia_files/figure-html/a43d1448-0f71-44fe-a886-598e556a9f1b-4-fig-deks.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_julia_files/figure-html/135adc4f-89e3-49b6-ad72-8f81719f4835-4-fig-deks.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;2: The dek components of a day-of-the-year (<code>doty</code>)</figcaption>
 </figure>
 </div>
@@ -475,14 +518,14 @@ new Runtime().module(define, name => {
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/a43d1448-0f71-44fe-a886-598e556a9f1b-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_julia_files/figure-html/135adc4f-89e3-49b6-ad72-8f81719f4835-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/a43d1448-0f71-44fe-a886-598e556a9f1b-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_julia_files/figure-html/135adc4f-89e3-49b6-ad72-8f81719f4835-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -497,7 +540,7 @@ new Runtime().module(define, name => {
 <p>The digits after the decimal in the <code>doty</code> are <code>Declock</code> units. Of these units, <code>mils</code> are notable because they provide the right level of precision for displaying time on clocks and watches. <code>Dimes</code> are also noteworthy because they are used for time zone offsets. <a href="#fig-time">Figure&nbsp;4</a> shows how a <code>Declock</code> <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional day</a> time can be combined with a time zone offset. The <code>+0</code> at the end of the time in <a href="#fig-time">Figure&nbsp;4</a> indicates that the time is in the <code>Zone 0</code> time zone, which is equivalent to the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_julia_files/figure-html/a43d1448-0f71-44fe-a886-598e556a9f1b-5-fig-time.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_julia_files/figure-html/135adc4f-89e3-49b6-ad72-8f81719f4835-5-fig-time.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: The components of a <code>Declock</code> time</figcaption>
 </figure>
 </div>
@@ -507,7 +550,7 @@ new Runtime().module(define, name => {
 <p>In addition to being combined with a time zone offset as in <a href="#fig-time">Figure&nbsp;4</a>, a <code>doty</code> can be combined with a year to form a <code>Decalendar</code> ordinal (<code>deco</code>) date. <a href="#fig-date">Figure&nbsp;5</a> shows a <code>deco</code> date that is equivalent to January 1st, 1969 in the Gregorian calendar. The <code>Declock</code> time in <a href="#fig-time">Figure&nbsp;4</a> and the <code>deco</code> date in <a href="#fig-date">Figure&nbsp;5</a> both use a plus sign (<code>+</code>) as a delimiter. If we combined the <code>deco</code> date from <a href="#fig-date">Figure&nbsp;5</a> and the <code>Declock</code> time from <a href="#fig-time">Figure&nbsp;4</a>, we would obtain a <code>deco stamp</code>: <code>1960+306.000+0</code>. <a href="#tbl-2x2">Table&nbsp;1</a> compares <code>doty</code> and <code>deco</code> dates in its first column and <code>doty</code> and <code>deco stamps</code> in its second column.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_julia_files/figure-html/a43d1448-0f71-44fe-a886-598e556a9f1b-3-fig-date.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_julia_files/figure-html/135adc4f-89e3-49b6-ad72-8f81719f4835-3-fig-date.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;5: The components of a <code>Decalendar</code> ordinal (<code>deco</code>) date</figcaption>
 </figure>
 </div>
@@ -3239,7 +3282,7 @@ console.log(doty2dote());</code></pre>
 <span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+225.09327+0"</code></pre>
+<pre><code>"2023+225.10686+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3344,7 +3387,7 @@ console.log(
 <span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+225.09327+0"</code></pre>
+<pre><code>"2023+225.10686+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3463,7 +3506,7 @@ console.log(unix2deco())</code></pre>
 <span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+225.09327+0"</code></pre>
+<pre><code>"2023+225.10686+0"</code></pre>
 </div>
 </div></div>
 </section>

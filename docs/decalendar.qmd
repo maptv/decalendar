@@ -15,7 +15,29 @@ The current `doty` date and time is shown in @exm-doty. The code used to create 
 :::
 
 ```{ojs}
-import { doty } from "@dec/dec"
+function dote2doty(days = 719468) {
+  const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+    dotc = days - era * 146097,
+    yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
+  return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
+}
+function unix2doty(ms = 0) {
+  return dote2doty(ms / 86400000 + 719468)
+}
+function doty2deco(year = 1969, doty = 0) {
+  const day = Math.floor(doty);
+  return `${year.toString().padStart(4, "0")}+${day.toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}`
+};
+function unix2deco(ms = 0) {
+    return doty2deco(...unix2doty(ms));
+};
+unix = {
+  while(true) {
+    yield Date.now();
+  }
+}
+deco = unix2deco(unix)
+doty = deco.slice(5)
 doty
 ```
 
@@ -31,7 +53,10 @@ Enter a month and day in @exm-date to see the equivalent `Decalendar doty` date.
 :::
 
 ```{ojs}
-import { greg2doty } from "@dec/dec"
+function greg2doty(month = 1, day = 1) {
+    return Math.floor(
+        (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
+)}
 ```
 
 ```{ojs}
