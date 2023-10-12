@@ -9,13 +9,20 @@ author: Martin Laptev
 
 ## Day-of-the-year {#sec-summary-doty}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` shows the `Decalendar` date, while the [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) displays the `Declock` time.
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). @exm-doty shows code that can be used to obtain the current `doty` date and time: ${doty}.
 
-The current `doty` date and time is shown in @exm-doty. The code used to create @exm-doty is also available in the [Observable](https://observablehq.com/) notebook version of this document: <https://observablehq.com/@dec/dec>.
+The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: ${dotyDate}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: ${dotyTime}.
+
+`Doty` numbers are slightly more **precise** and much more **concise** than dates and times in the form of a month, day, hour, minute, and second. Compare the current `doty` to the current date and time in `mm-ddThh:mm:ss` format: ${isoNoYear}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
+
+The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number: ${dek}, while the last digit is the current day-of-the-`dek` (`dotd`): ${dotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`.
+
+The digits of the current `doty` time provide the current `dime`: ${dime}, `cent`: ${cent}, `mil`: ${mil}, `phrase`: ${phrase}, and `beat`: ${beat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat.
 
 ::: {#exm-doty}
 :::
 
+::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 ```{ojs}
 function dote2doty(days = 719468) {
   const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
@@ -43,59 +50,169 @@ doty = deco.slice(5)
 doty
 ```
 
-## Dates {#sec-summary-date}
-
- @fig-doty shows the `doty` number that corresponds to midnight on January 1st (`306.0`) in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.). Any Gregorian calendar date and any time of day can be represented by a single `doty` number.
-
-![The components of a day-of-the-year (`doty`)](fig-doty.svg){#fig-doty fig-alt="A 4-digit number with 3 digits before the decimal and 1 digit after the decimal. The three digits before the decimal are labeled 'January 1st'. The digit after the decimal is labeled 'Midnight'." fig-align="center"}
-
-Enter a month and day in @exm-date to see the equivalent `Decalendar doty` date. Try special dates like birthdays🎂and🥂anniversaries!
-
-::: {#exm-date}
-:::
+```{ojs}
+dotyDate = doty.slice(0, 2)
+dotyDate
+```
 
 ```{ojs}
-function greg2doty(month = 1, day = 1) {
-    return Math.floor(
-        (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
-)}
+dotyTime = doty.slice(3)
+dotyTime
 ```
+
+
+```{ojs}
+iso = {
+  while(true) {
+    yield new Date().toISOString()
+  }
+}
+isoNoYear = iso.slice(5, 19)
+isoNoYear
+```
+
+```{ojs}
+dek = dotyDate.slice(0, 2)
+dek
+```
+
+```{ojs}
+dotd = dotyDate[3]
+dotd
+```
+
+```{ojs}
+dime = dotyTime[1]
+dime
+```
+
+```{ojs}
+cent = dotyTime.slice(1, 3)
+cent
+```
+
+```{ojs}
+mil = dotyTime.slice(1, 4)
+mil
+```
+
+```{ojs}
+phrase = dotyTime.slice(1, 5)
+phrase
+```
+
+```{ojs}
+beat = dotyTime.slice(-5)
+beat
+```
+:::
+
+Now it's your turn! Enter a month and `dotm` below to see the equivalent `doty` date: ${outputDoty}. Try special dates like birthdays🎂and🥂anniversaries!
 
 ```{ojs}
 viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
 ```
 
 ```{ojs}
-viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day of the month"})
+viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day"})
+```
+
+You can also enter a `doty` below to get the current month: ${monthAndDay[0]} and `dotm`: ${monthAndDay[1]}. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
+
+```{ojs}
+viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
+```
+
+::: {#exm-date}
+:::
+
+::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
+```{ojs}
+function greg2doty(month = 1, day = 1) {
+    return Math.floor(
+        (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
+)}
+function doty2greg(doty = 0) {
+    const m = Math.floor((5 * doty + 2) / 153);
+    return [Math.floor(m < 10 ? m + 3 : m - 9), doty - Math.floor((153 * m + 2) / 5) + 1];
+}
 ```
 
 ```{ojs}
-greg2doty(month, dotm)
+outputDoty = greg2doty(month, dotm)
+outputDoty
 ```
 
-## Times {#sec-summary-time}
-
-`Declock` measures time in [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days). The current `Declock` time is shown in @exm-time. `Declock` times are slightly more **precise** and much more **concise** than a times in hours, minutes, and seconds. The last digit of the time in @exm-time increments every one ten thousandth ($10^{-5}$) of a day (`centimilliday`), which in `Decalendar` is called a `beat`. A `beat` lasts 0.864 seconds. It's like a heart❤️beat! Or if you prefer, a musical♫beat!
-
-::: {#exm-time}
+```{ojs}
+monthAndDay = doty2greg(inputDoty);
+monthAndDay
+```
 :::
 
-<div id="observablehq-time-4b9037e0"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-<script type="module">
-import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-import define from "https://api.observablehq.com/@dec/dec@311.js?v=4";
-new Runtime().module(define, name => { if (name === "time") return new Inspector(document.querySelector("#observablehq-time-4b9037e0")); });
-</script>
+## Years {#sec-summary-frac-days}
 
-## Fractional years {#sec-summary-frac-days}
+`Doty` numbers can can be combined years to form a `Decalendar` ordinal (`deco`) date (`year+day`). The current `deco` date is ${deco.slice(0,8)}. Enter a date in `year-mm-dd` format below to see the equivalent `deco` date: ${decoDate}. You can also enter a `year-mm-dd` date and `hh:mm` time to see a `deco` date and time (`year+day.ddddd`): ${decoDatetime}.
 
-`Decalendar` typically displays dates as year and `doty` integers separated by a plus sign (`year+day`), but `Decalendar` dates can also be shown as a fractional year. The current `Decalendar` date in both of these formats is shown in @exm-year.
+
+```{ojs}
+viewof inputDate = Inputs.date({label: "Date", value: "1970-01-01"})
+```
+
+```{ojs}
+viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"})
+```
+
+Parsing `deco` dates and times:
+
+
+::: {#exm-deco}
+:::
+
+::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
+
+```{ojs}
+decoDate = unix2deco(inputDate).slice(0, 8)
+decoDate
+```
+
+```{ojs}
+decoDatetime = unix2deco(inputDatetime)
+decoDatetime
+```
+
+:::
+
+Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `deco` dates. Fractional years are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) that make up `Declock` times. The current `Decalendar` year date is ${year}. Year dates cannot include times and are only used when it is convenient to store a `deco` date as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
 
 ::: {#exm-year}
 :::
 
-`Doty` numbers can can be combined with a year to form a `Decalendar` ordinal (`deco`) date. @fig-year shows the `doty` number that corresponds to midnight on January 1st (`306.0`) in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.).January 1st, 1970 is `1969+306`. Any `deco` date can also be represented by a fractional year.
+::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
+```{ojs}
+function doty2dote(year = 1969, doty = 0) {
+  return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
+}
+function unix2dote(ms = 0) {
+    return doty2dote(...unix2doty(ms));
+};
+function dote2year(days = 719468) {
+    const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        dotc = days - era * 146097,
+        yotc = (dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365;
+    return yotc + era * 400;
+}
+function unix2year(ms = 0) {
+    return dote2year(unix2dote(ms));
+};
+year = Math.ceil(unix2year(unix) * 1e3) / 1e3
+```
+:::
+
+@fig-doty shows the `doty` number that corresponds to midnight on January 1st (`306.0`) in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.).
+
+![The components of a day-of-the-year (`doty`)](fig-doty.svg){#fig-doty fig-alt="A 4-digit number with 3 digits before the decimal and 1 digit after the decimal. The three digits before the decimal are labeled 'January 1st'. The digit after the decimal is labeled 'Midnight'." fig-align="center"}
+
+@fig-year shows the `doty` number that corresponds to midnight on January 1st (`306.0`) in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.).January 1st, 1970 is `1969+306`. Any `deco` date can also be represented by a fractional year.
 
 ## Demonstrations {#sec-demo}
 
@@ -171,8 +288,6 @@ new Runtime().module(define, name => {
 `Doty` numbers make working with dates and times a breeze🎐. Use the inputs below to add numbers to the current year and `doty`. Add a positive number to see a future date or add a negative number to get a past date. You can use decimal `doty` numbers for times and even decimal years for dates! ✨🤩✨ For example, the decimal year date `1969.839` ($\lceil 1969+306/365 \rceil$) is equivalent to the `doty` date `1969+306`.
 
 ## Deks {#sec-summary-dek}
-
-The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) (hundreds and tens) of the `doty` are the `dek` number (30 in @fig-doty). `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The next digit (ones) of the `doty` number is the day-of-the-`dek` (`dotd`) number (6 in @fig-doty), which serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. Gregorian calendar dates require us to look up the day of the week, while the `doty` contains all of the analogous information for `Decalendar` in its first 3 digits (hundreds, tens, and ones).
 
 ![The dek components of a day-of-the-year (`doty`)](fig-deks.png){#fig-deks fig-alt="A 3-digit number with 3 additional digits after the decimal. The first two digits are labeled 'Dek', the third digit is labeled 'Day of the dek', the fourth digit is labeled 'Dimes', the fourth and fifth digits are labeled 'Cents', and all three digits after the decimal are labeled 'Mils'." fig-align="center"}
 
