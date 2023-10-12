@@ -11,7 +11,7 @@ author: Martin Laptev
 
 `Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` shows the `Decalendar` date, while the [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) displays the `Declock` time.
 
-The current `doty` date and time is shown in @exm-doty. The code used to create @exm-doty is available in the [Observable](https://observablehq.com/) notebook version of this document: <https://observablehq.com/@dec/dec>.
+The current `doty` date and time is shown in @exm-doty. The code used to create @exm-doty is also available in the [Observable](https://observablehq.com/) notebook version of this document: <https://observablehq.com/@dec/dec>.
 
 ::: {#exm-doty}
 :::
@@ -47,7 +47,7 @@ doty
 
  @fig-doty shows the `doty` number that corresponds to midnight on January 1st (`306.0`) in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar#:~:text=The%20Gregorian%20calendar%20is%20the%20calendar%20used%20in%20most%20parts%20of%20the%20world.). Any Gregorian calendar date and any time of day can be represented by a single `doty` number.
 
-![The components of a day-of-the-year (`doty`)](fig-doty.png){#fig-doty fig-alt="A 4-digit number with 3 digits before the decimal and 1 digit after the decimal. The three digits before the decimal are labeled 'January 1st'. The digit after the decimal is labeled 'Midnight'." fig-align="center"}
+![The components of a day-of-the-year (`doty`)](fig-doty.svg){#fig-doty fig-alt="A 4-digit number with 3 digits before the decimal and 1 digit after the decimal. The three digits before the decimal are labeled 'January 1st'. The digit after the decimal is labeled 'Midnight'." fig-align="center"}
 
 Enter a month and day in @exm-date to see the equivalent `Decalendar doty` date. Try special dates like birthdays🎂and🥂anniversaries!
 

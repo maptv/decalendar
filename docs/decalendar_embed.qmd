@@ -3,13 +3,15 @@ title: "`Decalendar` and `Declock`"
 author: Martin Laptev
 ---
 
+<link rel="stylesheet" href="ewka-regular.ttf"/>
+
 # Summary {#sec-summary}
 
 ## Day-of-the-year {#sec-summary-doty}
 
 `Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` shows the `Decalendar` date, while the [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) displays the `Declock` time.
 
-The current `doty` date and time is shown in @exm-doty. The code used to create @exm-doty is available in the [Observable](https://observablehq.com/) notebook version of this document: <https://observablehq.com/@dec/dec>.
+The current `doty` date and time is shown in @exm-doty. The code used to create @exm-doty is also available in the [Observable](https://observablehq.com/) notebook version of this document: <https://observablehq.com/@dec/dec>.
 
 ::: {#exm-doty}
 :::
