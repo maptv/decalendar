@@ -63,7 +63,7 @@ new Runtime().module(define, name => { if (name === "time") return new Inspector
 
 ## Fractional years {#sec-summary-frac-days}
 
-`Decalendar` typically displays dates as year and `doty` integers separated by a plus sign (`year+day`), but `Decalendar` dates can also be shown as a fractional year. The current `Decalendar` date in both of these formats is shown in @exm-year
+`Decalendar` typically displays dates as year and `doty` integers separated by a plus sign (`year+day`), but `Decalendar` dates can also be shown as a fractional year. The current `Decalendar` date in both of these formats is shown in @exm-year.
 
 ::: {#exm-year}
 :::
