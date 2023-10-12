@@ -77,7 +77,7 @@ dek
 ```
 
 ```{ojs}
-dotd = dotyDate[3]
+dotd = dotyDate[2]
 dotd
 ```
 

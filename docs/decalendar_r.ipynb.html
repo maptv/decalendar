@@ -294,7 +294,7 @@
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>isoNoYear</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dek <span class="op">=</span> dotyDate<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dek</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dotd <span class="op">=</span> dotyDate[<span class="dv">3</span>]</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dotd <span class="op">=</span> dotyDate[<span class="dv">2</span>]</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dotd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dime <span class="op">=</span> dotyTime[<span class="dv">1</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -412,7 +412,7 @@
 <h2 data-number="1.4" class="anchored" data-anchor-id="dek"><span class="header-section-number">1.4</span> Dek</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_r_files/figure-html/8be8b861-5b2b-4a0d-b822-bff122abc811-4-fig-deks.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_r_files/figure-html/97733f32-f6df-4387-a842-58cbf57ee9df-4-fig-deks.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: The dek components of a day-of-the-year (<code>doty</code>)</figcaption>
 </figure>
 </div>
@@ -493,14 +493,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/8be8b861-5b2b-4a0d-b822-bff122abc811-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_r_files/figure-html/97733f32-f6df-4387-a842-58cbf57ee9df-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/8be8b861-5b2b-4a0d-b822-bff122abc811-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_r_files/figure-html/97733f32-f6df-4387-a842-58cbf57ee9df-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -515,7 +515,7 @@
 <p>The digits after the decimal in the <code>doty</code> are <code>Declock</code> units. Of these units, <code>mils</code> are notable because they provide the right level of precision for displaying time on clocks and watches. <code>Dimes</code> are also noteworthy because they are used for time zone offsets. <a href="#fig-time">Figure&nbsp;3</a> shows how a <code>Declock</code> <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional day</a> time can be combined with a time zone offset. The <code>+0</code> at the end of the time in <a href="#fig-time">Figure&nbsp;3</a> indicates that the time is in the <code>Zone 0</code> time zone, which is equivalent to the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_r_files/figure-html/8be8b861-5b2b-4a0d-b822-bff122abc811-5-fig-time.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_r_files/figure-html/97733f32-f6df-4387-a842-58cbf57ee9df-5-fig-time.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: The components of a <code>Declock</code> time</figcaption>
 </figure>
 </div>
@@ -525,7 +525,7 @@
 <p>In addition to being combined with a time zone offset as in <a href="#fig-time">Figure&nbsp;3</a>, a <code>doty</code> can be combined with a year to form a <code>Decalendar</code> ordinal (<code>deco</code>) date. <a href="#fig-date">Figure&nbsp;4</a> shows a <code>deco</code> date that is equivalent to January 1st, 1969 in the Gregorian calendar. The <code>Declock</code> time in <a href="#fig-time">Figure&nbsp;3</a> and the <code>deco</code> date in <a href="#fig-date">Figure&nbsp;4</a> both use a plus sign (<code>+</code>) as a delimiter. If we combined the <code>deco</code> date from <a href="#fig-date">Figure&nbsp;4</a> and the <code>Declock</code> time from <a href="#fig-time">Figure&nbsp;3</a>, we would obtain a <code>deco stamp</code>: <code>1960+306.000+0</code>. <a href="#tbl-2x2">Table&nbsp;1</a> compares <code>doty</code> and <code>deco</code> dates in its first column and <code>doty</code> and <code>deco stamps</code> in its second column.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_r_files/figure-html/8be8b861-5b2b-4a0d-b822-bff122abc811-3-fig-date.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_r_files/figure-html/97733f32-f6df-4387-a842-58cbf57ee9df-3-fig-date.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: The components of a <code>Decalendar</code> ordinal (<code>deco</code>) date</figcaption>
 </figure>
 </div>
@@ -3304,7 +3304,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb96-13"><a href="#cb96-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+225.29094+0'
+'2023+225.29384+0'
 </div>
 </div></div>
 <p>:::</p>
@@ -3409,7 +3409,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+225.29094+0'
+'2023+225.29384+0'
 </div>
 </div></div>
 </section>
