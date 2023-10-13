@@ -384,7 +384,7 @@
 </section>
 <section id="year" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="year"><span class="header-section-number">1.2</span> Year</h2>
-<p><code>Doty</code> numbers can be combined with years to form <code>Decalendar</code> ordinal (<code>deco</code>) dates (<code>year+day</code>) and timestamps (<code>year+day.ddddd</code>). Enter a timestamp in <code>year-mm-dd hh:mm</code> format below to see the equivalent <code>deco</code> timestamp: <span id="ojs-element-id-12"></span>.</p>
+<p><code>Doty</code> numbers can be combined with years to form <code>Decalendar</code> ordinal (<code>deco</code>) dates (<code>year+day</code>). Enter a timestamp in <code>year-mm-dd hh:mm</code> format below to see the equivalent <code>deco</code> timestamp (<code>year+day.ddd</code>): <span id="ojs-element-id-12"></span>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -406,7 +406,7 @@
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dtYear</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb27"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dtDotyDate <span class="op">=</span> <span class="fu">setStyle</span>(outputDatetime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">5</span><span class="op">,</span> <span class="dv">8</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">1</span>])</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>dtDotyDate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dtDotyTime <span class="op">=</span> <span class="fu">setStyle</span>(outputDatetime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">9</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">2</span>])</span>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dtDotyTime <span class="op">=</span> <span class="fu">setStyle</span>(outputDatetime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">9</span><span class="op">,</span> <span class="dv">12</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">2</span>])</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dtDotyTime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </blockquote>
 <p>Storing a date in the <code>Decalendar</code> fractional year format (<code>year.yyy</code>) allows us to avoid parsing <code>deco</code> dates. Fractional years are similar to the <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> that make up <code>Declock</code> times. The current <code>Decalendar</code> year date is <span id="ojs-element-id-13"></span>. Year dates cannot include times and are only used when it is convenient to store a <code>deco</code> date as a single number. Enter a <code>deco</code> or <code>year-mm-dd</code> date to see a custom year date. Enter a year date to turn it into a <code>deco</code> and <code>year-mm-dd</code> date.</p>
@@ -438,7 +438,7 @@
 <h2 data-number="1.4" class="anchored" data-anchor-id="dek"><span class="header-section-number">1.4</span> Dek</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_r_files/figure-html/c0838c11-846c-4f74-82d5-3b183e83cd83-4-fig-deks.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_r_files/figure-html/33129ecd-199e-4aef-b4c8-886c706fcde8-4-fig-deks.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;1: The dek components of a day-of-the-year (<code>doty</code>)</figcaption>
 </figure>
 </div>
@@ -519,14 +519,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/c0838c11-846c-4f74-82d5-3b183e83cd83-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_r_files/figure-html/33129ecd-199e-4aef-b4c8-886c706fcde8-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/c0838c11-846c-4f74-82d5-3b183e83cd83-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_r_files/figure-html/33129ecd-199e-4aef-b4c8-886c706fcde8-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -541,7 +541,7 @@
 <p>The digits after the decimal in the <code>doty</code> are <code>Declock</code> units. Of these units, <code>mils</code> are notable because they provide the right level of precision for displaying time on clocks and watches. <code>Dimes</code> are also noteworthy because they are used for time zone offsets. <a href="#fig-time">Figure&nbsp;3</a> shows how a <code>Declock</code> <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional day</a> time can be combined with a time zone offset. The <code>+0</code> at the end of the time in <a href="#fig-time">Figure&nbsp;3</a> indicates that the time is in the <code>Zone 0</code> time zone, which is equivalent to the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_r_files/figure-html/c0838c11-846c-4f74-82d5-3b183e83cd83-5-fig-time.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_r_files/figure-html/33129ecd-199e-4aef-b4c8-886c706fcde8-5-fig-time.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: The components of a <code>Declock</code> time</figcaption>
 </figure>
 </div>
@@ -551,7 +551,7 @@
 <p>In addition to being combined with a time zone offset as in <a href="#fig-time">Figure&nbsp;3</a>, a <code>doty</code> can be combined with a year to form a <code>Decalendar</code> ordinal (<code>deco</code>) date. <a href="#fig-date">Figure&nbsp;4</a> shows a <code>deco</code> date that is equivalent to January 1st, 1969 in the Gregorian calendar. The <code>Declock</code> time in <a href="#fig-time">Figure&nbsp;3</a> and the <code>deco</code> date in <a href="#fig-date">Figure&nbsp;4</a> both use a plus sign (<code>+</code>) as a delimiter. If we combined the <code>deco</code> date from <a href="#fig-date">Figure&nbsp;4</a> and the <code>Declock</code> time from <a href="#fig-time">Figure&nbsp;3</a>, we would obtain a <code>deco stamp</code>: <code>1960+306.000+0</code>. <a href="#tbl-2x2">Table&nbsp;1</a> compares <code>doty</code> and <code>deco</code> dates in its first column and <code>doty</code> and <code>deco stamps</code> in its second column.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="decalendar_r_files/figure-html/c0838c11-846c-4f74-82d5-3b183e83cd83-3-fig-date.png" class="img-fluid figure-img"></p>
+<p><img src="decalendar_r_files/figure-html/33129ecd-199e-4aef-b4c8-886c706fcde8-3-fig-date.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: The components of a <code>Decalendar</code> ordinal (<code>deco</code>) date</figcaption>
 </figure>
 </div>
@@ -3330,7 +3330,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb103-13"><a href="#cb103-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+226.05650+0'
+'2023+226.06975+0'
 </div>
 </div></div>
 <p>:::</p>
@@ -3435,7 +3435,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb107-13"><a href="#cb107-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+226.05650+0'
+'2023+226.06975+0'
 </div>
 </div></div>
 </section>
