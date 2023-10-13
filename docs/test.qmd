@@ -25,3 +25,13 @@ Finally, we display the chart:
 ```{ojs}
 chart
 ```
+
+```{ojs}
+x = 6
+```
+
+```{ojs}
+y = 9
+```
+
+\${x}.${y}
