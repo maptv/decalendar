@@ -59,9 +59,13 @@ function setStyle(content, style = {}) {
 }
 function dote2doty(days = 719468) {
   const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
-    dotc = days - era * 146097,
-    yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
-  return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
+      dotc = days - era * 146097,
+      yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
+  return [
+      yotc + era * 400,
+      Math.floor(dotc) + Math.floor(yotc / 100) - yotc * 365 - Math.floor(yotc / 4)
+      + (days.toString().includes(".") && Number(days.toString().split(/(?=\.)/)[1]))
+  ];
 }
 function unix2doty(ms = 0) {
   return dote2doty(ms / 86400000 + 719468)
@@ -213,20 +217,48 @@ Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco`
 viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"})
 ```
 
-You can also enter a year and a `doty` to get year, month, `dotm`, hour, minute, and second values:
+You can also enter a `deco` timestamp to see what it looks like
+
+- parsed: [\${ydParsed[0]}, \${ydParsed[1]}],
+- standardized: [\${ydStandardized[0]}, \${ydStandardized[1]}], and
+- converted: ${outputIsoc}.
 
 ```{ojs}
-viewof inputYear = Inputs.number({label: "Year", value: 1969})
-```
-
-```{ojs}
-viewof inputDoty1 = Inputs.range([0, 365], {label: "Doty", value: 306})
+viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 14})
 ```
 
 ::: {#exm-deco}
 :::
 
 ::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
+
+```{ojs}
+function deco2doty(timestamp = "1969+306.00000Z") {
+    const arr = timestamp.toString().split(/(?=[+-]|[a-zA-Z])/, 3);
+    switch (arr.length) {
+        case 1: return [unix2doty(Date.now())[0], parseFloat(arr[0]), 0];
+        case 2: return (/^[a-zA-Z]+$/.test(arr[1]))
+            ? [unix2doty(Date.now())[0], parseFloat(arr[0]), zone2hour(arr[1]) / 24]
+            : [parseInt(arr[0]), parseFloat(arr[1]), 0];
+    };
+    return [parseInt(arr[0]), parseFloat(arr[1]), /^[a-zA-Z]+$/.test(arr[2])
+        ? zone2hour(arr[2]) / 24
+        : parseFloat(arr[2].replace(/([+-])/, "$1\."))];
+}
+function doty2dote(year = 1969, doty = 0, zone = 0) {
+    return Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400)) + doty - zone;
+}
+function doty2doty(year = 1969, doty = 0, zone = 0) {
+    return dote2doty(doty2dote(year, doty, zone));
+}
+function doty2unix(year = 1969, doty = 306) {
+  const days = doty2dote(year, doty)
+  return (days - 719468) * 86400000;
+}
+function doty2isoc(year = 1969, doty = 306) {
+    return new Date(doty2unix(year, doty)).toISOString().slice(0, 19)
+}
+```
 
 ```{ojs}
 decoYear = setStyle(deco.slice(0, 4), d3.schemePaired[10])
@@ -253,6 +285,21 @@ dtDotyTime = setStyle(outputDatetime.slice(9, 12), d3.schemePaired[2])
 dtDotyTime
 ```
 
+```{ojs}
+ydParsed = deco2doty(inputDeco)
+ydParsed
+```
+
+```{ojs}
+ydStandardized = doty2doty(...ydParsed)
+ydStandardized
+```
+
+```{ojs}
+outputIsoc = doty2isoc(...ydStandardized)
+outputIsoc
+```
+
 :::
 
 Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `deco` dates. Fractional years are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) that make up `Declock` times. The current `Decalendar` year date is ${year}. Year dates cannot include times and are only used when it is convenient to store a `deco` date as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
@@ -262,12 +309,6 @@ Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us
 
 ::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 ```{ojs}
-function doty2dote(year = 1969, doty = 0) {
-  return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
-}
-function unix2dote(ms = 0) {
-    return doty2dote(...unix2doty(ms));
-};
 function dote2year(days = 719468) {
     const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         dotc = days - era * 146097,
@@ -959,10 +1000,6 @@ $$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-second}
 
 {{< embed decalendar_javascript.ipynb#hmso2isot echo=true >}}
 
-##### `doty2hmso`
-
-{{< embed decalendar_javascript.ipynb#doty2hmso echo=true >}}
-
 #### Julia
 
 ##### `time`
@@ -1027,6 +1064,8 @@ To create a `deco` timestamp, we can use the `doty2deco` or the `greg2deco` func
 ##### `doty2hmso`
 
 {{< embed decalendar_javascript.ipynb#doty2hmso echo=true >}}
+
+{{< embed decalendar_javascript.ipynb#doty2isoc echo=true >}}
 
 #### Julia
 
