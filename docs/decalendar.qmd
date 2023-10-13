@@ -208,13 +208,13 @@ monthAndDay
 
 ## Year {#sec-summary-year}
 
-Any `doty` can be combined with a year to form a `Decalendar` ordinal date (`deco`). Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco` (`year+day.ddd`): \${dtYear}+\${dtDotyDate}.\${dtDotyTime}.
+Any `doty` can be combined with a year to form a `Decalendar ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco` (`year+day.ddd`): \${dtYear}+\${dtDotyDate}.\${dtDotyTime}.
 
 ```{ojs}
 viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"})
 ```
 
-You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and doty, 2) standardized to ensure years are integers and doties are positive numbers between 0 and 366, and 3) converted into `year-mm-ddThh:mm:ss` format:
+You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers between 0 and 366, and 3) **converted** into `year-mm-ddThh:mm:ss` format:
 
 1.  \${ydParsed\[0\]}, \${ydParsed\[1\]}
 2.  \${outputDeco}
@@ -223,6 +223,8 @@ You can also enter a `deco` to see what it looks like after it is 1) **parsed** 
 ```{ojs}
 viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 14})
 ```
+
+The `deco` parsing code in @exm-deco defines the rules for storing dates as `Decalendar ordinals` (`decos`). 
 
 ::: {#exm-deco}
 :::
@@ -299,7 +301,7 @@ outputIsoc
 ```
 :::
 
-Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `deco` dates. Fractional years are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) that make up `Declock` times. The current `Decalendar` year date is \${year}. Year dates cannot include times and are only used when it is convenient to store a `deco` date as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
+Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `Decalendar ordinals` (`decos`). Fractional years are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) that make up `Declock` times. The current `Decalendar` year date is \${yearFrac}. Year dates cannot include times and are only used when it is convenient to store a `deco` as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
 
 ::: {#exm-year}
 :::
