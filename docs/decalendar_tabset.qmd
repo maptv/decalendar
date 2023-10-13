@@ -7,27 +7,15 @@ author: Martin Laptev
 
 ## Day-of-the-year {#sec-summary-doty}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). @exm-doty shows code that can be used to obtain the current `doty` date and time: \${styledDotyDate}.${styledDotyTime}.
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). @exm-doty shows code that can be used to obtain the current `doty` date and time: \${styledDotyDate}.\${styledDotyTime}.
 
-The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date:
-\${setStyle(dotyDate, d3.schemePaired[1])}.
-The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time:
-.${setStyle(dotyTime, d3.schemePaired[2])}.
+The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: .\${setStyle(dotyTime, d3.schemePaired\[2\])}.
 
-Days-of-the-year (`doties`) are slightly more **precise** and much more **concise** than dates and times in the form of a month, day, hour, minute, and second. Compare the current `doty` to the current date and time in `mm-ddThh:mm:ss` format:
-\${styledIsoDate}T${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
+Days-of-the-year (`doties`) are slightly more **precise** and much more **concise** than dates and times in the form of a month, day, hour, minute, and second. Compare the current `doty` to the current date and time in `mm-ddThh:mm:ss` format: \${styledIsoDate}T\${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
 
-The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number:
-${styledDek}, while the last digit is the current day-of-the-`dek` (`dotd`):
-${styledDotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`.
+The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number: \${styledDek}, while the last digit is the current day-of-the-`dek` (`dotd`): \${styledDotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`.
 
-The digits of the current `doty` time provide the current `dime`:
-${styledDime}, `cent`:
-${styledCent}, `mil`:
-${styledMil}, `phrase`:
-${styledPhrase}, and `beat`:
-${styledBeat}.
-`Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat.
+The digits of the current `doty` time provide the current `dime`: \${styledDime}, `cent`: \${styledCent}, `mil`: \${styledMil}, `phrase`: \${styledPhrase}, and `beat`: \${styledBeat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat.
 
 ::: {#exm-doty}
 :::
@@ -66,6 +54,9 @@ function dote2doty(days = 719468) {
 }
 function unix2doty(ms = 0) {
   return dote2doty(ms / 86400000 + 719468)
+}
+function doty2dote(year = 1969, doty = 0, zone = 0) {
+    return Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400)) + doty - zone;
 }
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
@@ -171,7 +162,7 @@ styledBeat
 ```
 :::
 
-Now it's your turn! Enter a month and `dotm` below to see the equivalent `doty` date: ${outputDoty}. Try special dates like birthdays🎂and🥂anniversaries!
+Now it's your turn! Enter a month and `dotm` below to see the equivalent `doty` date: \${outputDoty}. Try special dates like birthdays🎂and🥂anniversaries!
 
 ```{ojs}
 viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
@@ -181,7 +172,7 @@ viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
 viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day"})
 ```
 
-You can also enter a `doty` below to get the current month and `dotm`: ${monthAndDay}. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
+You can also enter a `doty` below to get the current month and `dotm`: \${monthAndDay}. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
 
 ```{ojs}
 viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
@@ -225,9 +216,9 @@ viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"
 
 You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and doty, 2) standardized to ensure years are integers and doties are positive numbers between 0 and 366, and 3) converted into `year-mm-ddThh:mm:ss` format:
 
-1. \${ydParsed[0]}, ${ydParsed[1]}
-2. ${outputDeco}
-3. ${outputIsoc}
+1.  \${ydParsed\[0\]}, \${ydParsed\[1\]}
+2.  \${outputDeco}
+3.  \${outputIsoc}
 
 ```{ojs}
 viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 14})
@@ -237,7 +228,6 @@ viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", valu
 :::
 
 ::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
-
 ```{ojs}
 function deco2doty(timestamp = "1969+306.00000Z") {
     const arr = timestamp.toString().split(/(?=[+-]|[a-zA-Z])/, 3);
@@ -253,9 +243,6 @@ function deco2doty(timestamp = "1969+306.00000Z") {
 }
 function deco2deco(timestamp = "1969+306.00000Z") {
     return doty2deco(...deco2doty(timestamp))
-}
-function doty2dote(year = 1969, doty = 0, zone = 0) {
-    return Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400)) + doty - zone;
 }
 function doty2doty(year = 1969, doty = 0, zone = 0) {
     return dote2doty(doty2dote(year, doty, zone));
@@ -310,10 +297,9 @@ outputDeco
 outputIsoc = deco2isoc(outputDeco)
 outputIsoc
 ```
-
 :::
 
-Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `deco` dates. Fractional years are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) that make up `Declock` times. The current `Decalendar` year date is ${year}. Year dates cannot include times and are only used when it is convenient to store a `deco` date as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
+Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `deco` dates. Fractional years are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) that make up `Declock` times. The current `Decalendar` year date is \${year}. Year dates cannot include times and are only used when it is convenient to store a `deco` date as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
 
 ::: {#exm-year}
 :::
@@ -1698,7 +1684,7 @@ We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule 
 
 ::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Schedule | seq spread    | splice       | sled                | seq slice           |
-|---------------|---------------|---------------|---------------|---------------|
+|----------|---------------|--------------|---------------------|---------------------|
 | 2        | ≫2\>3\>.2\>.6 | ≫2\>3\>.2:.8 | :365:1,4:.2\>.6     | :365:1,4:.2:.8      |
 | 3        | ≫3\>2\>.3\>.4 | ≫3\>2\>.3:.7 | :365:1,1,3:.3\>.4   | :365:1,1,3:.3:.7    |
 | 4        | ≫4≫.35\>.3    | ≫4≫.35:.65   | :365:3\*1,2:.35\>.3 | :365:3\*1,2:.35:.65 |

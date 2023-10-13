@@ -284,29 +284,32 @@
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(ms <span class="op">=</span> <span class="dv">0</span>) {</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">dote2doty</span>(ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span>)</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2deco</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">306</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> yd <span class="op">=</span> <span class="fu">dote2doty</span>(<span class="fu">doty2dote</span>(year<span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(doty)))<span class="op">;</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span>yd[<span class="dv">0</span>]<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+</span><span class="sc">${</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        yd[<span class="dv">1</span>]<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">3</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}${</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        doty<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">includes</span>(<span class="st">"."</span>) <span class="op">?</span> <span class="st">"."</span> <span class="op">+</span> (</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            (doty <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">?</span> (doty<span class="op">-</span>zone)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)<span class="op">.</span><span class="fu">pop</span>()</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="op">:</span> [<span class="op">...</span>(doty<span class="op">-</span>zone)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)<span class="op">.</span><span class="fu">pop</span>()]<span class="op">.</span><span class="fu">map</span>(</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                (e<span class="op">,</span> i<span class="op">,</span> a) <span class="kw">=&gt;</span> (i <span class="op">+</span> <span class="dv">1</span> <span class="op">===</span> a<span class="op">.</span><span class="at">length</span>) <span class="op">?</span> <span class="dv">10</span> <span class="op">-</span> e <span class="op">:</span> <span class="dv">9</span> <span class="op">-</span> e</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            )<span class="op">.</span><span class="fu">join</span>(<span class="st">""</span>)</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        ) <span class="op">:</span> <span class="st">""</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="sc">}</span><span class="vs">`</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2deco</span>(ms <span class="op">=</span> <span class="dv">0</span>) {</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">doty2deco</span>(<span class="op">...</span><span class="fu">unix2doty</span>(ms))<span class="op">;</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>unix <span class="op">=</span> {</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(<span class="kw">true</span>) {</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">;</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>deco <span class="op">=</span> <span class="fu">unix2deco</span>(unix)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">14</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>doty <span class="op">=</span> deco<span class="op">.</span><span class="fu">slice</span>(<span class="dv">5</span>)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>doty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2dote</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">/</span> <span class="dv">4</span>) <span class="op">-</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">/</span> <span class="dv">100</span>) <span class="op">+</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">/</span> <span class="dv">400</span>)) <span class="op">+</span> doty <span class="op">-</span> zone<span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2deco</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">306</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> yd <span class="op">=</span> <span class="fu">dote2doty</span>(<span class="fu">doty2dote</span>(year<span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(doty)))<span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span>yd[<span class="dv">0</span>]<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+</span><span class="sc">${</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        yd[<span class="dv">1</span>]<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">3</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}${</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        doty<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">includes</span>(<span class="st">"."</span>) <span class="op">?</span> <span class="st">"."</span> <span class="op">+</span> (</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            (doty <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">?</span> (doty<span class="op">-</span>zone)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)<span class="op">.</span><span class="fu">pop</span>()</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>            <span class="op">:</span> [<span class="op">...</span>(doty<span class="op">-</span>zone)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)<span class="op">.</span><span class="fu">pop</span>()]<span class="op">.</span><span class="fu">map</span>(</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>                (e<span class="op">,</span> i<span class="op">,</span> a) <span class="kw">=&gt;</span> (i <span class="op">+</span> <span class="dv">1</span> <span class="op">===</span> a<span class="op">.</span><span class="at">length</span>) <span class="op">?</span> <span class="dv">10</span> <span class="op">-</span> e <span class="op">:</span> <span class="dv">9</span> <span class="op">-</span> e</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            )<span class="op">.</span><span class="fu">join</span>(<span class="st">""</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        ) <span class="op">:</span> <span class="st">""</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2deco</span>(ms <span class="op">=</span> <span class="dv">0</span>) {</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">doty2deco</span>(<span class="op">...</span><span class="fu">unix2doty</span>(ms))<span class="op">;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>unix <span class="op">=</span> {</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(<span class="kw">true</span>) {</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">;</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>deco <span class="op">=</span> <span class="fu">unix2deco</span>(unix)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">14</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>doty <span class="op">=</span> deco<span class="op">.</span><span class="fu">slice</span>(<span class="dv">5</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>doty</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dotyDate <span class="op">=</span> doty<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">3</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dotyDate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>styledDotyDate <span class="op">=</span> <span class="fu">setStyle</span>(dotyDate<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -433,21 +436,18 @@
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">deco2deco</span>(timestamp <span class="op">=</span> <span class="st">"1969+306.00000Z"</span>) {</span>
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">doty2deco</span>(<span class="op">...</span><span class="fu">deco2doty</span>(timestamp))</span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2dote</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">/</span> <span class="dv">4</span>) <span class="op">-</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">/</span> <span class="dv">100</span>) <span class="op">+</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">/</span> <span class="dv">400</span>)) <span class="op">+</span> doty <span class="op">-</span> zone<span class="op">;</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2doty</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">dote2doty</span>(<span class="fu">doty2dote</span>(year<span class="op">,</span> doty<span class="op">,</span> zone))<span class="op">;</span></span>
 <span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2doty</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">dote2doty</span>(<span class="fu">doty2dote</span>(year<span class="op">,</span> doty<span class="op">,</span> zone))<span class="op">;</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2unix</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">306</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="fu">doty2dote</span>(year<span class="op">,</span> doty<span class="op">,</span> zone) <span class="op">-</span> <span class="dv">719468</span>) <span class="op">*</span> <span class="dv">86400000</span><span class="op">;</span></span>
 <span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2unix</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">306</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="fu">doty2dote</span>(year<span class="op">,</span> doty<span class="op">,</span> zone) <span class="op">-</span> <span class="dv">719468</span>) <span class="op">*</span> <span class="dv">86400000</span><span class="op">;</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2isoc</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">306</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="fu">doty2unix</span>(year<span class="op">,</span> doty<span class="op">,</span> zone))<span class="op">.</span><span class="fu">toISOString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">0</span>]</span>
 <span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2isoc</span>(year <span class="op">=</span> <span class="dv">1969</span><span class="op">,</span> doty <span class="op">=</span> <span class="dv">306</span><span class="op">,</span> zone <span class="op">=</span> <span class="dv">0</span>) {</span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="fu">doty2unix</span>(year<span class="op">,</span> doty<span class="op">,</span> zone))<span class="op">.</span><span class="fu">toISOString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">0</span>]</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">deco2isoc</span>(timestamp <span class="op">=</span> <span class="st">"1969+306.00000Z"</span>) {</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">doty2isoc</span>(<span class="op">...</span><span class="fu">deco2doty</span>(timestamp))</span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">deco2isoc</span>(timestamp <span class="op">=</span> <span class="st">"1969+306.00000Z"</span>) {</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">doty2isoc</span>(<span class="op">...</span><span class="fu">deco2doty</span>(timestamp))</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb26"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>decoYear <span class="op">=</span> <span class="fu">setStyle</span>(deco<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">4</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">10</span>])</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>decoYear</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb27"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>outputDatetime <span class="op">=</span> <span class="fu">unix2deco</span>(inputDatetime)</span>
@@ -563,14 +563,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/372abb5d-f3d7-493d-87ad-43ee792c78d8-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_julia_files/figure-html/0c514430-9fba-4b96-ad63-6b462598ed0f-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/372abb5d-f3d7-493d-87ad-43ee792c78d8-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_julia_files/figure-html/0c514430-9fba-4b96-ad63-6b462598ed0f-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3292,7 +3292,7 @@ console.log(doty2dote());</code></pre>
 <span id="cb122-10"><a href="#cb122-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+226.84014+0"</code></pre>
+<pre><code>"2023+226.87049+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3397,7 +3397,7 @@ console.log(
 <span id="cb127-10"><a href="#cb127-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+226.84014+0"</code></pre>
+<pre><code>"2023+226.87049+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3516,7 +3516,7 @@ console.log(unix2deco())</code></pre>
 <span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+226.84014+0"</code></pre>
+<pre><code>"2023+226.87049+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -4418,11 +4418,11 @@ console.log(parse_dec());</code></pre>
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 17%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
