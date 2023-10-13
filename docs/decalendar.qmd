@@ -14,7 +14,7 @@ The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%2
 The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time:
 .${setStyle(dotyTime, d3.schemePaired[2])}.
 
-`Doty` numbers are slightly more **precise** and much more **concise** than dates and times in the form of a month, day, hour, minute, and second. Compare the current `doty` to the current date and time in `mm-ddThh:mm:ss` format:
+Days-of-the-year (`doties`) are slightly more **precise** and much more **concise** than dates and times in the form of a month, day, hour, minute, and second. Compare the current `doty` to the current date and time in `mm-ddThh:mm:ss` format:
 \${styledIsoDate}T${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
 
 The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number:
@@ -57,23 +57,28 @@ function setStyle(content, style = {}) {
     ...rest
   }}>${content}</span>`;
 }
+// http://howardhinnant.github.io/date_algorithms.html#civil_from_days
 function dote2doty(days = 719468) {
-  const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
-      dotc = days - era * 146097,
-      yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
-  return [
-      yotc + era * 400,
-      Math.floor(dotc) + Math.floor(yotc / 100) - yotc * 365 - Math.floor(yotc / 4)
-      + (days.toString().includes(".") && Number(days.toString().split(/(?=\.)/)[1]))
-  ];
+    const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        dotc = days - era * 146097,
+        yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
+    return [yotc + era * 400, dotc + Math.floor(yotc / 100) - yotc * 365 - Math.floor(yotc / 4)];
 }
 function unix2doty(ms = 0) {
   return dote2doty(ms / 86400000 + 719468)
 }
-function doty2deco(year = 1969, doty = 0) {
-  const day = Math.floor(doty);
-  return `${year.toString().padStart(4, "0")}+${day.toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}`
-};
+function doty2deco(year = 1969, doty = 306, zone = 0) {
+    const yd = dote2doty(doty2dote(year, Math.floor(doty)));
+    return `${yd[0].toString().padStart(4, "0")}+${
+        yd[1].toString().padStart(3, "0")}${
+        doty.toString().includes(".") ? "." + (
+            (doty > 0) ? (doty-zone).toString().split(".").pop()
+            : [...(doty-zone).toString().split(".").pop()].map(
+                (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
+            ).join("")
+        ) : ""
+    }`
+}
 function unix2deco(ms = 0) {
     return doty2deco(...unix2doty(ms));
 };
@@ -82,7 +87,7 @@ unix = {
     yield Date.now();
   }
 }
-deco = unix2deco(unix)
+deco = unix2deco(unix).slice(0, 14)
 doty = deco.slice(5)
 doty
 ```
@@ -187,10 +192,12 @@ viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
 
 ::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 ```{ojs}
+// http://howardhinnant.github.io/date_algorithms.html#days_from_civil
 function greg2doty(month = 1, day = 1) {
     return Math.floor(
         (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
 )}
+// http://howardhinnant.github.io/date_algorithms.html#civil_from_days
 function doty2greg(doty = 0) {
     const m = Math.floor((5 * doty + 2) / 153);
     return [Math.floor(m < 10 ? m + 3 : m - 9), doty - Math.floor((153 * m + 2) / 5) + 1];
@@ -210,18 +217,17 @@ monthAndDay
 
 ## Year {#sec-summary-year}
 
-`Doty` numbers can be combined with years to form `Decalendar` ordinal (`deco`) dates (`year+day`).
-Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco` timestamp (`year+day.ddd`): \${dtYear}+\${dtDotyDate}.\${dtDotyTime}.
+Any `doty` can be combined with a year to form a `Decalendar` ordinal date (`deco`). Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco` (`year+day.ddd`): \${dtYear}+\${dtDotyDate}.\${dtDotyTime}.
 
 ```{ojs}
 viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"})
 ```
 
-You can also enter a `deco` timestamp to see what it looks like
+You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and doty, 2) standardized to ensure years are integers and doties are positive numbers between 0 and 366, and 3) converted into `year-mm-ddThh:mm:ss` format:
 
-- parsed: [\${ydParsed[0]}, \${ydParsed[1]}],
-- standardized: [\${ydStandardized[0]}, \${ydStandardized[1]}], and
-- converted: ${outputIsoc}.
+1. \${ydParsed[0]}, ${ydParsed[1]}
+2. ${outputDeco}
+3. ${outputIsoc}
 
 ```{ojs}
 viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 14})
@@ -245,18 +251,23 @@ function deco2doty(timestamp = "1969+306.00000Z") {
         ? zone2hour(arr[2]) / 24
         : parseFloat(arr[2].replace(/([+-])/, "$1\."))];
 }
+function deco2deco(timestamp = "1969+306.00000Z") {
+    return doty2deco(...deco2doty(timestamp))
+}
 function doty2dote(year = 1969, doty = 0, zone = 0) {
     return Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400)) + doty - zone;
 }
 function doty2doty(year = 1969, doty = 0, zone = 0) {
     return dote2doty(doty2dote(year, doty, zone));
 }
-function doty2unix(year = 1969, doty = 306) {
-  const days = doty2dote(year, doty)
-  return (days - 719468) * 86400000;
+function doty2unix(year = 1969, doty = 306, zone = 0) {
+    return (doty2dote(year, doty, zone) - 719468) * 86400000;
 }
-function doty2isoc(year = 1969, doty = 306) {
-    return new Date(doty2unix(year, doty)).toISOString().slice(0, 19)
+function doty2isoc(year = 1969, doty = 306, zone = 0) {
+    return new Date(doty2unix(year, doty, zone)).toISOString().split(".")[0]
+}
+function deco2isoc(timestamp = "1969+306.00000Z") {
+    return doty2isoc(...deco2doty(timestamp))
 }
 ```
 
@@ -291,12 +302,12 @@ ydParsed
 ```
 
 ```{ojs}
-ydStandardized = doty2doty(...ydParsed)
-ydStandardized
+outputDeco = doty2deco(...ydParsed)
+outputDeco
 ```
 
 ```{ojs}
-outputIsoc = doty2isoc(...ydStandardized)
+outputIsoc = deco2isoc(outputDeco)
 outputIsoc
 ```
 
@@ -374,7 +385,7 @@ The `stamp` in @sec-stamp assumes that the year and time zone are known. A date 
 
 ## Negative numbers {#sec-neg}
 
-Every component of `Decalender` dates and `Declock` times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative `doty` numbers work like [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) in [computer programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming) in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first `doty` is indexed by both $0$ and $-N$, while the last `doty` is indexed by both $-1$ and $N$.
+Every component of `Decalender` dates and `Declock` times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of `Zone 0`. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative `doties` work like [zero-based indexes](https://en.wikipedia.org/wiki/Zero-based_numbering) in [computer programming](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming) in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first `doty` is indexed by both $0$ and $-N$, while the last `doty` is indexed by both $-1$ and $N$.
 
 In general, negative numbers show the number of parts that are left in the whole. A negative `doty` shows how many days remain in the year and a negative time [counts down](https://en.wikipedia.org/wiki/Countdown) to the end of the day. To extend the fractions analogy in @sec-frac to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction ($pos = N + neg$). Positive and negative numbers arrive at the same answer from opposite directions.
 
@@ -515,7 +526,7 @@ The French Republican calendar and `Declock` both break the day down into decima
 
 ### Coordinate analogy {#sec-coor}
 
-In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). The `Decalendar` ordinal (`deco`) date format provides two coordinates in one number: the day-of-the-year (`doty`). @tbl-greg2doty shows the `doty` number of all Gregorian calendar dates.
+In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (`dotm`) are like longitude and latitude in the [geographic coordinate system](https://en.wikipedia.org/wiki/Geographic_coordinate_system) or x and y in the [Cartesian coordinate system](https://en.wikipedia.org/wiki/Cartesian_coordinate_system). The `Decalendar` ordinal (`deco`) date format provides two coordinates in one number: the day-of-the-year (`doty`). @tbl-greg2doty shows the `doty` number equivalents of all Gregorian calendar dates.
 
 To locate a specific date in @tbl-greg2doty, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the `dotm` (which is like a y-axis value). To convert a `doty` number to a Gregorian calendar date, we first find the `dek` number (the first two digits of the `doty`) among the rows in @tbl-doty2greg and then move to the right to the `dotd` (the last digit of the `doty`). The dates in @tbl-doty2greg are shown in `mm-dd` format.
 
@@ -607,7 +618,7 @@ To locate a specific date in @tbl-greg2doty, first find the month among the colu
 
 ### Gregorian calendar date conversion {#sec-conv}
 
-In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar doty` dates programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [*chrono-Compatible Low-Level Date Algorithms*](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `greg2doty` function is a `doty` number, while its inverse function, `doty2greg`, returns an array containing a month and a `dotm` number.
+In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar doty` dates programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [*chrono-Compatible Low-Level Date Algorithms*](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `greg2doty` function is a `doty`, while its inverse function, `doty2greg`, returns an array containing a month and a `dotm` number.
 
 ::: {#exm-coor}
 :::
@@ -904,9 +915,9 @@ Both `Decalendar` and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) dates s
 
 ### Ordinal dates {#sec-isoo}
 
-`Deco` dates (`year+day`) are very similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar doty` numbers, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doty` numbers are [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
+`Deco` dates (`year+day`) are very similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar doties`, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doties` are [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
 
-In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doty` numbers. We use the `year2bool` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. To be clear, we only have to take Leap Day into account when dealing with `isoo` dates. `Decalendar doty` numbers are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
+In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doties`. We use the `year2bool` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. To be clear, we only have to take Leap Day into account when dealing with `isoo` dates. `Decalendar doties` are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
 
 $$(isoordinal + 305 - year2bool(year)) \mod 365$$ {#eq-isoo1}
 
@@ -1062,7 +1073,7 @@ paste0(sprintf("%04d", doty2year()), "+", sprintf("%03d", doty2isoo()))
 
 ISO 8601 [calendar dates (`isoc`)](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) consist of a four-digit year, a two-digit month, and a two-digit `dotm` separated by hyphens (`year-mm-dd`). This format is the current widely accepted standard for displaying Gregorian calendar dates. We can combine code from @exm-coor and @exm-gregm to convert between `deco` dates and `isoc` dates, as shown in @exm-isoc. The code in @exm-isoc formats the output of the `greg2year` and `greg2doty` functions into `deco` dates and the output of the `doty2year` and `doty2greg` functions into `isoc` dates.
 
-As mentioned in @sec-coor, `Decalendar` uses `doty` numbers as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `Decalendar` calendar (`decc`, pronounced "deck-see") format (`year+m+dd`), which is very similar to the `isoc` date format. The `decc` format is described in @sec-dotm. Examples of the `decc` format are provided in @sec-dotex. To be clear, the `decc` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
+As mentioned in @sec-coor, `Decalendar` uses `doties` as dates instead of month and day-of-the-month (`dotm`) numbers, but if required, Gregorian calendar dates can be provided in the `Decalendar` calendar (`decc`, pronounced "deck-see") format (`year+m+dd`), which is very similar to the `isoc` date format. The `decc` format is described in @sec-dotm. Examples of the `decc` format are provided in @sec-dotex. To be clear, the `decc` format is only used to display Gregorian calendar dates and otherwise does not play any role in `Decalendar`.
 
 ::: {#exm-isoc}
 :::
@@ -1638,9 +1649,9 @@ pd.date_range("1970", "1971", freq="6H")[-4:-1]
 
 ## Julian dates {#sec-jd}
 
-A [Julian date](https://en.wikipedia.org/wiki/Julian_day#:~:text=The%20Julian%20date%20(JD)%20of%20any%20instant%20is%20the%20Julian%20day%20number%20plus%20the%20fraction%20of%20a%20day%20since%20the%20preceding%20noon%20in%20Universal%20Time.) is the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+268.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. The analogous date format in `Decalendar` is the day-of-the-[era](https://en.wikipedia.org/wiki/Calendar_era) (`dote`). Both Julian and `dote` dates count days from a starting point called an [epoch](https://en.wikipedia.org/wiki/Epoch). The `Decalendar` epoch is `0000+000.0`, which is midnight on March 1, 1 BC in the Gregorian calendar. To convert a Julian date into a `dote`, we simply subtract 1721120.5 days ($dote = julian - 1721120.5$).
+A [Julian date](https://en.wikipedia.org/wiki/Julian_day#:~:text=The%20Julian%20date%20(JD)%20of%20any%20instant%20is%20the%20Julian%20day%20number%20plus%20the%20fraction%20of%20a%20day%20since%20the%20preceding%20noon%20in%20Universal%20Time.) is the number of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) since `-4713+268.5`, which is noon on November 24, 4714 BC in the Gregorian calendar and January 1, 4713 BC in the Julian calendar. The analogous date format in `Decalendar` is the day-of-the-[era](https://en.wikipedia.org/wiki/Calendar_era) (`dote`). Both Julian dates and days-of-the-era (`dotes`) count days from a starting point called an [epoch](https://en.wikipedia.org/wiki/Epoch). The `Decalendar` epoch is `0000+000.0`, which is midnight on March 1, 1 BC in the Gregorian calendar. To convert a Julian date into a `dote`, we simply subtract 1721120.5 days ($dote = julian - 1721120.5$).
 
-Like Julian dates, `dote` dates are very useful for date and time calculations. @eq-dote shows how a year and a `doty` can be turned into a `dote`. The conversion of a `dote` into a year and `doty` requires calculations adapted from the ["civil_from_days" algorithm](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) from [@hinnant2014]. Briefly, the `dote` is used to obtain the [solar cycle](https://en.wikipedia.org/wiki/Solar_cycle_(calendar)#:~:text=400%2Dyear%20cycle%20of%20the%20Gregorian%20calendar%20with%20respect%20to%20the%20week.) in @eq-cycl, which is then plugged into @eq-dotc and @eq-yotc to calculate the `day-of-the-cycle` in (`dotc`) and the `year-of-the-cycle` (`yotc`) in @eq-yotc. @eq-year takes the `yotc` and the solar cycle and yields the year, while @eq-doty generates the `doty` from the `yotc` and the `dotc`.
+Like Julian dates, `dotes` are very useful for date and time calculations. @eq-dote shows how a year and a `doty` can be turned into a `dote`. The conversion of a `dote` into a year and `doty` requires calculations adapted from the ["civil_from_days" algorithm](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) from [@hinnant2014]. Briefly, the `dote` is used to obtain the [solar cycle](https://en.wikipedia.org/wiki/Solar_cycle_(calendar)#:~:text=400%2Dyear%20cycle%20of%20the%20Gregorian%20calendar%20with%20respect%20to%20the%20week.) in @eq-cycl, which is then plugged into @eq-dotc and @eq-yotc to calculate the `day-of-the-cycle` in (`dotc`) and the `year-of-the-cycle` (`yotc`) in @eq-yotc. @eq-year takes the `yotc` and the solar cycle and yields the year, while @eq-doty generates the `doty` from the `yotc` and the `dotc`.
 
 $$dote = doty + (365 \cdot year + \lfloor \frac{year}{4} \rfloor - \lfloor \frac{year}{100} \rfloor + \lfloor \frac{year}{400} \rfloor)$$ {#eq-dote}
 
@@ -1737,7 +1748,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 
 ### Julian time conversion to UNIX time {#sec-unixj}
 
-Building on the conversion of Julian dates into `dote` and `doty` numbers, it may be easiest to obtain the official definition of `deco` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight in the [UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z) time zone on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `deco` dates, and `Declock` times. To obtain UNIX time from a Julian Date, we subtract 2440587.5 from the Julian Date and multiply by 86400 as shown in @eq-unixj.
+Building on the conversion of Julian dates into `dotes` and `doties`, it may be easiest to obtain the official definition of `deco` dates and `Declock` times is based on UNIX time. UNIX time is the number of seconds since the UNIX Epoch, which is `1969+306.0` in `Decalendar` or midnight in the [UTC+0](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC%C2%B100:00,_Z) time zone on January 1, 1970 in the Gregorian calendar. A day is exactly 86,400 seconds (100,000 `beats`) long in UNIX time, Julian dates, `deco` dates, and `Declock` times. To obtain UNIX time from a Julian Date, we subtract 2440587.5 from the Julian Date and multiply by 86400 as shown in @eq-unixj.
 
 $$unix = (JD − 2440587.5) \cdot 86400$$ {#eq-unixj}
 
@@ -2364,7 +2375,7 @@ We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule 
 
 ### Common years {#sec-transc}
 
-The `pently` schedules are important for the transition between years. In common years, the last `dek` of the year (`Dek 36`) contains the last `pent` of the current year (`Pent 72`), and the first `pent` of the subsequent year (`Pent 0`). If these two `pents` follow the default `pently` schedule, `Schedule 3`, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. @tbl-common shows the positive and negative `doty` numbers, names, and types (work or rest) of the days in `Dek 36` in common years. Notably, while the positive `doty` numbers continue counting past the end of the year, the negative `doty` numbers of the current year turn into the positive `doty` numbers of the subsequent year. The negative `doty` numbers in `Dek 36` can thus serve as the bridge from the one year to the next.
+The `pently` schedules are important for the transition between years. In common years, the last `dek` of the year (`Dek 36`) contains the last `pent` of the current year (`Pent 72`), and the first `pent` of the subsequent year (`Pent 0`). If these two `pents` follow the default `pently` schedule, `Schedule 3`, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. @tbl-common shows the positive and negative `doties`, names, and types (work or rest) of the days in `Dek 36` in common years. Notably, while the positive `doties` continue counting past the end of the year, the negative `doties` of the current year turn into the positive `doties` of the subsequent year. The negative `doties` in `Dek 36` can thus serve as the bridge from the one year to the next.
 
 #### @tbl-common
 
@@ -2387,7 +2398,7 @@ The `pently` schedules are important for the transition between years. In common
 
 ### Leap years {#sec-transl}
 
-In leap years, `Dek 36` contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, `Dek 36` always contain 6 workdays and 4 restdays, just like every other `dek`, but in leaps years these days do not follow the typical order of `Schedule 3`. Leap years end in 3 restdays instead of 2, because Leap Day (`Day 365`) is always a holiday. Leap day is always a `Penday` and always followed by a `Nulday`. After Leap Day, the normal rhythm of `Schedule 3` resumes. @tbl-leap shows the positive and negative `doty` numbers of the days in `Dek 36` in leap years, as well as their names and their types (work or rest).
+In leap years, `Dek 36` contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, `Dek 36` always contain 6 workdays and 4 restdays, just like every other `dek`, but in leaps years these days do not follow the typical order of `Schedule 3`. Leap years end in 3 restdays instead of 2, because Leap Day (`Day 365`) is always a holiday. Leap day is always a `Penday` and always followed by a `Nulday`. After Leap Day, the normal rhythm of `Schedule 3` resumes. @tbl-leap shows the positive and negative `doties` of the days in `Dek 36` in leap years, as well as their names and their types (work or rest).
 
 #### @tbl-leap
 
