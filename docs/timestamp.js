@@ -156,6 +156,19 @@ function unix2wday(ms = 0) {
     return Math.floor((ms / 86400000 + 4) % 7)
 }
 
+function doty2deco(year = 1969, doty = 306, zone = 0) {
+    const yd = dote2doty(doty2dote(year, Math.floor(doty)));
+    return `${yd[0]}+${(yd[1] - (year < 0)).toString().padStart(3, "0")}${
+        doty.toString().includes(".") ? "." + (
+            (doty > 0) ? (doty-zone).toString().split(".").pop()
+            : [...(doty-zone).toString().split(".").pop()].map(
+                (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
+            ).join("")
+        ) : ""
+    }`
+}
+
+console.log(doty2deco(8, -1));
 console.log(unix2wday(Date.now()));
 console.log(date2doty(2021, 9, 1));
 
@@ -494,13 +507,6 @@ console.log(doty2hmso(.533333))
 console.log(parseInt("3z"))
 console.log(new Date(Date.parse("2023-01-01T12:00")))
 
-function doty2deco(year = 1969, doty = 0) {
-    return `${year.toString().padStart(4, "0")}+${(day = Math.floor(doty)).toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}+0`
-};
-function doty2deco(year = 1969, doty = 0) {
-    const day = Math.floor(doty);
-    return `${year.toString().padStart(4, "0")}+${day.toString().padStart(3, "0")}.${(doty - day).toString().padStart(5, "0").slice(2, 7)}`
-}
 function unix2deco(ms = 0) {
     return doty2deco(...unix2doty(ms));
 };
@@ -653,10 +659,6 @@ function doty2unix(year = 1969, doty = 306) {
 }
 console.log(doty2unix(2000, 306))
 
-function doty2deco(year = 1969, doty = 0) {
-  const day = Math.floor(doty);
-  return `${year.toString().padStart(4, "0")}+${day.toString().padStart(3, "0")}.${(Math.round((doty - day) * 1e5)).toString().padStart(5, "0")}`
-};
 function unix2deco(ms = 0) {
     return doty2deco(...unix2doty(ms));
 };

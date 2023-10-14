@@ -60,8 +60,7 @@ function doty2dote(year = 1969, doty = 0, zone = 0) {
 }
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
-    return `${yd[0].toString().padStart(4, "0")}+${
-        yd[1].toString().padStart(3, "0")}${
+    return `${yd[0]}+${(yd[1] - (year < 0)).toString().padStart(3, "0")}${
         doty.toString().includes(".") ? "." + (
             (doty > 0) ? (doty-zone).toString().split(".").pop()
             : [...(doty-zone).toString().split(".").pop()].map(
@@ -216,21 +215,28 @@ viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"
 
 You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers between 0 and 366, and 3) **converted** into `year-mm-ddThh:mm:ss` format:
 
-1.  \${ydParsed\[0\]}, \${ydParsed\[1\]}
-2.  \${outputDeco}
-3.  \${outputIsoc}
+1.  \${styledParsedYear}, \${styledParsedDoty}
+2.  \${styledDecoYear}+\${styledDecoDoty}
+3.  \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
 
 ```{ojs}
-viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 14})
+viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 17})
 ```
 
-The `deco` parsing code in @exm-deco defines the rules for storing dates as `Decalendar ordinals` (`decos`). 
+The `deco` parsing code in @exm-deco defines the rules for storing dates as `Decalendar ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` support negative years and `doties`. In the example above, the range of accepted `doties` is $[-9999999999999999, 9999999999999999)$. The largest 16-digit number is not included in the acceptable range because it is automatically rounded up to 10000000000000000. `Doties` are zero padded, but years are not. There is a bug with `Year 0` and negative `doties`.
 
 ::: {#exm-deco}
 :::
 
 ::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 ```{ojs}
+function zone2hour(zone = "Z") {
+    return (zone = zone.toUpperCase()) == "Z" ? 0
+        : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
+        : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
+        : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
+        : zone;
+}
 function deco2doty(timestamp = "1969+306.00000Z") {
     const arr = timestamp.toString().split(/(?=[+-]|[a-zA-Z])/, 3);
     switch (arr.length) {
@@ -291,13 +297,48 @@ ydParsed
 ```
 
 ```{ojs}
+styledParsedYear = setStyle(ydParsed[0], d3.schemePaired[10])
+styledParsedYear
+```
+
+```{ojs}
+styledParsedDoty = setStyle(ydParsed[1], d3.schemePaired[1])
+styledParsedDoty
+```
+
+```{ojs}
 outputDeco = doty2deco(...ydParsed)
 outputDeco
 ```
 
 ```{ojs}
+styledDecoYear = setStyle(outputDeco.split("+")[0], d3.schemePaired[10])
+styledDecoYear
+```
+
+```{ojs}
+styledDecoDoty = setStyle(outputDeco.split("+")[1], d3.schemePaired[1])
+styledDecoDoty
+```
+
+```{ojs}
 outputIsoc = deco2isoc(outputDeco)
 outputIsoc
+```
+
+```{ojs}
+styledIsocYear = setStyle(outputIsoc.split("-")[0], d3.schemePaired[10])
+styledIsocYear
+```
+
+```{ojs}
+styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split("-")[0].length+1, outputIsoc.split("-")[0].length+6), d3.schemePaired[4])
+styledIsocMd
+```
+
+```{ojs}
+styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split("-")[0].length+7), d3.schemePaired[5])
+styledIsocTime
 ```
 :::
 
