@@ -1,8 +1,11 @@
 /*-- scss:defaults --*/
+$font-family-sans-serif: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
 // Base document colors
-$body-bg: #000000;
-$body-color: #ffffff;
+$body-bg: #000000 !default;
+$body-color: #ffffff !default;
 
 // Inline code
-$code-bg: #000000;
-$code-color: #75AADB;
+$code-bg: #000000 !default;
+$code-color: #00AAFF !default;
+$code-font-size: 1rem !default;

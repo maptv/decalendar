@@ -1,23 +1,50 @@
 ---
-title: "`Decalendar` and `Declock`"
-author: Martin Laptev
+title: "Decalendar and Declock"
+license: "CC BY-SA"
+author:
+  - name: Martin Laptev
+    url: https://maptv.github.io
+citation:
+  url: https://maptv.github.io/cal
+  issued: 2023
 ---
 
-# Summary {#sec-summary}
+# Introduction {#sec-intro}
 
-## Day-of-the-year {#sec-summary-doty}
+## Day-of-the-year {#sec-intro-doty}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). @exm-doty shows code that can be used to obtain the current `doty` date and time: \${styledDotyDate}.\${styledDotyTime}.
-
-The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: .\${setStyle(dotyTime, d3.schemePaired\[2\])}.
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). The current `doty` date and time: \${styledDotyDate}.\${styledDotyTime}.
 
 Days-of-the-year (`doties`) are slightly more **precise** and much more **concise** than dates and times in the form of a month, day, hour, minute, and second. Compare the current `doty` to the current date and time in `mm-ddThh:mm:ss` format: \${styledIsoDate}T\${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
 
+The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: \${setStyle(dotyTime, d3.schemePaired\[2\])}.
+
 The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number: \${styledDek}, while the last digit is the current day-of-the-`dek` (`dotd`): \${styledDotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`.
 
-The digits of the current `doty` time provide the current `dime`: \${styledDime}, `cent`: \${styledCent}, `mil`: \${styledMil}, `phrase`: \${styledPhrase}, and `beat`: \${styledBeat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat.
+The digits of the current `doty` time provide the current `dime`: \${styledDime}, `cent`: \${styledCent}, `mil`: \${styledMil}, `phrase`: \${styledPhrase}, and `beat`: \${styledBeat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat. In addition to representing a specific instant in the year, `doties` can represent durations, such as the time since this page was loaded: \${styledDotyDiff}.
 
-::: {#exm-doty .appendix}
+Now it's your turn! Enter a month and `dotm` below to see the equivalent `doty` date: \${outputDoty}. Try special dates like birthdays🎂and🥂anniversaries!
+
+```{ojs}
+//| echo: false
+viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
+```
+
+```{ojs}
+//| echo: false
+viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day"})
+```
+
+You can also enter a `doty` below to get the current month and `dotm`: \${monthAndDay}. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
+
+```{ojs}
+//| echo: false
+viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
+```
+
+#### `Doty` Observable code {#sec-ojs-code-doty .appendix}
+
+##### Functions {.appendix}
 
 ```{ojs}
 // https://observablehq.com/@observablehq/text-color-annotations-in-markdown#textcolor
@@ -70,114 +97,6 @@ function doty2deco(year = 1969, doty = 306, zone = 0) {
 function unix2deco(ms = 0) {
     return doty2deco(...unix2doty(ms));
 };
-unix = {
-  while(true) {
-    yield Date.now();
-  }
-}
-deco = unix2deco(unix).slice(0, 14)
-doty = deco.slice(5)
-doty
-```
-
-```{ojs}
-dotyDate = doty.slice(0, 3)
-dotyDate
-```
-
-```{ojs}
-styledDotyDate = setStyle(dotyDate, d3.schemePaired[1])
-```
-
-```{ojs}
-dotyTime = doty.slice(4)
-dotyTime
-```
-
-```{ojs}
-styledDotyTime = setStyle(dotyTime, d3.schemePaired[2])
-```
-
-```{ojs}
-iso = {
-  while(true) {
-    yield new Date().toISOString()
-  }
-}
-isoDate = iso.slice(5, 10)
-isoDate
-```
-
-```{ojs}
-styledIsoDate = setStyle(isoDate, d3.schemePaired[5])
-styledIsoDate
-```
-
-```{ojs}
-isoTime = iso.slice(11, 19)
-isoTime
-```
-
-```{ojs}
-styledIsoTime = setStyle(isoTime, d3.schemePaired[4])
-styledIsoTime
-```
-
-```{ojs}
-styledDek = setStyle(doty.slice(0, 2), d3.schemePaired[1])
-styledDek
-```
-
-```{ojs}
-styledDotd = setStyle(doty[2], d3.schemePaired[0])
-styledDotd
-```
-
-```{ojs}
-styledDime = setStyle(dotyTime[0], d3.schemePaired[11])
-styledDime
-```
-
-```{ojs}
-styledCent = setStyle(dotyTime[1], d3.schemePaired[6])
-styledCent
-```
-
-```{ojs}
-styledMil = setStyle(dotyTime[2], d3.schemePaired[7])
-styledMil
-```
-
-```{ojs}
-styledPhrase = setStyle(dotyTime[3], d3.schemePaired[8])
-styledPhrase
-```
-
-```{ojs}
-styledBeat = setStyle(dotyTime[4], d3.schemePaired[9])
-styledBeat
-```
-:::
-
-Now it's your turn! Enter a month and `dotm` below to see the equivalent `doty` date: \${outputDoty}. Try special dates like birthdays🎂and🥂anniversaries!
-
-```{ojs}
-viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
-```
-
-```{ojs}
-viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day"})
-```
-
-You can also enter a `doty` below to get the current month and `dotm`: \${monthAndDay}. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
-
-```{ojs}
-viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
-```
-
-::: {#exm-date .appendix}
-
-```{ojs}
 // http://howardhinnant.github.io/date_algorithms.html#days_from_civil
 function greg2doty(month = 1, day = 1) {
     return Math.floor(
@@ -190,23 +109,55 @@ function doty2greg(doty = 0) {
 }
 ```
 
+##### Variables {.appendix}
+
 ```{ojs}
+//| output: all
+unix = {
+  while(true) {
+    yield Date.now();
+  }
+}
+deco = unix2deco(unix).slice(0, 14)
+decoLoad = unix2deco(Date.now()).slice(0, 14)
+doty = deco.slice(5)
+dotyLoad = decoLoad.slice(5)
+dotyDiff = (doty - dotyLoad).toString().slice(0, 7)
+dotyDate = doty.slice(0, 3)
+dotyTime = doty.slice(4)
+iso = {
+  while(true) {
+    yield new Date().toISOString()
+  }
+}
+isoDate = iso.slice(5, 10)
+isoTime = iso.slice(11, 19)
+```
+
+```{ojs}
+styledDotyDate = setStyle(dotyDate, d3.schemePaired[1])
+styledDotyTime = setStyle(dotyTime, d3.schemePaired[2])
+styledDotyDiff = setStyle(dotyDiff, d3.schemePaired[2])
+styledIsoDate = setStyle(isoDate, d3.schemePaired[5])
+styledIsoTime = setStyle(isoTime, d3.schemePaired[4])
+styledDek = setStyle(doty.slice(0, 2), d3.schemePaired[1])
+styledDotd = setStyle(doty[2], d3.schemePaired[0])
+styledDime = setStyle(dotyTime[0], d3.schemePaired[6])
+styledCent = setStyle(dotyTime[1], d3.schemePaired[11])
+styledMil = setStyle(dotyTime[2], d3.schemePaired[9])
+styledPhrase = setStyle(dotyTime[3], d3.schemePaired[8])
+styledBeat = setStyle(dotyTime[4], d3.schemeAccent[5])
 outputDoty = setStyle(greg2doty(month, dotm).toString().padStart(3, "0"), d3.schemePaired[1])
-outputDoty
-```
-
-```{ojs}
 monthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart(2, "0")).join("-"), d3.schemePaired[5]);
-monthAndDay
 ```
-:::
 
-## Year {#sec-summary-year}
+## Year {#sec-intro-year}
 
-Any `doty` can be combined with a year to form a `Decalendar ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco` (`year+day.ddd`): \${dtYear}+\${dtDotyDate}.\${dtDotyTime}.
+Any `doty` can be combined with a year to form a `Decalendar ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco` (`year+day.ddddd`): \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}.
 
 ```{ojs}
-viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"})
+//| echo: false
+viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00:00"})
 ```
 
 You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers between 0 and 366, and 3) **converted** into `year-mm-ddThh:mm:ss` format:
@@ -216,12 +167,22 @@ You can also enter a `deco` to see what it looks like after it is 1) **parsed** 
 3.  \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
 
 ```{ojs}
+//| echo: false
 viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 16})
 ```
 
-The `deco` parsing code in @exm-deco defines the rules for storing dates as `Decalendar ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` can be entered with negative years and `doties`, but are always displayed with positive `doties`. `Doties` are zero padded to 3 digits, but years are not. If the input year is not an integer gg
+The `deco` parsing code in the [appendix](#appendix) defines the rules for storing dates as `Decalendar ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` can be written with negative `doties`, but are always displayed with positive `doties`. `Doties` are zero padded to 3 digits, but years are not.
 
-::: {#exm-deco .appendix}
+Both the year and the `doty` in a `deco` can be fractional. Just like [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) can take the place of a month, `dotm`, hour, minutes, and second, fractional years can replace year, month, and `dotm` dates. In other words, fractional years can be a convenient way to express a date in a single number. The current `Decalendar` year date is \${styledYearDate}.
+
+While they are not very useful in `decos`, 
+Multiples of a fifth (⅕, .2) of a year are of interest because they result in `doties` that are multiples of 73.
+
+in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `Decalendar ordinals` (`decos`). Year dates cannot include times and are only used when it is convenient to store a `deco` as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
+
+#### `Deco` Observable code {#sec-ojs-code-deco .appendix}
+
+##### Functions {.appendix}
 
 ```{ojs}
 function zone2hour(zone = "Z") {
@@ -258,124 +219,6 @@ function doty2isoc(year = 1969, doty = 306, zone = 0) {
 function deco2isoc(timestamp = "1969+306.00000Z") {
     return doty2isoc(...deco2doty(timestamp))
 }
-```
-
-```{ojs}
-decoYear = setStyle(deco.slice(0, 4), d3.schemePaired[10])
-decoYear
-```
-
-```{ojs}
-outputDatetime = unix2deco(inputDatetime)
-outputDatetime
-```
-
-```{ojs}
-dtYear = setStyle(outputDatetime.slice(0, 4), d3.schemePaired[10])
-dtYear
-```
-
-```{ojs}
-dtDotyDate = setStyle(outputDatetime.slice(5, 8), d3.schemePaired[1])
-dtDotyDate
-```
-
-```{ojs}
-dtDotyTime = setStyle(outputDatetime.slice(9, 12), d3.schemePaired[2])
-dtDotyTime
-```
-
-```{ojs}
-ydParsed = deco2doty(inputDeco)
-ydParsed
-```
-
-```{ojs}
-styledParsedYear = setStyle(ydParsed[0], d3.schemePaired[10])
-styledParsedYear
-```
-
-```{ojs}
-styledParsedDotyDate = setStyle(ydParsed[1].toString().split(".")[0], d3.schemePaired[1])
-styledParsedDotyDate
-```
-
-```{ojs}
-parsedDotyTime = ydParsed[1].toString().split(".")[1]
-parsedDotyTime
-```
-
-```{ojs}
-parsedDotyTimeDelimiter = parsedDotyTime ? ", " : ""
-parsedDotyTimeDelimiter
-```
-
-```{ojs}
-styledParsedDotyTime = parsedDotyTime ? setStyle(parsedDotyTime, d3.schemePaired[2]) : ""
-styledParsedDotyTime
-```
-
-```{ojs}
-outputDeco = doty2deco(...ydParsed)
-outputDeco
-```
-
-```{ojs}
-styledDecoYear = setStyle(outputDeco.split("+")[0], d3.schemePaired[10])
-styledDecoYear
-```
-
-```{ojs}
-decoDoty = outputDeco.split("+")[1]
-decoDoty
-```
-
-```{ojs}
-styledDecoDotyDate = setStyle(decoDoty.split(".")[0], d3.schemePaired[1])
-styledDecoDotyDate
-```
-
-```{ojs}
-decoDotyTime = decoDoty.split(".")[1]
-decoDotyTime
-```
-
-```{ojs}
-decoDotyTimeDelimiter = decoDotyTime ? "." : ""
-decoDotyTimeDelimiter
-```
-
-```{ojs}
-styledDecoDotyTime = decoDotyTime ? setStyle(decoDotyTime, d3.schemePaired[2]) : ""
-styledDecoDotyTime
-```
-
-```{ojs}
-outputIsoc = deco2isoc(outputDeco)
-outputIsoc
-```
-
-```{ojs}
-styledIsocYear = setStyle(outputIsoc.split(/(?=-)/)[0], d3.schemePaired[10])
-styledIsocYear
-```
-
-```{ojs}
-styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[5])
-styledIsocMd
-```
-
-```{ojs}
-styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+7), d3.schemePaired[4])
-styledIsocTime
-```
-:::
-
-Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `Decalendar ordinals` (`decos`). Fractional years are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) that make up `Declock` times. The current `Decalendar` year date is \${yearFrac}. Year dates cannot include times and are only used when it is convenient to store a `deco` as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
-
-::: {#exm-year .appendix}
-
-```{ojs}
 function unix2dote(ms = 0) {
   return ms / 86400000 + 719468;
 }
@@ -388,15 +231,49 @@ function dote2year(days = 719468) {
 function unix2year(ms = 0) {
     return dote2year(unix2dote(ms));
 };
-yearFrac = Math.ceil(unix2year(unix) * 1e3) / 1e3
 ```
-:::
 
-## Time Zone {#sec-summary-zone}
+##### Variables {.appendix}
 
-## Dek {#sec-summary-dek}
+```{ojs}
+//| output: all
+tzOffsetInMs = inputDatetime.getTimezoneOffset() * 60000
+outputDatetime = unix2deco(inputDatetime - tzOffsetInMs)
+dtDotyTimeRaw = outputDatetime.slice(9, 14)
+dtDotyTimeDelimiter = dtDotyTime ? "." : ""
+ydParsed = deco2doty(inputDeco)
+parsedDotyTime = ydParsed[1].toString().split(".")[1]
+parsedDotyTimeDelimiter = parsedDotyTime ? ", " : ""
+outputDeco = doty2doty(...ydParsed)
+decoDoty = outputDeco[1]
+decoDotyTime = decoDoty.toString().split(".")[1]
+decoDotyTimeDelimiter = decoDotyTime ? "." : ""
+outputIsoc = deco2isoc(outputDeco)
+yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
+```
 
-As mentioned in @sec-summary-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+```{ojs}
+decoYear = setStyle(outputDeco[0], d3.schemePaired[10])
+dtYear = setStyle(outputDatetime.slice(0, 4), d3.schemePaired[10])
+dtDotyDate = setStyle(outputDatetime.slice(5, 8), d3.schemePaired[1])
+dtDotyTime = dtDotyTimeRaw ? setStyle(dtDotyTimeRaw, d3.schemePaired[2]) : ""
+styledParsedYear = setStyle(ydParsed[0], d3.schemePaired[10])
+styledParsedDotyDate = setStyle(ydParsed[1].toString().split(".")[0], d3.schemePaired[1])
+styledParsedDotyTime = parsedDotyTime ? setStyle(parsedDotyTime, d3.schemePaired[2]) : ""
+styledDecoYear = setStyle(outputDeco[0], d3.schemePaired[10])
+styledDecoDotyDate = setStyle(decoDoty.toString().split(".")[0], d3.schemePaired[1])
+styledDecoDotyTime = decoDotyTime ? setStyle(decoDotyTime, d3.schemePaired[2]) : ""
+styledIsocYear = setStyle(outputIsoc.split(/(?=-)/)[0], d3.schemePaired[10])
+styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[5])
+styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+7), d3.schemePaired[4])
+styledYearDate = setStyle(yearDate, d3.schemePaired[10])
+```
+
+## Time Zone {#sec-intro-zone}
+
+## Dek {#sec-intro-dek}
+
+As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
 
 Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-pently provides more information on `Schedule 3` and the other `pently` schedules.
 
@@ -1841,3 +1718,5 @@ Any holiday with a fixed (rather than floating) date in the Gregorian calendar c
 
 ::: {#refs}
 :::
+
+# Appendix

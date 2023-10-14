@@ -10,6 +10,8 @@ execute:
   cache: false
 format:
   html:
+    monofont: "Ewka Nerd Font"
+    highlight-style: a11y
     anchor-sections: true
     code-block-background: false
     code-block-border-left: false
@@ -20,6 +22,6 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     theme:
-      dark: [darkly, dark.scss]
       light: [flatly, light.scss]
+      dark: [darkly, dark.scss]
     output-file: index.html
