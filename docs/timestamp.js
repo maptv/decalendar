@@ -158,7 +158,7 @@ function unix2wday(ms = 0) {
 
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
-    return `${yd[0]}+${(yd[1] - (year < 0)).toString().padStart(3, "0")}${
+    return `${yd[0]}+${(yd[1] - (year < 0) + (year === 0 && doty > 0) - (year === 0 && doty !== 0) + (year == 0 && doty === -1)).toString().padStart(3, "0")}${
         doty.toString().includes(".") ? "." + (
             (doty > 0) ? (doty-zone).toString().split(".").pop()
             : [...(doty-zone).toString().split(".").pop()].map(
@@ -168,7 +168,7 @@ function doty2deco(year = 1969, doty = 306, zone = 0) {
     }`
 }
 
-console.log(doty2deco(8, -1));
+console.log(doty2deco(0, -366));
 console.log(unix2wday(Date.now()));
 console.log(date2doty(2021, 9, 1));
 

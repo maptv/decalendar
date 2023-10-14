@@ -60,7 +60,7 @@ function doty2dote(year = 1969, doty = 0, zone = 0) {
 }
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
-    return `${yd[0]}+${(yd[1] - (year < 0)).toString().padStart(3, "0")}${
+    return `${yd[0]}+${(yd[1] - (year < 0) + (year === 0 && doty > 0) - (year === 0 && doty !== 0) + (year == 0 && doty === -1)).toString().padStart(3, "0")}${
         doty.toString().includes(".") ? "." + (
             (doty > 0) ? (doty-zone).toString().split(".").pop()
             : [...(doty-zone).toString().split(".").pop()].map(
@@ -223,7 +223,7 @@ You can also enter a `deco` to see what it looks like after it is 1) **parsed** 
 viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 17})
 ```
 
-The `deco` parsing code in @exm-deco defines the rules for storing dates as `Decalendar ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` support negative years and `doties`. In the example above, the range of accepted `doties` is $[-9999999999999999, 9999999999999999)$. The largest 16-digit number is not included in the acceptable range because it is automatically rounded up to 10000000000000000. `Doties` are zero padded, but years are not. There is a bug with `Year 0` and negative `doties`.
+The `deco` parsing code in @exm-deco defines the rules for storing dates as `Decalendar ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` support negative years and `doties`. `Doties` are zero padded, but years are not.
 
 ::: {#exm-deco}
 :::
@@ -327,17 +327,17 @@ outputIsoc
 ```
 
 ```{ojs}
-styledIsocYear = setStyle(outputIsoc.split("-")[0], d3.schemePaired[10])
+styledIsocYear = setStyle(outputIsoc.split(/(?=-)/)[0], d3.schemePaired[10])
 styledIsocYear
 ```
 
 ```{ojs}
-styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split("-")[0].length+1, outputIsoc.split("-")[0].length+6), d3.schemePaired[4])
+styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[4])
 styledIsocMd
 ```
 
 ```{ojs}
-styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split("-")[0].length+7), d3.schemePaired[5])
+styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+7), d3.schemePaired[5])
 styledIsocTime
 ```
 :::
