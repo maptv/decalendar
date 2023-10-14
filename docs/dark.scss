@@ -9,3 +9,20 @@ $body-color: #ffffff !default;
 $code-bg: #000000 !default;
 $code-color: #00AAFF !default;
 $code-font-size: 1rem !default;
+
+code {
+    padding: 0px !important;
+}
+
+em {
+    color: blue;
+}
+
+em > b {
+  background-color: yellow;
+}
+
+b > em {
+  background-color: red;
+}
+

@@ -10,7 +10,6 @@ execute:
   cache: false
 format:
   html:
-    monofont: "Ewka Nerd Font"
     highlight-style: a11y
     anchor-sections: true
     code-block-background: false

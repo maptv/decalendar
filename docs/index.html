@@ -382,7 +382,7 @@ div.csl-indent {
 <span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">1</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
 <span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
 <span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-14T19:35:49.379560Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-14T19:35:49.379307Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-14T19:35:49.734862Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-14T19:35:49.734553Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
+</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-14T23:52:47.814401Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-14T23:52:47.814284Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-14T23:52:48.177583Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-14T23:52:48.177290Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-schedules-1" class="quarto-figure quarto-figure-center anchored">
@@ -3445,7 +3445,7 @@ Click to toggle table expansion
 <span id="cb130-9"><a href="#cb130-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb130-10"><a href="#cb130-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+227.81677+0"</code></pre>
+<pre><code>"2023+227.99525+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-72" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3490,7 +3490,7 @@ Click to toggle table expansion
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+227.81700+0'
+'2023+227.99539+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-74" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3545,7 +3545,7 @@ y \mod 4 = 0 \\
 <span id="cb135-12"><a href="#cb135-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span></span>
 <span id="cb135-13"><a href="#cb135-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>2023+227.81661+0</code></pre>
+<pre><code>2023+227.99507+0</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-75" href="decalendar_javascript.ipynb.html">Source: decalendar_javascript.ipynb</a></div>
@@ -3567,7 +3567,7 @@ y \mod 4 = 0 \\
 <span id="cb137-9"><a href="#cb137-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb137-10"><a href="#cb137-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+227.81677+0"</code></pre>
+<pre><code>"2023+227.99525+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-76" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3612,7 +3612,7 @@ y \mod 4 = 0 \\
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+227.81700+0'
+'2023+227.99539+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-78" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3701,7 +3701,7 @@ y \mod 4 = 0 \\
 <span id="cb147-6"><a href="#cb147-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb147-7"><a href="#cb147-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+227.81677+0"</code></pre>
+<pre><code>"2023+227.99525+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-80" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
