@@ -537,7 +537,7 @@ console.log(isoo2deco())
 // }
 
 function doty2dote(year = 1969, doty = 0, zone = 0) {
-    return Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400)) + doty - zone;
+    return year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + doty - zone;
 }
 
 function dote2doty(days = 719468) {
@@ -665,6 +665,5 @@ function unix2deco(ms = 0) {
 function unix2dote(ms = 0) {
     return doty2dote(...unix2doty(ms));
 };
-
 
 load = unix2deco(Date.now());

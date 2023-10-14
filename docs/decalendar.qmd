@@ -17,10 +17,9 @@ The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation
 
 The digits of the current `doty` time provide the current `dime`: \${styledDime}, `cent`: \${styledCent}, `mil`: \${styledMil}, `phrase`: \${styledPhrase}, and `beat`: \${styledBeat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat.
 
+### `Doty` Observable code {#sec-code-ojs-doty .appendix}
 ::: {#exm-doty}
-:::
 
-::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 ```{ojs}
 // https://observablehq.com/@observablehq/text-color-annotations-in-markdown#textcolor
 function setStyle(content, style = {}) {
@@ -56,7 +55,7 @@ function unix2doty(ms = 0) {
   return dote2doty(ms / 86400000 + 719468)
 }
 function doty2dote(year = 1969, doty = 0, zone = 0) {
-    return Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400)) + doty - zone;
+    return year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + doty - zone;
 }
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
@@ -111,7 +110,7 @@ isoDate
 ```
 
 ```{ojs}
-styledIsoDate = setStyle(isoDate, d3.schemePaired[4])
+styledIsoDate = setStyle(isoDate, d3.schemePaired[5])
 styledIsoDate
 ```
 
@@ -121,7 +120,7 @@ isoTime
 ```
 
 ```{ojs}
-styledIsoTime = setStyle(isoTime, d3.schemePaired[5])
+styledIsoTime = setStyle(isoTime, d3.schemePaired[4])
 styledIsoTime
 ```
 
@@ -177,10 +176,9 @@ You can also enter a `doty` below to get the current month and `dotm`: \${monthA
 viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
 ```
 
+### Date Observable code {#sec-code-ojs-date .appendix}
 ::: {#exm-date}
-:::
 
-::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 ```{ojs}
 // http://howardhinnant.github.io/date_algorithms.html#days_from_civil
 function greg2doty(month = 1, day = 1) {
@@ -200,7 +198,7 @@ outputDoty
 ```
 
 ```{ojs}
-monthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart(2, "0")).join("-"), d3.schemePaired[4]);
+monthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart(2, "0")).join("-"), d3.schemePaired[5]);
 monthAndDay
 ```
 :::
@@ -215,20 +213,19 @@ viewof inputDatetime = Inputs.datetime({label: "Date", value: "1970-01-01T00:00"
 
 You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers between 0 and 366, and 3) **converted** into `year-mm-ddThh:mm:ss` format:
 
-1.  \${styledParsedYear}, \${styledParsedDoty}
-2.  \${styledDecoYear}+\${styledDecoDoty}
+1.  \${styledParsedYear}, \${styledParsedDotyDate}\${parsedDotyTimeDelimiter}\${styledParsedDotyTime}
+2.  \${styledDecoYear}+\${styledDecoDotyDate}\${decoDotyTimeDelimiter}\${styledDecoDotyTime}
 3.  \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
 
 ```{ojs}
-viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 17})
+viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 16})
 ```
 
-The `deco` parsing code in @exm-deco defines the rules for storing dates as `Decalendar ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` support negative years and `doties`. `Doties` are zero padded, but years are not.
+The `deco` parsing code in @exm-deco defines the rules for storing dates as `Decalendar ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` can be entered with negative years and `doties`, but are always displayed with positive `doties`. `Doties` are zero padded to 3 digits, but years are not.
 
+### `Deco` Observable code {#sec-code-ojs-deco .appendix}
 ::: {#exm-deco}
-:::
 
-::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 ```{ojs}
 function zone2hour(zone = "Z") {
     return (zone = zone.toUpperCase()) == "Z" ? 0
@@ -243,9 +240,9 @@ function deco2doty(timestamp = "1969+306.00000Z") {
         case 1: return [unix2doty(Date.now())[0], parseFloat(arr[0]), 0];
         case 2: return (/^[a-zA-Z]+$/.test(arr[1]))
             ? [unix2doty(Date.now())[0], parseFloat(arr[0]), zone2hour(arr[1]) / 24]
-            : [parseInt(arr[0]), parseFloat(arr[1]), 0];
+            : [parseFloat(arr[0]), parseFloat(arr[1]), 0];
     };
-    return [parseInt(arr[0]), parseFloat(arr[1]), /^[a-zA-Z]+$/.test(arr[2])
+    return [parseFloat(arr[0]), parseFloat(arr[1]), /^[a-zA-Z]+$/.test(arr[2])
         ? zone2hour(arr[2]) / 24
         : parseFloat(arr[2].replace(/([+-])/, "$1\."))];
 }
@@ -302,8 +299,23 @@ styledParsedYear
 ```
 
 ```{ojs}
-styledParsedDoty = setStyle(ydParsed[1], d3.schemePaired[1])
-styledParsedDoty
+styledParsedDotyDate = setStyle(ydParsed[1].toString().split(".")[0], d3.schemePaired[1])
+styledParsedDotyDate
+```
+
+```{ojs}
+parsedDotyTime = ydParsed[1].toString().split(".")[1]
+parsedDotyTime
+```
+
+```{ojs}
+parsedDotyTimeDelimiter = parsedDotyTime ? ", " : ""
+parsedDotyTimeDelimiter
+```
+
+```{ojs}
+styledParsedDotyTime = parsedDotyTime ? setStyle(parsedDotyTime, d3.schemePaired[2]) : ""
+styledParsedDotyTime
 ```
 
 ```{ojs}
@@ -317,8 +329,28 @@ styledDecoYear
 ```
 
 ```{ojs}
-styledDecoDoty = setStyle(outputDeco.split("+")[1], d3.schemePaired[1])
-styledDecoDoty
+decoDoty = outputDeco.split("+")[1]
+decoDoty
+```
+
+```{ojs}
+styledDecoDotyDate = setStyle(decoDoty.split(".")[0], d3.schemePaired[1])
+styledDecoDotyDate
+```
+
+```{ojs}
+decoDotyTime = decoDoty.split(".")[1]
+decoDotyTime
+```
+
+```{ojs}
+decoDotyTimeDelimiter = decoDotyTime ? "." : ""
+decoDotyTimeDelimiter
+```
+
+```{ojs}
+styledDecoDotyTime = decoDotyTime ? setStyle(decoDotyTime, d3.schemePaired[2]) : ""
+styledDecoDotyTime
 ```
 
 ```{ojs}
@@ -332,23 +364,25 @@ styledIsocYear
 ```
 
 ```{ojs}
-styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[4])
+styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[5])
 styledIsocMd
 ```
 
 ```{ojs}
-styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+7), d3.schemePaired[5])
+styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+7), d3.schemePaired[4])
 styledIsocTime
 ```
 :::
 
 Storing a date in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `Decalendar ordinals` (`decos`). Fractional years are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) that make up `Declock` times. The current `Decalendar` year date is \${yearFrac}. Year dates cannot include times and are only used when it is convenient to store a `deco` as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
 
-::: {#exm-year}
-:::
+### Year Observable code {#sec-code-ojs-year .appendix}
+::: {#exm-year .appendix}
 
-::: {.callout-note collapse="true" title="Click to toggle code expansion" icon="false"}
 ```{ojs}
+function unix2dote(ms = 0) {
+  return ms / 86400000 + 719468;
+}
 function dote2year(days = 719468) {
     const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
         dotc = days - era * 146097,
