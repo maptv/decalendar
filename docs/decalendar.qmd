@@ -244,13 +244,14 @@ dtDotyTimeDelimiter = dtDotyTime ? "." : ""
 ydParsed = deco2doty(inputDeco)
 parsedDotyTime = ydParsed[1].toString().split(".")[1]
 parsedDotyTimeDelimiter = parsedDotyTime ? ", " : ""
-outputDeco = doty2doty(...ydParsed)
-decoDoty = outputDeco[1]
-decoDotyTime = decoDoty.toString().split(".")[1]
+outputDeco = doty2deco(...ydParsed)
+decoDoty = outputDeco.split("+")[1]
+decoDotyTime = decoDoty.split(".")[1]
 decoDotyTimeDelimiter = decoDotyTime ? "." : ""
 outputIsoc = deco2isoc(outputDeco)
 yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
 ```
+
 
 ```{ojs}
 decoYear = setStyle(outputDeco[0], d3.schemePaired[10])
@@ -260,8 +261,8 @@ dtDotyTime = dtDotyTimeRaw ? setStyle(dtDotyTimeRaw, d3.schemePaired[2]) : ""
 styledParsedYear = setStyle(ydParsed[0], d3.schemePaired[10])
 styledParsedDotyDate = setStyle(ydParsed[1].toString().split(".")[0], d3.schemePaired[1])
 styledParsedDotyTime = parsedDotyTime ? setStyle(parsedDotyTime, d3.schemePaired[2]) : ""
-styledDecoYear = setStyle(outputDeco[0], d3.schemePaired[10])
-styledDecoDotyDate = setStyle(decoDoty.toString().split(".")[0], d3.schemePaired[1])
+styledDecoYear = setStyle(outputDeco.split("+")[0], d3.schemePaired[10])
+styledDecoDotyDate = setStyle(decoDoty.split(".")[0], d3.schemePaired[1])
 styledDecoDotyTime = decoDotyTime ? setStyle(decoDotyTime, d3.schemePaired[2]) : ""
 styledIsocYear = setStyle(outputIsoc.split(/(?=-)/)[0], d3.schemePaired[10])
 styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[5])

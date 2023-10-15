@@ -234,7 +234,7 @@
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2023+227</p>
+      <p class="date">2023+228</p>
     </div>
   </div>
   
@@ -626,9 +626,9 @@
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ydParsed <span class="ot">=</span> <span class="fu">deco2doty</span>(inputDeco)</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>parsedDotyTime <span class="ot">=</span> ydParsed[<span class="dv">1</span>]<span class="fu">.toString</span>()<span class="fu">.split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>parsedDotyTimeDelimiter <span class="ot">=</span> parsedDotyTime ? <span class="st">", "</span> <span class="sc">:</span> <span class="st">""</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>outputDeco <span class="ot">=</span> <span class="fu">doty2doty</span>(...ydParsed)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>decoDoty <span class="ot">=</span> outputDeco[<span class="dv">1</span>]</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>decoDotyTime <span class="ot">=</span> <span class="fu">decoDoty.toString</span>()<span class="fu">.split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>outputDeco <span class="ot">=</span> <span class="fu">doty2deco</span>(...ydParsed)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>decoDoty <span class="ot">=</span> <span class="fu">outputDeco.split</span>(<span class="st">"+"</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>decoDotyTime <span class="ot">=</span> <span class="fu">decoDoty.split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>decoDotyTimeDelimiter <span class="ot">=</span> decoDotyTime ? <span class="st">"."</span> <span class="sc">:</span> <span class="st">""</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>outputIsoc <span class="ot">=</span> <span class="fu">deco2isoc</span>(outputDeco)</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>yearDate <span class="ot">=</span> <span class="fu">Math.ceil</span>(<span class="fu">unix2year</span>(unix) <span class="sc">*</span> <span class="fl">1e3</span>) <span class="sc">/</span> <span class="fl">1e3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -683,8 +683,8 @@
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>styledParsedYear <span class="ot">=</span> <span class="fu">setStyle</span>(ydParsed[<span class="dv">0</span>], d3.schemePaired[<span class="dv">10</span>])</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>styledParsedDotyDate <span class="ot">=</span> <span class="fu">setStyle</span>(ydParsed[<span class="dv">1</span>]<span class="fu">.toString</span>()<span class="fu">.split</span>(<span class="st">"."</span>)[<span class="dv">0</span>], d3.schemePaired[<span class="dv">1</span>])</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>styledParsedDotyTime <span class="ot">=</span> parsedDotyTime ? <span class="fu">setStyle</span>(parsedDotyTime, d3.schemePaired[<span class="dv">2</span>]) <span class="sc">:</span> <span class="st">""</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>styledDecoYear <span class="ot">=</span> <span class="fu">setStyle</span>(outputDeco[<span class="dv">0</span>], d3.schemePaired[<span class="dv">10</span>])</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>styledDecoDotyDate <span class="ot">=</span> <span class="fu">setStyle</span>(<span class="fu">decoDoty.toString</span>()<span class="fu">.split</span>(<span class="st">"."</span>)[<span class="dv">0</span>], d3.schemePaired[<span class="dv">1</span>])</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>styledDecoYear <span class="ot">=</span> <span class="fu">setStyle</span>(<span class="fu">outputDeco.split</span>(<span class="st">"+"</span>)[<span class="dv">0</span>], d3.schemePaired[<span class="dv">10</span>])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>styledDecoDotyDate <span class="ot">=</span> <span class="fu">setStyle</span>(<span class="fu">decoDoty.split</span>(<span class="st">"."</span>)[<span class="dv">0</span>], d3.schemePaired[<span class="dv">1</span>])</span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>styledDecoDotyTime <span class="ot">=</span> decoDotyTime ? <span class="fu">setStyle</span>(decoDotyTime, d3.schemePaired[<span class="dv">2</span>]) <span class="sc">:</span> <span class="st">""</span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>styledIsocYear <span class="ot">=</span> <span class="fu">setStyle</span>(<span class="fu">outputIsoc.split</span>(<span class="sc">/</span>(?<span class="ot">=</span><span class="sc">-</span>)<span class="sc">/</span>)[<span class="dv">0</span>], d3.schemePaired[<span class="dv">10</span>])</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>styledIsocMd <span class="ot">=</span> <span class="fu">setStyle</span>(<span class="fu">outputIsoc.slice</span>(<span class="fu">outputIsoc.split</span>(<span class="sc">/</span>(?<span class="ot">=</span><span class="sc">-</span>)<span class="sc">/</span>)[<span class="dv">0</span>].length<span class="sc">+</span><span class="dv">1</span>,<span class="fu">outputIsoc.split</span>(<span class="sc">/</span>(?<span class="ot">=</span><span class="sc">-</span>)<span class="sc">/</span>)[<span class="dv">0</span>].length<span class="sc">+</span><span class="dv">6</span>), d3.schemePaired[<span class="dv">5</span>])</span>
@@ -819,14 +819,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/3e38edb9-5f6b-4dbd-8984-f9dc02fe8ae4-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_r_files/figure-html/223dbcdf-3396-45a4-8177-1d61cb8ab087-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/3e38edb9-5f6b-4dbd-8984-f9dc02fe8ae4-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_r_files/figure-html/223dbcdf-3396-45a4-8177-1d61cb8ab087-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3595,7 +3595,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb85-13"><a href="#cb85-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+227.99539+0'
+'2023+228.01152+0'
 </div>
 </div></div>
 <p>:::</p>
@@ -3700,7 +3700,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+227.99539+0'
+'2023+228.01152+0'
 </div>
 </div></div>
 </section>

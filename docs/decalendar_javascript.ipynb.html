@@ -232,7 +232,7 @@
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2023+227</p>
+      <p class="date">2023+228</p>
     </div>
   </div>
   
@@ -624,9 +624,9 @@
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ydParsed <span class="op">=</span> <span class="fu">deco2doty</span>(inputDeco)</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>parsedDotyTime <span class="op">=</span> ydParsed[<span class="dv">1</span>]<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>parsedDotyTimeDelimiter <span class="op">=</span> parsedDotyTime <span class="op">?</span> <span class="st">", "</span> <span class="op">:</span> <span class="st">""</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>outputDeco <span class="op">=</span> <span class="fu">doty2doty</span>(<span class="op">...</span>ydParsed)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>decoDoty <span class="op">=</span> outputDeco[<span class="dv">1</span>]</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>decoDotyTime <span class="op">=</span> decoDoty<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>outputDeco <span class="op">=</span> <span class="fu">doty2deco</span>(<span class="op">...</span>ydParsed)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>decoDoty <span class="op">=</span> outputDeco<span class="op">.</span><span class="fu">split</span>(<span class="st">"+"</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>decoDotyTime <span class="op">=</span> decoDoty<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>decoDotyTimeDelimiter <span class="op">=</span> decoDotyTime <span class="op">?</span> <span class="st">"."</span> <span class="op">:</span> <span class="st">""</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>outputIsoc <span class="op">=</span> <span class="fu">deco2isoc</span>(outputDeco)</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>yearDate <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">ceil</span>(<span class="fu">unix2year</span>(unix) <span class="op">*</span> <span class="fl">1e3</span>) <span class="op">/</span> <span class="fl">1e3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -681,8 +681,8 @@
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>styledParsedYear <span class="op">=</span> <span class="fu">setStyle</span>(ydParsed[<span class="dv">0</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">10</span>])</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>styledParsedDotyDate <span class="op">=</span> <span class="fu">setStyle</span>(ydParsed[<span class="dv">1</span>]<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">1</span>])</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>styledParsedDotyTime <span class="op">=</span> parsedDotyTime <span class="op">?</span> <span class="fu">setStyle</span>(parsedDotyTime<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">2</span>]) <span class="op">:</span> <span class="st">""</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>styledDecoYear <span class="op">=</span> <span class="fu">setStyle</span>(outputDeco[<span class="dv">0</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">10</span>])</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>styledDecoDotyDate <span class="op">=</span> <span class="fu">setStyle</span>(decoDoty<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">1</span>])</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>styledDecoYear <span class="op">=</span> <span class="fu">setStyle</span>(outputDeco<span class="op">.</span><span class="fu">split</span>(<span class="st">"+"</span>)[<span class="dv">0</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">10</span>])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>styledDecoDotyDate <span class="op">=</span> <span class="fu">setStyle</span>(decoDoty<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">0</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">1</span>])</span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>styledDecoDotyTime <span class="op">=</span> decoDotyTime <span class="op">?</span> <span class="fu">setStyle</span>(decoDotyTime<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">2</span>]) <span class="op">:</span> <span class="st">""</span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>styledIsocYear <span class="op">=</span> <span class="fu">setStyle</span>(outputIsoc<span class="op">.</span><span class="fu">split</span>(<span class="ss">/</span><span class="sc">(?</span><span class="ss">=-</span><span class="sc">)</span><span class="ss">/</span>)[<span class="dv">0</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">10</span>])</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>styledIsocMd <span class="op">=</span> <span class="fu">setStyle</span>(outputIsoc<span class="op">.</span><span class="fu">slice</span>(outputIsoc<span class="op">.</span><span class="fu">split</span>(<span class="ss">/</span><span class="sc">(?</span><span class="ss">=-</span><span class="sc">)</span><span class="ss">/</span>)[<span class="dv">0</span>]<span class="op">.</span><span class="at">length</span><span class="op">+</span><span class="dv">1</span><span class="op">,</span>outputIsoc<span class="op">.</span><span class="fu">split</span>(<span class="ss">/</span><span class="sc">(?</span><span class="ss">=-</span><span class="sc">)</span><span class="ss">/</span>)[<span class="dv">0</span>]<span class="op">.</span><span class="at">length</span><span class="op">+</span><span class="dv">6</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">5</span>])</span>
@@ -817,14 +817,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_javascript_files/figure-html/edb34580-8b1b-48cd-a600-dc5b9ff2ff65-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_javascript_files/figure-html/32d10522-c7ea-436e-93f5-02155ef5f8b2-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_javascript_files/figure-html/edb34580-8b1b-48cd-a600-dc5b9ff2ff65-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_javascript_files/figure-html/32d10522-c7ea-436e-93f5-02155ef5f8b2-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3635,7 +3635,7 @@ y \mod 4 = 0 \\
 <span id="cb99-13"><a href="#cb99-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023+227.99507+0</code></pre>
+<pre><code>2023+228.01112+0</code></pre>
 </div>
 </div></div>
 </section>
