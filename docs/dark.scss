@@ -3,13 +3,11 @@ $font-family-sans-serif: Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Ro
 
 // Base document colors
 $body-bg: #000000 !default;
-$body-color: #ffffff !default;
+$body-color: #FFFFFF !default;
 
 // Inline code
 $code-bg: #000000 !default;
-$code-color: #00AAFF !default;
-$code-font-size: 1rem !default;
-
-code {
-    padding: 0px !important;
-}
+$link-color: #CCFF00;
+$code-color: #00CCFF !default;
+$code-font-size: 1em !default;
+$code-padding: 0px !default;

@@ -298,55 +298,56 @@
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    color <span class="ot">=</span> <span class="fu">yiq</span>(background) <span class="sc">&gt;=</span> <span class="fl">0.6</span> ? <span class="st">"#111"</span> <span class="sc">:</span> <span class="st">"white"</span>,</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    padding <span class="ot">=</span> <span class="st">"0 1px"</span>,</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    borderRadius <span class="ot">=</span> <span class="st">"4px"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    fontWeight <span class="ot">=</span> <span class="dv">800</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    ...rest</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  } <span class="ot">=</span> typeof style <span class="sc">==</span><span class="er">=</span> <span class="st">"string"</span> ? {background<span class="sc">:</span> style} <span class="sc">:</span> style;</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  return htl.html<span class="st">`</span><span class="at">&lt;span style=${{</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="at">    background,</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">    color,</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">    padding,</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">    borderRadius,</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    fontWeight,</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="at">    ...rest</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">  }}&gt;${content}&lt;/span&gt;</span><span class="st">`</span>;</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> http<span class="sc">:</span><span class="er">//</span>howardhinnant.github.io<span class="sc">/</span>date_algorithms.html<span class="co">#civil_from_days</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">dote2doty</span>(<span class="at">days =</span> <span class="dv">719468</span>) {</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    const era <span class="ot">=</span> <span class="fu">Math.floor</span>((days <span class="sc">&gt;=</span> <span class="dv">0</span> ? days <span class="sc">:</span> days <span class="sc">-</span> <span class="dv">146096</span>) <span class="sc">/</span> <span class="dv">146097</span>),</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        dotc <span class="ot">=</span> days <span class="sc">-</span> era <span class="sc">*</span> <span class="dv">146097</span>,</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        yotc <span class="ot">=</span> <span class="fu">Math.floor</span>((dotc <span class="sc">-</span> <span class="fu">Math.floor</span>(dotc <span class="sc">/</span> <span class="dv">1460</span>) <span class="sc">+</span> <span class="fu">Math.floor</span>(dotc <span class="sc">/</span> <span class="dv">36524</span>) <span class="sc">-</span> <span class="fu">Math.floor</span>(dotc <span class="sc">/</span> <span class="dv">146096</span>)) <span class="sc">/</span> <span class="dv">365</span>);</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    return [yotc <span class="sc">+</span> era <span class="sc">*</span> <span class="dv">400</span>, dotc <span class="sc">+</span> <span class="fu">Math.floor</span>(yotc <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">-</span> yotc <span class="sc">*</span> <span class="dv">365</span> <span class="sc">-</span> <span class="fu">Math.floor</span>(yotc <span class="sc">/</span> <span class="dv">4</span>)];</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">unix2doty</span>(<span class="at">ms =</span> <span class="dv">0</span>) {</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">dote2doty</span>(ms <span class="sc">/</span> <span class="dv">86400000</span> <span class="sc">+</span> <span class="dv">719468</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">doty2dote</span>(<span class="at">year =</span> <span class="dv">1969</span>, <span class="at">doty =</span> <span class="dv">0</span>, <span class="at">zone =</span> <span class="dv">0</span>) {</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    return year <span class="sc">*</span> <span class="dv">365</span> <span class="sc">+</span> <span class="fu">Math.floor</span>(year <span class="sc">/</span> <span class="dv">4</span>) <span class="sc">-</span> <span class="fu">Math.floor</span>(year <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">+</span> <span class="fu">Math.floor</span>(year <span class="sc">/</span> <span class="dv">400</span>) <span class="sc">+</span> doty <span class="sc">-</span> zone;</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">doty2deco</span>(<span class="at">year =</span> <span class="dv">1969</span>, <span class="at">doty =</span> <span class="dv">306</span>, <span class="at">zone =</span> <span class="dv">0</span>) {</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    const yd <span class="ot">=</span> <span class="fu">dote2doty</span>(<span class="fu">doty2dote</span>(year, <span class="fu">Math.floor</span>(doty)));</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    return <span class="st">`</span><span class="at">${yd[0]}+${(yd[1] - (year &lt; 0) + (year === 0 &amp;&amp; doty &gt; 0) - (year === 0 &amp;&amp; doty !== 0) + (year == 0 &amp;&amp; doty === -1)).toString().padStart(3, "0")}${</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="at">        doty.toString().includes(".") ? "." + (</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="at">            (doty &gt; 0) ? (doty-zone).toString().split(".").pop()</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="at">            : [...(doty-zone).toString().split(".").pop()].map(</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="at">                (e, i, a) =&gt; (i + 1 === a.length) ? 10 - e : 9 - e</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="at">            ).join("")</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="at">        ) : ""</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="at">    }</span><span class="st">`</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">unix2deco</span>(<span class="at">ms =</span> <span class="dv">0</span>) {</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">doty2deco</span>(<span class="fu">...unix2doty</span>(ms));</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>};</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> http<span class="sc">:</span><span class="er">//</span>howardhinnant.github.io<span class="sc">/</span>date_algorithms.html<span class="co">#days_from_civil</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">greg2doty</span>(<span class="at">month =</span> <span class="dv">1</span>, <span class="at">day =</span> <span class="dv">1</span>) {</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">Math.floor</span>(</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">153</span> <span class="sc">*</span> (month <span class="sc">&gt;</span> <span class="dv">2</span> ? month <span class="sc">-</span> <span class="dv">3</span> <span class="sc">:</span> month <span class="sc">+</span> <span class="dv">9</span>) <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">5</span> <span class="sc">+</span> day <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>)}</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> http<span class="sc">:</span><span class="er">//</span>howardhinnant.github.io<span class="sc">/</span>date_algorithms.html<span class="co">#civil_from_days</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">doty2greg</span>(<span class="at">doty =</span> <span class="dv">0</span>) {</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    const m <span class="ot">=</span> <span class="fu">Math.floor</span>((<span class="dv">5</span> <span class="sc">*</span> doty <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">153</span>);</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    return [<span class="fu">Math.floor</span>(m <span class="sc">&lt;</span> <span class="dv">10</span> ? m <span class="sc">+</span> <span class="dv">3</span> <span class="sc">:</span> m <span class="sc">-</span> <span class="dv">9</span>), doty <span class="sc">-</span> <span class="fu">Math.floor</span>((<span class="dv">153</span> <span class="sc">*</span> m <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="dv">1</span>];</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    fontWeight <span class="ot">=</span> <span class="dv">900</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    fontSize <span class="ot">=</span> <span class="st">"1em"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ...rest</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  } <span class="ot">=</span> typeof style <span class="sc">==</span><span class="er">=</span> <span class="st">"string"</span> ? {background<span class="sc">:</span> style} <span class="sc">:</span> style;</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  return htl.html<span class="st">`</span><span class="at">&lt;span style=${{</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="at">    background,</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">    color,</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">    padding,</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    borderRadius,</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="at">    fontWeight,</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">    ...rest</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="at">  }}&gt;${content}&lt;/span&gt;</span><span class="st">`</span>;</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> http<span class="sc">:</span><span class="er">//</span>howardhinnant.github.io<span class="sc">/</span>date_algorithms.html<span class="co">#civil_from_days</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">dote2doty</span>(<span class="at">days =</span> <span class="dv">719468</span>) {</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    const era <span class="ot">=</span> <span class="fu">Math.floor</span>((days <span class="sc">&gt;=</span> <span class="dv">0</span> ? days <span class="sc">:</span> days <span class="sc">-</span> <span class="dv">146096</span>) <span class="sc">/</span> <span class="dv">146097</span>),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        dotc <span class="ot">=</span> days <span class="sc">-</span> era <span class="sc">*</span> <span class="dv">146097</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        yotc <span class="ot">=</span> <span class="fu">Math.floor</span>((dotc <span class="sc">-</span> <span class="fu">Math.floor</span>(dotc <span class="sc">/</span> <span class="dv">1460</span>) <span class="sc">+</span> <span class="fu">Math.floor</span>(dotc <span class="sc">/</span> <span class="dv">36524</span>) <span class="sc">-</span> <span class="fu">Math.floor</span>(dotc <span class="sc">/</span> <span class="dv">146096</span>)) <span class="sc">/</span> <span class="dv">365</span>);</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    return [yotc <span class="sc">+</span> era <span class="sc">*</span> <span class="dv">400</span>, dotc <span class="sc">+</span> <span class="fu">Math.floor</span>(yotc <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">-</span> yotc <span class="sc">*</span> <span class="dv">365</span> <span class="sc">-</span> <span class="fu">Math.floor</span>(yotc <span class="sc">/</span> <span class="dv">4</span>)];</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">unix2doty</span>(<span class="at">ms =</span> <span class="dv">0</span>) {</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  return <span class="fu">dote2doty</span>(ms <span class="sc">/</span> <span class="dv">86400000</span> <span class="sc">+</span> <span class="dv">719468</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">doty2dote</span>(<span class="at">year =</span> <span class="dv">1969</span>, <span class="at">doty =</span> <span class="dv">0</span>, <span class="at">zone =</span> <span class="dv">0</span>) {</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    return year <span class="sc">*</span> <span class="dv">365</span> <span class="sc">+</span> <span class="fu">Math.floor</span>(year <span class="sc">/</span> <span class="dv">4</span>) <span class="sc">-</span> <span class="fu">Math.floor</span>(year <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">+</span> <span class="fu">Math.floor</span>(year <span class="sc">/</span> <span class="dv">400</span>) <span class="sc">+</span> doty <span class="sc">-</span> zone;</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">doty2deco</span>(<span class="at">year =</span> <span class="dv">1969</span>, <span class="at">doty =</span> <span class="dv">306</span>, <span class="at">zone =</span> <span class="dv">0</span>) {</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    const yd <span class="ot">=</span> <span class="fu">dote2doty</span>(<span class="fu">doty2dote</span>(year, <span class="fu">Math.floor</span>(doty)));</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    return <span class="st">`</span><span class="at">${yd[0]}+${(yd[1] - (year &lt; 0) + (year === 0 &amp;&amp; doty &gt; 0) - (year === 0 &amp;&amp; doty !== 0) + (year == 0 &amp;&amp; doty === -1)).toString().padStart(3, "0")}${</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="at">        doty.toString().includes(".") ? "." + (</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="at">            (doty &gt; 0) ? (doty-zone).toString().split(".").pop()</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="at">            : [...(doty-zone).toString().split(".").pop()].map(</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="at">                (e, i, a) =&gt; (i + 1 === a.length) ? 10 - e : 9 - e</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="at">            ).join("")</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="at">        ) : ""</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="at">    }</span><span class="st">`</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">unix2deco</span>(<span class="at">ms =</span> <span class="dv">0</span>) {</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">doty2deco</span>(<span class="fu">...unix2doty</span>(ms));</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>};</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> http<span class="sc">:</span><span class="er">//</span>howardhinnant.github.io<span class="sc">/</span>date_algorithms.html<span class="co">#days_from_civil</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">greg2doty</span>(<span class="at">month =</span> <span class="dv">1</span>, <span class="at">day =</span> <span class="dv">1</span>) {</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">Math.floor</span>(</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">153</span> <span class="sc">*</span> (month <span class="sc">&gt;</span> <span class="dv">2</span> ? month <span class="sc">-</span> <span class="dv">3</span> <span class="sc">:</span> month <span class="sc">+</span> <span class="dv">9</span>) <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">5</span> <span class="sc">+</span> day <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>)}</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> http<span class="sc">:</span><span class="er">//</span>howardhinnant.github.io<span class="sc">/</span>date_algorithms.html<span class="co">#civil_from_days</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">doty2greg</span>(<span class="at">doty =</span> <span class="dv">0</span>) {</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    const m <span class="ot">=</span> <span class="fu">Math.floor</span>((<span class="dv">5</span> <span class="sc">*</span> doty <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">153</span>);</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    return [<span class="fu">Math.floor</span>(m <span class="sc">&lt;</span> <span class="dv">10</span> ? m <span class="sc">+</span> <span class="dv">3</span> <span class="sc">:</span> m <span class="sc">-</span> <span class="dv">9</span>), doty <span class="sc">-</span> <span class="fu">Math.floor</span>((<span class="dv">153</span> <span class="sc">*</span> m <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">+</span> <span class="dv">1</span>];</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
@@ -819,14 +820,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/223dbcdf-3396-45a4-8177-1d61cb8ab087-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_r_files/figure-html/b9b60d41-f52c-46ea-b977-40aca7f559c6-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/223dbcdf-3396-45a4-8177-1d61cb8ab087-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_r_files/figure-html/b9b60d41-f52c-46ea-b977-40aca7f559c6-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3595,7 +3596,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb85-13"><a href="#cb85-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+228.01152+0'
+'2023+228.17467+0'
 </div>
 </div></div>
 <p>:::</p>
@@ -3700,7 +3701,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+228.01152+0'
+'2023+228.17467+0'
 </div>
 </div></div>
 </section>
