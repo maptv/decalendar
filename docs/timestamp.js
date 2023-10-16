@@ -158,14 +158,13 @@ function unix2wday(ms = 0) {
 
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
-    return `${yd[0]}+${(yd[1] - (year < 0) + (year === 0 && doty > 0) - (year === 0 && doty !== 0) + (year == 0 && doty === -1)).toString().padStart(3, "0")}${
-        doty.toString().includes(".") ? "." + (
-            (doty > 0) ? (doty-zone).toString().split(".").pop()
-            : [...(doty-zone).toString().split(".").pop()].map(
-                (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
-            ).join("")
+    return `${yd[0]}+${(yd[1] - (year < 0) + (year === 0 && doty > 0) - (year === 0 && doty !== 0) + (year == 0 && doty === -1)).toString().padStart(3, "0")}${doty.toString().includes(".") ? "." + (
+            (doty > 0) ? (doty - zone).toString().split(".").pop()
+                : [...(doty - zone).toString().split(".").pop()].map(
+                    (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
+                ).join("")
         ) : ""
-    }`
+        }`
 }
 
 console.log(doty2deco(0, -366));
@@ -485,7 +484,7 @@ function doty2hmso(doty = 1 / 24) {
         floorHour = Math.floor(hour),
         minute = (hour - floorHour) / 60,
         floorMinute = Math.floor(minute);
-        return [floorHour, floorMinute, (minute - floorMinute) / 60]
+    return [floorHour, floorMinute, (minute - floorMinute) / 60]
 }
 function doty2isot(doty = 1 / 24) {
     return doty2hmso(doty).map(
@@ -493,16 +492,16 @@ function doty2isot(doty = 1 / 24) {
     ).join(":");
 }
 
-function doty2isoc(year = 1969, doty = 306) {
-    floorDoty = Math.floor(doty)
-    [month, day] = doty2greg(floorDoty);
-    return [month, day];
-    return new Date(year + (doty > 305), month - 1, day)
-}
+// function doty2isoc(year = 1969, doty = 306) {
+//     floorDoty = Math.floor(doty)
+//     [month, day] = doty2greg(floorDoty);
+//     return [month, day];
+//     return new Date(year + (doty > 305), month - 1, day)
+// }
 
 console.log(new Date(2000, 0))
 console.log(doty2greg(306))
-console.log(doty2isoc())
+// console.log(doty2isoc())
 console.log(doty2hmso(.533333))
 console.log(parseInt("3z"))
 console.log(new Date(Date.parse("2023-01-01T12:00")))
@@ -585,17 +584,17 @@ console.log(doty2doty(2000, 0))
 console.log(doty2doty(1999, 0))
 console.log(doty2doty(2000, -1))
 console.log(doty2doty(1951.957))
-console.log(doty2doty(1969 + (Math.ceil(2 / 365 * 1e3)/ 1e3)))
-console.log(doty2doty(1969 + (Math.ceil(2 / 366 * 1e3)/ 1e3)))
-console.log(Math.ceil(139 / 365 * 1e3)/ 1e3)
+console.log(doty2doty(1969 + (Math.ceil(2 / 365 * 1e3) / 1e3)))
+console.log(doty2doty(1969 + (Math.ceil(2 / 366 * 1e3) / 1e3)))
+console.log(Math.ceil(139 / 365 * 1e3) / 1e3)
 console.log(doty2doty(1971, -364.5))
 console.log(doty2doty(1970, .5))
-console.log(doty2doty(2023, 221-600))
+console.log(doty2doty(2023, 221 - 600))
 const dotytest = 17;
-console.log((Math.round(dotytest / 366 * 1e3)/ 1e3) === (Math.round(dotytest / 365 * 1e3)/ 1e3))
-2023+221
-2023+221.17200+0
-2023+221.17212+0
+console.log((Math.round(dotytest / 366 * 1e3) / 1e3) === (Math.round(dotytest / 365 * 1e3) / 1e3))
+2023 + 221
+2023 + 221.17200 + 0
+2023 + 221.17212 + 0
 
 // function dote2doty(days = 719468) {
 //     const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
@@ -621,7 +620,8 @@ function unix2doty(ms = 0) {
 function greg2doty(month = 1, day = 1) {
     return Math.floor(
         (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5 + day - 1
-)}
+    )
+}
 
 console.log(greg2doty())
 
@@ -635,27 +635,27 @@ console.log(doty2greg(306))
 console.log(greg2doty(doty2greg(123)))
 
 function doty2dote(year = 1969, doty = 0) {
-  return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
+    return doty + Math.floor(year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400));
 }
 function dote2doty(days = 719468) {
-  const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
-    dotc = days - era * 146097,
-    yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
-  return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
+    const era = Math.floor((days >= 0 ? days : days - 146096) / 146097),
+        dotc = days - era * 146097,
+        yotc = Math.floor((dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365);
+    return [yotc + era * 400, dotc - (yotc * 365 + Math.floor(yotc / 4) - Math.floor(yotc / 100))];
 }
 function dote2deco(days = 719468) {
-  return doty2deco(dote2doty(days))
+    return doty2deco(dote2doty(days))
 }
 function doty2doty(year = 1969, doty = 0) {
-  return dote2doty(doty2dote(year, doty));
+    return dote2doty(doty2dote(year, doty));
 }
 function unix2doty(ms = 0) {
-  const days = ms / 86400000 + 719468;
-  return dote2doty(days)
+    const days = ms / 86400000 + 719468;
+    return dote2doty(days)
 }
 function doty2unix(year = 1969, doty = 306) {
-  const days = doty2dote(year, doty)
-  return (days - 719468) * 86400000;
+    const days = doty2dote(year, doty)
+    return (days - 719468) * 86400000;
 }
 console.log(doty2unix(2000, 306))
 
@@ -667,3 +667,41 @@ function unix2dote(ms = 0) {
 };
 
 load = unix2deco(Date.now());
+
+function doty2toty(doty = 306) {
+    doty = Math.floor(doty)
+    return (205 <= doty && doty < 295) ? ["Fall🍁", "Spring🌼", "[205, 295)"] :
+        (110 <= doty && doty < 205) ? ["Summer☀️", "Winter❄️", "[110, 205)"] :
+        (20 <= doty && doty < 110) ? ["Spring🌼", "Fall🍁", "[20, 110)"] :
+        (0 <= doty && doty < 20) || (295 <= doty && doty <= 365)
+        ? ["Winter❄️", "Summer☀️", "[0, 20)∪[295, 365]"] : "Unknown"
+}
+console.log(doty2toty(365));
+
+console.log(((306 + 365) % 365));
+
+console.log(((-70 + 365) % 365));
+switch (new Date().getDay()) {
+    case 0:
+      day = "Sunday";
+      break;
+    case 1:
+      day = "Monday";
+      break;
+    case 2:
+       day = "Tuesday";
+      break;
+    case 3:
+      day = "Wednesday";
+      break;
+    case 4:
+      day = "Thursday";
+      break;
+    case 5:
+      day = "Friday";
+      break;
+    case 6:
+      day = "Saturday";
+  }
+  
+console.log(day);

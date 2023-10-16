@@ -17,11 +17,11 @@ citation:
 
 A `doty` can represent a specific instant in a year, such as the current `doty` timestamp (`year+day.clock`): \${styledDotyDate}.\${styledDotyTime}, or a duration, such as the such as the time since this page was loaded: \${styledDotyDiff}.
 
-`Doty` timestamps are slightly more **precise** and much more **concise** than timestamps consisting of a month, day, hour, minute, and second (`mm-ddThh:mm:ss`):  \${styledIsoDate}T\${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
+`Doty` timestamps are slightly more **precise** and much more **concise** than timestamps consisting of a month, day, hour, minute, and second (`mm-ddThh:mm:ss`): \${styledIsoDate}T\${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
 
 The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: \${setStyle(dotyTime, d3.schemePaired\[2\])}.
 
-The `doty` date can tell us the current season. It is now \$(season[0]) in the Northern Hemisphere and \$(season[1]) in the Southern Hemisphere. The `doty` [intervals](https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals) of the seasons are $\left[20, 110\right)$🌼🍁, $\left[110, 205\right)$☀️❄️, $\left[205, 295\right)$🍁🌼, and $\left[0, 20) \cup \left[295, 365\right]$❄️☀️. @sec-subyear discusses seasons and other parts of the year.
+The `doty` date can tell us the current season. It is now \${season\[0\]} in the Northern Hemisphere and \${season\[1\]} in the Southern Hemisphere. The `doty` [intervals](https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals) of the seasons are $\left[20, 110\right)$🌼🍁, $\left[110, 205\right)$☀️❄️, $\left[205, 295\right)$🍁🌼, and $\left[0, 20\right)\cup\left[295, 365\right]$❄️☀️. @sec-subyear discusses seasons and other parts of the year.
 
 The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number: \${styledDek}, while the last digit is the current day-of-the-`dek` (`dotd`): \${styledDotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. @sec-dek explains how `deks` can replace months and weeks.
 
@@ -189,8 +189,7 @@ The `deco` parsing code in the [appendix](#appendix) defines the rules for stori
 
 Both the year and the `doty` in a `deco` can be fractional. Just like [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) can take the place of a month, `dotm`, hour, minutes, and second, fractional years can replace year, month, and `dotm` dates. In other words, fractional years can be a convenient way to express a date in a single number. The current `Decalendar` year date is \${styledYearDate}.
 
-While they are not very useful in `decos`, 
-Multiples of a fifth (⅕, .2) of a year are of interest because they result in `doties` that are multiples of 73.
+While they are not very useful in `decos`, Multiples of a fifth (⅕, .2) of a year are of interest because they result in `doties` that are multiples of 73.
 
 in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `Decalendar` `ordinals` (`decos`). Year dates cannot include times and are only used when it is convenient to store a `deco` as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
 
@@ -265,7 +264,6 @@ decoDotyTimeDelimiter = decoDotyTime ? "." : ""
 outputIsoc = deco2isoc(outputDeco)
 yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
 ```
-
 
 ```{ojs}
 decoYear = setStyle(outputDeco[0], d3.schemePaired[10])
@@ -2398,4 +2396,4 @@ Any holiday with a fixed (rather than floating) date in the Gregorian calendar c
 ::: {#refs}
 :::
 
-# Appendix
+# Appendix {#appendix}
