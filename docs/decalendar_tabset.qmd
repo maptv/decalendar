@@ -15,11 +15,11 @@ citation:
 
 `Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`).
 
-A `doty` can represent a specific instant in a year, such as the current `doty` timestamp (`year+day.clock`): \${styledDotyDate}.\${styledDotyTime}, or a duration, such as the time since this page was loaded: \${styledDotyDiffDate}\${styledDotyDiffTime}.
+A `doty` can represent a specific instant in a year, such as the current `doty` timestamp (`year+day.clock`): \${styledDotyDate}.\${styledDotyTime}, or a duration, such as the time since this page was loaded: \${styledDotyDiffDate}.\${styledDotyDiffTime}.
 
 `Doty` timestamps and durations are more **precise** and more **concise** than and durations that include hours, minutes, and seconds. Compare the `doty` timestamp above with the current timestamp in the `mm-ddThh:mm:ss` format: \${styledIsoDate}T\${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
 
-The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: \${setStyle(dotyTime, d3.schemePaired\[2\])}.
+The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: .\${setStyle(dotyTime, d3.schemePaired\[2\])}.
 
 The `doty` date can tell us the current season. It is now \${season\[0\]} in the Northern Hemisphere and \${season\[1\]} in the Southern Hemisphere. The \${ordinal} third of this season is associated with the \${zodiac} [Zodiac](https://en.wikipedia.org/wiki/Zodiac) sign. The `doty` [intervals](https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals) of the seasons are $\left[20, 110\right)$🌼🍁, $\left[110, 205\right)$☀️❄️, $\left[205, 295\right)$🍁🌼, and $\left[0, 20\right)\cup\left[295, 365\right]$❄️☀️. @sec-subyear discusses seasons and other parts of the year.
 
@@ -149,8 +149,8 @@ decoLoad = unix2deco(Date.now()).slice(0, 14)
 doty = deco.slice(5)
 dotyLoad = decoLoad.slice(5)
 dotyDiffRaw = (doty - dotyLoad).toString().split(".")
-dotyDiffDate = (dotyDiffRaw[0] > 0) ? dotyDiffRaw[0] + "." : ""
-dotyDiffTime = dotyDiffRaw[1].slice(0, 6)
+dotyDiffDate = dotyDiffRaw[0]
+dotyDiffTime = dotyDiffRaw[1].slice(0, 5)
 dotyDate = doty.slice(0, 3)
 dotyTime = doty.slice(4)
 iso = {
@@ -169,7 +169,7 @@ inputDotySeason = doty2toty(inputDoty)
 ```{ojs}
 styledDotyDate = setStyle(dotyDate, d3.schemePaired[1])
 styledDotyTime = setStyle(dotyTime, d3.schemePaired[2])
-styledDotyDiffDate = setStyle(dotyDiffDate, d3.schemePaired[1])
+styledDotyDiffDate = (dotyDiffDate > 0) ? setStyle(dotyDiffDate, d3.schemePaired[1]) : ""
 styledDotyDiffTime = setStyle(dotyDiffTime, d3.schemePaired[2])
 styledIsoDate = setStyle(isoDate, d3.schemePaired[5])
 styledIsoTime = setStyle(isoTime, d3.schemePaired[4])

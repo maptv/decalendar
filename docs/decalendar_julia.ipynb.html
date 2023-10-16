@@ -248,7 +248,7 @@
 <p><code>Decalendar</code> is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar🗓️system and <code>Declock</code> is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a single decimal number called the day-of-the-year (<code>doty</code>).</p>
 <p>A <code>doty</code> can represent a specific instant in a year, such as the current <code>doty</code> timestamp (<code>year+day.clock</code>): <span id="ojs-element-id-1"></span>, or a duration, such as the time since this page was loaded: <span id="ojs-element-id-2"></span>.</p>
 <p><code>Doty</code> timestamps and durations are more <strong>precise</strong> and more <strong>concise</strong> than and durations that include hours, minutes, and seconds. Compare the <code>doty</code> timestamp above with the current timestamp in the <code>mm-ddThh:mm:ss</code> format: <span id="ojs-element-id-3"></span>. <strong>The <code>doty</code> is like 5 numbers in 1!</strong> <em>And that’s not all!</em></p>
-<p>The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator">integer part</a> of the <code>doty</code> is the current <code>Decalendar</code> date: <span id="ojs-element-id-31"></span>. The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.">fractional part</a> of the <code>doty</code> is the current <code>Declock</code> time: <span id="ojs-element-id-32"></span>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator">integer part</a> of the <code>doty</code> is the current <code>Decalendar</code> date: <span id="ojs-element-id-31"></span>. The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.">fractional part</a> of the <code>doty</code> is the current <code>Declock</code> time: .<span id="ojs-element-id-32"></span>.</p>
 <p>The <code>doty</code> date can tell us the current season. It is now <span id="ojs-element-id-4"></span> in the Northern Hemisphere and <span id="ojs-element-id-5"></span> in the Southern Hemisphere. The <span id="ojs-element-id-6"></span> third of this season is associated with the <span id="ojs-element-id-7"></span> <a href="https://en.wikipedia.org/wiki/Zodiac">Zodiac</a> sign. The <code>doty</code> <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals">intervals</a> of the seasons are <span class="math inline">\(\left[20, 110\right)\)</span>🌼🍁, <span class="math inline">\(\left[110, 205\right)\)</span>☀️❄️, <span class="math inline">\(\left[205, 295\right)\)</span>🍁🌼, and <span class="math inline">\(\left[0, 20\right)\cup\left[295, 365\right]\)</span>❄️☀️. <a href="#sec-subyear">Section&nbsp;5.5</a> discusses seasons and other parts of the year.</p>
 <p>The first two <a href="https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values">digits</a> of the current <code>doty</code> date are the current <code>dek</code> number: <span id="ojs-element-id-8"></span>, while the last digit is the current day-of-the-<code>dek</code> (<code>dotd</code>): <span id="ojs-element-id-9"></span>. <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The <code>dotd</code> serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. <a href="#sec-dek">Section&nbsp;5.4</a> explains how <code>deks</code> can replace months and weeks.</p>
 <p>The digits of the current <code>doty</code> time provide the current <code>dime</code>: <span id="ojs-element-id-10"></span>, <code>cent</code>: <span id="ojs-element-id-11"></span>, <code>mil</code>: <span id="ojs-element-id-12"></span>, <code>phrase</code>: <span id="ojs-element-id-13"></span>, and <code>beat</code>: <span id="ojs-element-id-14"></span>. <code>Dimes</code> are used for <code>Declock</code> time zone offsets, <code>cents</code> are 1 percent of the day, <code>mils</code> provide the right level of precision for displaying time on clocks🕰️and⌚️watches, <code>phrases</code> are like a musical🎶<a href="https://en.wikipedia.org/wiki/Phrase_(music)">phrase</a>, and <code>beats</code> are like a heart❤️beat. <a href="#sec-unit">Section&nbsp;2.7</a> provides more information on the various <code>Decalendar</code> and <code>Declock</code> units.</p>
@@ -414,8 +414,8 @@
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>doty <span class="op">=</span> deco.<span class="fu">slice</span>(<span class="fl">5</span>)</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>dotyLoad <span class="op">=</span> decoLoad.<span class="fu">slice</span>(<span class="fl">5</span>)</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>dotyDiffRaw <span class="op">=</span> (doty <span class="op">-</span> dotyLoad).<span class="fu">toString</span>().<span class="fu">split</span>(<span class="st">"."</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dotyDiffDate <span class="op">=</span> (dotyDiffRaw[<span class="fl">0</span>] <span class="op">&gt;</span> <span class="fl">0</span>) ? dotyDiffRaw[<span class="fl">0</span>] <span class="op">+</span> <span class="st">"."</span> <span class="op">:</span> <span class="st">""</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>dotyDiffTime <span class="op">=</span> dotyDiffRaw[<span class="fl">1</span>].<span class="fu">slice</span>(<span class="fl">0</span>, <span class="fl">6</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dotyDiffDate <span class="op">=</span> dotyDiffRaw[<span class="fl">0</span>]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>dotyDiffTime <span class="op">=</span> dotyDiffRaw[<span class="fl">1</span>].<span class="fu">slice</span>(<span class="fl">0</span>, <span class="fl">5</span>)</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>dotyDate <span class="op">=</span> doty.<span class="fu">slice</span>(<span class="fl">0</span>, <span class="fl">3</span>)</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>dotyTime <span class="op">=</span> doty.<span class="fu">slice</span>(<span class="fl">4</span>)</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>iso <span class="op">=</span> {</span>
@@ -487,7 +487,7 @@
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>styledDotyDate <span class="op">=</span> <span class="fu">setStyle</span>(dotyDate, d3.schemePaired[<span class="fl">1</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>styledDotyTime <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime, d3.schemePaired[<span class="fl">2</span>])</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>styledDotyDiffDate <span class="op">=</span> <span class="fu">setStyle</span>(dotyDiffDate, d3.schemePaired[<span class="fl">1</span>])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>styledDotyDiffDate <span class="op">=</span> (dotyDiffDate <span class="op">&gt;</span> <span class="fl">0</span>) ? <span class="fu">setStyle</span>(dotyDiffDate, d3.schemePaired[<span class="fl">1</span>]) <span class="op">:</span> <span class="st">""</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>styledDotyDiffTime <span class="op">=</span> <span class="fu">setStyle</span>(dotyDiffTime, d3.schemePaired[<span class="fl">2</span>])</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>styledIsoDate <span class="op">=</span> <span class="fu">setStyle</span>(isoDate, d3.schemePaired[<span class="fl">5</span>])</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>styledIsoTime <span class="op">=</span> <span class="fu">setStyle</span>(isoTime, d3.schemePaired[<span class="fl">4</span>])</span>
@@ -895,14 +895,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/fd325830-eaed-4159-bcab-958aa64fb557-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_julia_files/figure-html/6524046d-9dda-4e93-a1bf-a7f9a7e6b5af-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/fd325830-eaed-4159-bcab-958aa64fb557-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_julia_files/figure-html/6524046d-9dda-4e93-a1bf-a7f9a7e6b5af-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3624,7 +3624,7 @@ console.log(doty2dote());</code></pre>
 <span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+229.76676+0"</code></pre>
+<pre><code>"2023+229.79775+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3729,7 +3729,7 @@ console.log(
 <span id="cb104-10"><a href="#cb104-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+229.76676+0"</code></pre>
+<pre><code>"2023+229.79775+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3848,7 +3848,7 @@ console.log(unix2deco())</code></pre>
 <span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+229.76676+0"</code></pre>
+<pre><code>"2023+229.79775+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -5052,7 +5052,7 @@ console.log(parse_dec());</code></pre>
 {"contents":[
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotyDate}.${styledDotyTime}</span>`", "cellName":"ojs-element-id-1"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotyDiffDate}${styledDotyDiffTime}</span>`", "cellName":"ojs-element-id-2"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotyDiffDate}.${styledDotyDiffTime}</span>`", "cellName":"ojs-element-id-2"}
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledIsoDate}T${styledIsoTime}</span>`", "cellName":"ojs-element-id-3"}
 ,
