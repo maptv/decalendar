@@ -93,11 +93,11 @@ function myStamp(date, offset = 0, dayOf = "y", sign = "+") {
     }
 }
 
-function leap_year(y) {
+function year2bool(y) {
     return y % 4 == 0 && y % 100 != 0 || y % 400 == 0;
 }
 
-console.log(leap_year(1972))
+console.log(year2bool(1972))
 
 function unix2doty(ms = 0) {
     const days = ms / 86400000 + 719468,
@@ -136,7 +136,7 @@ function doty2date(doty = 0) {
 console.log(doty2date());
 
 function doty2isoo(year = 1970, doty = 0) {
-    return (doty + 60 + leap_year(year + 1)) % 365
+    return (doty + 60 + year2bool(year + 1)) % 365
 }
 
 
@@ -158,16 +158,17 @@ function unix2wday(ms = 0) {
 
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
-    return `${yd[0]}+${(yd[1] - (year < 0) + (year === 0 && doty > 0) - (year === 0 && doty !== 0) + (year == 0 && doty === -1)).toString().padStart(3, "0")}${doty.toString().includes(".") ? "." + (
-            (doty > 0) ? (doty - zone).toString().split(".").pop()
-                : [...(doty - zone).toString().split(".").pop()].map(
-                    (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
-                ).join("")
+    return `${yd[0]}+${(yd[1] - (year < 0 && yd[1] < 366)).toString().padStart(3, "0")}${
+        doty.toString().includes(".") ? "." + (
+            (doty > 0) ? (doty-zone).toString().split(".").pop()
+            : [...(doty-zone).toString().split(".").pop()].map(
+                (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
+            ).join("")
         ) : ""
-        }`
+    }`
 }
 
-console.log(doty2deco(0, -366));
+console.log(doty2deco(-1, +366));
 console.log(unix2wday(Date.now()));
 console.log(date2doty(2021, 9, 1));
 
@@ -183,7 +184,7 @@ console.log(unix2doty(1695327225999, 5));
 console.log((60 + 305) % 365);
 console.log((263 + 305) % 365);
 console.log((1 + 305) % 365);
-console.log(leap_year(2000));
+console.log(year2bool(2000));
 
 function doty2year(year = 1969, doty = 0) { return year + (doty > 305) }
 
@@ -200,7 +201,7 @@ console.log(
 
 
 function isoo2year(year = 1970, day = 1) {
-    return year - (day < (60 + leap_year(year - 1)))
+    return year - (day < (60 + year2bool(year - 1)))
 }
 
 console.log(`${isoo2year(1970, 60)}+${isoo2doty()}`)
@@ -217,7 +218,7 @@ function hour2zone(hour = 0) {
                     : "J";
 }
 
-console.log(leap_year(1970))
+console.log(year2bool(1970))
 console.log(hour2zone()) // R
 console.log(hour2zone(-new Date().getTimezoneOffset() / 60)) // R
 console.log() // R
@@ -514,8 +515,8 @@ console.log(unix2deco(Date.now()))
 
 function isoo2doty(yd = "1970-001") {
     const [year, day] = yd.includes("-") ? yd.split("-") : yd.split(/(?=\d{4})/);
-    return [parseInt(year) - (parseInt(day) < (60 + leap_year(year - 1))),
-    (parseInt(day) + 305 - leap_year(year)) % 365]
+    return [parseInt(year) - (parseInt(day) < (60 + year2bool(year - 1))),
+    (parseInt(day) + 305 - year2bool(year)) % 365]
 }
 
 console.log(isoo2doty())
@@ -535,8 +536,10 @@ console.log(isoo2deco())
 //     return [year, days - (year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400))];
 // }
 
-function doty2dote(year = 1969, doty = 0, zone = 0) {
-    return year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + doty - zone;
+function doty2dote(year = 1969, doty = 0) {
+    const cycle = Math.floor((year >= 0 ? year : year - 399) / 400),
+    yote = year - cycle * 400;
+    return cycle * 146097 + yote * 365 + Math.floor(yote / 4) - Math.floor(yote / 100) + doty
 }
 
 function dote2doty(days = 719468) {

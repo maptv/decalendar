@@ -85,12 +85,15 @@ function dote2doty(days = 719468) {
 function unix2doty(ms = 0) {
   return dote2doty(ms / 86400000 + 719468)
 }
-function doty2dote(year = 1969, doty = 0, zone = 0) {
-    return year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + doty - zone;
+// https://howardhinnant.github.io/date_algorithms.html#days_from_civil
+function doty2dote(year = 1969, doty = 0) {
+    const cycle = Math.floor((year >= 0 ? year : year - 399) / 400),
+    yote = year - cycle * 400;
+    return cycle * 146097 + yote * 365 + Math.floor(yote / 4) - Math.floor(yote / 100) + doty
 }
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
-    return `${yd[0]}+${(yd[1] - (year < 0) + (year === 0 && doty > 0) - (year === 0 && doty !== 0) + (year == 0 && doty === -1)).toString().padStart(3, "0")}${
+    return `${yd[0]}+${(yd[1]).toString().padStart(3, "0")}${
         doty.toString().includes(".") ? "." + (
             (doty > 0) ? (doty-zone).toString().split(".").pop()
             : [...(doty-zone).toString().split(".").pop()].map(
@@ -156,11 +159,11 @@ styledIsoDate = setStyle(isoDate, d3.schemePaired[5])
 styledIsoTime = setStyle(isoTime, d3.schemePaired[4])
 styledDek = setStyle(doty.slice(0, 2), d3.schemePaired[1])
 styledDotd = setStyle(doty[2], d3.schemePaired[0])
-styledDime = setStyle(dotyTime[0], d3.schemePaired[6])
-styledCent = setStyle(dotyTime[1], d3.schemePaired[11])
-styledMil = setStyle(dotyTime[2], d3.schemePaired[9])
+styledDime = setStyle(dotyTime[0], d3.schemePaired[11])
+styledCent = setStyle(dotyTime[1], d3.schemePaired[6])
+styledMil = setStyle(dotyTime[2], d3.schemeAccent[5])
 styledPhrase = setStyle(dotyTime[3], d3.schemePaired[8])
-styledBeat = setStyle(dotyTime[4], d3.schemeAccent[5])
+styledBeat = setStyle(dotyTime[4], d3.schemePaired[9])
 outputDoty = setStyle(greg2doty(month, dotm).toString().padStart(3, "0"), d3.schemePaired[1])
 monthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart(2, "0")).join("-"), d3.schemePaired[5]);
 ```
