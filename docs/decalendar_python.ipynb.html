@@ -104,11 +104,11 @@
 <script src="decalendar_python_files/libs/quarto-html/anchor.min.js"></script>
 <link href="decalendar_python_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="decalendar_python_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="decalendar_python_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="decalendar_python_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="decalendar_python_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="decalendar_python_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="decalendar_python_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="decalendar_python_files/libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="decalendar_python_files/libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script> 
       </head>
   <body class="quarto-notebook">
@@ -246,13 +246,13 @@
 <section id="day-of-the-year" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="day-of-the-year"><span class="header-section-number">1.1</span> Day-of-the-year</h2>
 <p><code>Decalendar</code> is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar🗓️system and <code>Declock</code> is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a single decimal number called the day-of-the-year (<code>doty</code>).</p>
-<p>A <code>doty</code> can represent a specific instant in a year, such as the current <code>doty</code> timestamp (<code>year+day.clock</code>): <span id="ojs-element-id-1"></span>, or a duration, such as the such as the time since this page was loaded: <span id="ojs-element-id-2"></span>.</p>
-<p><code>Doty</code> timestamps are slightly more <strong>precise</strong> and much more <strong>concise</strong> than timestamps consisting of a month, day, hour, minute, and second (<code>mm-ddThh:mm:ss</code>): <span id="ojs-element-id-3"></span>. <strong>The <code>doty</code> is like 5 numbers in 1!</strong> <em>And that’s not all!</em></p>
-<p>The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator">integer part</a> of the <code>doty</code> is the current <code>Decalendar</code> date: <span id="ojs-element-id-21"></span>. The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.">fractional part</a> of the <code>doty</code> is the current <code>Declock</code> time: <span id="ojs-element-id-22"></span>.</p>
-<p>The <code>doty</code> date can tell us the current season. It is now <span id="ojs-element-id-4"></span> in the Northern Hemisphere and <span id="ojs-element-id-5"></span> in the Southern Hemisphere. The <code>doty</code> <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals">intervals</a> of the seasons are <span class="math inline">\(\left[20, 110\right)\)</span>🌼🍁, <span class="math inline">\(\left[110, 205\right)\)</span>☀️❄️, <span class="math inline">\(\left[205, 295\right)\)</span>🍁🌼, and <span class="math inline">\(\left[0, 20\right)\cup\left[295, 365\right]\)</span>❄️☀️. <a href="#sec-subyear">Section&nbsp;5.5</a> discusses seasons and other parts of the year.</p>
-<p>The first two <a href="https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values">digits</a> of the current <code>doty</code> date are the current <code>dek</code> number: <span id="ojs-element-id-6"></span>, while the last digit is the current day-of-the-<code>dek</code> (<code>dotd</code>): <span id="ojs-element-id-7"></span>. <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The <code>dotd</code> serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. <a href="#sec-dek">Section&nbsp;5.4</a> explains how <code>deks</code> can replace months and weeks.</p>
-<p>The digits of the current <code>doty</code> time provide the current <code>dime</code>: <span id="ojs-element-id-8"></span>, <code>cent</code>: <span id="ojs-element-id-9"></span>, <code>mil</code>: <span id="ojs-element-id-10"></span>, <code>phrase</code>: <span id="ojs-element-id-11"></span>, and <code>beat</code>: <span id="ojs-element-id-12"></span>. <code>Dimes</code> are used for <code>Declock</code> time zone offsets, <code>cents</code> are 1 percent of the day, <code>mils</code> provide the right level of precision for displaying time on clocks🕰️and⌚️watches, <code>phrases</code> are like a musical🎶<a href="https://en.wikipedia.org/wiki/Phrase_(music)">phrase</a>, and <code>beats</code> are like a heart❤️beat. <a href="#sec-unit">Section&nbsp;2.7</a> provides more information on the various <code>Decalendar</code> and <code>Declock</code> units.</p>
-<p>Now it’s your turn! Enter a month and <code>dotm</code> below to see the equivalent <code>doty</code> date: <span id="ojs-element-id-13"></span>. Try special dates like birthdays🎂and🥂anniversaries!</p>
+<p>A <code>doty</code> can represent a specific instant in a year, such as the current <code>doty</code> timestamp (<code>year+day.clock</code>): <span id="ojs-element-id-1"></span>, or a duration, such as the time since this page was loaded: <span id="ojs-element-id-2"></span>.</p>
+<p><code>Doty</code> timestamps and durations are more <strong>precise</strong> and more <strong>concise</strong> than and durations that include hours, minutes, and seconds. Compare the <code>doty</code> timestamp above with the current timestamp in the <code>mm-ddThh:mm:ss</code> format: <span id="ojs-element-id-3"></span>. <strong>The <code>doty</code> is like 5 numbers in 1!</strong> <em>And that’s not all!</em></p>
+<p>The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator">integer part</a> of the <code>doty</code> is the current <code>Decalendar</code> date: <span id="ojs-element-id-31"></span>. The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.">fractional part</a> of the <code>doty</code> is the current <code>Declock</code> time: <span id="ojs-element-id-32"></span>.</p>
+<p>The <code>doty</code> date can tell us the current season. It is now <span id="ojs-element-id-4"></span> in the Northern Hemisphere and <span id="ojs-element-id-5"></span> in the Southern Hemisphere. The <span id="ojs-element-id-6"></span> third of this season is associated with the <span id="ojs-element-id-7"></span> <a href="https://en.wikipedia.org/wiki/Zodiac">Zodiac</a> sign. The <code>doty</code> <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals">intervals</a> of the seasons are <span class="math inline">\(\left[20, 110\right)\)</span>🌼🍁, <span class="math inline">\(\left[110, 205\right)\)</span>☀️❄️, <span class="math inline">\(\left[205, 295\right)\)</span>🍁🌼, and <span class="math inline">\(\left[0, 20\right)\cup\left[295, 365\right]\)</span>❄️☀️. <a href="#sec-subyear">Section&nbsp;5.5</a> discusses seasons and other parts of the year.</p>
+<p>The first two <a href="https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values">digits</a> of the current <code>doty</code> date are the current <code>dek</code> number: <span id="ojs-element-id-8"></span>, while the last digit is the current day-of-the-<code>dek</code> (<code>dotd</code>): <span id="ojs-element-id-9"></span>. <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The <code>dotd</code> serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. <a href="#sec-dek">Section&nbsp;5.4</a> explains how <code>deks</code> can replace months and weeks.</p>
+<p>The digits of the current <code>doty</code> time provide the current <code>dime</code>: <span id="ojs-element-id-10"></span>, <code>cent</code>: <span id="ojs-element-id-11"></span>, <code>mil</code>: <span id="ojs-element-id-12"></span>, <code>phrase</code>: <span id="ojs-element-id-13"></span>, and <code>beat</code>: <span id="ojs-element-id-14"></span>. <code>Dimes</code> are used for <code>Declock</code> time zone offsets, <code>cents</code> are 1 percent of the day, <code>mils</code> provide the right level of precision for displaying time on clocks🕰️and⌚️watches, <code>phrases</code> are like a musical🎶<a href="https://en.wikipedia.org/wiki/Phrase_(music)">phrase</a>, and <code>beats</code> are like a heart❤️beat. <a href="#sec-unit">Section&nbsp;2.7</a> provides more information on the various <code>Decalendar</code> and <code>Declock</code> units.</p>
+<p>Now it’s your turn! Enter a month and <code>dotm</code> below to see 1) the equivalent <code>doty</code> date, 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere. Try special dates like birthdays🎂and🥂anniversaries!</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -271,7 +271,12 @@
 
 </div>
 </div>
-<p>You can also enter a <code>doty</code> below to get the current month and <code>dotm</code>: <span id="ojs-element-id-14"></span>. Converting back and forth between date formats is a great way to build familiarity with <code>doty</code> dates.</p>
+<ol type="1">
+<li><span id="ojs-element-id-15"></span></li>
+<li><span id="ojs-element-id-16"></span></li>
+<li><span id="ojs-element-id-17"></span></li>
+</ol>
+<p>Similarly, you can also enter a <code>doty</code> below to get 1) the corresponding month and <code>dotm</code>, 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere. Converting back and forth between date formats is a great way to build familiarity with <code>doty</code> dates.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -281,6 +286,11 @@
 
 </div>
 </div>
+<ol type="1">
+<li><span id="ojs-element-id-18"></span></li>
+<li><span id="ojs-element-id-19"></span></li>
+<li><span id="ojs-element-id-20"></span></li>
+</ol>
 <section id="doty-observable-code" class="level4">
 <h4 class="anchored" data-anchor-id="doty-observable-code"><code>Doty</code> Observable code</h4>
 <section id="functions" class="level5">
@@ -403,18 +413,38 @@
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>decoLoad <span class="op">=</span> unix2deco(Date.now()).<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">14</span>)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>doty <span class="op">=</span> deco.<span class="bu">slice</span>(<span class="dv">5</span>)</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>dotyLoad <span class="op">=</span> decoLoad.<span class="bu">slice</span>(<span class="dv">5</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>dotyDiff <span class="op">=</span> (doty <span class="op">-</span> dotyLoad).toString().<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">7</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dotyDate <span class="op">=</span> doty.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">3</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>dotyTime <span class="op">=</span> doty.<span class="bu">slice</span>(<span class="dv">4</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>iso <span class="op">=</span> {</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(true) {</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> new Date().toISOString()</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>isoDate <span class="op">=</span> iso.<span class="bu">slice</span>(<span class="dv">5</span>, <span class="dv">10</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>isoTime <span class="op">=</span> iso.<span class="bu">slice</span>(<span class="dv">11</span>, <span class="dv">19</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>season <span class="op">=</span> doty2toty(dotyDate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>dotyDiffRaw <span class="op">=</span> (doty <span class="op">-</span> dotyLoad).toString().split(<span class="st">"."</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>dotyDiffDate <span class="op">=</span> (dotyDiffRaw[<span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">0</span>) ? dotyDiffRaw[<span class="dv">0</span>] <span class="op">+</span> <span class="st">"."</span> : <span class="st">""</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>dotyDiffTime <span class="op">=</span> dotyDiffRaw[<span class="dv">1</span>].<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>dotyDate <span class="op">=</span> doty.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>dotyTime <span class="op">=</span> doty.<span class="bu">slice</span>(<span class="dv">4</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>iso <span class="op">=</span> {</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(true) {</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">yield</span> new Date().toISOString()</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>isoDate <span class="op">=</span> iso.<span class="bu">slice</span>(<span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>isoTime <span class="op">=</span> iso.<span class="bu">slice</span>(<span class="dv">11</span>, <span class="dv">19</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>season <span class="op">=</span> doty2toty(dotyDate)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>outputDoty <span class="op">=</span> greg2doty(month, dotm)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>outputDotySeason <span class="op">=</span> doty2toty(outputDoty)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>inputDotySeason <span class="op">=</span> doty2toty(inputDoty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -457,19 +487,23 @@
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>styledDotyDate <span class="op">=</span> setStyle(dotyDate, d3.schemePaired[<span class="dv">1</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>styledDotyTime <span class="op">=</span> setStyle(dotyTime, d3.schemePaired[<span class="dv">2</span>])</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>styledDotyDiff <span class="op">=</span> setStyle(dotyDiff, d3.schemePaired[<span class="dv">2</span>])</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>styledIsoDate <span class="op">=</span> setStyle(isoDate, d3.schemePaired[<span class="dv">5</span>])</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>styledIsoTime <span class="op">=</span> setStyle(isoTime, d3.schemePaired[<span class="dv">4</span>])</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>styledDek <span class="op">=</span> setStyle(doty.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">2</span>), d3.schemePaired[<span class="dv">1</span>])</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>styledDotd <span class="op">=</span> setStyle(doty[<span class="dv">2</span>], d3.schemePaired[<span class="dv">0</span>])</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>styledDime <span class="op">=</span> setStyle(dotyTime[<span class="dv">0</span>], d3.schemePaired[<span class="dv">9</span>])</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>styledCent <span class="op">=</span> setStyle(dotyTime[<span class="dv">1</span>], d3.schemePaired[<span class="dv">8</span>])</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>styledMil <span class="op">=</span> setStyle(dotyTime[<span class="dv">2</span>], d3.schemeAccent[<span class="dv">5</span>])</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>styledPhrase <span class="op">=</span> setStyle(dotyTime[<span class="dv">3</span>], d3.schemePaired[<span class="dv">6</span>])</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>styledBeat <span class="op">=</span> setStyle(dotyTime[<span class="dv">4</span>], d3.schemePaired[<span class="dv">11</span>])</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>outputDoty <span class="op">=</span> setStyle(greg2doty(month, dotm).toString().padStart(<span class="dv">3</span>, <span class="st">"0"</span>), d3.schemePaired[<span class="dv">1</span>])</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>monthAndDay <span class="op">=</span> setStyle(doty2greg(inputDoty).<span class="bu">map</span>(i <span class="op">=&gt;</span> i.toString().padStart(<span class="dv">2</span>, <span class="st">"0"</span>)).join(<span class="st">"-"</span>), d3.schemePaired[<span class="dv">5</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>styledDotyDiffDate <span class="op">=</span> setStyle(dotyDiffDate, d3.schemePaired[<span class="dv">1</span>])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>styledDotyDiffTime <span class="op">=</span> setStyle(dotyDiffTime, d3.schemePaired[<span class="dv">2</span>])</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>styledIsoDate <span class="op">=</span> setStyle(isoDate, d3.schemePaired[<span class="dv">5</span>])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>styledIsoTime <span class="op">=</span> setStyle(isoTime, d3.schemePaired[<span class="dv">4</span>])</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>styledDek <span class="op">=</span> setStyle(doty.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">2</span>), d3.schemePaired[<span class="dv">1</span>])</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>styledDotd <span class="op">=</span> setStyle(doty[<span class="dv">2</span>], d3.schemePaired[<span class="dv">0</span>])</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>styledDime <span class="op">=</span> setStyle(dotyTime[<span class="dv">0</span>], d3.schemePaired[<span class="dv">9</span>])</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>styledCent <span class="op">=</span> setStyle(dotyTime[<span class="dv">1</span>], d3.schemePaired[<span class="dv">8</span>])</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>styledMil <span class="op">=</span> setStyle(dotyTime[<span class="dv">2</span>], d3.schemeAccent[<span class="dv">5</span>])</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>styledPhrase <span class="op">=</span> setStyle(dotyTime[<span class="dv">3</span>], d3.schemePaired[<span class="dv">6</span>])</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>styledBeat <span class="op">=</span> setStyle(dotyTime[<span class="dv">4</span>], d3.schemePaired[<span class="dv">11</span>])</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>styledOutputDoty <span class="op">=</span> setStyle(outputDoty.toString().padStart(<span class="dv">3</span>, <span class="st">"0"</span>), d3.schemePaired[<span class="dv">1</span>])</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>styledMonthAndDay <span class="op">=</span> setStyle(doty2greg(inputDoty).<span class="bu">map</span>(i <span class="op">=&gt;</span> i.toString().padStart(<span class="dv">2</span>, <span class="st">"0"</span>)).join(<span class="st">"-"</span>), d3.schemePaired[<span class="dv">5</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -518,7 +552,7 @@
 </section>
 <section id="year" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="year"><span class="header-section-number">1.2</span> Year</h2>
-<p>Any <code>doty</code> can be combined with a year to form a <code>Decalendar</code> <code>ordinal</code> (<code>deco</code>). Enter a year, month, <code>dotm</code>, hour, and minute below to see the equivalent <code>deco</code> (<code>year+day.ddddd</code>): <span id="ojs-element-id-15"></span>.</p>
+<p>Any <code>doty</code> can be combined with a year to form a <code>Decalendar</code> <code>ordinal</code> (<code>deco</code>). Enter a year, month, <code>dotm</code>, hour, and minute below to see 1) the equivalent <code>deco</code> (<code>year+day.ddddd</code>), 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -528,12 +562,12 @@
 
 </div>
 </div>
-<p>You can also enter a <code>deco</code> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers between 0 and 366, and 3) <strong>converted</strong> into <code>year-mm-ddThh:mm:ss</code> format:</p>
 <ol type="1">
-<li><span id="ojs-element-id-16"></span>, <span id="ojs-element-id-17"></span></li>
-<li><span id="ojs-element-id-18"></span></li>
-<li><span id="ojs-element-id-19"></span></li>
+<li><span id="ojs-element-id-21"></span></li>
+<li><span id="ojs-element-id-22"></span></li>
+<li><span id="ojs-element-id-23"></span></li>
 </ol>
+<p>You can also enter a <code>deco</code> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers below 366 <span class="math inline">\(\left[0, 366\right)\)</span>, and <strong>converted</strong> into 3) the <code>year-mm-ddThh:mm:ss</code> format, 4) Northern Hemisphere season, and 5) Southern Hemisphere season.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -543,8 +577,15 @@
 
 </div>
 </div>
+<ol type="1">
+<li><span id="ojs-element-id-24"></span>, <span id="ojs-element-id-25"></span></li>
+<li><span id="ojs-element-id-26"></span></li>
+<li><span id="ojs-element-id-27"></span></li>
+<li><span id="ojs-element-id-28"></span></li>
+<li><span id="ojs-element-id-29"></span></li>
+</ol>
 <p>The <code>deco</code> parsing code in the <a href="#appendix">appendix</a> defines the rules for storing dates as <code>Decalendar</code> <code>ordinals</code> (<code>decos</code>). Notably, a <code>deco</code> consisting of a single number without a plus (+) or minus sign (-) is interpreted as a <code>doty</code> and will be appended to the current year. <code>Decos</code> can be written with negative <code>doties</code>, but are always displayed with positive <code>doties</code>. <code>Doties</code> are zero padded to 3 digits, but years are not.</p>
-<p>Both the year and the <code>doty</code> in a <code>deco</code> can be fractional. Just like <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> can take the place of a month, <code>dotm</code>, hour, minutes, and second, fractional years can replace year, month, and <code>dotm</code> dates. In other words, fractional years can be a convenient way to express a date in a single number. The current <code>Decalendar</code> year date is <span id="ojs-element-id-20"></span>.</p>
+<p>Both the year and the <code>doty</code> in a <code>deco</code> can be fractional. Just like <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> can take the place of a month, <code>dotm</code>, hour, minutes, and second, fractional years can replace year, month, and <code>dotm</code> dates. In other words, fractional years can be a convenient way to express a date in a single number. The current <code>Decalendar</code> year date is <span id="ojs-element-id-30"></span>.</p>
 <p>While they are not very useful in <code>decos</code>, Multiples of a fifth (⅕, .2) of a year are of interest because they result in <code>doties</code> that are multiples of 73.</p>
 <p>in the <code>Decalendar</code> fractional year format (<code>year.yyy</code>) allows us to avoid parsing <code>Decalendar</code> <code>ordinals</code> (<code>decos</code>). Year dates cannot include times and are only used when it is convenient to store a <code>deco</code> as a single number. Enter a <code>deco</code> or <code>year-mm-dd</code> date to see a custom year date. Enter a year date to turn it into a <code>deco</code> and <code>year-mm-dd</code> date.</p>
 <section id="deco-observable-code" class="level4">
@@ -640,18 +681,34 @@
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tzOffsetInMs <span class="op">=</span> inputDatetime.getTimezoneOffset() <span class="op">*</span> <span class="dv">60000</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>outputDatetime <span class="op">=</span> unix2deco(inputDatetime <span class="op">-</span> tzOffsetInMs)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>dtDotyTimeRaw <span class="op">=</span> outputDatetime.<span class="bu">slice</span>(<span class="dv">9</span>, <span class="dv">14</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>dtDotyTimeDelimiter <span class="op">=</span> dtDotyTime ? <span class="st">"."</span> : <span class="st">""</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ydParsed <span class="op">=</span> deco2doty(inputDeco)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>parsedDotyTime <span class="op">=</span> ydParsed[<span class="dv">1</span>].toString().split(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>parsedDotyTimeDelimiter <span class="op">=</span> parsedDotyTime ? <span class="st">", "</span> : <span class="st">""</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>outputDeco <span class="op">=</span> doty2deco(...ydParsed)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>decoDoty <span class="op">=</span> outputDeco.split(<span class="st">"+"</span>)[<span class="dv">1</span>]</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>decoDotyTime <span class="op">=</span> decoDoty.split(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>decoDotyTimeDelimiter <span class="op">=</span> decoDotyTime ? <span class="st">"."</span> : <span class="st">""</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>outputIsoc <span class="op">=</span> deco2isoc(outputDeco)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>yearDate <span class="op">=</span> Math.ceil(unix2year(unix) <span class="op">*</span> <span class="fl">1e3</span>) <span class="op">/</span> <span class="fl">1e3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>dtDotyDateRaw <span class="op">=</span> outputDatetime.<span class="bu">slice</span>(<span class="dv">5</span>, <span class="dv">8</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>dtDotyTimeRaw <span class="op">=</span> outputDatetime.<span class="bu">slice</span>(<span class="dv">9</span>, <span class="dv">14</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>dtDotyTimeDelimiter <span class="op">=</span> dtDotyTime ? <span class="st">"."</span> : <span class="st">""</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ydParsed <span class="op">=</span> deco2doty(inputDeco)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>parsedDotyTime <span class="op">=</span> ydParsed[<span class="dv">1</span>].toString().split(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>parsedDotyTimeDelimiter <span class="op">=</span> parsedDotyTime ? <span class="st">", "</span> : <span class="st">""</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>outputDeco <span class="op">=</span> doty2deco(...ydParsed)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>decoDoty <span class="op">=</span> outputDeco.split(<span class="st">"+"</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>decoDotyDate <span class="op">=</span> decoDoty.split(<span class="st">"."</span>)[<span class="dv">0</span>]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>decoDotyTime <span class="op">=</span> decoDoty.split(<span class="st">"."</span>)[<span class="dv">1</span>]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>decoDotyTimeDelimiter <span class="op">=</span> decoDotyTime ? <span class="st">"."</span> : <span class="st">""</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>outputIsoc <span class="op">=</span> deco2isoc(outputDeco)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>yearDate <span class="op">=</span> Math.ceil(unix2year(unix) <span class="op">*</span> <span class="fl">1e3</span>) <span class="op">/</span> <span class="fl">1e3</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>dtDotyToty <span class="op">=</span> doty2toty(dtDotyDateRaw)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>decoDotyToty <span class="op">=</span> doty2toty(decoDotyDate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -697,7 +754,7 @@
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>decoYear <span class="op">=</span> setStyle(outputDeco[<span class="dv">0</span>], d3.schemePaired[<span class="dv">10</span>])</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dtYear <span class="op">=</span> setStyle(outputDatetime.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">4</span>), d3.schemePaired[<span class="dv">10</span>])</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dtDotyDate <span class="op">=</span> setStyle(outputDatetime.<span class="bu">slice</span>(<span class="dv">5</span>, <span class="dv">8</span>), d3.schemePaired[<span class="dv">1</span>])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dtDotyDate <span class="op">=</span> setStyle(dtDotyDateRaw, d3.schemePaired[<span class="dv">1</span>])</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>dtDotyTime <span class="op">=</span> dtDotyTimeRaw ? setStyle(dtDotyTimeRaw, d3.schemePaired[<span class="dv">2</span>]) : <span class="st">""</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>styledParsedYear <span class="op">=</span> setStyle(ydParsed[<span class="dv">0</span>], d3.schemePaired[<span class="dv">10</span>])</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>styledParsedDotyDate <span class="op">=</span> setStyle(ydParsed[<span class="dv">1</span>].toString().split(<span class="st">"."</span>)[<span class="dv">0</span>], d3.schemePaired[<span class="dv">1</span>])</span>
@@ -838,14 +895,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_python_files/figure-html/43156db9-2dfa-4fd6-81d7-9428bbb872d2-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_python_files/figure-html/4fb0b812-57e7-4ffe-bb8f-e9b1bef78cdb-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_python_files/figure-html/43156db9-2dfa-4fd6-81d7-9428bbb872d2-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_python_files/figure-html/4fb0b812-57e7-4ffe-bb8f-e9b1bef78cdb-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -906,7 +963,7 @@
 </section>
 <section id="specific-dates-and-times" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="specific-dates-and-times"><span class="header-section-number">2.5</span> Specific dates and times</h2>
-<p>The <code>stamp</code> in <a href="#sec-stamp">Section&nbsp;2.4</a> assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The <code>Day</code> <code>306</code> of 1969, would be written <code>1969+306</code> and said “Year 1969 Day 306” or simply “1969 306”, while midnight in <code>Zone</code> <code>0</code> would be written <code>.000+0</code> and said “Dot 0 Zone 0”, “0 Zone 0”, or “0 0”. Combined together, this date and time form the <code>stamp 1969+306.000+0</code>.</p>
+<p>The <code>stamp</code> in <a href="#sec-stamp">Section&nbsp;2.4</a> assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The <code>Day</code> <code>306</code> of 1969, would be written <code>1969+306</code> and said “Year 1969 Day 306” or simply “1969 306”, while midnight in <code>Zone</code> <code>0</code> would be written <code>.000+0</code> and said “Dot 0 Zone 0”, “0 Zone 0”, or “0 0”. Combined together, this date and time form the <code>stamp</code> <code>1969+306.000+0</code>.</p>
 </section>
 <section id="negative-numbers" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="negative-numbers"><span class="header-section-number">2.6</span> Negative numbers</h2>
@@ -3593,7 +3650,7 @@ day = Int(floor(d))
 <span id="cb101-10"><a href="#cb101-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>'2023+229.28683+0'</code></pre>
+<pre><code>'2023+229.76688+0'</code></pre>
 </div>
 </div></div>
 </section>
@@ -3698,7 +3755,7 @@ day = Int(floor(d))
 <span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>'2023+229.28683+0'</code></pre>
+<pre><code>'2023+229.76688+0'</code></pre>
 </div>
 </div></div>
 </section>
@@ -3814,7 +3871,7 @@ unix2deco()</code></pre>
 <span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>'2023+229.28683+0'</code></pre>
+<pre><code>'2023+229.76688+0'</code></pre>
 </div>
 </div></div>
 </section>
@@ -4043,8 +4100,8 @@ console.log(parse_dec());</code></pre>
 </table>
 <p>Table&nbsp;11: The time in Mexico City, London, and Tokyo in all three dot formats</p>
 </blockquote>
-<p>In <a href="#tbl-dotex">Table&nbsp;11</a>, the <code>.m</code> format tells us that the month in Tokyo is January (<code>Month 0</code>) and the month in Mexico City and London is December (<code>Month B</code>). We could say the <code>.m</code> dates in Mexico City and London as “Year 1999 Month B Day 29” or “Year 1999 Month -1 Day -1” and the Tokyo date as “Year 2000 Month 0 Day 0” or “Year 2000 Month -C Day -31”.</p>
-<p>The <code>decw</code> format always starts the year with <code>Week 0</code>, but the year can start on any day of the week. <a href="#tbl-dotex">Table&nbsp;11</a> shows that the year 2000 starts on a Saturday (<code>Week 0 Day 6</code>). The <code>decw</code> dates in Mexico City and London could be said “Year 1999 Week 52 Day 2” or “Year 1999 Week -1 Day -5”, while the date in Tokyo could be pronounced “Year 2000 Week 0 Day 3” or “Year 2000 Week -52 Day -4” in Tokyo.</p>
+<p>In <a href="#tbl-dotex">Table&nbsp;11</a>, the <code>.m</code> format tells us that the month in Tokyo is January (<code>Month</code> <code>0</code>) and the month in Mexico City and London is December (<code>Month</code> <code>B</code>). We could say the <code>.m</code> dates in Mexico City and London as “Year 1999 Month B Day 29” or “Year 1999 Month -1 Day -1” and the Tokyo date as “Year 2000 Month 0 Day 0” or “Year 2000 Month -C Day -31”.</p>
+<p>The <code>decw</code> format always starts the year with <code>Week</code> <code>0</code>, but the year can start on any day of the week. <a href="#tbl-dotex">Table&nbsp;11</a> shows that the year 2000 starts on a Saturday (<code>Week</code> <code>0</code> <code>Day</code> <code>6</code>). The <code>decw</code> dates in Mexico City and London could be said “Year 1999 Week 52 Day 2” or “Year 1999 Week -1 Day -5”, while the date in Tokyo could be pronounced “Year 2000 Week 0 Day 3” or “Year 2000 Week -52 Day -4” in Tokyo.</p>
 <p>In contrast to the <code>.m</code> and the <code>decw</code> formats, the dates in the <code>.y</code> format are one character shorter and a little easier to say. The spoken form of the <code>.y</code> date in Mexico City and London is “Year 1999 Day 365” or “Year 1999 Day -1” and the spoken form of the Tokyo date is “Year 2000 Day 0” or “Year 2000 Day -365”.</p>
 </section>
 </section>
@@ -4481,7 +4538,7 @@ console.log(parse_dec());</code></pre>
 </table>
 <p>Table&nbsp;19: The days that begin and end each <code>wau</code></p>
 </blockquote>
-<p>All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of <code>Delt 2</code>, <code>D2+00.5</code> or <code>+182.5</code>, and the midpoint of leap years is midnight of the first day of <code>Wau 3</code>, <code>W3+00.0</code> or <code>+183.0</code>. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is <code>2000S0+00</code> or <code>2000+020</code>, while the last day of this season is <code>2000S0+89</code> or <code>2000+109</code>. The subyear units are essentially date intervals, series of contiguous dates. <code>Decalendar</code> includes very powerful approaches to describing series of dates, times, and <code>stamps</code>.</p>
+<p>All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of <code>Delt</code> <code>2</code>, <code>D2+00.5</code> or <code>+182.5</code>, and the midpoint of leap years is midnight of the first day of <code>Wau</code> <code>3</code>, <code>W3+00.0</code> or <code>+183.0</code>. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is <code>2000S0+00</code> or <code>2000+020</code>, while the last day of this season is <code>2000S0+89</code> or <code>2000+109</code>. The subyear units are essentially date intervals, series of contiguous dates. <code>Decalendar</code> includes very powerful approaches to describing series of dates, times, and <code>stamps</code>.</p>
 </section>
 </section>
 </section>
@@ -4491,8 +4548,8 @@ console.log(parse_dec());</code></pre>
 <p>A single <code>doty</code> number, such as <code>Day</code> <code>0</code>, implies a duration on 1 day. We can indicate a duration of multiple days by listing consecutive days in a <code>series</code>. A <code>series</code> consists of dates, times, or <code>stamps</code> separated by commas (<code>,</code>). The items in a <code>series</code> should all be of the same type. In other words, <code>series</code> should be homogeneous and not mix dates, times, and <code>stamps</code>. The first 3 days of the year in the form of a <code>series</code> would be written <code>0,1,2</code>, while the last three days would be <code>-3,-2,-1</code>. The first half a day, from midnight to noon, could be written <code>0,.1,.2,.3,.4</code>.</p>
 <section id="slices" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="slices"><span class="header-section-number">6.1</span> Slices</h2>
-<p>Instead of listing every single day in a <code>series</code>, we can “slice” from <code>Day</code> <code>0</code> up to but not including <code>Day</code> <code>3</code> by writing <code>:3</code>. <code>Simple slices</code> consist of a <code>start</code> and a <code>stop</code> separated by a colon (<code>start:stop</code>). When the <code>start</code> is omitted, <code>slices</code> begin at the first value, which in the context of a year is <code>Day</code> <code>0</code> and in the context of a day is midnight. Therefore, writing <code>:3</code> is the same as writing <code>0:3</code>, both represent the first 3 days of the year: <code>0,1,2</code>. Using this approach, we can shorten the series <code>0,.1,.2,.3,.4</code> to <code>:.5</code>. If we omit the <code>stop</code>, instead of the <code>start</code>, we would “slice” up to and including the last value.</p>
-<p>In the context of <code>doty</code> dates, omitting the <code>stop</code> value obtains all of the days in the year after the <code>start</code>, because the default <code>stop</code> is the number of days in the year (<code>n</code>). For example, the <code>slice 3:</code> has a <code>start</code> of <code>Day</code> <code>3</code> and a <code>stop</code> of <code>n</code>, and thus represents every day in the year except the first 3. The number of items we obtain from a <code>slice</code> is called a <code>span</code>. To calculate the <code>span</code>, we subtract the <code>start</code> from the <code>stop</code> (<span class="math inline">\(stop-start\)</span>). In a common year, the <code>span</code> of <code>003:</code> is <span class="math inline">\(n-3=362\)</span>, while in a leap year it would be <span class="math inline">\(n-3=363\)</span>. If both the <code>start</code> and the <code>stop</code> are omitted, every day is included (<span class="math inline">\(span=n-0\)</span>). <a href="#tbl-4slice">Table&nbsp;20</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>slices</code>. The superscript plus sign (⁺) in <a href="#tbl-4slice">Table&nbsp;20</a> indicates a number that has to be incremented in leap years.</p>
+<p>Instead of listing every single day in a <code>series</code>, we can “slice” from <code>Day</code> <code>0</code> up to but not including <code>Day</code> <code>3</code> by writing <code>:3</code>. <code>Simple</code> <code>slices</code> consist of a <code>start</code> and a <code>stop</code> separated by a colon (<code>start:stop</code>). When the <code>start</code> is omitted, <code>slices</code> begin at the first value, which in the context of a year is <code>Day</code> <code>0</code> and in the context of a day is midnight. Therefore, writing <code>:3</code> is the same as writing <code>0:3</code>, both represent the first 3 days of the year: <code>0,1,2</code>. Using this approach, we can shorten the series <code>0,.1,.2,.3,.4</code> to <code>:.5</code>. If we omit the <code>stop</code>, instead of the <code>start</code>, we would “slice” up to and including the last value.</p>
+<p>In the context of <code>doty</code> dates, omitting the <code>stop</code> value obtains all of the days in the year after the <code>start</code>, because the default <code>stop</code> is the number of days in the year (<code>n</code>). For example, the <code>slice</code> <code>3:</code> has a <code>start</code> of <code>Day</code> <code>3</code> and a <code>stop</code> of <code>n</code>, and thus represents every day in the year except the first 3. The number of items we obtain from a <code>slice</code> is called a <code>span</code>. To calculate the <code>span</code>, we subtract the <code>start</code> from the <code>stop</code> (<span class="math inline">\(stop-start\)</span>). In a common year, the <code>span</code> of <code>003:</code> is <span class="math inline">\(n-3=362\)</span>, while in a leap year it would be <span class="math inline">\(n-3=363\)</span>. If both the <code>start</code> and the <code>stop</code> are omitted, every day is included (<span class="math inline">\(span=n-0\)</span>). <a href="#tbl-4slice">Table&nbsp;20</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>slices</code>. The superscript plus sign (⁺) in <a href="#tbl-4slice">Table&nbsp;20</a> indicates a number that has to be incremented in leap years.</p>
 <section id="table-20" class="level4">
 <h4 class="anchored" data-anchor-id="table-20"><a href="#tbl-4slice">Table&nbsp;20</a></h4>
 <blockquote class="blockquote">
@@ -4539,14 +4596,14 @@ console.log(parse_dec());</code></pre>
 </section>
 <section id="steps" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="steps"><span class="header-section-number">6.2</span> Steps</h2>
-<p>The <code>simple slices</code> (<code>start:stop</code>) described above are a type of time <code>segment</code>, an unbroken time interval. To break up a <code>simple slice</code> into a non-consecutive <code>series</code>, we can add a <code>step</code> value and create a <code>stepped</code> <code>slice</code> (<code>start:stop:step</code>). <code>stepped</code> <code>slices</code> move in <code>step</code>-sized “steps” starting from <code>start</code>, skipping over <span class="math inline">\(step-1\)</span> items with each “step”, keeping only items that are “stepped” on.</p>
-<p>In other words, <code>stepped</code> <code>slices</code> keep items whose index (zero-based position) in the <code>slice</code> is evenly divisible by <code>step</code>. A <code>step</code> value of 1 keeps every item, because every index is divisible by 1, and a <code>step</code> of 2 keeps every other item, those with even-numbered indexes. <code>Day</code> <code>0</code> and every other third day in the year thereafter (<code>Day</code> <code>3</code>, <code>Day</code> <code>6</code>, etc.) can be represented by the <code>slice ::3</code>.</p>
-<p>To create a <code>series</code> of times on days throughout the year, we can use a <code>slice</code> with a <code>series</code> of <code>steps</code>. The <code>slice :365:1,1,3</code> represents all of the <code>Decalendar</code> workdays in a year. It is necessary to specify 365 as the <code>stop</code>, so that Leap Day (<code>Day</code> <code>365</code>) is not included as a workday in leap years. Similarly, <code>3::1,4</code> is a <code>seq</code> that represents all of the regular restdays, not including the Leap Day holiday.</p>
+<p>The <code>simple</code> <code>slices</code> (<code>start:stop</code>) described above are a type of time <code>segment</code>, an unbroken time interval. To break up a <code>simple</code> <code>slice</code> into a non-consecutive <code>series</code>, we can add a <code>step</code> value and create a <code>stepped</code> <code>slice</code> (<code>start:stop:step</code>). <code>stepped</code> <code>slices</code> move in <code>step</code>-sized “steps” starting from <code>start</code>, skipping over <span class="math inline">\(step-1\)</span> items with each “step”, keeping only items that are “stepped” on.</p>
+<p>In other words, <code>stepped</code> <code>slices</code> keep items whose index (zero-based position) in the <code>slice</code> is evenly divisible by <code>step</code>. A <code>step</code> value of 1 keeps every item, because every index is divisible by 1, and a <code>step</code> of 2 keeps every other item, those with even-numbered indexes. <code>Day</code> <code>0</code> and every other third day in the year thereafter (<code>Day</code> <code>3</code>, <code>Day</code> <code>6</code>, etc.) can be represented by the <code>slice</code> <code>::3</code>.</p>
+<p>To create a <code>series</code> of times on days throughout the year, we can use a <code>slice</code> with a <code>series</code> of <code>steps</code>. The <code>slice</code> <code>:365:1,1,3</code> represents all of the <code>Decalendar</code> workdays in a year. It is necessary to specify 365 as the <code>stop</code>, so that Leap Day (<code>Day</code> <code>365</code>) is not included as a workday in leap years. Similarly, <code>3::1,4</code> is a <code>seq</code> that represents all of the regular restdays, not including the Leap Day holiday.</p>
 <p><code>stepped</code> <code>slices</code> cannot be included in <code>series</code>, because both use commas (<code>,</code>) and it would not possible to differentiate a <code>series</code> of <code>steps</code> from subsequent items in the <code>series</code>. The simple rule is that <code>slices</code> with more than 1 colon (<code>:</code>) cannot be part of a series. For example, <code>:365:1,1,3</code> is a <code>stepped</code> <code>slice</code> with a <code>series</code> of 3 <code>steps</code> rather than a series consisting of a <code>slice</code> and two numbers.</p>
 </section>
 <section id="spreads" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="spreads"><span class="header-section-number">6.3</span> Spreads</h2>
-<p>To create <code>series</code> of consecutive items with breaks in between, it may be better to use a <code>spread</code> than a <code>slice</code>. <code>Simple spreads</code> consist of either a <code>start</code> and a <code>span</code> (<code>start&gt;span</code>) separated by a greater-than sign (<code>&gt;</code>) or a <code>stop</code> and a <code>span</code> (<code>stop&lt;span</code>) separated by a less-than (<code>&lt;</code>) sign. The default <code>start</code> and <code>stop</code> values are the same for both <code>slices</code> and <code>spreads</code>. We can <code>spread</code> forward from the default <code>start</code> to capture the first <code>span</code> days in a year. For example, the first 3 days in a year can be represented by the <code>spread &gt;3</code>, which is synonymous with the <code>slice :3</code>. In this example, the <code>start</code> is 0, while the <code>stop</code> and the <code>span</code> are both 3. In addition to default <code>start</code> and <code>stop</code> values, <code>spreads</code> also have default <code>span</code> values. A <code>spread</code> that only uses default values (<code>&gt;</code> or <code>&lt;</code>) will include every day in the year (<span class="math inline">\(span=n\)</span>). <a href="#tbl-4spread">Table&nbsp;21</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>spreads</code>.</p>
+<p>To create <code>series</code> of consecutive items with breaks in between, it may be better to use a <code>spread</code> than a <code>slice</code>. <code>Simple</code> <code>spreads</code> consist of either a <code>start</code> and a <code>span</code> (<code>start&gt;span</code>) separated by a greater-than sign (<code>&gt;</code>) or a <code>stop</code> and a <code>span</code> (<code>stop&lt;span</code>) separated by a less-than (<code>&lt;</code>) sign. The default <code>start</code> and <code>stop</code> values are the same for both <code>slices</code> and <code>spreads</code>. We can <code>spread</code> forward from the default <code>start</code> to capture the first <code>span</code> days in a year. For example, the first 3 days in a year can be represented by the <code>spread</code> <code>&gt;3</code>, which is synonymous with the <code>slice</code> <code>:3</code>. In this example, the <code>start</code> is 0, while the <code>stop</code> and the <code>span</code> are both 3. In addition to default <code>start</code> and <code>stop</code> values, <code>spreads</code> also have default <code>span</code> values. A <code>spread</code> that only uses default values (<code>&gt;</code> or <code>&lt;</code>) will include every day in the year (<span class="math inline">\(span=n\)</span>). <a href="#tbl-4spread">Table&nbsp;21</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>spreads</code>.</p>
 <section id="table-21" class="level4">
 <h4 class="anchored" data-anchor-id="table-21"><a href="#tbl-4spread">Table&nbsp;21</a></h4>
 <blockquote class="blockquote">
@@ -4589,19 +4646,19 @@ console.log(parse_dec());</code></pre>
 </table>
 <p>Table&nbsp;21: The spreads that represent the 4-part subyear units</p>
 </blockquote>
-<p>If we “spread” forward from a positive <code>start</code>, the default <code>span</code> is <span class="math inline">\(n-start\)</span>. If we spread backward from a positive <code>stop</code>, the default <code>span</code> is <code>stop</code>. We can <code>spread</code> backward from the default <code>stop</code> to capture the last <code>span</code> days in a year. For example, <code>&lt;3</code> represents the last 3 days of any year. We could also use a negative <code>start</code> of <code>-3</code>, the third to last day of any year, to create the <code>slice -3:</code> and the <code>spread -3&gt;</code>, both of which are synonymous with <code>&lt;3</code>. One advantage of <code>spreads</code> over <code>slices</code> is the ability to access days from the end of a year without negative numbers. A <code>span</code> value of zero does not return any items. Negative <code>span</code> values reverse the direction of the first sign, turning <code>start</code> into <code>stop</code> and vice versa.</p>
+<p>If we “spread” forward from a positive <code>start</code>, the default <code>span</code> is <span class="math inline">\(n-start\)</span>. If we spread backward from a positive <code>stop</code>, the default <code>span</code> is <code>stop</code>. We can <code>spread</code> backward from the default <code>stop</code> to capture the last <code>span</code> days in a year. For example, <code>&lt;3</code> represents the last 3 days of any year. We could also use a negative <code>start</code> of <code>-3</code>, the third to last day of any year, to create the <code>slice</code> <code>-3:</code> and the <code>spread</code> <code>-3&gt;</code>, both of which are synonymous with <code>&lt;3</code>. One advantage of <code>spreads</code> over <code>slices</code> is the ability to access days from the end of a year without negative numbers. A <code>span</code> value of zero does not return any items. Negative <code>span</code> values reverse the direction of the first sign, turning <code>start</code> into <code>stop</code> and vice versa.</p>
 </section>
 </section>
 <section id="splits" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="splits"><span class="header-section-number">6.4</span> Splits</h2>
-<p>As with <code>stepped</code> <code>slices</code>, we can create non-consecutive <code>series</code> by “splitting” a <code>simple spread</code> (<code>start&gt;span</code> or <code>stop&lt;span</code>) into <code>split</code> <code>spread</code> (e.g.&nbsp;<code>start&gt;span&gt;split</code>) with a <code>split</code> value that works like the opposite of a <code>step</code>. While <code>steps</code> keep items that are “stepped” on, <code>splits</code> exclude items that are used to create the boundaries of the <code>splits</code>. The default <code>split</code> value is <code>span</code>, meaning that the entire <code>span</code> is included in one <code>split</code>.</p>
+<p>As with <code>stepped</code> <code>slices</code>, we can create non-consecutive <code>series</code> by “splitting” a <code>simple</code> <code>spread</code> (<code>start&gt;span</code> or <code>stop&lt;span</code>) into <code>split</code> <code>spread</code> (e.g.&nbsp;<code>start&gt;span&gt;split</code>) with a <code>split</code> value that works like the opposite of a <code>step</code>. While <code>steps</code> keep items that are “stepped” on, <code>splits</code> exclude items that are used to create the boundaries of the <code>splits</code>. The default <code>split</code> value is <code>span</code>, meaning that the entire <code>span</code> is included in one <code>split</code>.</p>
 <p>A <code>split</code> <code>spread</code> with a <code>split</code> value of 1 (<code>start&gt;span&gt;1</code>) is the same as a <code>stepped</code> <code>slice</code> with a <code>step</code> value of 2 (<code>start:stop:2</code>). <code>Split</code> values greater than 1 but less than <code>span</code> will yield a <code>series</code> of <code>segments</code>. If <code>split</code> is zero (<code>start&gt;span&gt;0</code>), the <code>split</code> <code>spread</code> will not return any items. A negative <code>split</code> value reverses the direction of the second greater-than sign (<code>start&gt;span&gt;-2</code> and <code>start&gt;span&lt;2</code> are synonymous). This can be useful when providing a series of <code>split</code> values. Negative <code>split</code> values reverse the direction of a <code>split</code> and a <code>split</code> value of zero skips a <code>split</code>. Just like <code>stepped</code> <code>slices</code>, <code>split</code> <code>spreads</code> cannot be included in a <code>series</code>, because every <code>split</code> can have a <code>series</code> of values.</p>
 <p>The direction of the second sign in <code>split</code> <code>spreads</code> determines whether we begin creating splits from the <code>start</code> (<code>&gt;</code>) or the <code>stop</code> (<code>&lt;</code>) of the <code>span</code>. If the first two values (<code>start</code> and <code>span</code> or <code>stop</code> and <code>span</code>) are blank, the direction of the first sign does not matter and the first two signs can be combined into a “much greater-than sign” (<code>≫</code>), a “much less-than sign” (<code>≪</code>), a diamond (<code>♢</code>), or simply an <code>x</code>. The split spreads <code>≫4</code> and <code>♢4</code> are synonymous; both skip every 5th day to create groups of 4 days throughout the year starting with the first 4 days of the year <code>&gt;4</code>. Notably, <code>≫4</code> and <code>♢4</code> will always end with a <code>segment</code> containing the last 4 days of common years, <code>360:364</code>, <code>360&gt;4</code>, or <code>364&lt;4</code>, even in leap years, because partial <code>splits</code> are not allowed.</p>
 </section>
 <section id="spaces" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="spaces"><span class="header-section-number">6.5</span> Spaces</h2>
-<p>The patterns described above require that <code>splits</code> are separated by the default <code>space</code> value of 1. We can specify a different <code>space</code> value in the form <code>start&gt;span&gt;split&gt;space</code>. The <code>split</code> <code>spreads ≫3&gt;2</code> and <code>♢3&gt;2</code> create 3-day <code>splits</code> separated by 2-day <code>spaces</code>. This is the pattern of workdays in the <code>Decalendar</code> system. The first <code>segment</code> of <code>≫3&gt;2</code> and <code>♢3&gt;2</code> can be written as <code>:3</code>, <code>&gt;3</code>, or <code>3&lt;</code>, while the last <code>segment</code> is <code>360:363</code>, <code>360&gt;3</code>, or <code>363&lt;3</code>. The workdays in the first <code>dek</code> of <code>≫3&gt;2</code> and <code>♢3&gt;2</code> can be written as the following <code>series</code> of <code>segments</code>: <code>:4,5:8</code>, <code>&gt;3,5&gt;3</code>, or <code>3&lt;,8&lt;3</code>. Unlike <code>stepped</code> <code>slices</code> and <code>split</code> <code>spreads</code>, <code>simple slices</code> and <code>simple spreads</code> can be used in <code>series</code>.</p>
-<p>A <code>space</code> value of 0 may also be useful. For example, <code>delts</code>, <code>qops</code>, <code>eps</code>, and <code>waus</code> can be summarized as <code>split</code> <code>spreads</code> as shown in <a href="#tbl-constant">Table&nbsp;22</a>. When <code>space</code> is zero, the direction of the third sign does not matter. The <code>split</code> <code>spreads ≫61&gt;0</code>, <code>♢61&gt;0</code>, <code>≫61&lt;0</code>, and <code>♢61&lt;0</code> all represents the <code>waus</code> in a year. <code>Waus</code> divide leap years evenly and <code>eps</code> divide common years evenly. Therefore, <code>x61&gt;0</code> and <code>x61&lt;0</code> can represent all of the <code>waus</code> in leap years, just like <code>x73&gt;0</code> and <code>x73&lt;0</code> can represent all of the <code>eps</code> in common years. The seasons can be described by a <code>spread</code> with a <code>series</code> of <code>splits</code> and a <code>space</code> of 0: <code>»90,95,90,90⁺&gt;0</code>.</p>
+<p>The patterns described above require that <code>splits</code> are separated by the default <code>space</code> value of 1. We can specify a different <code>space</code> value in the form <code>start&gt;span&gt;split&gt;space</code>. The <code>split</code> <code>spreads</code> <code>≫3&gt;2</code> and <code>♢3&gt;2</code> create 3-day <code>splits</code> separated by 2-day <code>spaces</code>. This is the pattern of workdays in the <code>Decalendar</code> system. The first <code>segment</code> of <code>≫3&gt;2</code> and <code>♢3&gt;2</code> can be written as <code>:3</code>, <code>&gt;3</code>, or <code>3&lt;</code>, while the last <code>segment</code> is <code>360:363</code>, <code>360&gt;3</code>, or <code>363&lt;3</code>. The workdays in the first <code>dek</code> of <code>≫3&gt;2</code> and <code>♢3&gt;2</code> can be written as the following <code>series</code> of <code>segments</code>: <code>:4,5:8</code>, <code>&gt;3,5&gt;3</code>, or <code>3&lt;,8&lt;3</code>. Unlike <code>stepped</code> <code>slices</code> and <code>split</code> <code>spreads</code>, <code>simple</code> <code>slices</code> and <code>simple</code> <code>spreads</code> can be used in <code>series</code>.</p>
+<p>A <code>space</code> value of 0 may also be useful. For example, <code>delts</code>, <code>qops</code>, <code>eps</code>, and <code>waus</code> can be summarized as <code>split</code> <code>spreads</code> as shown in <a href="#tbl-constant">Table&nbsp;22</a>. When <code>space</code> is zero, the direction of the third sign does not matter. The <code>split</code> <code>spreads</code> <code>≫61&gt;0</code>, <code>♢61&gt;0</code>, <code>≫61&lt;0</code>, and <code>♢61&lt;0</code> all represents the <code>waus</code> in a year. <code>Waus</code> divide leap years evenly and <code>eps</code> divide common years evenly. Therefore, <code>x61&gt;0</code> and <code>x61&lt;0</code> can represent all of the <code>waus</code> in leap years, just like <code>x73&gt;0</code> and <code>x73&lt;0</code> can represent all of the <code>eps</code> in common years. The seasons can be described by a <code>spread</code> with a <code>series</code> of <code>splits</code> and a <code>space</code> of 0: <code>»90,95,90,90⁺&gt;0</code>.</p>
 <section id="table-22" class="level4">
 <h4 class="anchored" data-anchor-id="table-22"><a href="#tbl-constant">Table&nbsp;22</a></h4>
 <blockquote class="blockquote">
@@ -4634,16 +4691,16 @@ console.log(parse_dec());</code></pre>
 </table>
 <p>Table&nbsp;22: The spreads that represent the constant length subyear units</p>
 </blockquote>
-<p>If <code>space</code> is greater than zero and the second and third sign are pointing in opposite directions, the resulting time <code>segments</code> will overlap. The <code>split</code> <code>spreads &gt;1&gt;.4&lt;.2</code> and <code>&lt;1&lt;.4&gt;.2</code> both result in the same 4 overlapping time <code>segments</code>: <code>:.4</code>, <code>.2:.6</code>, <code>.4:.8</code>, <code>.6:1</code>. Negative values can be used in a <code>series</code> of <code>spaces</code> to temporarily reverse the direction and intersperse overlapping and non-overlapping <code>segments</code>. The <code>split</code> <code>spread &gt;1&gt;.4&lt;.2,-.1</code> yields two <code>segments</code> that overlap and one <code>segment</code> that does not overlap: <code>:.4</code>, <code>.2:.6</code>, <code>.6:1</code>.</p>
+<p>If <code>space</code> is greater than zero and the second and third sign are pointing in opposite directions, the resulting time <code>segments</code> will overlap. The <code>split</code> <code>spreads</code> <code>&gt;1&gt;.4&lt;.2</code> and <code>&lt;1&lt;.4&gt;.2</code> both result in the same 4 overlapping time <code>segments</code>: <code>:.4</code>, <code>.2:.6</code>, <code>.4:.8</code>, <code>.6:1</code>. Negative values can be used in a <code>series</code> of <code>spaces</code> to temporarily reverse the direction and intersperse overlapping and non-overlapping <code>segments</code>. The <code>split</code> <code>spread</code> <code>&gt;1&gt;.4&lt;.2,-.1</code> yields two <code>segments</code> that overlap and one <code>segment</code> that does not overlap: <code>:.4</code>, <code>.2:.6</code>, <code>.6:1</code>.</p>
 <p>Overlapping segments could be used to plan work shifts that require a hand-off between teams. The segments created by <code>&gt;1&gt;.4&lt;.2</code> are shifted by two <code>dimes</code> in relation to each other and overlap by 2 <code>dimes</code>. If these segments are in <code>Zone</code> <code>0</code> time, they represent the normal workday (<code>.3:.7</code>) for <code>Zone</code> <code>3</code> (<code>:.4</code>), <code>Zone</code> <code>1</code>(<code>.2:.6</code>), <code>Zone</code> <code>-1</code>(<code>.4:.8</code>), and <code>Zone</code> <code>-3</code>(<code>.6:1</code>). Each of these 4 segments could represent a team working during the normal workday in their respective time zone. All but the last team would have two dimes of overlap with the subsequent team.</p>
 </section>
 </section>
 <section id="sequential-spreads-and-slices" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="sequential-spreads-and-slices"><span class="header-section-number">6.6</span> Sequential spreads and slices</h2>
-<p><code>split</code> <code>spreads</code> can be combined with other <code>spreads</code> into <code>sequences</code> called <code>seq</code> <code>spreads</code> (<code>sequential spreads</code>). The intuition behind <code>seq</code> <code>spreads</code> and is that each item in the first (outer) <code>spread</code> serves as a starting point for the second (inner) <code>spread</code>. The main use of <code>seq</code> <code>spreads</code> is to first “spread” across days and then “spread” across times in those days. We can combine <code>≫3&gt;2</code>, a <code>split</code> <code>spread</code> that represents the <code>Decalendar</code> workdays, with <code>.3&gt;.4</code>, a <code>simple spread</code> that provides the <code>start</code> and <code>span</code> of the <code>Decalendar</code> workday, to obtain <code>≫3&gt;2&gt;.3&gt;.4</code>, a <code>seq</code> <code>spread</code> that represents the time spent at work in a <code>Decalendar</code> year.</p>
-<p>In this <code>seq</code> <code>spread</code>, the <code>split</code> is the number of workdays (<code>3</code>), the space is the number of restdays (<code>2</code>), the second-to-last number is the <code>start</code> of the workday (<code>.3</code>) and the last number is the workday <code>span</code> (<code>.4</code>). The <code>spread ≫3&gt;2&gt;.3&gt;.4</code> first starts at midnight of each workday, then moves forward 3 <code>dimes</code> to the new <code>start</code> of <code>Dot</code> <code>3</code>, and then “spreads” forward by a <code>span</code> of 4 <code>dimes</code> to the new <code>stop</code> of <code>Dot</code> <code>7</code>. We could replace the start of the workday in <code>≫3&gt;2&gt;.3&gt;.4</code> with the end of workday if we reverse the last sign: <code>≫3&gt;2&gt;.7&lt;.4</code>, because <code>.3&gt;.4</code> and <code>.7&lt;.4</code> are synonymous.</p>
-<p>We combine the two <code>spreads</code> with <code>&gt;</code> because we want to move forward from the beginning of each workday, instead of backward to the previous day. If we combined <code>≫3&gt;2</code> and <code>.3&gt;.4</code> with <code>&lt;</code>, the resulting <code>spread ≫3&gt;2&lt;.3&gt;.4</code> would move backward from midnight of each workday to <code>Dot</code> <code>7</code> of each previous day and then “spread” forward to <code>Dot</code> <code>1</code> of each workday. We may want to use such a mixed direction <code>seq</code> <code>spreads</code> when dealing with time zones. If we lived in <code>Zone</code> <code>-3</code> and wanted to know how the workdays in <code>Zone</code> <code>4</code> translated into our time zone, we could take the <code>spread ≫3&gt;2&gt;.3&gt;.4</code> and move its <code>start</code> to 7 <code>dimes</code> earlier: <code>≫3&gt;2&lt;.4&gt;.4</code>. <code>seq</code> <code>spreads</code> enable such time zone conversions without the use of negative numbers.</p>
-<p>The <code>seq</code> <code>slice</code> equivalent of <code>≫3&gt;2&gt;.3&gt;.4</code> is <code>:365:1,1,3:.3:.7</code>. <code>seq</code> <code>spreads</code> will always be a more succinct way for creating long consecutive sequences with breaks than <code>slices</code>. For example, to include a lunch break in the middle of work, we could simply add a <code>split</code> and a <code>space</code> to the <code>seq</code> <code>spread</code> above: <code>≫3&gt;2&gt;.3&gt;.4&gt;.18&gt;.04</code>. To do the same with a <code>seq</code> <code>slice</code>, we have to create 17 steps of 0.01 and a step of .04: <code>:365:1,1,3:.3:.7:17*1%,4%</code>. Here, we are using the replication operator (<code>*</code>) to avoid writing 0.01 17 times and the percent operator (<code>%</code>) to save a few characters, but even so the <code>seq</code> <code>slice</code> is not as concise as the <code>seq</code> <code>spread</code>. <a href="#tbl-workday">Table&nbsp;23</a> shows each part of this schedule in the form of <code>simple slices</code> and <code>simple spreads</code>.</p>
+<p><code>split</code> <code>spreads</code> can be combined with other <code>spreads</code> into <code>sequences</code> called <code>seq</code> <code>spreads</code> (<code>sequential</code> <code>spreads</code>). The intuition behind <code>seq</code> <code>spreads</code> and is that each item in the first (outer) <code>spread</code> serves as a starting point for the second (inner) <code>spread</code>. The main use of <code>seq</code> <code>spreads</code> is to first “spread” across days and then “spread” across times in those days. We can combine <code>≫3&gt;2</code>, a <code>split</code> <code>spread</code> that represents the <code>Decalendar</code> workdays, with <code>.3&gt;.4</code>, a <code>simple</code> <code>spread</code> that provides the <code>start</code> and <code>span</code> of the <code>Decalendar</code> workday, to obtain <code>≫3&gt;2&gt;.3&gt;.4</code>, a <code>seq</code> <code>spread</code> that represents the time spent at work in a <code>Decalendar</code> year.</p>
+<p>In this <code>seq</code> <code>spread</code>, the <code>split</code> is the number of workdays (<code>3</code>), the space is the number of restdays (<code>2</code>), the second-to-last number is the <code>start</code> of the workday (<code>.3</code>) and the last number is the workday <code>span</code> (<code>.4</code>). The <code>spread</code> <code>≫3&gt;2&gt;.3&gt;.4</code> first starts at midnight of each workday, then moves forward 3 <code>dimes</code> to the new <code>start</code> of <code>Dot</code> <code>3</code>, and then “spreads” forward by a <code>span</code> of 4 <code>dimes</code> to the new <code>stop</code> of <code>Dot</code> <code>7</code>. We could replace the start of the workday in <code>≫3&gt;2&gt;.3&gt;.4</code> with the end of workday if we reverse the last sign: <code>≫3&gt;2&gt;.7&lt;.4</code>, because <code>.3&gt;.4</code> and <code>.7&lt;.4</code> are synonymous.</p>
+<p>We combine the two <code>spreads</code> with <code>&gt;</code> because we want to move forward from the beginning of each workday, instead of backward to the previous day. If we combined <code>≫3&gt;2</code> and <code>.3&gt;.4</code> with <code>&lt;</code>, the resulting <code>spread</code> <code>≫3&gt;2&lt;.3&gt;.4</code> would move backward from midnight of each workday to <code>Dot</code> <code>7</code> of each previous day and then “spread” forward to <code>Dot</code> <code>1</code> of each workday. We may want to use such a mixed direction <code>seq</code> <code>spreads</code> when dealing with time zones. If we lived in <code>Zone</code> <code>-3</code> and wanted to know how the workdays in <code>Zone</code> <code>4</code> translated into our time zone, we could take the <code>spread</code> <code>≫3&gt;2&gt;.3&gt;.4</code> and move its <code>start</code> to 7 <code>dimes</code> earlier: <code>≫3&gt;2&lt;.4&gt;.4</code>. <code>seq</code> <code>spreads</code> enable such time zone conversions without the use of negative numbers.</p>
+<p>The <code>seq</code> <code>slice</code> equivalent of <code>≫3&gt;2&gt;.3&gt;.4</code> is <code>:365:1,1,3:.3:.7</code>. <code>seq</code> <code>spreads</code> will always be a more succinct way for creating long consecutive sequences with breaks than <code>slices</code>. For example, to include a lunch break in the middle of work, we could simply add a <code>split</code> and a <code>space</code> to the <code>seq</code> <code>spread</code> above: <code>≫3&gt;2&gt;.3&gt;.4&gt;.18&gt;.04</code>. To do the same with a <code>seq</code> <code>slice</code>, we have to create 17 steps of 0.01 and a step of .04: <code>:365:1,1,3:.3:.7:17*1%,4%</code>. Here, we are using the replication operator (<code>*</code>) to avoid writing 0.01 17 times and the percent operator (<code>%</code>) to save a few characters, but even so the <code>seq</code> <code>slice</code> is not as concise as the <code>seq</code> <code>spread</code>. <a href="#tbl-workday">Table&nbsp;23</a> shows each part of this schedule in the form of <code>simple</code> <code>slices</code> and <code>simple</code> <code>spreads</code>.</p>
 <section id="table-23" class="level4">
 <h4 class="anchored" data-anchor-id="table-23"><a href="#tbl-workday">Table&nbsp;23</a></h4>
 <blockquote class="blockquote">
@@ -4687,7 +4744,7 @@ console.log(parse_dec());</code></pre>
 <p>Another real-life application of <code>spreads</code> can be to intersperse breaks in between periods of work as in the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro technique</a>. The times spent working and resting can vary, but a reasonable translation of the original Pomodoro into the <code>Declock</code> units would be to have each <code>pomodoro</code> consist of 17 <code>mils</code> of work and 3 <code>mils</code> of rest, with a 17 <code>mil</code> break after every 4 <code>pomodoros</code>. To repeat 16 <code>pomodoros</code> throughout the <code>Decalendar</code> workday, we could use the following <code>seq</code> <code>spread</code>: <code>.3&gt;.7&gt;.08&gt;.02⋙.017&gt;.003</code>. Here, we use the “very much greater-then sign” (<code>⋙</code>) instead of a combination of a “much greater-than sign” (<code>≫</code>) and a greater-than sign (<code>&gt;</code>). The <code>pomodoro</code> pattern is difficult to capture with a <code>slice</code> because we have to use <code>*</code> for the steps of the inner and the outer <code>slice</code>: <code>.3:.7:8*.01,.02:::17*.001,.003</code>.</p>
 <section id="replication-operator" class="level3" data-number="6.7.1">
 <h3 data-number="6.7.1" class="anchored" data-anchor-id="replication-operator"><span class="header-section-number">6.7.1</span> Replication operator</h3>
-<p>The replication operator (<code>*</code>) is very useful for replacing repetitive values. For example, to divide any year into six parts we could use the <code>spread ≫5*61,60⁺&gt;0</code> to create 5 “splits” that are all 61 days long and one last “split” that is <code>60⁺</code> days (60 days in a common year or 61 days in a leap year) long. The <code>*</code> helps us avoid the repetitiveness of writing <code>≫61,61,61,61,61,60⁺&gt;0</code>. In addition to being used in the <code>split</code> and <code>space</code> of a <code>split</code> <code>spread</code> or the <code>step</code> of a <code>stepped</code> <code>slice</code>, the <code>*</code> can also be used in the <code>span</code> of a <code>split</code> <code>spread</code> or the <code>stop</code> of a <code>stepped</code> <code>slice</code> to indicate has many cycles of <code>splits</code> or <code>steps</code> we want to complete. For example, <code>&gt;4*&gt;5*61,60⁺&gt;0</code> indicates that we want 4 years (the current year and the 3 subsequent years) “split” into 6 parts for a total of 24 parts. In other words, <code>4*</code> means that we want to stop cycling after completing four yearly cycles. We can read <code>4*</code> out loud as “four times” because it means we intend to go through the yearly cycle “four times”.</p>
+<p>The replication operator (<code>*</code>) is very useful for replacing repetitive values. For example, to divide any year into six parts we could use the <code>spread</code> <code>≫5*61,60⁺&gt;0</code> to create 5 “splits” that are all 61 days long and one last “split” that is <code>60⁺</code> days (60 days in a common year or 61 days in a leap year) long. The <code>*</code> helps us avoid the repetitiveness of writing <code>≫61,61,61,61,61,60⁺&gt;0</code>. In addition to being used in the <code>split</code> and <code>space</code> of a <code>split</code> <code>spread</code> or the <code>step</code> of a <code>stepped</code> <code>slice</code>, the <code>*</code> can also be used in the <code>span</code> of a <code>split</code> <code>spread</code> or the <code>stop</code> of a <code>stepped</code> <code>slice</code> to indicate has many cycles of <code>splits</code> or <code>steps</code> we want to complete. For example, <code>&gt;4*&gt;5*61,60⁺&gt;0</code> indicates that we want 4 years (the current year and the 3 subsequent years) “split” into 6 parts for a total of 24 parts. In other words, <code>4*</code> means that we want to stop cycling after completing four yearly cycles. We can read <code>4*</code> out loud as “four times” because it means we intend to go through the yearly cycle “four times”.</p>
 </section>
 <section id="percent-permil-and-permyr-operators" class="level3" data-number="6.7.2">
 <h3 data-number="6.7.2" class="anchored" data-anchor-id="percent-permil-and-permyr-operators"><span class="header-section-number">6.7.2</span> Percent, permil, and permyr operators</h3>
@@ -4695,7 +4752,7 @@ console.log(parse_dec());</code></pre>
 </section>
 <section id="pently-schedules-as-seq-spreads-splices-and-sleds" class="level3" data-number="6.7.3">
 <h3 data-number="6.7.3" class="anchored" data-anchor-id="pently-schedules-as-seq-spreads-splices-and-sleds"><span class="header-section-number">6.7.3</span> Pently schedules as seq spreads, splices, and sleds</h3>
-<p>We can use <code>seq</code> <code>spreads</code> to describe the <a href="#sched"><code>pently</code>schedules</a>. <code>Schedule</code> <code>5</code> is particularly interesting because it includes all of the days of the year. <code>Spreads</code> that include every item can be written as <code>&gt;</code> or <code>&lt;</code>, but <code>seq</code> <code>spreads</code> must have at least 5 values. The <code>Schedule</code> <code>5</code> <code>seq</code> <code>spread</code> <code>≫≫.38&gt;.24</code> has 4 blank values, which represent the default <code>start</code>, <code>span</code>, <code>split</code>, and <code>space</code>. Similarly, the <code>Schedule</code> <code>4</code> <code>seq</code> <code>spread</code> <code>≫4≫.35&gt;.3</code> has 3 blank values, which represent the default <code>start</code>, <code>span</code>, and <code>space</code>. The <code>Schedule</code> <code>2</code> and <code>Schedule</code> <code>3</code> <code>seq</code> <code>spreads</code>, <code>≫2&gt;3&gt;.2&gt;.6</code> and <code>≫3&gt;2&gt;.3&gt;.4</code>, respectively, only have 2 blank values, the <code>start</code> and the <code>span</code>. As an alternative to <code>seq</code> <code>spreads</code> and <code>seq</code> <code>slices</code>, we can use <code>slice</code>-<code>spread</code> hybrids called <code>sleds</code> or <code>spread</code>-<code>slice</code> hybrids called <code>splices</code>. <code>Sleds</code> put the <code>slice</code> elements first (<code>start:stop:step:start&gt;span&gt;split&gt;space</code>), while <code>splices</code> start with the <code>spread</code> elements (<code>start&gt;span&gt;split&gt;space&gt;start:stop:step</code>). The <code>pently</code>schedules are easiest to write as <code>seq</code> <code>spreads</code> and <code>splices</code>, as shown in <a href="#tbl-sched">Table&nbsp;24</a>.</p>
+<p>We can use <code>seq</code> <code>spreads</code> to describe the <a href="#sched"><code>pently</code>schedules</a>. <code>Schedule</code> <code>5</code> is particularly interesting because it includes all of the days of the year. <code>Spreads</code> that include every item can be written as <code>&gt;</code> or <code>&lt;</code>, but <code>seq</code> <code>spreads</code> must have at least 5 values. The <code>Schedule</code> <code>5</code> <code>seq</code> <code>spread</code> <code>≫≫.38&gt;.24</code> has 4 blank values, which represent the default <code>start</code>, <code>span</code>, <code>split</code>, and <code>space</code>. Similarly, the <code>Schedule</code> <code>4</code> <code>seq</code> <code>spread</code> <code>≫4≫.35&gt;.3</code> has 3 blank values, which represent the default <code>start</code>, <code>span</code>, and <code>space</code>. The <code>Schedule</code> <code>2</code> and <code>Schedule</code> <code>3</code> <code>seq</code> <code>spreads</code>, <code>≫2&gt;3&gt;.2&gt;.6</code> and <code>≫3&gt;2&gt;.3&gt;.4</code>, respectively, only have 2 blank values, the <code>start</code> and the <code>span</code>. As an alternative to <code>seq</code> <code>spreads</code> and <code>seq</code> <code>slices</code>, we can use <code>slice</code>-<code>spread</code> hybrids called <code>sleds</code> or <code>spread</code>-<code>slice</code> hybrids called <code>splices</code>. <code>Sleds</code> put the <code>slice</code> elements first (<code>start:stop:step:start&gt;span&gt;split&gt;space</code>), while <code>splices</code> start with the <code>spread</code> elements (<code>start&gt;span&gt;split&gt;space&gt;start:stop:step</code>). The <code>pently</code> schedules are easiest to write as <code>seq</code> <code>spreads</code> and <code>splices</code>, as shown in <a href="#tbl-sched">Table&nbsp;24</a>.</p>
 <section id="table-24" class="level4">
 <h4 class="anchored" data-anchor-id="table-24"><a href="#tbl-sched">Table&nbsp;24</a></h4>
 <blockquote class="blockquote">
@@ -5004,7 +5061,7 @@ console.log(parse_dec());</code></pre>
 {"contents":[
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotyDate}.${styledDotyTime}</span>`", "cellName":"ojs-element-id-1"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotyDiff}</span>`", "cellName":"ojs-element-id-2"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotyDiffDate}${styledDotyDiffTime}</span>`", "cellName":"ojs-element-id-2"}
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledIsoDate}T${styledIsoTime}</span>`", "cellName":"ojs-element-id-3"}
 ,
@@ -5012,39 +5069,59 @@ console.log(parse_dec());</code></pre>
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${season[1]}</span>`", "cellName":"ojs-element-id-5"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDek}</span>`", "cellName":"ojs-element-id-6"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${ordinal}</span>`", "cellName":"ojs-element-id-6"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotd}</span>`", "cellName":"ojs-element-id-7"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${zodiac}</span>`", "cellName":"ojs-element-id-7"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDime}</span>`", "cellName":"ojs-element-id-8"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDek}</span>`", "cellName":"ojs-element-id-8"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledCent}</span>`", "cellName":"ojs-element-id-9"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotd}</span>`", "cellName":"ojs-element-id-9"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledMil}</span>`", "cellName":"ojs-element-id-10"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDime}</span>`", "cellName":"ojs-element-id-10"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledPhrase}</span>`", "cellName":"ojs-element-id-11"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledCent}</span>`", "cellName":"ojs-element-id-11"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledBeat}</span>`", "cellName":"ojs-element-id-12"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledMil}</span>`", "cellName":"ojs-element-id-12"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${outputDoty}</span>`", "cellName":"ojs-element-id-13"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledPhrase}</span>`", "cellName":"ojs-element-id-13"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${monthAndDay}</span>`", "cellName":"ojs-element-id-14"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledBeat}</span>`", "cellName":"ojs-element-id-14"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtYear}+${dtDotyDate}${dtDotyTimeDelimiter}${dtDotyTime}</span>`", "cellName":"ojs-element-id-15"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledOutputDoty}</span>`", "cellName":"ojs-element-id-15"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedYear}</span>`", "cellName":"ojs-element-id-16"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${outputDotySeason[0]}</span>`", "cellName":"ojs-element-id-16"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedDotyDate}${parsedDotyTimeDelimiter}${styledParsedDotyTime}</span>`", "cellName":"ojs-element-id-17"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${outputDotySeason[1]}</span>`", "cellName":"ojs-element-id-17"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDecoYear}+${styledDecoDotyDate}${decoDotyTimeDelimiter}${styledDecoDotyTime}</span>`", "cellName":"ojs-element-id-18"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledMonthAndDay}</span>`", "cellName":"ojs-element-id-18"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledIsocYear}-${styledIsocMd}T${styledIsocTime}</span>`", "cellName":"ojs-element-id-19"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[0]}</span>`", "cellName":"ojs-element-id-19"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledYearDate}</span>`", "cellName":"ojs-element-id-20"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[1]}</span>`", "cellName":"ojs-element-id-20"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyDate, d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-21"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtYear}+${dtDotyDate}${dtDotyTimeDelimiter}${dtDotyTime}</span>`", "cellName":"ojs-element-id-21"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyTime, d3.schemePaired[2])}</span>`", "cellName":"ojs-element-id-22"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtDotyToty[0]}</span>`", "cellName":"ojs-element-id-22"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtDotyToty[1]}</span>`", "cellName":"ojs-element-id-23"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedYear}</span>`", "cellName":"ojs-element-id-24"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedDotyDate}${parsedDotyTimeDelimiter}${styledParsedDotyTime}</span>`", "cellName":"ojs-element-id-25"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDecoYear}+${styledDecoDotyDate}${decoDotyTimeDelimiter}${styledDecoDotyTime}</span>`", "cellName":"ojs-element-id-26"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledIsocYear}-${styledIsocMd}T${styledIsocTime}</span>`", "cellName":"ojs-element-id-27"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${decoDotyToty[0]}</span>`", "cellName":"ojs-element-id-28"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${decoDotyToty[1]}</span>`", "cellName":"ojs-element-id-29"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledYearDate}</span>`", "cellName":"ojs-element-id-30"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyDate, d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-31"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyTime, d3.schemePaired[2])}</span>`", "cellName":"ojs-element-id-32"}
 ]}
 </script>
 
@@ -5163,7 +5240,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  let localAlternateSentinel = 'alternate';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 

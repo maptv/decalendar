@@ -21,6 +21,6 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     theme:
-      light: [flatly, light.scss]
       dark: [darkly, dark.scss]
+      light: [flatly, light.scss]
     output-file: index.html
