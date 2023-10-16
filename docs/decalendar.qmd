@@ -13,15 +13,19 @@ citation:
 
 ## Day-of-the-year {#sec-intro-doty}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`). The current `doty` date and time: \${styledDotyDate}.\${styledDotyTime}.
+`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`).
 
-Days-of-the-year (`doties`) are slightly more **precise** and much more **concise** than dates and times in the form of a month, day, hour, minute, and second. Compare the current `doty` to the current date and time in `mm-ddThh:mm:ss` format: \${styledIsoDate}T\${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
+A `doty` can represent a specific instant in a year, such as the current `doty` timestamp (`year+day.clock`): \${styledDotyDate}.\${styledDotyTime}, or a duration, such as the such as the time since this page was loaded: \${styledDotyDiff}.
+
+`Doty` timestamps are slightly more **precise** and much more **concise** than timestamps consisting of a month, day, hour, minute, and second (`mm-ddThh:mm:ss`):  \${styledIsoDate}T\${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
 
 The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: \${setStyle(dotyTime, d3.schemePaired\[2\])}.
 
-The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number: \${styledDek}, while the last digit is the current day-of-the-`dek` (`dotd`): \${styledDotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`.
+The `doty` date can tell us the current season. It is now \$(season[0]) in the Northern Hemisphere and \$(season[1]) in the Southern Hemisphere. The `doty` [intervals](https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals) of the seasons are $\left[20, 110\right)$🌼🍁, $\left[110, 205\right)$☀️❄️, $\left[205, 295\right)$🍁🌼, and $\left[0, 20) \cup \left[295, 365\right]$❄️☀️. @sec-subyear discusses seasons and other parts of the year.
 
-The digits of the current `doty` time provide the current `dime`: \${styledDime}, `cent`: \${styledCent}, `mil`: \${styledMil}, `phrase`: \${styledPhrase}, and `beat`: \${styledBeat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat. In addition to representing a specific instant in the year, `doties` can represent durations, such as the time since this page was loaded: \${styledDotyDiff}.
+The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number: \${styledDek}, while the last digit is the current day-of-the-`dek` (`dotd`): \${styledDotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. @sec-dek explains how `deks` can replace months and weeks.
+
+The digits of the current `doty` time provide the current `dime`: \${styledDime}, `cent`: \${styledCent}, `mil`: \${styledMil}, `phrase`: \${styledPhrase}, and `beat`: \${styledBeat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat. @sec-unit provides more information on the various `Decalendar` and `Declock` units.
 
 Now it's your turn! Enter a month and `dotm` below to see the equivalent `doty` date: \${outputDoty}. Try special dates like birthdays🎂and🥂anniversaries!
 
@@ -108,6 +112,14 @@ function doty2greg(doty = 0) {
     const m = Math.floor((5 * doty + 2) / 153);
     return [Math.floor(m < 10 ? m + 3 : m - 9), doty - Math.floor((153 * m + 2) / 5) + 1];
 }
+function doty2toty(doty = 306) {
+    doty = Math.floor(doty)
+    return (205 <= doty && doty < 295) ? ["Fall🍁", "Spring🌼"] :
+        (110 <= doty && doty < 205) ? ["Summer☀️", "Winter❄️"] :
+        (20 <= doty && doty < 110) ? ["Spring🌼", "Fall🍁"] :
+        (0 <= doty && doty < 20) || (295 <= doty && doty <= 365)
+        ? ["Winter❄️", "Summer☀️"] : "Unknown"
+}
 ```
 
 ##### Variables {.appendix}
@@ -133,6 +145,7 @@ iso = {
 }
 isoDate = iso.slice(5, 10)
 isoTime = iso.slice(11, 19)
+season = doty2toty(dotyDate)
 ```
 
 ```{ojs}
@@ -154,7 +167,7 @@ monthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart(2, "0
 
 ## Year {#sec-intro-year}
 
-Any `doty` can be combined with a year to form a `Decalendar ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco` (`year+day.ddddd`): \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}.
+Any `doty` can be combined with a year to form a `Decalendar` `ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute below to see the equivalent `deco` (`year+day.ddddd`): \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}.
 
 ```{ojs}
 //| echo: false
@@ -172,14 +185,14 @@ You can also enter a `deco` to see what it looks like after it is 1) **parsed** 
 viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 16})
 ```
 
-The `deco` parsing code in the [appendix](#appendix) defines the rules for storing dates as `Decalendar ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` can be written with negative `doties`, but are always displayed with positive `doties`. `Doties` are zero padded to 3 digits, but years are not.
+The `deco` parsing code in the [appendix](#appendix) defines the rules for storing dates as `Decalendar` `ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` can be written with negative `doties`, but are always displayed with positive `doties`. `Doties` are zero padded to 3 digits, but years are not.
 
 Both the year and the `doty` in a `deco` can be fractional. Just like [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) can take the place of a month, `dotm`, hour, minutes, and second, fractional years can replace year, month, and `dotm` dates. In other words, fractional years can be a convenient way to express a date in a single number. The current `Decalendar` year date is \${styledYearDate}.
 
 While they are not very useful in `decos`, 
 Multiples of a fifth (⅕, .2) of a year are of interest because they result in `doties` that are multiples of 73.
 
-in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `Decalendar ordinals` (`decos`). Year dates cannot include times and are only used when it is convenient to store a `deco` as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
+in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `Decalendar` `ordinals` (`decos`). Year dates cannot include times and are only used when it is convenient to store a `deco` as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
 
 #### `Deco` Observable code {#sec-ojs-code-deco .appendix}
 
@@ -275,9 +288,9 @@ styledYearDate = setStyle(yearDate, d3.schemePaired[10])
 
 ## Dek {#sec-intro-dek}
 
-As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule 3 pently` schedule. Like other `pently` schedules, `Schedule 3` is named after the number of workdays it contains. The 3 workdays in `Schedule 3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule` `3` `pently` schedule. Like other `pently` schedules, `Schedule` `3` is named after the number of workdays it contains. The 3 workdays in `Schedule` `3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
 
-Unlike `Schedule 3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule 3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-pently provides more information on `Schedule 3` and the other `pently` schedules.
+Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule` `3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-pently provides more information on `Schedule` `3` and the other `pently` schedules.
 
 ::: {#exm-glance}
 :::
@@ -394,7 +407,7 @@ This shift causes the Gregorian calendar year to be 1 greater than the year in t
 
 In @tbl-unit, the units with positive exponents are used for `Decalendar`, while the ones with negative exponents are used for `Declock`. `Cents` (`¢`) can serve as a useful point of comparison to understand the scale of some of the units in @tbl-unit above, because each `cent` is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to `cents`, `mils` are ten times smaller (.1% = 1.4 minutes), `dimes` (`⅒`) are ten times larger (10% = 144 minutes), and `deks` (`ι`) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 `dek` contains 10 whole days while the other units are fractions of days.
 
-`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` (`◠`) and `beats` (`♫`), music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
+`Declock` units smaller than `mils` are not easy to think of as percents of a day. For `phrases` (`◠`) and `beats` (`♫`), music serves as a much more useful analogy. In fact, `phrases` and `beats` are musical terms. The duration of a musical beat depends on the tempo, but a `Declock` `beat` is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. `Declock` `beats` are organized into groups of 2 called `bars` or `measures`, groups of 10 called `phrases`, and groups of 20 called `periods`. A real example of music that follows this exact pattern is Haydn's [Feldpartita](https://en.wikipedia.org/wiki/Period_(music)).
 
 `Declock` units smaller than `beats` are too small for typical daily use. For example, a `mic` (`microday`, `μ`) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 `liphs` (`milliphrases`, `m̑`). A `lib` (`millibeat`, `m̈`) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person's ear to their other ear in about 7 `nans` (`nanodays`). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a `roph` (`microphrase`, `μ̑`) difference might be too fast to notice. In a `rob` (`microbeat`, `µ̈`), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.
 
@@ -458,7 +471,7 @@ The French Republican calendar and `Declock` both break the day down into decima
 
 ## Swatch Internet Time {#sec-sit}
 
-[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, [UTC+1](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC+01:00,_A), limiting its utility outside of Central Europe or West Africa. Swatch Internet Time is 41.6̅ `mils` ahead of UTC and the `Declock Zone 0` time zone.`Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits. More information on `Declock` time zones can be found in @sec-zone.
+[Swatch Internet Time](https://en.wikipedia.org/wiki/Swatch_Internet_Time) uses the term ".beats" to describe a thousandth of day (10⁻³). In `Declock`, a `beat` is a hundred thousandth of a day (10⁻⁵), because this is the approximate duration of a heartbeat or a beat of music. Another difference is that Swatch Internet Time has only 1 time zone, [UTC+1](https://en.wikipedia.org/wiki/List_of_UTC_offsets#UTC+01:00,_A), limiting its utility outside of Central Europe or West Africa. Swatch Internet Time is 41.6̅ `mils` ahead of UTC and the `Declock` `Zone` `0` time zone.`Declock` has 11 main single-digit time zones, but can support as many time zones as needed by adding additional digits. More information on `Declock` time zones can be found in @sec-zone.
 
 ## Gregorian calendar {#sec-greg}
 
@@ -556,7 +569,7 @@ To locate a specific date in @tbl-greg2doty, first find the month among the colu
 
 ### Gregorian calendar date conversion {#sec-conv}
 
-In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar doty` dates programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [*chrono-Compatible Low-Level Date Algorithms*](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `greg2doty` function is a `doty`, while its inverse function, `doty2greg`, returns an array containing a month and a `dotm` number.
+In addition to using a conversion table like @tbl-greg2doty, we can convert between Gregorian calendar dates and `Decalendar` `doty` dates programmatically. The code in @exm-coor is derived from the [`days_from_civil`](http://howardhinnant.github.io/date_algorithms.html#days_from_civil) and [`civil_from_days`](http://howardhinnant.github.io/date_algorithms.html#civil_from_days) algorithms described by [Howard Hinnant](https://howardhinnant.github.io/) in [*chrono-Compatible Low-Level Date Algorithms*](http://howardhinnant.github.io/date_algorithms.html) [-@hinnant2014]. The output of the `greg2doty` function is a `doty`, while its inverse function, `doty2greg`, returns an array containing a month and a `dotm` number.
 
 ::: {#exm-coor}
 :::
@@ -849,13 +862,13 @@ year2bool()
 
 ### Years {#sec-isoy}
 
-Both `Decalendar` and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. As shown in @tbl-2x2, `Decalendar deco` dates include years while `doty` dates do not. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is called the `Decalendar` epoch and translates to March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
+Both `Decalendar` and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. As shown in @tbl-2x2, `Decalendar` `deco` dates include years while `doty` dates do not. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is called the `Decalendar` epoch and translates to March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
 
 ### Ordinal dates {#sec-isoo}
 
-`Deco` dates (`year+day`) are very similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar doties`, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doties` are [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
+`Deco` dates (`year+day`) are very similar to [ISO 8601 ordinal (`isoo`) dates](https://en.wikipedia.org/wiki/ISO_8601#Ordinal_dates) (`year-day`). Like `Decalendar` `doties`, `isoo` dates count the number of days since the start of the year. Unlike ordinal dates, `doties` are [zero-based](https://en.wikipedia.org/wiki/Zero-based_numbering) and do not differ across common and leap years. The `deco` date can be easily obtained from the `isoo` date using the calculations shown in @eq-isoo1, @eq-isoo2, and @exm-isoo. These calculation shift the `isoo` date by 60 or 61 days to account for the 2-month difference between `Decalendar` and the Gregorian calendar.
 
-In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doties`. We use the `year2bool` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. To be clear, we only have to take Leap Day into account when dealing with `isoo` dates. `Decalendar doties` are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
+In @exm-isoo, the `isoo2doty` and `doty2isoo` functions convert between ISO 8601 ordinal day numbers and `doties`. We use the `year2bool` function from @exm-gregl in @exm-isoo to correct for the fact that Leap Day shifts ISO 8601 ordinal day numbers by 1 day in leap years. To be clear, we only have to take Leap Day into account when dealing with `isoo` dates. `Decalendar` `doties` are the same in common and leap years, because Leap Day is at the end of the `Decalendar` year.
 
 $$(isoordinal + 305 - year2bool(year)) \mod 365$$ {#eq-isoo1}
 
@@ -1399,7 +1412,7 @@ doty2hmso()
 
 Coincidentally, an ISO 8601 ordinal (`isoo`) timestamp (`year-dayThh:mm:ssZ`) without delimiters (`yeardayThhmmssZ`) is the same length as a `deco` timestamp (`year+day.dddddZ`). `Deco` timestamps cannot exist without delimiters, because removing the plus sign (`+`) from a `deco` timestamp turns it into a `doty` number (`ddddddd.ddddd`). If we removed the `+` from the `deco` timestamp `1969+306.00000`, we would obtain the `doty` number `1969306.00000` would represent midnight 1969306 days from the beginning of the current year. The rules for `deco` timestamp interpretation are summarized by the code in the `deco2doty` function in @exm-unixp.
 
-To create a `deco` timestamp, we can use the `doty2deco` or the `greg2deco` functions as shown in @exm-isos. Similarly, @exm-isos also shows how to create an `isoc` timestamp with the `doty2isoc` and `doty2isoc` functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or `Zone 0` and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. @sec-unixb and @sec-unixp further discuss timestamps and provide functions for building, parsing, and converting timestamps.
+To create a `deco` timestamp, we can use the `doty2deco` or the `greg2deco` functions as shown in @exm-isos. Similarly, @exm-isos also shows how to create an `isoc` timestamp with the `doty2isoc` and `doty2isoc` functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or `Zone` `0` and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. @sec-unixb and @sec-unixp further discuss timestamps and provide functions for building, parsing, and converting timestamps.
 
 ::: {#exm-isos}
 :::
@@ -1696,7 +1709,7 @@ To calculate `deco` dates directly from UNIX time, we can use a calculation adap
 
 ### UNIX time conversion to `Decalendar` timestamp {#sec-unixt}
 
-To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` ordinal (`deco`) timestamp as shown in @eq-unixt. The code in @exm-unixt converts UNIX time into a `deco` timestamp in the `Zone 0` time zone by passing the current UNIX timestamp to the `unix2doty` function. If we call this function without arguments (`unix2doty()`) the result will be the year and `doty` of the UNIX Epoch: 1969 and 306. To see @exm-unixt in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current `deco` (`year+day.ddddd`) and `isoc` (`year-mm-ddThh:mm:ss`) timestamps.
+To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` ordinal (`deco`) timestamp as shown in @eq-unixt. The code in @exm-unixt converts UNIX time into a `deco` timestamp in the `Zone` `0` time zone by passing the current UNIX timestamp to the `unix2doty` function. If we call this function without arguments (`unix2doty()`) the result will be the year and `doty` of the UNIX Epoch: 1969 and 306. To see @exm-unixt in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current `deco` (`year+day.ddddd`) and `isoc` (`year-mm-ddThh:mm:ss`) timestamps.
 
 $$time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c}
 y \mod 4 = 0 \\
@@ -1834,7 +1847,7 @@ paste()
 
 ### Building timestamps {#sec-unixb}
 
-The code in @exm-unixt creates a `Decalendar` ordinal (`deco`) timestamp from UNIX time. @exm-unixb encapsulates this code in a function called `unix2deco`. The `deco` timestamps converted from UNIX time are all in the `Zone 0` time zone. To switch to a different time zone, we should pass the year and `doty` we obtain from the `unix2doty` function to the `doty2deco` function from @exm-isot along with the desired time zone.
+The code in @exm-unixt creates a `Decalendar` ordinal (`deco`) timestamp from UNIX time. @exm-unixb encapsulates this code in a function called `unix2deco`. The `deco` timestamps converted from UNIX time are all in the `Zone` `0` time zone. To switch to a different time zone, we should pass the year and `doty` we obtain from the `unix2doty` function to the `doty2deco` function from @exm-isot along with the desired time zone.
 
 ::: {#exm-unixb}
 :::
@@ -1961,7 +1974,7 @@ The `m` in the `.m` format is the 1-digit month number and is the double-digit `
 
 The [ordinal numerals](https://en.wikipedia.org/wiki/Ordinal_numeral) of September, October, November, and December in `Decalendar` (Sep=7th, Oct=8th, Nov=9th, Dec=10th) match the [numeral prefixes](https://en.m.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English) in their names (Sep=7, Oct=8, Nov=9, Dec=10). The `m` value of a month is based on its cardinal number in `Decalendar`, which is 1 less than its ordinal number (Sep=6, Oct=7, Nov=8, Dec=9).
 
-To convert a double-digit Gregorian calendar month number (`mm`) into a single-digit `Decalendar m` value, we subtract 3 if `mm` is greater than 2, add 9 if not, as shown in @eq-dotm1, and then encode into hexadecimal (Base16). To do the inverse (convert `m` to `mm`), we decode from hexadecimal, add 3 to `m` values less than 10 and subtract 9 from other `m` values, as shown in @eq-dotm2. After hexadecimal encoding, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February).
+To convert a double-digit Gregorian calendar month number (`mm`) into a single-digit `Decalendar` `m` value, we subtract 3 if `mm` is greater than 2, add 9 if not, as shown in @eq-dotm1, and then encode into hexadecimal (Base16). To do the inverse (convert `m` to `mm`), we decode from hexadecimal, add 3 to `m` values less than 10 and subtract 9 from other `m` values, as shown in @eq-dotm2. After hexadecimal encoding, January is represented by `A` and February is represented by `B` (mnemonic: `jAn`=January, `feB`=February).
 
 $$m = \begin{cases}mm - 3&{\text{if } month > 2;}\\mm + 9&{\text{otherwise.}}\end{cases}$$ {#eq-dotm1}
 
@@ -2028,7 +2041,7 @@ The Gregorian calendar has many more workdays, 260 in common years and 261 in le
 
 #### Pently schedules {#sec-pently}
 
-If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. As mentioned above, each half of the `dek` is called a `pent`. Each `pent` can have its own `pently` schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. @tbl-pently displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different `pently` schedules are named after the number of workdays per `pent`. People can switch between `pently` schedules every `pent` as needed, but unless there is a compelling reason to follow a different `pently` schedule, everyone should follow the `Schedule 3` by default. `Schedule 3` has 3 workdays and 2 restdays in each `pent`. Each `Schedule 3` workday starts at `Dot 3`, ends at `Dot 7`, and lasts 4 `dimes`.
+If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. As mentioned above, each half of the `dek` is called a `pent`. Each `pent` can have its own `pently` schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. @tbl-pently displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different `pently` schedules are named after the number of workdays per `pent`. People can switch between `pently` schedules every `pent` as needed, but unless there is a compelling reason to follow a different `pently` schedule, everyone should follow the `Schedule` `3` by default. `Schedule` `3` has 3 workdays and 2 restdays in each `pent`. Each `Schedule` `3` workday starts at `Dot 3`, ends at `Dot 7`, and lasts 4 `dimes`.
 
 #### @tbl-pently
 
@@ -2045,7 +2058,7 @@ If necessary, the length of the workday and the number of workdays in the `dek` 
 
 #### Daily schedules {#sec-daily}
 
-`Decalendar` recommends waking up at `Dot 2` and going to bed at `Dot 8`. This recommendation allots 4 `dimes` (9.6 hours) for falling asleep and sleeping. To keep daily schedules symmetrical, the time spent awake should be split evenly before and after work. People following `Schedule 3` would thus have 10 `cents` (2.4 hours) to prepare for work and another 10 `cents` to prepare for bed. @tbl-daily shows the recommended `Schedule 3` daily schedule. `Schedule 4` and `Schedule 5` allot even more time, 15 `cents` (3.6 hours) and 18 `cents` (4.32 hours), respectively, for before-work and after-work activities. The recommended sleep schedule does not fit well with `Schedule 2`, but this incompatibility does not have to result in a sleep deficit. If the `Schedule 2` workdays are not consecutive, people following `Schedule 2` can catch up on sleep on their days off by going to bed early before and sleeping in after every workday.
+`Decalendar` recommends waking up at `Dot 2` and going to bed at `Dot 8`. This recommendation allots 4 `dimes` (9.6 hours) for falling asleep and sleeping. To keep daily schedules symmetrical, the time spent awake should be split evenly before and after work. People following `Schedule` `3` would thus have 10 `cents` (2.4 hours) to prepare for work and another 10 `cents` to prepare for bed. @tbl-daily shows the recommended `Schedule` `3` daily schedule. `Schedule` `4` and `Schedule` `5` allot even more time, 15 `cents` (3.6 hours) and 18 `cents` (4.32 hours), respectively, for before-work and after-work activities. The recommended sleep schedule does not fit well with `Schedule` `2`, but this incompatibility does not have to result in a sleep deficit. If the `Schedule` `2` workdays are not consecutive, people following `Schedule` `2` can catch up on sleep on their days off by going to bed early before and sleeping in after every workday.
 
 #### @tbl-daily
 
@@ -2075,8 +2088,8 @@ The dates of the solstices and the equinoxes can be used as definitions of the s
 ::: {.callout-note collapse="true" title="Click to toggle table expansion" icon="false"}
 | Code | North  | South  | `doty` | `dotm` | Date         | Event              |
 |------|--------|--------|--------|--------|--------------|--------------------|
-| S0   | Spring | Fall   | 19     | 0+19   | March 20     | Northward Equinox  |
-| S1   | Summer | Winter | 111    | 3+19   | June 20      | Northward Solstice |
+| S0   | Spring | Fall   | 20     | 0+20   | March 21     | Northward Equinox  |
+| S1   | Summer | Winter | 110    | 3+18   | June 19      | Northward Solstice |
 | S2   | Fall   | Spring | 205    | 6+21   | September 22 | Southward Equinox  |
 | S3   | Winter | Summer | 295    | 9+20   | December 21  | Southward Solstice |
 
@@ -2290,11 +2303,11 @@ The replication operator (`*`) is very useful for replacing repetitive values. F
 
 ### Percent, permil, and permyr operators {#sec-per}
 
-We can make the `seq spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. Most of the values in `.3>2*>.08>.02⋙.017>.003` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this `seq spread` as `.3>2*>8%>2%⋙17‰>3‰`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.3>2*>8%>2%⋙17‰>3‰` as `.3>2*>8%>2%⋙17m>3m`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator, which is short for permyriad and represents `Declock phrases` (10⁻⁴).
+We can make the `seq spread` above even shorter by using the `per` operators: `%`, `‰`, and `‱`. Most of the values in `.3>2*>.08>.02⋙.017>.003` are either percents (.01 or ¹/₁₀₀) or permils (.001 or ¹/₁₀₀₀) of a day, we can therefore rewrite this `seq spread` as `.3>2*>8%>2%⋙17‰>3‰`. It may be difficult to write the permil (`‰`) operator (hex: `2030`, html: `&permil;`, vim: `%0`, compose: `%o`), because it does not appear on a typical keyboard, so it is also possible to write `.3>2*>8%>2%⋙17‰>3‰` as `.3>2*>8%>2%⋙17m>3m`, with the letter `m`, which stands for `mil`, replacing `‰`. In addition to the percent (`%`) and permil (`‰`) operators, there is also the permyr (`‱`) operator, which is short for permyriad and represents `Declock` `phrases` (10⁻⁴).
 
 ### Pently schedules as seq spreads, splices, and sleds {#sec-3s}
 
-We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule 5` is particularly interesting because it includes all of the days of the year. `Spreads` that include every item can be written as `>` or `<`, but `seq spreads` must have at least 5 values. The `Schedule 5 seq spread ≫≫.38>.24` has 4 blank values, which represent the default `start`, `span`, `split`, and `space`. Similarly, the `Schedule 4 seq spread ≫4≫.35>.3` has 3 blank values, which represent the default `start`, `span`, and `space`. The `Schedule 2` and `Schedule 3 seq spreads`, `≫2>3>.2>.6` and `≫3>2>.3>.4`, respectively, only have 2 blank values, the `start` and the `span`. As an alternative to `seq spreads` and `seq slices`, we can use `slice`-`spread` hybrids called `sleds` or `spread`-`slice` hybrids called `splices`. `Sleds` put the `slice` elements first (`start:stop:step:start>span>split>space`), while `splices` start with the `spread` elements (`start>span>split>space>start:stop:step`). The `pently`schedules are easiest to write as `seq spreads` and `splices`, as shown in @tbl-sched.
+We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule` `5` is particularly interesting because it includes all of the days of the year. `Spreads` that include every item can be written as `>` or `<`, but `seq spreads` must have at least 5 values. The `Schedule` `5` `seq` `spread` `≫≫.38>.24` has 4 blank values, which represent the default `start`, `span`, `split`, and `space`. Similarly, the `Schedule` `4` `seq` `spread` `≫4≫.35>.3` has 3 blank values, which represent the default `start`, `span`, and `space`. The `Schedule` `2` and `Schedule` `3` `seq` `spreads`, `≫2>3>.2>.6` and `≫3>2>.3>.4`, respectively, only have 2 blank values, the `start` and the `span`. As an alternative to `seq` `spreads` and `seq` `slices`, we can use `slice`-`spread` hybrids called `sleds` or `spread`-`slice` hybrids called `splices`. `Sleds` put the `slice` elements first (`start:stop:step:start>span>split>space`), while `splices` start with the `spread` elements (`start>span>split>space>start:stop:step`). The `pently`schedules are easiest to write as `seq spreads` and `splices`, as shown in @tbl-sched.
 
 #### @tbl-sched
 
@@ -2313,7 +2326,7 @@ We can use `seq spreads` to describe the [`pently`schedules](#sched). `Schedule 
 
 ### Common years {#sec-transc}
 
-The `pently` schedules are important for the transition between years. In common years, the last `dek` of the year (`Dek 36`) contains the last `pent` of the current year (`Pent 72`), and the first `pent` of the subsequent year (`Pent 0`). If these two `pents` follow the default `pently` schedule, `Schedule 3`, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. @tbl-common shows the positive and negative `doties`, names, and types (work or rest) of the days in `Dek 36` in common years. Notably, while the positive `doties` continue counting past the end of the year, the negative `doties` of the current year turn into the positive `doties` of the subsequent year. The negative `doties` in `Dek 36` can thus serve as the bridge from the one year to the next.
+The `pently` schedules are important for the transition between years. In common years, the last `dek` of the year (`Dek 36`) contains the last `pent` of the current year (`Pent 72`), and the first `pent` of the subsequent year (`Pent 0`). If these two `pents` follow the default `pently` schedule, `Schedule` `3`, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. @tbl-common shows the positive and negative `doties`, names, and types (work or rest) of the days in `Dek 36` in common years. Notably, while the positive `doties` continue counting past the end of the year, the negative `doties` of the current year turn into the positive `doties` of the subsequent year. The negative `doties` in `Dek 36` can thus serve as the bridge from the one year to the next.
 
 #### @tbl-common
 
@@ -2336,7 +2349,7 @@ The `pently` schedules are important for the transition between years. In common
 
 ### Leap years {#sec-transl}
 
-In leap years, `Dek 36` contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, `Dek 36` always contain 6 workdays and 4 restdays, just like every other `dek`, but in leaps years these days do not follow the typical order of `Schedule 3`. Leap years end in 3 restdays instead of 2, because Leap Day (`Day 365`) is always a holiday. Leap day is always a `Penday` and always followed by a `Nulday`. After Leap Day, the normal rhythm of `Schedule 3` resumes. @tbl-leap shows the positive and negative `doties` of the days in `Dek 36` in leap years, as well as their names and their types (work or rest).
+In leap years, `Dek 36` contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, `Dek 36` always contain 6 workdays and 4 restdays, just like every other `dek`, but in leaps years these days do not follow the typical order of `Schedule` `3`. Leap years end in 3 restdays instead of 2, because Leap Day (`Day 365`) is always a holiday. Leap day is always a `Penday` and always followed by a `Nulday`. After Leap Day, the normal rhythm of `Schedule` `3` resumes. @tbl-leap shows the positive and negative `doties` of the days in `Dek 36` in leap years, as well as their names and their types (work or rest).
 
 #### @tbl-leap
 
@@ -2378,7 +2391,7 @@ Leap Day is a important holiday because it occurs only once every four years exc
 : Gregorian calendar holidays that happen to fall on `Decalendar` restdays {#tbl-holiday}
 :::
 
-Any holiday with a fixed (rather than floating) date in the Gregorian calendar can easily be added to `Decalendar`. Holidays with floating dates do not follow easily recognizable patterns. `Decalendar` recommends redefining such dates to always be on the same `doty` every year. For example, November 25 (`Day 269`) is a sensible fixed date for Thanksgiving, because it is exactly 30 days before Christmas (December 25, `Day 299`) and falls on a `Decalendar` restday. When assigning fixed dates to floating date holidays, we should choose `Decalendar` restdays to avoid disrupting the normal rhythm of the `pently` schedules. Instead of gaining days off because of holidays, workers should gain additional time off from their employers. In the United States, the 11 federal holidays (88 hours = 3.6̅ dimes) would translate to 9 `Schedule 3` days offs (3.6 dimes).
+Any holiday with a fixed (rather than floating) date in the Gregorian calendar can easily be added to `Decalendar`. Holidays with floating dates do not follow easily recognizable patterns. `Decalendar` recommends redefining such dates to always be on the same `doty` every year. For example, November 25 (`Day 269`) is a sensible fixed date for Thanksgiving, because it is exactly 30 days before Christmas (December 25, `Day 299`) and falls on a `Decalendar` restday. When assigning fixed dates to floating date holidays, we should choose `Decalendar` restdays to avoid disrupting the normal rhythm of the `pently` schedules. Instead of gaining days off because of holidays, workers should gain additional time off from their employers. In the United States, the 11 federal holidays (88 hours = 3.6̅ dimes) would translate to 9 `Schedule` `3` days offs (3.6 dimes).
 
 # References
 
