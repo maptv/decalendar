@@ -248,11 +248,11 @@
 <p><code>Decalendar</code> is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar🗓️system and <code>Declock</code> is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a single decimal number called the day-of-the-year (<code>doty</code>).</p>
 <p>A <code>doty</code> can represent a specific instant in a year, such as the current <code>doty</code> timestamp (<code>year+day.clock</code>): <span id="ojs-element-id-1"></span>, or a duration, such as the time since this page was loaded: <span id="ojs-element-id-2"></span>.</p>
 <p><code>Doty</code> timestamps and durations are more <strong>precise</strong> and more <strong>concise</strong> than and durations that include hours, minutes, and seconds. Compare the <code>doty</code> timestamp above with the current timestamp in the <code>mm-ddThh:mm:ss</code> format: <span id="ojs-element-id-3"></span>. <strong>The <code>doty</code> is like 5 numbers in 1!</strong> <em>And that’s not all!</em></p>
-<p>The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator">integer part</a> of the <code>doty</code> is the current <code>Decalendar</code> date: <span id="ojs-element-id-31"></span>. The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.">fractional part</a> of the <code>doty</code> is the current <code>Declock</code> time: .<span id="ojs-element-id-32"></span>.</p>
-<p>The <code>doty</code> date can tell us the current season. It is now <span id="ojs-element-id-4"></span> in the Northern Hemisphere and <span id="ojs-element-id-5"></span> in the Southern Hemisphere. The <span id="ojs-element-id-6"></span> third of this season is associated with the <span id="ojs-element-id-7"></span> <a href="https://en.wikipedia.org/wiki/Zodiac">Zodiac</a> sign. The <code>doty</code> <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals">intervals</a> of the seasons are <span class="math inline">\(\left[20, 110\right)\)</span>🌼🍁, <span class="math inline">\(\left[110, 205\right)\)</span>☀️❄️, <span class="math inline">\(\left[205, 295\right)\)</span>🍁🌼, and <span class="math inline">\(\left[0, 20\right)\cup\left[295, 365\right]\)</span>❄️☀️. <a href="#sec-subyear">Section&nbsp;5.5</a> discusses seasons and other parts of the year.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator">integer part</a> of the <code>doty</code> is the current <code>Decalendar</code> date: <span id="ojs-element-id-35"></span>. The <a href="https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.">fractional part</a> of the <code>doty</code> is the current <code>Declock</code> time: .<span id="ojs-element-id-36"></span>.</p>
+<p>The <code>doty</code> date can tell us the current season. It is now <span id="ojs-element-id-4"></span>in the Northern Hemisphere and <span id="ojs-element-id-5"></span>in the Southern Hemisphere. The current part of this season (<span id="ojs-element-id-6"></span> <a href="https://en.wiktionary.org/wiki/tertile">tertile</a>) is associated with the <span id="ojs-element-id-7"></span><a href="https://en.wikipedia.org/wiki/Zodiac">Zodiac</a> sign. The <code>doty</code> <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals">intervals</a> of the seasons are <span class="math inline">\(\left[20, 110\right)\)</span>🌼🍁, <span class="math inline">\(\left[110, 205\right)\)</span>☀️❄️, <span class="math inline">\(\left[205, 295\right)\)</span>🍁🌼, and <span class="math inline">\(\left[0, 20\right)\cup\left[295, 365\right]\)</span>❄️☀️. <a href="#sec-subyear">Section&nbsp;5.5</a> discusses seasons and other parts of the year.</p>
 <p>The first two <a href="https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values">digits</a> of the current <code>doty</code> date are the current <code>dek</code> number: <span id="ojs-element-id-8"></span>, while the last digit is the current day-of-the-<code>dek</code> (<code>dotd</code>): <span id="ojs-element-id-9"></span>. <code>Deks</code> are groups of 10 days that fulfill the role of both months and weeks in <code>Decalendar</code>. The <code>dotd</code> serves as both the day-of-the-month (<code>dotm</code>) and the day-of-the-week (<code>dotw</code>) in <code>Decalendar</code>. <a href="#sec-dek">Section&nbsp;5.4</a> explains how <code>deks</code> can replace months and weeks.</p>
 <p>The digits of the current <code>doty</code> time provide the current <code>dime</code>: <span id="ojs-element-id-10"></span>, <code>cent</code>: <span id="ojs-element-id-11"></span>, <code>mil</code>: <span id="ojs-element-id-12"></span>, <code>phrase</code>: <span id="ojs-element-id-13"></span>, and <code>beat</code>: <span id="ojs-element-id-14"></span>. <code>Dimes</code> are used for <code>Declock</code> time zone offsets, <code>cents</code> are 1 percent of the day, <code>mils</code> provide the right level of precision for displaying time on clocks🕰️and⌚️watches, <code>phrases</code> are like a musical🎶<a href="https://en.wikipedia.org/wiki/Phrase_(music)">phrase</a>, and <code>beats</code> are like a heart❤️beat. <a href="#sec-unit">Section&nbsp;2.7</a> provides more information on the various <code>Decalendar</code> and <code>Declock</code> units.</p>
-<p>Now it’s your turn! Enter a month and <code>dotm</code> below to see 1) the equivalent <code>doty</code> date, 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere. Try special dates like birthdays🎂and🥂anniversaries!</p>
+<p>Now it’s your turn! Enter a month and <code>dotm</code> below to see 1) the associated <code>doty</code> date, 2) season in the Northern Hemisphere, 3) season in the Southern Hemisphere, and 4) Zodiac sign. Try special dates like birthdays🎂and🥂anniversaries!</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -275,8 +275,9 @@
 <li><span id="ojs-element-id-15"></span></li>
 <li><span id="ojs-element-id-16"></span></li>
 <li><span id="ojs-element-id-17"></span></li>
+<li><span id="ojs-element-id-18"></span></li>
 </ol>
-<p>Similarly, you can also enter a <code>doty</code> below to get 1) the corresponding month and <code>dotm</code>, 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere. Converting back and forth between date formats is a great way to build familiarity with <code>doty</code> dates.</p>
+<p>Similarly, you can also enter a <code>doty</code> below to get 1) the corresponding month and <code>dotm</code>, 2) season in the Northern Hemisphere, 3) season in the Southern Hemisphere, and 4) Zodiac sign. Converting back and forth between date formats is a great way to build familiarity with <code>doty</code> dates.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -287,9 +288,10 @@
 </div>
 </div>
 <ol type="1">
-<li><span id="ojs-element-id-18"></span></li>
 <li><span id="ojs-element-id-19"></span></li>
 <li><span id="ojs-element-id-20"></span></li>
+<li><span id="ojs-element-id-21"></span></li>
+<li><span id="ojs-element-id-22"></span></li>
 </ol>
 <section id="doty-observable-code" class="level4">
 <h4 class="anchored" data-anchor-id="doty-observable-code"><code>Doty</code> Observable code</h4>
@@ -368,8 +370,27 @@
 <span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>        (<span class="fl">20</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">110</span>) ? [<span class="st">"Spring🌼"</span>, <span class="st">"Fall🍁"</span>] <span class="op">:</span></span>
 <span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>        (<span class="fl">0</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">20</span>) <span class="op">||</span> (<span class="fl">295</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;=</span> <span class="fl">365</span>)</span>
 <span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>        ? [<span class="st">"Winter❄️"</span>, <span class="st">"Summer☀️"</span>] <span class="op">:</span> <span class="st">"Unknown"</span></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">doty2zodi</span>(doty <span class="op">=</span> <span class="fl">306</span>) {</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    doty <span class="op">=</span> <span class="bu">Math</span>.<span class="fu">floor</span>(doty)</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="fl">20</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">50</span>) ? [<span class="st">"first"</span>, <span class="st">"Aries♈️"</span>] <span class="op">:</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">50</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">81</span>) ? [<span class="st">"middle"</span>, <span class="st">"Taurus♉️"</span>] <span class="op">:</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">81</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">112</span>) ? [<span class="st">"last"</span>, <span class="st">"Gemini♊️"</span>] <span class="op">:</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">112</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">144</span>) ? [<span class="st">"first"</span>, <span class="st">"Cancer♋️"</span>] <span class="op">:</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">144</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">175</span>) ? [<span class="st">"middle"</span>, <span class="st">"Leo♌️"</span>] <span class="op">:</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">175</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">206</span>) ? [<span class="st">"last"</span>, <span class="st">"Virgo♍️"</span>] <span class="op">:</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">206</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">236</span>) ? [<span class="st">"first"</span>, <span class="st">"Libra♎️"</span>] <span class="op">:</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">236</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">266</span>) ? [<span class="st">"middle"</span>, <span class="st">"Scorpio♏️"</span>] <span class="op">:</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">266</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">296</span>) ? [<span class="st">"last"</span>, <span class="st">"Sagittarius♐️"</span>] <span class="op">:</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">296</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">325</span>) ? [<span class="st">"first"</span>, <span class="st">"Capricorn♑️"</span>] <span class="op">:</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">325</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">355</span>) ? [<span class="st">"middle"</span>, <span class="st">"Aquarius♒️"</span>] <span class="op">:</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>     (<span class="fl">355</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;=</span> <span class="fl">365</span>) <span class="op">||</span> (<span class="fl">0</span> <span class="op">&lt;=</span> doty <span class="op">&amp;&amp;</span> doty <span class="op">&lt;</span> <span class="fl">20</span>)</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>     ? [<span class="st">"last"</span>, <span class="st">"Pisces♓️"</span>] <span class="op">:</span> <span class="st">"Unknown"</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -426,10 +447,22 @@
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>isoDate <span class="op">=</span> iso.<span class="fu">slice</span>(<span class="fl">5</span>, <span class="fl">10</span>)</span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>isoTime <span class="op">=</span> iso.<span class="fu">slice</span>(<span class="fl">11</span>, <span class="fl">19</span>)</span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>season <span class="op">=</span> <span class="fu">doty2toty</span>(dotyDate)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>outputDoty <span class="op">=</span> <span class="fu">greg2doty</span>(month, dotm)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>outputDotySeason <span class="op">=</span> <span class="fu">doty2toty</span>(outputDoty)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>inputDotySeason <span class="op">=</span> <span class="fu">doty2toty</span>(inputDoty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>zodiac <span class="op">=</span> <span class="fu">doty2zodi</span>(dotyDate)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>outputDoty <span class="op">=</span> <span class="fu">greg2doty</span>(month, dotm)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>outputDotySeason <span class="op">=</span> <span class="fu">doty2toty</span>(outputDoty)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>inputDotySeason <span class="op">=</span> <span class="fu">doty2toty</span>(inputDoty)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>outputDotyZodiac <span class="op">=</span> <span class="fu">doty2zodi</span>(outputDoty)[<span class="fl">1</span>]</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>inputDotyZodiac <span class="op">=</span> <span class="fu">doty2zodi</span>(inputDoty)[<span class="fl">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -552,7 +585,7 @@
 </section>
 <section id="year" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="year"><span class="header-section-number">1.2</span> Year</h2>
-<p>Any <code>doty</code> can be combined with a year to form a <code>Decalendar</code> <code>ordinal</code> (<code>deco</code>). Enter a year, month, <code>dotm</code>, hour, and minute below to see 1) the equivalent <code>deco</code> (<code>year+day.ddddd</code>), 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere.</p>
+<p>Any <code>doty</code> can be combined with a year to form a <code>Decalendar</code> <code>ordinal</code> (<code>deco</code>). Enter a year, month, <code>dotm</code>, hour, and minute below to see 1) the corresponding <code>deco</code> (<code>year+day.clock</code>), 2) season in the Northern Hemisphere, 3) season in the Southern Hemisphere, and 4) Zodiac sign.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -563,11 +596,12 @@
 </div>
 </div>
 <ol type="1">
-<li><span id="ojs-element-id-21"></span></li>
-<li><span id="ojs-element-id-22"></span></li>
 <li><span id="ojs-element-id-23"></span></li>
+<li><span id="ojs-element-id-24"></span></li>
+<li><span id="ojs-element-id-25"></span></li>
+<li><span id="ojs-element-id-26"></span></li>
 </ol>
-<p>You can also enter a <code>deco</code> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers below 366 <span class="math inline">\(\left[0, 366\right)\)</span>, and <strong>converted</strong> into 3) the <code>year-mm-ddThh:mm:ss</code> format, 4) Northern Hemisphere season, and 5) Southern Hemisphere season.</p>
+<p>You can also enter a <code>deco</code> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers below 366 <span class="math inline">\(\left[0, 366\right)\)</span>, and 3) <strong>converted</strong> into the <code>year-mm-ddThh:mm:ss</code> format equivalent, and used to calculate the associated 4) Northern Hemisphere season, 5) Southern Hemisphere season, and 6) Zodiac sign.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -578,14 +612,15 @@
 </div>
 </div>
 <ol type="1">
-<li><span id="ojs-element-id-24"></span>, <span id="ojs-element-id-25"></span></li>
-<li><span id="ojs-element-id-26"></span></li>
-<li><span id="ojs-element-id-27"></span></li>
-<li><span id="ojs-element-id-28"></span></li>
+<li><span id="ojs-element-id-27"></span>, <span id="ojs-element-id-28"></span></li>
 <li><span id="ojs-element-id-29"></span></li>
+<li><span id="ojs-element-id-30"></span></li>
+<li><span id="ojs-element-id-31"></span></li>
+<li><span id="ojs-element-id-32"></span></li>
+<li><span id="ojs-element-id-33"></span></li>
 </ol>
 <p>The <code>deco</code> parsing code in the <a href="#appendix">appendix</a> defines the rules for storing dates as <code>Decalendar</code> <code>ordinals</code> (<code>decos</code>). Notably, a <code>deco</code> consisting of a single number without a plus (+) or minus sign (-) is interpreted as a <code>doty</code> and will be appended to the current year. <code>Decos</code> can be written with negative <code>doties</code>, but are always displayed with positive <code>doties</code>. <code>Doties</code> are zero padded to 3 digits, but years are not.</p>
-<p>Both the year and the <code>doty</code> in a <code>deco</code> can be fractional. Just like <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> can take the place of a month, <code>dotm</code>, hour, minutes, and second, fractional years can replace year, month, and <code>dotm</code> dates. In other words, fractional years can be a convenient way to express a date in a single number. The current <code>Decalendar</code> year date is <span id="ojs-element-id-30"></span>.</p>
+<p>Both the year and the <code>doty</code> in a <code>deco</code> can be fractional. Just like <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> can take the place of a month, <code>dotm</code>, hour, minutes, and second, fractional years can replace year, month, and <code>dotm</code> dates. In other words, fractional years can be a convenient way to express a date in a single number. The current <code>Decalendar</code> year date is <span id="ojs-element-id-34"></span>.</p>
 <p>While they are not very useful in <code>decos</code>, Multiples of a fifth (⅕, .2) of a year are of interest because they result in <code>doties</code> that are multiples of 73.</p>
 <p>in the <code>Decalendar</code> fractional year format (<code>year.yyy</code>) allows us to avoid parsing <code>Decalendar</code> <code>ordinals</code> (<code>decos</code>). Year dates cannot include times and are only used when it is convenient to store a <code>deco</code> as a single number. Enter a <code>deco</code> or <code>year-mm-dd</code> date to see a custom year date. Enter a year date to turn it into a <code>deco</code> and <code>year-mm-dd</code> date.</p>
 <section id="deco-observable-code" class="level4">
@@ -695,8 +730,16 @@
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>outputIsoc <span class="op">=</span> <span class="fu">deco2isoc</span>(outputDeco)</span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>yearDate <span class="op">=</span> <span class="bu">Math</span>.<span class="fu">ceil</span>(<span class="fu">unix2year</span>(unix) <span class="op">*</span> <span class="fl">1e3</span>) <span class="op">/</span> <span class="fl">1e3</span></span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>dtDotyToty <span class="op">=</span> <span class="fu">doty2toty</span>(dtDotyDateRaw)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>decoDotyToty <span class="op">=</span> <span class="fu">doty2toty</span>(decoDotyDate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>decoDotyToty <span class="op">=</span> <span class="fu">doty2toty</span>(decoDotyDate)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>dtDotyZodiac <span class="op">=</span> <span class="fu">doty2zodi</span>(dtDotyDateRaw)[<span class="fl">1</span>]</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>decoDotyZodiac <span class="op">=</span> <span class="fu">doty2zodi</span>(decoDotyDate)[<span class="fl">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -895,14 +938,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/6524046d-9dda-4e93-a1bf-a7f9a7e6b5af-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_julia_files/figure-html/34fcd20f-9ec9-49ab-9944-0669d7b94b78-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/6524046d-9dda-4e93-a1bf-a7f9a7e6b5af-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_julia_files/figure-html/34fcd20f-9ec9-49ab-9944-0669d7b94b78-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3091,8 +3134,8 @@ paste0(sprintf("%04d", doty2year()), "-",
 </section>
 <section id="time-zones-1" class="level3 page-columns page-full" data-number="4.4.4">
 <h3 data-number="4.4.4" class="anchored" data-anchor-id="time-zones-1"><span class="header-section-number">4.4.4</span> Time zones</h3>
-<p><code>Isoc</code> dates can be combined with the <a href="https://en.wikipedia.org/wiki/ISO_8601#Times">ISO 8601 time (<code>isot</code>) format</a> (<code>hh:mm:ss</code>) to form <code>isoc</code> timestamps. Likewise, <code>deco</code> dates can be combined with <code>Declock</code> times to form <code>deco</code> timestamps. Both <code>deco</code> (<code>year+day.dddddZ</code>) and <code>isoc</code> (<code>year-mm-ddThh:mm:ssZ</code>) timestamps can end in a <code>Z</code>. This <code>Z</code> is a <a href="https://en.wikipedia.org/wiki/Military_time_zone#Description">military time zone code</a> that represents the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone, which is the basis of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>.</p>
-<p><code>Deco</code> timestamps that are synchronized with UTC can either end in <code>Z</code> (<code>year+day.dddddZ</code>) or <code>+0</code> (<code>year+day.ddddd+0</code>). Noon UTC can be written <code>.5Z</code> or <code>.5+0</code> in <code>Declock</code> and 12:00:00Z, 120000Z, 12:00:00+00, or 120000+00 as per ISO 8601. The code in <a href="#exm-isoz">Example&nbsp;7</a> converts between UTC offsets and military time zone codes. <a href="#sec-zone">Section&nbsp;3</a> provides more information on <code>Declock</code> time zones.</p>
+<p><code>Isoc</code> dates can be combined with the <a href="https://en.wikipedia.org/wiki/ISO_8601#Times">ISO 8601 time (<code>isot</code>) format</a> (<code>hh:mm:ss</code>) to form <code>isoc</code> timestamps. Likewise, <code>deco</code> dates can be combined with <code>Declock</code> times to form <code>deco</code> timestamps. Both <code>deco</code> (<code>year+day.clockZ</code>) and <code>isoc</code> (<code>year-mm-ddThh:mm:ssZ</code>) timestamps can end in a <code>Z</code>. This <code>Z</code> is a <a href="https://en.wikipedia.org/wiki/Military_time_zone#Description">military time zone code</a> that represents the <a href="https://en.wikipedia.org/wiki/UTC+00:00">UTC+00:00</a> time zone, which is the basis of <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal Time (UTC)</a>.</p>
+<p><code>Deco</code> timestamps that are synchronized with UTC can either end in <code>Z</code> (<code>year+day.clockZ</code>) or <code>+0</code> (<code>year+day.clock+0</code>). Noon UTC can be written <code>.5Z</code> or <code>.5+0</code> in <code>Declock</code> and 12:00:00Z, 120000Z, 12:00:00+00, or 120000+00 as per ISO 8601. The code in <a href="#exm-isoz">Example&nbsp;7</a> converts between UTC offsets and military time zone codes. <a href="#sec-zone">Section&nbsp;3</a> provides more information on <code>Declock</code> time zones.</p>
 <p><span class="theorem-title"><strong>Example 7 </strong></span>&nbsp;</p>
 <section id="javascript-5" class="level4">
 <h4 class="anchored" data-anchor-id="javascript-5">JavaScript</h4>
@@ -3404,8 +3447,8 @@ doty2hmso()</code></pre>
 </section>
 <section id="timestamps" class="level3 page-columns page-full" data-number="4.4.6">
 <h3 data-number="4.4.6" class="anchored" data-anchor-id="timestamps"><span class="header-section-number">4.4.6</span> Timestamps</h3>
-<p><code>Decalendar</code> seeks to make months and weeks obsolete. Similarly, <code>Declock</code> aims to deprecate hours, minutes, and seconds in favor of <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> (<code>.day</code>). <code>Deco</code> timestamps, which combine <code>Decalendar</code> dates and <code>Declock</code> times, are more concise and easier to read than ISO 8601 timestamps. An <code>isoc</code> timestamp that includes seconds is 20 characters long (<code>year-mm-ddThh:mm:ssZ</code>), while a <code>deco</code> timestamp with slightly greater precision is only 15 characters long (<code>year+day.dddddZ</code>). ISO 8601 timestamps can omit delimiters except for the <code>T</code> which separates the date and the time (<code>yearmmddThhmmssZ</code>). Without delimiters, <code>isoc</code> timestamps become even more difficult to read and still cannot match the brevity of <code>Decalendar</code> timestamps.</p>
-<p>Coincidentally, an ISO 8601 ordinal (<code>isoo</code>) timestamp (<code>year-dayThh:mm:ssZ</code>) without delimiters (<code>yeardayThhmmssZ</code>) is the same length as a <code>deco</code> timestamp (<code>year+day.dddddZ</code>). <code>Deco</code> timestamps cannot exist without delimiters, because removing the plus sign (<code>+</code>) from a <code>deco</code> timestamp turns it into a <code>doty</code> number (<code>ddddddd.ddddd</code>). If we removed the <code>+</code> from the <code>deco</code> timestamp <code>1969+306.00000</code>, we would obtain the <code>doty</code> number <code>1969306.00000</code> would represent midnight 1969306 days from the beginning of the current year. The rules for <code>deco</code> timestamp interpretation are summarized by the code in the <code>deco2doty</code> function in <a href="#exm-unixp">Example&nbsp;15</a>.</p>
+<p><code>Decalendar</code> seeks to make months and weeks obsolete. Similarly, <code>Declock</code> aims to deprecate hours, minutes, and seconds in favor of <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> (<code>.day</code>). <code>Deco</code> timestamps, which combine <code>Decalendar</code> dates and <code>Declock</code> times, are more concise and easier to read than ISO 8601 timestamps. An <code>isoc</code> timestamp that includes seconds is 20 characters long (<code>year-mm-ddThh:mm:ssZ</code>), while a <code>deco</code> timestamp with slightly greater precision is only 15 characters long (<code>year+day.clockZ</code>). ISO 8601 timestamps can omit delimiters except for the <code>T</code> which separates the date and the time (<code>yearmmddThhmmssZ</code>). Without delimiters, <code>isoc</code> timestamps become even more difficult to read and still cannot match the brevity of <code>Decalendar</code> timestamps.</p>
+<p>Coincidentally, an ISO 8601 ordinal (<code>isoo</code>) timestamp (<code>year-dayThh:mm:ssZ</code>) without delimiters (<code>yeardayThhmmssZ</code>) is the same length as a <code>deco</code> timestamp (<code>year+day.clockZ</code>). <code>Deco</code> timestamps cannot exist without delimiters, because removing the plus sign (<code>+</code>) from a <code>deco</code> timestamp turns it into a <code>doty</code> number (<code>ddddddd.clock</code>). If we removed the <code>+</code> from the <code>deco</code> timestamp <code>1969+306.00000</code>, we would obtain the <code>doty</code> number <code>1969306.00000</code> would represent midnight 1969306 days from the beginning of the current year. The rules for <code>deco</code> timestamp interpretation are summarized by the code in the <code>deco2doty</code> function in <a href="#exm-unixp">Example&nbsp;15</a>.</p>
 <p>To create a <code>deco</code> timestamp, we can use the <code>doty2deco</code> or the <code>greg2deco</code> functions as shown in <a href="#exm-isos">Example&nbsp;9</a>. Similarly, <a href="#exm-isos">Example&nbsp;9</a> also shows how to create an <code>isoc</code> timestamp with the <code>doty2isoc</code> and <code>doty2isoc</code> functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or <code>Zone</code> <code>0</code> and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. <a href="#sec-unixb">Section&nbsp;4.6.4</a> and <a href="#sec-unixp">Section&nbsp;4.6.5</a> further discuss timestamps and provide functions for building, parsing, and converting timestamps.</p>
 <p><span class="theorem-title"><strong>Example 9 </strong></span>&nbsp;</p>
 <section id="javascript-7" class="level4">
@@ -3624,7 +3667,7 @@ console.log(doty2dote());</code></pre>
 <span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+229.79775+0"</code></pre>
+<pre><code>"2023+229.93154+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3681,7 +3724,7 @@ paste0(sprintf("%04d", yd[1]), "+",
 </section>
 <section id="unix-time-conversion-to-decalendar-timestamp" class="level3 page-columns page-full" data-number="4.6.3">
 <h3 data-number="4.6.3" class="anchored" data-anchor-id="unix-time-conversion-to-decalendar-timestamp"><span class="header-section-number">4.6.3</span> UNIX time conversion to <code>Decalendar</code> timestamp</h3>
-<p>To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from <code>days</code> to obtain the current <code>Decalendar</code> ordinal (<code>deco</code>) timestamp as shown in <a href="#eq-unixt">Equation&nbsp;15</a>. The code in <a href="#exm-unixt">Example&nbsp;13</a> converts UNIX time into a <code>deco</code> timestamp in the <code>Zone</code> <code>0</code> time zone by passing the current UNIX timestamp to the <code>unix2doty</code> function. If we call this function without arguments (<code>unix2doty()</code>) the result will be the year and <code>doty</code> of the UNIX Epoch: 1969 and 306. To see <a href="#exm-unixt">Example&nbsp;13</a> in action, visit this <a href="https://codepen.io/maptv/pen/oNJZeea">CodePen</a> which displays the current <code>deco</code> (<code>year+day.ddddd</code>) and <code>isoc</code> (<code>year-mm-ddThh:mm:ss</code>) timestamps.</p>
+<p>To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from <code>days</code> to obtain the current <code>Decalendar</code> ordinal (<code>deco</code>) timestamp as shown in <a href="#eq-unixt">Equation&nbsp;15</a>. The code in <a href="#exm-unixt">Example&nbsp;13</a> converts UNIX time into a <code>deco</code> timestamp in the <code>Zone</code> <code>0</code> time zone by passing the current UNIX timestamp to the <code>unix2doty</code> function. If we call this function without arguments (<code>unix2doty()</code>) the result will be the year and <code>doty</code> of the UNIX Epoch: 1969 and 306. To see <a href="#exm-unixt">Example&nbsp;13</a> in action, visit this <a href="https://codepen.io/maptv/pen/oNJZeea">CodePen</a> which displays the current <code>deco</code> (<code>year+day.clock</code>) and <code>isoc</code> (<code>year-mm-ddThh:mm:ss</code>) timestamps.</p>
 <p><span id="eq-unixt"><span class="math display">\[time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c}
 y \mod 4 = 0 \\
 \land y \mod 100 \neq 0 \\
@@ -3729,7 +3772,7 @@ console.log(
 <span id="cb104-10"><a href="#cb104-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+229.79775+0"</code></pre>
+<pre><code>"2023+229.93154+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3848,7 +3891,7 @@ console.log(unix2deco())</code></pre>
 <span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+229.79775+0"</code></pre>
+<pre><code>"2023+229.93154+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -5060,9 +5103,9 @@ console.log(parse_dec());</code></pre>
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${season[1]}</span>`", "cellName":"ojs-element-id-5"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${ordinal}</span>`", "cellName":"ojs-element-id-6"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${zodiac[0]}</span>`", "cellName":"ojs-element-id-6"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${zodiac}</span>`", "cellName":"ojs-element-id-7"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${zodiac[1]}</span>`", "cellName":"ojs-element-id-7"}
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDek}</span>`", "cellName":"ojs-element-id-8"}
 ,
@@ -5084,35 +5127,43 @@ console.log(parse_dec());</code></pre>
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${outputDotySeason[1]}</span>`", "cellName":"ojs-element-id-17"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledMonthAndDay}</span>`", "cellName":"ojs-element-id-18"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${outputDotyZodiac}</span>`", "cellName":"ojs-element-id-18"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[0]}</span>`", "cellName":"ojs-element-id-19"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledMonthAndDay}</span>`", "cellName":"ojs-element-id-19"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[1]}</span>`", "cellName":"ojs-element-id-20"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[0]}</span>`", "cellName":"ojs-element-id-20"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtYear}+${dtDotyDate}${dtDotyTimeDelimiter}${dtDotyTime}</span>`", "cellName":"ojs-element-id-21"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[1]}</span>`", "cellName":"ojs-element-id-21"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtDotyToty[0]}</span>`", "cellName":"ojs-element-id-22"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotyZodiac}</span>`", "cellName":"ojs-element-id-22"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtDotyToty[1]}</span>`", "cellName":"ojs-element-id-23"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtYear}+${dtDotyDate}${dtDotyTimeDelimiter}${dtDotyTime}</span>`", "cellName":"ojs-element-id-23"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedYear}</span>`", "cellName":"ojs-element-id-24"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtDotyToty[0]}</span>`", "cellName":"ojs-element-id-24"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedDotyDate}${parsedDotyTimeDelimiter}${styledParsedDotyTime}</span>`", "cellName":"ojs-element-id-25"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtDotyToty[1]}</span>`", "cellName":"ojs-element-id-25"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDecoYear}+${styledDecoDotyDate}${decoDotyTimeDelimiter}${styledDecoDotyTime}</span>`", "cellName":"ojs-element-id-26"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtDotyZodiac}</span>`", "cellName":"ojs-element-id-26"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledIsocYear}-${styledIsocMd}T${styledIsocTime}</span>`", "cellName":"ojs-element-id-27"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedYear}</span>`", "cellName":"ojs-element-id-27"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${decoDotyToty[0]}</span>`", "cellName":"ojs-element-id-28"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedDotyDate}${parsedDotyTimeDelimiter}${styledParsedDotyTime}</span>`", "cellName":"ojs-element-id-28"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${decoDotyToty[1]}</span>`", "cellName":"ojs-element-id-29"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDecoYear}+${styledDecoDotyDate}${decoDotyTimeDelimiter}${styledDecoDotyTime}</span>`", "cellName":"ojs-element-id-29"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledYearDate}</span>`", "cellName":"ojs-element-id-30"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledIsocYear}-${styledIsocMd}T${styledIsocTime}</span>`", "cellName":"ojs-element-id-30"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyDate, d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-31"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${decoDotyToty[0]}</span>`", "cellName":"ojs-element-id-31"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyTime, d3.schemePaired[2])}</span>`", "cellName":"ojs-element-id-32"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${decoDotyToty[1]}</span>`", "cellName":"ojs-element-id-32"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${decoDotyZodiac}</span>`", "cellName":"ojs-element-id-33"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledYearDate}</span>`", "cellName":"ojs-element-id-34"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyDate, d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-35"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyTime, d3.schemePaired[2])}</span>`", "cellName":"ojs-element-id-36"}
 ]}
 </script>
 

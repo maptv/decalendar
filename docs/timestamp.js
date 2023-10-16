@@ -708,3 +708,13 @@ function doty2decom(year = 1969, doty = 306, zone = 0) {
         ) : ""
     }`
 }
+
+
+function doty2zodi(doty = 306) {
+    doty = Math.floor(doty)
+    return (205 <= doty && doty < 295) ? ["Early", "Aries"] :
+        (110 <= doty && doty < 205) ? ["Summer☀️", "Winter❄️"] :
+        (20 <= doty && doty < 110) ? ["Spring🌼", "Fall🍁"] :
+        (0 <= doty && doty < 20) || (295 <= doty && doty <= 365)
+        ? ["Winter❄️", "Summer☀️"] : "Unknown"
+}

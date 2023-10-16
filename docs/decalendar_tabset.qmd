@@ -21,13 +21,13 @@ A `doty` can represent a specific instant in a year, such as the current `doty` 
 
 The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: .\${setStyle(dotyTime, d3.schemePaired\[2\])}.
 
-The `doty` date can tell us the current season. It is now \${season\[0\]} in the Northern Hemisphere and \${season\[1\]} in the Southern Hemisphere. The \${ordinal} third of this season is associated with the \${zodiac} [Zodiac](https://en.wikipedia.org/wiki/Zodiac) sign. The `doty` [intervals](https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals) of the seasons are $\left[20, 110\right)$🌼🍁, $\left[110, 205\right)$☀️❄️, $\left[205, 295\right)$🍁🌼, and $\left[0, 20\right)\cup\left[295, 365\right]$❄️☀️. @sec-subyear discusses seasons and other parts of the year.
+The `doty` date can tell us the current season. It is now \${season\[0\]}in the Northern Hemisphere and \${season\[1\]}in the Southern Hemisphere. The current part of this season (\${zodiac\[0\]} [tertile](https://en.wiktionary.org/wiki/tertile)) is associated with the \${zodiac\[1\]}[Zodiac](https://en.wikipedia.org/wiki/Zodiac) sign. The `doty` [intervals](https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals) of the seasons are $\left[20, 110\right)$🌼🍁, $\left[110, 205\right)$☀️❄️, $\left[205, 295\right)$🍁🌼, and $\left[0, 20\right)\cup\left[295, 365\right]$❄️☀️. @sec-subyear discusses seasons and other parts of the year.
 
 The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number: \${styledDek}, while the last digit is the current day-of-the-`dek` (`dotd`): \${styledDotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. @sec-dek explains how `deks` can replace months and weeks.
 
 The digits of the current `doty` time provide the current `dime`: \${styledDime}, `cent`: \${styledCent}, `mil`: \${styledMil}, `phrase`: \${styledPhrase}, and `beat`: \${styledBeat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, `phrases` are like a musical🎶[phrase](https://en.wikipedia.org/wiki/Phrase_(music)), and `beats` are like a heart❤️beat. @sec-unit provides more information on the various `Decalendar` and `Declock` units.
 
-Now it's your turn! Enter a month and `dotm` below to see 1) the equivalent `doty` date, 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere. Try special dates like birthdays🎂and🥂anniversaries!
+Now it's your turn! Enter a month and `dotm` below to see 1) the associated `doty` date, 2) season in the Northern Hemisphere, 3) season in the Southern Hemisphere, and 4) Zodiac sign. Try special dates like birthdays🎂and🥂anniversaries!
 
 ```{ojs}
 //| echo: false
@@ -42,9 +42,10 @@ viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day"})
 1. \${styledOutputDoty}
 2. \${outputDotySeason\[0\]}
 3. \${outputDotySeason\[1\]}
+4. \${outputDotyZodiac}
 
 
-Similarly, you can also enter a `doty` below to get 1) the corresponding month and `dotm`, 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
+Similarly, you can also enter a `doty` below to get 1) the corresponding month and `dotm`, 2) season in the Northern Hemisphere, 3) season in the Southern Hemisphere, and 4) Zodiac sign. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
 
 ```{ojs}
 //| echo: false
@@ -54,6 +55,7 @@ viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
 1. \${styledMonthAndDay}
 2. \${inputDotySeason\[0\]}
 3. \${inputDotySeason\[1\]}
+4. \${inputDotyZodiac}
 
 
 #### `Doty` Observable code {#sec-ojs-code-doty .appendix}
@@ -133,6 +135,22 @@ function doty2toty(doty = 306) {
         (0 <= doty && doty < 20) || (295 <= doty && doty <= 365)
         ? ["Winter❄️", "Summer☀️"] : "Unknown"
 }
+function doty2zodi(doty = 306) {
+    doty = Math.floor(doty)
+    return (20 <= doty && doty < 50) ? ["first", "Aries♈️"] :
+     (50 <= doty && doty < 81) ? ["middle", "Taurus♉️"] :
+     (81 <= doty && doty < 112) ? ["last", "Gemini♊️"] :
+     (112 <= doty && doty < 144) ? ["first", "Cancer♋️"] :
+     (144 <= doty && doty < 175) ? ["middle", "Leo♌️"] :
+     (175 <= doty && doty < 206) ? ["last", "Virgo♍️"] :
+     (206 <= doty && doty < 236) ? ["first", "Libra♎️"] :
+     (236 <= doty && doty < 266) ? ["middle", "Scorpio♏️"] :
+     (266 <= doty && doty < 296) ? ["last", "Sagittarius♐️"] :
+     (296 <= doty && doty < 325) ? ["first", "Capricorn♑️"] :
+     (325 <= doty && doty < 355) ? ["middle", "Aquarius♒️"] :
+     (355 <= doty && doty <= 365) || (0 <= doty && doty < 20)
+     ? ["last", "Pisces♓️"] : "Unknown"
+}
 ```
 
 ##### Variables {.appendix}
@@ -161,9 +179,12 @@ iso = {
 isoDate = iso.slice(5, 10)
 isoTime = iso.slice(11, 19)
 season = doty2toty(dotyDate)
+zodiac = doty2zodi(dotyDate)
 outputDoty = greg2doty(month, dotm)
 outputDotySeason = doty2toty(outputDoty)
 inputDotySeason = doty2toty(inputDoty)
+outputDotyZodiac = doty2zodi(outputDoty)[1]
+inputDotyZodiac = doty2zodi(inputDoty)[1]
 ```
 
 ```{ojs}
@@ -186,7 +207,7 @@ styledMonthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart
 
 ## Year {#sec-intro-year}
 
-Any `doty` can be combined with a year to form a `Decalendar` `ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute below to see 1) the equivalent `deco` (`year+day.ddddd`), 2) season in the Northern Hemisphere, and 3) season in the Southern Hemisphere.
+Any `doty` can be combined with a year to form a `Decalendar` `ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute below to see 1) the corresponding `deco` (`year+day.clock`), 2) season in the Northern Hemisphere, 3) season in the Southern Hemisphere, and 4) Zodiac sign.
 
 ```{ojs}
 //| echo: false
@@ -196,8 +217,9 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 1. \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}
 2. \${dtDotyToty\[0\]}
 3. \${dtDotyToty\[1\]}
+4. \${dtDotyZodiac}
 
-You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and **converted** into 3) the `year-mm-ddThh:mm:ss` format, 4) Northern Hemisphere season, and 5) Southern Hemisphere season.
+You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into the `year-mm-ddThh:mm:ss` format equivalent, and used to calculate the associated 4) Northern Hemisphere season, 5) Southern Hemisphere season, and 6) Zodiac sign.
 
 ```{ojs}
 //| echo: false
@@ -209,6 +231,7 @@ viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", valu
 3. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
 4. \${decoDotyToty\[0\]}
 5. \${decoDotyToty\[1\]}
+6. \${decoDotyZodiac}
 
 The `deco` parsing code in the [appendix](#appendix) defines the rules for storing dates as `Decalendar` `ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` can be written with negative `doties`, but are always displayed with positive `doties`. `Doties` are zero padded to 3 digits, but years are not.
 
@@ -292,6 +315,8 @@ outputIsoc = deco2isoc(outputDeco)
 yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
 dtDotyToty = doty2toty(dtDotyDateRaw)
 decoDotyToty = doty2toty(decoDotyDate)
+dtDotyZodiac = doty2zodi(dtDotyDateRaw)[1]
+decoDotyZodiac = doty2zodi(decoDotyDate)[1]
 ```
 
 ```{ojs}
@@ -894,9 +919,9 @@ As mentioned in @sec-coor, `Decalendar` uses `doties` as dates instead of month 
 
 ### Time zones {#sec-isoz}
 
-`Isoc` dates can be combined with the [ISO 8601 time (`isot`) format](https://en.wikipedia.org/wiki/ISO_8601#Times) (`hh:mm:ss`) to form `isoc` timestamps. Likewise, `deco` dates can be combined with `Declock` times to form `deco` timestamps. Both `deco` (`year+day.dddddZ`) and `isoc` (`year-mm-ddThh:mm:ssZ`) timestamps can end in a `Z`. This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC+00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
+`Isoc` dates can be combined with the [ISO 8601 time (`isot`) format](https://en.wikipedia.org/wiki/ISO_8601#Times) (`hh:mm:ss`) to form `isoc` timestamps. Likewise, `deco` dates can be combined with `Declock` times to form `deco` timestamps. Both `deco` (`year+day.clockZ`) and `isoc` (`year-mm-ddThh:mm:ssZ`) timestamps can end in a `Z`. This `Z` is a [military time zone code](https://en.wikipedia.org/wiki/Military_time_zone#Description) that represents the [UTC+00:00](https://en.wikipedia.org/wiki/UTC+00:00) time zone, which is the basis of [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
-`Deco` timestamps that are synchronized with UTC can either end in `Z` (`year+day.dddddZ`) or `+0` (`year+day.ddddd+0`). Noon UTC can be written `.5Z` or `.5+0` in `Declock` and 12:00:00Z, 120000Z, 12:00:00+00, or 120000+00 as per ISO 8601. The code in @exm-isoz converts between UTC offsets and military time zone codes. @sec-zone provides more information on `Declock` time zones.
+`Deco` timestamps that are synchronized with UTC can either end in `Z` (`year+day.clockZ`) or `+0` (`year+day.clock+0`). Noon UTC can be written `.5Z` or `.5+0` in `Declock` and 12:00:00Z, 120000Z, 12:00:00+00, or 120000+00 as per ISO 8601. The code in @exm-isoz converts between UTC offsets and military time zone codes. @sec-zone provides more information on `Declock` time zones.
 
 ::: {#exm-isoz}
 :::
@@ -1025,9 +1050,9 @@ $$second = \frac{minute - \lfloor minute \rfloor}{60}$$ {#eq-second}
 
 ### Timestamps {#sec-isos}
 
-`Decalendar` seeks to make months and weeks obsolete. Similarly, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) (`.day`). `Deco` timestamps, which combine `Decalendar` dates and `Declock` times, are more concise and easier to read than ISO 8601 timestamps. An `isoc` timestamp that includes seconds is 20 characters long (`year-mm-ddThh:mm:ssZ`), while a `deco` timestamp with slightly greater precision is only 15 characters long (`year+day.dddddZ`). ISO 8601 timestamps can omit delimiters except for the `T` which separates the date and the time (`yearmmddThhmmssZ`). Without delimiters, `isoc` timestamps become even more difficult to read and still cannot match the brevity of `Decalendar` timestamps.
+`Decalendar` seeks to make months and weeks obsolete. Similarly, `Declock` aims to deprecate hours, minutes, and seconds in favor of [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) (`.day`). `Deco` timestamps, which combine `Decalendar` dates and `Declock` times, are more concise and easier to read than ISO 8601 timestamps. An `isoc` timestamp that includes seconds is 20 characters long (`year-mm-ddThh:mm:ssZ`), while a `deco` timestamp with slightly greater precision is only 15 characters long (`year+day.clockZ`). ISO 8601 timestamps can omit delimiters except for the `T` which separates the date and the time (`yearmmddThhmmssZ`). Without delimiters, `isoc` timestamps become even more difficult to read and still cannot match the brevity of `Decalendar` timestamps.
 
-Coincidentally, an ISO 8601 ordinal (`isoo`) timestamp (`year-dayThh:mm:ssZ`) without delimiters (`yeardayThhmmssZ`) is the same length as a `deco` timestamp (`year+day.dddddZ`). `Deco` timestamps cannot exist without delimiters, because removing the plus sign (`+`) from a `deco` timestamp turns it into a `doty` number (`ddddddd.ddddd`). If we removed the `+` from the `deco` timestamp `1969+306.00000`, we would obtain the `doty` number `1969306.00000` would represent midnight 1969306 days from the beginning of the current year. The rules for `deco` timestamp interpretation are summarized by the code in the `deco2doty` function in @exm-unixp.
+Coincidentally, an ISO 8601 ordinal (`isoo`) timestamp (`year-dayThh:mm:ssZ`) without delimiters (`yeardayThhmmssZ`) is the same length as a `deco` timestamp (`year+day.clockZ`). `Deco` timestamps cannot exist without delimiters, because removing the plus sign (`+`) from a `deco` timestamp turns it into a `doty` number (`ddddddd.clock`). If we removed the `+` from the `deco` timestamp `1969+306.00000`, we would obtain the `doty` number `1969306.00000` would represent midnight 1969306 days from the beginning of the current year. The rules for `deco` timestamp interpretation are summarized by the code in the `deco2doty` function in @exm-unixp.
 
 To create a `deco` timestamp, we can use the `doty2deco` or the `greg2deco` functions as shown in @exm-isos. Similarly, @exm-isos also shows how to create an `isoc` timestamp with the `doty2isoc` and `doty2isoc` functions. All of these timestamp creation functions assume that the provided times are in the UTC+00:00 time zone or `Zone` `0` and need to be adjusted to the provided time zone by adding the appropriate time zone offset to the timestamp. @sec-unixb and @sec-unixp further discuss timestamps and provide functions for building, parsing, and converting timestamps.
 
@@ -1175,7 +1200,7 @@ To calculate `deco` dates directly from UNIX time, we can use a calculation adap
 
 ### UNIX time conversion to `Decalendar` timestamp {#sec-unixt}
 
-To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` ordinal (`deco`) timestamp as shown in @eq-unixt. The code in @exm-unixt converts UNIX time into a `deco` timestamp in the `Zone` `0` time zone by passing the current UNIX timestamp to the `unix2doty` function. If we call this function without arguments (`unix2doty()`) the result will be the year and `doty` of the UNIX Epoch: 1969 and 306. To see @exm-unixt in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current `deco` (`year+day.ddddd`) and `isoc` (`year-mm-ddThh:mm:ss`) timestamps.
+To obtain fractional days, we have to sum up all of the days in previous years and subtract this sum from `days` to obtain the current `Decalendar` ordinal (`deco`) timestamp as shown in @eq-unixt. The code in @exm-unixt converts UNIX time into a `deco` timestamp in the `Zone` `0` time zone by passing the current UNIX timestamp to the `unix2doty` function. If we call this function without arguments (`unix2doty()`) the result will be the year and `doty` of the UNIX Epoch: 1969 and 306. To see @exm-unixt in action, visit this [CodePen](https://codepen.io/maptv/pen/oNJZeea) which displays the current `deco` (`year+day.clock`) and `isoc` (`year-mm-ddThh:mm:ss`) timestamps.
 
 $$time = year \cdot 365 + \sum_{n=1}^{year} \left[ \begin{array}{c}
 y \mod 4 = 0 \\
