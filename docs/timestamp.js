@@ -681,30 +681,35 @@ function doty2toty(doty = 306) {
 }
 console.log(doty2toty(365));
 
-console.log(((306 + 365) % 365));
 
-console.log(((-70 + 365) % 365));
-switch (new Date().getDay()) {
-    case 0:
-      day = "Sunday";
-      break;
-    case 1:
-      day = "Monday";
-      break;
-    case 2:
-       day = "Tuesday";
-      break;
-    case 3:
-      day = "Wednesday";
-      break;
-    case 4:
-      day = "Thursday";
-      break;
-    case 5:
-      day = "Friday";
-      break;
-    case 6:
-      day = "Saturday";
-  }
-  
-console.log(day);
+function doty2dote(year = 1969, doty = 0) {
+    const cycle = Math.floor((year >= 0 ? year : year - 399) / 400),
+    yote = year - cycle * 400;
+    return cycle * 146097 + yote * 365 + Math.floor(yote / 4) - Math.floor(yote / 100) + doty
+}
+function doty2deco(year = 1969, doty = 306, zone = 0) {
+    const yd = dote2doty(doty2dote(year, Math.floor(doty)));
+    return `${yd[0]}+${(yd[1]).toString().padStart(3, "0")}${
+        doty.toString().includes(".") ? "." + (
+            (doty > 0) ? (doty-zone).toString().split(".").pop()
+            : [...(doty-zone).toString().split(".").pop()].map(
+                (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
+            ).join("")
+        ) : ""
+    }`
+}
+
+function doty2dote(year = 1969, doty = 0, zone = 0) {
+    return year * 365 + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + doty - zone;
+}
+function doty2deco(year = 1969, doty = 306, zone = 0) {
+    const yd = dote2doty(doty2dote(year, Math.floor(doty)));
+    return `${yd[0]}+${(yd[1] - (year < 0) + (year === 0 && doty > 0) - (year === 0 && doty !== 0) + (year == 0 && doty === -1)).toString().padStart(3, "0")}${
+        doty.toString().includes(".") ? "." + (
+            (doty > 0) ? (doty-zone).toString().split(".").pop()
+            : [...(doty-zone).toString().split(".").pop()].map(
+                (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
+            ).join("")
+        ) : ""
+    }`
+}
