@@ -12,8 +12,12 @@ format:
   html:
     highlight-style: a11y
     anchor-sections: true
+    section-title-reuse: "License"
+    section-title-footnotes: "Glossary"
     code-block-background: false
     code-block-border-left: false
+    citations-hover: true
+    footnote-hover: true
     code-copy: true
     code-fold: true
     code-link: true
@@ -21,6 +25,6 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     theme:
-      dark: [darkly, dark.scss]
       light: [flatly, light.scss]
+      dark: [darkly, dark.scss]
     output-file: index.html

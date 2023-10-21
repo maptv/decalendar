@@ -576,6 +576,7 @@ console.log(unix2doty(Date.now()))
 console.log(unix2deco(Date.now()))
 console.log(unix2doty(5161600000))
 
+console.log(encodeURIComponent(")"))
 
 console.log(dote2doty(2440587.5 - 719468))
 console.log(dote2doty(-1721120.5))

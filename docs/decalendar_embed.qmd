@@ -13,58 +13,139 @@ citation:
 
 ## Day-of-the-year {#sec-intro-doty}
 
-`Decalendar` is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock` is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a single decimal number called the day-of-the-year (`doty`).
+`Decalendar`[^decalendar] is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock`[^declock] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a number called the day-of-the-year (`doty`)[^doty].
 
-A `doty` can represent a specific instant in a year, such as the current `doty` timestamp (`year+day.clock`): \${styledDotyDate}.\${styledDotyTime}, or a duration, such as the time since this page was loaded: \${styledTickDate}\${tickDelimiter}\${styledTickTime}.
+[^decalendar]: `Decalendar`: a calendar system that uses `deks` instead of months and weeks
+[^declock]: `Declock`: a timekeeping system that uses fractional days instead of hours, minutes, and seconds
+[^doty]: `doty`: day-of-the-year; an alternative to months, weeks, hours, minutes, and seconds
 
-This timestamp and duration both increment every 864 milliseconds or $10^{-5}$ days (1 `centimilliday`), which in `Declock` is called a `beat`. There are 69.4̅ (69⁴/₉ or 625/9) `beats` in a minute, which is within the normal range for a heart❤️[rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or a musical🎵[tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings).
+The current `doty`, \${styledDotyDate}.\${styledDotyTime}, consists of the current `Decalendar` date[^date] (\${setStyle(dotyDate, d3.schemePaired\[1\])}) and the current `Declock` time[^time] (\${setStyle(dotyTime, d3.schemePaired\[2\])}).
 
-`Doty` timestamps and durations are more **precise** and more **concise** than timestamps and durations that include hours, minutes, and seconds. Compare the `doty` timestamp above with the current timestamp in the `mm-ddThh:mm:ss` format: \${styledIsoDate}T\${styledIsoTime}. **The `doty` is like 5 numbers in 1!** *And that's not all!*
+[^date]: `Decalendar` date: the integer part of the `doty`; an alternate to calendar dates and week dates
+[^time]: `Declock` time: the fractional part of the `doty`; an alternate to hours, minutes and seconds
 
-The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the current `Decalendar` date: \${setStyle(dotyDate, d3.schemePaired\[1\])}. The [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) of the `doty` is the current `Declock` time: .\${setStyle(dotyTime, d3.schemePaired\[2\])}.
+The first two digits of the `Decalendar` date are the `dek`[^dek] number (\${setStyle(doty.slice(0, 2), d3.schemePaired\[0\])}), while the last digit is the `dotd`[^dotd] number (\${setStyle(doty\[2\], d3.schemePaired\[1\])}).
 
-The `doty` date can tell us the current season. It is now \${season\[0\]}in the Northern Hemisphere and \${season\[1\]}in the Southern Hemisphere. The current part of this season (\${zodiac\[0\]} [tertile](https://en.wiktionary.org/wiki/tertile)) is associated with the \${zodiac\[1\]}[Zodiac](https://en.wikipedia.org/wiki/Zodiac) sign. The `doty` [intervals](https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals) of the seasons are $\left[20, 110\right)$🌼🍁, $\left[110, 205\right)$☀️❄️, $\left[205, 295\right)$🍁🌼, and $\left[0, 20\right)\cup\left[295, 365\right]$❄️☀️. @sec-subyear discusses seasons and other parts of the year.
+[^dek]: `dek`: a group of 10 days; the first two digits of the `Decalendar` date; an alternate to month and weeks
+[^dotd]: `dotd`: one of the 10 days in a `dek`; the last digit of the `Decalendar` date; an alternate to the day-of-the-month and day-of-the-week
 
-The first two [digits](https://en.wikipedia.org/wiki/Numerical_digit#Computation_of_place_values) of the current `doty` date are the current `dek` number: \${styledDek}, while the last digit is the current day-of-the-`dek` (`dotd`): \${styledDotd}. `Deks` are groups of 10 days that fulfill the role of both months and weeks in `Decalendar`. The `dotd` serves as both the day-of-the-month (`dotm`) and the day-of-the-week (`dotw`) in `Decalendar`. @sec-dek explains how `deks` can replace months and weeks.
+The `dek` and `dotd` numbers in `Decalendar` dates are analogous to the month and day-of-the-month (`dotm`) in [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (`mm-dd`) and the week and day-of-the-week (`dotw`) in [week dates](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (`Www-d`).
 
-The digits of the current `doty` time provide the current `dime`: \${styledDime}, `cent`: \${styledCent}, `mil`: \${styledMil}, `phrase`: \${styledPhrase}, and `beat`: \${styledBeat}. `Dimes` are used for `Declock` time zone offsets, `cents` are 1 percent of the day, `mils` provide the right level of precision for displaying time on clocks🕰️and⌚️watches, while `phrases` and `beats` are inspired by musical🎶[phrases](https://en.wikipedia.org/wiki/Phrase_(music)#:~:text=a%20phrase%20(Greek%3A%20%CF%86%CF%81%CE%AC%CF%83%CE%B7)%20is%20a%20unit%20of%20musical%20meter%20that%20has%20a%20complete%20musical%20sense%20of%20its%20own) and [beats](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time). @sec-unit provides more information on the various `Decalendar` and `Declock` units.
+`Decalendar` dates can be also expressed as fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `Declock` times. The current `Decalendar` fractional year date[^year] is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
 
-Now it's your turn! Enter a month and `dotm` below to see 1) the associated `doty` date, 3) season in the Northern Hemisphere, 4) season in the Southern Hemisphere, and 5) Zodiac sign. Try special dates like birthdays🎂and🥂anniversaries!
+[^year]: fractional year date: the current year and the proportion of the current year that has passed; an alternative to `Decalendar` dates
 
+Now it's your turn! Move one of the sliders🎚️in @exm-doty to change the `doty`, fractional year, month, or `dotm` value and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign.
+
+::: {#exm-doty}
+:::
+
+::: {.grid}
+
+::: {.g-col-6}
 ```{ojs}
 //| echo: false
-viewof month = Inputs.range([1, 12], {step: 1, label: "Month"})
+viewof inputDoty = Inputs.range([0, 365], {value: 306, step: 1, label: "doty"});
 ```
 
 ```{ojs}
 //| echo: false
-viewof dotm = Inputs.range([1, 31], {step: 1, label: "Day"})
+viewof year = transformInput(
+    Inputs.range([0, .999], {step: .001, label: "year"}),
+    {bind: viewof inputDoty, transform: (x => x / 365), invert: (x => x * 365)}
+);
 ```
-
-1. \${styledOutputDoty}
-2. \${outputDotySeason\[0\]}
-3. \${outputDotySeason\[1\]}
-4. \${outputDotyZodiac}
-
-
-Similarly, you can also enter a `doty` below to get 1) the corresponding month and `dotm`, 2) season in the Northern Hemisphere, 3) season in the Southern Hemisphere, and 4) Zodiac sign. Converting back and forth between date formats is a great way to build familiarity with `doty` dates.
 
 ```{ojs}
 //| echo: false
-viewof inputDoty = Inputs.range([0, 365], {step: 1, label: "Doty"})
+viewof monthInput = transformInput(
+    Inputs.range([1, 12], {step: 1, label: "month"}),
+    {bind: viewof inputDoty, transform: doty2month, invert: month2doty}
+);
 ```
 
-1. \${styledMonthAndDay}
-2. \${inputDotySeason\[0\]}
-3. \${inputDotySeason\[1\]}
-4. \${inputDotyZodiac}
 
+```{ojs}
+//| echo: false
+viewof dotmInput = transformInput(
+    Inputs.range([1, 31], {step: 1, label: "dotm"}),
+    {bind: viewof inputDoty, transform: doty2dotm, invert: (x => Math.floor(( 153 * (
+        viewof monthInput.value > 2
+        ? viewof monthInput.value - 3
+        : viewof monthInput.value + 9) + 2
+    ) / 5 + x - 1
+))});
+```
+
+:::
+
+::: {.g-col-6}
+1. \${inputDotySeason\[0\]}
+2. \${inputDotySeason\[1\]}
+3. \${inputDotyZodiac}
+:::
+
+:::
 
 #### `Doty` Observable code {#sec-ojs-code-doty .appendix}
 
 ##### Functions {.appendix}
 
 ```{ojs}
+// https://observablehq.com/@juang1744/transform-input/1
+transformInput = function(target, {bind: source, transform = identity, involutory = false, invert = involutory ? transform : inverse(transform)} = {}){
+  if (source === undefined) {
+    source = target;
+    target = html`<div>${source}</div>`;
+  }
+  function sourceInputHandler() {
+    target.removeEventListener("input", targetInputHandler);
+    set(target).to(transform(source.value)).andDispatchEvent();
+    target.addEventListener("input", targetInputHandler);
+  }
+  function targetInputHandler() {
+    source.removeEventListener("input", sourceInputHandler);
+    set(source).to(invert(target.value)).andDispatchEvent();
+    source.addEventListener("input", sourceInputHandler);
+  }
+  source.addEventListener("input", sourceInputHandler);
+  target.addEventListener("input", targetInputHandler);
+  invalidation.then(() => {
+    source.removeEventListener("input", sourceInputHandler);
+    target.removeEventListener("input", targetInputHandler);
+  });
+
+  sourceInputHandler();
+  return target;
+}
+function inverse(f) {
+  switch (f) {
+    case identity:  return identity;
+    case Math.sqrt: return square;
+    case Math.log:  return Math.exp;
+    case Math.exp:  return Math.log;
+    default:        return (x => solve(f, x, x));
+  }
+  function solve(f, y, x = 0) {
+    const dx = 1e-6;
+    let steps = 100, deltax, fx, dfx;
+    do {
+      fx = f(x)
+      dfx = (f(x + dx) - fx) || dx;
+      deltax = dx * (fx - y)/dfx
+      x -= deltax;
+    } while (Math.abs(deltax) > dx && --steps > 0);
+    return steps === 0 ? NaN : x;
+  }
+
+  function square(x) {
+    return x * x;
+  }
+}
+function identity(x) {
+  return x;
+}
+set = (input) => ({to: (value) => (input.value = value, {andDispatchEvent: (event = new Event("input")) => input.dispatchEvent(event)})});
 // https://observablehq.com/@observablehq/text-color-annotations-in-markdown#textcolor
 function setStyle(content, style = {}) {
   function yiq(color) {
@@ -100,10 +181,10 @@ function unix2doty(ms = 0) {
   return dote2doty(ms / 86400000 + 719468)
 }
 // https://howardhinnant.github.io/date_algorithms.html#days_from_civil
-function doty2dote(year = 1969, doty = 0) {
+function doty2dote(year = 1969, doty = 0, zone = 0) {
     const cycle = Math.floor((year >= 0 ? year : year - 399) / 400),
     yote = year - cycle * 400;
-    return cycle * 146097 + yote * 365 + Math.floor(yote / 4) - Math.floor(yote / 100) + doty
+    return cycle * 146097 + yote * 365 + Math.floor(yote / 4) - Math.floor(yote / 100) + doty - zone
 }
 function doty2deco(year = 1969, doty = 306, zone = 0) {
     const yd = dote2doty(doty2dote(year, Math.floor(doty)));
@@ -139,19 +220,31 @@ function doty2toty(doty = 306) {
 }
 function doty2zodi(doty = 306) {
     doty = Math.floor(doty)
-    return (20 <= doty && doty < 50) ? ["first", "Aries♈️"] :
-     (50 <= doty && doty < 81) ? ["middle", "Taurus♉️"] :
-     (81 <= doty && doty < 112) ? ["last", "Gemini♊️"] :
-     (112 <= doty && doty < 144) ? ["first", "Cancer♋️"] :
-     (144 <= doty && doty < 175) ? ["middle", "Leo♌️"] :
-     (175 <= doty && doty < 206) ? ["last", "Virgo♍️"] :
-     (206 <= doty && doty < 236) ? ["first", "Libra♎️"] :
-     (236 <= doty && doty < 266) ? ["middle", "Scorpio♏️"] :
-     (266 <= doty && doty < 296) ? ["last", "Sagittarius♐️"] :
-     (296 <= doty && doty < 325) ? ["first", "Capricorn♑️"] :
-     (325 <= doty && doty < 355) ? ["middle", "Aquarius♒️"] :
+    return (20 <= doty && doty < 50) ? "Aries♈️" :
+     (50 <= doty && doty < 81) ? "Taurus♉️" :
+     (81 <= doty && doty < 112) ? "Gemini♊️" :
+     (112 <= doty && doty < 144) ? "Cancer♋️" :
+     (144 <= doty && doty < 175) ? "Leo♌️" :
+     (175 <= doty && doty < 206) ? "Virgo♍️" :
+     (206 <= doty && doty < 236) ? "Libra♎️" :
+     (236 <= doty && doty < 266) ? "Scorpio♏️" :
+     (266 <= doty && doty < 296) ? "Sagittarius♐️" :
+     (296 <= doty && doty < 325) ? "Capricorn♑️" :
+     (325 <= doty && doty < 355) ? "Aquarius♒️" :
      (355 <= doty && doty <= 365) || (0 <= doty && doty < 20)
-     ? ["last", "Pisces♓️"] : "Unknown"
+     ? "Pisces♓️" : "Unknown"
+}
+function doty2month(doty = 0) {
+    const m = Math.floor((5 * doty + 2) / 153);
+    return Math.floor(m < 10 ? m + 3 : m - 9);
+}
+function month2doty(month = 1) {
+    return Math.floor(
+        (153 * (month > 2 ? month - 3 : month + 9) + 2) / 5
+)}
+function doty2dotm(doty = 0) {
+    const m = Math.floor((5 * doty + 2) / 153);
+    return doty - Math.floor((153 * m + 2) / 5) + 1;
 }
 ```
 
@@ -186,11 +279,8 @@ isoDate = iso.slice(5, 10)
 isoTime = iso.slice(11, 19)
 season = doty2toty(dotyDate)
 zodiac = doty2zodi(dotyDate)
-outputDoty = greg2doty(month, dotm)
-outputDotySeason = doty2toty(outputDoty)
 inputDotySeason = doty2toty(inputDoty)
-outputDotyZodiac = doty2zodi(outputDoty)[1]
-inputDotyZodiac = doty2zodi(inputDoty)[1]
+inputDotyZodiac = doty2zodi(inputDoty)
 ```
 
 ```{ojs}
@@ -200,52 +290,63 @@ styledTickDate = (tickDate > 0) ? setStyle(tickDate, d3.schemePaired[1]) : ""
 styledTickTime = setStyle(tickTime, d3.schemePaired[2])
 styledIsoDate = setStyle(isoDate, d3.schemePaired[5])
 styledIsoTime = setStyle(isoTime, d3.schemePaired[4])
-styledDek = setStyle(doty.slice(0, 2), d3.schemePaired[1])
-styledDotd = setStyle(doty[2], d3.schemePaired[0])
+styledDek = setStyle(doty.slice(0, 2), d3.schemePaired[0])
+styledDotd = setStyle(doty[2], d3.schemePaired[1])
 styledDime = setStyle(dotyTime[0], d3.schemePaired[9])
 styledCent = setStyle(dotyTime[1], d3.schemePaired[8])
 styledMil = setStyle(dotyTime[2], d3.schemeAccent[5])
-styledPhrase = setStyle(dotyTime[3], d3.schemePaired[6])
+styledPhrase = setStyle(dotyTime[3], d3.schemePaired[2])
 styledBeat = setStyle(dotyTime[4], d3.schemePaired[11])
-styledOutputDoty = setStyle(outputDoty.toString().padStart(3, "0"), d3.schemePaired[1])
 styledMonthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart(2, "0")).join("-"), d3.schemePaired[5]);
 ```
 
 ## Year {#sec-intro-year}
 
-Any `doty` can be combined with a year to form a `Decalendar` `ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute below to see 1) the corresponding `deco` (`year+day.clock`), 2) season in the Northern Hemisphere, 3) season in the Southern Hemisphere, and 4) Zodiac sign.
+Any `doty` can be combined with a year to form a `Decalendar` `ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute in @exm-dt to see 1) the corresponding `deco` (`year+day.clock`), and 2) fractional year date.
 
+::: {#exm-dt}
+:::
+
+::: {.grid}
+
+::: {.g-col-6}
 ```{ojs}
 //| echo: false
 viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00:00"})
 ```
+:::
 
+::: {.g-col-6}
 1. \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}
-2. \${dtDotyToty\[0\]}
-3. \${dtDotyToty\[1\]}
-4. \${dtDotyZodiac}
+2. \${styledOutputDatetimeYear}
+:::
 
-You can also enter a `deco` to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into the `year-mm-ddThh:mm:ss` format equivalent, and used to calculate the associated 4) Northern Hemisphere season, 5) Southern Hemisphere season, and 6) Zodiac sign.
+:::
 
+Once you feel comfortable with the `deco` format, you can type a `deco` in @exm-doty to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into a) the `year-mm-ddThh:mm:ss` format and b) the year date format (`year.yyy`).
+
+::: {#exm-deco}
+:::
+
+::: {.grid}
+
+::: {.g-col-6}
 ```{ojs}
 //| echo: false
 viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 16})
 ```
+:::
 
+::: {.g-col-6}
 1. \${styledParsedYear}, \${styledParsedDotyDate}\${parsedDotyTimeDelimiter}\${styledParsedDotyTime}
 2. \${styledDecoYear}+\${styledDecoDotyDate}\${decoDotyTimeDelimiter}\${styledDecoDotyTime}
-3. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
-4. \${decoDotyToty\[0\]}
-5. \${decoDotyToty\[1\]}
-6. \${decoDotyZodiac}
+3.
+  a. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
+  b. \${styledOutputDecoYear}
+:::
 
-The `deco` parsing code in the [appendix](#appendix) defines the rules for storing dates as `Decalendar` `ordinals` (`decos`). Notably, a `deco` consisting of a single number without a plus (+) or minus sign (-) is interpreted as a `doty` and will be appended to the current year. `Decos` can be written with negative `doties`, but are always displayed with positive `doties`. `Doties` are zero padded to 3 digits, but years are not.
+:::
 
-Both the year and the `doty` in a `deco` can be fractional. Just like [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) can take the place of a month, `dotm`, hour, minutes, and second, fractional years can replace year, month, and `dotm` dates. In other words, fractional years can be a convenient way to express a date in a single number. The current `Decalendar` year date is \${styledYearDate}.
-
-While they are not very useful in `decos`, Multiples of a fifth (⅕, .2) of a year are of interest because they result in `doties` that are multiples of 73.
-
-in the `Decalendar` fractional year format (`year.yyy`) allows us to avoid parsing `Decalendar` `ordinals` (`decos`). Year dates cannot include times and are only used when it is convenient to store a `deco` as a single number. Enter a `deco` or `year-mm-dd` date to see a custom year date. Enter a year date to turn it into a `deco` and `year-mm-dd` date.
 
 #### `Deco` Observable code {#sec-ojs-code-deco .appendix}
 
@@ -295,6 +396,9 @@ function dote2year(days = 719468) {
         yotc = (dotc - Math.floor(dotc / 1460) + Math.floor(dotc / 36524) - Math.floor(dotc / 146096)) / 365;
     return yotc + era * 400;
 }
+function doty2year(year = 1969, doty = 306, zone = 0) {
+    return dote2year(doty2dote(year, doty, zone));
+}
 function unix2year(ms = 0) {
     return dote2year(unix2dote(ms));
 };
@@ -305,11 +409,14 @@ function unix2year(ms = 0) {
 ```{ojs}
 //| output: all
 tzOffsetInMs = inputDatetime.getTimezoneOffset() * 60000
-outputDatetime = unix2deco(inputDatetime - tzOffsetInMs)
-dtDotyDateRaw = outputDatetime.slice(5, 8)
-dtDotyTimeRaw = outputDatetime.slice(9, 14)
+utcDatetime = inputDatetime - tzOffsetInMs
+outputDatetimeDeco = unix2deco(utcDatetime)
+dtDotyDateRaw = outputDatetimeDeco.slice(5, 8)
+dtDotyTimeRaw = outputDatetimeDeco.slice(9, 14)
+outputDatetimeYear = unix2year(utcDatetime).toString().slice(0, 8)
 dtDotyTimeDelimiter = dtDotyTime ? "." : ""
 ydParsed = deco2doty(inputDeco)
+outputDecoYear = doty2year(...ydParsed).toString().slice(0, 8)
 parsedDotyTime = ydParsed[1].toString().split(".")[1]
 parsedDotyTimeDelimiter = parsedDotyTime ? ", " : ""
 outputDeco = doty2deco(...ydParsed)
@@ -319,15 +426,11 @@ decoDotyTime = decoDoty.split(".")[1]
 decoDotyTimeDelimiter = decoDotyTime ? "." : ""
 outputIsoc = deco2isoc(outputDeco)
 yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
-dtDotyToty = doty2toty(dtDotyDateRaw)
-decoDotyToty = doty2toty(decoDotyDate)
-dtDotyZodiac = doty2zodi(dtDotyDateRaw)[1]
-decoDotyZodiac = doty2zodi(decoDotyDate)[1]
 ```
 
 ```{ojs}
 decoYear = setStyle(outputDeco[0], d3.schemePaired[10])
-dtYear = setStyle(outputDatetime.slice(0, 4), d3.schemePaired[10])
+dtYear = setStyle(outputDatetimeDeco.slice(0, 4), d3.schemePaired[10])
 dtDotyDate = setStyle(dtDotyDateRaw, d3.schemePaired[1])
 dtDotyTime = dtDotyTimeRaw ? setStyle(dtDotyTimeRaw, d3.schemePaired[2]) : ""
 styledParsedYear = setStyle(ydParsed[0], d3.schemePaired[10])
@@ -340,6 +443,8 @@ styledIsocYear = setStyle(outputIsoc.split(/(?=-)/)[0], d3.schemePaired[10])
 styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[5])
 styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+7), d3.schemePaired[4])
 styledYearDate = setStyle(yearDate, d3.schemePaired[10])
+styledOutputDatetimeYear = setStyle(outputDatetimeYear, d3.schemePaired[10])
+styledOutputDecoYear = setStyle(outputDecoYear, d3.schemePaired[10])
 ```
 
 ## Time Zone {#sec-intro-zone}
