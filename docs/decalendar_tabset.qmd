@@ -33,7 +33,7 @@ The `dek` and `dotd` numbers in `Decalendar` dates are analogous to the month an
 
 `Decalendar` dates can be also expressed as fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `Declock` times. The current `Decalendar` fractional year date[^year] is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
 
-[^year]: fractional year date: the current year and the proportion of the current year that has passed; an alternative to `Decalendar` dates
+[^year]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
 
 Now it's your turn! Move the sliders🎚️in @exm-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign. Try entering a special date like your birthday🎂!
 
@@ -325,7 +325,7 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 
 :::
 
-Once you feel comfortable with the `deco` format, you can type a `deco` in @exm-doty to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into a) the `year-mm-ddThh:mm:ss` format and b) the year date format (`year.yyy`).
+Once you feel comfortable with the `deco` format, you can type a `deco` in @exm-deco to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into a) the `year-mm-ddThh:mm:ss` format and b) the year date format (`year.yyy`).
 
 ::: {#exm-deco}
 :::
@@ -456,23 +456,12 @@ As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `De
 [^pent]: `pent`: a group of 5 days; half of a `dek`
 [^sched]: `pently` schedule: one of a set of workday and restday schedules for the 5 days of the `pent`
 
-Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule` `3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-pently provides more information on `Schedule` `3` and the other `pently` schedules.
+Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule` `3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-sched provides more information on `Schedule` `3` and the other `pently` schedules.
 
 ::: {#exm-intro-dek}
 :::
 
 {{< embed schedules.ipynb#fig-schedules echo=true >}}
-
-#### @tbl-2x2
-
-::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
-|      | date     | stamp          |
-|------|----------|----------------|
-| doty | 306      | 306.000+0      |
-| deco | 1969+306 | 1969+306.000+0 |
-
-: Comparison of `doty` and `deco` dates and `stamps` {#tbl-2x2}
-:::
 
 # Basic concepts {#sec-basics}
 
@@ -511,6 +500,17 @@ In certain contexts, the choice of using a negative number over a positive numbe
 The negative equivalent of `1969+306`, the `deco` date in @tbl-2x2, is `1970-059`. This negative `deco` date literally subtracts 59 days from the beginning of year 1970 to arrive at `Day` `306` of 1969. The year in negative `deco` dates is always 1 greater than the year in the equivalent positive `deco` date. Both `1969+306` and `1970-059` translate to January 1, 1970 in the Gregorian calendar. `Decalendar` years are shifted by two months in relation to the Gregorian calendar years because `Decalendar` years start on March 1.
 
 This shift causes the Gregorian calendar year to be 1 greater than the year in the positive `deco` dates during January and February and 1 less than the year in negative `deco` dates during every other month. For example, the `Deco` dates `1969+000` and `1970-365` are March 1, 1969 in the Gregorian calendar. Immediately after midnight on this date, the negative `doty` will change from -365 to -364, while the positive `doty` will remain at 0 At noon, the positive `deco` date will be `1969+306.500` and the negative `deco` date will be `1970-058.500`.
+
+#### @tbl-2x2
+
+::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
+|      | date     | timestamp      |
+|------|----------|----------------|
+| doty | 306      | 306.000+0      |
+| deco | 1969+306 | 1969+306.000+0 |
+
+: Comparison of `doty` and `deco` dates and timestamps {#tbl-2x2}
+:::
 
 ## Units {#sec-unit}
 

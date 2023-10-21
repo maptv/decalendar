@@ -334,7 +334,7 @@ div.csl-indent {
 </ol>
 </div>
 </div>
-<p>Once you feel comfortable with the <code>deco</code> format, you can type a <code>deco</code> in <a href="#exm-doty">Example&nbsp;1</a> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers below 366 <span class="math inline">\(\left[0, 366\right)\)</span>, and 3) <strong>converted</strong> into a) the <code>year-mm-ddThh:mm:ss</code> format and b) the year date format (<code>year.yyy</code>).</p>
+<p>Once you feel comfortable with the <code>deco</code> format, you can type a <code>deco</code> in <a href="#exm-deco">Example&nbsp;3</a> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers below 366 <span class="math inline">\(\left[0, 366\right)\)</span>, and 3) <strong>converted</strong> into a) the <code>year-mm-ddThh:mm:ss</code> format and b) the year date format (<code>year.yyy</code>).</p>
 <div id="exm-deco" class="theorem example">
 <p><span class="theorem-title"><strong>Example 3 </strong></span>&nbsp;</p>
 </div>
@@ -365,7 +365,7 @@ div.csl-indent {
 </section><section id="sec-intro-dek" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="sec-intro-dek">
 <span class="header-section-number">1.3</span> Dek</h2>
 <p>As mentioned in <a href="#sec-intro-doty">Section&nbsp;1.1</a>, <code>deks</code> function as both months and weeks in <code>Decalendar</code>. A <code>dek</code> consists of 2 groups of 5 days called <code>pents</code><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>. Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>. The code in <a href="#exm-intro-dek">Example&nbsp;4</a> generates <a href="#fig-schedules">Figure&nbsp;1</a> which compares the typical weekly schedule and the <code>Schedule</code> <code>3</code> <code>pently</code> schedule. Like other <code>pently</code> schedules, <code>Schedule</code> <code>3</code> is named after the number of workdays it contains. The 3 workdays in <code>Schedule</code> <code>3</code> are followed by a 2-day <code>pentend</code>, the <code>Decalender</code> equivalent of a weekend.</p>
-<p>Unlike <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. Each <code>Schedule</code> <code>3</code> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). <a href="#sec-pently">Section&nbsp;5.4.3.1</a> provides more information on <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules.</p>
+<p>Unlike <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. Each <code>Schedule</code> <code>3</code> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). <a href="#sec-sched">Section&nbsp;5.4.3</a> provides more information on <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules.</p>
 <div id="exm-intro-dek" class="theorem example">
 <p><span class="theorem-title"><strong>Example 4 </strong></span>&nbsp;</p>
 </div>
@@ -434,7 +434,7 @@ div.csl-indent {
 <span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">1</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
 <span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
 <span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"white"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-21T03:00:50.168867Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-21T03:00:50.168741Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-21T03:00:50.485572Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-21T03:00:50.485297Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
+</details><div id="fig-schedules" class="cell quarto-layout-panel" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-21T03:12:51.174400Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-21T03:12:51.174269Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-21T03:12:51.526114Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-21T03:12:51.525836Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-schedules-1" class="quarto-figure quarto-figure-center anchored">
@@ -454,46 +454,7 @@ div.csl-indent {
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-1" href="schedules.ipynb.html">Source: schedules.ipynb</a></div>
-<section id="tbl-2x2" class="level4"><h4 class="anchored" data-anchor-id="tbl-2x2"><a href="#tbl-2x2">Table&nbsp;1</a></h4>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Click to toggle table expansion">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click to toggle table expansion
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div id="tbl-2x2" class="anchored">
-<table class="table">
-<caption>Table&nbsp;1: Comparison of <code>doty</code> and <code>deco</code> dates and <code>stamps</code>
-</caption>
-<thead><tr class="header">
-<th></th>
-<th>date</th>
-<th>stamp</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>doty</td>
-<td>306</td>
-<td>306.000+0</td>
-</tr>
-<tr class="even">
-<td>deco</td>
-<td>1969+306</td>
-<td>1969+306.000+0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</section></section></section><section id="sec-basics" class="level1" data-number="2"><h1 data-number="2">
+</section></section><section id="sec-basics" class="level1" data-number="2"><h1 data-number="2">
 <span class="header-section-number">2</span> Basic concepts</h1>
 <section id="sec-frac" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="sec-frac">
 <span class="header-section-number">2.1</span> Fractions analogy</h2>
@@ -520,7 +481,45 @@ Click to toggle table expansion
 <p>In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though <code>Dot</code> <code>-1</code> and <code>Dot</code> <code>9</code> are synonymous <code>Declock</code> times, the former could highlight that there is only 1 tenth (⅒ or .1) of the day remaining before midnight. <code>Dot</code> <code>5</code> and <code>Dot</code> <code>-5</code> both mean noon, like saying that a glass is half-empty or half-full.</p>
 <p>The negative equivalent of <code>1969+306</code>, the <code>deco</code> date in <a href="#tbl-2x2">Table&nbsp;1</a>, is <code>1970-059</code>. This negative <code>deco</code> date literally subtracts 59 days from the beginning of year 1970 to arrive at <code>Day</code> <code>306</code> of 1969. The year in negative <code>deco</code> dates is always 1 greater than the year in the equivalent positive <code>deco</code> date. Both <code>1969+306</code> and <code>1970-059</code> translate to January 1, 1970 in the Gregorian calendar. <code>Decalendar</code> years are shifted by two months in relation to the Gregorian calendar years because <code>Decalendar</code> years start on March 1.</p>
 <p>This shift causes the Gregorian calendar year to be 1 greater than the year in the positive <code>deco</code> dates during January and February and 1 less than the year in negative <code>deco</code> dates during every other month. For example, the <code>Deco</code> dates <code>1969+000</code> and <code>1970-365</code> are March 1, 1969 in the Gregorian calendar. Immediately after midnight on this date, the negative <code>doty</code> will change from -365 to -364, while the positive <code>doty</code> will remain at 0 At noon, the positive <code>deco</code> date will be <code>1969+306.500</code> and the negative <code>deco</code> date will be <code>1970-058.500</code>.</p>
-</section><section id="sec-unit" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="sec-unit">
+<section id="tbl-2x2" class="level4"><h4 class="anchored" data-anchor-id="tbl-2x2"><a href="#tbl-2x2">Table&nbsp;1</a></h4>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Click to toggle table expansion">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click to toggle table expansion
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="tbl-2x2" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1: Comparison of <code>doty</code> and <code>deco</code> dates and timestamps</caption>
+<thead><tr class="header">
+<th></th>
+<th>date</th>
+<th>timestamp</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>doty</td>
+<td>306</td>
+<td>306.000+0</td>
+</tr>
+<tr class="even">
+<td>deco</td>
+<td>1969+306</td>
+<td>1969+306.000+0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="sec-unit" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="sec-unit">
 <span class="header-section-number">2.7</span> Units</h2>
 <p><code>Declock</code> times often have three digits because this is the best level of precision for displaying time on clocks and watches. While 3 digits are often best, <code>Declock</code> times can have any number of digits, depending on the desired precision level. <code>Declock</code> provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both <code>Declock</code> and <code>Decalendar</code>. Listing the units of each, as in <a href="#tbl-unit">Table&nbsp;2</a>, highlights the relationship between the two:</p>
 <section id="tbl-unit" class="level4"><h4 class="anchored" data-anchor-id="tbl-unit"><a href="#tbl-unit">Table&nbsp;2</a></h4>
@@ -3497,7 +3496,7 @@ Click to toggle table expansion
 <span id="cb131-9"><a href="#cb131-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb131-10"><a href="#cb131-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+234.12580+0"</code></pre>
+<pre><code>"2023+234.13416+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-72" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3518,7 +3517,7 @@ Click to toggle table expansion
 <span id="cb133-9"><a href="#cb133-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> doty2dote(time())</span>
 <span id="cb133-10"><a href="#cb133-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+234.12592+0'</code></pre>
+<pre><code>'2023+234.13427+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-73" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -3542,7 +3541,7 @@ Click to toggle table expansion
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+234.12603+0'
+'2023+234.13438+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-74" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3597,7 +3596,7 @@ y \mod 4 = 0 \\
 <span id="cb136-12"><a href="#cb136-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span></span>
 <span id="cb136-13"><a href="#cb136-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>2023+234.12565+0</code></pre>
+<pre><code>2023+234.13400+0</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-75" href="decalendar_javascript.ipynb.html">Source: decalendar_javascript.ipynb</a></div>
@@ -3619,7 +3618,7 @@ y \mod 4 = 0 \\
 <span id="cb138-9"><a href="#cb138-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb138-10"><a href="#cb138-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+234.12580+0"</code></pre>
+<pre><code>"2023+234.13416+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-76" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3640,7 +3639,7 @@ y \mod 4 = 0 \\
 <span id="cb140-9"><a href="#cb140-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> unix2doty(time())</span>
 <span id="cb140-10"><a href="#cb140-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+234.12592+0'</code></pre>
+<pre><code>'2023+234.13427+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-77" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -3664,7 +3663,7 @@ y \mod 4 = 0 \\
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+234.12603+0'
+'2023+234.13438+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-78" href="decalendar_r.ipynb.html">Source: decalendar_r.ipynb</a></div>
@@ -3753,7 +3752,7 @@ y \mod 4 = 0 \\
 <span id="cb148-6"><a href="#cb148-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb148-7"><a href="#cb148-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+234.12580+0"</code></pre>
+<pre><code>"2023+234.13416+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-80" href="decalendar_julia.ipynb.html">Source: decalendar_julia.ipynb</a></div>
@@ -3771,7 +3770,7 @@ y \mod 4 = 0 \\
 <span id="cb150-6"><a href="#cb150-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb150-7"><a href="#cb150-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+234.12592+0'</code></pre>
+<pre><code>'2023+234.13427+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-81" href="decalendar_python.ipynb.html">Source: decalendar_python.ipynb</a></div>
@@ -6118,7 +6117,7 @@ Hinnant, Howard. 2014. <span>“Chrono-Compatible Low-Level Date Algorithms.”<
 <li id="fn5"><p><code>Declock</code> time: the fractional part of the <code>doty</code>; an alternate to hours, minutes and seconds<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p><code>dek</code>: a group of 10 days; the first two digits of the <code>Decalendar</code> date; an alternate to month and weeks<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p><code>dotd</code>: one of the 10 days in a <code>dek</code>; the last digit of the <code>Decalendar</code> date; an alternate to the day-of-the-month and day-of-the-week<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>fractional year date: the current year and the proportion of the current year that has passed; an alternative to <code>Decalendar</code> dates<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>fractional year date: a year and the proportion of that year that has passed; an alternative to <code>Decalendar</code> dates<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn9"><p><code>deco</code>: a date and time format consisting of a year and a <code>doty</code> and analogous to ISO 8601 dates<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p><code>pent</code>: a group of 5 days; half of a <code>dek</code><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p><code>pently</code> schedule: one of a set of workday and restday schedules for the 5 days of the <code>pent</code><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -6590,7 +6589,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb155-33"><a href="#cb155-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb155-34"><a href="#cb155-34" aria-hidden="true" tabindex="-1"></a><span class="in">`Decalendar`</span> dates can be also expressed as fractional years, which are similar to the <span class="co">[</span><span class="ot">fractional days</span><span class="co">](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days)</span> used in <span class="in">`Declock`</span> times. The current <span class="in">`Decalendar`</span> fractional year date<span class="ot">[^year]</span> is \${setStyle(yearDate.toString().slice(4), d3.schemePaired<span class="sc">\[</span>10<span class="sc">\]</span>)}.</span>
 <span id="cb155-35"><a href="#cb155-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-36"><a href="#cb155-36" aria-hidden="true" tabindex="-1"></a><span class="ot">[^year]: </span>fractional year date: the current year and the proportion of the current year that has passed; an alternative to <span class="in">`Decalendar`</span> dates</span>
+<span id="cb155-36"><a href="#cb155-36" aria-hidden="true" tabindex="-1"></a><span class="ot">[^year]: </span>fractional year date: a year and the proportion of that year that has passed; an alternative to <span class="in">`Decalendar`</span> dates</span>
 <span id="cb155-37"><a href="#cb155-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb155-38"><a href="#cb155-38" aria-hidden="true" tabindex="-1"></a>Now it's your turn! Move the sliders🎚️in @exm-doty to adjust the <span class="in">`doty`</span>, fractional year, month, and <span class="in">`dotm`</span> values and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign. Try entering a special date like your birthday🎂!</span>
 <span id="cb155-39"><a href="#cb155-39" aria-hidden="true" tabindex="-1"></a></span>
@@ -6882,7 +6881,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb155-341"><a href="#cb155-341" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb155-342"><a href="#cb155-342" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb155-343"><a href="#cb155-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-344"><a href="#cb155-344" aria-hidden="true" tabindex="-1"></a>Once you feel comfortable with the <span class="in">`deco`</span> format, you can type a <span class="in">`deco`</span> in @exm-doty to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into a) the <span class="in">`year-mm-ddThh:mm:ss`</span> format and b) the year date format (<span class="in">`year.yyy`</span>).</span>
+<span id="cb155-344"><a href="#cb155-344" aria-hidden="true" tabindex="-1"></a>Once you feel comfortable with the <span class="in">`deco`</span> format, you can type a <span class="in">`deco`</span> in @exm-deco to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into a) the <span class="in">`year-mm-ddThh:mm:ss`</span> format and b) the year date format (<span class="in">`year.yyy`</span>).</span>
 <span id="cb155-345"><a href="#cb155-345" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb155-346"><a href="#cb155-346" aria-hidden="true" tabindex="-1"></a>::: {#exm-deco}</span>
 <span id="cb155-347"><a href="#cb155-347" aria-hidden="true" tabindex="-1"></a>:::</span>
@@ -7013,61 +7012,61 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb155-480"><a href="#cb155-480" aria-hidden="true" tabindex="-1"></a><span class="ot">[^pent]: </span><span class="in">`pent`</span>: a group of 5 days; half of a <span class="in">`dek`</span></span>
 <span id="cb155-481"><a href="#cb155-481" aria-hidden="true" tabindex="-1"></a><span class="ot">[^sched]: </span><span class="in">`pently`</span> schedule: one of a set of workday and restday schedules for the 5 days of the <span class="in">`pent`</span></span>
 <span id="cb155-482"><a href="#cb155-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-483"><a href="#cb155-483" aria-hidden="true" tabindex="-1"></a>Unlike <span class="in">`Schedule`</span> <span class="in">`3`</span> and the other <span class="in">`pently`</span> schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in <span class="in">`pently`</span> schedules are never <span class="co">[</span><span class="ot">repeating decimal</span><span class="co">](https://en.wikipedia.org/wiki/Repeating_decimal)</span> numbers. Each <span class="in">`Schedule`</span> <span class="in">`3`</span> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-pently provides more information on <span class="in">`Schedule`</span> <span class="in">`3`</span> and the other <span class="in">`pently`</span> schedules.</span>
+<span id="cb155-483"><a href="#cb155-483" aria-hidden="true" tabindex="-1"></a>Unlike <span class="in">`Schedule`</span> <span class="in">`3`</span> and the other <span class="in">`pently`</span> schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in <span class="in">`pently`</span> schedules are never <span class="co">[</span><span class="ot">repeating decimal</span><span class="co">](https://en.wikipedia.org/wiki/Repeating_decimal)</span> numbers. Each <span class="in">`Schedule`</span> <span class="in">`3`</span> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-sched provides more information on <span class="in">`Schedule`</span> <span class="in">`3`</span> and the other <span class="in">`pently`</span> schedules.</span>
 <span id="cb155-484"><a href="#cb155-484" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb155-485"><a href="#cb155-485" aria-hidden="true" tabindex="-1"></a>::: {#exm-intro-dek}</span>
 <span id="cb155-486"><a href="#cb155-486" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb155-487"><a href="#cb155-487" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb155-488"><a href="#cb155-488" aria-hidden="true" tabindex="-1"></a>{{&lt; embed schedules.ipynb#fig-schedules echo=true &gt;}}</span>
 <span id="cb155-489"><a href="#cb155-489" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-490"><a href="#cb155-490" aria-hidden="true" tabindex="-1"></a><span class="fu">#### @tbl-2x2</span></span>
+<span id="cb155-490"><a href="#cb155-490" aria-hidden="true" tabindex="-1"></a><span class="fu"># Basic concepts {#sec-basics}</span></span>
 <span id="cb155-491"><a href="#cb155-491" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-492"><a href="#cb155-492" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}</span>
-<span id="cb155-493"><a href="#cb155-493" aria-hidden="true" tabindex="-1"></a>|      | date     | stamp          |</span>
-<span id="cb155-494"><a href="#cb155-494" aria-hidden="true" tabindex="-1"></a>|------|----------|----------------|</span>
-<span id="cb155-495"><a href="#cb155-495" aria-hidden="true" tabindex="-1"></a>| doty | 306      | 306.000+0      |</span>
-<span id="cb155-496"><a href="#cb155-496" aria-hidden="true" tabindex="-1"></a>| deco | 1969+306 | 1969+306.000+0 |</span>
+<span id="cb155-492"><a href="#cb155-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fractions analogy {#sec-frac}</span></span>
+<span id="cb155-493"><a href="#cb155-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-494"><a href="#cb155-494" aria-hidden="true" tabindex="-1"></a>In the simplest terms, <span class="in">`Decalendar`</span> counts fractions of a year, while <span class="in">`Declock`</span> counts fractions of a day. The denominator for <span class="in">`Decalendar`</span> is the number of days in the year, and the <span class="in">`Declock`</span> denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of<span class="in">`Decalendar`</span>, the numerator is the days that have passed in the year, while in the context of<span class="in">`Declock`</span>, the numerator is the parts of the day that have passed in the day.</span>
+<span id="cb155-495"><a href="#cb155-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-496"><a href="#cb155-496" aria-hidden="true" tabindex="-1"></a>To avoid any confusion between the two, we can say "Day 5" to mean the date when 5 days have passed this year or <span class="in">`Day`</span> <span class="in">`0`</span> to mean the first day-of-the-year (<span class="in">`doty`</span>). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is <span class="in">`Dot`</span>. The word <span class="in">`Dot`</span> conveys that at its core <span class="in">`Declock`</span> is a system built on <span class="co">[</span><span class="ot">fractional days</span><span class="co">](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days)</span> expressed as decimal numbers. The 5 in <span class="in">`Dot`</span> <span class="in">`5`</span> can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.</span>
 <span id="cb155-497"><a href="#cb155-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-498"><a href="#cb155-498" aria-hidden="true" tabindex="-1"></a>: Comparison of <span class="in">`doty`</span> and <span class="in">`deco`</span> dates and <span class="in">`stamps`</span> {#tbl-2x2}</span>
-<span id="cb155-499"><a href="#cb155-499" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb155-500"><a href="#cb155-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-501"><a href="#cb155-501" aria-hidden="true" tabindex="-1"></a><span class="fu"># Basic concepts {#sec-basics}</span></span>
-<span id="cb155-502"><a href="#cb155-502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-503"><a href="#cb155-503" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fractions analogy {#sec-frac}</span></span>
-<span id="cb155-504"><a href="#cb155-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-505"><a href="#cb155-505" aria-hidden="true" tabindex="-1"></a>In the simplest terms, <span class="in">`Decalendar`</span> counts fractions of a year, while <span class="in">`Declock`</span> counts fractions of a day. The denominator for <span class="in">`Decalendar`</span> is the number of days in the year, and the <span class="in">`Declock`</span> denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of<span class="in">`Decalendar`</span>, the numerator is the days that have passed in the year, while in the context of<span class="in">`Declock`</span>, the numerator is the parts of the day that have passed in the day.</span>
-<span id="cb155-506"><a href="#cb155-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-507"><a href="#cb155-507" aria-hidden="true" tabindex="-1"></a>To avoid any confusion between the two, we can say "Day 5" to mean the date when 5 days have passed this year or <span class="in">`Day`</span> <span class="in">`0`</span> to mean the first day-of-the-year (<span class="in">`doty`</span>). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is <span class="in">`Dot`</span>. The word <span class="in">`Dot`</span> conveys that at its core <span class="in">`Declock`</span> is a system built on <span class="co">[</span><span class="ot">fractional days</span><span class="co">](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days)</span> expressed as decimal numbers. The 5 in <span class="in">`Dot`</span> <span class="in">`5`</span> can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.</span>
-<span id="cb155-508"><a href="#cb155-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-509"><a href="#cb155-509" aria-hidden="true" tabindex="-1"></a><span class="fu">## Implied tolerance and duration {#sec-imp}</span></span>
-<span id="cb155-510"><a href="#cb155-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-511"><a href="#cb155-511" aria-hidden="true" tabindex="-1"></a>The analogy to decimals or fractions is important, because it explains why adding a zero at the end of a time does not change the time, only the implied tolerance of time points or the implied duration of time intervals. If <span class="in">`Dot`</span> <span class="in">`5`</span> is a time point, it has an implied tolerance of 5% of the day ($.5±.05$), because any time after <span class="in">`Dot`</span> <span class="in">`45`</span> and before <span class="in">`Dot`</span> <span class="in">`55`</span> ($[.45, .55)$) would round to <span class="in">`Dot`</span> <span class="in">`5`</span>. On the other hand, if <span class="in">`Dot`</span> <span class="in">`5`</span> is the start time for a time interval, that interval is implied to start at <span class="in">`Dot`</span> <span class="in">`5`</span> and end before <span class="in">`Dot`</span> <span class="in">`6`</span> ($[.5, .6)$) and thus have a duration of 10% of the day (<span class="in">`Dot`</span> <span class="in">`6`</span>-<span class="in">`Dot`</span> <span class="in">`5`</span>). Every additional digit we add decreases the implied tolerance and the implied duration 10-fold.</span>
-<span id="cb155-512"><a href="#cb155-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-513"><a href="#cb155-513" aria-hidden="true" tabindex="-1"></a>If we really want to insist on punctuality, we could include up to 5 digits in a time. Specifying times with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing <span class="co">[</span><span class="ot">extremely long GPS coordinates</span><span class="co">](https://xkcd.com/2170/)</span>; at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word "sharp" or the <span class="in">`#`</span> symbol to the time. Saying "5 Sharp" or writing <span class="in">`5#`</span> means as close as possible to noon. Times that include <span class="in">`#`</span> cannot have an implied duration. We can only add <span class="in">`#`</span> to a time, so there is no need say "Dot 5 Sharp" or write <span class="in">`.5#`</span>.</span>
-<span id="cb155-514"><a href="#cb155-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-515"><a href="#cb155-515" aria-hidden="true" tabindex="-1"></a><span class="fu">## Context clues {#sec-context}</span></span>
-<span id="cb155-516"><a href="#cb155-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-517"><a href="#cb155-517" aria-hidden="true" tabindex="-1"></a>Not saying "Day" or "Dot" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (<span class="in">`Dot`</span> <span class="in">`5`</span>) and not the sixth <span class="in">`doty`</span> (<span class="in">`Day`</span> <span class="in">`5`</span>). Also, the number itself may provide a clue. Numbers greater than 365 could still be a <span class="in">`doty`</span>, but it would represent a day in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean <span class="in">`Day`</span> <span class="in">`134`</span> (if n=366) or <span class="in">`Day`</span> <span class="in">`135`</span> (if n=365) of the subsequent year, but it would most likely mean noon (<span class="in">`Dot`</span> <span class="in">`500`</span>).</span>
-<span id="cb155-518"><a href="#cb155-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-519"><a href="#cb155-519" aria-hidden="true" tabindex="-1"></a><span class="fu">## `Stamps` {#sec-stamp}</span></span>
-<span id="cb155-520"><a href="#cb155-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-521"><a href="#cb155-521" aria-hidden="true" tabindex="-1"></a>If a <span class="in">`Decalender`</span> date and a <span class="in">`Declock`</span> time are combined, they form a time <span class="in">`stamp`</span>. The date always goes before the time in any <span class="in">`stamp`</span>. When said together, the numbers "0" and "5" mean the first <span class="in">`doty`</span> (<span class="in">`Day`</span> <span class="in">`0`</span>) at noon (<span class="in">`Dot`</span> <span class="in">`5`</span>). In written form, this would be <span class="in">`000.5`</span>. This format is called <span class="in">`.y`</span>, which is read the same way as <span class="in">`doty`</span>, but emphasizes that the <span class="in">`.`</span> is used in a floating point decimal <span class="in">`doty`</span>. In other words, <span class="in">`doty`</span> can be used instead of "day of the year" in a sentence, whereas <span class="in">`.y`</span> indicates a <span class="in">`stamp`</span>, such as <span class="in">`000.5`</span>. Ideally, a <span class="in">`stamp`</span> will include all of the information needed to identify a singular point in time, and thus should include a year and time zone.</span>
-<span id="cb155-522"><a href="#cb155-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-523"><a href="#cb155-523" aria-hidden="true" tabindex="-1"></a><span class="fu">## Specific dates and times {#sec-specific}</span></span>
-<span id="cb155-524"><a href="#cb155-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-525"><a href="#cb155-525" aria-hidden="true" tabindex="-1"></a>The <span class="in">`stamp`</span> in @sec-stamp assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The <span class="in">`Day`</span> <span class="in">`306`</span> of 1969, would be written <span class="in">`1969+306`</span> and said "Year 1969 Day 306" or simply "1969 306", while midnight in <span class="in">`Zone`</span> <span class="in">`0`</span> would be written <span class="in">`.000+0`</span> and said "Dot 0 Zone 0", "0 Zone 0", or "0 0". Combined together, this date and time form the <span class="in">`stamp`</span> <span class="in">`1969+306.000+0`</span>.</span>
-<span id="cb155-526"><a href="#cb155-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-527"><a href="#cb155-527" aria-hidden="true" tabindex="-1"></a><span class="fu">## Negative numbers {#sec-neg}</span></span>
-<span id="cb155-528"><a href="#cb155-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-529"><a href="#cb155-529" aria-hidden="true" tabindex="-1"></a>Every component of <span class="in">`Decalender`</span> dates and <span class="in">`Declock`</span> times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of <span class="in">`Zone`</span> <span class="in">`0`</span>. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative <span class="in">`doties`</span> work like <span class="co">[</span><span class="ot">zero-based indexes</span><span class="co">](https://en.wikipedia.org/wiki/Zero-based_numbering)</span> in <span class="co">[</span><span class="ot">computer programming</span><span class="co">](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming)</span> in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first <span class="in">`doty`</span> is indexed by both $0$ and $-N$, while the last <span class="in">`doty`</span> is indexed by both $-1$ and $N$.</span>
-<span id="cb155-530"><a href="#cb155-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-531"><a href="#cb155-531" aria-hidden="true" tabindex="-1"></a>In general, negative numbers show the number of parts that are left in the whole. A negative <span class="in">`doty`</span> shows how many days remain in the year and a negative time <span class="co">[</span><span class="ot">counts down</span><span class="co">](https://en.wikipedia.org/wiki/Countdown)</span> to the end of the day. To extend the fractions analogy in @sec-frac to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction ($pos = N + neg$). Positive and negative numbers arrive at the same answer from opposite directions.</span>
-<span id="cb155-532"><a href="#cb155-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-533"><a href="#cb155-533" aria-hidden="true" tabindex="-1"></a>In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though <span class="in">`Dot`</span> <span class="in">`-1`</span> and <span class="in">`Dot`</span> <span class="in">`9`</span> are synonymous <span class="in">`Declock`</span> times, the former could highlight that there is only 1 tenth (⅒ or .1) of the day remaining before midnight. <span class="in">`Dot`</span> <span class="in">`5`</span> and <span class="in">`Dot`</span> <span class="in">`-5`</span> both mean noon, like saying that a glass is half-empty or half-full.</span>
-<span id="cb155-534"><a href="#cb155-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-535"><a href="#cb155-535" aria-hidden="true" tabindex="-1"></a>The negative equivalent of <span class="in">`1969+306`</span>, the <span class="in">`deco`</span> date in @tbl-2x2, is <span class="in">`1970-059`</span>. This negative <span class="in">`deco`</span> date literally subtracts 59 days from the beginning of year 1970 to arrive at <span class="in">`Day`</span> <span class="in">`306`</span> of 1969. The year in negative <span class="in">`deco`</span> dates is always 1 greater than the year in the equivalent positive <span class="in">`deco`</span> date. Both <span class="in">`1969+306`</span> and <span class="in">`1970-059`</span> translate to January 1, 1970 in the Gregorian calendar. <span class="in">`Decalendar`</span> years are shifted by two months in relation to the Gregorian calendar years because <span class="in">`Decalendar`</span> years start on March 1.</span>
-<span id="cb155-536"><a href="#cb155-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb155-537"><a href="#cb155-537" aria-hidden="true" tabindex="-1"></a>This shift causes the Gregorian calendar year to be 1 greater than the year in the positive <span class="in">`deco`</span> dates during January and February and 1 less than the year in negative <span class="in">`deco`</span> dates during every other month. For example, the <span class="in">`Deco`</span> dates <span class="in">`1969+000`</span> and <span class="in">`1970-365`</span> are March 1, 1969 in the Gregorian calendar. Immediately after midnight on this date, the negative <span class="in">`doty`</span> will change from -365 to -364, while the positive <span class="in">`doty`</span> will remain at 0 At noon, the positive <span class="in">`deco`</span> date will be <span class="in">`1969+306.500`</span> and the negative <span class="in">`deco`</span> date will be <span class="in">`1970-058.500`</span>.</span>
+<span id="cb155-498"><a href="#cb155-498" aria-hidden="true" tabindex="-1"></a><span class="fu">## Implied tolerance and duration {#sec-imp}</span></span>
+<span id="cb155-499"><a href="#cb155-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-500"><a href="#cb155-500" aria-hidden="true" tabindex="-1"></a>The analogy to decimals or fractions is important, because it explains why adding a zero at the end of a time does not change the time, only the implied tolerance of time points or the implied duration of time intervals. If <span class="in">`Dot`</span> <span class="in">`5`</span> is a time point, it has an implied tolerance of 5% of the day ($.5±.05$), because any time after <span class="in">`Dot`</span> <span class="in">`45`</span> and before <span class="in">`Dot`</span> <span class="in">`55`</span> ($[.45, .55)$) would round to <span class="in">`Dot`</span> <span class="in">`5`</span>. On the other hand, if <span class="in">`Dot`</span> <span class="in">`5`</span> is the start time for a time interval, that interval is implied to start at <span class="in">`Dot`</span> <span class="in">`5`</span> and end before <span class="in">`Dot`</span> <span class="in">`6`</span> ($[.5, .6)$) and thus have a duration of 10% of the day (<span class="in">`Dot`</span> <span class="in">`6`</span>-<span class="in">`Dot`</span> <span class="in">`5`</span>). Every additional digit we add decreases the implied tolerance and the implied duration 10-fold.</span>
+<span id="cb155-501"><a href="#cb155-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-502"><a href="#cb155-502" aria-hidden="true" tabindex="-1"></a>If we really want to insist on punctuality, we could include up to 5 digits in a time. Specifying times with more than 5 digits is possible, and may be useful for scientific or technical purposes, but it is analogous to providing <span class="co">[</span><span class="ot">extremely long GPS coordinates</span><span class="co">](https://xkcd.com/2170/)</span>; at some point the level of precision stops having relevance to daily life. If we want to strive for the highest level of precision possible, we can add the word "sharp" or the <span class="in">`#`</span> symbol to the time. Saying "5 Sharp" or writing <span class="in">`5#`</span> means as close as possible to noon. Times that include <span class="in">`#`</span> cannot have an implied duration. We can only add <span class="in">`#`</span> to a time, so there is no need say "Dot 5 Sharp" or write <span class="in">`.5#`</span>.</span>
+<span id="cb155-503"><a href="#cb155-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-504"><a href="#cb155-504" aria-hidden="true" tabindex="-1"></a><span class="fu">## Context clues {#sec-context}</span></span>
+<span id="cb155-505"><a href="#cb155-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-506"><a href="#cb155-506" aria-hidden="true" tabindex="-1"></a>Not saying "Day" or "Dot" in general is acceptable, because it is convenient and often the numbers make perfect sense in context. If someone says "let's have lunch at 5", it is clear that they are referring to noon (<span class="in">`Dot`</span> <span class="in">`5`</span>) and not the sixth <span class="in">`doty`</span> (<span class="in">`Day`</span> <span class="in">`5`</span>). Also, the number itself may provide a clue. Numbers greater than 365 could still be a <span class="in">`doty`</span>, but it would represent a day in an upcoming year, not the current year. The meaning of such dates depends on whether the current year is a common year (n=365) or a leap year (n=366). Saying "500" could mean <span class="in">`Day`</span> <span class="in">`134`</span> (if n=366) or <span class="in">`Day`</span> <span class="in">`135`</span> (if n=365) of the subsequent year, but it would most likely mean noon (<span class="in">`Dot`</span> <span class="in">`500`</span>).</span>
+<span id="cb155-507"><a href="#cb155-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-508"><a href="#cb155-508" aria-hidden="true" tabindex="-1"></a><span class="fu">## `Stamps` {#sec-stamp}</span></span>
+<span id="cb155-509"><a href="#cb155-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-510"><a href="#cb155-510" aria-hidden="true" tabindex="-1"></a>If a <span class="in">`Decalender`</span> date and a <span class="in">`Declock`</span> time are combined, they form a time <span class="in">`stamp`</span>. The date always goes before the time in any <span class="in">`stamp`</span>. When said together, the numbers "0" and "5" mean the first <span class="in">`doty`</span> (<span class="in">`Day`</span> <span class="in">`0`</span>) at noon (<span class="in">`Dot`</span> <span class="in">`5`</span>). In written form, this would be <span class="in">`000.5`</span>. This format is called <span class="in">`.y`</span>, which is read the same way as <span class="in">`doty`</span>, but emphasizes that the <span class="in">`.`</span> is used in a floating point decimal <span class="in">`doty`</span>. In other words, <span class="in">`doty`</span> can be used instead of "day of the year" in a sentence, whereas <span class="in">`.y`</span> indicates a <span class="in">`stamp`</span>, such as <span class="in">`000.5`</span>. Ideally, a <span class="in">`stamp`</span> will include all of the information needed to identify a singular point in time, and thus should include a year and time zone.</span>
+<span id="cb155-511"><a href="#cb155-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-512"><a href="#cb155-512" aria-hidden="true" tabindex="-1"></a><span class="fu">## Specific dates and times {#sec-specific}</span></span>
+<span id="cb155-513"><a href="#cb155-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-514"><a href="#cb155-514" aria-hidden="true" tabindex="-1"></a>The <span class="in">`stamp`</span> in @sec-stamp assumes that the year and time zone are known. A date without a year is like a time without a time zone, both depend on the context. Most likely, we are talking about the current year and the local time zone, but it may be unclear. Including a year allows us to pinpoint a specific day, instead of a day that could happen any year. Similarly, a time with a time zone occurs once every day, rather than once in every time zone per day. The <span class="in">`Day`</span> <span class="in">`306`</span> of 1969, would be written <span class="in">`1969+306`</span> and said "Year 1969 Day 306" or simply "1969 306", while midnight in <span class="in">`Zone`</span> <span class="in">`0`</span> would be written <span class="in">`.000+0`</span> and said "Dot 0 Zone 0", "0 Zone 0", or "0 0". Combined together, this date and time form the <span class="in">`stamp`</span> <span class="in">`1969+306.000+0`</span>.</span>
+<span id="cb155-515"><a href="#cb155-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-516"><a href="#cb155-516" aria-hidden="true" tabindex="-1"></a><span class="fu">## Negative numbers {#sec-neg}</span></span>
+<span id="cb155-517"><a href="#cb155-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-518"><a href="#cb155-518" aria-hidden="true" tabindex="-1"></a>Every component of <span class="in">`Decalender`</span> dates and <span class="in">`Declock`</span> times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of <span class="in">`Zone`</span> <span class="in">`0`</span>. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative <span class="in">`doties`</span> work like <span class="co">[</span><span class="ot">zero-based indexes</span><span class="co">](https://en.wikipedia.org/wiki/Zero-based_numbering)</span> in <span class="co">[</span><span class="ot">computer programming</span><span class="co">](https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming)</span> in that they label the days of the year from $-N$ to $-1$, where $N$ is the number of the days in the current year. The first <span class="in">`doty`</span> is indexed by both $0$ and $-N$, while the last <span class="in">`doty`</span> is indexed by both $-1$ and $N$.</span>
+<span id="cb155-519"><a href="#cb155-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-520"><a href="#cb155-520" aria-hidden="true" tabindex="-1"></a>In general, negative numbers show the number of parts that are left in the whole. A negative <span class="in">`doty`</span> shows how many days remain in the year and a negative time <span class="co">[</span><span class="ot">counts down</span><span class="co">](https://en.wikipedia.org/wiki/Countdown)</span> to the end of the day. To extend the fractions analogy in @sec-frac to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction ($pos = N + neg$). Positive and negative numbers arrive at the same answer from opposite directions.</span>
+<span id="cb155-521"><a href="#cb155-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-522"><a href="#cb155-522" aria-hidden="true" tabindex="-1"></a>In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though <span class="in">`Dot`</span> <span class="in">`-1`</span> and <span class="in">`Dot`</span> <span class="in">`9`</span> are synonymous <span class="in">`Declock`</span> times, the former could highlight that there is only 1 tenth (⅒ or .1) of the day remaining before midnight. <span class="in">`Dot`</span> <span class="in">`5`</span> and <span class="in">`Dot`</span> <span class="in">`-5`</span> both mean noon, like saying that a glass is half-empty or half-full.</span>
+<span id="cb155-523"><a href="#cb155-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-524"><a href="#cb155-524" aria-hidden="true" tabindex="-1"></a>The negative equivalent of <span class="in">`1969+306`</span>, the <span class="in">`deco`</span> date in @tbl-2x2, is <span class="in">`1970-059`</span>. This negative <span class="in">`deco`</span> date literally subtracts 59 days from the beginning of year 1970 to arrive at <span class="in">`Day`</span> <span class="in">`306`</span> of 1969. The year in negative <span class="in">`deco`</span> dates is always 1 greater than the year in the equivalent positive <span class="in">`deco`</span> date. Both <span class="in">`1969+306`</span> and <span class="in">`1970-059`</span> translate to January 1, 1970 in the Gregorian calendar. <span class="in">`Decalendar`</span> years are shifted by two months in relation to the Gregorian calendar years because <span class="in">`Decalendar`</span> years start on March 1.</span>
+<span id="cb155-525"><a href="#cb155-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-526"><a href="#cb155-526" aria-hidden="true" tabindex="-1"></a>This shift causes the Gregorian calendar year to be 1 greater than the year in the positive <span class="in">`deco`</span> dates during January and February and 1 less than the year in negative <span class="in">`deco`</span> dates during every other month. For example, the <span class="in">`Deco`</span> dates <span class="in">`1969+000`</span> and <span class="in">`1970-365`</span> are March 1, 1969 in the Gregorian calendar. Immediately after midnight on this date, the negative <span class="in">`doty`</span> will change from -365 to -364, while the positive <span class="in">`doty`</span> will remain at 0 At noon, the positive <span class="in">`deco`</span> date will be <span class="in">`1969+306.500`</span> and the negative <span class="in">`deco`</span> date will be <span class="in">`1970-058.500`</span>.</span>
+<span id="cb155-527"><a href="#cb155-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-528"><a href="#cb155-528" aria-hidden="true" tabindex="-1"></a><span class="fu">#### @tbl-2x2</span></span>
+<span id="cb155-529"><a href="#cb155-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-530"><a href="#cb155-530" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}</span>
+<span id="cb155-531"><a href="#cb155-531" aria-hidden="true" tabindex="-1"></a>|      | date     | timestamp      |</span>
+<span id="cb155-532"><a href="#cb155-532" aria-hidden="true" tabindex="-1"></a>|------|----------|----------------|</span>
+<span id="cb155-533"><a href="#cb155-533" aria-hidden="true" tabindex="-1"></a>| doty | 306      | 306.000+0      |</span>
+<span id="cb155-534"><a href="#cb155-534" aria-hidden="true" tabindex="-1"></a>| deco | 1969+306 | 1969+306.000+0 |</span>
+<span id="cb155-535"><a href="#cb155-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-536"><a href="#cb155-536" aria-hidden="true" tabindex="-1"></a>: Comparison of <span class="in">`doty`</span> and <span class="in">`deco`</span> dates and timestamps {#tbl-2x2}</span>
+<span id="cb155-537"><a href="#cb155-537" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb155-538"><a href="#cb155-538" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb155-539"><a href="#cb155-539" aria-hidden="true" tabindex="-1"></a><span class="fu">## Units {#sec-unit}</span></span>
 <span id="cb155-540"><a href="#cb155-540" aria-hidden="true" tabindex="-1"></a></span>
