@@ -126,8 +126,7 @@
   <ul class="collapse">
   <li><a href="#day-of-the-year" id="toc-day-of-the-year" class="nav-link" data-scroll-target="#day-of-the-year"><span class="header-section-number">1.1</span> Day-of-the-year</a></li>
   <li><a href="#year" id="toc-year" class="nav-link" data-scroll-target="#year"><span class="header-section-number">1.2</span> Year</a></li>
-  <li><a href="#time-zone" id="toc-time-zone" class="nav-link" data-scroll-target="#time-zone"><span class="header-section-number">1.3</span> Time Zone</a></li>
-  <li><a href="#dek" id="toc-dek" class="nav-link" data-scroll-target="#dek"><span class="header-section-number">1.4</span> Dek</a></li>
+  <li><a href="#dek" id="toc-dek" class="nav-link" data-scroll-target="#dek"><span class="header-section-number">1.3</span> Dek</a></li>
   </ul></li>
   <li><a href="#basic-concepts" id="toc-basic-concepts" class="nav-link" data-scroll-target="#basic-concepts"><span class="header-section-number">2</span> Basic concepts</a>
   <ul class="collapse">
@@ -250,7 +249,7 @@
 <p>The first two digits of the <code>Decalendar</code> date are the <code>dek</code>[6] number (<span id="ojs-element-id-14"></span>), while the last digit is the <code>dotd</code>[7] number (<span id="ojs-element-id-15"></span>).</p>
 <p>The <code>dek</code> and <code>dotd</code> numbers in <code>Decalendar</code> dates are analogous to the month and day-of-the-month (<code>dotm</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates">calendar dates</a> (<code>mm-dd</code>) and the week and day-of-the-week (<code>dotw</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Week_dates">week dates</a> (<code>Www-d</code>).</p>
 <p><code>Decalendar</code> dates can be also expressed as fractional years, which are similar to the <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> used in <code>Declock</code> times. The current <code>Decalendar</code> fractional year date[8] is <span id="ojs-element-id-16"></span>.</p>
-<p>Now it’s your turn! Move one of the sliders🎚️in <a href="#exm-doty">Example&nbsp;1</a> to change the <code>doty</code>, fractional year, month, or <code>dotm</code> value and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign.</p>
+<p>Now it’s your turn! Move the sliders🎚️in <a href="#exm-doty">Example&nbsp;1</a> to adjust the <code>doty</code>, fractional year, month, and <code>dotm</code> values and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign. Try entering a special date like your birthday🎂!</p>
 <p><span class="theorem-title"><strong>Example 1 </strong></span>&nbsp;</p>
 <ol type="1">
 <li><span id="ojs-element-id-2"></span></li>
@@ -629,7 +628,7 @@
 </section>
 <section id="year" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="year"><span class="header-section-number">1.2</span> Year</h2>
-<p>Any <code>doty</code> can be combined with a year to form a <code>Decalendar</code> <code>ordinal</code> (<code>deco</code>). Enter a year, month, <code>dotm</code>, hour, and minute in <a href="#exm-dt">Example&nbsp;2</a> to see 1) the corresponding <code>deco</code> (<code>year+day.clock</code>), and 2) fractional year date.</p>
+<p>Any <code>doty</code> can be combined with a year to form a <code>Decalendar</code> <code>ordinal</code>[1] (<code>deco</code>). Enter a year, month, <code>dotm</code>, hour, and minute in <a href="#exm-dt">Example&nbsp;2</a> to see 1) the corresponding <code>deco</code> (<code>year+day.clock</code>), and 2) fractional year date.</p>
 <p><span class="theorem-title"><strong>Example 2 </strong></span>&nbsp;</p>
 <ol type="1">
 <li><span id="ojs-element-id-5"></span></li>
@@ -649,6 +648,7 @@
 <h4 class="anchored" data-anchor-id="deco-observable-code"><code>Deco</code> Observable code</h4>
 <section id="functions-1" class="level5">
 <h5 class="anchored" data-anchor-id="functions-1">Functions</h5>
+<p>[1] <code>deco</code>: a date and time format consisting of a year and a <code>doty</code> and analogous to ISO 8601 dates</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -888,12 +888,9 @@
 </section>
 </section>
 </section>
-<section id="time-zone" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="time-zone"><span class="header-section-number">1.3</span> Time Zone</h2>
-</section>
-<section id="dek" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="dek"><span class="header-section-number">1.4</span> Dek</h2>
-<p>As mentioned in <a href="#sec-intro-doty">Section&nbsp;1.1</a>, <code>deks</code> function as both months and weeks in <code>Decalendar</code>. A <code>dek</code> consists of 2 groups of 5 days called <code>pents.</code> Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule. The code in <a href="#exm-glance">Example&nbsp;4</a> generates <a href="#fig-schedules">Figure&nbsp;1</a> which compares the typical weekly schedule and the <code>Schedule</code> <code>3</code> <code>pently</code> schedule. Like other <code>pently</code> schedules, <code>Schedule</code> <code>3</code> is named after the number of workdays it contains. The 3 workdays in <code>Schedule</code> <code>3</code> are followed by a 2-day <code>pentend</code>, the <code>Decalender</code> equivalent of a weekend.</p>
+<section id="dek" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="dek"><span class="header-section-number">1.3</span> Dek</h2>
+<p>As mentioned in <a href="#sec-intro-doty">Section&nbsp;1.1</a>, <code>deks</code> function as both months and weeks in <code>Decalendar</code>. A <code>dek</code> consists of 2 groups of 5 days called <code>pents</code>[1]. Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule[2]. The code in <a href="#exm-intro-dek">Example&nbsp;4</a> generates <a href="#fig-schedules">Figure&nbsp;1</a> which compares the typical weekly schedule and the <code>Schedule</code> <code>3</code> <code>pently</code> schedule. Like other <code>pently</code> schedules, <code>Schedule</code> <code>3</code> is named after the number of workdays it contains. The 3 workdays in <code>Schedule</code> <code>3</code> are followed by a 2-day <code>pentend</code>, the <code>Decalender</code> equivalent of a weekend.</p>
 <p>Unlike <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. Each <code>Schedule</code> <code>3</code> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). <a href="#sec-pently">Section&nbsp;5.4.3.1</a> provides more information on <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules.</p>
 <p><span class="theorem-title"><strong>Example 4 </strong></span>&nbsp;</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -970,14 +967,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/a02d7dc9-7548-4a06-a5e3-9458eee145df-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_julia_files/figure-html/3040ccfa-d265-4580-9f69-e27ffd02ecf8-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_julia_files/figure-html/a02d7dc9-7548-4a06-a5e3-9458eee145df-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_julia_files/figure-html/3040ccfa-d265-4580-9f69-e27ffd02ecf8-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -2598,6 +2595,8 @@ doty2greg()</code></pre>
 <h4 class="anchored" data-anchor-id="julia">Julia</h4>
 <section id="greg2doty-1" class="level5 page-columns page-full">
 <h5 class="anchored" data-anchor-id="greg2doty-1"><code>greg2doty</code></h5>
+<p>[1] <code>pent</code>: a group of 5 days; half of a <code>dek</code></p>
+<p>[2] <code>pently</code> schedule: one of a set of workday and restday schedules for the 5 days of the <code>pent</code></p>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-tags="[&quot;greg2doty&quot;]" data-execution_count="1">
 <details>
 <summary>Code</summary>
@@ -3699,7 +3698,7 @@ console.log(doty2dote());</code></pre>
 <span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+234.10824+0"</code></pre>
+<pre><code>"2023+234.12580+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3804,7 +3803,7 @@ console.log(
 <span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+234.10824+0"</code></pre>
+<pre><code>"2023+234.12580+0"</code></pre>
 </div>
 </div></div>
 </section>
@@ -3923,7 +3922,7 @@ console.log(unix2deco())</code></pre>
 <span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>"2023+234.10824+0"</code></pre>
+<pre><code>"2023+234.12580+0"</code></pre>
 </div>
 </div></div>
 </section>

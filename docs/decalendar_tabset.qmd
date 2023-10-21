@@ -35,7 +35,7 @@ The `dek` and `dotd` numbers in `Decalendar` dates are analogous to the month an
 
 [^year]: fractional year date: the current year and the proportion of the current year that has passed; an alternative to `Decalendar` dates
 
-Now it's your turn! Move one of the sliders🎚️in @exm-doty to change the `doty`, fractional year, month, or `dotm` value and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign.
+Now it's your turn! Move the sliders🎚️in @exm-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign. Try entering a special date like your birthday🎂!
 
 ::: {#exm-doty}
 :::
@@ -302,7 +302,9 @@ styledMonthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart
 
 ## Year {#sec-intro-year}
 
-Any `doty` can be combined with a year to form a `Decalendar` `ordinal` (`deco`). Enter a year, month, `dotm`, hour, and minute in @exm-dt to see 1) the corresponding `deco` (`year+day.clock`), and 2) fractional year date.
+Any `doty` can be combined with a year to form a `Decalendar` `ordinal`[^deco] (`deco`). Enter a year, month, `dotm`, hour, and minute in @exm-dt to see 1) the corresponding `deco` (`year+day.clock`), and 2) fractional year date.
+
+[^deco]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
 
 ::: {#exm-dt}
 :::
@@ -447,15 +449,16 @@ styledOutputDatetimeYear = setStyle(outputDatetimeYear, d3.schemePaired[10])
 styledOutputDecoYear = setStyle(outputDecoYear, d3.schemePaired[10])
 ```
 
-## Time Zone {#sec-intro-zone}
-
 ## Dek {#sec-intro-dek}
 
-As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents.` Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule. The code in @exm-glance generates @fig-schedules which compares the typical weekly schedule and the `Schedule` `3` `pently` schedule. Like other `pently` schedules, `Schedule` `3` is named after the number of workdays it contains. The 3 workdays in `Schedule` `3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents`[^pent]. Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule[^sched]. The code in @exm-intro-dek generates @fig-schedules which compares the typical weekly schedule and the `Schedule` `3` `pently` schedule. Like other `pently` schedules, `Schedule` `3` is named after the number of workdays it contains. The 3 workdays in `Schedule` `3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+
+[^pent]: `pent`: a group of 5 days; half of a `dek`
+[^sched]: `pently` schedule: one of a set of workday and restday schedules for the 5 days of the `pent`
 
 Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule` `3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). @sec-pently provides more information on `Schedule` `3` and the other `pently` schedules.
 
-::: {#exm-glance}
+::: {#exm-intro-dek}
 :::
 
 {{< embed schedules.ipynb#fig-schedules echo=true >}}
