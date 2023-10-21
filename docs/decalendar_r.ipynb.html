@@ -246,8 +246,7 @@
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <section id="day-of-the-year" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="day-of-the-year"><span class="header-section-number">1.1</span> Day-of-the-year</h2>
-<p><code>Decalendar</code>[1] is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar🗓️system and <code>Declock</code>[2] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a number called the day-of-the-year (<code>doty</code>)[3].</p>
-<p>The current <code>doty</code>, <span id="ojs-element-id-1"></span>, consists of the current <code>Decalendar</code> date[4] (<span id="ojs-element-id-12"></span>) and the current <code>Declock</code> time[5] (<span id="ojs-element-id-13"></span>).</p>
+<p><code>Decalendar</code>[1] is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar🗓️system and <code>Declock</code>[2] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a number called the day-of-the-year (<code>doty</code>)[3]. Each <code>doty</code> (<span id="ojs-element-id-1"></span>) consists of a <code>Decalendar</code> date[4] (<span id="ojs-element-id-13"></span>) and a <code>Declock</code> time[5] (<span id="ojs-element-id-14"></span>). <a href="#fig-bar-time">Figure&nbsp;1</a> displays the current <code>Declock</code> time as a bar chart.</p>
 <p>[1] <code>Decalendar</code>: a calendar system that uses <code>deks</code> instead of months and weeks</p>
 <p>[2] <code>Declock</code>: a timekeeping system that uses fractional days instead of hours, minutes, and seconds</p>
 <p>[3] <code>doty</code>: day-of-the-year; an alternative to months, weeks, hours, minutes, and seconds</p>
@@ -261,19 +260,16 @@
 <div class="cell-output cell-output-display">
 
 </div>
-<div class="cell-output cell-output-display">
-
 </div>
-</div>
-<p>The first two digits of the <code>Decalendar</code> date are the <code>dek</code>[1] number (<span id="ojs-element-id-14"></span>), while the last digit is the <code>dotd</code>[2] number (<span id="ojs-element-id-15"></span>).</p>
-<p>The <code>dek</code> and <code>dotd</code> numbers in <code>Decalendar</code> dates are analogous to the month and day-of-the-month (<code>dotm</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates">calendar dates</a> (<code>mm-dd</code>) and the week and day-of-the-week (<code>dotw</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Week_dates">week dates</a> (<code>Www-d</code>).</p>
-<p><code>Decalendar</code> dates can be also expressed as fractional years, which are similar to the <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> used in <code>Declock</code> times. The current <code>Decalendar</code> fractional year date[3] is <span id="ojs-element-id-16"></span>.</p>
+<p>The top bar in <a href="#fig-bar-time">Figure&nbsp;1</a> shows <code>mils</code> (<code>‰</code>), which are a thousandth (.001) of the day. The bottom bar displays <code>beats</code> (<code>♫</code>), which are like heart❤️beats or musical🎵<a href="https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time">beats</a> with a constant <a href="https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.">rate</a> or <a href="https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm">tempo</a> of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, <code>mils</code> and <code>beats</code> can be used to measure durations, such as the number of <code>beats</code> since this webpage was loaded: <span id="ojs-element-id-2"></span>.</p>
+<p>Just like <code>Declock</code> times have <code>mils</code> and <code>beats</code>, <code>Decalendar</code> <code>doty</code> dates have two components called the <code>dek</code>[1] and the day-of-the-<code>dek</code>[2] (<code>dotd</code>). The <code>dek</code> (<span id="ojs-element-id-15"></span>) and <code>dotd</code> (<span id="ojs-element-id-16"></span>) in <code>Decalendar</code> dates (<span id="ojs-element-id-17"></span>) are analogous to the month and day-of-the-month (<code>dotm</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates">calendar dates</a> (<code>mm-dd</code>) and the week and day-of-the-week (<code>dotw</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Week_dates">week dates</a> (<code>Www-d</code>).</p>
+<p>As an alternative to <code>doty</code> dates, <code>Decalendar</code> can express dates in fractional years, which are similar to the <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> used in <code>Declock</code> times. Fractional year dates[3] can be combined with years into one number and are convenient for marking periods of 73 days in the <code>Decalendar</code> year. Every 73 days, the <code>Decalendar</code> fractional year date increments by .2 (⅕). The current <code>Decalendar</code> fractional year date is <span id="ojs-element-id-18"></span>.</p>
 <p>Now it’s your turn! Move the sliders🎚️in <a href="#exm-doty">Example&nbsp;1</a> to adjust the <code>doty</code>, fractional year, month, and <code>dotm</code> values and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign. Try entering a special date like your birthday🎂!</p>
 <p><span class="theorem-title"><strong>Example 1 </strong></span>&nbsp;</p>
 <ol type="1">
-<li><span id="ojs-element-id-2"></span></li>
 <li><span id="ojs-element-id-3"></span></li>
 <li><span id="ojs-element-id-4"></span></li>
+<li><span id="ojs-element-id-5"></span></li>
 </ol>
 <section id="doty-observable-code" class="level4">
 <h4 class="anchored" data-anchor-id="doty-observable-code"><code>Doty</code> Observable code</h4>
@@ -513,7 +509,7 @@
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>tickDelimiter <span class="ot">=</span> (tickDate <span class="sc">&gt;</span> <span class="dv">0</span>) ? <span class="st">"."</span> <span class="sc">:</span> <span class="st">""</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>barTime <span class="ot">=</span> <span class="fu">unix2dote</span>(unix)<span class="fu">.toString</span>()<span class="fu">.split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]<span class="fu">.slice</span>(<span class="dv">0</span>, <span class="dv">8</span>)</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>barBeats <span class="ot">=</span> <span class="fu">barTime.slice</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>barMils <span class="ot">=</span> <span class="fu">barTime.slice</span>(<span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>barMils <span class="ot">=</span> <span class="fu">barTime.slice</span>(<span class="dv">0</span>, <span class="dv">3</span>)</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>barDimes <span class="ot">=</span> barTime[<span class="dv">0</span>]</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>barMb <span class="ot">=</span> <span class="fu">barTime.slice</span>(<span class="dv">5</span>)</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>deco <span class="ot">=</span> <span class="fu">unix2deco</span>(unix)<span class="fu">.slice</span>(<span class="dv">0</span>, <span class="dv">14</span>)</span>
@@ -662,20 +658,20 @@
 </section>
 <section id="year" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="year"><span class="header-section-number">1.2</span> Year</h2>
-<p>Any <code>doty</code> can be combined with a year to form a <code>Decalendar</code> <code>ordinal</code>[1] (<code>deco</code>). Enter a year, month, <code>dotm</code>, hour, and minute in <a href="#exm-dt">Example&nbsp;2</a> to see 1) the corresponding <code>deco</code> (<code>year+day.clock</code>), and 2) fractional year date.</p>
+<p>Any <code>doty</code> can be combined with a year to form a <code>Decalendar</code> <code>ordinal</code>[1] (<code>deco</code>). Enter a year, month, <code>dotm</code>, hour, and minute in <a href="#exm-dt">Example&nbsp;2</a> to see 1) the corresponding <code>deco</code> timestamp (<code>year+day.clock</code>), and 2) year date (<code>year.yyy</code>).</p>
 <p><span class="theorem-title"><strong>Example 2 </strong></span>&nbsp;</p>
 <ol type="1">
-<li><span id="ojs-element-id-5"></span></li>
 <li><span id="ojs-element-id-6"></span></li>
+<li><span id="ojs-element-id-7"></span></li>
 </ol>
-<p>Once you feel comfortable with the <code>deco</code> format, you can type a <code>deco</code> in <a href="#exm-deco">Example&nbsp;3</a> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers below 366 <span class="math inline">\(\left[0, 366\right)\)</span>, and 3) <strong>converted</strong> into a) the <code>year-mm-ddThh:mm:ss</code> format and b) the year date format (<code>year.yyy</code>).</p>
+<p>Once you feel comfortable with the <code>deco</code> format, you can type a <code>deco</code> in <a href="#exm-deco">Example&nbsp;3</a> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers below 366 <span class="math inline">\(\left[0, 366\right)\)</span>, and 3) <strong>converted</strong> into a) the <code>year-mm-ddThh:mm:ss</code> format and b) the year date format.</p>
 <p><span class="theorem-title"><strong>Example 3 </strong></span>&nbsp;</p>
 <ol type="1">
-<li><p><span id="ojs-element-id-7"></span>, <span id="ojs-element-id-8"></span></p></li>
-<li><p><span id="ojs-element-id-9"></span></p></li>
+<li><p><span id="ojs-element-id-8"></span>, <span id="ojs-element-id-9"></span></p></li>
+<li><p><span id="ojs-element-id-10"></span></p></li>
 <li><ol type="1">
-<li><span id="ojs-element-id-10"></span></li>
 <li><span id="ojs-element-id-11"></span></li>
+<li><span id="ojs-element-id-12"></span></li>
 </ol></li>
 </ol>
 <section id="deco-observable-code" class="level4">
@@ -924,7 +920,7 @@
 </section>
 <section id="dek" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="dek"><span class="header-section-number">1.3</span> Dek</h2>
-<p>As mentioned in <a href="#sec-intro-doty">Section&nbsp;1.1</a>, <code>deks</code> function as both months and weeks in <code>Decalendar</code>. A <code>dek</code> consists of 2 groups of 5 days called <code>pents</code>[1]. Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule[2]. The code in <a href="#exm-intro-dek">Example&nbsp;4</a> generates <a href="#fig-schedules">Figure&nbsp;1</a> which compares the typical weekly schedule and the <code>Schedule</code> <code>3</code> <code>pently</code> schedule. Like other <code>pently</code> schedules, <code>Schedule</code> <code>3</code> is named after the number of workdays it contains. The 3 workdays in <code>Schedule</code> <code>3</code> are followed by a 2-day <code>pentend</code>, the <code>Decalender</code> equivalent of a weekend.</p>
+<p>As mentioned in <a href="#sec-intro-doty">Section&nbsp;1.1</a>, <code>deks</code> function as both months and weeks in <code>Decalendar</code>. A <code>dek</code> consists of 2 groups of 5 days called <code>pents</code>[1]. Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule[2]. The code in <a href="#exm-intro-dek">Example&nbsp;4</a> generates <a href="#fig-schedules">Figure&nbsp;2</a> which compares the typical weekly schedule and the <code>Schedule</code> <code>3</code> <code>pently</code> schedule. Like other <code>pently</code> schedules, <code>Schedule</code> <code>3</code> is named after the number of workdays it contains. The 3 workdays in <code>Schedule</code> <code>3</code> are followed by a 2-day <code>pentend</code>, the <code>Decalender</code> equivalent of a weekend.</p>
 <p>Unlike <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. Each <code>Schedule</code> <code>3</code> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours). <a href="#sec-sched">Section&nbsp;5.4.3</a> provides more information on <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules.</p>
 <p><span class="theorem-title"><strong>Example 4 </strong></span>&nbsp;</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1001,14 +997,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/d587a5d7-8e5a-4647-931b-4f7a881ea28d-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="decalendar_r_files/figure-html/5a18cdeb-e8db-4d80-93e5-56397fd0c896-1-decalendar_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="decalendar_r_files/figure-html/d587a5d7-8e5a-4647-931b-4f7a881ea28d-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="decalendar_r_files/figure-html/5a18cdeb-e8db-4d80-93e5-56397fd0c896-2-decalendar_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -1016,7 +1012,7 @@
 </tbody>
 
 </table>
-<p>Figure&nbsp;1: Weekly and pently schedule comparison</p>
+<p>Figure&nbsp;2: Weekly and pently schedule comparison</p>
 </section>
 </section>
 <section id="basic-concepts" class="level1" data-number="2">
@@ -1171,7 +1167,7 @@
 <tr class="odd">
 <td><span class="math inline">\(10\)</span></td>
 <td><code>dek</code></td>
-<td><code>ι</code>, 旬</td>
+<td><code>ι</code> 旬</td>
 <td><code>decaday</code></td>
 </tr>
 <tr class="even">
@@ -1183,7 +1179,7 @@
 <tr class="odd">
 <td><span class="math inline">\(10^{-1}\)</span></td>
 <td><code>dime</code></td>
-<td><code>⅒</code>, 更</td>
+<td><code>⅒</code></td>
 <td><code>deciday</code></td>
 </tr>
 <tr class="even">
@@ -3779,7 +3775,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+234.65436+0'
+'2023+234.78165+0'
 </div>
 </div></div>
 <p>:::</p>
@@ -3884,7 +3880,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb85-13"><a href="#cb85-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+234.65436+0'
+'2023+234.78165+0'
 </div>
 </div></div>
 </section>
@@ -5167,35 +5163,39 @@ console.log(parse_dec());</code></pre>
 {"contents":[
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDotyDate}.${styledDotyTime}</span>`", "cellName":"ojs-element-id-1"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[0]}</span>`", "cellName":"ojs-element-id-2"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledTickTime}</span>`", "cellName":"ojs-element-id-2"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[1]}</span>`", "cellName":"ojs-element-id-3"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[0]}</span>`", "cellName":"ojs-element-id-3"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotyZodiac}</span>`", "cellName":"ojs-element-id-4"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotySeason[1]}</span>`", "cellName":"ojs-element-id-4"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtYear}+${dtDotyDate}${dtDotyTimeDelimiter}${dtDotyTime}</span>`", "cellName":"ojs-element-id-5"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotyZodiac}</span>`", "cellName":"ojs-element-id-5"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledOutputDatetimeYear}</span>`", "cellName":"ojs-element-id-6"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtYear}+${dtDotyDate}${dtDotyTimeDelimiter}${dtDotyTime}</span>`", "cellName":"ojs-element-id-6"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedYear}</span>`", "cellName":"ojs-element-id-7"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledOutputDatetimeYear}</span>`", "cellName":"ojs-element-id-7"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedDotyDate}${parsedDotyTimeDelimiter}${styledParsedDotyTime}</span>`", "cellName":"ojs-element-id-8"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedYear}</span>`", "cellName":"ojs-element-id-8"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDecoYear}+${styledDecoDotyDate}${decoDotyTimeDelimiter}${styledDecoDotyTime}</span>`", "cellName":"ojs-element-id-9"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledParsedDotyDate}${parsedDotyTimeDelimiter}${styledParsedDotyTime}</span>`", "cellName":"ojs-element-id-9"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledIsocYear}-${styledIsocMd}T${styledIsocTime}</span>`", "cellName":"ojs-element-id-10"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledDecoYear}+${styledDecoDotyDate}${decoDotyTimeDelimiter}${styledDecoDotyTime}</span>`", "cellName":"ojs-element-id-10"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledOutputDecoYear}</span>`", "cellName":"ojs-element-id-11"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledIsocYear}-${styledIsocMd}T${styledIsocTime}</span>`", "cellName":"ojs-element-id-11"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyDate, d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-12"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledOutputDecoYear}</span>`", "cellName":"ojs-element-id-12"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyTime, d3.schemePaired[2])}</span>`", "cellName":"ojs-element-id-13"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyDate, d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-13"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(doty.slice(0, 2), d3.schemePaired[0])}</span>`", "cellName":"ojs-element-id-14"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyTime, d3.schemePaired[2])}</span>`", "cellName":"ojs-element-id-14"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(doty[2], d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-15"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(doty.slice(0, 2), d3.schemePaired[0])}</span>`", "cellName":"ojs-element-id-15"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(yearDate.toString().slice(4), d3.schemePaired[10])}</span>`", "cellName":"ojs-element-id-16"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(doty[2], d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-16"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyDate, d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-17"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(yearDate.toString().slice(4), d3.schemePaired[10])}</span>`", "cellName":"ojs-element-id-18"}
 ]}
 </script>
 

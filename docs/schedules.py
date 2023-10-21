@@ -35,6 +35,7 @@ plt.rcParams.update(
 # | tags: [fig-schedules]
 # | label: fig-schedules
 # | fig-cap: "Weekly and pently schedule comparison"
+# | fig-cap-location: margin
 # | fig-subcap:
 # |   - "Proportion of the day spent working and resting every day of the week"
 # |   - "Proportion of the day spent working and resting every day of the pent"
