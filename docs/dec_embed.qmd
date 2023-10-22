@@ -27,6 +27,7 @@ citation:
 //| fig-cap: "Declock time bar chart"
 //| fig-align: "center"
 //| fig-cap-location: margin
+//| column: screen-inset
 // https://observablehq.com/@fheyen/barchart-clock
 {
   const W = 450;
@@ -148,14 +149,17 @@ html`<style>
 </style>`
 ```
 
-The top bar in @fig-bar-time shows `mils` (`‰`), which are a thousandth (.001) of the day. The bottom bar displays `beats` (`♫`), which are like heart❤️beats or musical🎵[beats](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time) with a constant [rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or [tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm) of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, `mils` and `beats` can be used to measure durations, such as the number of `beats` since this webpage was loaded: \${styledTickTime}.
+The top bar in @fig-bar-time shows `mils`[^mil] (`‰`). Each `mil` is .1% of the day. The bottom bar displays `beats`[^beat] (`♫`), which are like heart❤️beats or musical🎵[beats](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time) with a constant [rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or [tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm) of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, `mils` and `beats` can be used to measure durations, such as the number of `beats` since this webpage was loaded: \${styledTickTime}.
+
+[^mil]: `mil`: a thousandth ($10^{-3}$) of a day; the first 3 digits of the `Declock` time; an alternate to minutes
+[^beat]: `beat`: a hundred thousandth ($10^{-5}$) of a day; the first 5 digits of the `Declock` time; an alternate to seconds
 
 Just like `Declock` times have `mils` and `beats`, `Decalendar` `doty` dates have two components called the `dek`[^dek] and the day-of-the-`dek`[^dotd] (`dotd`). The `dek` (\${setStyle(doty.slice(0, 2), d3.schemePaired\[0\])}) and `dotd` (\${setStyle(doty\[2\], d3.schemePaired\[1\])}) in `Decalendar` dates (\${setStyle(dotyDate, d3.schemePaired\[1\])}) are analogous to the month and day-of-the-month (`dotm`) in [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (`mm-dd`) and the week and day-of-the-week (`dotw`) in [week dates](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (`Www-d`).
 
 [^dek]: `dek`: a group of 10 days; the first two digits of the `Decalendar` date; an alternate to month and weeks
 [^dotd]: `dotd`: one of the 10 days in a `dek`; the last digit of the `Decalendar` date; an alternate to the day-of-the-month and day-of-the-week
 
-As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `Declock` times. Fractional year dates[^year] can be combined with years into one number and are convenient for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increments by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
+As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `Declock` times. Fractional year dates[^year] can be combined with years into one number and are convenient for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increases by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
 
 [^year]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
 
@@ -431,7 +435,7 @@ styledMonthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart
 
 ## Year {#sec-intro-year}
 
-Any `doty` can be combined with a year to form a `Decalendar` `ordinal`[^deco] (`deco`). Enter a year, month, `dotm`, hour, and minute in @exm-dt to see 1) the corresponding `deco` timestamp (`year+day.clock`), and 2) year date (`year.yyy`).
+A year and a `doty` can be combined to form a `Decalendar` `ordinal`[^deco] (`deco`). In @exm-dt, you can enter a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`).
 
 [^deco]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
 
@@ -542,10 +546,11 @@ function unix2year(ms = 0) {
 tzOffsetInMs = inputDatetime.getTimezoneOffset() * 60000
 utcDatetime = inputDatetime - tzOffsetInMs
 outputDatetimeDeco = unix2deco(utcDatetime)
-dtDotyDateRaw = outputDatetimeDeco.slice(5, 8)
-dtDotyTimeRaw = outputDatetimeDeco.slice(9, 14)
+dtDoty = outputDatetimeDeco.split("+")[1]
+dtDotyDateRaw = dtDoty.split(".")[0]
+dtDotyTimeRaw = dtDoty.split(".")[1].slice(0, 5)
 outputDatetimeYear = unix2year(utcDatetime).toString().slice(0, 8)
-dtDotyTimeDelimiter = dtDotyTime ? "." : ""
+dtDotyTimeDelimiter = dtDotyTimeRaw ? "." : ""
 ydParsed = deco2doty(inputDeco)
 outputDecoYear = doty2year(...ydParsed).toString().slice(0, 8)
 parsedDotyTime = ydParsed[1].toString().split(".")[1]
@@ -561,7 +566,7 @@ yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
 
 ```{ojs}
 decoYear = setStyle(outputDeco[0], d3.schemePaired[10])
-dtYear = setStyle(outputDatetimeDeco.slice(0, 4), d3.schemePaired[10])
+dtYear = setStyle(outputDatetimeDeco.split("+")[0], d3.schemePaired[10])
 dtDotyDate = setStyle(dtDotyDateRaw, d3.schemePaired[1])
 dtDotyTime = dtDotyTimeRaw ? setStyle(dtDotyTimeRaw, d3.schemePaired[2]) : ""
 styledParsedYear = setStyle(ydParsed[0], d3.schemePaired[10])
