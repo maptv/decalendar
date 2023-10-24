@@ -13,13 +13,13 @@ citation:
 
 ## Day-of-the-year {#sec-intro-doty}
 
-`Decalendar`[^decalendar] is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock`[^declock] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a number called the day-of-the-year (`doty`)[^doty]. Each `doty` (\${styledDotyDate}.\${styledDotyTime}) consists of a `Decalendar` date[^date] (\${setStyle(dotyDate, d3.schemePaired\[1\])}) and a `Declock` time[^time] (\${setStyle(dotyTime, d3.schemePaired\[2\])}). @fig-bar-time displays the current `Declock` time as a bar chart.
+`Decalendar`[^decalendar] is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock`[^declock] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a number called the day-of-the-year (`doty`)[^doty]. Each `doty` (\${styledDotyDate}.\${styledDotyTime}) consists of a `Decalendar` `doty` date[^date] (\${setStyle(dotyDate, d3.schemePaired\[1\])}) and a `Declock` `doty` time[^time] (\${setStyle(dotyTime, d3.schemePaired\[2\])}). @fig-bar-time displays the current `doty` time as a bar chart.
 
 [^decalendar]: `Decalendar`: a calendar system that uses `deks` instead of months and weeks
 [^declock]: `Declock`: a timekeeping system that uses fractional days instead of hours, minutes, and seconds
 [^doty]: `doty`: day-of-the-year; an alternative to months, weeks, hours, minutes, and seconds
-[^date]: `Decalendar` date: the integer part of the `doty`; an alternate to calendar dates and week dates
-[^time]: `Declock` time: the fractional part of the `doty`; an alternate to hours, minutes and seconds
+[^date]: `doty` date: the integer part of the `doty`; an alternate to calendar dates and week dates
+[^time]: `doty` time: the fractional part of the `doty`; an alternate to hours, minutes and seconds
 
 ```{ojs}
 //| echo: false
@@ -27,11 +27,11 @@ citation:
 //| fig-cap: "Declock time bar chart"
 //| fig-align: "center"
 //| fig-cap-location: margin
-//| column: screen-inset
+//| column: screen
 // https://observablehq.com/@fheyen/barchart-clock
 {
   const W = 450;
-  const H = 35;
+  const H = 57;
   const barX = 1;
   const firstBarY = 1;
   const svg = d3
@@ -39,76 +39,94 @@ citation:
     .attr("width", W)
     .attr("viewBox", [0, 0, W, H]);
   const xRange = [0, W - 100];
-  const scaleD = d3.scaleLinear()
+  const scaleM = d3.scaleLinear()
     .domain([0, 10])
     .range(xRange);
-  const scaleMandB = d3.scaleLinear()
+  const scaleCandB = d3.scaleLinear()
     .domain([0, 100])
     .range(xRange);
   // Background bars to show where 100% lies
   svg.selectAll('.background')
-    .data(['dimes', 'beats'])
+    .data(['cents', "mils", 'beats'])
     .enter()
     .append('rect')
     .attr('class', 'background timeBar')
     .attr('width', W-100)
-    .attr('y', (d,i)=>i*18+firstBarY)
-  // Dimes/Mils
+    .attr('y', (d,i)=>i*20+firstBarY)
+  // Cents/Mils
   svg
     .append('rect')
     .attr('class', 'timeBar')
     .attr('y', firstBarY)
-    .attr('width', d => scaleD(Number(barMils)/100+Number(barBeats)/10000))
+    .attr('width', d => scaleCandB(Number(barCents)+Number(barMils)/10+Number(barBeats)/1000))
   svg
     .append('rect')
     .attr('class', 'timeBarFull')
     .attr('y', firstBarY)
-    .attr('width', d => scaleD(barDimes))
-  // Dime ticks
-  svg.selectAll('.tick')
+    .attr('width', d => scaleCandB(barCents))
+  svg
+    .append('rect')
+    .attr('class', 'timeBar')
+    .attr('y', firstBarY+20)
+    .attr('width', d => scaleM(Number(barMils)+Number(barBeats)/100+Number(barMb)/100000))
+  svg
+    .append('rect')
+    .attr('class', 'timeBarFull')
+    .attr('y', firstBarY+20)
+    .attr('width', d => scaleM(barMils))
+  svg.selectAll('.tickC')
+    .data(d3.range(10, 100))
+    .enter()
+    .append('rect')
+    .attr('class', 'tickC')
+    .attr('x', d=>scaleM(d/10)+barX)
+    .attr('y', d=>d%2===0? firstBarY+6:firstBarY+9)
+    .attr('height', d=>d%2===0? 9:6)
+  // Mil ticks
+  svg.selectAll('.tickM')
     .data(d3.range(1, 10))
     .enter()
     .append('rect')
-    .attr('class', 'tick')
-    .attr('x', d=>scaleD(d)+barX)
-    .attr('y', d=>d%2===0?firstBarY:firstBarY)
-    .attr('height', d=>d%2===0? 4:7)
+    .attr('class', 'tickM')
+    .attr('x', d=>scaleM(d)+barX)
+    .attr('y', firstBarY+20)
+    .attr('height', 4)
   svg.selectAll('.tickLabel')
-    .data(d3.range(2, 10, 2))
+    .data(d3.range(1, 10))
     .enter()
     .append('text')
     .attr('class', 'tickLabel')
-    .attr('x', d=>scaleD(d)+barX+.4)
-    .attr('y', firstBarY+13)
+    .attr('x', d=>scaleM(d)+barX+.5)
+    .attr('y', firstBarY+33)
     .text(d=>d)
   // Beats
   svg
     .append('rect')
     .attr('class', 'timeBar')
-    .attr('y', firstBarY+18)
-    .attr('width', d => scaleMandB(Number(barBeats)+Number(barMb)/1000))
+    .attr('y', firstBarY+40)
+    .attr('width', d => scaleCandB(Number(barBeats)+Number(barMb)/1000))
   svg
     .append('rect')
     .attr('class', 'timeBarFull')
-    .attr('y', firstBarY+18)
-    .attr('width', d => scaleMandB(barBeats))
+    .attr('y', firstBarY+40)
+    .attr('width', d => scaleCandB(barBeats))
   // Beat ticks
   svg.selectAll('.tickB')
     .data(d3.range(10, 100))
     .enter()
     .append('rect')
     .attr('class', 'tickB')
-    .attr('x', d=>scaleD(d/10)+barX)
-    .attr('y', firstBarY+18)
+    .attr('x', d=>scaleM(d/10)+barX)
+    .attr('y', firstBarY+40)
     .attr('height', d=>d%2===0? 9:6)
   // Labels
   svg.selectAll('.timeLabel')
-    .data([`${barMils}‰`, `${barBeats}♫`])
+    .data([`${barCents}%`, `${barMils}‰`, `${barBeats}♫`])
     .enter()
     .append('text')
     .attr('class', 'timeLabel')
     .attr('x', barX+2)
-    .attr('y', (d,i)=>i*18+firstBarY+12)
+    .attr('y', (d,i)=>i*20+firstBarY+12)
     .text(d=>d)
   return svg.node();
 }
@@ -141,7 +159,7 @@ html`<style>
   .background {
     fill: white;
   }
-  .tick, .tickB {
+  .tickC, .tickM, .tickB {
     stroke: none;
     fill: #666;
     width: 1px;
@@ -149,24 +167,24 @@ html`<style>
 </style>`
 ```
 
-The top bar in @fig-bar-time shows `mils`[^mil] (`‰`). Each `mil` is .1% of the day. The bottom bar displays `beats`[^beat] (`♫`), which are like heart❤️beats or musical🎵[beats](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time) with a constant [rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or [tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm) of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, `mils` and `beats` can be used to measure durations, such as the number of `beats` since this webpage was loaded: \${styledTickTime}.
+The top bar in @fig-bar-time shows `cents`[^cent] (`%`). Each `cent` is 1% of the day, which is a little less a quarter hour. The middle bar shows `mils`[^mil] (`‰`). A `mil` is a tenth of a `cent`, which is close to a minute and a half. The bottom bar displays `beats`[^beat] (`♫`). A `beat` is 1% of a `mil`, which is almost as long as a second.
 
-[^mil]: `mil`: a thousandth ($10^{-3}$) of a day; the first 3 digits of the `Declock` time; an alternate to minutes
-[^beat]: `beat`: a hundred thousandth ($10^{-5}$) of a day; the first 5 digits of the `Declock` time; an alternate to seconds
+[^cent]: `cent`: a hundredth ($10^{-2}$) of a day; the first 2 digits of the `doty` time; an alternate to quarter hours
+[^mil]: `mil`: a thousandth ($10^{-3}$) of a day; the first 3 digits of the `doty` time; an alternate to minutes
+[^beat]: `beat`: a hundred thousandth ($10^{-5}$) of a day; the first 5 digits of the `doty` time; an alternate to seconds
 
-Just like `Declock` times have `mils` and `beats`, `Decalendar` `doty` dates have two components called the `dek`[^dek] and the day-of-the-`dek`[^dotd] (`dotd`). The `dek` (\${setStyle(doty.slice(0, 2), d3.schemePaired\[0\])}) and `dotd` (\${setStyle(doty\[2\], d3.schemePaired\[1\])}) in `Decalendar` dates (\${setStyle(dotyDate, d3.schemePaired\[1\])}) are analogous to the month and day-of-the-month (`dotm`) in [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (`mm-dd`) and the week and day-of-the-week (`dotw`) in [week dates](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (`Www-d`).
+A `Declock` `beat` can be thought of as a heart❤️beat or musical🎵[beat](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time) with a constant [rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or [tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm) of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, `beats` can be used to measure durations, such as the number of `beats` since this webpage was loaded: \${styledTickTime}.
+
+Just like `doty` times can be split up into `cents`, `mils`, and `beats`, `doty` dates have two components called the `dek`[^dek] and the day-of-the-`dek`[^dotd] (`dotd`). The `dek` (\${setStyle(doty.slice(0, 2), d3.schemePaired\[0\])}) and `dotd` (\${setStyle(doty\[2\], d3.schemePaired\[1\])}) in `Decalendar` dates (\${setStyle(dotyDate, d3.schemePaired\[1\])}) are analogous to the month and day-of-the-month (`dotm`) in [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (`mm-dd`) and the week and day-of-the-week (`dotw`) in [week dates](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (`Www-d`).
 
 [^dek]: `dek`: a group of 10 days; the first two digits of the `Decalendar` date; an alternate to month and weeks
 [^dotd]: `dotd`: one of the 10 days in a `dek`; the last digit of the `Decalendar` date; an alternate to the day-of-the-month and day-of-the-week
 
-As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `Declock` times. Fractional year dates[^year] can be combined with years into one number and are convenient for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increases by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
+As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `doty` times. Fractional year dates[^year] can be combined with years into one number and are convenient for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increases by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
 
 [^year]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
 
 Now it's your turn! Move the sliders🎚️in @exm-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign. Try entering a special date like your birthday🎂!
-
-::: {#exm-doty}
-:::
 
 ::: {.grid}
 
@@ -213,6 +231,9 @@ viewof dotmInput = transformInput(
 3. \${inputDotyZodiac}
 :::
 
+:::
+
+::: {#exm-doty .column-margin}
 :::
 
 #### `Doty` Observable code {#sec-ojs-code-doty .appendix}
@@ -395,9 +416,9 @@ tickDate = Math.floor(tick / 1e5)
 tickTime = tick % 1e5
 tickDelimiter = (tickDate > 0) ? "." : ""
 barTime = unix2dote(unix).toString().split(".")[1].slice(0, 8)
+barCents = barTime.slice(0, 2)
+barMils = barTime[2]
 barBeats = barTime.slice(3, 5)
-barMils = barTime.slice(0, 3)
-barDimes = barTime[0]
 barMb = barTime.slice(5)
 deco = unix2deco(unix).slice(0, 14)
 doty = deco.slice(5)
@@ -439,9 +460,6 @@ A year and a `doty` can be combined to form a `Decalendar` `ordinal`[^deco] (`de
 
 [^deco]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
 
-::: {#exm-dt}
-:::
-
 ::: {.grid}
 
 ::: {.g-col-6}
@@ -458,10 +476,10 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 
 :::
 
-Once you feel comfortable with the `deco` format, you can type a `deco` in @exm-deco to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into a) the `year-mm-ddThh:mm:ss` format and b) the year date format.
-
-::: {#exm-deco}
+::: {#exm-dt .column-margin}
 :::
+
+Once you feel comfortable with the `deco` format, you can type a `deco` in @exm-deco to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into a) the `year-mm-ddThh:mm:ss` format and b) the year date format.
 
 ::: {.grid}
 
@@ -482,6 +500,8 @@ viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", valu
 
 :::
 
+::: {#exm-deco .column-margin}
+:::
 
 #### `Deco` Observable code {#sec-ojs-code-deco .appendix}
 

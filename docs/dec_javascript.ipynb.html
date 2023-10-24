@@ -231,7 +231,7 @@
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2023+235</p>
+      <p class="date">2023+237</p>
     </div>
   </div>
   
@@ -244,12 +244,12 @@
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <section id="day-of-the-year" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="day-of-the-year"><span class="header-section-number">1.1</span> Day-of-the-year</h2>
-<p><code>Decalendar</code>[1] is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar🗓️system and <code>Declock</code>[2] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a number called the day-of-the-year (<code>doty</code>)[3]. Each <code>doty</code> (<span id="ojs-element-id-1"></span>) consists of a <code>Decalendar</code> date[4] (<span id="ojs-element-id-13"></span>) and a <code>Declock</code> time[5] (<span id="ojs-element-id-14"></span>). <a href="#fig-bar-time">Figure&nbsp;1</a> displays the current <code>Declock</code> time as a bar chart.</p>
+<p><code>Decalendar</code>[1] is a <a href="https://en.wikipedia.org/wiki/Decimal">decimal</a> calendar🗓️system and <code>Declock</code>[2] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, <code>Decalendar</code> and <code>Declock</code> use a number called the day-of-the-year (<code>doty</code>)[3]. Each <code>doty</code> (<span id="ojs-element-id-1"></span>) consists of a <code>Decalendar</code> <code>doty</code> date[4] (<span id="ojs-element-id-13"></span>) and a <code>Declock</code> <code>doty</code> time[5] (<span id="ojs-element-id-14"></span>). <a href="#fig-bar-time">Figure&nbsp;1</a> displays the current <code>doty</code> time as a bar chart.</p>
 <p>[1] <code>Decalendar</code>: a calendar system that uses <code>deks</code> instead of months and weeks</p>
 <p>[2] <code>Declock</code>: a timekeeping system that uses fractional days instead of hours, minutes, and seconds</p>
 <p>[3] <code>doty</code>: day-of-the-year; an alternative to months, weeks, hours, minutes, and seconds</p>
-<p>[4] <code>Decalendar</code> date: the integer part of the <code>doty</code>; an alternate to calendar dates and week dates</p>
-<p>[5] <code>Declock</code> time: the fractional part of the <code>doty</code>; an alternate to hours, minutes and seconds</p>
+<p>[4] <code>doty</code> date: the integer part of the <code>doty</code>; an alternate to calendar dates and week dates</p>
+<p>[5] <code>doty</code> time: the fractional part of the <code>doty</code>; an alternate to hours, minutes and seconds</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -259,25 +259,27 @@
 
 </div>
 </div>
-<p>The top bar in <a href="#fig-bar-time">Figure&nbsp;1</a> shows <code>mils</code>[1] (<code>‰</code>). Each <code>mil</code> is .1% of the day. The bottom bar displays <code>beats</code>[2] (<code>♫</code>), which are like heart❤️beats or musical🎵<a href="https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time">beats</a> with a constant <a href="https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.">rate</a> or <a href="https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm">tempo</a> of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, <code>mils</code> and <code>beats</code> can be used to measure durations, such as the number of <code>beats</code> since this webpage was loaded: <span id="ojs-element-id-2"></span>.</p>
-<p>Just like <code>Declock</code> times have <code>mils</code> and <code>beats</code>, <code>Decalendar</code> <code>doty</code> dates have two components called the <code>dek</code>[3] and the day-of-the-<code>dek</code>[4] (<code>dotd</code>). The <code>dek</code> (<span id="ojs-element-id-15"></span>) and <code>dotd</code> (<span id="ojs-element-id-16"></span>) in <code>Decalendar</code> dates (<span id="ojs-element-id-17"></span>) are analogous to the month and day-of-the-month (<code>dotm</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates">calendar dates</a> (<code>mm-dd</code>) and the week and day-of-the-week (<code>dotw</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Week_dates">week dates</a> (<code>Www-d</code>).</p>
-<p>As an alternative to <code>doty</code> dates, <code>Decalendar</code> can express dates in fractional years, which are similar to the <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> used in <code>Declock</code> times. Fractional year dates[5] can be combined with years into one number and are convenient for marking periods of 73 days in the <code>Decalendar</code> year. Every 73 days, the <code>Decalendar</code> fractional year date increases by .2 (⅕). The current <code>Decalendar</code> fractional year date is <span id="ojs-element-id-18"></span>.</p>
+<p>The top bar in <a href="#fig-bar-time">Figure&nbsp;1</a> shows <code>cents</code>[1] (<code>%</code>). Each <code>cent</code> is 1% of the day, which is a little less a quarter hour. The middle bar shows <code>mils</code>[2] (<code>‰</code>). A <code>mil</code> is a tenth of a <code>cent</code>, which is close to a minute and a half. The bottom bar displays <code>beats</code>[3] (<code>♫</code>). A <code>beat</code> is 1% of a <code>mil</code>, which is almost as long as a second.</p>
+<p>A <code>Declock</code> <code>beat</code> can be thought of as a heart❤️beat or musical🎵<a href="https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time">beat</a> with a constant <a href="https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.">rate</a> or <a href="https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm">tempo</a> of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, <code>beats</code> can be used to measure durations, such as the number of <code>beats</code> since this webpage was loaded: <span id="ojs-element-id-2"></span>.</p>
+<p>Just like <code>doty</code> times can be split up into <code>cents</code>, <code>mils</code>, and <code>beats</code>, <code>doty</code> dates have two components called the <code>dek</code>[4] and the day-of-the-<code>dek</code>[5] (<code>dotd</code>). The <code>dek</code> (<span id="ojs-element-id-15"></span>) and <code>dotd</code> (<span id="ojs-element-id-16"></span>) in <code>Decalendar</code> dates (<span id="ojs-element-id-17"></span>) are analogous to the month and day-of-the-month (<code>dotm</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates">calendar dates</a> (<code>mm-dd</code>) and the week and day-of-the-week (<code>dotw</code>) in <a href="https://en.wikipedia.org/wiki/ISO_8601#Week_dates">week dates</a> (<code>Www-d</code>).</p>
+<p>As an alternative to <code>doty</code> dates, <code>Decalendar</code> can express dates in fractional years, which are similar to the <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> used in <code>doty</code> times. Fractional year dates[6] can be combined with years into one number and are convenient for marking periods of 73 days in the <code>Decalendar</code> year. Every 73 days, the <code>Decalendar</code> fractional year date increases by .2 (⅕). The current <code>Decalendar</code> fractional year date is <span id="ojs-element-id-18"></span>.</p>
 <p>Now it’s your turn! Move the sliders🎚️in <a href="#exm-doty">Example&nbsp;1</a> to adjust the <code>doty</code>, fractional year, month, and <code>dotm</code> values and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign. Try entering a special date like your birthday🎂!</p>
-<p><span class="theorem-title"><strong>Example 1 </strong></span>&nbsp;</p>
 <ol type="1">
 <li><span id="ojs-element-id-3"></span></li>
 <li><span id="ojs-element-id-4"></span></li>
 <li><span id="ojs-element-id-5"></span></li>
 </ol>
+<p><span class="theorem-title"><strong>Example 1 </strong></span>&nbsp;</p>
 <section id="doty-observable-code" class="level4">
 <h4 class="anchored" data-anchor-id="doty-observable-code"><code>Doty</code> Observable code</h4>
 <section id="functions" class="level5">
 <h5 class="anchored" data-anchor-id="functions">Functions</h5>
-<p>[1] <code>mil</code>: a thousandth (<span class="math inline">\(10^{-3}\)</span>) of a day; the first 3 digits of the <code>Declock</code> time; an alternate to minutes</p>
-<p>[2] <code>beat</code>: a hundred thousandth (<span class="math inline">\(10^{-5}\)</span>) of a day; the first 5 digits of the <code>Declock</code> time; an alternate to seconds</p>
-<p>[3] <code>dek</code>: a group of 10 days; the first two digits of the <code>Decalendar</code> date; an alternate to month and weeks</p>
-<p>[4] <code>dotd</code>: one of the 10 days in a <code>dek</code>; the last digit of the <code>Decalendar</code> date; an alternate to the day-of-the-month and day-of-the-week</p>
-<p>[5] fractional year date: a year and the proportion of that year that has passed; an alternative to <code>Decalendar</code> dates</p>
+<p>[1] <code>cent</code>: a hundredth (<span class="math inline">\(10^{-2}\)</span>) of a day; the first 2 digits of the <code>doty</code> time; an alternate to quarter hours</p>
+<p>[2] <code>mil</code>: a thousandth (<span class="math inline">\(10^{-3}\)</span>) of a day; the first 3 digits of the <code>doty</code> time; an alternate to minutes</p>
+<p>[3] <code>beat</code>: a hundred thousandth (<span class="math inline">\(10^{-5}\)</span>) of a day; the first 5 digits of the <code>doty</code> time; an alternate to seconds</p>
+<p>[4] <code>dek</code>: a group of 10 days; the first two digits of the <code>Decalendar</code> date; an alternate to month and weeks</p>
+<p>[5] <code>dotd</code>: one of the 10 days in a <code>dek</code>; the last digit of the <code>Decalendar</code> date; an alternate to the day-of-the-month and day-of-the-week</p>
+<p>[6] fractional year date: a year and the proportion of that year that has passed; an alternative to <code>Decalendar</code> dates</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -508,9 +510,9 @@
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>tickTime <span class="op">=</span> tick <span class="op">%</span> <span class="fl">1e5</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>tickDelimiter <span class="op">=</span> (tickDate <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">?</span> <span class="st">"."</span> <span class="op">:</span> <span class="st">""</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>barTime <span class="op">=</span> <span class="fu">unix2dote</span>(unix)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">8</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>barBeats <span class="op">=</span> barTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">3</span><span class="op">,</span> <span class="dv">5</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>barMils <span class="op">=</span> barTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">3</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>barDimes <span class="op">=</span> barTime[<span class="dv">0</span>]</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>barCents <span class="op">=</span> barTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>barMils <span class="op">=</span> barTime[<span class="dv">2</span>]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>barBeats <span class="op">=</span> barTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">3</span><span class="op">,</span> <span class="dv">5</span>)</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>barMb <span class="op">=</span> barTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">5</span>)</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>deco <span class="op">=</span> <span class="fu">unix2deco</span>(unix)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">14</span>)</span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>doty <span class="op">=</span> deco<span class="op">.</span><span class="fu">slice</span>(<span class="dv">5</span>)</span>
@@ -659,13 +661,12 @@
 <section id="year" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="year"><span class="header-section-number">1.2</span> Year</h2>
 <p>A year and a <code>doty</code> can be combined to form a <code>Decalendar</code> <code>ordinal</code>[1] (<code>deco</code>). In <a href="#exm-dt">Example&nbsp;2</a>, you can enter a year, month, <code>dotm</code>, hour, and minute to see the equivalent 1) <code>deco</code> timestamp (<code>year+day.clock</code>) and 2) year date (<code>year.yyy</code>).</p>
-<p><span class="theorem-title"><strong>Example 2 </strong></span>&nbsp;</p>
 <ol type="1">
 <li><span id="ojs-element-id-6"></span></li>
 <li><span id="ojs-element-id-7"></span></li>
 </ol>
+<p><span class="theorem-title"><strong>Example 2 </strong></span>&nbsp;</p>
 <p>Once you feel comfortable with the <code>deco</code> format, you can type a <code>deco</code> in <a href="#exm-deco">Example&nbsp;3</a> to see what it looks like after it is 1) <strong>parsed</strong> from a string of characters into a year and <code>doty</code>, 2) <strong>standardized</strong> to ensure years are integers and <code>doties</code> are positive numbers below 366 <span class="math inline">\(\left[0, 366\right)\)</span>, and 3) <strong>converted</strong> into a) the <code>year-mm-ddThh:mm:ss</code> format and b) the year date format.</p>
-<p><span class="theorem-title"><strong>Example 3 </strong></span>&nbsp;</p>
 <ol type="1">
 <li><p><span id="ojs-element-id-8"></span>, <span id="ojs-element-id-9"></span></p></li>
 <li><p><span id="ojs-element-id-10"></span></p></li>
@@ -674,6 +675,7 @@
 <li><span id="ojs-element-id-12"></span></li>
 </ol></li>
 </ol>
+<p><span class="theorem-title"><strong>Example 3 </strong></span>&nbsp;</p>
 <section id="deco-observable-code" class="level4">
 <h4 class="anchored" data-anchor-id="deco-observable-code"><code>Deco</code> Observable code</h4>
 <section id="functions-1" class="level5">
@@ -1001,14 +1003,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_javascript_files/figure-html/8ea0663a-1f77-40ad-9069-afa8e3ab73c8-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="dec_javascript_files/figure-html/e5f8ce4c-73d2-41a7-b3e5-fab57d973b6c-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_javascript_files/figure-html/8ea0663a-1f77-40ad-9069-afa8e3ab73c8-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="dec_javascript_files/figure-html/e5f8ce4c-73d2-41a7-b3e5-fab57d973b6c-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3821,7 +3823,7 @@ y \mod 4 = 0 \\
 <span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023+235.00908+0</code></pre>
+<pre><code>2023+237.52021+0</code></pre>
 </div>
 </div></div>
 </section>
