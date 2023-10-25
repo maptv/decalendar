@@ -12,8 +12,7 @@ format:
   html:
     highlight-style: a11y
     anchor-sections: true
-    section-title-reuse: "License"
-    section-title-footnotes: "Glossary"
+    tbl-cap-location: margin
     code-block-background: false
     code-block-border-left: false
     citations-hover: true
@@ -24,6 +23,9 @@ format:
     code-tools: true
     link-external-icon: true
     link-external-newwindow: true
+    crossref:
+      lst-title: List
+      lst-prefix: List
     theme:
       light: [flatly, light.scss]
       dark: [darkly, dark.scss]

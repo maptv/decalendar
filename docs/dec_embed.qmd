@@ -13,7 +13,7 @@ citation:
 
 ## Day-of-the-year {#sec-intro-doty}
 
-`Decalendar`[^decalendar] is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock`[^declock] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a number called the day-of-the-year (`doty`)[^doty]. Each `doty` (\${styledDotyDate}.\${styledDotyTime}) consists of a `Decalendar` `doty` date[^date] (\${setStyle(dotyDate, d3.schemePaired\[1\])}) and a `Declock` `doty` time[^time] (\${setStyle(dotyTime, d3.schemePaired\[2\])}). @fig-bar-time displays the current `doty` time as a bar chart.
+`Decalendar`[^decalendar] is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock`[^declock] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a number called the day-of-the-year (`doty`)[^doty]. @fig-bar-doty displays the current `doty` (\${styledDotyDate}.\${styledDotyTime}) as a bar chart. The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the `Decalendar` date[^date] (\${setStyle(dotyDate, d3.schemePaired\[1\])}) and the [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) is the `Declock` time[^time] (\${setStyle(dotyTime, d3.schemePaired\[2\])}).
 
 [^decalendar]: `Decalendar`: a calendar system that uses `deks` instead of months and weeks
 [^declock]: `Declock`: a timekeeping system that uses fractional days instead of hours, minutes, and seconds
@@ -21,19 +21,30 @@ citation:
 [^date]: `doty` date: the integer part of the `doty`; an alternate to calendar dates and week dates
 [^time]: `doty` time: the fractional part of the `doty`; an alternate to hours, minutes and seconds
 
+The top two bars in @fig-bar-doty (旬 and 日) show the two components of the `Decalendar` date (\${setStyle(dotyDate, d3.schemePaired\[1\])}): the `dek`[^dek]  (\${styledDek}) and the day-of-the-`dek`[^dotd] (\${styledDotd}). A `dek` is a group of 10 days that fulfills the role of months and weeks in `Decalendar`. Therefore, the `dek` and the day-of-the-`dek` (`dotd`) in `Decalendar` dates are analogous to the month and day-of-the-month (`dotm`) in [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (`mm-dd`) and the week and day-of-the-week (`dotw`) in [week dates](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (`Www-d`).
+
+[^dek]: `dek`: a group of 10 days; the first two digits of the `Decalendar` date; an alternate to month and weeks
+[^dotd]: `dotd`: one of the 10 days in a `dek`; the last digit of the `Decalendar` date; an alternate to the day-of-the-month and day-of-the-week
+
+The bottom three bars in @fig-bar-doty (%, ‰, and ♫) show components of the `Declock` time (\${setStyle(dotyTime, d3.schemePaired\[2\])}):
+`cents`[^cent] (\${styledCent}), `mils`[^mil] (\${styledMil}), and `beats`[^beat] (\${styledBeat}). A `cent` is 1% of the day, which is a little less than a quarter hour. A `mil` (`‰`) is a tenth of a `cent`, which is close to a minute and a half. A `beat` is 1% of a `mil`, which is almost as long as a second, and can be thought of as a heart❤️beat or musical🎵[beat](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time) with a constant [rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or [tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm) of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, `beats` can be used to measure durations, such as the time since this webpage was loaded: \${styledTickTime}.
+
+[^cent]: `cent`: a hundredth ($10^{-2}$) of a day; the first 2 digits of the `doty` time; an alternate to quarter hours
+[^mil]: `mil`: a thousandth ($10^{-3}$) of a day; the first 3 digits of the `doty` time; an alternate to minutes
+[^beat]: `beat`: a hundred thousandth ($10^{-5}$) of a day; the first 5 digits of the `doty` time; an alternate to seconds
+
 ```{ojs}
 //| echo: false
-//| label: fig-bar-time
-//| fig-cap: "Declock time bar chart"
+//| label: fig-bar-doty
+//| fig-cap: "Doty bar chart"
 //| fig-align: "center"
-//| fig-cap-location: margin
-//| column: screen
+//| column: screen-inset
 // https://observablehq.com/@fheyen/barchart-clock
 {
-  const W = 450;
-  const H = 57;
+  const W = width;
+  const H = 156;
   const barX = 1;
-  const firstBarY = 1;
+  const firstBarY = 10;
   const svg = d3
     .create("svg")
     .attr("width", W)
@@ -45,43 +56,101 @@ citation:
   const scaleCandB = d3.scaleLinear()
     .domain([0, 100])
     .range(xRange);
+  const scaleDek = d3.scaleLinear()
+    .domain([0, 37])
+    .range(xRange);
   // Background bars to show where 100% lies
   svg.selectAll('.background')
-    .data(['cents', "mils", 'beats'])
+    .data(['dek', 'dotd', 'cents', "mils", 'beats'])
     .enter()
     .append('rect')
     .attr('class', 'background timeBar')
     .attr('width', W-100)
-    .attr('y', (d,i)=>i*20+firstBarY)
+    .attr('y', (d,i)=>i*30+firstBarY)
+  // Dek/Dotd
+  svg
+    .append('rect')
+    .attr('class', 'timeBar')
+    .attr('y', firstBarY)
+    .attr('width', d => scaleDek(Number(dotyDek)+Number(dotyDotd)/10+Number(barCents)/1000))
+  svg
+    .append('rect')
+    .attr('class', 'timeBarFull')
+    .attr('y', firstBarY)
+    .attr('width', d => scaleDek(dotyDek))
+  svg
+    .append('rect')
+    .attr('class', 'timeBar')
+    .attr('y', firstBarY+30)
+    .attr('width', d => scaleM(Number(dotyDotd)+Number(barCents)/100+Number(barMils)/1000))
+  svg
+    .append('rect')
+    .attr('class', 'timeBarFull')
+    .attr('y', firstBarY+30)
+    .attr('width', d => scaleM(dotyDotd))
+  svg.selectAll('.tickDek')
+    .data(d3.range(3, 37))
+    .enter()
+    .append('rect')
+    .attr('class', 'tickDek')
+    .attr('x', d=>scaleDek(d)+barX)
+    .attr('y', firstBarY)
+    .attr('height', d=>d%3===0? 6:4)
+  // Cent ticks
+  svg.selectAll('.tickDotd')
+    .data(d3.range(1, 10))
+    .enter()
+    .append('rect')
+    .attr('class', 'tickDotd')
+    .attr('x', d=>scaleM(d)+barX)
+    .attr('y', firstBarY+49)
+    .attr('height', 6)
+  svg.selectAll('.tickLabel')
+    .data(d3.range(6, 37, 3))
+    .enter()
+    .append('text')
+    .attr('class', 'tickLabel')
+    .attr('x', d=>scaleDek(d)+barX+.5)
+    .attr('y', firstBarY+22)
+    .text(d=>d)
   // Cents/Mils
   svg
     .append('rect')
     .attr('class', 'timeBar')
-    .attr('y', firstBarY)
+    .attr('y', firstBarY+60)
     .attr('width', d => scaleCandB(Number(barCents)+Number(barMils)/10+Number(barBeats)/1000))
   svg
     .append('rect')
     .attr('class', 'timeBarFull')
-    .attr('y', firstBarY)
+    .attr('y', firstBarY+60)
     .attr('width', d => scaleCandB(barCents))
   svg
     .append('rect')
     .attr('class', 'timeBar')
-    .attr('y', firstBarY+20)
+    .attr('y', firstBarY+90)
     .attr('width', d => scaleM(Number(barMils)+Number(barBeats)/100+Number(barMb)/100000))
   svg
     .append('rect')
     .attr('class', 'timeBarFull')
-    .attr('y', firstBarY+20)
+    .attr('y', firstBarY+90)
     .attr('width', d => scaleM(barMils))
+  // Cent ticks
   svg.selectAll('.tickC')
     .data(d3.range(10, 100))
     .enter()
     .append('rect')
     .attr('class', 'tickC')
     .attr('x', d=>scaleM(d/10)+barX)
-    .attr('y', d=>d%2===0? firstBarY+6:firstBarY+9)
-    .attr('height', d=>d%2===0? 9:6)
+    .attr('y', firstBarY+60)
+    .attr('height', d=>d%2===0? 8:5)
+  svg.selectAll('.tickC1')
+    .data(d3.range(10, 100))
+    .enter()
+    .append('rect')
+    .attr('class', 'tickC1')
+    .attr('x', d=>scaleM(d/10)+barX)
+    .attr('y', d=>d%2===0? firstBarY+77:firstBarY+80)
+    .attr('height', d=>d%2===0? 8:5)
   // Mil ticks
   svg.selectAll('.tickM')
     .data(d3.range(1, 10))
@@ -89,26 +158,42 @@ citation:
     .append('rect')
     .attr('class', 'tickM')
     .attr('x', d=>scaleM(d)+barX)
-    .attr('y', firstBarY+20)
-    .attr('height', 4)
-  svg.selectAll('.tickLabel')
+    .attr('y', firstBarY+90)
+    .attr('height', 6)
+  svg.selectAll('.tickM1')
+    .data(d3.range(1, 10))
+    .enter()
+    .append('rect')
+    .attr('class', 'tickM1')
+    .attr('x', d=>scaleM(d)+barX)
+    .attr('y', firstBarY+92.5)
+    .attr('height', 2.5)
+  svg.selectAll('.tickLabel1')
     .data(d3.range(1, 10))
     .enter()
     .append('text')
-    .attr('class', 'tickLabel')
+    .attr('class', 'tickLabel1')
     .attr('x', d=>scaleM(d)+barX+.5)
-    .attr('y', firstBarY+33)
+    .attr('y', firstBarY+47)
+    .text(d=>d)
+  svg.selectAll('.tickLabel2')
+    .data(d3.range(1, 10))
+    .enter()
+    .append('text')
+    .attr('class', 'tickLabel2')
+    .attr('x', d=>scaleM(d)+barX+.5)
+    .attr('y', firstBarY+112)
     .text(d=>d)
   // Beats
   svg
     .append('rect')
     .attr('class', 'timeBar')
-    .attr('y', firstBarY+40)
+    .attr('y', firstBarY+120)
     .attr('width', d => scaleCandB(Number(barBeats)+Number(barMb)/1000))
   svg
     .append('rect')
     .attr('class', 'timeBarFull')
-    .attr('y', firstBarY+40)
+    .attr('y', firstBarY+120)
     .attr('width', d => scaleCandB(barBeats))
   // Beat ticks
   svg.selectAll('.tickB')
@@ -117,16 +202,16 @@ citation:
     .append('rect')
     .attr('class', 'tickB')
     .attr('x', d=>scaleM(d/10)+barX)
-    .attr('y', firstBarY+40)
+    .attr('y', firstBarY+120)
     .attr('height', d=>d%2===0? 9:6)
   // Labels
   svg.selectAll('.timeLabel')
-    .data([`${barCents}%`, `${barMils}‰`, `${barBeats}♫`])
+    .data([`${dotyDek}旬`, `${dotyDotd}日`, `${barCents}%`, `${barMils}‰`, `${barBeats}♫`])
     .enter()
     .append('text')
     .attr('class', 'timeLabel')
     .attr('x', barX+2)
-    .attr('y', (d,i)=>i*20+firstBarY+12)
+    .attr('y', (d,i)=>i*30+firstBarY+20)
     .text(d=>d)
   return svg.node();
 }
@@ -138,7 +223,7 @@ html`<style>
   text {
     fill: #000;
     font-family: sans-serif;
-    font-size: 12px;
+    font-size: 20px;
     text-anchor: middle;
   }
   .timeLabel {
@@ -146,7 +231,7 @@ html`<style>
   }
   .timeBar, .timeBarFull {
     x: 1px;
-    height: 15px;
+    height: 25px;
     rx: 5px;
     stroke: #aaa;
   }
@@ -159,7 +244,7 @@ html`<style>
   .background {
     fill: white;
   }
-  .tickC, .tickM, .tickB {
+  .tickDek, .tickDotd, .tickDotd1, .tickC, .tickC1, .tickM, .tickM1, .tickB {
     stroke: none;
     fill: #666;
     width: 1px;
@@ -167,24 +252,11 @@ html`<style>
 </style>`
 ```
 
-The top bar in @fig-bar-time shows `cents`[^cent] (`%`). Each `cent` is 1% of the day, which is a little less a quarter hour. The middle bar shows `mils`[^mil] (`‰`). A `mil` is a tenth of a `cent`, which is close to a minute and a half. The bottom bar displays `beats`[^beat] (`♫`). A `beat` is 1% of a `mil`, which is almost as long as a second.
-
-[^cent]: `cent`: a hundredth ($10^{-2}$) of a day; the first 2 digits of the `doty` time; an alternate to quarter hours
-[^mil]: `mil`: a thousandth ($10^{-3}$) of a day; the first 3 digits of the `doty` time; an alternate to minutes
-[^beat]: `beat`: a hundred thousandth ($10^{-5}$) of a day; the first 5 digits of the `doty` time; an alternate to seconds
-
-A `Declock` `beat` can be thought of as a heart❤️beat or musical🎵[beat](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time) with a constant [rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or [tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm) of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, `beats` can be used to measure durations, such as the number of `beats` since this webpage was loaded: \${styledTickTime}.
-
-Just like `doty` times can be split up into `cents`, `mils`, and `beats`, `doty` dates have two components called the `dek`[^dek] and the day-of-the-`dek`[^dotd] (`dotd`). The `dek` (\${setStyle(doty.slice(0, 2), d3.schemePaired\[0\])}) and `dotd` (\${setStyle(doty\[2\], d3.schemePaired\[1\])}) in `Decalendar` dates (\${setStyle(dotyDate, d3.schemePaired\[1\])}) are analogous to the month and day-of-the-month (`dotm`) in [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (`mm-dd`) and the week and day-of-the-week (`dotw`) in [week dates](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (`Www-d`).
-
-[^dek]: `dek`: a group of 10 days; the first two digits of the `Decalendar` date; an alternate to month and weeks
-[^dotd]: `dotd`: one of the 10 days in a `dek`; the last digit of the `Decalendar` date; an alternate to the day-of-the-month and day-of-the-week
-
 As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `doty` times. Fractional year dates[^year] can be combined with years into one number and are convenient for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increases by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
 
 [^year]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
 
-Now it's your turn! Move the sliders🎚️in @exm-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) season in the Northern Hemisphere, 2) season in the Southern Hemisphere, and 3) Zodiac sign. Try entering a special date like your birthday🎂!
+Now it's your turn! Move the sliders🎚️next to @lst-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign. Try entering a special date like your birthday🎂!
 
 ::: {.grid}
 
@@ -192,27 +264,17 @@ Now it's your turn! Move the sliders🎚️in @exm-doty to adjust the `doty`, fr
 ```{ojs}
 //| echo: false
 viewof inputDoty = Inputs.range([0, 365], {value: 306, step: 1, label: "doty"});
-```
 
-```{ojs}
-//| echo: false
 viewof year = transformInput(
     Inputs.range([0, .999], {step: .001, label: "year"}),
     {bind: viewof inputDoty, transform: (x => x / 365), invert: (x => x * 365)}
 );
-```
 
-```{ojs}
-//| echo: false
 viewof monthInput = transformInput(
     Inputs.range([1, 12], {step: 1, label: "month"}),
     {bind: viewof inputDoty, transform: doty2month, invert: month2doty}
 );
-```
 
-
-```{ojs}
-//| echo: false
 viewof dotmInput = transformInput(
     Inputs.range([1, 31], {step: 1, label: "dotm"}),
     {bind: viewof inputDoty, transform: doty2dotm, invert: (x => Math.floor(( 153 * (
@@ -222,18 +284,26 @@ viewof dotmInput = transformInput(
     ) / 5 + x - 1
 ))});
 ```
-
 :::
 
 ::: {.g-col-6}
+
 1. \${inputDotySeason\[0\]}
 2. \${inputDotySeason\[1\]}
 3. \${inputDotyZodiac}
-:::
+
+```{ojs}
+//| echo: false
+viewof scrubberDoty = Scrubber(numbers, {autoplay: false, alternate: true, delay: 100, loopDelay: 500})
+```
 
 :::
 
-::: {#exm-doty .column-margin}
+:::
+
+::: {.column-margin}
+```{#lst-doty lst-cap="Date to season conversion"}
+```
 :::
 
 #### `Doty` Observable code {#sec-ojs-code-doty .appendix}
@@ -241,6 +311,83 @@ viewof dotmInput = transformInput(
 ##### Functions {.appendix}
 
 ```{ojs}
+// https://observablehq.com/@observablehq/synchronized-inputs
+function set(input, value) {
+  input.value = value;
+  input.dispatchEvent(new Event("input", {bubbles: true}));
+}
+// https://observablehq.com/@mbostock/scrubber
+function Scrubber(values, {
+  format = value => value,
+  initial = 0,
+  direction = 1,
+  delay = null,
+  autoplay = true,
+  loop = true,
+  loopDelay = null,
+  alternate = false
+} = {}) {
+  values = Array.from(values);
+  const form = html`<form style="font: 12px var(--sans-serif); font-variant-numeric: tabular-nums; display: flex; height: 33px; align-items: center;">
+  <button name=b type=button style="background-color:#002ead;color:#fff;border-radius:10px;margin-left:.4em;width: 5em;"></button>
+  <label style="display: flex; align-items: center;">
+    <input name=i type=range min=0 max=${values.length - 1} value=${initial} step=1 style="display: none;">
+    <output name=o style="display: none;"></output>
+  </label>
+</form>`;
+  let frame = null;
+  let timer = null;
+  let interval = null;
+  function start() {
+    form.b.textContent = "Pause";
+    if (delay === null) frame = requestAnimationFrame(tick);
+    else interval = setInterval(tick, delay);
+  }
+  function stop() {
+    form.b.textContent = "Play";
+    if (frame !== null) cancelAnimationFrame(frame), frame = null;
+    if (timer !== null) clearTimeout(timer), timer = null;
+    if (interval !== null) clearInterval(interval), interval = null;
+  }
+  function running() {
+    return frame !== null || timer !== null || interval !== null;
+  }
+  function tick() {
+    if (form.i.valueAsNumber === (direction > 0 ? values.length - 1 : direction < 0 ? 0 : NaN)) {
+      if (!loop) return stop();
+      if (alternate) direction = -direction;
+      if (loopDelay !== null) {
+        if (frame !== null) cancelAnimationFrame(frame), frame = null;
+        if (interval !== null) clearInterval(interval), interval = null;
+        timer = setTimeout(() => (step(), start()), loopDelay);
+        return;
+      }
+    }
+    if (delay === null) frame = requestAnimationFrame(tick);
+    step();
+  }
+  function step() {
+    form.i.valueAsNumber = (form.i.valueAsNumber + direction + values.length) % values.length;
+    form.i.dispatchEvent(new CustomEvent("input", {bubbles: true}));
+  }
+  form.i.oninput = event => {
+    if (event && event.isTrusted && running()) stop();
+    form.value = values[form.i.valueAsNumber];
+    form.o.value = format(form.value, form.i.valueAsNumber, values);
+  };
+  form.b.onclick = () => {
+    if (running()) return stop();
+    direction = alternate && form.i.valueAsNumber === values.length - 1 ? -1 : 1;
+    form.i.valueAsNumber = (form.i.valueAsNumber + direction) % values.length;
+    form.i.dispatchEvent(new CustomEvent("input", {bubbles: true}));
+    start();
+  };
+  form.i.oninput();
+  if (autoplay) start();
+  else stop();
+  Inputs.disposal(form).then(stop);
+  return form;
+}
 // https://observablehq.com/@juang1744/transform-input/1
 transformInput = function(target, {bind: source, transform = identity, involutory = false, invert = involutory ? transform : inverse(transform)} = {}){
   if (source === undefined) {
@@ -249,12 +396,12 @@ transformInput = function(target, {bind: source, transform = identity, involutor
   }
   function sourceInputHandler() {
     target.removeEventListener("input", targetInputHandler);
-    set(target).to(transform(source.value)).andDispatchEvent();
+    setTransform(target).to(transform(source.value)).andDispatchEvent();
     target.addEventListener("input", targetInputHandler);
   }
   function targetInputHandler() {
     source.removeEventListener("input", sourceInputHandler);
-    set(source).to(invert(target.value)).andDispatchEvent();
+    setTransform(source).to(invert(target.value)).andDispatchEvent();
     source.addEventListener("input", sourceInputHandler);
   }
   source.addEventListener("input", sourceInputHandler);
@@ -267,6 +414,7 @@ transformInput = function(target, {bind: source, transform = identity, involutor
   sourceInputHandler();
   return target;
 }
+setTransform = (input) => ({to: (value) => (input.value = value, {andDispatchEvent: (event = new Event("input")) => input.dispatchEvent(event)})});
 function inverse(f) {
   switch (f) {
     case identity:  return identity;
@@ -294,7 +442,6 @@ function inverse(f) {
 function identity(x) {
   return x;
 }
-set = (input) => ({to: (value) => (input.value = value, {andDispatchEvent: (event = new Event("input")) => input.dispatchEvent(event)})});
 // https://observablehq.com/@observablehq/text-color-annotations-in-markdown#textcolor
 function setStyle(content, style = {}) {
   function yiq(color) {
@@ -424,6 +571,8 @@ deco = unix2deco(unix).slice(0, 14)
 doty = deco.slice(5)
 dotyDate = doty.slice(0, 3)
 dotyTime = doty.slice(4)
+dotyDek = doty.slice(0, 2)
+dotyDotd = doty[2]
 iso = {
   while(true) {
     yield new Date().toISOString()
@@ -435,28 +584,24 @@ season = doty2toty(dotyDate)
 zodiac = doty2zodi(dotyDate)
 inputDotySeason = doty2toty(inputDoty)
 inputDotyZodiac = doty2zodi(inputDoty)
+numbers = Array.from({length: 365}, (_, i) => i)
+set(viewof inputDoty, scrubberDoty)
 ```
 
 ```{ojs}
 styledDotyDate = setStyle(dotyDate, d3.schemePaired[1])
 styledDotyTime = setStyle(dotyTime, d3.schemePaired[2])
-styledTickDate = (tickDate > 0) ? setStyle(tickDate, d3.schemePaired[1]) : ""
 styledTickTime = setStyle(tickTime, d3.schemePaired[2])
-styledIsoDate = setStyle(isoDate, d3.schemePaired[5])
-styledIsoTime = setStyle(isoTime, d3.schemePaired[4])
-styledDek = setStyle(doty.slice(0, 2), d3.schemePaired[0])
-styledDotd = setStyle(doty[2], d3.schemePaired[1])
-styledDime = setStyle(dotyTime[0], d3.schemePaired[9])
-styledCent = setStyle(dotyTime[1], d3.schemePaired[8])
-styledMil = setStyle(dotyTime[2], d3.schemeAccent[5])
-styledPhrase = setStyle(dotyTime[3], d3.schemePaired[2])
-styledBeat = setStyle(dotyTime[4], d3.schemePaired[11])
-styledMonthAndDay = setStyle(doty2greg(inputDoty).map(i => i.toString().padStart(2, "0")).join("-"), d3.schemePaired[5]);
+styledDek = setStyle(dotyDek, d3.schemePaired[0])
+styledDotd = setStyle(dotyDotd, d3.schemePaired[9])
+styledCent = setStyle(dotyTime.slice(0, 2), d3.schemePaired[7])
+styledMil = setStyle(dotyTime[2], d3.schemePaired[6])
+styledBeat = setStyle(dotyTime.slice(3, 5), d3.schemePaired[11])
 ```
 
 ## Year {#sec-intro-year}
 
-A year and a `doty` can be combined to form a `Decalendar` `ordinal`[^deco] (`deco`). In @exm-dt, you can enter a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`).
+A year and a `doty` can be combined to form a `Decalendar` `ordinal`[^deco] (`deco`). You can enter a year, month, `dotm`, hour, and minute next to @lst-date to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`).
 
 [^deco]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
 
@@ -470,16 +615,19 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 :::
 
 ::: {.g-col-6}
+
 1. \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}
 2. \${styledOutputDatetimeYear}
 :::
 
 :::
 
-::: {#exm-dt .column-margin}
+::: {.column-margin}
+```{#lst-date lst-cap="Date and time conversion" cap-location=margin}
+```
 :::
 
-Once you feel comfortable with the `deco` format, you can type a `deco` in @exm-deco to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366 $\left[0, 366\right)$, and 3) **converted** into a) the `year-mm-ddThh:mm:ss` format and b) the year date format.
+Once you feel comfortable with the `deco` format, you can type a `deco` next to @lst-deco to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366, and 3) **converted** into a) the year date format and b) the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`).
 
 ::: {.grid}
 
@@ -491,16 +639,19 @@ viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", valu
 :::
 
 ::: {.g-col-6}
+
 1. \${styledParsedYear}, \${styledParsedDotyDate}\${parsedDotyTimeDelimiter}\${styledParsedDotyTime}
 2. \${styledDecoYear}+\${styledDecoDotyDate}\${decoDotyTimeDelimiter}\${styledDecoDotyTime}
 3.
-  a. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
-  b. \${styledOutputDecoYear}
+  a. \${styledOutputDecoYear}
+  b. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
 :::
 
 :::
 
-::: {#exm-deco .column-margin}
+::: {.column-margin}
+```{#lst-deco lst-cap="Deco string processing" cap-location=margin}
+```
 :::
 
 #### `Deco` Observable code {#sec-ojs-code-deco .appendix}
@@ -621,7 +772,7 @@ Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is a
 
 ## Fractions analogy {#sec-frac}
 
-In the simplest terms, `Decalendar` counts fractions of a year, while `Declock` counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, and the `Declock` denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of`Decalendar`, the numerator is the days that have passed in the year, while in the context of`Declock`, the numerator is the parts of the day that have passed in the day.
+In the simplest terms, `Decalendar` counts fractions of a year, while `Declock` counts fractions of a day. The denominator for `Decalendar` is the number of days in the year, and the `Declock` denominator is $10^x$, where $x$ is the number of digits in the numerator. In both systems, only the numerator, not the denominator, is provided. In the context of `Decalendar`, the numerator is the days that have passed in the year, while in the context of `Declock`, the numerator is the parts of the day that have passed in the day.
 
 To avoid any confusion between the two, we can say "Day 5" to mean the date when 5 days have passed this year or `Day` `0` to mean the first day-of-the-year (`doty`). This is like the use of the term "day zero" in other contexts, such as epidemiology. The analogous term for times is `Dot`. The word `Dot` conveys that at its core `Declock` is a system built on [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) expressed as decimal numbers. The 5 in `Dot` `5` can be thought of as a number after a decimal (0.5) or a numerator (⁵/₁₀), either way it means noon, the time when half the day has passed.
 
