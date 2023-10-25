@@ -37,11 +37,12 @@ The bottom three bars in @fig-bar-doty (%, ‰, and ♫) show components of the 
 //| echo: false
 //| label: fig-bar-doty
 //| fig-cap: "Doty bar chart"
+//| fig-cap-location: "margin"
 //| fig-align: "center"
-//| column: screen-inset
+//| column: body
 // https://observablehq.com/@fheyen/barchart-clock
 {
-  const W = width;
+const W = width > 750 ? width * 2 / 3 : width > 600 ? width * 1.05 : width > 500 ? width * 1.1 : width * 1.15;
   const H = 156;
   const barX = 1;
   const firstBarY = 10;

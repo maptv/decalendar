@@ -11,6 +11,7 @@ execute:
 format:
   html:
     highlight-style: a11y
+    max-width: 800px
     anchor-sections: true
     tbl-cap-location: margin
     code-block-background: false
