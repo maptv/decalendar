@@ -252,11 +252,11 @@ html`<style>
 </style>`
 ```
 
-As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `doty` times. Fractional year dates[^year] can be combined with years into one number and are convenient for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increases by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
+As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `doty` times. Fractional year dates[^year] can be combined with years into one number and are useful for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increases by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
 
 [^year]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
 
-Now it's your turn! Move the sliders🎚️next to @lst-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign. Try selecting a special date, like your birthday🎂! You can also press the play▶️button and then sit back and watch the sliders cycle🔄back and forth from the start to the end of the `Decalendar` year. The sliders cycle through an entire year in 36.5 `beats`, a million times faster🏎️than the actual speed of time!
+Now it's your turn! Move the sliders🎚️next to @lst-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign. Try selecting a special date, like your birthday🎂! You can also press the Play▶️button and then sit back and watch the sliders cycle🔄back and forth from the start to the end of the `Decalendar` year. The sliders cycle through an entire year in 36.5 `beats`, a million times faster🏎️than the actual speed of time!
 
 ::: {.grid}
 
@@ -602,7 +602,7 @@ styledBeat = setStyle(dotyTime.slice(3, 5), d3.schemePaired[11])
 
 ## Year {#sec-intro-year}
 
-A year and a `doty` can be combined to form a `Decalendar` `ordinal`[^deco] (`deco`). You can enter a year, month, `dotm`, hour, and minute next to @lst-date to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`).
+`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^deco] (`deco`) and can then represent a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, rather than a date (`day`) or time (`day.stamp`) that occurs every year or every leap year. You can select a year, month, `dotm`, hour, and minute next to @lst-date to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`).
 
 [^deco]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
 
@@ -628,7 +628,9 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 ```
 :::
 
-Once you feel comfortable with the `deco` format, you can type a `deco` next to @lst-deco to see what it looks like after it is 1) **parsed** from a string of characters into a year and `doty`, 2) **standardized** to ensure years are integers and `doties` are positive numbers below 366, and 3) **converted** into a) the year date format and b) the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`).
+You can also enter numeric year and `doty` values next to @lst-deco to see the resulting 1) `deco`, 2) year date, and 3) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`). The `deco` in @lst-deco is standardized to ensure years are integers and `doties` are positive numbers below 366, but the year and `doty` can be any number.
+
+Try entering negative and fractional numeric values for the year and `doty` to see the effect on the items in @lst-deco. [Fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) and years were discussed in @sec-intro-doty. Negative `doty` values subtract days from the start of a given year into a previous year. Similarly, negative years move a `deco` back in time starting from 1 BCE ([Before the Common Era](https://en.wikipedia.org/wiki/Common_Era)).
 
 ::: {.grid}
 

@@ -13,9 +13,11 @@ import matplotlib.pyplot as plt
 
 plt.rcParams.update(
     {
-        "title.fontsize": "x-large",
         "legend.fontsize": "x-large",
         "axes.labelsize": "x-large",
+        "axes.titlesize": "xx-large",
+        "xtick.labelsize" : "large",
+        "ytick.labelsize" : "large",
     }
 )
 
@@ -47,7 +49,6 @@ ax = (
         stacked=True,
         color=["blue", "crimson", "blue"],
         title="Weekly schedule",
-        fontsize=15,
         legend=False,
         xlabel="Days of the week",
         ylabel="Proportion of the day",
@@ -78,7 +79,6 @@ ax = (
         stacked=True,
         color=["blue", "crimson", "blue"],
         title="Pently schedule",
-        fontsize=15,
         legend=False,
         xlabel="Days of the dek",
         ylabel="Proportion of the day",
