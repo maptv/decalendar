@@ -13,21 +13,9 @@ import matplotlib.pyplot as plt
 
 plt.rcParams.update(
     {
-        "text.color": "black",
-        "axes.facecolor": "white",
-        "axes.edgecolor": "lightgray",
-        "axes.labelcolor": "white",
-        "legend.labelcolor": "white",
-        "legend.edgecolor": "lightgray",
-        "legend.facecolor": "black",
-        "xtick.color": "white",
-        "ytick.color": "white",
+        "title.fontsize": "x-large",
         "legend.fontsize": "x-large",
         "axes.labelsize": "x-large",
-        "figure.facecolor": "black",
-        "figure.edgecolor": "black",
-        "savefig.facecolor": "black",
-        "savefig.edgecolor": "black",
     }
 )
 

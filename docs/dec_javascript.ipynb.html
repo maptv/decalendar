@@ -267,7 +267,7 @@
 </div>
 </div>
 <p>As an alternative to <code>doty</code> dates, <code>Decalendar</code> can express dates in fractional years, which are similar to the <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> used in <code>doty</code> times. Fractional year dates[1] can be combined with years into one number and are convenient for marking periods of 73 days in the <code>Decalendar</code> year. Every 73 days, the <code>Decalendar</code> fractional year date increases by .2 (⅕). The current <code>Decalendar</code> fractional year date is <span id="ojs-element-id-22"></span>.</p>
-<p>Now it’s your turn! Move the sliders🎚️next to <a href="#lst-doty">Listing&nbsp;1</a> to adjust the <code>doty</code>, fractional year, month, and <code>dotm</code> values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign. Try entering a special date like your birthday🎂!</p>
+<p>Now it’s your turn! Move the sliders🎚️next to <a href="#lst-doty">Listing&nbsp;1</a> to adjust the <code>doty</code>, fractional year, month, and <code>dotm</code> values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign. Try selecting a special date, like your birthday🎂! You can also press the play▶️button and then sit back and watch the sliders cycle🔄back and forth from the start to the end of the <code>Decalendar</code> year. The sliders cycle through an entire year in 36.5 <code>beats</code>, a million times faster🏎️than the actual speed of time!</p>
 <ol type="1">
 <li><span id="ojs-element-id-8"></span></li>
 <li><span id="ojs-element-id-9"></span></li>
@@ -578,45 +578,11 @@
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>unix <span class="op">=</span> {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(<span class="kw">true</span>) {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tick <span class="op">=</span> {</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> Promises<span class="op">.</span><span class="fu">tick</span>(<span class="dv">864</span><span class="op">,</span> <span class="op">++</span>i)<span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>tickDate <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(tick <span class="op">/</span> <span class="fl">1e5</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>tickTime <span class="op">=</span> tick <span class="op">%</span> <span class="fl">1e5</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>tickDelimiter <span class="op">=</span> (tickDate <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">?</span> <span class="st">"."</span> <span class="op">:</span> <span class="st">""</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>barTime <span class="op">=</span> <span class="fu">unix2dote</span>(unix)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">"."</span>)[<span class="dv">1</span>]<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">8</span>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>barCents <span class="op">=</span> barTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>barMils <span class="op">=</span> barTime[<span class="dv">2</span>]</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>barBeats <span class="op">=</span> barTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">3</span><span class="op">,</span> <span class="dv">5</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>barMb <span class="op">=</span> barTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">5</span>)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>deco <span class="op">=</span> <span class="fu">unix2deco</span>(unix)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">14</span>)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>doty <span class="op">=</span> deco<span class="op">.</span><span class="fu">slice</span>(<span class="dv">5</span>)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>dotyDate <span class="op">=</span> doty<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">3</span>)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>dotyTime <span class="op">=</span> doty<span class="op">.</span><span class="fu">slice</span>(<span class="dv">4</span>)</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>dotyDek <span class="op">=</span> doty<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span>)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>dotyDotd <span class="op">=</span> doty[<span class="dv">2</span>]</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>iso <span class="op">=</span> {</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(<span class="kw">true</span>) {</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> <span class="kw">new</span> <span class="bu">Date</span>()<span class="op">.</span><span class="fu">toISOString</span>()</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>isoDate <span class="op">=</span> iso<span class="op">.</span><span class="fu">slice</span>(<span class="dv">5</span><span class="op">,</span> <span class="dv">10</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>isoTime <span class="op">=</span> iso<span class="op">.</span><span class="fu">slice</span>(<span class="dv">11</span><span class="op">,</span> <span class="dv">19</span>)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>season <span class="op">=</span> <span class="fu">doty2toty</span>(dotyDate)</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>zodiac <span class="op">=</span> <span class="fu">doty2zodi</span>(dotyDate)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>inputDotySeason <span class="op">=</span> <span class="fu">doty2toty</span>(inputDoty)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>inputDotyZodiac <span class="op">=</span> <span class="fu">doty2zodi</span>(inputDoty)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">365</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> i)</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span>(viewof inputDoty<span class="op">,</span> scrubberDoty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>width</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -1080,14 +1046,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_javascript_files/figure-html/110be459-6642-4036-94a7-f2e45b569095-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="dec_javascript_files/figure-html/c12fe357-b842-42ce-9b2b-91fb721229c8-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_javascript_files/figure-html/110be459-6642-4036-94a7-f2e45b569095-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="dec_javascript_files/figure-html/c12fe357-b842-42ce-9b2b-91fb721229c8-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3900,7 +3866,7 @@ y \mod 4 = 0 \\
 <span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023+238.24453+0</code></pre>
+<pre><code>2023+238.70841+0</code></pre>
 </div>
 </div></div>
 </section>

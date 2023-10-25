@@ -41,10 +41,10 @@ The bottom three bars in @fig-bar-doty (%, ‰, and ♫) show components of the 
 //| column: body
 // https://observablehq.com/@fheyen/barchart-clock
 {
-const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? width * 1.06 : width > 450 ? width * 1.1 : width > 400 ? width * 1.14 : width * 1.18;
+const W = width > 1250 ? width * 2 / 3 : width > 1150 ? width * 3 / 4 : width > 1050 ? width * 4 / 5 : width > 950 ? width * 5 / 6 : width > 850 ? width : width > 750 ? width * 1.02 : width > 650 ? width * 1.06 : width > 550 ? width * 1.1 : width > 450 ? width * 1.14 : width * 1.18;
   const H = 156;
   const barX = 1;
-  const firstBarY = 10;
+  const firstBarY = 1;
   const svg = d3
     .create("svg")
     .attr("width", W)
@@ -89,16 +89,16 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('y', firstBarY+30)
     .attr('width', d => scaleM(dotyDotd))
   svg.selectAll('.tickDek')
-    .data(d3.range(3, 37))
+    .data(d3.range(width > 500 ? 4: 6, 37))
     .enter()
     .append('rect')
     .attr('class', 'tickDek')
     .attr('x', d=>scaleDek(d)+barX)
     .attr('y', firstBarY)
-    .attr('height', d=>d%3===0? 6:4)
+    .attr('height', d=>d%(width > 500 ? 2 : 3)===0? 6:4)
   // Cent ticks
   svg.selectAll('.tickDotd')
-    .data(d3.range(1, 10))
+    .data(d3.range(width > 500 ? 1: 2, 10))
     .enter()
     .append('rect')
     .attr('class', 'tickDotd')
@@ -106,7 +106,7 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('y', firstBarY+49)
     .attr('height', 6)
   svg.selectAll('.tickLabel')
-    .data(d3.range(6, 37, 3))
+    .data(d3.range(width > 500 ? 4: 6, width > 500 ? 37: 35, width > 500 ? 2: 3))
     .enter()
     .append('text')
     .attr('class', 'tickLabel')
@@ -136,7 +136,7 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('width', d => scaleM(barMils))
   // Cent ticks
   svg.selectAll('.tickC')
-    .data(d3.range(10, 100))
+    .data(d3.range(width > 500 ? 10 : 20, 100))
     .enter()
     .append('rect')
     .attr('class', 'tickC')
@@ -144,7 +144,7 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('y', firstBarY+60)
     .attr('height', d=>d%2===0? 8:5)
   svg.selectAll('.tickC1')
-    .data(d3.range(10, 100))
+    .data(d3.range(width > 500 ? 10 : 20, 100))
     .enter()
     .append('rect')
     .attr('class', 'tickC1')
@@ -153,7 +153,7 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('height', d=>d%2===0? 8:5)
   // Mil ticks
   svg.selectAll('.tickM')
-    .data(d3.range(1, 10))
+    .data(d3.range(width > 500 ? 1 : 2, 10))
     .enter()
     .append('rect')
     .attr('class', 'tickM')
@@ -161,7 +161,7 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('y', firstBarY+90)
     .attr('height', 6)
   svg.selectAll('.tickM1')
-    .data(d3.range(1, 10))
+    .data(d3.range(width > 500 ? 1 : 2, 10))
     .enter()
     .append('rect')
     .attr('class', 'tickM1')
@@ -169,7 +169,7 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('y', firstBarY+92.5)
     .attr('height', 2.5)
   svg.selectAll('.tickLabel1')
-    .data(d3.range(1, 10))
+    .data(d3.range(width > 500 ? 1 : 2, 10))
     .enter()
     .append('text')
     .attr('class', 'tickLabel1')
@@ -177,7 +177,7 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('y', firstBarY+47)
     .text(d=>d)
   svg.selectAll('.tickLabel2')
-    .data(d3.range(1, 10))
+    .data(d3.range(width > 500 ? 1 : 2, 10))
     .enter()
     .append('text')
     .attr('class', 'tickLabel2')
@@ -197,7 +197,7 @@ const W = width > 850 ? width * 2 / 3 : width > 650 ? width : width > 550 ? widt
     .attr('width', d => scaleCandB(barBeats))
   // Beat ticks
   svg.selectAll('.tickB')
-    .data(d3.range(10, 100))
+    .data(d3.range(width > 500 ? 10 : 20, 100))
     .enter()
     .append('rect')
     .attr('class', 'tickB')
@@ -256,7 +256,7 @@ As an alternative to `doty` dates, `Decalendar` can express dates in fractional 
 
 [^year]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
 
-Now it's your turn! Move the sliders🎚️next to @lst-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign. Try entering a special date like your birthday🎂!
+Now it's your turn! Move the sliders🎚️next to @lst-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign. Try selecting a special date, like your birthday🎂! You can also press the play▶️button and then sit back and watch the sliders cycle🔄back and forth from the start to the end of the `Decalendar` year. The sliders cycle through an entire year in 36.5 `beats`, a million times faster🏎️than the actual speed of time!
 
 ::: {.grid}
 
@@ -294,7 +294,7 @@ viewof dotmInput = transformInput(
 
 ```{ojs}
 //| echo: false
-viewof scrubberDoty = Scrubber(numbers, {autoplay: false, alternate: true, delay: 100, loopDelay: 500})
+viewof scrubberDoty = Scrubber(numbers, {autoplay: false, alternate: true, delay: 86.4, loopDelay: 864})
 ```
 
 :::
@@ -548,6 +548,7 @@ function doty2dotm(doty = 0) {
 
 ```{ojs}
 //| output: all
+width
 unix = {
   while(true) {
     yield Date.now();
