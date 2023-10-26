@@ -588,7 +588,7 @@ season = doty2toty(dotyDate)
 zodiac = doty2zodi(dotyDate)
 inputDotySeason = doty2toty(inputDoty)
 inputDotyZodiac = doty2zodi(inputDoty)
-numbers = Array.from({length: 365}, (_, i) => i)
+numbers = Array.from({length: 366}, (_, i) => i)
 ```
 
 ```{ojs}
@@ -616,7 +616,7 @@ function setValue(input, value) {
   input.dispatchEvent(new Event("input", {bubbles: true}));
 }
 // setValue(viewof yd, [yd[0], scrubberDeco])
-setValue(viewof decoOutput, `${yd[0]}+${scrubberDeco}`)
+setValue(viewof decoOutput, `1969+${scrubberDeco}`)
 ```
 
 
@@ -651,7 +651,9 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 ```
 :::
 
-In @exm-intro-deco, you can enter numeric year and `doty` values or type in a free-form `deco` to see the resulting 1) standardized `deco`, 2) year date, and 3) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`) in @lst-intro-deco. The [number](https://observablehq.com/@observablehq/input-range#m) and [text](https://observablehq.com/@observablehq/input-text) inputs in @exm-intro-deco support negative and [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) and years. Negative `doty` values move dates backward from the start of a given year into a previous year. Similarly, negative years move dates backward starting from `Year` `0`, which is 1 BCE (Before the [Common Era](https://en.wikipedia.org/wiki/Common_Era)). Interacting with the number inputs in @exm-intro-deco values, the `deco` displayed in @lst-intro-deco is standardized to ensure years are integers and `doty` values are positive numbers below 366.
+In @exm-intro-deco, you can enter numeric year and `doty` values or type in a free-form `deco` to see the resulting 1) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`) and 2) year date in @lst-intro-deco. As in @exm-intro-doty, there is a Play button in @exm-intro-deco to cycle from `Day` `0` to `Day` `365`.
+
+The [number](https://observablehq.com/@observablehq/input-range#m) and [text](https://observablehq.com/@observablehq/input-text) inputs in @exm-intro-deco support negative and [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) and years. Negative `doty` values move dates backward from the start of a given year into a previous year. Similarly, negative years move dates backward starting from `Year` `0`, which is 1 BCE (Before the [Common Era](https://en.wikipedia.org/wiki/Common_Era)). Interacting with the number inputs in @exm-intro-deco values, the `deco` displayed in @lst-intro-deco is standardized to ensure years are integers and `doty` values are positive numbers below 366.
 
 ::: {#exm-intro-deco}
 :::
@@ -677,9 +679,8 @@ viewof decoOutput = transformInput(
 
 ::: {.g-col-6}
 
-1. \${styledDecoYear}+\${styledDecoDotyDate}\${decoDotyTimeDelimiter}\${styledDecoDotyTime}
+1. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
 2. \${styledOutputDecoYear}
-3. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
 
 ```{ojs}
 //| echo: false
@@ -764,11 +765,6 @@ dtDotyTimeRaw = dtDoty.split(".")[1].slice(0, 5)
 outputDatetimeYear = unix2year(utcDatetime).toString().slice(0, 8)
 dtDotyTimeDelimiter = dtDotyTimeRaw ? "." : ""
 outputDecoYear = doty2year(...yd).toString().slice(0, 8)
-outputDeco = doty2deco(yd)
-decoDoty = outputDeco.split("+")[1]
-decoDotyDate = decoDoty.split(".")[0]
-decoDotyTime = decoDoty.split(".")[1]
-decoDotyTimeDelimiter = decoDotyTime ? "." : ""
 outputIsoc = doty2isoc(...yd)
 yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
 ```
@@ -777,9 +773,6 @@ yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
 dtYear = setStyle(outputDatetimeDeco.split("+")[0], d3.schemePaired[10])
 dtDotyDate = setStyle(dtDotyDateRaw, d3.schemePaired[1])
 dtDotyTime = dtDotyTimeRaw ? setStyle(dtDotyTimeRaw, d3.schemePaired[2]) : ""
-styledDecoYear = setStyle(outputDeco.split("+")[0], d3.schemePaired[10])
-styledDecoDotyDate = setStyle(decoDoty.split(".")[0], d3.schemePaired[1])
-styledDecoDotyTime = decoDotyTime ? setStyle(decoDotyTime, d3.schemePaired[2]) : ""
 styledIsocYear = setStyle(outputIsoc.split(/(?=-)/)[0], d3.schemePaired[10])
 styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[5])
 styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+7), d3.schemePaired[4])
