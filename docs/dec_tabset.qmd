@@ -611,12 +611,7 @@ set(viewof inputDoty, scrubberDoty)
 
 ```{ojs}
 //| echo: false
-function setValue(input, value) {
-  input.value = value;
-  input.dispatchEvent(new Event("input", {bubbles: true}));
-}
-// setValue(viewof yd, [yd[0], scrubberDeco])
-setValue(viewof decoOutput, `1969+${scrubberDeco}`)
+set(viewof decoOutput, `1969+${scrubberDeco.toString().padStart(3, "0")}`)
 ```
 
 
@@ -651,9 +646,9 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 ```
 :::
 
-In @exm-intro-deco, you can enter numeric year and `doty` values or type in a free-form `deco` to see the resulting 1) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`) and 2) year date in @lst-intro-deco. As in @exm-intro-doty, there is a Play button in @exm-intro-deco to cycle from `Day` `0` to `Day` `365`.
+In @exm-intro-deco, you can enter numeric year and `doty` values or type in a free-form `deco` to see the resulting 1) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`) and 2) year date in @lst-intro-deco. @exm-intro-deco also has a Play▶️button in that cycles from `Day` `0` to `Day` `365` of `Year` `1969`. The cycle goes up to `Day` `0` of `Year` `1970`, because `Year` `1969` is a common year and does not have a `Day` `365`.
 
-The [number](https://observablehq.com/@observablehq/input-range#m) and [text](https://observablehq.com/@observablehq/input-text) inputs in @exm-intro-deco support negative and [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) and years. Negative `doty` values move dates backward from the start of a given year into a previous year. Similarly, negative years move dates backward starting from `Year` `0`, which is 1 BCE (Before the [Common Era](https://en.wikipedia.org/wiki/Common_Era)). Interacting with the number inputs in @exm-intro-deco values, the `deco` displayed in @lst-intro-deco is standardized to ensure years are integers and `doty` values are positive numbers below 366.
+Interacting with the [number](https://observablehq.com/@observablehq/input-range#m) inputs in @exm-intro-deco, standardizes the `deco` in the [text](https://observablehq.com/@observablehq/input-text) input to ensure years are integers and `doty` values are positive numbers below 366. Nevertheless, all of the inputs in @exm-intro-deco support negative and fractional year and `doty` values. Negative `doty` values [shift](https://en.wikipedia.org/wiki/Shift_operator) dates backward in time from the start of a given year into a previous year. Similarly, negative years shift dates backward starting from `Year` `0`, which is 1 BCE (Before the [Common Era](https://en.wikipedia.org/wiki/Common_Era)).
 
 ::: {#exm-intro-deco}
 :::

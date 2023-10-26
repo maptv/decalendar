@@ -714,9 +714,6 @@
 <div class="cell-output cell-output-display">
 
 </div>
-<div class="cell-output cell-output-display">
-
-</div>
 </div>
 </section>
 </section>
@@ -731,8 +728,8 @@
 </ol>
 <p>Listing&nbsp;2: Date and time conversion</p>
 <pre><code></code></pre>
-<p>In <a href="#exm-intro-deco">Example&nbsp;3</a>, you can enter numeric year and <code>doty</code> values or type in a free-form <code>deco</code> to see the resulting 1) <a href="https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations">ISO 8601 timestamp</a> (<code>year-mm-ddThh:mm:ss</code>) and 2) year date in <a href="#lst-intro-deco">Listing&nbsp;3</a>. As in <a href="#exm-intro-doty">Example&nbsp;1</a>, there is a Play button in <a href="#exm-intro-deco">Example&nbsp;3</a> to cycle from <code>Day</code> <code>0</code> to <code>Day</code> <code>365</code>.</p>
-<p>The <a href="https://observablehq.com/@observablehq/input-range#m">number</a> and <a href="https://observablehq.com/@observablehq/input-text">text</a> inputs in <a href="#exm-intro-deco">Example&nbsp;3</a> support negative and <a href="https://en.wikipedia.org/wiki/Decimal_time#Fractional_days">fractional days</a> and years. Negative <code>doty</code> values move dates backward from the start of a given year into a previous year. Similarly, negative years move dates backward starting from <code>Year</code> <code>0</code>, which is 1 BCE (Before the <a href="https://en.wikipedia.org/wiki/Common_Era">Common Era</a>). Interacting with the number inputs in <a href="#exm-intro-deco">Example&nbsp;3</a> values, the <code>deco</code> displayed in <a href="#lst-intro-deco">Listing&nbsp;3</a> is standardized to ensure years are integers and <code>doty</code> values are positive numbers below 366.</p>
+<p>In <a href="#exm-intro-deco">Example&nbsp;3</a>, you can enter numeric year and <code>doty</code> values or type in a free-form <code>deco</code> to see the resulting 1) <a href="https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations">ISO 8601 timestamp</a> (<code>year-mm-ddThh:mm:ss</code>) and 2) year date in <a href="#lst-intro-deco">Listing&nbsp;3</a>. <a href="#exm-intro-deco">Example&nbsp;3</a> also has a Play▶️button in that cycles from <code>Day</code> <code>0</code> to <code>Day</code> <code>365</code> of <code>Year</code> <code>1969</code>. The cycle goes up to <code>Day</code> <code>0</code> of <code>Year</code> <code>1970</code>, because <code>Year</code> <code>1969</code> is a common year and does not have a <code>Day</code> <code>365</code>.</p>
+<p>Interacting with the <a href="https://observablehq.com/@observablehq/input-range#m">number</a> inputs in <a href="#exm-intro-deco">Example&nbsp;3</a>, standardizes the <code>deco</code> in the <a href="https://observablehq.com/@observablehq/input-text">text</a> input to ensure years are integers and <code>doty</code> values are positive numbers below 366. Nevertheless, all of the inputs in <a href="#exm-intro-deco">Example&nbsp;3</a> support negative and fractional year and <code>doty</code> values. Negative <code>doty</code> values <a href="https://en.wikipedia.org/wiki/Shift_operator">shift</a> dates backward in time from the start of a given year into a previous year. Similarly, negative years shift dates backward starting from <code>Year</code> <code>0</code>, which is 1 BCE (Before the <a href="https://en.wikipedia.org/wiki/Common_Era">Common Era</a>).</p>
 <p><span class="theorem-title"><strong>Example 3 </strong></span>&nbsp;</p>
 <ol type="1">
 <li><span id="ojs-element-id-13"></span></li>
@@ -1001,14 +998,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_javascript_files/figure-html/c490a59f-32a5-4dba-8e35-7dafdaf9fcda-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="dec_javascript_files/figure-html/aa5b8ba5-9f69-4281-88b7-a8a5bdc09f1b-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_javascript_files/figure-html/c490a59f-32a5-4dba-8e35-7dafdaf9fcda-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="dec_javascript_files/figure-html/aa5b8ba5-9f69-4281-88b7-a8a5bdc09f1b-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -3821,7 +3818,7 @@ y \mod 4 = 0 \\
 <span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023+239.85674+0</code></pre>
+<pre><code>2023+239.90135+0</code></pre>
 </div>
 </div></div>
 </section>
