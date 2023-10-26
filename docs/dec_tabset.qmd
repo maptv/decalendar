@@ -589,7 +589,6 @@ zodiac = doty2zodi(dotyDate)
 inputDotySeason = doty2toty(inputDoty)
 inputDotyZodiac = doty2zodi(inputDoty)
 numbers = Array.from({length: 365}, (_, i) => i)
-set(viewof inputDoty, scrubberDoty)
 ```
 
 ```{ojs}
@@ -602,6 +601,24 @@ styledCent = setStyle(dotyTime.slice(0, 2), d3.schemePaired[7])
 styledMil = setStyle(dotyTime[2], d3.schemePaired[6])
 styledBeat = setStyle(dotyTime.slice(3, 5), d3.schemePaired[11])
 ```
+
+##### Set values {.appendix}
+
+```{ojs}
+//| echo: false
+set(viewof inputDoty, scrubberDoty)
+```
+
+```{ojs}
+//| echo: false
+function setValue(input, value) {
+  input.value = value;
+  input.dispatchEvent(new Event("input", {bubbles: true}));
+}
+// setValue(viewof yd, [yd[0], scrubberDeco])
+setValue(viewof decoOutput, `${yd[0]}+${scrubberDeco}`)
+```
+
 
 ## Year {#sec-intro-year}
 
@@ -634,7 +651,7 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 ```
 :::
 
-In @exm-intro-deco, you can enter numeric year and `doty` values or type in a free-form `deco` to see the resulting 1) standardized `deco`, 2) year date, and 3) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`) in @lst-intro-deco. The [range](https://observablehq.com/@observablehq/input-range) and [text](https://observablehq.com/@observablehq/input-text) inputs in @exm-intro-deco support negative and [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) and years. Negative `doty` values move dates backward from the start of a given year into a previous year. Similarly, negative years move dates backward starting from `Year` `0`, which is 1 BCE (Before the [Common Era](https://en.wikipedia.org/wiki/Common_Era)). Regardless of the input values, the `deco` displayed in @lst-intro-deco is standardized to ensure years are integers and `doty` values are positive numbers below 366.
+In @exm-intro-deco, you can enter numeric year and `doty` values or type in a free-form `deco` to see the resulting 1) standardized `deco`, 2) year date, and 3) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`) in @lst-intro-deco. The [number](https://observablehq.com/@observablehq/input-range#m) and [text](https://observablehq.com/@observablehq/input-text) inputs in @exm-intro-deco support negative and [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) and years. Negative `doty` values move dates backward from the start of a given year into a previous year. Similarly, negative years move dates backward starting from `Year` `0`, which is 1 BCE (Before the [Common Era](https://en.wikipedia.org/wiki/Common_Era)). Interacting with the number inputs in @exm-intro-deco values, the `deco` displayed in @lst-intro-deco is standardized to ensure years are integers and `doty` values are positive numbers below 366.
 
 ::: {#exm-intro-deco}
 :::
@@ -652,7 +669,7 @@ viewof yd = Inputs.form([
 
 ```{ojs}
 //| echo: false
-transformInput(
+viewof decoOutput = transformInput(
   Inputs.text({label: "deco", placeholder: "year+day.ddd", value: "1969+306"}),
   {bind: viewof yd, transform: doty2deco, invert: deco2doty});
 ```
@@ -663,6 +680,11 @@ transformInput(
 1. \${styledDecoYear}+\${styledDecoDotyDate}\${decoDotyTimeDelimiter}\${styledDecoDotyTime}
 2. \${styledOutputDecoYear}
 3. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
+
+```{ojs}
+//| echo: false
+viewof scrubberDeco = Scrubber(numbers, {autoplay: false, alternate: true, delay: 86.4, loopDelay: 864})
+```
 
 :::
 
