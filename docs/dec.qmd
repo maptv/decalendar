@@ -256,7 +256,10 @@ As an alternative to `doty` dates, `Decalendar` can express dates in fractional 
 
 [^year]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
 
-Now it's your turn! Move the sliders🎚️next to @lst-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign. Try selecting a special date, like your birthday🎂! You can also press the Play▶️button and then sit back and watch the sliders cycle🔄back and forth from the start to the end of the `Decalendar` year. The sliders cycle through an entire year in 36.5 `beats`, a million times faster🏎️than the actual speed of time!
+Now it's your turn! Move the sliders🎚️in @exm-intro-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign in @lst-intro-doty. Try selecting a special date, like your birthday🎂! You can also press the Play▶️button and then sit back and watch the sliders cycle🔄back and forth from the start to the end of the `Decalendar` year. The sliders cycle through an entire year in 36.5 `beats`, a million times faster🏎️than the actual speed of time!
+
+::: {#exm-intro-doty}
+:::
 
 ::: {.grid}
 
@@ -302,7 +305,7 @@ viewof scrubberDoty = Scrubber(numbers, {autoplay: false, alternate: true, delay
 :::
 
 ::: {.column-margin}
-```{#lst-doty lst-cap="Date to season conversion"}
+```{#lst-intro-doty lst-cap="Date to season conversion"}
 ```
 :::
 
@@ -482,19 +485,19 @@ function doty2dote(year = 1969, doty = 0, zone = 0) {
     yote = year - cycle * 400;
     return cycle * 146097 + yote * 365 + Math.floor(yote / 4) - Math.floor(yote / 100) + doty - zone
 }
-function doty2deco(year = 1969, doty = 306, zone = 0) {
-    const yd = dote2doty(doty2dote(year, Math.floor(doty)));
+function doty2deco(yearDoty = [1969, 306], zone = 0) {
+    const yd = dote2doty(doty2dote(yearDoty[0], Math.floor(yearDoty[1])));
     return `${yd[0]}+${(yd[1]).toString().padStart(3, "0")}${
-        doty.toString().includes(".") ? "." + (
-            (doty > 0) ? (doty-zone).toString().split(".").pop()
-            : [...(doty-zone).toString().split(".").pop()].map(
+        yearDoty[1].toString().includes(".") ? "." + (
+            (yearDoty[1] > 0) ? (yearDoty[1] - zone).toString().split(".").pop()
+            : [...(yearDoty[1] - zone).toString().split(".").pop()].map(
                 (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
             ).join("")
         ) : ""
     }`
 }
 function unix2deco(ms = 0) {
-    return doty2deco(...unix2doty(ms));
+    return doty2deco(unix2doty(ms));
 };
 // http://howardhinnant.github.io/date_algorithms.html#days_from_civil
 function greg2doty(month = 1, day = 1) {
@@ -602,9 +605,12 @@ styledBeat = setStyle(dotyTime.slice(3, 5), d3.schemePaired[11])
 
 ## Year {#sec-intro-year}
 
-`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^deco] (`deco`) and can then represent a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, rather than a date (`day`) or time (`day.stamp`) that occurs every year or every leap year. You can select a year, month, `dotm`, hour, and minute next to @lst-date to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`).
+`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^deco] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of than a date (`day`) or time (`day.stamp`) that occurs every year or every leap year. Using the [Observable](https://observablehq.com/about) [`datetime` input](https://observablehq.com/@observablehq/input-date#cell-111) in @exm-intro-date, you can select a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`) in @lst-intro-date .
 
 [^deco]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
+
+::: {#exm-intro-date}
+:::
 
 ::: {.grid}
 
@@ -624,36 +630,46 @@ viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00
 :::
 
 ::: {.column-margin}
-```{#lst-date lst-cap="Date and time conversion" cap-location=margin}
+```{#lst-intro-date lst-cap="Date and time conversion" cap-location=margin}
 ```
 :::
 
-You can also enter numeric year and `doty` values next to @lst-deco to see the resulting 1) `deco`, 2) year date, and 3) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`). The `deco` in @lst-deco is standardized to ensure years are integers and `doties` are positive numbers below 366, but the year and `doty` can be any number.
+In @exm-intro-deco, you can enter numeric year and `doty` values or type in a free-form `deco` to see the resulting 1) standardized `deco`, 2) year date, and 3) [ISO 8601 timestamp](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) (`year-mm-ddThh:mm:ss`) in @lst-intro-deco. The [range](https://observablehq.com/@observablehq/input-range) and [text](https://observablehq.com/@observablehq/input-text) inputs in @exm-intro-deco support negative and [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) and years. Negative `doty` values move dates backward from the start of a given year into a previous year. Similarly, negative years move dates backward starting from `Year` `0`, which is 1 BCE (Before the [Common Era](https://en.wikipedia.org/wiki/Common_Era)). Regardless of the input values, the `deco` displayed in @lst-intro-deco is standardized to ensure years are integers and `doty` values are positive numbers below 366.
 
-Try entering negative and fractional numeric values for the year and `doty` to see the effect on the items in @lst-deco. [Fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) and years were discussed in @sec-intro-doty. Negative `doty` values subtract days from the start of a given year into a previous year. Similarly, negative years move a `deco` back in time starting from 1 BCE ([Before the Common Era](https://en.wikipedia.org/wiki/Common_Era)).
+::: {#exm-intro-deco}
+:::
 
 ::: {.grid}
 
 ::: {.g-col-6}
 ```{ojs}
 //| echo: false
-viewof inputDeco = Inputs.text({label: "Deco", placeholder: "year+day.ddd", value: "1969+306.0", maxlength: 16})
+viewof yd = Inputs.form([
+  Inputs.number({label: "year", value: "1969"}),
+  Inputs.number({label: "doty", value: "306"})
+])
+```
+
+```{ojs}
+//| echo: false
+transformInput(
+  Inputs.text({label: "deco", placeholder: "year+day.ddd", value: "1969+306"}),
+  {bind: viewof yd, transform: doty2deco, invert: deco2doty});
 ```
 :::
 
 ::: {.g-col-6}
 
-1. \${styledParsedYear}, \${styledParsedDotyDate}\${parsedDotyTimeDelimiter}\${styledParsedDotyTime}
-2. \${styledDecoYear}+\${styledDecoDotyDate}\${decoDotyTimeDelimiter}\${styledDecoDotyTime}
-3.
-  a. \${styledOutputDecoYear}
-  b. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
+1. \${styledDecoYear}+\${styledDecoDotyDate}\${decoDotyTimeDelimiter}\${styledDecoDotyTime}
+2. \${styledOutputDecoYear}
+3. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
+
 :::
 
 :::
 
 ::: {.column-margin}
-```{#lst-deco lst-cap="Deco string processing" cap-location=margin}
+```{#lst-intro-deco lst-cap="Deco string processing" cap-location=margin}
 ```
 :::
 
@@ -682,7 +698,7 @@ function deco2doty(timestamp = "1969+306.00000Z") {
         : parseFloat(arr[2].replace(/([+-])/, "$1\."))];
 }
 function deco2deco(timestamp = "1969+306.00000Z") {
-    return doty2deco(...deco2doty(timestamp))
+    return doty2deco(deco2doty(timestamp))
 }
 function doty2doty(year = 1969, doty = 0, zone = 0) {
     return dote2doty(doty2dote(year, doty, zone));
@@ -725,34 +741,26 @@ dtDotyDateRaw = dtDoty.split(".")[0]
 dtDotyTimeRaw = dtDoty.split(".")[1].slice(0, 5)
 outputDatetimeYear = unix2year(utcDatetime).toString().slice(0, 8)
 dtDotyTimeDelimiter = dtDotyTimeRaw ? "." : ""
-ydParsed = deco2doty(inputDeco)
-outputDecoYear = doty2year(...ydParsed).toString().slice(0, 8)
-parsedDotyTime = ydParsed[1].toString().split(".")[1]
-parsedDotyTimeDelimiter = parsedDotyTime ? ", " : ""
-outputDeco = doty2deco(...ydParsed)
+outputDecoYear = doty2year(...yd).toString().slice(0, 8)
+outputDeco = doty2deco(yd)
 decoDoty = outputDeco.split("+")[1]
 decoDotyDate = decoDoty.split(".")[0]
 decoDotyTime = decoDoty.split(".")[1]
 decoDotyTimeDelimiter = decoDotyTime ? "." : ""
-outputIsoc = deco2isoc(outputDeco)
+outputIsoc = doty2isoc(...yd)
 yearDate = Math.ceil(unix2year(unix) * 1e3) / 1e3
 ```
 
 ```{ojs}
-decoYear = setStyle(outputDeco[0], d3.schemePaired[10])
 dtYear = setStyle(outputDatetimeDeco.split("+")[0], d3.schemePaired[10])
 dtDotyDate = setStyle(dtDotyDateRaw, d3.schemePaired[1])
 dtDotyTime = dtDotyTimeRaw ? setStyle(dtDotyTimeRaw, d3.schemePaired[2]) : ""
-styledParsedYear = setStyle(ydParsed[0], d3.schemePaired[10])
-styledParsedDotyDate = setStyle(ydParsed[1].toString().split(".")[0], d3.schemePaired[1])
-styledParsedDotyTime = parsedDotyTime ? setStyle(parsedDotyTime, d3.schemePaired[2]) : ""
 styledDecoYear = setStyle(outputDeco.split("+")[0], d3.schemePaired[10])
 styledDecoDotyDate = setStyle(decoDoty.split(".")[0], d3.schemePaired[1])
 styledDecoDotyTime = decoDotyTime ? setStyle(decoDotyTime, d3.schemePaired[2]) : ""
 styledIsocYear = setStyle(outputIsoc.split(/(?=-)/)[0], d3.schemePaired[10])
 styledIsocMd = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+1,outputIsoc.split(/(?=-)/)[0].length+6), d3.schemePaired[5])
 styledIsocTime = setStyle(outputIsoc.slice(outputIsoc.split(/(?=-)/)[0].length+7), d3.schemePaired[4])
-styledYearDate = setStyle(yearDate, d3.schemePaired[10])
 styledOutputDatetimeYear = setStyle(outputDatetimeYear, d3.schemePaired[10])
 styledOutputDecoYear = setStyle(outputDecoYear, d3.schemePaired[10])
 ```

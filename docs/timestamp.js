@@ -156,18 +156,6 @@ function unix2wday(ms = 0) {
     return Math.floor((ms / 86400000 + 4) % 7)
 }
 
-function doty2deco(year = 1969, doty = 306, zone = 0) {
-    const yd = dote2doty(doty2dote(year, Math.floor(doty)));
-    return `${yd[0]}+${(yd[1] - (year < 0 && yd[1] < 366)).toString().padStart(3, "0")}${
-        doty.toString().includes(".") ? "." + (
-            (doty > 0) ? (doty-zone).toString().split(".").pop()
-            : [...(doty-zone).toString().split(".").pop()].map(
-                (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
-            ).join("")
-        ) : ""
-    }`
-}
-
 console.log(doty2deco(-1, +366));
 console.log(unix2wday(Date.now()));
 console.log(date2doty(2021, 9, 1));
@@ -259,14 +247,6 @@ function doty2time(doty = 1 / 24) {
         floorMinutes = Math.floor(minutes),
         seconds = (minutes - floorMinutes) / 60;
     return [floorHours, floorMinutes, Math.floor(seconds)]
-}
-
-function zone2hour(zone = "Z") {
-    return (zone = zone.toUpperCase()) == "Z" ? 0
-        : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
-            : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
-                : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
-                    : zone;
 }
 
 console.log(hour2zone(-new Date().getTimezoneOffset() / 60))
@@ -448,20 +428,39 @@ function parse_dec(timestamp = "1969+306.00000Z") {
     return /(?<year>(?<=[+-])[+-]?\d*)?(?<doty>[+-]?\d*\.?\d*)(?<zone>[+-]\d*|[a-zA-Z])?/.exec(timestamp);
 }
 
+function zone2hour(zone = "Z") {
+    return (zone = zone.toUpperCase()) == "Z" ? 0
+        : zone > "@" && zone < "J" ? zone.charCodeAt() - 64
+        : zone > "J" && zone < "N" ? zone.charCodeAt() - 65
+        : zone < "Z" && zone > "M" ? -(zone.charCodeAt() - 77)
+        : zone;
+}
 function deco2doty(timestamp = "1969+306.00000Z") {
     const arr = timestamp.toString().split(/(?=[+-]|[a-zA-Z])/, 3);
     switch (arr.length) {
         case 1: return [unix2doty(Date.now())[0], parseFloat(arr[0]), 0];
         case 2: return (/^[a-zA-Z]+$/.test(arr[1]))
             ? [unix2doty(Date.now())[0], parseFloat(arr[0]), zone2hour(arr[1]) / 24]
-            : [parseInt(arr[0]), parseFloat(arr[1]), 0];
+            : [parseFloat(arr[0]), parseFloat(arr[1]), 0];
     };
-    return [parseInt(arr[0]), parseFloat(arr[1]), /^[a-zA-Z]+$/.test(arr[2])
+    return [parseFloat(arr[0]), parseFloat(arr[1]), /^[a-zA-Z]+$/.test(arr[2])
         ? zone2hour(arr[2]) / 24
         : parseFloat(arr[2].replace(/([+-])/, "$1\."))];
 }
 
+function doty2deco(year = 1969, doty = 306, zone = 0) {
+    const yd = dote2doty(doty2dote(year, Math.floor(doty)));
+    return `${yd[0]}+${(yd[1]).toString().padStart(3, "0")}${
+        doty.toString().includes(".") ? "." + (
+            (doty > 0) ? (doty-zone).toString().split(".").pop()
+            : [...(doty-zone).toString().split(".").pop()].map(
+                (e, i, a) => (i + 1 === a.length) ? 10 - e : 9 - e
+            ).join("")
+        ) : ""
+    }`
+}
 console.log(deco2doty(.20202))
+console.log(doty2deco(1969, 306))
 
 console.log(deco2doty("a2a+-1"))
 console.log(deco2doty("203.09c"))
