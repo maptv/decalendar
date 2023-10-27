@@ -10,6 +10,7 @@
 
 # %%
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as pe
 
 plt.rcParams.update(
     {
@@ -63,7 +64,7 @@ ax.patch.set_alpha(0)
 for c in ax.containers:
     labels = [round(v.get_height(), 3) if v.get_height() > 0 else "" for v in c]
     labels = [str(l)[1:] for l in labels if l != 1]
-    ax.bar_label(c, labels=labels, label_type="center", color="black", fontsize=15)
+    ax.bar_label(c, labels=labels, label_type="center", color="black", path_effects=[pe.withStroke(linewidth=3, foreground="white")], fontsize=15)
 
 ax = (
     pd.DataFrame(
@@ -93,4 +94,4 @@ ax.patch.set_alpha(0)
 for c in ax.containers[:-1]:
     labels = [round(v.get_height(), 1) if v.get_height() > 0 else "" for v in c]
     labels = [str(l)[1:] for l in labels if l != 1]
-    ax.bar_label(c, labels=labels, label_type="center", color="black", fontsize=18)
+    ax.bar_label(c, labels=labels, label_type="center", color="black", path_effects=[pe.withStroke(linewidth=3, foreground="white")], fontsize=18)

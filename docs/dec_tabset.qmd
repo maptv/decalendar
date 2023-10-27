@@ -845,6 +845,7 @@ Plot.plot({
             y: "duration",
             text: (d) => (d.duration < .0001 ? null : formatDecimal(d.duration)),
             fill: "white",
+            stroke: "white",
             fontSize: 20,
           }
         )
