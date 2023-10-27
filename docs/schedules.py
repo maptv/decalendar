@@ -19,6 +19,8 @@ plt.rcParams.update(
         "axes.titlesize": "xx-large",
         "xtick.labelsize" : "large",
         "ytick.labelsize" : "large",
+        'figure.dpi': 300,
+        'figure.figsize': [6, 4],
     }
 )
 

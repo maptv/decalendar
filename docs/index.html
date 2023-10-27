@@ -635,7 +635,7 @@ div.csl-indent {
 <p>As mentioned in <a href="#sec-intro-doty">Section&nbsp;1.1</a>, <code>deks</code> function as both months and weeks in <code>Decalendar</code>. A <code>dek</code> consists of 2 groups of 5 days called <code>pents</code><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>. Each <code>pent</code> can follow a sequence of workdays and restdays called a <code>pently</code> schedule<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>. <a href="#fig-schedules">Figure&nbsp;2</a> compares the typical weekly schedule and the <code>Schedule</code> <code>3</code> <code>pently</code> schedule. Like other <code>pently</code> schedules, <code>Schedule</code> <code>3</code> is named after the number of workdays it contains. The 3 workdays in <code>Schedule</code> <code>3</code> are followed by a 2-day <code>pentend</code>, the <code>Decalender</code> equivalent of a weekend.</p>
 <p>Unlike <code>Schedule</code> <code>3</code> and the other <code>pently</code> schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in <code>pently</code> schedules are never <a href="https://en.wikipedia.org/wiki/Repeating_decimal">repeating decimal</a> numbers. Each <code>Schedule</code> <code>3</code> workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours).</p>
 <div class="quarto-embed-nb-cell page-columns page-full">
-<div id="fig-schedules" class="cell quarto-layout-panel page-columns page-full" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-27T20:32:06.506058Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-27T20:32:06.505911Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-27T20:32:06.858304Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-27T20:32:06.858024Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
+<div id="fig-schedules" class="cell quarto-layout-panel page-columns page-full" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-10-27T21:30:06.632171Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-10-27T21:30:06.631994Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-10-27T21:30:07.107656Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-10-27T21:30:07.107394Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
 <figure class="figure page-columns page-full"><div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-schedules-1" class="quarto-figure quarto-figure-center anchored">
@@ -3780,7 +3780,7 @@ Click to toggle table expansion
 <span id="cb141-9"><a href="#cb141-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb141-10"><a href="#cb141-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+240.85588+0"</code></pre>
+<pre><code>"2023+240.89616+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-72" href="dec_julia.ipynb.html">Source: dec_julia.ipynb</a></div>
@@ -3801,7 +3801,7 @@ Click to toggle table expansion
 <span id="cb143-9"><a href="#cb143-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> doty2dote(time())</span>
 <span id="cb143-10"><a href="#cb143-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+240.85601+0'</code></pre>
+<pre><code>'2023+240.89628+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-73" href="dec_python.ipynb.html">Source: dec_python.ipynb</a></div>
@@ -3825,7 +3825,7 @@ Click to toggle table expansion
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+240.85613+0'
+'2023+240.89640+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-74" href="dec_r.ipynb.html">Source: dec_r.ipynb</a></div>
@@ -3880,7 +3880,7 @@ y \mod 4 = 0 \\
 <span id="cb146-12"><a href="#cb146-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span></span>
 <span id="cb146-13"><a href="#cb146-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>2023+240.85571+0</code></pre>
+<pre><code>2023+240.89599+0</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-75" href="dec_javascript.ipynb.html">Source: dec_javascript.ipynb</a></div>
@@ -3902,7 +3902,7 @@ y \mod 4 = 0 \\
 <span id="cb148-9"><a href="#cb148-9" aria-hidden="true" tabindex="-1"></a>day <span class="op">=</span> <span class="fu">Int</span>(<span class="fu">floor</span>(d))</span>
 <span id="cb148-10"><a href="#cb148-10" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="sc">$</span>(<span class="fu">lpad</span>(y, <span class="fl">4</span>, <span class="ch">'0'</span>))<span class="st">+</span><span class="sc">$</span>(<span class="fu">lpad</span>(day, <span class="fl">3</span>, <span class="ch">'0'</span>))<span class="st">.</span><span class="sc">$</span>(<span class="fu">lpad</span>(<span class="fu">Int</span>(<span class="fu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)), <span class="fl">5</span>, <span class="ch">'0'</span>))<span class="st">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+240.85588+0"</code></pre>
+<pre><code>"2023+240.89616+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-76" href="dec_julia.ipynb.html">Source: dec_julia.ipynb</a></div>
@@ -3923,7 +3923,7 @@ y \mod 4 = 0 \\
 <span id="cb150-9"><a href="#cb150-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> unix2doty(time())</span>
 <span id="cb150-10"><a href="#cb150-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+240.85601+0'</code></pre>
+<pre><code>'2023+240.89628+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-77" href="dec_python.ipynb.html">Source: dec_python.ipynb</a></div>
@@ -3947,7 +3947,7 @@ y \mod 4 = 0 \\
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%05d"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">yd</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">day</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1e5</span><span class="op">)</span><span class="op">)</span>, <span class="st">"+0"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-'2023+240.85613+0'
+'2023+240.89640+0'
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-78" href="dec_r.ipynb.html">Source: dec_r.ipynb</a></div>
@@ -4036,7 +4036,7 @@ y \mod 4 = 0 \\
 <span id="cb158-6"><a href="#cb158-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb158-7"><a href="#cb158-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unix2deco</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>"2023+240.85588+0"</code></pre>
+<pre><code>"2023+240.89616+0"</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-80" href="dec_julia.ipynb.html">Source: dec_julia.ipynb</a></div>
@@ -4054,7 +4054,7 @@ y \mod 4 = 0 \\
 <span id="cb160-6"><a href="#cb160-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb160-7"><a href="#cb160-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-display">
-<pre><code>'2023+240.85601+0'</code></pre>
+<pre><code>'2023+240.89628+0'</code></pre>
 </div>
 </div>
 <a class="quarto-notebook-link" id="nblink-81" href="dec_python.ipynb.html">Source: dec_python.ipynb</a></div>
