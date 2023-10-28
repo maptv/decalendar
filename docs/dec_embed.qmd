@@ -617,7 +617,7 @@ set(viewof decoOutput, `1969+${scrubberDeco.toString().padStart(3, "0")}`)
 
 ## Year {#sec-intro-year}
 
-`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^deco] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of than a date (`day`) or time (`day.stamp`) that occurs every year or every leap year. Using the [Observable](https://observablehq.com/about) [`datetime` input](https://observablehq.com/@observablehq/input-date#cell-111) in @exm-intro-date, you can select a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`) in @lst-intro-date .
+`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^deco] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of than a date (`day`) or time (`day.stamp`) that occurs every year or every leap year. Using the [Observable](https://observablehq.com/about) [datetime input](https://observablehq.com/@observablehq/input-date#cell-111) in @exm-intro-date, you can select a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`) in @lst-intro-date.
 
 [^deco]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
 
@@ -786,9 +786,9 @@ Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is a
 
 {{< embed schedules.ipynb#fig-schedules >}}
 
-@exm-intro-dek provides the opportunity to explore all four of the `pently` schedules. You can select which schedule to view using the [Observable](https://observablehq.com/about) [`radio` inputs](https://observablehq.com/@observablehq/input-radio), use the [interval sliders](https://observablehq.com/@mootari/range-slider) to adjust the schedule if desired, and click the [Download button](https://observablehq.com/@jeremiak/download-data-button) to obtain the schedule data used to create @fig-intro-dek. To download the schedule data as a [JSON](https://en.wikipedia.org/wiki/JSON) file instead of a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), change the file extension in the filename text input from `.csv` to `.json`. @sec-sched provides more information on `Schedule` `3` and the other `pently` schedules.
+@exm-intro-pent provides the opportunity to explore all four of the `pently` schedules. You can select which schedule to view using the [Observable](https://observablehq.com/about) [radio inputs](https://observablehq.com/@observablehq/input-radio), use the [interval sliders](https://observablehq.com/@mootari/range-slider) to adjust the schedule if desired, and click the [Download button](https://observablehq.com/@jeremiak/download-data-button) to obtain the schedule data used to create @fig-intro-dek. To download the data as a [JSON](https://en.wikipedia.org/wiki/JSON) file instead of a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), change the file extension in the filename text input from `.csv` to `.json`. @sec-sched provides more information on `Schedule` `3` and the other `pently` schedules.
 
-::: {#exm-intro-dek}
+::: {#exm-intro-pent}
 :::
 
 ::: {.grid}
@@ -846,7 +846,7 @@ Plot.plot({
             text: (d) => (d.duration < .0001 ? null : formatDecimal(d.duration)),
             fill: "white",
             stroke: "white",
-            fontSize: 20,
+            fontSize: 32,
           }
         )
       )
@@ -1194,6 +1194,73 @@ schedules = [
 
 ```{ojs}
 set(viewof intervals, schedules[schedule-2])
+```
+
+Just like @exm-intro-pent allows us to select `Declock` time intervals, we can create `Decalendar` date intervals in @exm-intro-dotd. To select discontinuous intervals, we can use the `step` input to "step" over $step-1$ dates in the interval. The `start`, `stop`, and `step` inputs in @exm-intro-dotd enable [array slicing](https://en.wikipedia.org/wiki/Array_slicing#:~:text=In%20computer%20programming%2C%20array%20slicing%20is%20an%20operation%20that%20extracts%20a%20subset%20of%20elements%20from%20an%20array%20and%20packages%20them%20as%20another%20array) as in the [Python programming language](https://en.wikipedia.org/wiki/Array_slicing#1991:_Python). In @fig-intro-dotd, `deks` are in separate rows, the days-of-the-`dek` are stacked in columns, and each `Decalendar` date has its own cell. `Decalendar` dates that are included in the interval are highlighted in orange, and all other `Decalendar` dates are labeled blue. Try setting a `step`👣of 10 to select all instances of one of the days-of-the-`dek`!
+
+::: {#exm-intro-dotd}
+:::
+
+::: {.grid}
+
+::: {.g-col-6}
+```{ojs}
+//| echo: false
+viewof startStop = interval([0, 365], {step: 1, value: [91, 273], label: 'start & stop', width: 195, format: ([start, end]) => start === end ? "" : `[${formatDecimal(start)}: ${formatDecimal(end)}]`}),
+```
+:::
+
+::: {.g-col-6}
+```{ojs}
+//| echo: false
+viewof step = Inputs.number([1, 365], {step: 1, label: "Step", value: 1, placeholder: "Enter step size"})
+```
+
+:::
+
+:::
+
+```{ojs}
+//| echo: false
+//| label: fig-intro-dotd
+//| fig-cap: "Decalendar date selector"
+//| fig-cap-location: margin
+//| fig-align: center
+
+// https://observablehq.com/@dec/dotd
+Plot.plot({
+  padding: 0,
+  x: {axis: "top", label: "Day-of-the-dek"},
+  y: {label: "Dek"},
+  color: {type: "categorical", scheme: "Category10"},
+  marks: [
+    Plot.cell(numbers, {x: d => d[2], y: d => d.slice(0, 2), fill: d => slice(numbers, startStop[0], startStop[1], step).includes(d), inset: 0.5}),
+    Plot.text(numbers, {x: d => d[2], y: d => d.slice(0, 2), fill: "white", stroke: "black", fontSize: 20})
+  ]
+})
+```
+
+#### `Dotd` Observable code {#sec-ojs-code-dek .appendix}
+
+##### Functions {.appendix}
+
+```{ojs}
+// https://observablehq.com/@mootari/range-slider
+// https://github.com/hustcc/slice.js/blob/master/src/index.js
+slice = (v, start, end, step) => {
+  const r = [];
+  let i;
+  if (step > 0) {
+    for (i = start; i < end; i += step) {
+      r.push(v[i]);
+    }
+  } else {
+    for (i = start; i > end; i += step) {
+      r.push(v[i]);
+    }
+  }
+  return r;
+};
 ```
 
 # Basic concepts {#sec-basics}
