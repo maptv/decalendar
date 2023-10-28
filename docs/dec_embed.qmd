@@ -1206,7 +1206,7 @@ Just like @exm-intro-pent allows us to select `Declock` time intervals, we can c
 ::: {.g-col-6}
 ```{ojs}
 //| echo: false
-viewof startStop = interval([0, 365], {step: 1, value: [91, 273], label: 'start & stop', width: 195, format: ([start, end]) => start === end ? "" : `[${formatDecimal(start)}: ${formatDecimal(end)}]`}),
+viewof startStop = interval([0, 365], {step: 1, value: [91, 273], label: 'start & stop', width: 195, format: ([start, end]) => start === end ? "" : `[${formatDecimal(start)}: ${formatDecimal(end)}]`})
 ```
 :::
 
@@ -1240,7 +1240,7 @@ Plot.plot({
 })
 ```
 
-#### `Dotd` Observable code {#sec-ojs-code-dek .appendix}
+#### `Dotd` Observable code {#sec-ojs-code-dotd .appendix}
 
 ##### Functions {.appendix}
 

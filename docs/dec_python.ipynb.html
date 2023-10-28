@@ -109,8 +109,7 @@
 <link href="dec_python_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="dec_python_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="dec_python_files/libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-     <script type="module" src="dec_python_files/libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="dec_python_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script> 
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script> 
       </head>
   <body class="quarto-notebook">
     <div class="quarto-embed-header">
@@ -937,14 +936,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_python_files/figure-html/f8b9ee97-e93d-4df9-a2d0-54130a6f7b9d-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="dec_python_files/figure-html/915c11c3-8c78-4e4c-84c3-2de03af17ab4-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_python_files/figure-html/f8b9ee97-e93d-4df9-a2d0-54130a6f7b9d-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="dec_python_files/figure-html/915c11c3-8c78-4e4c-84c3-2de03af17ab4-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -1339,14 +1338,7 @@
 </div>
 </div>
 <p>Just like <a href="#exm-intro-pent">Example&nbsp;4</a> allows us to select <code>Declock</code> time intervals, we can create <code>Decalendar</code> date intervals in <a href="#exm-intro-dotd">Example&nbsp;5</a>. To select discontinuous intervals, we can use the <code>step</code> input to “step” over <span class="math inline">\(step-1\)</span> dates in the interval. The <code>start</code>, <code>stop</code>, and <code>step</code> inputs in <a href="#exm-intro-dotd">Example&nbsp;5</a> enable <a href="https://en.wikipedia.org/wiki/Array_slicing#:~:text=In%20computer%20programming%2C%20array%20slicing%20is%20an%20operation%20that%20extracts%20a%20subset%20of%20elements%20from%20an%20array%20and%20packages%20them%20as%20another%20array">array slicing</a> as in the <a href="https://en.wikipedia.org/wiki/Array_slicing#1991:_Python">Python programming language</a>. In <a href="#fig-intro-dotd">Figure&nbsp;4</a>, <code>deks</code> are in separate rows, the days-of-the-<code>dek</code> are stacked in columns, and each <code>Decalendar</code> date has its own cell. <code>Decalendar</code> dates that are included in the interval are highlighted in orange, and all other <code>Decalendar</code> dates are labeled blue. Try setting a <code>step</code>👣of 10 to select all instances of one of the days-of-the-<code>dek</code>!</p>
-<p><span class="theorem-title"><strong>Example 5 </strong></span>&nbsp;</p>
-<pre class="numberlines"><code>```{ojs}
-//| echo: false
-viewof startStop = interval([0, 365], {step: 1, value: [91, 273], label: 'start &amp; stop', width: 195, format: ([start, end]) =&gt; start === end ? "" : `[${formatDecimal(start)}: ${formatDecimal(end)}]`}),
-```</code></pre>
-<blockquote class="blockquote">
-<p><strong>OJS Syntax Error (line 1210, column 1)Unexpected end of input</strong></p>
-</blockquote>
+<p><span class="theorem-title"><strong>Example 5 </strong></span></p>
 </section>
 </section>
 <section id="dotd-observable-code" class="level4">
@@ -1356,22 +1348,22 @@ viewof startStop = interval([0, 365], {step: 1, value: [91, 273], label: 'start 
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> https:<span class="op">//</span>observablehq.com<span class="op">/@</span>mootari<span class="op">/</span><span class="bu">range</span><span class="op">-</span>slider</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> https:<span class="op">//</span>github.com<span class="op">/</span>hustcc<span class="op">/</span><span class="bu">slice</span>.js<span class="op">/</span>blob<span class="op">/</span>master<span class="op">/</span>src<span class="op">/</span>index.js</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">slice</span> <span class="op">=</span> (v, start, end, step) <span class="op">=&gt;</span> {</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  const r <span class="op">=</span> []<span class="op">;</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  let i<span class="op">;</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (step <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="op">=</span> start<span class="op">;</span> i <span class="op">&lt;</span> end<span class="op">;</span> i <span class="op">+=</span> step) {</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>      r.push(v[i])<span class="op">;</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="op">=</span> start<span class="op">;</span> i <span class="op">&gt;</span> end<span class="op">;</span> i <span class="op">+=</span> step) {</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>      r.push(v[i])<span class="op">;</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> r<span class="op">;</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> https:<span class="op">//</span>observablehq.com<span class="op">/@</span>mootari<span class="op">/</span><span class="bu">range</span><span class="op">-</span>slider</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> https:<span class="op">//</span>github.com<span class="op">/</span>hustcc<span class="op">/</span><span class="bu">slice</span>.js<span class="op">/</span>blob<span class="op">/</span>master<span class="op">/</span>src<span class="op">/</span>index.js</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">slice</span> <span class="op">=</span> (v, start, end, step) <span class="op">=&gt;</span> {</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  const r <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  let i<span class="op">;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (step <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="op">=</span> start<span class="op">;</span> i <span class="op">&lt;</span> end<span class="op">;</span> i <span class="op">+=</span> step) {</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>      r.push(v[i])<span class="op">;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="op">=</span> start<span class="op">;</span> i <span class="op">&gt;</span> end<span class="op">;</span> i <span class="op">+=</span> step) {</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>      r.push(v[i])<span class="op">;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> r<span class="op">;</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 
@@ -3016,10 +3008,10 @@ doty2greg()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-tags="[&quot;greg2doty&quot;]" data-execution_count="1">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greg2doty(month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">153</span> <span class="op">*</span> (month <span class="op">-</span> <span class="dv">3</span> <span class="cf">if</span> month <span class="op">&gt;</span> <span class="dv">2</span> <span class="cf">else</span> month <span class="op">+</span> <span class="dv">9</span>) <span class="op">+</span> <span class="dv">2</span>) <span class="op">//</span> <span class="dv">5</span> <span class="op">+</span> day <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>greg2doty()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greg2doty(month<span class="op">=</span><span class="dv">1</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">153</span> <span class="op">*</span> (month <span class="op">-</span> <span class="dv">3</span> <span class="cf">if</span> month <span class="op">&gt;</span> <span class="dv">2</span> <span class="cf">else</span> month <span class="op">+</span> <span class="dv">9</span>) <span class="op">+</span> <span class="dv">2</span>) <span class="op">//</span> <span class="dv">5</span> <span class="op">+</span> day <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>greg2doty()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>306</code></pre>
@@ -3031,11 +3023,11 @@ doty2greg()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell" data-tags="[&quot;doty2greg&quot;]" data-execution_count="2">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2greg(doty<span class="op">=</span><span class="dv">306</span>):</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> (<span class="dv">5</span> <span class="op">*</span> doty <span class="op">+</span> <span class="dv">2</span>) <span class="op">//</span> <span class="dv">153</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m <span class="op">+</span> <span class="dv">3</span> <span class="cf">if</span> m <span class="op">&lt;</span> <span class="dv">10</span> <span class="cf">else</span> m <span class="op">-</span> <span class="dv">9</span>, doty <span class="op">-</span> (<span class="dv">153</span> <span class="op">*</span> m <span class="op">+</span> <span class="dv">2</span>) <span class="op">//</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>doty2greg()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2greg(doty<span class="op">=</span><span class="dv">306</span>):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> (<span class="dv">5</span> <span class="op">*</span> doty <span class="op">+</span> <span class="dv">2</span>) <span class="op">//</span> <span class="dv">153</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m <span class="op">+</span> <span class="dv">3</span> <span class="cf">if</span> m <span class="op">&lt;</span> <span class="dv">10</span> <span class="cf">else</span> m <span class="op">-</span> <span class="dv">9</span>, doty <span class="op">-</span> (<span class="dv">153</span> <span class="op">*</span> m <span class="op">+</span> <span class="dv">2</span>) <span class="op">//</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>doty2greg()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>(1, 1)</code></pre>
@@ -3193,10 +3185,10 @@ doty2year()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell" data-tags="[&quot;greg2year&quot;]" data-execution_count="3">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greg2year(year<span class="op">=</span><span class="dv">1970</span>, month<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">-</span> (month <span class="op">&lt;</span> <span class="dv">3</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>greg2year()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greg2year(year<span class="op">=</span><span class="dv">1970</span>, month<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">-</span> (month <span class="op">&lt;</span> <span class="dv">3</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>greg2year()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>1969</code></pre>
@@ -3208,10 +3200,10 @@ doty2year()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell" data-tags="[&quot;doty2year&quot;]" data-execution_count="4">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2year(year<span class="op">=</span><span class="dv">1969</span>, doty<span class="op">=</span><span class="dv">306</span>):</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">+</span> (doty <span class="op">&gt;</span> <span class="dv">305</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>doty2year()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2year(year<span class="op">=</span><span class="dv">1969</span>, doty<span class="op">=</span><span class="dv">306</span>):</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">+</span> (doty <span class="op">&gt;</span> <span class="dv">305</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>doty2year()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>1970</code></pre>
@@ -3279,10 +3271,10 @@ year2bool()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell" data-tags="[&quot;leap&quot;]" data-execution_count="5">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> year2bool(year<span class="op">=</span><span class="dv">1970</span>):</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> year <span class="op">%</span> <span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span> <span class="kw">or</span> year <span class="op">%</span> <span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>year2bool()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> year2bool(year<span class="op">=</span><span class="dv">1970</span>):</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> year <span class="op">%</span> <span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span> <span class="kw">or</span> year <span class="op">%</span> <span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>year2bool()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>False</code></pre>
@@ -3389,10 +3381,10 @@ end
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell" data-tags="[&quot;isoo2year&quot;]" data-execution_count="6">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> isoo2year(year<span class="op">=</span><span class="dv">1970</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">-</span> (day <span class="op">&lt;</span> (<span class="dv">60</span> <span class="op">+</span> year2bool(year <span class="op">-</span> <span class="dv">1</span>)))</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>isoo2year()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> isoo2year(year<span class="op">=</span><span class="dv">1970</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year <span class="op">-</span> (day <span class="op">&lt;</span> (<span class="dv">60</span> <span class="op">+</span> year2bool(year <span class="op">-</span> <span class="dv">1</span>)))</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>isoo2year()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>1969</code></pre>
@@ -3404,10 +3396,10 @@ end
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [7]:</pre></div><div class="cell" data-tags="[&quot;isoo2doty&quot;]" data-execution_count="7">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> isoo2doty(year<span class="op">=</span><span class="dv">1970</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (day <span class="op">+</span> <span class="dv">305</span> <span class="op">-</span> year2bool(year)) <span class="op">%</span> <span class="dv">365</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>isoo2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>isoo2doty()<span class="sc">:&gt;03}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> isoo2doty(year<span class="op">=</span><span class="dv">1970</span>, day<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (day <span class="op">+</span> <span class="dv">305</span> <span class="op">-</span> year2bool(year)) <span class="op">%</span> <span class="dv">365</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>isoo2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>isoo2doty()<span class="sc">:&gt;03}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>'1969+306'</code></pre>
@@ -3419,10 +3411,10 @@ end
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [8]:</pre></div><div class="cell" data-tags="[&quot;doty2isoo&quot;]" data-execution_count="8">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2isoo(year<span class="op">=</span><span class="dv">1970</span>, doty<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (doty <span class="op">+</span> <span class="dv">60</span> <span class="op">+</span> year2bool(year <span class="op">+</span> <span class="dv">1</span>)) <span class="op">%</span> <span class="dv">365</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>doty2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>doty2isoo()<span class="sc">:&gt;03}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2isoo(year<span class="op">=</span><span class="dv">1970</span>, doty<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (doty <span class="op">+</span> <span class="dv">60</span> <span class="op">+</span> year2bool(year <span class="op">+</span> <span class="dv">1</span>)) <span class="op">%</span> <span class="dv">365</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>doty2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>doty2isoo()<span class="sc">:&gt;03}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>'1970+060'</code></pre>
@@ -3517,7 +3509,7 @@ function greg2isoc(year = 1970, month = 1, day = 1) {
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [9]:</pre></div><div class="cell" data-tags="[&quot;decdate&quot;]" data-execution_count="9">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>greg2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>greg2doty()<span class="sc">:&lt;3}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>greg2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>greg2doty()<span class="sc">:&lt;3}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>'1969+306'</code></pre>
@@ -3529,7 +3521,7 @@ function greg2isoc(year = 1970, month = 1, day = 1) {
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [10]:</pre></div><div class="cell" data-tags="[&quot;isodate&quot;]" data-execution_count="10">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>doty2year()<span class="sc">:&gt;04}</span><span class="ss">-</span><span class="sc">{</span><span class="st">'-'</span><span class="sc">.</span>join(<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="bu">str</span>(i).rjust(<span class="dv">2</span>, <span class="st">'0'</span>), doty2greg()))<span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>doty2year()<span class="sc">:&gt;04}</span><span class="ss">-</span><span class="sc">{</span><span class="st">'-'</span><span class="sc">.</span>join(<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="bu">str</span>(i).rjust(<span class="dv">2</span>, <span class="st">'0'</span>), doty2greg()))<span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>'1970-01-01'</code></pre>
@@ -3632,17 +3624,17 @@ zone2hour()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [11]:</pre></div><div class="cell" data-tags="[&quot;hour2zone&quot;]" data-execution_count="11">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import time</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print(int(-time.timezone / 3600))</span></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hour2zone(hour<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Z"</span> <span class="cf">if</span> hour <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span></span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">chr</span>(hour <span class="op">+</span> <span class="dv">64</span>) <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> hour <span class="op">&lt;</span> <span class="dv">10</span> <span class="cf">else</span></span>
-<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">chr</span>(hour <span class="op">+</span> <span class="dv">65</span>) <span class="cf">if</span> <span class="dv">9</span> <span class="op">&lt;</span> hour <span class="op">&lt;</span> <span class="dv">13</span> <span class="cf">else</span></span>
-<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">chr</span>(<span class="bu">abs</span>(hour) <span class="op">+</span> <span class="dv">77</span>) <span class="cf">if</span> <span class="op">-</span><span class="dv">13</span> <span class="op">&lt;</span> hour <span class="op">&lt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">"J"</span></span>
-<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a>hour2zone()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import time</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print(int(-time.timezone / 3600))</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hour2zone(hour<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Z"</span> <span class="cf">if</span> hour <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">chr</span>(hour <span class="op">+</span> <span class="dv">64</span>) <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;</span> hour <span class="op">&lt;</span> <span class="dv">10</span> <span class="cf">else</span></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">chr</span>(hour <span class="op">+</span> <span class="dv">65</span>) <span class="cf">if</span> <span class="dv">9</span> <span class="op">&lt;</span> hour <span class="op">&lt;</span> <span class="dv">13</span> <span class="cf">else</span></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">chr</span>(<span class="bu">abs</span>(hour) <span class="op">+</span> <span class="dv">77</span>) <span class="cf">if</span> <span class="op">-</span><span class="dv">13</span> <span class="op">&lt;</span> hour <span class="op">&lt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">"J"</span></span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>hour2zone()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>'Z'</code></pre>
@@ -3654,15 +3646,15 @@ zone2hour()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [12]:</pre></div><div class="cell" data-tags="[&quot;zone2hour&quot;]" data-execution_count="12">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zone2hour(zone<span class="op">=</span><span class="st">"Z"</span>):</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span> <span class="cf">if</span> (zone <span class="op">:=</span> zone.upper()) <span class="op">==</span> <span class="st">"Z"</span> <span class="cf">else</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">ord</span>(zone) <span class="op">-</span> <span class="dv">64</span> <span class="cf">if</span> <span class="st">"@"</span> <span class="op">&lt;</span> zone <span class="op">&lt;</span> <span class="st">"J"</span> <span class="cf">else</span></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">ord</span>(zone) <span class="op">-</span> <span class="dv">65</span> <span class="cf">if</span> <span class="st">"J"</span> <span class="op">&lt;</span> zone <span class="op">&lt;</span> <span class="st">"N"</span> <span class="cf">else</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">-</span>(<span class="bu">ord</span>(zone) <span class="op">-</span> <span class="dv">77</span>) <span class="cf">if</span> <span class="st">"M"</span> <span class="op">&lt;</span> zone <span class="op">&lt;</span> <span class="st">"Z"</span> <span class="cf">else</span> zone</span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>zone2hour()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zone2hour(zone<span class="op">=</span><span class="st">"Z"</span>):</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span> <span class="cf">if</span> (zone <span class="op">:=</span> zone.upper()) <span class="op">==</span> <span class="st">"Z"</span> <span class="cf">else</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">ord</span>(zone) <span class="op">-</span> <span class="dv">64</span> <span class="cf">if</span> <span class="st">"@"</span> <span class="op">&lt;</span> zone <span class="op">&lt;</span> <span class="st">"J"</span> <span class="cf">else</span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">ord</span>(zone) <span class="op">-</span> <span class="dv">65</span> <span class="cf">if</span> <span class="st">"J"</span> <span class="op">&lt;</span> zone <span class="op">&lt;</span> <span class="st">"N"</span> <span class="cf">else</span></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">-</span>(<span class="bu">ord</span>(zone) <span class="op">-</span> <span class="dv">77</span>) <span class="cf">if</span> <span class="st">"M"</span> <span class="op">&lt;</span> zone <span class="op">&lt;</span> <span class="st">"Z"</span> <span class="cf">else</span> zone</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>zone2hour()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>0</code></pre>
@@ -3813,10 +3805,10 @@ doty2hmso()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [13]:</pre></div><div class="cell" data-tags="[&quot;hmso2doty&quot;]" data-execution_count="13">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hmso2doty(hour<span class="op">=</span><span class="dv">1</span>, minute<span class="op">=</span><span class="dv">0</span>, second<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hour <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> minute <span class="op">/</span> <span class="dv">1440</span> <span class="op">+</span> second <span class="op">/</span> <span class="dv">86400</span></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>hmso2doty()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hmso2doty(hour<span class="op">=</span><span class="dv">1</span>, minute<span class="op">=</span><span class="dv">0</span>, second<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hour <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> minute <span class="op">/</span> <span class="dv">1440</span> <span class="op">+</span> second <span class="op">/</span> <span class="dv">86400</span></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>hmso2doty()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>0.041666666666666664</code></pre>
@@ -3828,14 +3820,14 @@ doty2hmso()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [14]:</pre></div><div class="cell" data-tags="[&quot;doty2hmso&quot;]" data-execution_count="14">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2hmso(doty <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">24</span>):</span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    hour <span class="op">=</span> doty <span class="op">*</span> <span class="dv">24</span></span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    floorHour <span class="op">=</span> hour.<span class="fu">__floor__</span>()</span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>    minute <span class="op">=</span> (hour <span class="op">-</span> floorHour) <span class="op">/</span> <span class="dv">60</span></span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    floorMinute <span class="op">=</span> minute.<span class="fu">__floor__</span>()</span>
-<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> floorHour, floorMinute, (minute <span class="op">-</span> floorMinute) <span class="op">/</span> <span class="dv">60</span></span>
-<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>doty2hmso()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2hmso(doty <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">24</span>):</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>    hour <span class="op">=</span> doty <span class="op">*</span> <span class="dv">24</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>    floorHour <span class="op">=</span> hour.<span class="fu">__floor__</span>()</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>    minute <span class="op">=</span> (hour <span class="op">-</span> floorHour) <span class="op">/</span> <span class="dv">60</span></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>    floorMinute <span class="op">=</span> minute.<span class="fu">__floor__</span>()</span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> floorHour, floorMinute, (minute <span class="op">-</span> floorMinute) <span class="op">/</span> <span class="dv">60</span></span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>doty2hmso()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>(1, 0, 0.0)</code></pre>
@@ -3964,10 +3956,10 @@ end
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [15]:</pre></div><div class="cell" data-tags="[&quot;hmso2doty&quot;]" data-execution_count="15">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hmso2doty(hour<span class="op">=</span><span class="dv">1</span>, minute<span class="op">=</span><span class="dv">0</span>, second<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hour <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> minute <span class="op">/</span> <span class="dv">1440</span> <span class="op">+</span> second <span class="op">/</span> <span class="dv">86400</span></span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>greg2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>greg2doty()<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>(hmso2doty(<span class="dv">0</span>) <span class="op">*</span> <span class="fl">1e6</span>)<span class="sc">:&gt;05}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hmso2doty(hour<span class="op">=</span><span class="dv">1</span>, minute<span class="op">=</span><span class="dv">0</span>, second<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hour <span class="op">/</span> <span class="dv">24</span> <span class="op">+</span> minute <span class="op">/</span> <span class="dv">1440</span> <span class="op">+</span> second <span class="op">/</span> <span class="dv">86400</span></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>greg2year()<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>greg2doty()<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>(hmso2doty(<span class="dv">0</span>) <span class="op">*</span> <span class="fl">1e6</span>)<span class="sc">:&gt;05}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>'1969+306.00000'</code></pre>
@@ -3979,17 +3971,17 @@ end
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [16]:</pre></div><div class="cell" data-tags="[&quot;doty2hmso&quot;]" data-execution_count="16">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2hmso(doty <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">24</span>):</span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>    hour <span class="op">=</span> doty <span class="op">*</span> <span class="dv">24</span></span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>    floorHour <span class="op">=</span> hour.<span class="fu">__floor__</span>()</span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>    minute <span class="op">=</span> (hour <span class="op">-</span> floorHour) <span class="op">/</span> <span class="dv">60</span></span>
-<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>    floorMinute <span class="op">=</span> minute.<span class="fu">__floor__</span>()</span>
-<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> floorHour, floorMinute, (minute <span class="op">-</span> floorMinute) <span class="op">/</span> <span class="dv">60</span></span>
-<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>doty2year()<span class="sc">:&gt;04}</span><span class="ss">-</span><span class="sc">{</span><span class="st">'-'</span><span class="sc">.</span>join(<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="bu">str</span>(i).rjust(<span class="dv">2</span>, <span class="st">'0'</span>), doty2greg()))<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"T</span><span class="sc">{</span><span class="st">':'</span><span class="sc">.</span>join(<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="bu">str</span>(<span class="bu">round</span>(i)).rjust(<span class="dv">2</span>, <span class="st">'0'</span>), doty2hmso(<span class="dv">0</span>)))<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2hmso(doty <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">24</span>):</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>    hour <span class="op">=</span> doty <span class="op">*</span> <span class="dv">24</span></span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>    floorHour <span class="op">=</span> hour.<span class="fu">__floor__</span>()</span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>    minute <span class="op">=</span> (hour <span class="op">-</span> floorHour) <span class="op">/</span> <span class="dv">60</span></span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>    floorMinute <span class="op">=</span> minute.<span class="fu">__floor__</span>()</span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> floorHour, floorMinute, (minute <span class="op">-</span> floorMinute) <span class="op">/</span> <span class="dv">60</span></span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>doty2year()<span class="sc">:&gt;04}</span><span class="ss">-</span><span class="sc">{</span><span class="st">'-'</span><span class="sc">.</span>join(<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="bu">str</span>(i).rjust(<span class="dv">2</span>, <span class="st">'0'</span>), doty2greg()))<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"T</span><span class="sc">{</span><span class="st">':'</span><span class="sc">.</span>join(<span class="bu">map</span>(<span class="kw">lambda</span> i: <span class="bu">str</span>(<span class="bu">round</span>(i)).rjust(<span class="dv">2</span>, <span class="st">'0'</span>), doty2hmso(<span class="dv">0</span>)))<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>'1970-01-01T00:00:00'</code></pre>
@@ -4043,9 +4035,9 @@ paste0(sprintf("%04d", doty2year()), "-",
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [17]:</pre></div><div class="cell" data-tags="[&quot;intervals&quot;]" data-execution_count="17">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>pd.date_range(<span class="st">"1970"</span>, <span class="st">"1971"</span>, freq<span class="op">=</span><span class="st">"6H"</span>)[<span class="op">-</span><span class="dv">4</span>:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>pd.date_range(<span class="st">"1970"</span>, <span class="st">"1971"</span>, freq<span class="op">=</span><span class="st">"6H"</span>)[<span class="op">-</span><span class="dv">4</span>:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <pre><code>DatetimeIndex(['1970-12-31 06:00:00', '1970-12-31 12:00:00',
@@ -4106,19 +4098,19 @@ day = Int(floor(d))
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [18]:</pre></div><div class="cell" data-tags="[&quot;doty2dote&quot;]" data-execution_count="18">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2dote(s<span class="op">=</span><span class="dv">0</span>, ms<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>    days <span class="op">=</span> s <span class="op">/</span> <span class="dv">86400</span> <span class="op">+</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span></span>
-<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>    dote <span class="op">=</span> days <span class="op">-</span> (era <span class="op">:=</span> (days <span class="cf">if</span> days <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> days <span class="op">-</span> <span class="dv">146096</span>) <span class="op">//</span> <span class="dv">146097</span>) <span class="op">*</span> <span class="dv">146097</span></span>
-<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> <span class="bu">int</span>((dote <span class="op">-</span> dote <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> dote <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> dote <span class="op">/</span> <span class="dv">146096</span>) <span class="op">//</span> <span class="dv">365</span> <span class="op">+</span> era <span class="op">*</span> <span class="dv">400</span>)</span>
-<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year, days <span class="op">-</span> (year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">400</span>).<span class="fu">__floor__</span>()</span>
-<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> doty2dote(time())</span>
-<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> doty2dote(s<span class="op">=</span><span class="dv">0</span>, ms<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>    days <span class="op">=</span> s <span class="op">/</span> <span class="dv">86400</span> <span class="op">+</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span></span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a>    dote <span class="op">=</span> days <span class="op">-</span> (era <span class="op">:=</span> (days <span class="cf">if</span> days <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> days <span class="op">-</span> <span class="dv">146096</span>) <span class="op">//</span> <span class="dv">146097</span>) <span class="op">*</span> <span class="dv">146097</span></span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> <span class="bu">int</span>((dote <span class="op">-</span> dote <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> dote <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> dote <span class="op">/</span> <span class="dv">146096</span>) <span class="op">//</span> <span class="dv">365</span> <span class="op">+</span> era <span class="op">*</span> <span class="dv">400</span>)</span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year, days <span class="op">-</span> (year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">400</span>).<span class="fu">__floor__</span>()</span>
+<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-9"><a href="#cb105-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> doty2dote(time())</span>
+<span id="cb105-10"><a href="#cb105-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>'2023+241.72455+0'</code></pre>
+<pre><code>'2023+241.72799+0'</code></pre>
 </div>
 </div></div>
 </section>
@@ -4211,19 +4203,19 @@ day = Int(floor(d))
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [19]:</pre></div><div class="cell" data-tags="[&quot;unix2doty&quot;]" data-execution_count="19">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unix2doty(s<span class="op">=</span><span class="dv">0</span>, ms<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>    days <span class="op">=</span> s <span class="op">/</span> <span class="dv">86400</span> <span class="op">+</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span></span>
-<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>    dote <span class="op">=</span> days <span class="op">-</span> (era <span class="op">:=</span> (days <span class="cf">if</span> days <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> days <span class="op">-</span> <span class="dv">146096</span>) <span class="op">//</span> <span class="dv">146097</span>) <span class="op">*</span> <span class="dv">146097</span></span>
-<span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> <span class="bu">int</span>((dote <span class="op">-</span> dote <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> dote <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> dote <span class="op">/</span> <span class="dv">146096</span>) <span class="op">//</span> <span class="dv">365</span> <span class="op">+</span> era <span class="op">*</span> <span class="dv">400</span>)</span>
-<span id="cb111-7"><a href="#cb111-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year, days <span class="op">-</span> (year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">400</span>).<span class="fu">__floor__</span>()</span>
-<span id="cb111-8"><a href="#cb111-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-9"><a href="#cb111-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> unix2doty(time())</span>
-<span id="cb111-10"><a href="#cb111-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unix2doty(s<span class="op">=</span><span class="dv">0</span>, ms<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a>    days <span class="op">=</span> s <span class="op">/</span> <span class="dv">86400</span> <span class="op">+</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span></span>
+<span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>    dote <span class="op">=</span> days <span class="op">-</span> (era <span class="op">:=</span> (days <span class="cf">if</span> days <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> days <span class="op">-</span> <span class="dv">146096</span>) <span class="op">//</span> <span class="dv">146097</span>) <span class="op">*</span> <span class="dv">146097</span></span>
+<span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a>    year <span class="op">=</span> <span class="bu">int</span>((dote <span class="op">-</span> dote <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> dote <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> dote <span class="op">/</span> <span class="dv">146096</span>) <span class="op">//</span> <span class="dv">365</span> <span class="op">+</span> era <span class="op">*</span> <span class="dv">400</span>)</span>
+<span id="cb110-7"><a href="#cb110-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> year, days <span class="op">-</span> (year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">400</span>).<span class="fu">__floor__</span>()</span>
+<span id="cb110-8"><a href="#cb110-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-9"><a href="#cb110-9" aria-hidden="true" tabindex="-1"></a>y, d <span class="op">=</span> unix2doty(time())</span>
+<span id="cb110-10"><a href="#cb110-10" aria-hidden="true" tabindex="-1"></a><span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>'2023+241.72455+0'</code></pre>
+<pre><code>'2023+241.72799+0'</code></pre>
 </div>
 </div></div>
 </section>
@@ -4250,40 +4242,40 @@ paste0(sprintf("%04d", yd[1]), "+",
 </section>
 <section id="lua" class="level4">
 <h4 class="anchored" data-anchor-id="lua">Lua</h4>
-<div class="sourceCode" id="cb114"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> unix2doty<span class="op">(</span><span class="va">ms</span><span class="op">)</span></span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">days</span> <span class="op">=</span> <span class="va">ms</span> <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span></span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">era</span> <span class="op">=</span> <span class="op">(</span><span class="va">days</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> <span class="va">days</span> <span class="kw">or</span> <span class="va">days</span> <span class="op">-</span> <span class="dv">146096</span><span class="op">)</span> <span class="op">//</span> <span class="dv">146097</span></span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">dote</span> <span class="op">=</span> <span class="va">days</span> <span class="op">-</span> <span class="va">era</span> <span class="op">*</span> <span class="dv">146097</span></span>
-<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">year</span> <span class="op">=</span> <span class="fu">math.floor</span><span class="op">((</span><span class="va">dote</span> <span class="op">-</span> <span class="va">dote</span> <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> <span class="va">dote</span> <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> <span class="va">dote</span> <span class="op">/</span> <span class="dv">146096</span><span class="op">)</span> <span class="op">/</span> <span class="dv">365</span><span class="op">)</span> <span class="op">+</span> <span class="va">era</span> <span class="op">*</span> <span class="dv">400</span></span>
-<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">math.floor</span><span class="op">(</span><span class="va">year</span><span class="op">),</span> <span class="va">days</span> <span class="op">-</span> <span class="fu">math.floor</span><span class="op">(</span><span class="va">year</span> <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> <span class="va">year</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> <span class="va">year</span> <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> <span class="va">year</span> <span class="op">/</span> <span class="dv">400</span><span class="op">)</span></span>
-<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb114-8"><a href="#cb114-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-9"><a href="#cb114-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span><span class="op">(</span>unix2doty<span class="op">(</span><span class="dv">0</span><span class="op">))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb115"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> unix2deco<span class="op">(</span><span class="va">ms</span><span class="op">)</span></span>
-<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">year</span><span class="op">,</span> <span class="va">doty</span> <span class="op">=</span> unix2doty<span class="op">(</span><span class="va">ms</span><span class="op">)</span></span>
-<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">string.format</span><span class="op">(</span><span class="st">"%s+%s"</span><span class="op">,</span> <span class="fu">math.floor</span><span class="op">(</span><span class="va">year</span><span class="op">),</span> <span class="fu">math.floor</span><span class="op">(</span><span class="va">doty</span><span class="op">))</span></span>
-<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb115-5"><a href="#cb115-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-6"><a href="#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span><span class="op">(</span>unix2deco<span class="op">(</span><span class="dv">0</span><span class="op">))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> unix2doty<span class="op">(</span><span class="va">ms</span><span class="op">)</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">days</span> <span class="op">=</span> <span class="va">ms</span> <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span></span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">era</span> <span class="op">=</span> <span class="op">(</span><span class="va">days</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> <span class="va">days</span> <span class="kw">or</span> <span class="va">days</span> <span class="op">-</span> <span class="dv">146096</span><span class="op">)</span> <span class="op">//</span> <span class="dv">146097</span></span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">dote</span> <span class="op">=</span> <span class="va">days</span> <span class="op">-</span> <span class="va">era</span> <span class="op">*</span> <span class="dv">146097</span></span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">year</span> <span class="op">=</span> <span class="fu">math.floor</span><span class="op">((</span><span class="va">dote</span> <span class="op">-</span> <span class="va">dote</span> <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> <span class="va">dote</span> <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> <span class="va">dote</span> <span class="op">/</span> <span class="dv">146096</span><span class="op">)</span> <span class="op">/</span> <span class="dv">365</span><span class="op">)</span> <span class="op">+</span> <span class="va">era</span> <span class="op">*</span> <span class="dv">400</span></span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">math.floor</span><span class="op">(</span><span class="va">year</span><span class="op">),</span> <span class="va">days</span> <span class="op">-</span> <span class="fu">math.floor</span><span class="op">(</span><span class="va">year</span> <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> <span class="va">year</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> <span class="va">year</span> <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> <span class="va">year</span> <span class="op">/</span> <span class="dv">400</span><span class="op">)</span></span>
+<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb113-8"><a href="#cb113-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span><span class="op">(</span>unix2doty<span class="op">(</span><span class="dv">0</span><span class="op">))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> unix2deco<span class="op">(</span><span class="va">ms</span><span class="op">)</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">year</span><span class="op">,</span> <span class="va">doty</span> <span class="op">=</span> unix2doty<span class="op">(</span><span class="va">ms</span><span class="op">)</span></span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">string.format</span><span class="op">(</span><span class="st">"%s+%s"</span><span class="op">,</span> <span class="fu">math.floor</span><span class="op">(</span><span class="va">year</span><span class="op">),</span> <span class="fu">math.floor</span><span class="op">(</span><span class="va">doty</span><span class="op">))</span></span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span><span class="op">(</span>unix2deco<span class="op">(</span><span class="dv">0</span><span class="op">))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="copyq" class="level4">
 <h4 class="anchored" data-anchor-id="copyq">CopyQ</h4>
-<div class="sourceCode" id="cb116"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>copyq<span class="op">:</span></span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(ms <span class="op">=</span> <span class="dv">0</span>) {</span>
-<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> days <span class="op">=</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span><span class="op">,</span></span>
-<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>        dote <span class="op">=</span> days <span class="op">-</span> (era <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((days <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> days <span class="op">:</span> days <span class="op">-</span> <span class="dv">146096</span>) <span class="op">/</span> <span class="dv">146097</span>)) <span class="op">*</span> <span class="dv">146097</span><span class="op">,</span></span>
-<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>        year <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((dote <span class="op">-</span> dote <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> dote <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> dote <span class="op">/</span> <span class="dv">146096</span>) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> era <span class="op">*</span> <span class="dv">400</span><span class="op">;</span></span>
-<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [year<span class="op">,</span> days <span class="op">-</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">400</span>)]<span class="op">;</span></span>
-<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb116-8"><a href="#cb116-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-9"><a href="#cb116-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [year<span class="op">,</span> doty] <span class="op">=</span> <span class="fu">unix2doty</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>())<span class="op">,</span></span>
-<span id="cb116-10"><a href="#cb116-10" aria-hidden="true" tabindex="-1"></a>    datetime <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>year<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+</span><span class="sc">${</span></span>
-<span id="cb116-11"><a href="#cb116-11" aria-hidden="true" tabindex="-1"></a>    (day <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(doty))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">3</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">.</span><span class="sc">${</span></span>
-<span id="cb116-12"><a href="#cb116-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span><span class="op">;</span></span>
-<span id="cb116-13"><a href="#cb116-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-14"><a href="#cb116-14" aria-hidden="true" tabindex="-1"></a><span class="fu">copy</span>(datetime)</span>
-<span id="cb116-15"><a href="#cb116-15" aria-hidden="true" tabindex="-1"></a><span class="fu">copySelection</span>(datetime)</span>
-<span id="cb116-16"><a href="#cb116-16" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>copyq<span class="op">:</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">unix2doty</span>(ms <span class="op">=</span> <span class="dv">0</span>) {</span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> days <span class="op">=</span> ms <span class="op">/</span> <span class="dv">86400000</span> <span class="op">+</span> <span class="dv">719468</span><span class="op">,</span></span>
+<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a>        dote <span class="op">=</span> days <span class="op">-</span> (era <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((days <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> days <span class="op">:</span> days <span class="op">-</span> <span class="dv">146096</span>) <span class="op">/</span> <span class="dv">146097</span>)) <span class="op">*</span> <span class="dv">146097</span><span class="op">,</span></span>
+<span id="cb115-5"><a href="#cb115-5" aria-hidden="true" tabindex="-1"></a>        year <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((dote <span class="op">-</span> dote <span class="op">/</span> <span class="dv">1460</span> <span class="op">+</span> dote <span class="op">/</span> <span class="dv">36524</span> <span class="op">-</span> dote <span class="op">/</span> <span class="dv">146096</span>) <span class="op">/</span> <span class="dv">365</span>) <span class="op">+</span> era <span class="op">*</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb115-6"><a href="#cb115-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [year<span class="op">,</span> days <span class="op">-</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(year <span class="op">*</span> <span class="dv">365</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">4</span> <span class="op">-</span> year <span class="op">/</span> <span class="dv">100</span> <span class="op">+</span> year <span class="op">/</span> <span class="dv">400</span>)]<span class="op">;</span></span>
+<span id="cb115-7"><a href="#cb115-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb115-8"><a href="#cb115-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-9"><a href="#cb115-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> [year<span class="op">,</span> doty] <span class="op">=</span> <span class="fu">unix2doty</span>(<span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>())<span class="op">,</span></span>
+<span id="cb115-10"><a href="#cb115-10" aria-hidden="true" tabindex="-1"></a>    datetime <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>year<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+</span><span class="sc">${</span></span>
+<span id="cb115-11"><a href="#cb115-11" aria-hidden="true" tabindex="-1"></a>    (day <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>(doty))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">3</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">.</span><span class="sc">${</span></span>
+<span id="cb115-12"><a href="#cb115-12" aria-hidden="true" tabindex="-1"></a>    (<span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((doty <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>))<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="sc">}</span><span class="vs">+0`</span><span class="op">;</span></span>
+<span id="cb115-13"><a href="#cb115-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-14"><a href="#cb115-14" aria-hidden="true" tabindex="-1"></a><span class="fu">copy</span>(datetime)</span>
+<span id="cb115-15"><a href="#cb115-15" aria-hidden="true" tabindex="-1"></a><span class="fu">copySelection</span>(datetime)</span>
+<span id="cb115-16"><a href="#cb115-16" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>:::</p>
 </section>
 </section>
@@ -4330,16 +4322,16 @@ unix2deco()</code></pre>
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [20]:</pre></div><div class="cell" data-tags="[&quot;unix2deco&quot;]" data-execution_count="20">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
-<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unix2deco(s<span class="op">=</span><span class="dv">0</span>, ms<span class="op">=</span><span class="dv">0</span>):</span>
-<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>    y, d <span class="op">=</span> unix2doty(time())</span>
-<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span>
-<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unix2deco(s<span class="op">=</span><span class="dv">0</span>, ms<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>    y, d <span class="op">=</span> unix2doty(time())</span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>y<span class="sc">:&gt;04}</span><span class="ss">+</span><span class="sc">{</span>(day <span class="op">:=</span> d.<span class="fu">__floor__</span>())<span class="sc">:&gt;03}</span><span class="ss">.</span><span class="sc">{</span><span class="bu">round</span>((d <span class="op">-</span> day) <span class="op">*</span> <span class="fl">1e5</span>)<span class="sc">:&gt;05}</span><span class="ss">+0"</span></span>
+<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>unix2deco()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>'2023+241.72455+0'</code></pre>
+<pre><code>'2023+241.72799+0'</code></pre>
 </div>
 </div></div>
 </section>
@@ -5573,17 +5565,7 @@ console.log(parse_dec());</code></pre>
 Hinnant, Howard. 2014. <span>“Chrono-Compatible Low-Level Date Algorithms.”</span> <a href="http://howardhinnant.github.io/date_algorithms.html" class="uri">http://howardhinnant.github.io/date_algorithms.html</a>.
 </div>
 </div></section></div></main>
-<!-- /main column -->  <script type="ojs-module-contents">
-{"contents":[]}
-</script>
-<script type="module">
-if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../..";
-window._ojs.paths.runtimeToRoot = "../../..";
-window._ojs.paths.docToRoot = "";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script>  <script id="quarto-html-after-body" type="application/javascript">
+<!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
