@@ -687,7 +687,7 @@ viewof scrubberDeco = Scrubber(numbers, {autoplay: false, alternate: true, delay
 :::
 
 ::: {.column-margin}
-```{#lst-intro-deco lst-cap="Deco string processing" cap-location=margin}
+```{#lst-intro-deco lst-cap="Deco timestamp conversion" cap-location=margin}
 ```
 :::
 
@@ -861,8 +861,17 @@ Just like @exm-intro-pent allows us to select `Declock` time intervals, we can c
 
 ```{ojs}
 //| echo: false
-viewof startStop = interval([0, 365], {step: 1, value: [0, 365], label: 'start:stop', width: 425, format: ([start, end]) => start === end ? "" : `${start}:${end}`})
-viewof step = Inputs.number([1, 365], {step: 1, label: "Step", value: 1, placeholder: "Enter step size"})
+viewof sliceInputs = Inputs.form([
+    Inputs.number([-366, 366], {step: 1, label: "start", value: 0, placeholder: "Enter start index"}),
+    Inputs.number([-366, 366], {step: 1, label: "stop", value: 366, placeholder: "Enter stop index"}),
+    Inputs.number([-366, 366], {step: 1, label: "step", value: 1, placeholder: "Enter step size"}),
+])
+viewof spreadInputs = Inputs.form([
+    Inputs.number([-366, 366], {step: 1, label: "start", value: 0, placeholder: "Enter start index"}),
+    Inputs.number([-366, 366], {step: 1, label: "span", value: 366, placeholder: "Enter span size"}),
+    Inputs.number([-366, 366], {step: 1, label: "split", value: 3, placeholder: "Enter split size"}),
+    Inputs.number([-366, 366], {step: 1, label: "space", value: 2, placeholder: "Enter space size"}),
+])
 ```
 
 ```{ojs}
@@ -871,15 +880,17 @@ viewof step = Inputs.number([1, 365], {step: 1, label: "Step", value: 1, placeho
 //| fig-cap: "Decalendar date selector"
 //| fig-cap-location: margin
 //| fig-align: center
-
 // https://observablehq.com/@dec/dotd
 Plot.plot({
   padding: 0,
   x: {axis: "top", label: null},
   y: {label: null, tickPadding: 12},
-  color: {type: "categorical", scheme: "Category10"},
   marks: [
-    Plot.cell(dates, {x: d => d[2], y: d => d.slice(0, 2), fill: d => slice(dates, startStop[0], startStop[1], step).includes(d), inset: 0.5}),
+    Plot.cell(dates, {x: d => d[2], y: d => d.slice(0, 2),
+    fill: d => slice(dates, ...sliceInputs).includes(d) && [].concat(...spread(dates, ...spreadInputs)).includes(d) ? "green" :
+    slice(dates, ...sliceInputs).includes(d) && ![].concat(...spread(dates, ...spreadInputs)).includes(d) ? "blue" :
+    !slice(dates, ...sliceInputs).includes(d) && [].concat(...spread(dates, ...spreadInputs)).includes(d) ? "orange" :
+    "grey", inset: 0.5}),
     Plot.text(dates, {x: d => d[2], y: d => d.slice(0, 2), fill: "white", stroke: "white", fontSize: 20})
   ]
 })
@@ -1115,21 +1126,66 @@ button = (data, filename = 'data.csv') => {
   );
   return button;
 }
-// https://github.com/hustcc/slice.js/blob/master/src/index.js
-slice = (v, start, end, step) => {
-  const r = [];
-  let i;
-  if (step > 0) {
-    for (i = start; i < end; i += step) {
-      r.push(v[i]);
+function slice(self, start, stop, steps, ...args) {
+  steps = (!steps ? [] :
+    typeof steps === "number" ? [steps] :
+    typeof steps === "string" ? Array.from(steps, Number) :
+    steps).concat(args);
+  const len = self.length,
+    stepCount = steps.length,
+    stepSum = steps.reduce((a, b) => a + b, 0),
+    result = [];
+  if (stepSum === 0) { return result };
+  start = Math.max(
+    start == null && stepSum > 0 ? 0 :
+    start == null && stepSum < 0 ? len - 1 :
+    start >= len ? len - 1 :
+    start < 0 ? start + len :
+    start, 0);
+  stop = Math.max(
+    stop == null && stepSum > 0 ? len :
+    stop == null && stepSum < 0 ? -1 :
+    stop >= len ? len :
+    stop < 0 ? stop + len :
+    stop, -1);
+  for (
+    let i = start, counter = -1;
+    stepSum > 0 ? i < stop : i > stop;
+    i += steps[counter]
+  ) {
+    result.push(self[i]);
+    counter = (counter + 1) % stepCount;
+  };
+  return result;
+}
+function spread(self, startOrStop, span, splitsAndSpaces, ...args) {
+  const len = self.length, result = [];
+  if (span === 0) { return result };
+  splitsAndSpaces = (!splitsAndSpaces || splitsAndSpaces.length === 0 ? [len] :
+    typeof splitsAndSpaces === "number" ? [splitsAndSpaces] :
+    typeof splitsAndSpaces === "string" ? Array.from(splitsAndSpaces, Number) :
+    splitsAndSpaces).concat(args);
+    const splitCount = splitsAndSpaces.length,
+    splitSpaceSum = splitsAndSpaces.reduce((a, b) => a + b, 0);
+  if (splitSpaceSum <= 0) { return result };
+  startOrStop = Math.max(
+    startOrStop == null && span > 0 || startOrStop == null && span == null ? 0 :
+    startOrStop == null || startOrStop > len && span < 0 ? len :
+    startOrStop < 0 ? startOrStop + len :
+    startOrStop, 0);
+  span = span == null || startOrStop + span > len ? len - startOrStop :
+    startOrStop + span < 0 ? -startOrStop: span;
+  const start = span > 0 ? startOrStop : startOrStop + span,
+    stop = span > 0 ? startOrStop + span : startOrStop;
+  for (let i = start, c = -1, arr = []; i < stop; i += splitsAndSpaces[c]) {
+    if ((c = (c + 1) % splitCount) % 2 === 0 && i + splitsAndSpaces[c] <= stop) {
+      if ((arr = Array.from({length: splitsAndSpaces[c]}, (_, j) => j + i).map(
+        index => self[index]).filter(item => item !== undefined)
+          ).length == splitsAndSpaces[c]) { result.push(arr) }
     }
-  } else {
-    for (i = start; i > end; i += step) {
-      r.push(v[i]);
-    }
-  }
-  return r;
-};
+  };
+  return result;
+}
 ```
 
 ##### Variables {.appendix}

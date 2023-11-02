@@ -233,7 +233,7 @@
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2023+241</p>
+      <p class="date">2023+246</p>
     </div>
   </div>
   
@@ -737,7 +737,7 @@
 <li><span id="ojs-element-id-13"></span></li>
 <li><span id="ojs-element-id-14"></span></li>
 </ol>
-<p>Listing&nbsp;3: Deco string processing</p>
+<p>Listing&nbsp;3: Deco timestamp conversion</p>
 <pre><code></code></pre>
 <section id="deco-observable-code" class="level4">
 <h4 class="anchored" data-anchor-id="deco-observable-code"><code>Deco</code> Observable code</h4>
@@ -938,14 +938,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_r_files/figure-html/2cfd9c15-f329-4ac3-9270-a6772e55605c-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="dec_r_files/figure-html/b03241c6-bfb0-4179-ae5e-6d3e5ce6c682-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_r_files/figure-html/2cfd9c15-f329-4ac3-9270-a6772e55605c-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="dec_r_files/figure-html/b03241c6-bfb0-4179-ae5e-6d3e5ce6c682-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -1203,22 +1203,70 @@
 <span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a>  );</span>
 <span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a>  return button;</span>
 <span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span><span class="er">/</span> https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>hustcc<span class="sc">/</span>slice.js<span class="sc">/</span>blob<span class="sc">/</span>master<span class="sc">/</span>src<span class="sc">/</span>index.js</span>
-<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a>slice <span class="ot">=</span> (v, start, end, step) <span class="sc">=&gt;</span> {</span>
-<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a>  const r <span class="ot">=</span> [];</span>
-<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a>  let i;</span>
-<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (step <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="at">i =</span> start; i <span class="sc">&lt;</span> end; i <span class="sc">+</span><span class="er">=</span> step) {</span>
-<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a>      <span class="fu">r.push</span>(v[i]);</span>
-<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="at">i =</span> start; i <span class="sc">&gt;</span> end; i <span class="sc">+</span><span class="er">=</span> step) {</span>
-<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a>      <span class="fu">r.push</span>(v[i]);</span>
-<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a>  return r;</span>
-<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a>};</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">slice</span>(self, start, stop, steps, ...args) {</span>
+<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a>  steps <span class="ot">=</span> (<span class="sc">!</span>steps ? [] <span class="sc">:</span></span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a>    typeof steps <span class="sc">==</span><span class="er">=</span> <span class="st">"number"</span> ? [steps] <span class="sc">:</span></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a>    typeof steps <span class="sc">==</span><span class="er">=</span> <span class="st">"string"</span> ? <span class="fu">Array.from</span>(steps, Number) <span class="sc">:</span></span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a>    steps)<span class="fu">.concat</span>(args);</span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a>  const len <span class="ot">=</span> self.length,</span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a>    stepCount <span class="ot">=</span> steps.length,</span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>    stepSum <span class="ot">=</span> <span class="fu">steps.reduce</span>((a, b) <span class="sc">=&gt;</span> a <span class="sc">+</span> b, <span class="dv">0</span>),</span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">=</span> [];</span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (stepSum <span class="sc">==</span><span class="er">=</span> <span class="dv">0</span>) { return result };</span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a>  start <span class="ot">=</span> <span class="fu">Math.max</span>(</span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a>    start <span class="sc">==</span> null <span class="sc">&amp;&amp;</span> stepSum <span class="sc">&gt;</span> <span class="dv">0</span> ? <span class="dv">0</span> <span class="sc">:</span></span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a>    start <span class="sc">==</span> null <span class="sc">&amp;&amp;</span> stepSum <span class="sc">&lt;</span> <span class="dv">0</span> ? len <span class="sc">-</span> <span class="dv">1</span> <span class="sc">:</span></span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a>    start <span class="sc">&gt;=</span> len ? len <span class="sc">-</span> <span class="dv">1</span> <span class="sc">:</span></span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a>    start <span class="sc">&lt;</span> <span class="dv">0</span> ? start <span class="sc">+</span> len <span class="sc">:</span></span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a>    start, <span class="dv">0</span>);</span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a>  stop <span class="ot">=</span> <span class="fu">Math.max</span>(</span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a>    stop <span class="sc">==</span> null <span class="sc">&amp;&amp;</span> stepSum <span class="sc">&gt;</span> <span class="dv">0</span> ? len <span class="sc">:</span></span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a>    stop <span class="sc">==</span> null <span class="sc">&amp;&amp;</span> stepSum <span class="sc">&lt;</span> <span class="dv">0</span> ? <span class="sc">-</span><span class="dv">1</span> <span class="sc">:</span></span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a>    stop <span class="sc">&gt;=</span> len ? len <span class="sc">:</span></span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a>    stop <span class="sc">&lt;</span> <span class="dv">0</span> ? stop <span class="sc">+</span> len <span class="sc">:</span></span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a>    stop, <span class="sc">-</span><span class="dv">1</span>);</span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (</span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a>    let <span class="at">i =</span> start, <span class="at">counter =</span> <span class="sc">-</span><span class="dv">1</span>;</span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a>    stepSum <span class="sc">&gt;</span> <span class="dv">0</span> ? i <span class="sc">&lt;</span> stop <span class="sc">:</span> i <span class="sc">&gt;</span> stop;</span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a>    i <span class="sc">+</span><span class="er">=</span> steps[counter]</span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a>  ) {</span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a>    <span class="fu">result.push</span>(self[i]);</span>
+<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a>    counter <span class="ot">=</span> (counter <span class="sc">+</span> <span class="dv">1</span>) % stepCount;</span>
+<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a>  };</span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a>  return result;</span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="fu">spread</span>(self, startOrStop, span, splitsAndSpaces, ...args) {</span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a>  const len <span class="ot">=</span> self.length, result <span class="ot">=</span> [];</span>
+<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (span <span class="sc">==</span><span class="er">=</span> <span class="dv">0</span>) { return result };</span>
+<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a>  splitsAndSpaces <span class="ot">=</span> (<span class="sc">!</span>splitsAndSpaces <span class="sc">||</span> splitsAndSpaces.length <span class="sc">==</span><span class="er">=</span> <span class="dv">0</span> ? [len] <span class="sc">:</span></span>
+<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a>    typeof splitsAndSpaces <span class="sc">==</span><span class="er">=</span> <span class="st">"number"</span> ? [splitsAndSpaces] <span class="sc">:</span></span>
+<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a>    typeof splitsAndSpaces <span class="sc">==</span><span class="er">=</span> <span class="st">"string"</span> ? <span class="fu">Array.from</span>(splitsAndSpaces, Number) <span class="sc">:</span></span>
+<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a>    splitsAndSpaces)<span class="fu">.concat</span>(args);</span>
+<span id="cb14-264"><a href="#cb14-264" aria-hidden="true" tabindex="-1"></a>    const splitCount <span class="ot">=</span> splitsAndSpaces.length,</span>
+<span id="cb14-265"><a href="#cb14-265" aria-hidden="true" tabindex="-1"></a>    splitSpaceSum <span class="ot">=</span> <span class="fu">splitsAndSpaces.reduce</span>((a, b) <span class="sc">=&gt;</span> a <span class="sc">+</span> b, <span class="dv">0</span>);</span>
+<span id="cb14-266"><a href="#cb14-266" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (splitSpaceSum <span class="sc">&lt;=</span> <span class="dv">0</span>) { return result };</span>
+<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a>  startOrStop <span class="ot">=</span> <span class="fu">Math.max</span>(</span>
+<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a>    startOrStop <span class="sc">==</span> null <span class="sc">&amp;&amp;</span> span <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">||</span> startOrStop <span class="sc">==</span> null <span class="sc">&amp;&amp;</span> span <span class="sc">==</span> null ? <span class="dv">0</span> <span class="sc">:</span></span>
+<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a>    startOrStop <span class="sc">==</span> null <span class="sc">||</span> startOrStop <span class="sc">&gt;</span> len <span class="sc">&amp;&amp;</span> span <span class="sc">&lt;</span> <span class="dv">0</span> ? len <span class="sc">:</span></span>
+<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a>    startOrStop <span class="sc">&lt;</span> <span class="dv">0</span> ? startOrStop <span class="sc">+</span> len <span class="sc">:</span></span>
+<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a>    startOrStop, <span class="dv">0</span>);</span>
+<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a>  span <span class="ot">=</span> span <span class="sc">==</span> null <span class="sc">||</span> startOrStop <span class="sc">+</span> span <span class="sc">&gt;</span> len ? len <span class="sc">-</span> startOrStop <span class="sc">:</span></span>
+<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a>    startOrStop <span class="sc">+</span> span <span class="sc">&lt;</span> <span class="dv">0</span> ? <span class="sc">-</span>startOrStop<span class="sc">:</span> span;</span>
+<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a>  const start <span class="ot">=</span> span <span class="sc">&gt;</span> <span class="dv">0</span> ? startOrStop <span class="sc">:</span> startOrStop <span class="sc">+</span> span,</span>
+<span id="cb14-275"><a href="#cb14-275" aria-hidden="true" tabindex="-1"></a>    stop <span class="ot">=</span> span <span class="sc">&gt;</span> <span class="dv">0</span> ? startOrStop <span class="sc">+</span> span <span class="sc">:</span> startOrStop;</span>
+<span id="cb14-276"><a href="#cb14-276" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (let <span class="at">i =</span> start, <span class="at">c =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">arr =</span> []; i <span class="sc">&lt;</span> stop; i <span class="sc">+</span><span class="er">=</span> splitsAndSpaces[c]) {</span>
+<span id="cb14-277"><a href="#cb14-277" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ((<span class="at">c =</span> (c <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">% splitCount) %</span> <span class="dv">2</span> <span class="sc">==</span><span class="er">=</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> i <span class="sc">+</span> splitsAndSpaces[c] <span class="sc">&lt;=</span> stop) {</span>
+<span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> ((<span class="at">arr =</span> <span class="fu">Array.from</span>({length<span class="sc">:</span> splitsAndSpaces[c]}, (_, j) <span class="sc">=&gt;</span> j <span class="sc">+</span> i)<span class="fu">.map</span>(</span>
+<span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a>        <span class="at">index =</span><span class="sc">&gt;</span> self[index])<span class="fu">.filter</span>(<span class="at">item =</span><span class="sc">&gt;</span> item <span class="sc">!=</span><span class="er">=</span> undefined)</span>
+<span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a>          ).length <span class="sc">==</span> splitsAndSpaces[c]) { <span class="fu">result.push</span>(arr) }</span>
+<span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-282"><a href="#cb14-282" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span>;</span>
+<span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a>  return result;</span>
+<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -4137,7 +4185,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+241.75732+0'
+'2023+246.72910+0'
 </div>
 </div></div>
 <p>:::</p>
@@ -4242,7 +4290,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+241.75732+0'
+'2023+246.72910+0'
 </div>
 </div></div>
 </section>
