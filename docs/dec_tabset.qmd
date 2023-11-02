@@ -859,20 +859,42 @@ Just like @exm-intro-pent allows us to select `Declock` time intervals, we can c
 ::: {#exm-intro-dotd}
 :::
 
+::: {.grid}
+
+::: {.g-col-6}
+#### `Slice` inputs
 ```{ojs}
 //| echo: false
+viewof sliceString = transformInput(
+  Inputs.text({label: "slice", placeholder: "Enter slice string", value: "0:366"}),
+  {bind: viewof sliceInputs, transform: encodeSlice, invert: decodeSlice}
+);
 viewof sliceInputs = Inputs.form([
-    Inputs.number([-366, 366], {step: 1, label: "start", value: 0, placeholder: "Enter start index"}),
+    Inputs.number([-366, 366], {step: 1, label: "start", value: 1, placeholder: "Enter start index"}),
     Inputs.number([-366, 366], {step: 1, label: "stop", value: 366, placeholder: "Enter stop index"}),
-    Inputs.number([-366, 366], {step: 1, label: "step", value: 1, placeholder: "Enter step size"}),
-])
+    Inputs.number([-366, 366], {step: 1, label: "step", value: 5, placeholder: "Enter step size"}),
+]);
+```
+:::
+
+::: {.g-col-6}
+#### `Spread` inputs
+```{ojs}
+//| echo: false
+viewof spreadString = transformInput(
+  Inputs.text({label: "spread", placeholder: "Enter spread string", value: "0>366>3>2"}),
+  {bind: viewof spreadInputs, transform: encodeSpread, invert: decodeSpread}
+);
 viewof spreadInputs = Inputs.form([
     Inputs.number([-366, 366], {step: 1, label: "start", value: 0, placeholder: "Enter start index"}),
     Inputs.number([-366, 366], {step: 1, label: "span", value: 366, placeholder: "Enter span size"}),
     Inputs.number([-366, 366], {step: 1, label: "split", value: 3, placeholder: "Enter split size"}),
     Inputs.number([-366, 366], {step: 1, label: "space", value: 2, placeholder: "Enter space size"}),
-])
+]);
 ```
+:::
+
+:::
 
 ```{ojs}
 //| echo: false
@@ -886,11 +908,10 @@ Plot.plot({
   x: {axis: "top", label: null},
   y: {label: null, tickPadding: 12},
   marks: [
-    Plot.cell(dates, {x: d => d[2], y: d => d.slice(0, 2),
-    fill: d => slice(dates, ...sliceInputs).includes(d) && [].concat(...spread(dates, ...spreadInputs)).includes(d) ? "green" :
-    slice(dates, ...sliceInputs).includes(d) && ![].concat(...spread(dates, ...spreadInputs)).includes(d) ? "blue" :
-    !slice(dates, ...sliceInputs).includes(d) && [].concat(...spread(dates, ...spreadInputs)).includes(d) ? "orange" :
-    "grey", inset: 0.5}),
+    Plot.cell(dates, {x: d => d[2], y: d => d.slice(0, 2), fill: d =>
+      sliceArray.includes(d) && spreadArray.includes(d) ? "green" :
+      sliceArray.includes(d) && !spreadArray.includes(d) ? "blue" :
+      !sliceArray.includes(d) && spreadArray.includes(d) ? "orange" : "grey", inset: 0.5}),
     Plot.text(dates, {x: d => d[2], y: d => d.slice(0, 2), fill: "white", stroke: "white", fontSize: 20})
   ]
 })
@@ -1126,15 +1147,33 @@ button = (data, filename = 'data.csv') => {
   );
   return button;
 }
+function encodeSlice(...args) {
+  return args.join().replaceAll(",", ":")
+}
+function decodeSlice(s) {
+  let [start, stop, ...steps] = s.split(":").map(i => i === "" ? null : Number(i))
+  const step = steps[0] == null ? 1: steps[0];
+  start = start == null && step >= 0 ? 0 : start == null && step < 0 ? 365 : start;
+  stop = stop == null && step >= 0 ? 366 : stop;
+  return [start, stop, step]
+}
+function decodeSpread(spread) {
+  return spread.replace(/^</, "366<").replace(/^>/, "0>")
+    .split(/(?=^\d|<|>)/).map(s => s.replace("<", "-")
+    .replace(">", "")).map(s => s === "" || isNaN(s) ? null : Number(s))
+}
+function encodeSpread(args) {
+  return args.map(a => isNaN(a) ? null : a).join(">").replace(">-", "<")
+}
 function slice(self, start, stop, steps, ...args) {
-  steps = (!steps ? [] :
+  const len = self.length, result = [];
+  if (steps === 0 || len === 0) { return result };
+  steps = (!steps || steps.length === 0 ? [1] :
     typeof steps === "number" ? [steps] :
     typeof steps === "string" ? Array.from(steps, Number) :
-    steps).concat(args);
-  const len = self.length,
-    stepCount = steps.length,
-    stepSum = steps.reduce((a, b) => a + b, 0),
-    result = [];
+    steps).concat(args.map(i => i == null ? 1 : i));
+  const stepCount = steps.length,
+    stepSum = steps.reduce((a, b) => a + b, 0);
   if (stepSum === 0) { return result };
   start = Math.max(
     start == null && stepSum > 0 ? 0 :
@@ -1160,11 +1199,11 @@ function slice(self, start, stop, steps, ...args) {
 }
 function spread(self, startOrStop, span, splitsAndSpaces, ...args) {
   const len = self.length, result = [];
-  if (span === 0) { return result };
+  if (span === 0 || len === 0) { return result };
   splitsAndSpaces = (!splitsAndSpaces || splitsAndSpaces.length === 0 ? [len] :
     typeof splitsAndSpaces === "number" ? [splitsAndSpaces] :
     typeof splitsAndSpaces === "string" ? Array.from(splitsAndSpaces, Number) :
-    splitsAndSpaces).concat(args);
+    splitsAndSpaces).concat(args.map(i => i == null ? 1 : i));
     const splitCount = splitsAndSpaces.length,
     splitSpaceSum = splitsAndSpaces.reduce((a, b) => a + b, 0);
   if (splitSpaceSum <= 0) { return result };
@@ -1291,6 +1330,8 @@ schedules = [
   [[.38, .62], [.38, .62], [.38, .62], [.38, .62], [.38, .62]],
 ]
 dates = Array.from({length: 366}, (_, i) => i.toString().padStart(3, "0"))
+sliceArray = slice(dates, ...sliceString.split(":").map(i => i === "" ? null : Number(i)))
+spreadArray = [].concat(...spread(dates, ...decodeSpread(spreadString)))
 ```
 
 ##### Set values {.appendix}

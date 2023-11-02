@@ -494,14 +494,14 @@ function deco2doty(timestamp = "1969+306.00000Z") {
 }
 
 function slice(self, start, stop, steps, ...args) {
-  steps = (!steps || steps.length === 0 ? [] :
+  const len = self.length, result = [];
+  if (steps === 0) { return result };
+  steps = (!steps || steps.length === 0 ? [1] :
     typeof steps === "number" ? [steps] :
     typeof steps === "string" ? Array.from(steps, Number) :
     steps).concat(args);
-  const len = self.length,
-    stepCount = steps.length,
-    stepSum = steps.reduce((a, b) => a + b, 0),
-    result = [];
+  const stepCount = steps.length,
+    stepSum = steps.reduce((a, b) => a + b, 0);
   if (stepSum === 0) { return result };
   start = Math.max(
     start == null && stepSum > 0 ? 0 :
@@ -527,8 +527,8 @@ function slice(self, start, stop, steps, ...args) {
 }
 
 function slice(self, start, stop, step) {
-  const len = self.length, result = [];
-  if (step === 0) { return result };
+  const len = self.length,
+    result = [];
   step = step || 1;
   start = Math.max(
     start == null ? step > 0 ? 0 : len - 1 :
