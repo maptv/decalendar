@@ -782,11 +782,13 @@ As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `De
 [^pent]: `pent`: a group of 5 days; half of a `dek`
 [^sched]: `pently` schedule: one of a set of workday and restday schedules for the 5 days of the `pent`
 
-Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, the proportions of the day in `pently` schedules are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. Each `Schedule` `3` workday is split up symmetrically into proportions so that workday starts at .3 (7.2 hours), lasts .4 (9.6 hours), and ends at .7 (16.8 hours).
+Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, `pently` schedules divides each workday into simple, symmetrical proportions that are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. The `Schedule` `3` workday is longer the typical 9-to-5, but the longer workday is compensated by more frequent restdays.
 
 {{< embed schedules.ipynb#fig-schedules >}}
 
-@exm-intro-pent provides the opportunity to explore all four of the `pently` schedules. You can select which schedule to view using the [Observable](https://observablehq.com/about) [radio inputs](https://observablehq.com/@observablehq/input-radio), use the [interval sliders](https://observablehq.com/@mootari/range-slider) to adjust the schedule if desired, and click the [Download button](https://observablehq.com/@jeremiak/download-data-button) to obtain the schedule data used to create @fig-intro-dek. To download the data as a [JSON](https://en.wikipedia.org/wiki/JSON) file instead of a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), change the file extension in the filename text input from `.csv` to `.json`. @sec-sched provides more information on `Schedule` `3` and the other `pently` schedules.
+@exm-intro-pent provides the opportunity to explore all four of the `pently` schedules. `Schedule` `3` is the default `pently` schedule, and should be followed unless there is a compelling reason to do otherwise. Despite having different numbers of workdays, all `pently` schedules keep the amount of spent at work constant at 1.2 days (120 `cents`) per `pent`. Every `pently` schedule also splits up workdays symmetrically so that the time before and after is the same. You can select which schedule to view in @exm-intro-pent using the [Observable](https://observablehq.com/about) [radio inputs](https://observablehq.com/@observablehq/input-radio). @sec-sched provides more information on `Schedule` `3` and the other `pently` schedules.
+
+You can also use the [interval sliders](https://observablehq.com/@mootari/range-slider) to create a custom schedule. Each interval is summarized by a `Declock` `slice` shown next to its slider. The `slice` that summarizes the `Schedule` `3` workday is `.3:.7`, where .3 (7.2 hours) is the `start` and .7 (16.8 hours) is the `stop`. `Decalendar` and `Declock` `slices` are inspired by [array slicing](https://en.wikipedia.org/wiki/Array_slicing#:~:text=In%20computer%20programming%2C%20array%20slicing%20is%20an%20operation%20that%20extracts%20a%20subset%20of%20elements%20from%20an%20array%20and%20packages%20them%20as%20another%20array) in computer programming and are used to represent date and time intervals. Additional details regarding `slices` and other ways to express intervals are available in @sec-slice.
 
 ::: {#exm-intro-pent}
 :::
@@ -854,7 +856,17 @@ Plot.plot({
   ]})
 ```
 
-Just like @exm-intro-pent allows us to select `Declock` time intervals, we can create `Decalendar` date intervals in @exm-intro-dotd. To select discontinuous intervals, we can use the `step` input to "step" over $step-1$ dates in the interval. The `start:stop` and `step` inputs in @exm-intro-dotd enable [array slicing](https://en.wikipedia.org/wiki/Array_slicing#:~:text=In%20computer%20programming%2C%20array%20slicing%20is%20an%20operation%20that%20extracts%20a%20subset%20of%20elements%20from%20an%20array%20and%20packages%20them%20as%20another%20array) as in the [Python programming language](https://en.wikipedia.org/wiki/Array_slicing#1991:_Python). In @fig-intro-dotd, `deks` are in separate rows, the days-of-the-`dek` are stacked in columns, and each `Decalendar` date has its own cell. `Decalendar` dates that are included in the interval are highlighted in orange, and all other `Decalendar` dates are labeled blue. Try setting a `step`👣of 10 to select all instances of one of the days-of-the-`dek`!
+`Slices` can be used to select `Declock` time intervals, as in @exm-intro-pent above, or `Decalendar` date intervals, as in @exm-intro-dotd below. `Decalendar` date intervals can represent recurring events or events take place over multiple days. In addition to `slices`, `Decalendar` and `Declock` intervals can also be  created using `spreads`. @fig-intro-dotd shows dates selected by a `slice` in <span style="color:blue;">blue</span>, dates selected by a `spread` in <span style="color:orange;">orange</span>, dates selected by both in <span style="color:green;">green</span>, and dates selected by neither in <span style="color:gray;">gray</span>.
+
+With the `slice` and `spread` inputs in @exm-intro-dotd, it is possible to select any `dotd` (column) in @fig-intro-dotd.
+
+Checkbox inputs for selecting the days of the dek: 10 checkboxes for slices and another 10 for spreads. Clicking on a checkbox resets start, stop, and span to the default value: 0, 366, and 366.
+
+The text inputs combine the values from the numeric inputs into a `slice` and a `spread`. `Slices` can consist of `start` index, `stop` index, and `step` size values separated by colons (`start:stop:step`), whereas `spreads` can include the `start` index, `span` size, `split` size, and `space` size properties, which are typically delimited by greater-than signs (`start>span>split>space`). A `step`👣of 10 to selects all instances of one of the days-of-the-`dek`, while a `step` of 5 selects two days !
+
+
+Creating continuous intervals, with no breaks in between, is equally easy with `slices` and `spreads`, but `slices` are both useful for   or selecting dates separated by $step-1$ dates. Spreading on the other hand The `start:stop` and `step` inputs in @exm-intro-dotd enable . In @fig-intro-dotd, `deks` are in separate rows, the days-of-the-`dek` are stacked in columns, and each `Decalendar` date has its own cell. `Decalendar` dates that are included in the interval are highlighted in orange, and all other `Decalendar` dates are labeled blue. Try setting a `step`👣of 10 to select all instances of one of the days-of-the-`dek`!
+ @sec-slice and @sec-spread build on the discussion of `slices` and `spreads` below.
 
 ::: {#exm-intro-dotd}
 :::
@@ -862,7 +874,6 @@ Just like @exm-intro-pent allows us to select `Declock` time intervals, we can c
 ::: {.grid}
 
 ::: {.g-col-6}
-#### `Slice` inputs
 ```{ojs}
 //| echo: false
 viewof sliceString = transformInput(
@@ -878,7 +889,6 @@ viewof sliceInputs = Inputs.form([
 :::
 
 ::: {.g-col-6}
-#### `Spread` inputs
 ```{ojs}
 //| echo: false
 viewof spreadString = transformInput(
@@ -886,10 +896,10 @@ viewof spreadString = transformInput(
   {bind: viewof spreadInputs, transform: encodeSpread, invert: decodeSpread}
 );
 viewof spreadInputs = Inputs.form([
-    Inputs.number([-366, 366], {step: 1, label: "start", value: 0, placeholder: "Enter start index"}),
+    Inputs.number([-366, 366], {step: 1, label: "start", value: 3, placeholder: "Enter start index"}),
     Inputs.number([-366, 366], {step: 1, label: "span", value: 366, placeholder: "Enter span size"}),
-    Inputs.number([-366, 366], {step: 1, label: "split", value: 3, placeholder: "Enter split size"}),
-    Inputs.number([-366, 366], {step: 1, label: "space", value: 2, placeholder: "Enter space size"}),
+    Inputs.number([-366, 366], {step: 1, label: "split", value: 2, placeholder: "Enter split size"}),
+    Inputs.number([-366, 366], {step: 1, label: "space", value: 3, placeholder: "Enter space size"}),
 ]);
 ```
 :::
@@ -1200,7 +1210,7 @@ function slice(self, start, stop, steps, ...args) {
 function spread(self, startOrStop, span, splitsAndSpaces, ...args) {
   const len = self.length, result = [];
   if (span === 0 || len === 0) { return result };
-  splitsAndSpaces = (!splitsAndSpaces || splitsAndSpaces.length === 0 ? [len] :
+  splitsAndSpaces = (!splitsAndSpaces || splitsAndSpaces.length === 0 ? [1] :
     typeof splitsAndSpaces === "number" ? [splitsAndSpaces] :
     typeof splitsAndSpaces === "string" ? Array.from(splitsAndSpaces, Number) :
     splitsAndSpaces).concat(args.map(i => i == null ? 1 : i));
@@ -2420,7 +2430,7 @@ The Gregorian calendar has many more workdays, 260 in common years and 261 in le
 
 #### Pently schedules {#sec-pently}
 
-If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. As mentioned above, each half of the `dek` is called a `pent`. Each `pent` can have its own `pently` schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. @tbl-pently displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different `pently` schedules are named after the number of workdays per `pent`. People can switch between `pently` schedules every `pent` as needed, but unless there is a compelling reason to follow a different `pently` schedule, everyone should follow the `Schedule` `3` by default. `Schedule` `3` has 3 workdays and 2 restdays in each `pent`. Each `Schedule` `3` workday starts at `Dot` `3`, ends at `Dot` `7`, and lasts 4 `dimes`.
+If necessary, the length of the workday and the number of workdays in the `dek` can be adjusted according to different schedules. As mentioned above, each half of the `dek` is called a `pent`. Each `pent` can have its own `pently` schedule. The expectation is that workers will work for 12 `dimes` per `pent`. It is possible to split those 12 `dimes` over the course of 5, 4, 3, or 2 days in each `pent`. @tbl-pently displays how the number of workdays and restdays in a `pent` affects the start time, end time, and duration of the workday. The different `pently` schedules are named after the number of workdays per `pent`. People can switch between `pently` schedules every `pent` as needed, but everyone should follow the `Schedule` `3` by default. `Schedule` `3` has 3 workdays and 2 restdays in each `pent`. Each `Schedule` `3` workday starts at `Dot` `3`, ends at `Dot` `7`, and lasts 4 `dimes`.
 
 #### @tbl-pently
 
