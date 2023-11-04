@@ -233,7 +233,7 @@
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2023+247</p>
+      <p class="date">2023+248</p>
     </div>
   </div>
   
@@ -938,14 +938,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_r_files/figure-html/d244e7b3-04ac-441e-a415-e5074fdfad9c-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="dec_r_files/figure-html/cb1e1f78-d81d-4ac6-9cab-294767bbea09-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_r_files/figure-html/d244e7b3-04ac-441e-a415-e5074fdfad9c-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="dec_r_files/figure-html/cb1e1f78-d81d-4ac6-9cab-294767bbea09-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -959,9 +959,9 @@
 <p><span class="theorem-title"><strong>Example 4 </strong></span>&nbsp;</p>
 <p>[1] <code>pent</code>: a group of 5 days; half of a <code>dek</code></p>
 <p>[2] <code>pently</code> schedule: one of a set of workday and restday schedules for the 5 days of the <code>pent</code></p>
-<p><code>Slices</code> can be used to select <code>Declock</code> time intervals, as in <a href="#exm-intro-pent">Example&nbsp;4</a> above, or <code>Decalendar</code> date intervals, as in <a href="#exm-intro-dotd">Example&nbsp;5</a> below. <code>Decalendar</code> date intervals can represent events take place over multiple days. In addition to <code>slices</code>, <code>Decalendar</code> and <code>Declock</code> intervals can also be chosen using <code>spreads</code>. Use the checkbox inputs in <a href="#exm-intro-dotd">Example&nbsp;5</a> to select any combination of days-of-the-<code>dek</code> in <a href="#fig-intro-dotd">Figure&nbsp;4</a>. <a href="#fig-intro-dotd">Figure&nbsp;4</a> shows dates selected by a <code>slice</code> in <span class="blue">blue</span>, dates selected by a <code>spread</code> in <span class="orange">orange</span>, dates selected by both in <span class="green">green</span>, and dates selected by neither in <span class="gray">gray</span>. <a href="#sec-slice">Section&nbsp;6.1</a> and <a href="#sec-spread">Section&nbsp;6.3</a> build on the crash course in <code>slices</code> and <code>spreads</code> provided by <a href="#exm-intro-dotd">Example&nbsp;5</a>.</p>
-<p>The checkboxes will modify the <a href="#exm-intro-dotd">Example&nbsp;5</a> <code>slice</code> and <code>spread</code> text inputs and associated numeric inputs as needed to select the desired days-of-the-<code>dek</code>. The numeric inputs for <code>slices</code> are the <code>start</code>🎬index, the <code>stop</code>🛑index, and the <code>step</code>👣size, which are separated by colons (<code>start:stop:step</code>) when combined into a <code>slice</code>. Similarly, the numeric inputs for <code>spreads</code> are the <code>start</code>🎬or🛑<code>stop</code> index, the <code>span</code>🪽size, the <code>split</code> size, and the <code>space</code> size, which are typically delimited by greater-than signs (<code>start&gt;span&gt;split&gt;space</code>) or a mix of greater-than and less-than signs (<code>stop&lt;span&gt;split&gt;space</code>).</p>
-<p>The numeric inputs in <a href="#exm-intro-dotd">Example&nbsp;5</a> cannot capture the full power of <code>spreads</code> and <code>slices</code>, because <code>slices</code> can have any number of <code>steps</code> and, likewise, <code>spreads</code> can have any any number of alternating <code>split</code> and <code>space</code> sizes. The most useful <code>step</code> sizes for <code>slices</code> are 2, 5, and 10, which select every other <code>dotd</code> (<code>::2</code>), analogous <code>dotd</code> pairs in each <code>pent</code> (<code>::5</code>), or all instances of one <code>dotd</code> (<code>::10</code>), respectively. Any other <code>dotd</code> combination is likely to more easily encapsulated by a <code>spread</code>. The <code>Schedule</code> <code>3</code> workdays can be expressed as the <code>slice</code> <code>::1:1:3:1:1:3</code> or the <code>spread</code> <code>&gt;&gt;3&gt;2</code>, while the remaining days (restdays) can be represented by the <code>slice</code> <code>3::1:4:1:4</code> or the <code>spread</code> <code>3&gt;&gt;2&gt;3</code>.</p>
+<p><code>Slices</code> can be used to select <code>Declock</code> time intervals, as in <a href="#exm-intro-pent">Example&nbsp;4</a> above, or <code>Decalendar</code> date intervals, as in <a href="#exm-intro-dotd">Example&nbsp;5</a> below. <code>Decalendar</code> date intervals can represent events take place over multiple days. In addition to <code>slices</code>, <code>Decalendar</code> and <code>Declock</code> intervals can also be chosen using <code>spreads</code>. Use the <a href="https://observablehq.com/about">Observable</a> <a href="https://observablehq.com/@observablehq/input-button">button</a> and <a href="https://observablehq.com/@observablehq/input-checkbox">checkbox</a> inputs in <a href="#exm-intro-dotd">Example&nbsp;5</a> to display different <code>dotd</code> combinations in <a href="#fig-intro-dotd">Figure&nbsp;4</a>. <a href="#fig-intro-dotd">Figure&nbsp;4</a> shows dates selected by a <code>slice</code> in <span class="blue">blue</span>, dates selected by a <code>spread</code> in <span class="orange">orange</span>, dates selected by both in <span class="green">green</span>, and dates selected by neither in <span class="gray">gray</span>. <a href="#sec-slice">Section&nbsp;6.1</a> and <a href="#sec-spread">Section&nbsp;6.3</a> build on the practical introduction to <code>slices</code> and <code>spreads</code> provided by <a href="#exm-intro-dotd">Example&nbsp;5</a>.</p>
+<p>The <a href="#exm-intro-dotd">Example&nbsp;5</a> button and checkbox inputs will modify the associated <code>slice</code> and <code>spread</code> text and numeric inputs as needed to select the desired days-of-the-<code>dek</code>. The numeric inputs for <code>slices</code> are the <code>start</code>🎬index, the <code>stop</code>🛑index, and the <code>step</code>👣size, which are separated by colons (<code>start:stop:step</code>) when combined into a <code>slice</code>. Similarly, the numeric inputs for <code>spreads</code> are the <code>start</code>🎬or🛑<code>stop</code> index, the <code>span</code>🪽size, the <code>split</code> size, and the <code>space</code> size, which are typically delimited by greater-than signs (<code>start&gt;span&gt;split&gt;space</code>) or a mix of greater-than and less-than signs (<code>stop&lt;span&gt;split&gt;space</code>).</p>
+<p>The numeric inputs in <a href="#exm-intro-dotd">Example&nbsp;5</a> cannot capture the full power of <code>spreads</code> and <code>slices</code>, because <code>slices</code> can have any number of <code>steps</code> and, likewise, <code>spreads</code> can have any number of alternating <code>split</code> and <code>space</code> sizes. We can select all even or odd days-of-the-<code>dek</code> using a <code>slice</code> with a single <code>step</code> (<code>::2</code> or <code>1::2</code>) or a <code>spread</code> with one <code>split</code>-<code>space</code> pair (<code>&gt;&gt;&gt;1</code> or <code>1&gt;&gt;&gt;1</code>). More complex patterns, such as prime or composite days-of-the-<code>dek</code>, require multiple <code>step</code> sizes for <code>slices</code> (<code>2:::2:2:5</code> or <code>4::2:2::5</code>) or multiple <code>split</code>-<code>space</code> pairs (<code>2&gt;&gt;2&gt;1&gt;&gt;1&gt;&gt;4</code> or <code>4&gt;&gt;&gt;1&gt;&gt;1&gt;2&gt;4</code>).</p>
 <p><span class="theorem-title"><strong>Example 5 </strong></span></p>
 <section id="dek-observable-code" class="level4">
 <h4 class="anchored" data-anchor-id="dek-observable-code"><code>Dek</code> Observable code</h4>
@@ -4214,7 +4214,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb88-13"><a href="#cb88-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+247.99167+0'
+'2023+248.23884+0'
 </div>
 </div></div>
 <p>:::</p>
@@ -4319,7 +4319,7 @@ f"{y:&gt;04}+{(day := d.__floor__()):&gt;03}.{round((d - day) * 1e5):&gt;05}+0"<
 <span id="cb92-13"><a href="#cb92-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-'2023+247.99167+0'
+'2023+248.23884+0'
 </div>
 </div></div>
 </section>
