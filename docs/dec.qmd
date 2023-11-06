@@ -220,7 +220,7 @@ const W = width > 1250 ? width * 2 / 3 : width > 1150 ? width * 3 / 4 : width > 
 ```{ojs}
 //| echo: false
 html`<style>
-  text {
+  .tickLabel, .tickLabel1, .tickLabel2, .timeLabel {
     fill: #000;
     font-family: sans-serif;
     font-size: 20px;
@@ -692,7 +692,7 @@ Inputs.button("Copy current timestamp", {value: null, reduce: () => navigator.cl
 ```
 :::
 
-@exm-intro-deco also features a button to copy the current `deco` timestamp (`year+day.stamp`) to your clipboard. You can paste the copied `deco` into the text input in @exm-intro-deco. You can also configure your [clipboard manager](https://en.wikipedia.org/wiki/Clipboard_manager#:~:text=A%20clipboard%20manager%20is%20a%20computer%20program%20that%20adds%20functionality%20to%20an%20operating%20system%27s%20clipboard.) to paste in the current date, time, or timestamp whenever you press a keyboard shortcut. Code that enables the [CopyQ](https://hluk.github.io/CopyQ/) clipboard manager to paste in the current `deco` timestamp is available at the top of @sec-ojs-code-deco.
+@exm-intro-deco also features a button to copy the current `deco` timestamp (`year+day.stamp`) to your clipboard. You can paste the copied `deco` into the text input in @exm-intro-deco. You can also configure your [clipboard manager](https://en.wikipedia.org/wiki/Clipboard_manager#:~:text=A%20clipboard%20manager%20is%20a%20computer%20program%20that%20adds%20functionality%20to%20an%20operating%20system%27s%20clipboard.) to paste in the current date, time, or timestamp whenever you press a keyboard shortcut. Code that enables the [CopyQ](https://hluk.github.io/CopyQ/) clipboard manager to paste in the current `deco` timestamp is available at the top of @sec-ojs-code-deco in the appendix.
 
 #### `Deco` Observable code {#sec-ojs-code-deco .appendix}
 
@@ -853,9 +853,10 @@ button(durations, filename)
 
 // https://observablehq.com/@dec/pent
 Plot.plot({
+  className: "schedule-explorer",
   x: {label: null},
   color: {scheme: "Set1", legend: "swatches", reverse: true},
-  y: {label: null, domain: [1, 0], tickPadding: 18},
+  y: {label: null, domain: [1, 0]},
   marks: [
   Plot.barY(durations, {x: "label", y: "duration", fill: "group"}),
   Plot.textY(
@@ -869,8 +870,8 @@ Plot.plot({
             y: "duration",
             text: (d) => (d.duration < .0001 ? null : formatDecimal(d.duration)),
             fill: "white",
-            stroke: "white",
-            fontSize: 32,
+            stroke: "black",
+            fontSize: 36,
           }
         )
       )
@@ -970,15 +971,21 @@ viewof sliceOrSpread = toggleSwitch({textOn: invertDotd ? "Spread" : 'Slice' , t
 //| fig-align: center
 // https://observablehq.com/@dec/dotd
 Plot.plot({
+  className: "date-selector",
   padding: 0,
   x: {axis: "top", label: null},
-  y: {label: null, tickPadding: 12},
+  y: {label: null},
   marks: [
     Plot.cell(dates, {x: d => d[2], y: d => d.slice(0, 2), fill: d =>
       sliceArray.includes(d) && spreadArray.includes(d) ? "green" :
       sliceArray.includes(d) && !spreadArray.includes(d) ? "blue" :
       !sliceArray.includes(d) && spreadArray.includes(d) ? "orange" : "grey", inset: 0.5}),
-    Plot.text(dates, {x: d => d[2], y: d => d.slice(0, 2), fill: "white", stroke: "white", fontSize: 20})
+    Plot.text(dates, {
+    x: d => d[2],
+    y: d => d.slice(0, 2),
+    fill: "white",
+    stroke: "black",
+    fontSize: 20})
   ]
 })
 ```
@@ -1246,7 +1253,7 @@ function addButtonStyle() {
     }
   }
   addRule(
-    '.button-switch { -webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;display: inline-block;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;background-color: #EFEFEF;padding: 0px 7px 0px 7px;text-align: center;border: 1px solid grey;width: auto;color: #1c1c1c;font-size: 13px;font-family: sans-serif;text-decoration: none; }'
+    '.button-switch { -webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;display: inline-block;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;background-color: #EFEFEF;padding: 0px 7px 0px 7px;text-align: center;border: 1px solid grey;width: auto;color: #1c1c1c;font-size: 14px;font-family: sans-serif;text-decoration: none; }'
   );
   addRule(
     '.button-switch:hover { background-color: #E5E5E5;border: 1px solid #454545; }'

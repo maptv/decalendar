@@ -121,7 +121,7 @@
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2023+249</p>
+      <p class="date">2023+250</p>
     </div>
   </div>
   
@@ -129,7 +129,7 @@
   </div>
   
 
-</header>   <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-11-05T05:30:20.327249Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-11-05T05:30:20.326747Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-11-05T05:30:20.573178Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-11-05T05:30:20.572926Z&quot;}" data-execution_count="1">
+</header>   <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-11-06T06:54:11.896958Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-11-06T06:54:11.896770Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-11-06T06:54:12.112780Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-11-06T06:54:12.112475Z&quot;}" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -181,7 +181,7 @@
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> ax.containers:</span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">3</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"black"</span>, path_effects<span class="op">=</span>[pe.withStroke(linewidth<span class="op">=</span><span class="dv">3</span>, foreground<span class="op">=</span><span class="st">"white"</span>)], fontsize<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"white"</span>, path_effects<span class="op">=</span>[pe.withStroke(linewidth<span class="op">=</span><span class="dv">1</span>, foreground<span class="op">=</span><span class="st">"black"</span>)], fontsize<span class="op">=</span><span class="dv">15</span>)</span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> (</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    pd.DataFrame(</span>
@@ -211,9 +211,9 @@
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> ax.containers[:<span class="op">-</span><span class="dv">1</span>]:</span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">round</span>(v.get_height(), <span class="dv">1</span>) <span class="cf">if</span> v.get_height() <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span> <span class="cf">for</span> v <span class="kw">in</span> c]</span>
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="bu">str</span>(l)[<span class="dv">1</span>:] <span class="cf">for</span> l <span class="kw">in</span> labels <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span>]</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"black"</span>, path_effects<span class="op">=</span>[pe.withStroke(linewidth<span class="op">=</span><span class="dv">3</span>, foreground<span class="op">=</span><span class="st">"white"</span>)], fontsize<span class="op">=</span><span class="dv">22</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    ax.bar_label(c, labels<span class="op">=</span>labels, label_type<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"white"</span>, path_effects<span class="op">=</span>[pe.withStroke(linewidth<span class="op">=</span><span class="dv">1</span>, foreground<span class="op">=</span><span class="st">"black"</span>)], fontsize<span class="op">=</span><span class="dv">22</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-container column-page-left page-columns page-full"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="fig-schedules" class="cell quarto-layout-panel page-columns page-full" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-11-05T05:30:20.574925Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-11-05T05:30:20.574799Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-11-05T05:30:21.060577Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-11-05T05:30:21.060168Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
+<div class="cell-container column-page-left page-columns page-full"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="fig-schedules" class="cell quarto-layout-panel page-columns page-full" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-11-06T06:54:12.114437Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-11-06T06:54:12.114332Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-11-06T06:54:12.554666Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-11-06T06:54:12.554241Z&quot;}" data-tags="[&quot;fig-schedules&quot;]" data-execution_count="2">
 <figure class="figure page-columns page-full">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
