@@ -619,6 +619,8 @@ set(viewof decoOutput, `1969+${scrubberDeco.toString().padStart(3, "0")}`)
 
 ## Year {#sec-intro-year}
 
+The current `deco` timestamp is \${styledYear}+\${setStyle(dotyDate, d3.schemePaired\[1\])}.\${setStyle(dotyTime, d3.schemePaired\[2\])}.
+
 `Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^12] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of a date (`day`) or time (`day.stamp`) that occurs every year or every leap year.
 
 [^12]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
