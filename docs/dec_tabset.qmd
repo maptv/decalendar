@@ -13,25 +13,31 @@ citation:
 
 ## Day-of-the-year {#sec-intro-doty}
 
-`Decalendar`[^decalendar] is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock`[^declock] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a number called the day-of-the-year (`doty`)[^doty]. @fig-bar-doty displays the current `doty` (\${styledDotyDate}.\${styledDotyTime}) as a bar chart. The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the `Decalendar` date[^date] (\${setStyle(dotyDate, d3.schemePaired\[1\])}) and the [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) is the `Declock` time[^time] (\${setStyle(dotyTime, d3.schemePaired\[2\])}).
+`Decalendar`[^1] is a [decimal](https://en.wikipedia.org/wiki/Decimal) calendar🗓️system and `Declock`[^2] is a decimal timekeeping⏳system. Instead of months, weeks, hours, minutes, and seconds, `Decalendar` and `Declock` use a number called the day-of-the-year (`doty`)[^3]. @fig-bar-doty displays the current `doty` (\${styledDotyDate}.\${styledDotyTime}) as a bar chart. The [integer part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20integer%20part%20or%20integral%20part%20of%20a%20decimal%20numeral%20is%20the%20integer%20written%20to%20the%20left%20of%20the%20decimal%20separator) of the `doty` is the `Decalendar` date[^4] (\${setStyle(dotyDate, d3.schemePaired\[1\])}) and the [fractional part](https://en.wikipedia.org/wiki/Decimal#:~:text=The%20part%20from%20the%20decimal%20separator%20to%20the%20right%20is%20the%20fractional%20part%2C%20which%20equals%20the%20difference%20between%20the%20numeral%20and%20its%20integer%20part.) is the `Declock` time[^5] (\${setStyle(dotyTime, d3.schemePaired\[2\])}).
 
-[^decalendar]: `Decalendar`: a calendar system that uses `deks` instead of months and weeks
-[^declock]: `Declock`: a timekeeping system that uses fractional days instead of hours, minutes, and seconds
-[^doty]: `doty`: day-of-the-year; an alternative to months, weeks, hours, minutes, and seconds
-[^date]: `doty` date: the integer part of the `doty`; an alternate to calendar dates and week dates
-[^time]: `doty` time: the fractional part of the `doty`; an alternate to hours, minutes and seconds
+[^1]: `Decalendar`: a calendar system that uses `deks` instead of months and weeks
 
-The top two bars in @fig-bar-doty (旬 and 日) show the two components of the `Decalendar` date (\${setStyle(dotyDate, d3.schemePaired\[1\])}): the `dek`[^dek]  (\${styledDek}) and the day-of-the-`dek`[^dotd] (\${styledDotd}). A `dek` is a group of 10 days that fulfills the role of months and weeks in `Decalendar`. Therefore, the `dek` and the day-of-the-`dek` (`dotd`) in `Decalendar` dates are analogous to the month and day-of-the-month (`dotm`) in [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (`mm-dd`) and the week and day-of-the-week (`dotw`) in [week dates](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (`Www-d`).
+[^2]: `Declock`: a timekeeping system that uses fractional days instead of hours, minutes, and seconds
 
-[^dek]: `dek`: a group of 10 days; the first two digits of the `Decalendar` date; an alternate to month and weeks
-[^dotd]: `dotd`: one of the 10 days in a `dek`; the last digit of the `Decalendar` date; an alternate to the day-of-the-month and day-of-the-week
+[^3]: `doty`: day-of-the-year; an alternative to months, weeks, hours, minutes, and seconds
 
-The bottom three bars in @fig-bar-doty (%, ‰, and ♫) show components of the `Declock` time (\${setStyle(dotyTime, d3.schemePaired\[2\])}):
-`cents`[^cent] (\${styledCent}), `mils`[^mil] (\${styledMil}), and `beats`[^beat] (\${styledBeat}). A `cent` is 1% of the day, which is a little less than a quarter hour. A `mil` (`‰`) is a tenth of a `cent`, which is close to a minute and a half. A `beat` is 1% of a `mil`, which is almost as long as a second, and can be thought of as a heart❤️beat or musical🎵[beat](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time) with a constant [rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or [tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm) of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, `beats` can be used to measure durations, such as the time since this webpage was loaded: \${styledTickTime}.
+[^4]: `doty` date: the integer part of the `doty`; an alternate to calendar dates and week dates
 
-[^cent]: `cent`: a hundredth ($10^{-2}$) of a day; the first 2 digits of the `doty` time; an alternate to quarter hours
-[^mil]: `mil`: a thousandth ($10^{-3}$) of a day; the first 3 digits of the `doty` time; an alternate to minutes
-[^beat]: `beat`: a hundred thousandth ($10^{-5}$) of a day; the first 5 digits of the `doty` time; an alternate to seconds
+[^5]: `doty` time: the fractional part of the `doty`; an alternate to hours, minutes and seconds
+
+The top two bars in @fig-bar-doty (旬 and 日) show the two components of the `Decalendar` date (\${setStyle(dotyDate, d3.schemePaired\[1\])}): the `dek`[^6] (\${styledDek}) and the day-of-the-`dek`[^7] (\${styledDotd}). A `dek` is a group of 10 days that fulfills the role of months and weeks in `Decalendar`. Therefore, the `dek` and the day-of-the-`dek` (`dotd`) in `Decalendar` dates are analogous to the month and day-of-the-month (`dotm`) in [calendar dates](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) (`mm-dd`) and the week and day-of-the-week (`dotw`) in [week dates](https://en.wikipedia.org/wiki/ISO_8601#Week_dates) (`Www-d`).
+
+[^6]: `dek`: a group of 10 days; the first two digits of the `Decalendar` date; an alternate to month and weeks
+
+[^7]: `dotd`: one of the 10 days in a `dek`; the last digit of the `Decalendar` date; an alternate to the day-of-the-month and day-of-the-week
+
+The bottom three bars in @fig-bar-doty (%, ‰, and ♫) show components of the `Declock` time (\${setStyle(dotyTime, d3.schemePaired\[2\])}): `cents`[^8] (\${styledCent}), `mils`[^9] (\${styledMil}), and `beats`[^10] (\${styledBeat}). A `cent` is 1% of the day, which is a little less than a quarter hour. A `mil` (`‰`) is a tenth of a `cent`, which is close to a minute and a half. A `beat` is 1% of a `mil`, which is almost as long as a second, and can be thought of as a heart❤️beat or musical🎵[beat](https://en.wikipedia.org/wiki/Beat_(music)#:~:text=the%20beat%20is%20the%20basic%20unit%20of%20time) with a constant [rate](https://en.wikipedia.org/wiki/Heart_rate#:~:text=The%20American%20Heart%20Association%20states%20the%20normal%20resting%20adult%20human%20heart%20rate%20is%2060%2D100%20bpm.) or [tempo](https://en.wikipedia.org/wiki/Tempo#Basic_tempo_markings:~:text=Adagietto%20%E2%80%93%20slower%20than,56%E2%80%93108%C2%A0bpm) of 69.4̅ beats per minute. In addition to displaying time on clocks🕰️and⌚️watches, `beats` can be used to measure durations, such as the time since this webpage was loaded: \${styledTickTime}.
+
+[^8]: `cent`: a hundredth ($10^{-2}$) of a day; the first 2 digits of the `doty` time; an alternate to quarter hours
+
+[^9]: `mil`: a thousandth ($10^{-3}$) of a day; the first 3 digits of the `doty` time; an alternate to minutes
+
+[^10]: `beat`: a hundred thousandth ($10^{-5}$) of a day; the first 5 digits of the `doty` time; an alternate to seconds
 
 ```{ojs}
 //| echo: false
@@ -252,18 +258,17 @@ html`<style>
 </style>`
 ```
 
-As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `doty` times. Fractional year dates[^year] can be combined with years into one number and are useful for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increases by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
+As an alternative to `doty` dates, `Decalendar` can express dates in fractional years, which are similar to the [fractional days](https://en.wikipedia.org/wiki/Decimal_time#Fractional_days) used in `doty` times. Fractional year dates[^11] can be combined with years into one number and are useful for marking periods of 73 days in the `Decalendar` year. Every 73 days, the `Decalendar` fractional year date increases by .2 (⅕). The current `Decalendar` fractional year date is \${setStyle(yearDate.toString().slice(4), d3.schemePaired\[10\])}.
 
-[^year]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
+[^11]: fractional year date: a year and the proportion of that year that has passed; an alternative to `Decalendar` dates
 
 Now it's your turn! Move the sliders🎚️in @exm-intro-doty to adjust the `doty`, fractional year, month, and `dotm` values and see the corresponding 1) Northern Hemisphere season, 2) Southern Hemisphere season, and 3) Zodiac sign in @lst-intro-doty. Try selecting a special date, like your birthday🎂! You can also press the Play▶️button and then sit back and watch the sliders cycle🔄back and forth from the start to the end of the `Decalendar` year. The sliders cycle through an entire year in 36.5 `beats`, a million times faster🏎️than the actual speed of time!
 
 ::: {#exm-intro-doty}
 :::
 
-::: {.grid}
-
-::: {.g-col-6}
+::: grid
+::: g-col-6
 ```{ojs}
 //| echo: false
 viewof inputDoty = Inputs.range([0, 365], {value: 306, step: 1, label: "doty"});
@@ -289,23 +294,20 @@ viewof dotmInput = transformInput(
 ```
 :::
 
-::: {.g-col-6}
-
-1. \${inputDotySeason\[0\]}
-2. \${inputDotySeason\[1\]}
-3. \${inputDotyZodiac}
+::: g-col-6
+1.  \${inputDotySeason\[0\]}
+2.  \${inputDotySeason\[1\]}
+3.  \${inputDotyZodiac}
 
 ```{ojs}
 //| echo: false
 viewof scrubberDoty = Scrubber(numbers, {autoplay: false, alternate: true, delay: 86.4, loopDelay: 864})
 ```
-
+:::
 :::
 
-:::
-
-::: {.column-margin}
-```{#lst-intro-doty lst-cap="Date to season conversion"}
+::: column-margin
+``` {#lst-intro-doty lst-cap="Date to season conversion"}
 ```
 :::
 
@@ -592,6 +594,7 @@ numbers = Array.from({length: 366}, (_, i) => i)
 ```
 
 ```{ojs}
+styledYear = setStyle(deco.slice(0, 4), d3.schemePaired[10])
 styledDotyDate = setStyle(dotyDate, d3.schemePaired[1])
 styledDotyTime = setStyle(dotyTime, d3.schemePaired[2])
 styledTickTime = setStyle(tickTime, d3.schemePaired[2])
@@ -614,35 +617,33 @@ set(viewof inputDoty, scrubberDoty)
 set(viewof decoOutput, `1969+${scrubberDeco.toString().padStart(3, "0")}`)
 ```
 
-
 ## Year {#sec-intro-year}
 
-`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^deco] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of than a date (`day`) or time (`day.stamp`) that occurs every year or every leap year. Using the [Observable](https://observablehq.com/about) [datetime input](https://observablehq.com/@observablehq/input-date#cell-111) in @exm-intro-date, you can select a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`) in @lst-intro-date.
+`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^12] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of a date (`day`) or time (`day.stamp`) that occurs every year or every leap year.
 
-[^deco]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
+[^12]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
+
+Using the [Observable](https://observablehq.com/about) [datetime input](https://observablehq.com/@observablehq/input-date#cell-111) in @exm-intro-date, you can select a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`) in @lst-intro-date.
 
 ::: {#exm-intro-date}
 :::
 
-::: {.grid}
-
-::: {.g-col-6}
+::: grid
+::: g-col-6
 ```{ojs}
 //| echo: false
 viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00:00"})
 ```
 :::
 
-::: {.g-col-6}
-
-1. \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}
-2. \${styledOutputDatetimeYear}
+::: g-col-6
+1.  \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}
+2.  \${styledOutputDatetimeYear}
+:::
 :::
 
-:::
-
-::: {.column-margin}
-```{#lst-intro-date lst-cap="Date and time conversion" cap-location=margin}
+::: column-margin
+``` {#lst-intro-date lst-cap="Date and time conversion" cap-location="margin"}
 ```
 :::
 
@@ -653,9 +654,8 @@ Interacting with the [number](https://observablehq.com/@observablehq/input-range
 ::: {#exm-intro-deco}
 :::
 
-::: {.grid}
-
-::: {.g-col-6}
+::: grid
+::: g-col-6
 ```{ojs}
 //| echo: false
 viewof yd = Inputs.form([
@@ -672,27 +672,21 @@ viewof decoOutput = transformInput(
 ```
 :::
 
-::: {.g-col-6}
-
-1. \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
-2. \${styledOutputDecoYear}
+::: g-col-6
+1.  \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
+2.  \${styledOutputDecoYear}
 
 ```{ojs}
 //| echo: false
 viewof scrubberDeco = Scrubber(numbers, {autoplay: false, alternate: true, delay: 86.4, loopDelay: 864})
-Inputs.button("Copy current timestamp", {value: null, reduce: () => navigator.clipboard.writeText(unix2deco(new Date().getTime()).slice(0, 14))})
-```
-
-:::
-
-:::
-
-::: {.column-margin}
-```{#lst-intro-deco lst-cap="Deco timestamp conversion" cap-location=margin}
 ```
 :::
+:::
 
-@exm-intro-deco also features a button to copy the current `deco` timestamp (`year+day.stamp`) to your clipboard. You can paste the copied `deco` into the text input in @exm-intro-deco. You can also configure your [clipboard manager](https://en.wikipedia.org/wiki/Clipboard_manager#:~:text=A%20clipboard%20manager%20is%20a%20computer%20program%20that%20adds%20functionality%20to%20an%20operating%20system%27s%20clipboard.) to paste in the current date, time, or timestamp whenever you press a keyboard shortcut. Code that enables the [CopyQ](https://hluk.github.io/CopyQ/) clipboard manager to paste in the current `deco` timestamp is available at the top of @sec-ojs-code-deco in the appendix.
+::: column-margin
+``` {#lst-intro-deco lst-cap="Deco timestamp conversion" cap-location="margin"}
+```
+:::
 
 #### `Deco` Observable code {#sec-ojs-code-deco .appendix}
 
@@ -799,10 +793,11 @@ styledOutputDecoYear = setStyle(outputDecoYear, d3.schemePaired[10])
 
 ## Dek {#sec-intro-dek}
 
-As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents`[^pent]. Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule[^sched]. @fig-schedules compares the typical weekly schedule and the `Schedule` `3` `pently` schedule. Like other `pently` schedules, `Schedule` `3` is named after the number of workdays it contains. The 3 workdays in `Schedule` `3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
+As mentioned in @sec-intro-doty, `deks` function as both months and weeks in `Decalendar`. A `dek` consists of 2 groups of 5 days called `pents`[^13]. Each `pent` can follow a sequence of workdays and restdays called a `pently` schedule[^14]. @fig-schedules compares the typical weekly schedule and the `Schedule` `3` `pently` schedule. Like other `pently` schedules, `Schedule` `3` is named after the number of workdays it contains. The 3 workdays in `Schedule` `3` are followed by a 2-day `pentend`, the `Decalender` equivalent of a weekend.
 
-[^pent]: `pent`: a group of 5 days; half of a `dek`
-[^sched]: `pently` schedule: one of a set of workday and restday schedules for the 5 days of the `pent`
+[^13]: `pent`: a group of 5 days; half of a `dek`
+
+[^14]: `pently` schedule: one of a set of workday and restday schedules for the 5 days of the `pent`
 
 Unlike `Schedule` `3` and the other `pently` schedules, the weekly schedule is asymmetric and divides up workdays into proportions that are easier to express as fractions: 3/8 (.375), 1/3 (.3̅), and 7/24 (0.2916̅). In contrast, `pently` schedules divides each workday into simple, symmetrical proportions that are never [repeating decimal](https://en.wikipedia.org/wiki/Repeating_decimal) numbers. The `Schedule` `3` workday is longer the typical 9-to-5, but the longer workday is compensated by more frequent restdays.
 
@@ -815,9 +810,8 @@ You can also use the [interval sliders](https://observablehq.com/@mootari/range-
 ::: {#exm-intro-pent}
 :::
 
-::: {.grid}
-
-::: {.g-col-6}
+::: grid
+::: g-col-6
 ```{ojs}
 //| echo: false
 viewof intervals = Inputs.form([
@@ -830,7 +824,7 @@ viewof intervals = Inputs.form([
 ```
 :::
 
-::: {.g-col-6}
+::: g-col-6
 ```{ojs}
 //| echo: false
 viewof schedule = Inputs.radio([2, 3, 4, 5], {label: "Schedule", value: 3})
@@ -839,9 +833,7 @@ viewof filename = Inputs.text({label: "Filename", placeholder: "Enter the filena
 
 button(durations, filename)
 ```
-
 :::
-
 :::
 
 ```{ojs}
@@ -898,9 +890,8 @@ viewof sliceDotd = Inputs.checkbox([...Array(10).keys()], {label: "slice dotd", 
 viewof spreadDotd = Inputs.checkbox([...Array(10).keys()], {label: "spread dotd", value: [1, 6]})
 ```
 
-::: {.grid}
-
-::: {.g-col-6}
+::: grid
+::: g-col-6
 ```{ojs}
 //| echo: false
 viewof sliceString = transformInput(
@@ -914,7 +905,7 @@ viewof sliceInputs = Inputs.form([
 ```
 :::
 
-::: {.g-col-6}
+::: g-col-6
 ```{ojs}
 //| echo: false
 viewof spreadString = transformInput(
@@ -928,7 +919,6 @@ viewof spreadInputs = Inputs.form([
 ])
 ```
 :::
-
 :::
 
 ```{ojs}
@@ -944,24 +934,12 @@ viewof togglePlot = Inputs.button([
 ], {value: [], label: "select dotd"})
 ```
 
-::: {.grid}
-
-::: {.g-col-6}
 ```{ojs}
 //| echo: false
+//| classes: btn-row
 viewof invertDotd = Inputs.toggle({label: "invert buttons"})
-```
-:::
-
-::: {.g-col-6}
-```{ojs}
-//| echo: false
 viewof sliceOrSpread = toggleSwitch({textOn: invertDotd ? "Spread" : 'Slice' , textOff: invertDotd ? "Slice" : 'Spread'})
 ```
-:::
-
-:::
-
 
 ```{ojs}
 //| echo: false
@@ -973,8 +951,8 @@ viewof sliceOrSpread = toggleSwitch({textOn: invertDotd ? "Spread" : 'Slice' , t
 Plot.plot({
   className: "date-selector",
   padding: 0,
-  x: {axis: "top", label: null},
-  y: {label: null},
+  x: {axis: "top", label: null, type: "band"},
+  y: {label: null, type: "band"},
   marks: [
     Plot.cell(dates, {x: d => d[2], y: d => d.slice(0, 2), fill: d =>
       sliceArray.includes(d) && spreadArray.includes(d) ? "green" :
@@ -1212,13 +1190,11 @@ button = (data, filename = 'data.csv') => {
       type: "application/json"
     });
   }
-  const size = (downloadData.size / 1024).toFixed(0);
-  const button = DOM.download(
+  return DOM.download(
     downloadData,
     filename,
-    `Download ${filename} (~${size} KB)`
+    "Download"
   );
-  return button;
 }
 function invert(arr) {
   return invertDotd ? [...Array(10).keys()].map(n => !arr.includes(n)).map((x, i) => x ? i : null).filter(i => i !== null) : arr
@@ -1569,7 +1545,7 @@ This shift causes the Gregorian calendar year to be 1 greater than the year in t
 | $40$               | `mu`     | `Μ`      | `muday`             |
 | $30$               | `lam`    | `λ`      | `lamdaday`          |
 | $20$               | `kap`    | `κ`      | `kappaday`          |
-| $10$               | `dek`    | `ι`  旬  | `decaday`           |
+| $10$               | `dek`    | `ι` 旬   | `decaday`           |
 | $1$                | `day`    | `d`, 日  | `day`               |
 | $10^{-1}$          | `dime`   | `⅒`      | `deciday`           |
 | $10^{-2}$          | `cent`   | `¢`, `%` | `centiday`          |
