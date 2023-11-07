@@ -597,6 +597,8 @@ numbers = Array.from({length: 366}, (_, i) => i)
 styledYear = setStyle(deco.slice(0, 4), d3.schemePaired[10])
 styledDotyDate = setStyle(dotyDate, d3.schemePaired[1])
 styledDotyTime = setStyle(dotyTime, d3.schemePaired[2])
+styledDotyDate1 = setStyle(dotyDate, d3.schemePaired[1])
+styledDotyTime1 = setStyle(dotyTime, d3.schemePaired[2])
 styledTickTime = setStyle(tickTime, d3.schemePaired[2])
 styledDek = setStyle(dotyDek, d3.schemePaired[0])
 styledDotd = setStyle(dotyDotd, d3.schemePaired[9])
@@ -619,15 +621,9 @@ set(viewof decoOutput, `1969+${scrubberDeco.toString().padStart(3, "0")}`)
 
 ## Year {#sec-intro-year}
 
-The current `deco` timestamp is \${styledYear}
-+\${setStyle(dotyDate, d3.schemePaired\[1\])}
-.\${setStyle(dotyTime, d3.schemePaired\[2\])}.
-
-`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^12] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of a date (`day`) or time (`day.stamp`) that occurs every year or every leap year.
+`Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^12] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of a date (`day`) or time (`day.stamp`) that occurs every year or every leap year. Using the [Observable](https://observablehq.com/about) [datetime input](https://observablehq.com/@observablehq/input-date#cell-111) in @exm-intro-date, you can select a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`) in @lst-intro-date. For comparison, the current `deco` timestamp is \${styledYear}+\${styledDotyDate1}.\${styledDotyTime1}.
 
 [^12]: `deco`: a date and time format consisting of a year and a `doty` and analogous to ISO 8601 dates
-
-Using the [Observable](https://observablehq.com/about) [datetime input](https://observablehq.com/@observablehq/input-date#cell-111) in @exm-intro-date, you can select a year, month, `dotm`, hour, and minute to see the equivalent 1) `deco` timestamp (`year+day.clock`) and 2) year date (`year.yyy`) in @lst-intro-date.
 
 ::: {#exm-intro-date}
 :::
@@ -915,6 +911,7 @@ viewof togglePlot = Inputs.button([
 viewof invertDotd = Inputs.toggle({label: "invert"})
 viewof sliceOrSpread = toggleSwitch({textOn: invertDotd ? "Spread" : 'Slice' , textOff: invertDotd ? "Slice" : 'Spread'})
 ```
+
 ```{ojs}
 //| echo: false
 viewof sliceInputs = Inputs.form([
@@ -961,7 +958,7 @@ Plot.plot({
       sliceArray.includes(d) && spreadArray.includes(d) ? "green" :
       sliceArray.includes(d) && !spreadArray.includes(d) ? "blue" :
       !sliceArray.includes(d) && spreadArray.includes(d) ? "orange" : "grey",
-      width: 60, height: 18, inset: 0.5}),
+      inset: 0.5}),
     Plot.text(dates, {
     x: d => d[2],
     y: d => d.slice(0, 2),
@@ -1513,20 +1510,9 @@ In general, negative numbers show the number of parts that are left in the whole
 
 In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though `Dot` `-1` and `Dot` `9` are synonymous `Declock` times, the former could highlight that there is only 1 tenth (⅒ or .1) of the day remaining before midnight. `Dot` `5` and `Dot` `-5` both mean noon, like saying that a glass is half-empty or half-full.
 
-The negative equivalent of `1969+306`, the `deco` date in @tbl-2x2, is `1970-059`. This negative `deco` date literally subtracts 59 days from the beginning of year 1970 to arrive at `Day` `306` of 1969. The year in negative `deco` dates is always 1 greater than the year in the equivalent positive `deco` date. Both `1969+306` and `1970-059` translate to January 1, 1970 in the Gregorian calendar. `Decalendar` years are shifted by two months in relation to the Gregorian calendar years because `Decalendar` years start on March 1.
+The negative equivalent of `1969+306`, January 1st, 1970 in the Gregorian calendar, is `1970-059`. This negative `deco` date literally subtracts 59 days from the beginning of year 1970 to arrive at `Day` `306` of 1969. The year in negative `deco` dates is always 1 greater than the year in the equivalent positive `deco` date. Both `1969+306` and `1970-059` translate to January 1, 1970 in the Gregorian calendar. `Decalendar` years are shifted by two months in relation to the Gregorian calendar years because `Decalendar` years start on March 1.
 
-This shift causes the Gregorian calendar year to be 1 greater than the year in the positive `deco` dates during January and February and 1 less than the year in negative `deco` dates during every other month. For example, the `Deco` dates `1969+000` and `1970-365` are March 1, 1969 in the Gregorian calendar. Immediately after midnight on this date, the negative `doty` will change from -365 to -364, while the positive `doty` will remain at 0 At noon, the positive `deco` date will be `1969+306.500` and the negative `deco` date will be `1970-058.500`.
-
-#### @tbl-2x2
-
-::: {.callout-note collapse="false" title="Click to toggle table expansion" icon="false"}
-|      | date     | timestamp      |
-|------|----------|----------------|
-| doty | 306      | 306.000+0      |
-| deco | 1969+306 | 1969+306.000+0 |
-
-: Comparison of `doty` and `deco` dates and timestamps {#tbl-2x2}
-:::
+This shift causes the Gregorian calendar year to be 1 greater than the year in the positive `deco` dates during January and February and 1 less than the year in negative `deco` dates during every other month. For example, the `Deco` dates `1969+000` and `1970-365` are March 1, 1969 in the Gregorian calendar. Immediately after midnight on this date, the negative `doty` will change from -365 to -364, while the positive `doty` will remain at 0. At noon, the positive `deco` date will be `1969+306.500` and the negative `deco` date will be `1970-058.500`.
 
 ## Units {#sec-unit}
 
@@ -1915,7 +1901,7 @@ $$y \mod 4 = 0 \land year \mod 100 \neq 0 \lor year \mod 400 = 0$$ {#eq-gregl}
 
 ### Years {#sec-isoy}
 
-Both `Decalendar` and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. As shown in @tbl-2x2, `Decalendar` `deco` dates include years while `doty` dates do not. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is called the `Decalendar` epoch and translates to March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
+Both `Decalendar` and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) dates show [years](https://en.wikipedia.org/wiki/ISO_8601#Years) as 4-digit numbers. Unlike ISO 8601, `Decalendar` does not require years to be included in dates. `Decalendar` `deco` dates include years while `doty` dates do not. Year 0 in both `Decalendar` and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in `Decalendar`, `0000+000`, is called the `Decalendar` epoch and translates to March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is `-0001+306` in `Decalendar` and January 1, 1 BCE in the Gregorian calendar.
 
 ### Ordinal dates {#sec-isoo}
 

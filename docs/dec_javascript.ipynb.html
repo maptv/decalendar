@@ -663,13 +663,21 @@
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>styledYear <span class="op">=</span> <span class="fu">setStyle</span>(deco<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">4</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">10</span>])</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>styledDotyDate <span class="op">=</span> <span class="fu">setStyle</span>(dotyDate<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">1</span>])</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>styledDotyTime <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">2</span>])</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>styledTickTime <span class="op">=</span> <span class="fu">setStyle</span>(tickTime<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">2</span>])</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>styledDek <span class="op">=</span> <span class="fu">setStyle</span>(dotyDek<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">0</span>])</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>styledDotd <span class="op">=</span> <span class="fu">setStyle</span>(dotyDotd<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">9</span>])</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>styledCent <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">7</span>])</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>styledMil <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime[<span class="dv">2</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">6</span>])</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>styledBeat <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">3</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">11</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>styledDotyDate1 <span class="op">=</span> <span class="fu">setStyle</span>(dotyDate<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">1</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>styledDotyTime1 <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">2</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>styledTickTime <span class="op">=</span> <span class="fu">setStyle</span>(tickTime<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">2</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>styledDek <span class="op">=</span> <span class="fu">setStyle</span>(dotyDek<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">0</span>])</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>styledDotd <span class="op">=</span> <span class="fu">setStyle</span>(dotyDotd<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">9</span>])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>styledCent <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">7</span>])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>styledMil <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime[<span class="dv">2</span>]<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">6</span>])</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>styledBeat <span class="op">=</span> <span class="fu">setStyle</span>(dotyTime<span class="op">.</span><span class="fu">slice</span>(<span class="dv">3</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">,</span> d3<span class="op">.</span><span class="at">schemePaired</span>[<span class="dv">11</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display">
+
+</div>
 <div class="cell-output cell-output-display">
 
 </div>
@@ -724,9 +732,7 @@
 </section>
 <section id="year" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="year"><span class="header-section-number">1.2</span> Year</h2>
-<p>The current <code>deco</code> timestamp is <span id="ojs-element-id-11"></span> +<span id="ojs-element-id-21"></span> .<span id="ojs-element-id-22"></span>.</p>
-<p><code>Doty</code> dates (<code>day</code>) and <a href="https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.">timestamps</a> (<code>day.stamp</code>) do not include years and thus can be reused from year to year. When a <code>doty</code> is combined with a year, it forms a <code>Decalendar</code> <code>ordinal</code>[1] (<code>deco</code>) and represents a specific date (<code>year+day</code>) or time (<code>year+day.stamp</code>) in a specific year, instead of a date (<code>day</code>) or time (<code>day.stamp</code>) that occurs every year or every leap year.</p>
-<p>Using the <a href="https://observablehq.com/about">Observable</a> <a href="https://observablehq.com/@observablehq/input-date#cell-111">datetime input</a> in <a href="#exm-intro-date">Example&nbsp;2</a>, you can select a year, month, <code>dotm</code>, hour, and minute to see the equivalent 1) <code>deco</code> timestamp (<code>year+day.clock</code>) and 2) year date (<code>year.yyy</code>) in <a href="#lst-intro-date">Listing&nbsp;2</a>.</p>
+<p><code>Doty</code> dates (<code>day</code>) and <a href="https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.">timestamps</a> (<code>day.stamp</code>) do not include years and thus can be reused from year to year. When a <code>doty</code> is combined with a year, it forms a <code>Decalendar</code> <code>ordinal</code>[1] (<code>deco</code>) and represents a specific date (<code>year+day</code>) or time (<code>year+day.stamp</code>) in a specific year, instead of a date (<code>day</code>) or time (<code>day.stamp</code>) that occurs every year or every leap year. Using the <a href="https://observablehq.com/about">Observable</a> <a href="https://observablehq.com/@observablehq/input-date#cell-111">datetime input</a> in <a href="#exm-intro-date">Example&nbsp;2</a>, you can select a year, month, <code>dotm</code>, hour, and minute to see the equivalent 1) <code>deco</code> timestamp (<code>year+day.clock</code>) and 2) year date (<code>year.yyy</code>) in <a href="#lst-intro-date">Listing&nbsp;2</a>. For comparison, the current <code>deco</code> timestamp is <span id="ojs-element-id-11"></span>.</p>
 <p><span class="theorem-title"><strong>Example 2 </strong></span>&nbsp;</p>
 <ol type="1">
 <li><span id="ojs-element-id-12"></span></li>
@@ -958,14 +964,14 @@
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_javascript_files/figure-html/5e7b539d-2b91-4197-a137-20a335e89f70-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
+<img src="dec_javascript_files/figure-html/f5b2f2d1-bf1e-4262-b63a-1a2474e44563-1-dec_files/figure-ipynb/fig-schedules-output-1.png" alt="(a) Proportion of the day spent working and resting every day of the week">
 </p>
 </div>
 </td>
 <td style="text-align: center;">
 <div class="output display_data" width="50.0%" data-layout-align="center">
 <p>
-<img src="dec_javascript_files/figure-html/5e7b539d-2b91-4197-a137-20a335e89f70-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
+<img src="dec_javascript_files/figure-html/f5b2f2d1-bf1e-4262-b63a-1a2474e44563-2-dec_files/figure-ipynb/fig-schedules-output-2.png" alt="(b) Proportion of the day spent working and resting every day of the pent">
 </p>
 </div>
 </td>
@@ -1617,42 +1623,14 @@
 <p>Every component of <code>Decalender</code> dates and <code>Declock</code> times can be negative. A negative year is before 1 BCE (Before Common Era) and a negative time zone is West of <code>Zone</code> <code>0</code>. The year is usually provided without a sign, because most people rarely discuss years before 1 BCE, but numeric time zone offset must have a sign. Negative <code>doties</code> work like <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero-based indexes</a> in <a href="https://en.wikipedia.org/wiki/Zero-based_numbering#Computer_programming">computer programming</a> in that they label the days of the year from <span class="math inline">\(-N\)</span> to <span class="math inline">\(-1\)</span>, where <span class="math inline">\(N\)</span> is the number of the days in the current year. The first <code>doty</code> is indexed by both <span class="math inline">\(0\)</span> and <span class="math inline">\(-N\)</span>, while the last <code>doty</code> is indexed by both <span class="math inline">\(-1\)</span> and <span class="math inline">\(N\)</span>.</p>
 <p>In general, negative numbers show the number of parts that are left in the whole. A negative <code>doty</code> shows how many days remain in the year and a negative time <a href="https://en.wikipedia.org/wiki/Countdown">counts down</a> to the end of the day. To extend the fractions analogy in <a href="#sec-frac">Section&nbsp;2.1</a> to negative numbers, the negative number added to the whole gives us the numerator of the positive fraction (<span class="math inline">\(pos = N + neg\)</span>). Positive and negative numbers arrive at the same answer from opposite directions.</p>
 <p>In certain contexts, the choice of using a negative number over a positive number may mean that we want to emphasize how much time is left instead of how much has passed. Even though <code>Dot</code> <code>-1</code> and <code>Dot</code> <code>9</code> are synonymous <code>Declock</code> times, the former could highlight that there is only 1 tenth (⅒ or .1) of the day remaining before midnight. <code>Dot</code> <code>5</code> and <code>Dot</code> <code>-5</code> both mean noon, like saying that a glass is half-empty or half-full.</p>
-<p>The negative equivalent of <code>1969+306</code>, the <code>deco</code> date in <a href="#tbl-2x2">Table&nbsp;1</a>, is <code>1970-059</code>. This negative <code>deco</code> date literally subtracts 59 days from the beginning of year 1970 to arrive at <code>Day</code> <code>306</code> of 1969. The year in negative <code>deco</code> dates is always 1 greater than the year in the equivalent positive <code>deco</code> date. Both <code>1969+306</code> and <code>1970-059</code> translate to January 1, 1970 in the Gregorian calendar. <code>Decalendar</code> years are shifted by two months in relation to the Gregorian calendar years because <code>Decalendar</code> years start on March 1.</p>
-<p>This shift causes the Gregorian calendar year to be 1 greater than the year in the positive <code>deco</code> dates during January and February and 1 less than the year in negative <code>deco</code> dates during every other month. For example, the <code>Deco</code> dates <code>1969+000</code> and <code>1970-365</code> are March 1, 1969 in the Gregorian calendar. Immediately after midnight on this date, the negative <code>doty</code> will change from -365 to -364, while the positive <code>doty</code> will remain at 0 At noon, the positive <code>deco</code> date will be <code>1969+306.500</code> and the negative <code>deco</code> date will be <code>1970-058.500</code>.</p>
-<section id="table-1" class="level4">
-<h4 class="anchored" data-anchor-id="table-1"><a href="#tbl-2x2">Table&nbsp;1</a></h4>
-<blockquote class="blockquote">
-<p><strong>Click to toggle table expansion</strong></p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th>date</th>
-<th>timestamp</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>doty</td>
-<td>306</td>
-<td>306.000+0</td>
-</tr>
-<tr class="even">
-<td>deco</td>
-<td>1969+306</td>
-<td>1969+306.000+0</td>
-</tr>
-</tbody>
-</table>
-<p>Table&nbsp;1: Comparison of <code>doty</code> and <code>deco</code> dates and timestamps</p>
-</blockquote>
-</section>
+<p>The negative equivalent of <code>1969+306</code>, January 1st, 1970 in the Gregorian calendar, is <code>1970-059</code>. This negative <code>deco</code> date literally subtracts 59 days from the beginning of year 1970 to arrive at <code>Day</code> <code>306</code> of 1969. The year in negative <code>deco</code> dates is always 1 greater than the year in the equivalent positive <code>deco</code> date. Both <code>1969+306</code> and <code>1970-059</code> translate to January 1, 1970 in the Gregorian calendar. <code>Decalendar</code> years are shifted by two months in relation to the Gregorian calendar years because <code>Decalendar</code> years start on March 1.</p>
+<p>This shift causes the Gregorian calendar year to be 1 greater than the year in the positive <code>deco</code> dates during January and February and 1 less than the year in negative <code>deco</code> dates during every other month. For example, the <code>Deco</code> dates <code>1969+000</code> and <code>1970-365</code> are March 1, 1969 in the Gregorian calendar. Immediately after midnight on this date, the negative <code>doty</code> will change from -365 to -364, while the positive <code>doty</code> will remain at 0. At noon, the positive <code>deco</code> date will be <code>1969+306.500</code> and the negative <code>deco</code> date will be <code>1970-058.500</code>.</p>
 </section>
 <section id="units" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="units"><span class="header-section-number">2.7</span> Units</h2>
-<p><code>Declock</code> times often have three digits because this is the best level of precision for displaying time on clocks and watches. While 3 digits are often best, <code>Declock</code> times can have any number of digits, depending on the desired precision level. <code>Declock</code> provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both <code>Declock</code> and <code>Decalendar</code>. Listing the units of each, as in <a href="#tbl-unit">Table&nbsp;2</a>, highlights the relationship between the two:</p>
-<section id="table-2" class="level4">
-<h4 class="anchored" data-anchor-id="table-2"><a href="#tbl-unit">Table&nbsp;2</a></h4>
+<p><code>Declock</code> times often have three digits because this is the best level of precision for displaying time on clocks and watches. While 3 digits are often best, <code>Declock</code> times can have any number of digits, depending on the desired precision level. <code>Declock</code> provides names for extremely precise time units, but the most relevant units are within a few orders of magnitude from a day, which is the base unit of both <code>Declock</code> and <code>Decalendar</code>. Listing the units of each, as in <a href="#tbl-unit">Table&nbsp;1</a>, highlights the relationship between the two:</p>
+<section id="table-1" class="level4">
+<h4 class="anchored" data-anchor-id="table-1"><a href="#tbl-unit">Table&nbsp;1</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -1943,9 +1921,9 @@
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;2: The units of <code>Decalendar</code> and <code>Declock</code></p>
+<p>Table&nbsp;1: The units of <code>Decalendar</code> and <code>Declock</code></p>
 </blockquote>
-<p>In <a href="#tbl-unit">Table&nbsp;2</a>, the units with positive exponents are used for <code>Decalendar</code>, while the ones with negative exponents are used for <code>Declock</code>. <code>Cents</code> (<code>¢</code>) can serve as a useful point of comparison to understand the scale of some of the units in <a href="#tbl-unit">Table&nbsp;2</a> above, because each <code>cent</code> is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to <code>cents</code>, <code>mils</code> are ten times smaller (.1% = 1.4 minutes), <code>dimes</code> (<code>⅒</code>) are ten times larger (10% = 144 minutes), and <code>deks</code> (<code>ι</code>) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 <code>dek</code> contains 10 whole days while the other units are fractions of days.</p>
+<p>In <a href="#tbl-unit">Table&nbsp;1</a>, the units with positive exponents are used for <code>Decalendar</code>, while the ones with negative exponents are used for <code>Declock</code>. <code>Cents</code> (<code>¢</code>) can serve as a useful point of comparison to understand the scale of some of the units in <a href="#tbl-unit">Table&nbsp;1</a> above, because each <code>cent</code> is 1 percent of the day, which is about a quarter hour (1% = 14.4 minutes). In comparison to <code>cents</code>, <code>mils</code> are ten times smaller (.1% = 1.4 minutes), <code>dimes</code> (<code>⅒</code>) are ten times larger (10% = 144 minutes), and <code>deks</code> (<code>ι</code>) are 1000 times larger (1000% = 14400 minutes). To be clear, 1 <code>dek</code> contains 10 whole days while the other units are fractions of days.</p>
 <p><code>Declock</code> units smaller than <code>mils</code> are not easy to think of as percents of a day. For <code>phrases</code> (<code>◠</code>) and <code>beats</code> (<code>♫</code>), music serves as a much more useful analogy. In fact, <code>phrases</code> and <code>beats</code> are musical terms. The duration of a musical beat depends on the tempo, but a <code>Declock</code> <code>beat</code> is always precisely 0.864 seconds long. This translates to a tempo of 69.4̅ (69⁴/₉ or 625/9) beats per minute, which is coincidentally also within the normal range of a resting heart rate. <code>Declock</code> <code>beats</code> are organized into groups of 2 called <code>bars</code> or <code>measures</code>, groups of 10 called <code>phrases</code>, and groups of 20 called <code>periods</code>. A real example of music that follows this exact pattern is Haydn’s <a href="https://en.wikipedia.org/wiki/Period_(music)">Feldpartita</a>.</p>
 <p><code>Declock</code> units smaller than <code>beats</code> are too small for typical daily use. For example, a <code>mic</code> (<code>microday</code>, <code>μ</code>) is faster than a blink of an eye. Each frame in a video playing at 60 frames per second will be shown for about 1.93 <code>liphs</code> (<code>milliphrases</code>, <code>m̑</code>). A <code>lib</code> (<code>millibeat</code>, <code>m̈</code>) is not enough time for a neuron in a human brain to fire and return to rest. Sound can travel from a person’s ear to their other ear in about 7 <code>nans</code> (<code>nanodays</code>). Noticing that a sound reaches one ear before the other can help humans to localize the source of the sound, but a <code>roph</code> (<code>microphrase</code>, <code>μ̑</code>) difference might be too fast to notice. In a <code>rob</code> (<code>microbeat</code>, <code>µ̈</code>), a USB 3.0 cable transferring 5 gigabytes per second can send 4.32 kilobytes, the equivalent of a text file with 4320 characters.</p>
 </section>
@@ -1963,9 +1941,9 @@
 <h2 data-number="4.1" class="anchored" data-anchor-id="french-republican-calendar"><span class="header-section-number">4.1</span> French Republican calendar</h2>
 <section id="french-republican-calendar-décades" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="french-republican-calendar-décades"><span class="header-section-number">4.1.1</span> French Republican calendar <em>décades</em></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/French_Republican_calendar">French Republican calendar</a> and <code>Decalendar</code> both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a <em>décade</em>, while a group of 10 days in <code>Decalendar</code> is called a <code>dek</code>. The names of the days in a <code>dek</code> are derived from their <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero-based</a> cardinal numbers (zero, one, two…), whereas the days of the <em>décade</em> are named after their ordinal numbers (first, second, third…). In both cases, the names are based on Roman and Greek <a href="https://en.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English">numeral prefixes</a>. <a href="#tbl-dotd">Table&nbsp;3</a> provides the cardinal numbers, one-letter codes, names, and types of the days of the <code>dek</code> as well as the names of their French Republican calendar equivalents.</p>
-<section id="table-3" class="level4">
-<h4 class="anchored" data-anchor-id="table-3"><a href="#tbl-dotd">Table&nbsp;3</a></h4>
+<p>The <a href="https://en.wikipedia.org/wiki/French_Republican_calendar">French Republican calendar</a> and <code>Decalendar</code> both organize days in groups of 10. A group of 10 days in the French Republican calendar is called a <em>décade</em>, while a group of 10 days in <code>Decalendar</code> is called a <code>dek</code>. The names of the days in a <code>dek</code> are derived from their <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">zero-based</a> cardinal numbers (zero, one, two…), whereas the days of the <em>décade</em> are named after their ordinal numbers (first, second, third…). In both cases, the names are based on Roman and Greek <a href="https://en.wikipedia.org/wiki/Numeral_prefix#Table_of_number_prefixes_in_English">numeral prefixes</a>. <a href="#tbl-dotd">Table&nbsp;2</a> provides the cardinal numbers, one-letter codes, names, and types of the days of the <code>dek</code> as well as the names of their French Republican calendar equivalents.</p>
+<section id="table-2" class="level4">
+<h4 class="anchored" data-anchor-id="table-2"><a href="#tbl-dotd">Table&nbsp;2</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -2051,15 +2029,15 @@
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;3: The days of the <code>dek</code> and their French Republican calendar equivalents</p>
+<p>Table&nbsp;2: The days of the <code>dek</code> and their French Republican calendar equivalents</p>
 </blockquote>
 </section>
 </section>
 <section id="french-republican-calendar-time" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="french-republican-calendar-time"><span class="header-section-number">4.1.2</span> French Republican calendar time</h3>
-<p>The French Republican calendar and <code>Declock</code> both break the day down into decimal portions. In <code>Declock</code>, a <code>dime</code> is a tenth (⅒) of a day, a <code>cent</code> is a hundredth (10⁻²) of a day, a <code>mil</code> is a thousandth (10⁻³) of a day, and a <code>beat</code> is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, <em>décimes</em>, and decimal seconds, respectively. <a href="#tbl-dime">Table&nbsp;4</a> shows the start times of each <code>dime</code> (⅒) in a day and its equivalent in 24-hour and 12-hour standard time.</p>
-<section id="table-4" class="level4">
-<h4 class="anchored" data-anchor-id="table-4"><a href="#tbl-dime">Table&nbsp;4</a></h4>
+<p>The French Republican calendar and <code>Declock</code> both break the day down into decimal portions. In <code>Declock</code>, a <code>dime</code> is a tenth (⅒) of a day, a <code>cent</code> is a hundredth (10⁻²) of a day, a <code>mil</code> is a thousandth (10⁻³) of a day, and a <code>beat</code> is a hundred thousandth (10⁻⁵) of a day, whereas the French Republican calendar calls these units decimal hours, decimal minutes, <em>décimes</em>, and decimal seconds, respectively. <a href="#tbl-dime">Table&nbsp;3</a> shows the start times of each <code>dime</code> (⅒) in a day and its equivalent in 24-hour and 12-hour standard time.</p>
+<section id="table-3" class="level4">
+<h4 class="anchored" data-anchor-id="table-3"><a href="#tbl-dime">Table&nbsp;3</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -2123,7 +2101,7 @@
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;4: The <code>dimes</code> in a day and their standard time equivalents</p>
+<p>Table&nbsp;3: The <code>dimes</code> in a day and their standard time equivalents</p>
 </blockquote>
 </section>
 </section>
@@ -2136,10 +2114,10 @@
 <h2 data-number="4.3" class="anchored" data-anchor-id="gregorian-calendar"><span class="header-section-number">4.3</span> Gregorian calendar</h2>
 <section id="coordinate-analogy" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="coordinate-analogy"><span class="header-section-number">4.3.1</span> Coordinate analogy</h3>
-<p>In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (<code>dotm</code>) are like longitude and latitude in the <a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system">geographic coordinate system</a> or x and y in the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system">Cartesian coordinate system</a>. The <code>Decalendar</code> ordinal (<code>deco</code>) date format provides two coordinates in one number: the day-of-the-year (<code>doty</code>). <a href="#tbl-greg2doty">Table&nbsp;5</a> shows the <code>doty</code> number equivalents of all Gregorian calendar dates.</p>
-<p>To locate a specific date in <a href="#tbl-greg2doty">Table&nbsp;5</a>, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the <code>dotm</code> (which is like a y-axis value). To convert a <code>doty</code> number to a Gregorian calendar date, we first find the <code>dek</code> number (the first two digits of the <code>doty</code>) among the rows in <a href="#tbl-doty2greg">Table&nbsp;6</a> and then move to the right to the <code>dotd</code> (the last digit of the <code>doty</code>). The dates in <a href="#tbl-doty2greg">Table&nbsp;6</a> are shown in <code>mm-dd</code> format.</p>
-<section id="table-5" class="level4">
-<h4 class="anchored" data-anchor-id="table-5"><a href="#tbl-greg2doty">Table&nbsp;5</a></h4>
+<p>In the Gregorian calendar, dates are like a set of coordinates, where the month and the day-of-the-month (<code>dotm</code>) are like longitude and latitude in the <a href="https://en.wikipedia.org/wiki/Geographic_coordinate_system">geographic coordinate system</a> or x and y in the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system">Cartesian coordinate system</a>. The <code>Decalendar</code> ordinal (<code>deco</code>) date format provides two coordinates in one number: the day-of-the-year (<code>doty</code>). <a href="#tbl-greg2doty">Table&nbsp;4</a> shows the <code>doty</code> number equivalents of all Gregorian calendar dates.</p>
+<p>To locate a specific date in <a href="#tbl-greg2doty">Table&nbsp;4</a>, first find the month among the columns (think of the month as an x-axis value) and then move down through the rows to the <code>dotm</code> (which is like a y-axis value). To convert a <code>doty</code> number to a Gregorian calendar date, we first find the <code>dek</code> number (the first two digits of the <code>doty</code>) among the rows in <a href="#tbl-doty2greg">Table&nbsp;5</a> and then move to the right to the <code>dotd</code> (the last digit of the <code>doty</code>). The dates in <a href="#tbl-doty2greg">Table&nbsp;5</a> are shown in <code>mm-dd</code> format.</p>
+<section id="table-4" class="level4">
+<h4 class="anchored" data-anchor-id="table-4"><a href="#tbl-greg2doty">Table&nbsp;4</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -2643,11 +2621,11 @@
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;5: Gregorian calendar date to <code>doty</code> conversion</p>
+<p>Table&nbsp;4: Gregorian calendar date to <code>doty</code> conversion</p>
 </blockquote>
 </section>
-<section id="table-6" class="level4">
-<h4 class="anchored" data-anchor-id="table-6"><a href="#tbl-doty2greg">Table&nbsp;6</a></h4>
+<section id="table-5" class="level4">
+<h4 class="anchored" data-anchor-id="table-5"><a href="#tbl-doty2greg">Table&nbsp;5</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -3163,13 +3141,13 @@
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;6: <code>Doty</code> number to Gregorian calendar date conversion</p>
+<p>Table&nbsp;5: <code>Doty</code> number to Gregorian calendar date conversion</p>
 </blockquote>
 </section>
 </section>
 <section id="gregorian-calendar-date-conversion" class="level3 page-columns page-full" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="gregorian-calendar-date-conversion"><span class="header-section-number">4.3.2</span> Gregorian calendar date conversion</h3>
-<p>In addition to using a conversion table like <a href="#tbl-greg2doty">Table&nbsp;5</a>, we can convert between Gregorian calendar dates and <code>Decalendar</code> <code>doty</code> dates programmatically. The code in <a href="#exm-coor">Example&nbsp;6</a> is derived from the <a href="http://howardhinnant.github.io/date_algorithms.html#days_from_civil"><code>days_from_civil</code></a> and <a href="http://howardhinnant.github.io/date_algorithms.html#civil_from_days"><code>civil_from_days</code></a> algorithms described by <a href="https://howardhinnant.github.io/">Howard Hinnant</a> in <a href="http://howardhinnant.github.io/date_algorithms.html"><em>chrono-Compatible Low-Level Date Algorithms</em></a> [-<span class="citation" data-cites="hinnant2014">Hinnant (<a href="#ref-hinnant2014" role="doc-biblioref">2014</a>)</span>]. The output of the <code>greg2doty</code> function is a <code>doty</code>, while its inverse function, <code>doty2greg</code>, returns an array containing a month and a <code>dotm</code> number.</p>
+<p>In addition to using a conversion table like <a href="#tbl-greg2doty">Table&nbsp;4</a>, we can convert between Gregorian calendar dates and <code>Decalendar</code> <code>doty</code> dates programmatically. The code in <a href="#exm-coor">Example&nbsp;6</a> is derived from the <a href="http://howardhinnant.github.io/date_algorithms.html#days_from_civil"><code>days_from_civil</code></a> and <a href="http://howardhinnant.github.io/date_algorithms.html#civil_from_days"><code>civil_from_days</code></a> algorithms described by <a href="https://howardhinnant.github.io/">Howard Hinnant</a> in <a href="http://howardhinnant.github.io/date_algorithms.html"><em>chrono-Compatible Low-Level Date Algorithms</em></a> [-<span class="citation" data-cites="hinnant2014">Hinnant (<a href="#ref-hinnant2014" role="doc-biblioref">2014</a>)</span>]. The output of the <code>greg2doty</code> function is a <code>doty</code>, while its inverse function, <code>doty2greg</code>, returns an array containing a month and a <code>dotm</code> number.</p>
 <p><span class="theorem-title"><strong>Example 6 </strong></span>&nbsp;</p>
 <section id="javascript" class="level4 page-columns page-full">
 <h4 class="anchored" data-anchor-id="javascript">JavaScript</h4>
@@ -3275,9 +3253,9 @@ doty2greg()</code></pre>
 </section>
 <section id="gregorian-calendar-months-and-years" class="level3 page-columns page-full" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="gregorian-calendar-months-and-years"><span class="header-section-number">4.3.3</span> Gregorian calendar months and years</h3>
-<p><code>Decalendar</code> only uses months for converting to and from Gregorian calendar dates. Nevertheless, discussing months can help to explain how <code>Decalendar</code> works. The <code>Decalendar</code> year ends with January and February, as shown in <a href="#tbl-gregm">Table&nbsp;7</a>. During these two months, the <code>Decalendar</code> year is 1 less than the Gregorian calendar year. To obtain a <code>Decalendar</code> year (<code>dy</code>) from a Gregorian calendar year (<code>gy</code>) and month number (<code>gm</code>), we subtract 1 from <code>gy</code> if <code>gm</code> is less than 3 (<span class="math inline">\(dy = gy - [gm &lt; 3]\)</span>). To obtain a Gregorian calendar year (<code>gy</code>) from a <code>Decalendar</code> year (<code>dy</code>) and <code>doty</code>, we add 1 to <code>dy</code> if <code>doty</code> is greater than 305 (<span class="math inline">\(gy = dy + [dm &gt; 305]\)</span>). Code to convert between <code>Decalendar</code> and Gregorian calendar years is provided in <a href="#exm-gregm">Example&nbsp;7</a>.</p>
-<section id="table-7" class="level4">
-<h4 class="anchored" data-anchor-id="table-7"><a href="#tbl-gregm">Table&nbsp;7</a></h4>
+<p><code>Decalendar</code> only uses months for converting to and from Gregorian calendar dates. Nevertheless, discussing months can help to explain how <code>Decalendar</code> works. The <code>Decalendar</code> year ends with January and February, as shown in <a href="#tbl-gregm">Table&nbsp;6</a>. During these two months, the <code>Decalendar</code> year is 1 less than the Gregorian calendar year. To obtain a <code>Decalendar</code> year (<code>dy</code>) from a Gregorian calendar year (<code>gy</code>) and month number (<code>gm</code>), we subtract 1 from <code>gy</code> if <code>gm</code> is less than 3 (<span class="math inline">\(dy = gy - [gm &lt; 3]\)</span>). To obtain a Gregorian calendar year (<code>gy</code>) from a <code>Decalendar</code> year (<code>dy</code>) and <code>doty</code>, we add 1 to <code>dy</code> if <code>doty</code> is greater than 305 (<span class="math inline">\(gy = dy + [dm &gt; 305]\)</span>). Code to convert between <code>Decalendar</code> and Gregorian calendar years is provided in <a href="#exm-gregm">Example&nbsp;7</a>.</p>
+<section id="table-6" class="level4">
+<h4 class="anchored" data-anchor-id="table-6"><a href="#tbl-gregm">Table&nbsp;6</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -3351,7 +3329,7 @@ doty2greg()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;7: The numeric values of months in <code>Decalendar</code> and the Gregorian calendar</p>
+<p>Table&nbsp;6: The numeric values of months in <code>Decalendar</code> and the Gregorian calendar</p>
 </blockquote>
 <p><span class="theorem-title"><strong>Example 7 </strong></span>&nbsp;</p>
 </section>
@@ -3516,7 +3494,7 @@ year2bool()</code></pre>
 <h2 data-number="4.4" class="anchored" data-anchor-id="iso-8601"><span class="header-section-number">4.4</span> ISO 8601</h2>
 <section id="years" class="level3" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="years"><span class="header-section-number">4.4.1</span> Years</h3>
-<p>Both <code>Decalendar</code> and <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> dates show <a href="https://en.wikipedia.org/wiki/ISO_8601#Years">years</a> as 4-digit numbers. Unlike ISO 8601, <code>Decalendar</code> does not require years to be included in dates. As shown in <a href="#tbl-2x2">Table&nbsp;1</a>, <code>Decalendar</code> <code>deco</code> dates include years while <code>doty</code> dates do not. Year 0 in both <code>Decalendar</code> and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in <code>Decalendar</code>, <code>0000+000</code>, is called the <code>Decalendar</code> epoch and translates to March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is <code>-0001+306</code> in <code>Decalendar</code> and January 1, 1 BCE in the Gregorian calendar.</p>
+<p>Both <code>Decalendar</code> and <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> dates show <a href="https://en.wikipedia.org/wiki/ISO_8601#Years">years</a> as 4-digit numbers. Unlike ISO 8601, <code>Decalendar</code> does not require years to be included in dates. <code>Decalendar</code> <code>deco</code> dates include years while <code>doty</code> dates do not. Year 0 in both <code>Decalendar</code> and ISO 8601 is 1 BCE (Before Common Era) in the Gregorian calendar. The first day of Year 0 in <code>Decalendar</code>, <code>0000+000</code>, is called the <code>Decalendar</code> epoch and translates to March 1, 1 BCE in the Gregorian calendar. The first day of Year 0 according to ISO 8601 is <code>-0001+306</code> in <code>Decalendar</code> and January 1, 1 BCE in the Gregorian calendar.</p>
 </section>
 <section id="ordinal-dates" class="level3 page-columns page-full" data-number="4.4.2">
 <h3 data-number="4.4.2" class="anchored" data-anchor-id="ordinal-dates"><span class="header-section-number">4.4.2</span> Ordinal dates</h3>
@@ -3907,13 +3885,13 @@ zone2hour()</code></pre>
 </section>
 <section id="times" class="level3 page-columns page-full" data-number="4.4.5">
 <h3 data-number="4.4.5" class="anchored" data-anchor-id="times"><span class="header-section-number">4.4.5</span> Times</h3>
-<p>The formula for conversion of standard time to <code>Declock</code> time is shown in <a href="#eq-declock">Equation&nbsp;4</a>. The value of <code>x</code> in <a href="#eq-declock">Equation&nbsp;4</a>. can be modified to obtain different units, which are displayed in <a href="#tbl-isot">Table&nbsp;8</a>. To convert <code>Declock</code> time into standard time, we first convert into hours using <a href="#eq-hour">Equation&nbsp;5</a> and the appropriate <code>x</code> value from <a href="#tbl-isot">Table&nbsp;8</a>. Then, we convert hours into minutes with <a href="#eq-minute">Equation&nbsp;6</a> and minutes into seconds with <a href="#eq-second">Equation&nbsp;7</a> The <code>hmso2doty</code> and <code>doty2hmso</code> functions in <a href="#exm-isot">Example&nbsp;12</a> uses these formulas to convert between standard time and <code>Declock</code> time.</p>
+<p>The formula for conversion of standard time to <code>Declock</code> time is shown in <a href="#eq-declock">Equation&nbsp;4</a>. The value of <code>x</code> in <a href="#eq-declock">Equation&nbsp;4</a>. can be modified to obtain different units, which are displayed in <a href="#tbl-isot">Table&nbsp;7</a>. To convert <code>Declock</code> time into standard time, we first convert into hours using <a href="#eq-hour">Equation&nbsp;5</a> and the appropriate <code>x</code> value from <a href="#tbl-isot">Table&nbsp;7</a>. Then, we convert hours into minutes with <a href="#eq-minute">Equation&nbsp;6</a> and minutes into seconds with <a href="#eq-second">Equation&nbsp;7</a> The <code>hmso2doty</code> and <code>doty2hmso</code> functions in <a href="#exm-isot">Example&nbsp;12</a> uses these formulas to convert between standard time and <code>Declock</code> time.</p>
 <p><span id="eq-declock"><span class="math display">\[declock = \frac{hour}{24} + \frac{minute}{1440} + \frac{second}{86400} \cdot 10^x \qquad(4)\]</span></span></p>
 <p><span id="eq-hour"><span class="math display">\[hour = declock \cdot 24 \cdot 10^x \qquad(5)\]</span></span></p>
 <p><span id="eq-minute"><span class="math display">\[minute = \frac{hour - \lfloor hour \rfloor}{60} \qquad(6)\]</span></span></p>
 <p><span id="eq-second"><span class="math display">\[second = \frac{minute - \lfloor minute \rfloor}{60} \qquad(7)\]</span></span></p>
-<section id="table-8" class="level4">
-<h4 class="anchored" data-anchor-id="table-8"><a href="#tbl-isot">Table&nbsp;8</a></h4>
+<section id="table-7" class="level4">
+<h4 class="anchored" data-anchor-id="table-7"><a href="#tbl-isot">Table&nbsp;7</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -3958,7 +3936,7 @@ zone2hour()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;8: The powers of ten of units based on days</p>
+<p>Table&nbsp;7: The powers of ten of units based on days</p>
 </blockquote>
 <p><span class="theorem-title"><strong>Example 12 </strong></span>&nbsp;</p>
 </section>
@@ -4388,7 +4366,7 @@ y \mod 4 = 0 \\
 <span id="cb106-13"><a href="#cb106-13" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023+251.04245+0</code></pre>
+<pre><code>2023+251.06610+0</code></pre>
 </div>
 </div></div>
 </section>
@@ -4602,9 +4580,9 @@ unix2deco()</code></pre>
 </section>
 <section id="dot-formats" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Dot formats</h1>
-<p>The <code>stamps</code> shown above are in the decimal days of the year (<code>.y</code>) format, which is the main <code>Decalendar</code> format. In addition to the <code>.y</code> format, there are 2 other supplemental <code>datetime</code> formats, which are based on decimal days of the month (<code>decc</code>), and decimal days of the week (<code>.w</code>). <a href="#tbl-format">Table&nbsp;9</a> summarizes the three decimal day-of-the ( <code>dot</code> or <code>.</code>) formats:</p>
-<section id="table-9" class="level4">
-<h4 class="anchored" data-anchor-id="table-9"><a href="#tbl-format">Table&nbsp;9</a></h4>
+<p>The <code>stamps</code> shown above are in the decimal days of the year (<code>.y</code>) format, which is the main <code>Decalendar</code> format. In addition to the <code>.y</code> format, there are 2 other supplemental <code>datetime</code> formats, which are based on decimal days of the month (<code>decc</code>), and decimal days of the week (<code>.w</code>). <a href="#tbl-format">Table&nbsp;8</a> summarizes the three decimal day-of-the ( <code>dot</code> or <code>.</code>) formats:</p>
+<section id="table-8" class="level4">
+<h4 class="anchored" data-anchor-id="table-8"><a href="#tbl-format">Table&nbsp;8</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -4637,9 +4615,9 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;9: The three dot formats</p>
+<p>Table&nbsp;8: The three dot formats</p>
 </blockquote>
-<p>In <a href="#tbl-format">Table&nbsp;9</a> , <code>day</code> is the 3-digit day of the year (<code>doty</code>) number, <code>dd</code> is the 2-digit day of the month (<code>dotm</code>) number, <code>d</code> is the 1-digit day of the week (<code>dotw</code>) number, and <code>.day</code> is the time in <code>mils</code>.</p>
+<p>In <a href="#tbl-format">Table&nbsp;8</a> , <code>day</code> is the 3-digit day of the year (<code>doty</code>) number, <code>dd</code> is the 2-digit day of the month (<code>dotm</code>) number, <code>d</code> is the 1-digit day of the week (<code>dotw</code>) number, and <code>.day</code> is the time in <code>mils</code>.</p>
 </section>
 <section id="the-.m-format" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="the-.m-format"><span class="header-section-number">5.1</span> The <code>.m</code> format</h2>
@@ -4651,9 +4629,9 @@ unix2deco()</code></pre>
 </section>
 <section id="the-decw-format" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="the-decw-format"><span class="header-section-number">5.2</span> The <code>decw</code> format</h2>
-<p>The week number in the <code>decw</code> format, <code>ww</code>, ranges from 0 to 53 or -54 to -1. Weeks in the <code>decw</code> format start from Sunday. <a href="#tbl-dotw">Table&nbsp;10</a> shows the possible <code>dotw</code> values, which range from 0 to 6 or -7 to -1.</p>
-<section id="table-10" class="level4">
-<h4 class="anchored" data-anchor-id="table-10"><a href="#tbl-dotw">Table&nbsp;10</a></h4>
+<p>The week number in the <code>decw</code> format, <code>ww</code>, ranges from 0 to 53 or -54 to -1. Weeks in the <code>decw</code> format start from Sunday. <a href="#tbl-dotw">Table&nbsp;9</a> shows the possible <code>dotw</code> values, which range from 0 to 6 or -7 to -1.</p>
+<section id="table-9" class="level4">
+<h4 class="anchored" data-anchor-id="table-9"><a href="#tbl-dotw">Table&nbsp;9</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -4702,15 +4680,15 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;10: The weeks in the <code>decw</code> format</p>
+<p>Table&nbsp;9: The weeks in the <code>decw</code> format</p>
 </blockquote>
 </section>
 </section>
 <section id="dot-format-examples" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="dot-format-examples"><span class="header-section-number">5.3</span> Dot format examples</h2>
-<p><a href="#tbl-dotex">Table&nbsp;11</a> builds on the example from <a href="#sec-zone">Section&nbsp;3</a> to compare all three <code>.</code> formats. The 3 <code>.</code> formats differ only in their approach to the date, not the time. Therefore, the times below are all shown to 1-digit <code>dime</code> precision (same as time zones) instead of the typical 3-digit <code>mil</code> precision. In Mexico City, the time is <code>+5-3</code> or <code>-5-3</code>, while the time in London is <code>+8+0</code> or <code>-2+0</code> and time in Tokyo is <code>+2+4</code> or <code>-8+4</code>.</p>
-<section id="table-11" class="level4">
-<h4 class="anchored" data-anchor-id="table-11"><a href="#tbl-dotex">Table&nbsp;11</a></h4>
+<p><a href="#tbl-dotex">Table&nbsp;10</a> builds on the example from <a href="#sec-zone">Section&nbsp;3</a> to compare all three <code>.</code> formats. The 3 <code>.</code> formats differ only in their approach to the date, not the time. Therefore, the times below are all shown to 1-digit <code>dime</code> precision (same as time zones) instead of the typical 3-digit <code>mil</code> precision. In Mexico City, the time is <code>+5-3</code> or <code>-5-3</code>, while the time in London is <code>+8+0</code> or <code>-2+0</code> and time in Tokyo is <code>+2+4</code> or <code>-8+4</code>.</p>
+<section id="table-10" class="level4">
+<h4 class="anchored" data-anchor-id="table-10"><a href="#tbl-dotex">Table&nbsp;10</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -4775,10 +4753,10 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;11: The time in Mexico City, London, and Tokyo in all three dot formats</p>
+<p>Table&nbsp;10: The time in Mexico City, London, and Tokyo in all three dot formats</p>
 </blockquote>
-<p>In <a href="#tbl-dotex">Table&nbsp;11</a>, the <code>.m</code> format tells us that the month in Tokyo is January (<code>Month</code> <code>0</code>) and the month in Mexico City and London is December (<code>Month</code> <code>B</code>). We could say the <code>.m</code> dates in Mexico City and London as “Year 1999 Month B Day 29” or “Year 1999 Month -1 Day -1” and the Tokyo date as “Year 2000 Month 0 Day 0” or “Year 2000 Month -C Day -31”.</p>
-<p>The <code>decw</code> format always starts the year with <code>Week</code> <code>0</code>, but the year can start on any day of the week. <a href="#tbl-dotex">Table&nbsp;11</a> shows that the year 2000 starts on a Saturday (<code>Week</code> <code>0</code> <code>Day</code> <code>6</code>). The <code>decw</code> dates in Mexico City and London could be said “Year 1999 Week 52 Day 2” or “Year 1999 Week -1 Day -5”, while the date in Tokyo could be pronounced “Year 2000 Week 0 Day 3” or “Year 2000 Week -52 Day -4” in Tokyo.</p>
+<p>In <a href="#tbl-dotex">Table&nbsp;10</a>, the <code>.m</code> format tells us that the month in Tokyo is January (<code>Month</code> <code>0</code>) and the month in Mexico City and London is December (<code>Month</code> <code>B</code>). We could say the <code>.m</code> dates in Mexico City and London as “Year 1999 Month B Day 29” or “Year 1999 Month -1 Day -1” and the Tokyo date as “Year 2000 Month 0 Day 0” or “Year 2000 Month -C Day -31”.</p>
+<p>The <code>decw</code> format always starts the year with <code>Week</code> <code>0</code>, but the year can start on any day of the week. <a href="#tbl-dotex">Table&nbsp;10</a> shows that the year 2000 starts on a Saturday (<code>Week</code> <code>0</code> <code>Day</code> <code>6</code>). The <code>decw</code> dates in Mexico City and London could be said “Year 1999 Week 52 Day 2” or “Year 1999 Week -1 Day -5”, while the date in Tokyo could be pronounced “Year 2000 Week 0 Day 3” or “Year 2000 Week -52 Day -4” in Tokyo.</p>
 <p>In contrast to the <code>.m</code> and the <code>decw</code> formats, the dates in the <code>.y</code> format are one character shorter and a little easier to say. The spoken form of the <code>.y</code> date in Mexico City and London is “Year 1999 Day 365” or “Year 1999 Day -1” and the spoken form of the Tokyo date is “Year 2000 Day 0” or “Year 2000 Day -365”.</p>
 </section>
 </section>
@@ -4797,10 +4775,10 @@ unix2deco()</code></pre>
 <h3 data-number="5.4.3" class="anchored" data-anchor-id="schedules"><span class="header-section-number">5.4.3</span> Schedules</h3>
 <section id="pently-schedules" class="level4">
 <h4 class="anchored" data-anchor-id="pently-schedules">Pently schedules</h4>
-<p>If necessary, the length of the workday and the number of workdays in the <code>dek</code> can be adjusted according to different schedules. As mentioned above, each half of the <code>dek</code> is called a <code>pent</code>. Each <code>pent</code> can have its own <code>pently</code> schedule. The expectation is that workers will work for 12 <code>dimes</code> per <code>pent</code>. It is possible to split those 12 <code>dimes</code> over the course of 5, 4, 3, or 2 days in each <code>pent</code>. <a href="#tbl-pently">Table&nbsp;12</a> displays how the number of workdays and restdays in a <code>pent</code> affects the start time, end time, and duration of the workday. The different <code>pently</code> schedules are named after the number of workdays per <code>pent</code>. People can switch between <code>pently</code> schedules every <code>pent</code> as needed, but everyone should follow the <code>Schedule</code> <code>3</code> by default. <code>Schedule</code> <code>3</code> has 3 workdays and 2 restdays in each <code>pent</code>. Each <code>Schedule</code> <code>3</code> workday starts at <code>Dot</code> <code>3</code>, ends at <code>Dot</code> <code>7</code>, and lasts 4 <code>dimes</code>.</p>
+<p>If necessary, the length of the workday and the number of workdays in the <code>dek</code> can be adjusted according to different schedules. As mentioned above, each half of the <code>dek</code> is called a <code>pent</code>. Each <code>pent</code> can have its own <code>pently</code> schedule. The expectation is that workers will work for 12 <code>dimes</code> per <code>pent</code>. It is possible to split those 12 <code>dimes</code> over the course of 5, 4, 3, or 2 days in each <code>pent</code>. <a href="#tbl-pently">Table&nbsp;11</a> displays how the number of workdays and restdays in a <code>pent</code> affects the start time, end time, and duration of the workday. The different <code>pently</code> schedules are named after the number of workdays per <code>pent</code>. People can switch between <code>pently</code> schedules every <code>pent</code> as needed, but everyone should follow the <code>Schedule</code> <code>3</code> by default. <code>Schedule</code> <code>3</code> has 3 workdays and 2 restdays in each <code>pent</code>. Each <code>Schedule</code> <code>3</code> workday starts at <code>Dot</code> <code>3</code>, ends at <code>Dot</code> <code>7</code>, and lasts 4 <code>dimes</code>.</p>
 </section>
-<section id="table-12" class="level4">
-<h4 class="anchored" data-anchor-id="table-12"><a href="#tbl-pently">Table&nbsp;12</a></h4>
+<section id="table-11" class="level4">
+<h4 class="anchored" data-anchor-id="table-11"><a href="#tbl-pently">Table&nbsp;11</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -4849,15 +4827,15 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;12: The characteristics of the pently schedules</p>
+<p>Table&nbsp;11: The characteristics of the pently schedules</p>
 </blockquote>
 </section>
 <section id="daily-schedules" class="level4">
 <h4 class="anchored" data-anchor-id="daily-schedules">Daily schedules</h4>
-<p><code>Decalendar</code> recommends waking up at <code>Dot</code> <code>2</code> and going to bed at <code>Dot</code> <code>8</code>. This recommendation allots 4 <code>dimes</code> (9.6 hours) for falling asleep and sleeping. To keep daily schedules symmetrical, the time spent awake should be split evenly before and after work. People following <code>Schedule</code> <code>3</code> would thus have 10 <code>cents</code> (2.4 hours) to prepare for work and another 10 <code>cents</code> to prepare for bed. <a href="#tbl-daily">Table&nbsp;13</a> shows the recommended <code>Schedule</code> <code>3</code> daily schedule. <code>Schedule</code> <code>4</code> and <code>Schedule</code> <code>5</code> allot even more time, 15 <code>cents</code> (3.6 hours) and 18 <code>cents</code> (4.32 hours), respectively, for before-work and after-work activities. The recommended sleep schedule does not fit well with <code>Schedule</code> <code>2</code>, but this incompatibility does not have to result in a sleep deficit. If the <code>Schedule</code> <code>2</code> workdays are not consecutive, people following <code>Schedule</code> <code>2</code> can catch up on sleep on their days off by going to bed early before and sleeping in after every workday.</p>
+<p><code>Decalendar</code> recommends waking up at <code>Dot</code> <code>2</code> and going to bed at <code>Dot</code> <code>8</code>. This recommendation allots 4 <code>dimes</code> (9.6 hours) for falling asleep and sleeping. To keep daily schedules symmetrical, the time spent awake should be split evenly before and after work. People following <code>Schedule</code> <code>3</code> would thus have 10 <code>cents</code> (2.4 hours) to prepare for work and another 10 <code>cents</code> to prepare for bed. <a href="#tbl-daily">Table&nbsp;12</a> shows the recommended <code>Schedule</code> <code>3</code> daily schedule. <code>Schedule</code> <code>4</code> and <code>Schedule</code> <code>5</code> allot even more time, 15 <code>cents</code> (3.6 hours) and 18 <code>cents</code> (4.32 hours), respectively, for before-work and after-work activities. The recommended sleep schedule does not fit well with <code>Schedule</code> <code>2</code>, but this incompatibility does not have to result in a sleep deficit. If the <code>Schedule</code> <code>2</code> workdays are not consecutive, people following <code>Schedule</code> <code>2</code> can catch up on sleep on their days off by going to bed early before and sleeping in after every workday.</p>
 </section>
-<section id="table-13" class="level4">
-<h4 class="anchored" data-anchor-id="table-13"><a href="#tbl-daily">Table&nbsp;13</a></h4>
+<section id="table-12" class="level4">
+<h4 class="anchored" data-anchor-id="table-12"><a href="#tbl-daily">Table&nbsp;12</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -4896,7 +4874,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;13: The workday schedule</p>
+<p>Table&nbsp;12: The workday schedule</p>
 </blockquote>
 </section>
 </section>
@@ -4906,10 +4884,10 @@ unix2deco()</code></pre>
 <p>In addition to serving as a part of the Gregorian date coordinate system described above, months can also indicate the current season or quarter. <code>Deks</code> can also serve as indicator of subyear units like seasons.</p>
 <section id="seasons" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="seasons"><span class="header-section-number">5.5.1</span> Seasons</h3>
-<p>We can use <a href="#tbl-greg2doty">Table&nbsp;5</a> to convert any Gregorian calendar date to a positive <code>doty</code> number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact <code>doty</code> number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as <a href="https://en.wikipedia.org/wiki/Nowruz">Nowruz</a>.</p>
-<p>The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has its opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. <a href="#tbl-soleq">Table&nbsp;14</a> lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.</p>
-<section id="table-14" class="level4">
-<h4 class="anchored" data-anchor-id="table-14"><a href="#tbl-soleq">Table&nbsp;14</a></h4>
+<p>We can use <a href="#tbl-greg2doty">Table&nbsp;4</a> to convert any Gregorian calendar date to a positive <code>doty</code> number. This is especially useful for variable dates that have to be converted every year. For example, the dates of the solstices, the longest and shortest days of the year, vary slightly every year. Instead of calculating the exact <code>doty</code> number of the solstices ourselves we could translate from existing Gregorian calendar dates. Solstices and equinoxes (the points in between the solstices) are the basis of the some holidays, such as <a href="https://en.wikipedia.org/wiki/Nowruz">Nowruz</a>.</p>
+<p>The dates of the solstices and the equinoxes can be used as definitions of the seasons. Each season has its opposite. The opposite of Spring is Fall and the opposite of Summer is Winter. These opposites are always occurring simultaneously, one opposing season in the Northern hemisphere and the other in the Southern hemisphere. <a href="#tbl-soleq">Table&nbsp;13</a> lists the opposing seasons in the North and South columns (which correspond to the Northern and Southern hemispheres) and the approximate dates of the solstices and the equinoxes that mark the start of each season.</p>
+<section id="table-13" class="level4">
+<h4 class="anchored" data-anchor-id="table-13"><a href="#tbl-soleq">Table&nbsp;13</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -4972,13 +4950,13 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;14: Solstice and equinox Gregorian calendar and <code>doty</code> dates</p>
+<p>Table&nbsp;13: Solstice and equinox Gregorian calendar and <code>doty</code> dates</p>
 </blockquote>
-<p>Using the information in <a href="#tbl-soleq">Table&nbsp;14</a>, we can group the <code>deks</code> and <code>pents</code> in a year according to the seasons in which they occur. We identify <code>deks</code> using the first 2 digits of the 3-digit day number of any day in that <code>dek</code>. The <code>pent</code> number is twice the <code>dek</code> number plus one if the <code>dotd</code> is greater than 4 (<span class="math inline">\(dek \cdot 2 + dotd &gt; 4\)</span>). For example, <code>Day</code> <code>19</code> is the last day in <code>Dek</code> <code>1</code> and <code>Pent</code> <code>3</code>, while <code>Day</code> <code>111</code> is the second day in <code>Dek</code> <code>11</code> and <code>Pent</code> <code>22</code>.</p>
-<p>We can round up the start of the first season and round down the start of the second season to obtain the division of <code>pents</code> by season as summarized in <a href="#tbl-season">Table&nbsp;15</a> It is important to note that the last season starts in <code>Pent</code> <code>59</code> of one year and ends with <code>Pent</code> <code>3</code> of the subsequent year. In common years, each season in <a href="#tbl-season">Table&nbsp;15</a> has 18 <code>pents</code> (90 days), except for the season in the second row, which has 19 <code>pents</code> (95 days). In leap years, the season in the last row of <a href="#tbl-season">Table&nbsp;15</a> has 18.2 pents (91 days).</p>
+<p>Using the information in <a href="#tbl-soleq">Table&nbsp;13</a>, we can group the <code>deks</code> and <code>pents</code> in a year according to the seasons in which they occur. We identify <code>deks</code> using the first 2 digits of the 3-digit day number of any day in that <code>dek</code>. The <code>pent</code> number is twice the <code>dek</code> number plus one if the <code>dotd</code> is greater than 4 (<span class="math inline">\(dek \cdot 2 + dotd &gt; 4\)</span>). For example, <code>Day</code> <code>19</code> is the last day in <code>Dek</code> <code>1</code> and <code>Pent</code> <code>3</code>, while <code>Day</code> <code>111</code> is the second day in <code>Dek</code> <code>11</code> and <code>Pent</code> <code>22</code>.</p>
+<p>We can round up the start of the first season and round down the start of the second season to obtain the division of <code>pents</code> by season as summarized in <a href="#tbl-season">Table&nbsp;14</a> It is important to note that the last season starts in <code>Pent</code> <code>59</code> of one year and ends with <code>Pent</code> <code>3</code> of the subsequent year. In common years, each season in <a href="#tbl-season">Table&nbsp;14</a> has 18 <code>pents</code> (90 days), except for the season in the second row, which has 19 <code>pents</code> (95 days). In leap years, the season in the last row of <a href="#tbl-season">Table&nbsp;14</a> has 18.2 pents (91 days).</p>
 </section>
-<section id="table-15" class="level4">
-<h4 class="anchored" data-anchor-id="table-15"><a href="#tbl-season">Table&nbsp;15</a></h4>
+<section id="table-14" class="level4">
+<h4 class="anchored" data-anchor-id="table-14"><a href="#tbl-season">Table&nbsp;14</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5027,7 +5005,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;15: The <code>pents</code> that begin and end each season</p>
+<p>Table&nbsp;14: The <code>pents</code> that begin and end each season</p>
 </blockquote>
 </section>
 </section>
@@ -5035,10 +5013,10 @@ unix2deco()</code></pre>
 <h3 data-number="5.5.2" class="anchored" data-anchor-id="qops-delts-eps-and-waus"><span class="header-section-number">5.5.2</span> <code>Qops</code>, <code>Delts</code>, <code>Eps</code> and <code>Waus</code></h3>
 <section id="qops" class="level4">
 <h4 class="anchored" data-anchor-id="qops"><code>Qops</code></h4>
-<p>In contrast to the variable length of seasons, other <code>Decalendar</code> units are constant length. Of these constant length units, <code>qops</code> (<code>qoppas</code>, <code>ϟ</code>) are most like seasons. <code>Qops</code> divide the year into four parts, but unlike seasons, <code>qops</code> do not include <code>Pent</code> <code>72</code>, the last <code>pent</code> of the year. <code>Pent</code> <code>72</code> is not included in the last <code>qop</code> so that each <code>qop</code> is 9 <code>deks</code> and 90 days long. The omission of <code>Dek</code> <code>36</code> also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because <code>Dek</code> <code>36</code> overlaps with <code>Dek</code> <code>0</code>. <a href="#tbl-q">Table&nbsp;16</a> shows the division of <code>deks</code> by <code>qop</code>.</p>
+<p>In contrast to the variable length of seasons, other <code>Decalendar</code> units are constant length. Of these constant length units, <code>qops</code> (<code>qoppas</code>, <code>ϟ</code>) are most like seasons. <code>Qops</code> divide the year into four parts, but unlike seasons, <code>qops</code> do not include <code>Pent</code> <code>72</code>, the last <code>pent</code> of the year. <code>Pent</code> <code>72</code> is not included in the last <code>qop</code> so that each <code>qop</code> is 9 <code>deks</code> and 90 days long. The omission of <code>Dek</code> <code>36</code> also maintains the pattern of alternating even and odd numbers in each row. This omission leaves out only 5 or 6 days per year, because <code>Dek</code> <code>36</code> overlaps with <code>Dek</code> <code>0</code>. <a href="#tbl-q">Table&nbsp;15</a> shows the division of <code>deks</code> by <code>qop</code>.</p>
 </section>
-<section id="table-16" class="level4">
-<h4 class="anchored" data-anchor-id="table-16"><a href="#tbl-q">Table&nbsp;16</a></h4>
+<section id="table-15" class="level4">
+<h4 class="anchored" data-anchor-id="table-15"><a href="#tbl-q">Table&nbsp;15</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5072,15 +5050,15 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;16: The <code>deks</code> that begin and end each <code>qop</code></p>
+<p>Table&nbsp;15: The <code>deks</code> that begin and end each <code>qop</code></p>
 </blockquote>
 </section>
 <section id="delts" class="level4">
 <h4 class="anchored" data-anchor-id="delts"><code>Delts</code></h4>
-<p>In addition to <code>qops</code> shown above, <code>Decalendar</code> describes 3 other similar units called <code>delts</code> (<code>deltas</code>, <code>δ</code>), <code>eps</code> (<code>epsilons</code>, <code>ε</code>), and <code>waus</code> (<code>ϛ</code>). These units do not leave out as many days in each year, because they split the year by day, rather than by <code>dek</code>. <code>Delts</code>, <code>eps</code>, and <code>wau</code> split the year into 4, 5, and 6 parts, respectively. <code>Delts</code> are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which <code>delts</code> start and end. <a href="#tbl-d">Table&nbsp;17</a> list the numbers of the days that begin and end each <code>delt</code>. In <a href="#tbl-q">Table&nbsp;16</a>, not only do rows alternate between even and odd numbers, but the <code>delt</code> number is the last digit of both the start and the end day of the <code>delt</code>.</p>
+<p>In addition to <code>qops</code> shown above, <code>Decalendar</code> describes 3 other similar units called <code>delts</code> (<code>deltas</code>, <code>δ</code>), <code>eps</code> (<code>epsilons</code>, <code>ε</code>), and <code>waus</code> (<code>ϛ</code>). These units do not leave out as many days in each year, because they split the year by day, rather than by <code>dek</code>. <code>Delts</code>, <code>eps</code>, and <code>wau</code> split the year into 4, 5, and 6 parts, respectively. <code>Delts</code> are 91 days long and leave out one day at the end of common years and two days at the end of leap years. Just as above, leaving out a small number of days at the end of the year preserves a pattern that can be useful for remembering the days on which <code>delts</code> start and end. <a href="#tbl-d">Table&nbsp;16</a> list the numbers of the days that begin and end each <code>delt</code>. In <a href="#tbl-q">Table&nbsp;15</a>, not only do rows alternate between even and odd numbers, but the <code>delt</code> number is the last digit of both the start and the end day of the <code>delt</code>.</p>
 </section>
-<section id="table-17" class="level4">
-<h4 class="anchored" data-anchor-id="table-17"><a href="#tbl-d">Table&nbsp;17</a></h4>
+<section id="table-16" class="level4">
+<h4 class="anchored" data-anchor-id="table-16"><a href="#tbl-d">Table&nbsp;16</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5114,15 +5092,15 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;17: The days that begin and end each <code>delt</code></p>
+<p>Table&nbsp;16: The days that begin and end each <code>delt</code></p>
 </blockquote>
 </section>
 <section id="eps" class="level4">
 <h4 class="anchored" data-anchor-id="eps"><code>Eps</code></h4>
-<p>Unlike <code>delts</code>, <code>eps</code> are 73 days long and do not leave out any days from common years. <code>Qops</code>, <code>delts</code>, and <code>eps</code> all leave out leap days in leap years. <a href="#tbl-e">Table&nbsp;18</a> list the numbers of the days that begin and end each <code>ep</code>.</p>
+<p>Unlike <code>delts</code>, <code>eps</code> are 73 days long and do not leave out any days from common years. <code>Qops</code>, <code>delts</code>, and <code>eps</code> all leave out leap days in leap years. <a href="#tbl-e">Table&nbsp;17</a> list the numbers of the days that begin and end each <code>ep</code>.</p>
 </section>
-<section id="table-18" class="level4">
-<h4 class="anchored" data-anchor-id="table-18"><a href="#tbl-e">Table&nbsp;18</a></h4>
+<section id="table-17" class="level4">
+<h4 class="anchored" data-anchor-id="table-17"><a href="#tbl-e">Table&nbsp;17</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5161,15 +5139,15 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;18: The days that begin and end each <code>ep</code></p>
+<p>Table&nbsp;17: The days that begin and end each <code>ep</code></p>
 </blockquote>
 </section>
 <section id="waus" class="level4">
 <h4 class="anchored" data-anchor-id="waus"><code>Waus</code></h4>
-<p>The only unit that can include the leap year is a <code>wau</code> (<code>ϛ</code>), which is 61 days long and follows a similar pattern as a <code>delt</code>, except the last <code>wau</code> in common years is 1 day short than all the others. <a href="#tbl-w">Table&nbsp;19</a> list the numbers of the days that begin and end each <code>wau</code>. As with <code>delts</code>, the <code>wau</code> number is the last digit of the numbers of its first and last day.</p>
+<p>The only unit that can include the leap year is a <code>wau</code> (<code>ϛ</code>), which is 61 days long and follows a similar pattern as a <code>delt</code>, except the last <code>wau</code> in common years is 1 day short than all the others. <a href="#tbl-w">Table&nbsp;18</a> list the numbers of the days that begin and end each <code>wau</code>. As with <code>delts</code>, the <code>wau</code> number is the last digit of the numbers of its first and last day.</p>
 </section>
-<section id="table-19" class="level4">
-<h4 class="anchored" data-anchor-id="table-19"><a href="#tbl-w">Table&nbsp;19</a></h4>
+<section id="table-18" class="level4">
+<h4 class="anchored" data-anchor-id="table-18"><a href="#tbl-w">Table&nbsp;18</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5213,7 +5191,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;19: The days that begin and end each <code>wau</code></p>
+<p>Table&nbsp;18: The days that begin and end each <code>wau</code></p>
 </blockquote>
 <p>All of the subyear unit codes can be preceded by a year and followed by a day number. The midpoint of common years is noon on the first day of <code>Delt</code> <code>2</code>, <code>D2+00.5</code> or <code>+182.5</code>, and the midpoint of leap years is midnight of the first day of <code>Wau</code> <code>3</code>, <code>W3+00.0</code> or <code>+183.0</code>. The first day of Spring in northern hemisphere and Fall in the southern hemisphere in the year 2000 is <code>2000S0+00</code> or <code>2000+020</code>, while the last day of this season is <code>2000S0+89</code> or <code>2000+109</code>. The subyear units are essentially date intervals, series of contiguous dates. <code>Decalendar</code> includes very powerful approaches to describing series of dates, times, and <code>stamps</code>.</p>
 </section>
@@ -5226,9 +5204,9 @@ unix2deco()</code></pre>
 <section id="slices" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="slices"><span class="header-section-number">6.1</span> Slices</h2>
 <p>Instead of listing every single day in a <code>series</code>, we can “slice” from <code>Day</code> <code>0</code> up to but not including <code>Day</code> <code>3</code> by writing <code>:3</code>. <code>Simple</code> <code>slices</code> consist of a <code>start</code> and a <code>stop</code> separated by a colon (<code>start:stop</code>). When the <code>start</code> is omitted, <code>slices</code> begin at the first value, which in the context of a year is <code>Day</code> <code>0</code> and in the context of a day is midnight. Therefore, writing <code>:3</code> is the same as writing <code>0:3</code>, both represent the first 3 days of the year: <code>0,1,2</code>. Using this approach, we can shorten the series <code>0,.1,.2,.3,.4</code> to <code>:.5</code>. If we omit the <code>stop</code>, instead of the <code>start</code>, we would “slice” up to and including the last value.</p>
-<p>In the context of <code>doty</code> dates, omitting the <code>stop</code> value obtains all of the days in the year after the <code>start</code>, because the default <code>stop</code> is the number of days in the year (<code>n</code>). For example, the <code>slice</code> <code>3:</code> has a <code>start</code> of <code>Day</code> <code>3</code> and a <code>stop</code> of <code>n</code>, and thus represents every day in the year except the first 3. The number of items we obtain from a <code>slice</code> is called a <code>span</code>. To calculate the <code>span</code>, we subtract the <code>start</code> from the <code>stop</code> (<span class="math inline">\(stop-start\)</span>). In a common year, the <code>span</code> of <code>003:</code> is <span class="math inline">\(n-3=362\)</span>, while in a leap year it would be <span class="math inline">\(n-3=363\)</span>. If both the <code>start</code> and the <code>stop</code> are omitted, every day is included (<span class="math inline">\(span=n-0\)</span>). <a href="#tbl-4slice">Table&nbsp;20</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>slices</code>. The superscript plus sign (⁺) in <a href="#tbl-4slice">Table&nbsp;20</a> indicates a number that has to be incremented in leap years.</p>
-<section id="table-20" class="level4">
-<h4 class="anchored" data-anchor-id="table-20"><a href="#tbl-4slice">Table&nbsp;20</a></h4>
+<p>In the context of <code>doty</code> dates, omitting the <code>stop</code> value obtains all of the days in the year after the <code>start</code>, because the default <code>stop</code> is the number of days in the year (<code>n</code>). For example, the <code>slice</code> <code>3:</code> has a <code>start</code> of <code>Day</code> <code>3</code> and a <code>stop</code> of <code>n</code>, and thus represents every day in the year except the first 3. The number of items we obtain from a <code>slice</code> is called a <code>span</code>. To calculate the <code>span</code>, we subtract the <code>start</code> from the <code>stop</code> (<span class="math inline">\(stop-start\)</span>). In a common year, the <code>span</code> of <code>003:</code> is <span class="math inline">\(n-3=362\)</span>, while in a leap year it would be <span class="math inline">\(n-3=363\)</span>. If both the <code>start</code> and the <code>stop</code> are omitted, every day is included (<span class="math inline">\(span=n-0\)</span>). <a href="#tbl-4slice">Table&nbsp;19</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>slices</code>. The superscript plus sign (⁺) in <a href="#tbl-4slice">Table&nbsp;19</a> indicates a number that has to be incremented in leap years.</p>
+<section id="table-19" class="level4">
+<h4 class="anchored" data-anchor-id="table-19"><a href="#tbl-4slice">Table&nbsp;19</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5267,7 +5245,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;20: The slices that represent the 4-part subyear units</p>
+<p>Table&nbsp;19: The slices that represent the 4-part subyear units</p>
 </blockquote>
 </section>
 </section>
@@ -5280,9 +5258,9 @@ unix2deco()</code></pre>
 </section>
 <section id="spreads" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="spreads"><span class="header-section-number">6.3</span> Spreads</h2>
-<p>To create <code>series</code> of consecutive items with breaks in between, it may be better to use a <code>spread</code> than a <code>slice</code>. <code>Simple</code> <code>spreads</code> consist of either a <code>start</code> and a <code>span</code> (<code>start&gt;span</code>) separated by a greater-than sign (<code>&gt;</code>) or a <code>stop</code> and a <code>span</code> (<code>stop&lt;span</code>) separated by a less-than (<code>&lt;</code>) sign. The default <code>start</code> and <code>stop</code> values are the same for both <code>slices</code> and <code>spreads</code>. We can <code>spread</code> forward from the default <code>start</code> to capture the first <code>span</code> days in a year. For example, the first 3 days in a year can be represented by the <code>spread</code> <code>&gt;3</code>, which is synonymous with the <code>slice</code> <code>:3</code>. In this example, the <code>start</code> is 0, while the <code>stop</code> and the <code>span</code> are both 3. In addition to default <code>start</code> and <code>stop</code> values, <code>spreads</code> also have default <code>span</code> values. A <code>spread</code> that only uses default values (<code>&gt;</code> or <code>&lt;</code>) will include every day in the year (<span class="math inline">\(span=n\)</span>). <a href="#tbl-4spread">Table&nbsp;21</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>spreads</code>.</p>
-<section id="table-21" class="level4">
-<h4 class="anchored" data-anchor-id="table-21"><a href="#tbl-4spread">Table&nbsp;21</a></h4>
+<p>To create <code>series</code> of consecutive items with breaks in between, it may be better to use a <code>spread</code> than a <code>slice</code>. <code>Simple</code> <code>spreads</code> consist of either a <code>start</code> and a <code>span</code> (<code>start&gt;span</code>) separated by a greater-than sign (<code>&gt;</code>) or a <code>stop</code> and a <code>span</code> (<code>stop&lt;span</code>) separated by a less-than (<code>&lt;</code>) sign. The default <code>start</code> and <code>stop</code> values are the same for both <code>slices</code> and <code>spreads</code>. We can <code>spread</code> forward from the default <code>start</code> to capture the first <code>span</code> days in a year. For example, the first 3 days in a year can be represented by the <code>spread</code> <code>&gt;3</code>, which is synonymous with the <code>slice</code> <code>:3</code>. In this example, the <code>start</code> is 0, while the <code>stop</code> and the <code>span</code> are both 3. In addition to default <code>start</code> and <code>stop</code> values, <code>spreads</code> also have default <code>span</code> values. A <code>spread</code> that only uses default values (<code>&gt;</code> or <code>&lt;</code>) will include every day in the year (<span class="math inline">\(span=n\)</span>). <a href="#tbl-4spread">Table&nbsp;20</a> lists the seasons, <code>qops</code>, and <code>delts</code> in the form of <code>spreads</code>.</p>
+<section id="table-20" class="level4">
+<h4 class="anchored" data-anchor-id="table-20"><a href="#tbl-4spread">Table&nbsp;20</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5321,7 +5299,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;21: The spreads that represent the 4-part subyear units</p>
+<p>Table&nbsp;20: The spreads that represent the 4-part subyear units</p>
 </blockquote>
 <p>If we “spread” forward from a positive <code>start</code>, the default <code>span</code> is <span class="math inline">\(n-start\)</span>. If we spread backward from a positive <code>stop</code>, the default <code>span</code> is <code>stop</code>. We can <code>spread</code> backward from the default <code>stop</code> to capture the last <code>span</code> days in a year. For example, <code>&lt;3</code> represents the last 3 days of any year. We could also use a negative <code>start</code> of <code>-3</code>, the third to last day of any year, to create the <code>slice</code> <code>-3:</code> and the <code>spread</code> <code>-3&gt;</code>, both of which are synonymous with <code>&lt;3</code>. One advantage of <code>spreads</code> over <code>slices</code> is the ability to access days from the end of a year without negative numbers. A <code>span</code> value of zero does not return any items. Negative <code>span</code> values reverse the direction of the first sign, turning <code>start</code> into <code>stop</code> and vice versa.</p>
 </section>
@@ -5335,9 +5313,9 @@ unix2deco()</code></pre>
 <section id="spaces" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="spaces"><span class="header-section-number">6.5</span> Spaces</h2>
 <p>The patterns described above require that <code>splits</code> are separated by the default <code>space</code> value of 1. We can specify a different <code>space</code> value in the form <code>start&gt;span&gt;split&gt;space</code>. The <code>split</code> <code>spreads</code> <code>≫3&gt;2</code> and <code>♢3&gt;2</code> create 3-day <code>splits</code> separated by 2-day <code>spaces</code>. This is the pattern of workdays in the <code>Decalendar</code> system. The first <code>segment</code> of <code>≫3&gt;2</code> and <code>♢3&gt;2</code> can be written as <code>:3</code>, <code>&gt;3</code>, or <code>3&lt;</code>, while the last <code>segment</code> is <code>360:363</code>, <code>360&gt;3</code>, or <code>363&lt;3</code>. The workdays in the first <code>dek</code> of <code>≫3&gt;2</code> and <code>♢3&gt;2</code> can be written as the following <code>series</code> of <code>segments</code>: <code>:4,5:8</code>, <code>&gt;3,5&gt;3</code>, or <code>3&lt;,8&lt;3</code>. Unlike <code>stepped</code> <code>slices</code> and <code>split</code> <code>spreads</code>, <code>simple</code> <code>slices</code> and <code>simple</code> <code>spreads</code> can be used in <code>series</code>.</p>
-<p>A <code>space</code> value of 0 may also be useful. For example, <code>delts</code>, <code>qops</code>, <code>eps</code>, and <code>waus</code> can be summarized as <code>split</code> <code>spreads</code> as shown in <a href="#tbl-constant">Table&nbsp;22</a>. When <code>space</code> is zero, the direction of the third sign does not matter. The <code>split</code> <code>spreads</code> <code>≫61&gt;0</code>, <code>♢61&gt;0</code>, <code>≫61&lt;0</code>, and <code>♢61&lt;0</code> all represents the <code>waus</code> in a year. <code>Waus</code> divide leap years evenly and <code>eps</code> divide common years evenly. Therefore, <code>x61&gt;0</code> and <code>x61&lt;0</code> can represent all of the <code>waus</code> in leap years, just like <code>x73&gt;0</code> and <code>x73&lt;0</code> can represent all of the <code>eps</code> in common years. The seasons can be described by a <code>spread</code> with a <code>series</code> of <code>splits</code> and a <code>space</code> of 0: <code>»90,95,90,90⁺&gt;0</code>.</p>
-<section id="table-22" class="level4">
-<h4 class="anchored" data-anchor-id="table-22"><a href="#tbl-constant">Table&nbsp;22</a></h4>
+<p>A <code>space</code> value of 0 may also be useful. For example, <code>delts</code>, <code>qops</code>, <code>eps</code>, and <code>waus</code> can be summarized as <code>split</code> <code>spreads</code> as shown in <a href="#tbl-constant">Table&nbsp;21</a>. When <code>space</code> is zero, the direction of the third sign does not matter. The <code>split</code> <code>spreads</code> <code>≫61&gt;0</code>, <code>♢61&gt;0</code>, <code>≫61&lt;0</code>, and <code>♢61&lt;0</code> all represents the <code>waus</code> in a year. <code>Waus</code> divide leap years evenly and <code>eps</code> divide common years evenly. Therefore, <code>x61&gt;0</code> and <code>x61&lt;0</code> can represent all of the <code>waus</code> in leap years, just like <code>x73&gt;0</code> and <code>x73&lt;0</code> can represent all of the <code>eps</code> in common years. The seasons can be described by a <code>spread</code> with a <code>series</code> of <code>splits</code> and a <code>space</code> of 0: <code>»90,95,90,90⁺&gt;0</code>.</p>
+<section id="table-21" class="level4">
+<h4 class="anchored" data-anchor-id="table-21"><a href="#tbl-constant">Table&nbsp;21</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5366,7 +5344,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;22: The spreads that represent the constant length subyear units</p>
+<p>Table&nbsp;21: The spreads that represent the constant length subyear units</p>
 </blockquote>
 <p>If <code>space</code> is greater than zero and the second and third sign are pointing in opposite directions, the resulting time <code>segments</code> will overlap. The <code>split</code> <code>spreads</code> <code>&gt;1&gt;.4&lt;.2</code> and <code>&lt;1&lt;.4&gt;.2</code> both result in the same 4 overlapping time <code>segments</code>: <code>:.4</code>, <code>.2:.6</code>, <code>.4:.8</code>, <code>.6:1</code>. Negative values can be used in a <code>series</code> of <code>spaces</code> to temporarily reverse the direction and intersperse overlapping and non-overlapping <code>segments</code>. The <code>split</code> <code>spread</code> <code>&gt;1&gt;.4&lt;.2,-.1</code> yields two <code>segments</code> that overlap and one <code>segment</code> that does not overlap: <code>:.4</code>, <code>.2:.6</code>, <code>.6:1</code>.</p>
 <p>Overlapping segments could be used to plan work shifts that require a hand-off between teams. The segments created by <code>&gt;1&gt;.4&lt;.2</code> are shifted by two <code>dimes</code> in relation to each other and overlap by 2 <code>dimes</code>. If these segments are in <code>Zone</code> <code>0</code> time, they represent the normal workday (<code>.3:.7</code>) for <code>Zone</code> <code>3</code> (<code>:.4</code>), <code>Zone</code> <code>1</code>(<code>.2:.6</code>), <code>Zone</code> <code>-1</code>(<code>.4:.8</code>), and <code>Zone</code> <code>-3</code>(<code>.6:1</code>). Each of these 4 segments could represent a team working during the normal workday in their respective time zone. All but the last team would have two dimes of overlap with the subsequent team.</p>
@@ -5377,9 +5355,9 @@ unix2deco()</code></pre>
 <p><code>split</code> <code>spreads</code> can be combined with other <code>spreads</code> into <code>sequences</code> called <code>seq</code> <code>spreads</code> (<code>sequential</code> <code>spreads</code>). The intuition behind <code>seq</code> <code>spreads</code> and is that each item in the first (outer) <code>spread</code> serves as a starting point for the second (inner) <code>spread</code>. The main use of <code>seq</code> <code>spreads</code> is to first “spread” across days and then “spread” across times in those days. We can combine <code>≫3&gt;2</code>, a <code>split</code> <code>spread</code> that represents the <code>Decalendar</code> workdays, with <code>.3&gt;.4</code>, a <code>simple</code> <code>spread</code> that provides the <code>start</code> and <code>span</code> of the <code>Decalendar</code> workday, to obtain <code>≫3&gt;2&gt;.3&gt;.4</code>, a <code>seq</code> <code>spread</code> that represents the time spent at work in a <code>Decalendar</code> year.</p>
 <p>In this <code>seq</code> <code>spread</code>, the <code>split</code> is the number of workdays (<code>3</code>), the space is the number of restdays (<code>2</code>), the second-to-last number is the <code>start</code> of the workday (<code>.3</code>) and the last number is the workday <code>span</code> (<code>.4</code>). The <code>spread</code> <code>≫3&gt;2&gt;.3&gt;.4</code> first starts at midnight of each workday, then moves forward 3 <code>dimes</code> to the new <code>start</code> of <code>Dot</code> <code>3</code>, and then “spreads” forward by a <code>span</code> of 4 <code>dimes</code> to the new <code>stop</code> of <code>Dot</code> <code>7</code>. We could replace the start of the workday in <code>≫3&gt;2&gt;.3&gt;.4</code> with the end of workday if we reverse the last sign: <code>≫3&gt;2&gt;.7&lt;.4</code>, because <code>.3&gt;.4</code> and <code>.7&lt;.4</code> are synonymous.</p>
 <p>We combine the two <code>spreads</code> with <code>&gt;</code> because we want to move forward from the beginning of each workday, instead of backward to the previous day. If we combined <code>≫3&gt;2</code> and <code>.3&gt;.4</code> with <code>&lt;</code>, the resulting <code>spread</code> <code>≫3&gt;2&lt;.3&gt;.4</code> would move backward from midnight of each workday to <code>Dot</code> <code>7</code> of each previous day and then “spread” forward to <code>Dot</code> <code>1</code> of each workday. We may want to use such a mixed direction <code>seq</code> <code>spreads</code> when dealing with time zones. If we lived in <code>Zone</code> <code>-3</code> and wanted to know how the workdays in <code>Zone</code> <code>4</code> translated into our time zone, we could take the <code>spread</code> <code>≫3&gt;2&gt;.3&gt;.4</code> and move its <code>start</code> to 7 <code>dimes</code> earlier: <code>≫3&gt;2&lt;.4&gt;.4</code>. <code>seq</code> <code>spreads</code> enable such time zone conversions without the use of negative numbers.</p>
-<p>The <code>seq</code> <code>slice</code> equivalent of <code>≫3&gt;2&gt;.3&gt;.4</code> is <code>:365:1,1,3:.3:.7</code>. <code>seq</code> <code>spreads</code> will always be a more succinct way for creating long consecutive sequences with breaks than <code>slices</code>. For example, to include a lunch break in the middle of work, we could simply add a <code>split</code> and a <code>space</code> to the <code>seq</code> <code>spread</code> above: <code>≫3&gt;2&gt;.3&gt;.4&gt;.18&gt;.04</code>. To do the same with a <code>seq</code> <code>slice</code>, we have to create 17 steps of 0.01 and a step of .04: <code>:365:1,1,3:.3:.7:17*1%,4%</code>. Here, we are using the replication operator (<code>*</code>) to avoid writing 0.01 17 times and the percent operator (<code>%</code>) to save a few characters, but even so the <code>seq</code> <code>slice</code> is not as concise as the <code>seq</code> <code>spread</code>. <a href="#tbl-workday">Table&nbsp;23</a> shows each part of this schedule in the form of <code>simple</code> <code>slices</code> and <code>simple</code> <code>spreads</code>.</p>
-<section id="table-23" class="level4">
-<h4 class="anchored" data-anchor-id="table-23"><a href="#tbl-workday">Table&nbsp;23</a></h4>
+<p>The <code>seq</code> <code>slice</code> equivalent of <code>≫3&gt;2&gt;.3&gt;.4</code> is <code>:365:1,1,3:.3:.7</code>. <code>seq</code> <code>spreads</code> will always be a more succinct way for creating long consecutive sequences with breaks than <code>slices</code>. For example, to include a lunch break in the middle of work, we could simply add a <code>split</code> and a <code>space</code> to the <code>seq</code> <code>spread</code> above: <code>≫3&gt;2&gt;.3&gt;.4&gt;.18&gt;.04</code>. To do the same with a <code>seq</code> <code>slice</code>, we have to create 17 steps of 0.01 and a step of .04: <code>:365:1,1,3:.3:.7:17*1%,4%</code>. Here, we are using the replication operator (<code>*</code>) to avoid writing 0.01 17 times and the percent operator (<code>%</code>) to save a few characters, but even so the <code>seq</code> <code>slice</code> is not as concise as the <code>seq</code> <code>spread</code>. <a href="#tbl-workday">Table&nbsp;22</a> shows each part of this schedule in the form of <code>simple</code> <code>slices</code> and <code>simple</code> <code>spreads</code>.</p>
+<section id="table-22" class="level4">
+<h4 class="anchored" data-anchor-id="table-22"><a href="#tbl-workday">Table&nbsp;22</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5412,7 +5390,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;23: A workday schedule with a lunch break</p>
+<p>Table&nbsp;22: A workday schedule with a lunch break</p>
 </blockquote>
 </section>
 </section>
@@ -5429,9 +5407,9 @@ unix2deco()</code></pre>
 </section>
 <section id="pently-schedules-as-seq-spreads-splices-and-sleds" class="level3" data-number="6.7.3">
 <h3 data-number="6.7.3" class="anchored" data-anchor-id="pently-schedules-as-seq-spreads-splices-and-sleds"><span class="header-section-number">6.7.3</span> Pently schedules as seq spreads, splices, and sleds</h3>
-<p>We can use <code>seq</code> <code>spreads</code> to describe the <a href="#sched"><code>pently</code>schedules</a>. <code>Schedule</code> <code>5</code> is particularly interesting because it includes all of the days of the year. <code>Spreads</code> that include every item can be written as <code>&gt;</code> or <code>&lt;</code>, but <code>seq</code> <code>spreads</code> must have at least 5 values. The <code>Schedule</code> <code>5</code> <code>seq</code> <code>spread</code> <code>≫≫.38&gt;.24</code> has 4 blank values, which represent the default <code>start</code>, <code>span</code>, <code>split</code>, and <code>space</code>. Similarly, the <code>Schedule</code> <code>4</code> <code>seq</code> <code>spread</code> <code>≫4≫.35&gt;.3</code> has 3 blank values, which represent the default <code>start</code>, <code>span</code>, and <code>space</code>. The <code>Schedule</code> <code>2</code> and <code>Schedule</code> <code>3</code> <code>seq</code> <code>spreads</code>, <code>≫2&gt;3&gt;.2&gt;.6</code> and <code>≫3&gt;2&gt;.3&gt;.4</code>, respectively, only have 2 blank values, the <code>start</code> and the <code>span</code>. As an alternative to <code>seq</code> <code>spreads</code> and <code>seq</code> <code>slices</code>, we can use <code>slice</code>-<code>spread</code> hybrids called <code>sleds</code> or <code>spread</code>-<code>slice</code> hybrids called <code>splices</code>. <code>Sleds</code> put the <code>slice</code> elements first (<code>start:stop:step:start&gt;span&gt;split&gt;space</code>), while <code>splices</code> start with the <code>spread</code> elements (<code>start&gt;span&gt;split&gt;space&gt;start:stop:step</code>). The <code>pently</code> schedules are easiest to write as <code>seq</code> <code>spreads</code> and <code>splices</code>, as shown in <a href="#tbl-sched">Table&nbsp;24</a>.</p>
-<section id="table-24" class="level4">
-<h4 class="anchored" data-anchor-id="table-24"><a href="#tbl-sched">Table&nbsp;24</a></h4>
+<p>We can use <code>seq</code> <code>spreads</code> to describe the <a href="#sched"><code>pently</code>schedules</a>. <code>Schedule</code> <code>5</code> is particularly interesting because it includes all of the days of the year. <code>Spreads</code> that include every item can be written as <code>&gt;</code> or <code>&lt;</code>, but <code>seq</code> <code>spreads</code> must have at least 5 values. The <code>Schedule</code> <code>5</code> <code>seq</code> <code>spread</code> <code>≫≫.38&gt;.24</code> has 4 blank values, which represent the default <code>start</code>, <code>span</code>, <code>split</code>, and <code>space</code>. Similarly, the <code>Schedule</code> <code>4</code> <code>seq</code> <code>spread</code> <code>≫4≫.35&gt;.3</code> has 3 blank values, which represent the default <code>start</code>, <code>span</code>, and <code>space</code>. The <code>Schedule</code> <code>2</code> and <code>Schedule</code> <code>3</code> <code>seq</code> <code>spreads</code>, <code>≫2&gt;3&gt;.2&gt;.6</code> and <code>≫3&gt;2&gt;.3&gt;.4</code>, respectively, only have 2 blank values, the <code>start</code> and the <code>span</code>. As an alternative to <code>seq</code> <code>spreads</code> and <code>seq</code> <code>slices</code>, we can use <code>slice</code>-<code>spread</code> hybrids called <code>sleds</code> or <code>spread</code>-<code>slice</code> hybrids called <code>splices</code>. <code>Sleds</code> put the <code>slice</code> elements first (<code>start:stop:step:start&gt;span&gt;split&gt;space</code>), while <code>splices</code> start with the <code>spread</code> elements (<code>start&gt;span&gt;split&gt;space&gt;start:stop:step</code>). The <code>pently</code> schedules are easiest to write as <code>seq</code> <code>spreads</code> and <code>splices</code>, as shown in <a href="#tbl-sched">Table&nbsp;23</a>.</p>
+<section id="table-23" class="level4">
+<h4 class="anchored" data-anchor-id="table-23"><a href="#tbl-sched">Table&nbsp;23</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5482,7 +5460,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;24: The seq spreads, splices, and sleds that represent the 4 pently schedules</p>
+<p>Table&nbsp;23: The seq spreads, splices, and sleds that represent the 4 pently schedules</p>
 </blockquote>
 </section>
 </section>
@@ -5491,9 +5469,9 @@ unix2deco()</code></pre>
 <h2 data-number="6.8" class="anchored" data-anchor-id="yearly-transition"><span class="header-section-number">6.8</span> Yearly transition</h2>
 <section id="common-years" class="level3" data-number="6.8.1">
 <h3 data-number="6.8.1" class="anchored" data-anchor-id="common-years"><span class="header-section-number">6.8.1</span> Common years</h3>
-<p>The <code>pently</code> schedules are important for the transition between years. In common years, the last <code>dek</code> of the year (<code>Dek</code> <code>36</code>) contains the last <code>pent</code> of the current year (<code>Pent</code> <code>72</code>), and the first <code>pent</code> of the subsequent year (<code>Pent</code> <code>0</code>). If these two <code>pents</code> follow the default <code>pently</code> schedule, <code>Schedule</code> <code>3</code>, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. <a href="#tbl-common">Table&nbsp;25</a> shows the positive and negative <code>doties</code>, names, and types (work or rest) of the days in <code>Dek</code> <code>36</code> in common years. Notably, while the positive <code>doties</code> continue counting past the end of the year, the negative <code>doties</code> of the current year turn into the positive <code>doties</code> of the subsequent year. The negative <code>doties</code> in <code>Dek</code> <code>36</code> can thus serve as the bridge from the one year to the next.</p>
-<section id="table-25" class="level4">
-<h4 class="anchored" data-anchor-id="table-25"><a href="#tbl-common">Table&nbsp;25</a></h4>
+<p>The <code>pently</code> schedules are important for the transition between years. In common years, the last <code>dek</code> of the year (<code>Dek</code> <code>36</code>) contains the last <code>pent</code> of the current year (<code>Pent</code> <code>72</code>), and the first <code>pent</code> of the subsequent year (<code>Pent</code> <code>0</code>). If these two <code>pents</code> follow the default <code>pently</code> schedule, <code>Schedule</code> <code>3</code>, the natural rhythm of 3 workdays followed by 2 rest days continues undisrupted. <a href="#tbl-common">Table&nbsp;24</a> shows the positive and negative <code>doties</code>, names, and types (work or rest) of the days in <code>Dek</code> <code>36</code> in common years. Notably, while the positive <code>doties</code> continue counting past the end of the year, the negative <code>doties</code> of the current year turn into the positive <code>doties</code> of the subsequent year. The negative <code>doties</code> in <code>Dek</code> <code>36</code> can thus serve as the bridge from the one year to the next.</p>
+<section id="table-24" class="level4">
+<h4 class="anchored" data-anchor-id="table-24"><a href="#tbl-common">Table&nbsp;24</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5568,15 +5546,15 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;25: The days in Dek 36 in common years</p>
+<p>Table&nbsp;24: The days in Dek 36 in common years</p>
 </blockquote>
 </section>
 </section>
 <section id="leap-years-1" class="level3" data-number="6.8.2">
 <h3 data-number="6.8.2" class="anchored" data-anchor-id="leap-years-1"><span class="header-section-number">6.8.2</span> Leap years</h3>
-<p>In leap years, <code>Dek</code> <code>36</code> contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, <code>Dek</code> <code>36</code> always contain 6 workdays and 4 restdays, just like every other <code>dek</code>, but in leaps years these days do not follow the typical order of <code>Schedule</code> <code>3</code>. Leap years end in 3 restdays instead of 2, because Leap Day (<code>Day</code> <code>365</code>) is always a holiday. Leap day is always a <code>Penday</code> and always followed by a <code>Nulday</code>. After Leap Day, the normal rhythm of <code>Schedule</code> <code>3</code> resumes. <a href="#tbl-leap">Table&nbsp;26</a> shows the positive and negative <code>doties</code> of the days in <code>Dek</code> <code>36</code> in leap years, as well as their names and their types (work or rest).</p>
-<section id="table-26" class="level4">
-<h4 class="anchored" data-anchor-id="table-26"><a href="#tbl-leap">Table&nbsp;26</a></h4>
+<p>In leap years, <code>Dek</code> <code>36</code> contains the last 6 days of the current year and the first 4 days of the subsequent year. Interestingly, <code>Dek</code> <code>36</code> always contain 6 workdays and 4 restdays, just like every other <code>dek</code>, but in leaps years these days do not follow the typical order of <code>Schedule</code> <code>3</code>. Leap years end in 3 restdays instead of 2, because Leap Day (<code>Day</code> <code>365</code>) is always a holiday. Leap day is always a <code>Penday</code> and always followed by a <code>Nulday</code>. After Leap Day, the normal rhythm of <code>Schedule</code> <code>3</code> resumes. <a href="#tbl-leap">Table&nbsp;25</a> shows the positive and negative <code>doties</code> of the days in <code>Dek</code> <code>36</code> in leap years, as well as their names and their types (work or rest).</p>
+<section id="table-25" class="level4">
+<h4 class="anchored" data-anchor-id="table-25"><a href="#tbl-leap">Table&nbsp;25</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5651,16 +5629,16 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;26: The days in Dek 36 in leap years</p>
+<p>Table&nbsp;25: The days in Dek 36 in leap years</p>
 </blockquote>
 </section>
 </section>
 </section>
 <section id="holidays" class="level2" data-number="6.9">
 <h2 data-number="6.9" class="anchored" data-anchor-id="holidays"><span class="header-section-number">6.9</span> Holidays</h2>
-<p>Leap Day is a important holiday because it occurs only once every four years except for years that start centuries not divisible by 400 and it results in the only time when there are 3 consecutive restdays in <code>Decalendar</code>. Another <code>Decalendar</code> holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative <code>.y</code> format <code>stamps</code> are the same (<code>+183.5</code> and <code>-183.5</code>), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Many Gregorian calendar holidays just so happen to also fall on the first day of a <code>pent</code> (<code>Nulday</code> or <code>Quaday</code>). <a href="#tbl-holiday">Table&nbsp;27</a> lists 8 such holidays and their <code>doty</code>, <code>dotm</code>, and Gregorian calendar dates.</p>
-<section id="table-27" class="level4">
-<h4 class="anchored" data-anchor-id="table-27"><a href="#tbl-holiday">Table&nbsp;27</a></h4>
+<p>Leap Day is a important holiday because it occurs only once every four years except for years that start centuries not divisible by 400 and it results in the only time when there are 3 consecutive restdays in <code>Decalendar</code>. Another <code>Decalendar</code> holiday that only occurs in leap years is Dyad Day. At noon on Dyad Day, the positive and negative <code>.y</code> format <code>stamps</code> are the same (<code>+183.5</code> and <code>-183.5</code>), meaning that 183.5 days have passed in the year and 183.5 days remain in the year. Unlike Leap Day, Dyad Day is naturally a day off. Many Gregorian calendar holidays just so happen to also fall on the first day of a <code>pent</code> (<code>Nulday</code> or <code>Quaday</code>). <a href="#tbl-holiday">Table&nbsp;26</a> lists 8 such holidays and their <code>doty</code>, <code>dotm</code>, and Gregorian calendar dates.</p>
+<section id="table-26" class="level4">
+<h4 class="anchored" data-anchor-id="table-26"><a href="#tbl-holiday">Table&nbsp;26</a></h4>
 <blockquote class="blockquote">
 <p><strong>Click to toggle table expansion</strong></p>
 <table class="table">
@@ -5723,7 +5701,7 @@ unix2deco()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Table&nbsp;27: Gregorian calendar holidays that happen to fall on <code>Decalendar</code> restdays</p>
+<p>Table&nbsp;26: Gregorian calendar holidays that happen to fall on <code>Decalendar</code> restdays</p>
 </blockquote>
 <p>Any holiday with a fixed (rather than floating) date in the Gregorian calendar can easily be added to <code>Decalendar</code>. Holidays with floating dates do not follow easily recognizable patterns. <code>Decalendar</code> recommends redefining such dates to always be on the same <code>doty</code> every year. For example, November 25 (<code>Day</code> <code>269</code>) is a sensible fixed date for Thanksgiving, because it is exactly 30 days before Christmas (December 25, <code>Day</code> <code>299</code>) and falls on a <code>Decalendar</code> restday. When assigning fixed dates to floating date holidays, we should choose <code>Decalendar</code> restdays to avoid disrupting the normal rhythm of the <code>pently</code> schedules. Instead of gaining days off because of holidays, workers should gain additional time off from their employers. In the United States, the 11 federal holidays (88 hours = 3.6̅ dimes) would translate to 9 <code>Schedule</code> <code>3</code> days offs (3.6 dimes).</p>
 </section>
@@ -5756,7 +5734,7 @@ unix2deco()</code></pre>
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${inputDotyZodiac}</span>`", "cellName":"ojs-element-id-10"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledYear}</span>`", "cellName":"ojs-element-id-11"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${styledYear}+${styledDotyDate1}.${styledDotyTime1}</span>`", "cellName":"ojs-element-id-11"}
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${dtYear}+${dtDotyDate}${dtDotyTimeDelimiter}${dtDotyTime}</span>`", "cellName":"ojs-element-id-12"}
 ,
@@ -5775,10 +5753,6 @@ unix2deco()</code></pre>
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyTime, d3.schemePaired[2])}</span>`", "cellName":"ojs-element-id-19"}
 ,
   {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(yearDate.toString().slice(4), d3.schemePaired[10])}</span>`", "cellName":"ojs-element-id-20"}
-,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyDate, d3.schemePaired[1])}</span>`", "cellName":"ojs-element-id-21"}
-,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${setStyle(dotyTime, d3.schemePaired[2])}</span>`", "cellName":"ojs-element-id-22"}
 ]}
 </script>
 
