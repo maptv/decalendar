@@ -268,7 +268,7 @@ Now it's your turn! Move the sliders🎚️in @exm-intro-doty to adjust the `dot
 :::
 
 ::: grid
-::: g-col-6
+::: g-col-7
 ```{ojs}
 //| echo: false
 viewof inputDoty = Inputs.range([0, 365], {value: 306, step: 1, label: "doty"});
@@ -294,7 +294,7 @@ viewof dotmInput = transformInput(
 ```
 :::
 
-::: g-col-6
+::: g-col-5
 1.  \${inputDotySeason\[0\]}
 2.  \${inputDotySeason\[1\]}
 3.  \${inputDotyZodiac}
@@ -619,7 +619,9 @@ set(viewof decoOutput, `1969+${scrubberDeco.toString().padStart(3, "0")}`)
 
 ## Year {#sec-intro-year}
 
-The current `deco` timestamp is \${styledYear}+\${setStyle(dotyDate, d3.schemePaired\[1\])}.\${setStyle(dotyTime, d3.schemePaired\[2\])}.
+The current `deco` timestamp is \${styledYear}
++\${setStyle(dotyDate, d3.schemePaired\[1\])}
+.\${setStyle(dotyTime, d3.schemePaired\[2\])}.
 
 `Doty` dates (`day`) and [timestamps](https://en.wikipedia.org/wiki/Timestamp#:~:text=A%20timestamp%20is%20a%20sequence%20of%20characters%20or%20encoded%20information%20identifying%20when%20a%20certain%20event%20occurred%2C%20usually%20giving%20date%20and%20time%20of%20day%2C%20sometimes%20accurate%20to%20a%20small%20fraction%20of%20a%20second.) (`day.stamp`) do not include years and thus can be reused from year to year. When a `doty` is combined with a year, it forms a `Decalendar` `ordinal`[^12] (`deco`) and represents a specific date (`year+day`) or time (`year+day.stamp`) in a specific year, instead of a date (`day`) or time (`day.stamp`) that occurs every year or every leap year.
 
@@ -631,14 +633,14 @@ Using the [Observable](https://observablehq.com/about) [datetime input](https://
 :::
 
 ::: grid
-::: g-col-6
+::: g-col-7
 ```{ojs}
 //| echo: false
-viewof inputDatetime = Inputs.datetime({label: "Datetime", value: "1970-01-01T00:00"})
+viewof inputDatetime = Inputs.datetime({label: "date", value: "1970-01-01T00:00"})
 ```
 :::
 
-::: g-col-6
+::: g-col-5
 1.  \${dtYear}+\${dtDotyDate}\${dtDotyTimeDelimiter}\${dtDotyTime}
 2.  \${styledOutputDatetimeYear}
 :::
@@ -657,7 +659,7 @@ Interacting with the [number](https://observablehq.com/@observablehq/input-range
 :::
 
 ::: grid
-::: g-col-6
+::: g-col-7
 ```{ojs}
 //| echo: false
 viewof yd = Inputs.form([
@@ -674,7 +676,7 @@ viewof decoOutput = transformInput(
 ```
 :::
 
-::: g-col-6
+::: g-col-5
 1.  \${styledIsocYear}-\${styledIsocMd}T\${styledIsocTime}
 2.  \${styledOutputDecoYear}
 
@@ -813,25 +815,25 @@ You can also use the [interval sliders](https://observablehq.com/@mootari/range-
 :::
 
 ::: grid
-::: g-col-6
+::: g-col-7
 ```{ojs}
 //| echo: false
 viewof intervals = Inputs.form([
-  interval([0, 1], {step: .01, value: [.3, .7], label: '0 or 5', width: 195, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
-  interval([0, 1], {step: .01, value: [.3, .7], label: '1 or 6', width: 195, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
-  interval([0, 1], {step: .01, value: [.3, .7], label: '2 or 7', width: 195, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
-  interval([0, 1], {step: .01, value: [0, 0], label: '3 or 8', width: 195, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
-  interval([0, 1], {step: .01, value: [0, 0], label: '4 or 9', width: 195, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
+  interval([0, 1], {step: .01, value: [.3, .7], label: '0 or 5', width: 250, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
+  interval([0, 1], {step: .01, value: [.3, .7], label: '1 or 6', width: 250, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
+  interval([0, 1], {step: .01, value: [.3, .7], label: '2 or 7', width: 250, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
+  interval([0, 1], {step: .01, value: [0, 0], label: '3 or 8', width: 250, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
+  interval([0, 1], {step: .01, value: [0, 0], label: '4 or 9', width: 250, format: ([start, end]) => start === end ? "" : `${formatDecimal(start)}:${formatDecimal(end)}`}),
 ])
 ```
 :::
 
-::: g-col-6
+::: g-col-5
 ```{ojs}
 //| echo: false
-viewof schedule = Inputs.radio([2, 3, 4, 5], {label: "Schedule", value: 3})
+viewof schedule = Inputs.radio([2, 3, 4, 5], {label: "sched.", value: 3})
 
-viewof filename = Inputs.text({label: "Filename", placeholder: "Enter the filename", value: `schedule${schedule}.csv`})
+viewof filename = Inputs.text({label: "name", placeholder: "Enter the filename", value: `schedule${schedule}.csv`})
 
 button(durations, filename)
 ```
@@ -884,44 +886,13 @@ The numeric inputs in @exm-intro-dotd cannot capture the full power of `spreads`
 
 ```{ojs}
 //| echo: false
-viewof sliceDotd = Inputs.checkbox([...Array(10).keys()], {label: "slice dotd", value: [1, 6]})
+viewof sliceDotd = Inputs.checkbox([...Array(10).keys()], {label: "slice", value: [1, 6]})
 ```
 
 ```{ojs}
 //| echo: false
-viewof spreadDotd = Inputs.checkbox([...Array(10).keys()], {label: "spread dotd", value: [1, 6]})
+viewof spreadDotd = Inputs.checkbox([...Array(10).keys()], {label: "spread", value: [1, 6]})
 ```
-
-::: grid
-::: g-col-6
-```{ojs}
-//| echo: false
-viewof sliceString = transformInput(
-  Inputs.text({label: "slice string", placeholder: "Enter slice string", value: "0:366"}),
-{bind: viewof sliceInputs, transform: encodeSlice, invert: decodeSlice});
-viewof sliceInputs = Inputs.form([
-    Inputs.number([-366, 366], {step: 1, label: "start", value: 1, placeholder: "Enter start index"}),
-    Inputs.number([-366, 366], {step: 1, label: "stop", value: 366, placeholder: "Enter stop index"}),
-    Inputs.number([-366, 366], {step: 1, label: "step", value: 5, placeholder: "Enter step size"}),
-])
-```
-:::
-
-::: g-col-6
-```{ojs}
-//| echo: false
-viewof spreadString = transformInput(
-  Inputs.text({label: "spread string", placeholder: "Enter spread string", value: "0>366>3>2"}),
-{bind: viewof spreadInputs, transform: encodeSpread, invert: decodeSpread});
-viewof spreadInputs = Inputs.form([
-    Inputs.number([-366, 366], {step: 1, label: "start", value: 0, placeholder: "Enter start index"}),
-    Inputs.number([-366, 366], {step: 1, label: "span", value: 366, placeholder: "Enter span size"}),
-    Inputs.number([-366, 366], {step: 1, label: "split", value: 3, placeholder: "Enter split size"}),
-    Inputs.number([-366, 366], {step: 1, label: "space", value: 2, placeholder: "Enter space size"}),
-])
-```
-:::
-:::
 
 ```{ojs}
 //| echo: false
@@ -933,15 +904,45 @@ viewof togglePlot = Inputs.button([
   [invertDotd ? html`<s>Schedule2</s>` : "Schedule2", value => [0, 1, 5, 6]],
   [invertDotd ? html`<s>Schedule3</s>` : "Schedule3", value => [0, 1, 2, 5, 6, 7]],
   [invertDotd ? html`<s>Schedule4</s>` : "Schedule4", value => [0, 1, 2, 3, 5, 6, 7, 8]],
-], {value: [], label: "select dotd"})
+], {value: [], label: "select"})
 ```
 
+::: grid
+::: g-col-6
 ```{ojs}
 //| echo: false
 //| classes: btn-row
-viewof invertDotd = Inputs.toggle({label: "invert buttons"})
+viewof invertDotd = Inputs.toggle({label: "invert"})
 viewof sliceOrSpread = toggleSwitch({textOn: invertDotd ? "Spread" : 'Slice' , textOff: invertDotd ? "Slice" : 'Spread'})
 ```
+```{ojs}
+//| echo: false
+viewof sliceInputs = Inputs.form([
+    Inputs.number([-366, 366], {step: 1, label: "start", value: 1, placeholder: "Enter start index"}),
+    Inputs.number([-366, 366], {step: 1, label: "stop", value: 366, placeholder: "Enter stop index"}),
+    Inputs.number([-366, 366], {step: 1, label: "step", value: 5, placeholder: "Enter step size"}),
+])
+viewof sliceString = transformInput(
+  Inputs.text({label: "slice", placeholder: "Enter slice string", value: "0:366"}),
+{bind: viewof sliceInputs, transform: encodeSlice, invert: decodeSlice});
+```
+:::
+
+::: g-col-6
+```{ojs}
+//| echo: false
+viewof spreadInputs = Inputs.form([
+    Inputs.number([-366, 366], {step: 1, label: "start", value: 0, placeholder: "Enter start index"}),
+    Inputs.number([-366, 366], {step: 1, label: "span", value: 366, placeholder: "Enter span size"}),
+    Inputs.number([-366, 366], {step: 1, label: "split", value: 3, placeholder: "Enter split size"}),
+    Inputs.number([-366, 366], {step: 1, label: "space", value: 2, placeholder: "Enter space size"}),
+])
+viewof spreadString = transformInput(
+  Inputs.text({label: "spread", placeholder: "Enter spread string", value: "0>366>3>2"}),
+{bind: viewof spreadInputs, transform: encodeSpread, invert: decodeSpread});
+```
+:::
+:::
 
 ```{ojs}
 //| echo: false
@@ -959,7 +960,8 @@ Plot.plot({
     Plot.cell(dates, {x: d => d[2], y: d => d.slice(0, 2), fill: d =>
       sliceArray.includes(d) && spreadArray.includes(d) ? "green" :
       sliceArray.includes(d) && !spreadArray.includes(d) ? "blue" :
-      !sliceArray.includes(d) && spreadArray.includes(d) ? "orange" : "grey", inset: 0.5}),
+      !sliceArray.includes(d) && spreadArray.includes(d) ? "orange" : "grey",
+      width: 60, height: 18, inset: 0.5}),
     Plot.text(dates, {
     x: d => d[2],
     y: d => d.slice(0, 2),
@@ -1004,7 +1006,7 @@ function interval(range = [], options = {}) {
   }
 }
 #${__ns__} .label {
-  width: 99px;
+  width: 50px;
   padding: 5px 0 4px 0;
   margin-right: .5px;
   flex-shrink: 0;

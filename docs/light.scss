@@ -18,7 +18,7 @@ $code-padding: 0px !default;
 .blue { color: blue }
 .gray { color: dimgray }
 
-button.btn.btn-quarto {
+button.btn.btn-quarto, div.observablehq > div.button-switch {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -40,11 +40,11 @@ button.btn.btn-quarto {
     font-family: sans-serif !important;
     text-decoration: none !important;
 }
-button.btn.btn-quarto:hover {
+button.btn.btn-quarto:hover, div.observablehq > div.button-switch:hover {
     background-color: #E5E5E5 !important;
     border: 1px solid #454545 !important;
 }
-button.btn.btn-quarto:active {
+button.btn.btn-quarto:active, div.observablehq > div.button-switch:active {
     background-color: #f5f5f5 !important;
     border: 1px solid grey !important;
 }
@@ -53,6 +53,21 @@ button.btn.btn-quarto:active {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin: 0px;
+}
+
+form.oi-ec050e.oi-ec050e-toggle {
+    --label-width: 60px;
+    --input-width: 30px;
+}
+
+// div.ojs-in-a-box-waiting-for-module-import.observablehq > form.oi-ec050e {
+form.oi-ec050e {
+    --label-width: 60px;
+    --input-width: 360px;
 }
 
 svg g g.tick text {
