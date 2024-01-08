@@ -85,15 +85,21 @@ class Calendar:
                     date2 = d.strftime("%m%d")
                 else:
                     date2 = d.strftime("%Y%m%d")
-                bottom_left = "<date>" if d.strftime("%u") != "7" else "<date class='solid'>"
+                date3 = (153 * (
+                    d.month - 3 if d.month > 2 else d.month + 9
+                ) + 2) // 5 + d.day - 1
+                year = d.year - (d.month < 3) + 1
+                leap = year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+                date4 = date3 - 365 - leap
                 html_list.append(
-                    "<day>\n\t\t\t"
-                    + f"<date>{date1}</date>\n\t\t\t"
+                    "<week>\n\t\t\t"
+                    + f"<column>{date3:03}</column>\n\t\t\t"
+                    + f"<last>{date1}</last>\n\t\t\t"
                     + "<dashed></dashed>\n\t\t\t"
-                    + bottom_left
-                    + f"{date2}</date>\n\t\t\t"
+                    + f"<column class='solid'>{abs(date4):03}</column>\n\t\t\t"
+                    + f"<last class='solid'>{date2}</last>\n\t\t\t"
                     + "<solid></solid>\n\t\t"
-                    + "</day>\n\t\t"
+                    + "</week>\n\t\t"
             )
             pathlib.Path(
                 f"{page + 71:02}_{five_weeks[0].isoformat()}_{five_weeks[-1].isoformat()}_month.html"
@@ -109,7 +115,13 @@ class Calendar:
         html_list = []
         for i, week in enumerate(self.weeks):
             date1 = week[0].strftime("%V")
-            date2 = week[0].strftime("%Y-%m-%d")
+            date2 = week[0].strftime("%Y%m%d")
+            date3 = (153 * (
+                week[0].month - 3 if week[0].month > 2 else week[0].month + 9
+            ) + 2) // 5 + week[0].day - 1
+            year = week[0].year - (week[0].month < 3) + 1
+            leap = year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+            date4 = date3 - 365 - leap
             current_page = 71 + i // 5
             toc_class = "class='solid'" if (i + 1) % 5 == 0 else ""
             last_class = "" if (i + 1) % 5 == 0 else "class='solid'"
@@ -119,7 +131,7 @@ class Calendar:
                 if same_year and same_month:
                     date2 = week[0].strftime("%d")
                 elif same_year:
-                    date2 = week[0].strftime("%m-%d")
+                    date2 = week[0].strftime("%m%d")
                 previous_page = 71 + (i-1) // 5
                 if current_page == previous_page:
                     current_page = "&nbsp;"
@@ -127,6 +139,8 @@ class Calendar:
                 f"<toc {toc_class}>\n\t\t\t"
                 f"<column>{i + 1}</column><column>{current_page}</column>"
                 f"<column>{date1}</column>\n\t\t\t"
+                f"<column>{date3:03}</column>\n\t\t\t"
+                f"<column>{abs(date4):03}</column>\n\t\t\t"
                 f"<last>{date2}</last>\n\t\t\t"
                 f"<last {last_class}></last>\n\t\t"
                 "</toc>\n\t\t"

@@ -6,7 +6,7 @@
 toc {
     display: grid;
     font-family: 'isosevcal', monospace;
-    grid-template-columns: 3ch 3ch 3ch 10ch 1fr;
+    grid-template-columns: 3ch 3ch 3ch 4ch 4ch 8ch 1fr;
 }
 
 column {
@@ -24,6 +24,12 @@ day {
     display: grid;
     font-family: 'isosevcal', monospace;
     grid-template-columns: 8ch 1fr;
+}
+
+week {
+    display: grid;
+    font-family: 'isosevcal', monospace;
+    grid-template-columns: 4ch 8ch 1fr;
 }
 
 .right {
