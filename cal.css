@@ -23,7 +23,7 @@ last {
 day {
     display: grid;
     font-family: 'isosevcal', monospace;
-    grid-template-columns: 10ch 1fr;
+    grid-template-columns: 8ch 1fr;
 }
 
 .right {
@@ -42,7 +42,7 @@ day {
 
 
 .wider {
-    grid-template-columns: 13ch 1fr;
+    grid-template-columns: 8ch 1fr;
 }
 
 .solid {

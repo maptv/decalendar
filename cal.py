@@ -27,34 +27,40 @@ class Calendar:
             html_list = []
             for i, d in enumerate(week):
                 if i and d.strftime("%G") == week[i-1].strftime("%Y"):
-                    date1 = d.strftime('W%V-%u')
+                    date1 = d.strftime('W%V%u')
                 else:
-                    date1 = d.strftime('%G-W%V-%u')
+                    date1 = d.strftime('%GW%V%u')
                 if d.strftime("%Y") == d.strftime("%G"):
-                    date2 = d.strftime("%m-%d")
+                    date2 = d.strftime("%m%d")
                 else:
-                    date2 = d.strftime("%Y-%m-%d")
+                    date2 = d.strftime("%Y%m%d")
+                date3 = (153 * (
+                    d.month - 3 if d.month > 2 else d.month + 9
+                ) + 2) // 5 + d.day - 1
+                date4 = date3 - 365 - (
+                    d.year % 4 == 0 and d.year % 100 != 0 or d.year % 400 == 0
+                ) + (d.month > 2) # temporary hack
                 html_list.append(
                     "<day class='solid wider'>\n\t\t\t"
-                    f"<date>{date1}.0</date>\n\t\t\t"
+                    f"<date>{date1}</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    f"<date>{date2}.1</date>\n\t\t\t"
+                    f"<date>{date2}</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    "<time>.2</time>\n\t\t\t"
+                    f"<date>+{date3:03}</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>.3</time>\n\t\t\t"
+                    f"<date>{date4:04}</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    "<time>.4</time>\n\t\t\t"
+                    "<time>&nbsp</time>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>.5</time>\n\t\t\t"
+                    "<time>&nbsp</time>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    "<time>.6</time>\n\t\t\t"
+                    "<time>&nbsp</time>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>.7</time>\n\t\t\t"
+                    "<time>&nbsp</time>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    "<date>.8</date>\n\t\t\t"
+                    "<time>&nbsp</time>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>.9</time>\n\t\t</day>\n\t\t"
+                    "<time>&nbsp</time>\n\t\t</day>\n\t\t"
                 )
             pathlib.Path(
                 f"{page + 1:02}_{week[0].isoformat()}_{week[-1].isoformat()}_week.html"
@@ -136,7 +142,7 @@ class Calendar:
 
 
 if __name__ == "__main__":
-    cal = Calendar("2023-10-30", n_days=490)
+    cal = Calendar("2024-01-01", n_days=490)
     cal.write_times()
     cal.write_dates()
     cal.write_toc()
