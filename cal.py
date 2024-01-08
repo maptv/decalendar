@@ -37,9 +37,9 @@ class Calendar:
                 date3 = (153 * (
                     d.month - 3 if d.month > 2 else d.month + 9
                 ) + 2) // 5 + d.day - 1
-                date4 = date3 - 365 - (
-                    d.year % 4 == 0 and d.year % 100 != 0 or d.year % 400 == 0
-                ) + (d.month > 2) # temporary hack
+                year = d.year - (d.month < 3) + 1
+                leap = year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+                date4 = date3 - 365 - leap
                 html_list.append(
                     "<day class='solid wider'>\n\t\t\t"
                     f"<date>{date1}</date>\n\t\t\t"
@@ -78,13 +78,13 @@ class Calendar:
             html_list = []
             for i, d in enumerate(five_weeks):
                 if i and d.strftime("%G") == five_weeks[i-1].strftime("%Y"):
-                    date1 = d.strftime('W%V-%u')
+                    date1 = d.strftime('W%V%u')
                 else:
-                    date1 = d.strftime('%G-W%V-%u')
+                    date1 = d.strftime('%GW%V%u')
                 if d.strftime("%Y") == d.strftime("%G"):
-                    date2 = d.strftime("%m-%d")
+                    date2 = d.strftime("%m%d")
                 else:
-                    date2 = d.strftime("%Y-%m-%d")
+                    date2 = d.strftime("%Y%m%d")
                 bottom_left = "<date>" if d.strftime("%u") != "7" else "<date class='solid'>"
                 html_list.append(
                     "<day>\n\t\t\t"
