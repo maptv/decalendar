@@ -14,7 +14,7 @@ settings = {
         "selectedDestinationId": "Save as PDF",
         "version": 2,
         "isHeaderFooterEnabled": False,
-        "scaling": 68,
+        "scaling": 67,
         "scalingType": 3,
         "scalingTypePdf": 3,
     }
