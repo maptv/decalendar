@@ -72,7 +72,7 @@ class Calendar:
         self.weeks = list(zip(*[iter(self.dates)] * 7))
         self.__head = (
             "<!DOCTYPE html>\n<html>\n\n<head>\n\t"
-            '<link rel="stylesheet" href="cal.css">\n'
+            '<link rel="stylesheet" href="week.css">\n'
             "</head>\n\n<body>\n\t<main>\n\t\t"
         )
         self.__foot = "\n\t\t</pages>\n\t</main>\n</body>\n\n</html>"

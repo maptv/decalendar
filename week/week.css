@@ -5,6 +5,7 @@
 
 day {
     display: grid;
+    font-size: 17px;
     font-family: 'isosevcal', monospace;
     grid-template-columns: 8ch 1fr;
 }
@@ -55,6 +56,7 @@ current {
     margin: 0 auto;
     max-width: 64em;
     padding: 0;
+    font-size: 17px;
 }
 
 ol {
@@ -77,7 +79,7 @@ ol li:not(.dotw) {
     justify-content: flex-start;
     padding: 2px;
     border: 1px solid #eaeaea;
-    height: 20vw;
+    height: 20.2vw;
 }
 
 ol li.dotw {
