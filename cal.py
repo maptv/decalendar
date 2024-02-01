@@ -2,6 +2,67 @@ import datetime
 import pathlib
 
 
+class DecalendarDate:
+    """Convert a datetime object into a DecalendarDate object
+    
+    Examples:
+    >>> dd = DecalendarDate(datetime.date(2000, 3, 1))
+    >>> dd.year_date()
+    '2000+000'
+    >>> dd.year_date(False)
+    '2001-365'
+    >>> dd.cycle_date()
+    '5+000000'
+    >>> dd.cycle_date(False)
+    '6-146097'
+    """
+    def __init__(self, date: datetime.date = datetime.date.today()):
+        self.year = date.year - (date.month < 3)
+        self.day_of_the_year = (153 * (
+            date.month - 3 if date.month > 2 else date.month + 9
+            ) + 2) // 5 + date.day - 1
+        self.solar_cycle = (
+            self.year if self.year >= 0 else self.year - 399
+            ) // 400
+        self.year_of_the_cycle = self.year - self.solar_cycle * 400
+        self.day_of_the_cycle = (
+            self.year_of_the_cycle * 365 + self.year_of_the_cycle // 4
+            - self.year_of_the_cycle // 100 + self.day_of_the_year
+        )
+        self.days_left_in_cycle = 146097 - self.day_of_the_cycle
+        self.day_of_the_era = self.solar_cycle * 146097 + self.day_of_the_cycle
+        self.leap = (self.year + 1) % 4 == 0 and (
+            (self.year + 1) % 100 != 0 or (self.year + 1) % 400 == 0
+            )
+        self.days_left_in_year = 365 + self.leap - self.day_of_the_year
+
+    def year_date(self, positive: bool = True):
+        return (
+            f"{self.year:04}+{self.day_of_the_year:03}"
+            if positive else
+            f"{self.year + 1:04}-{self.days_left_in_year:03}" 
+        )
+
+    def cycle_date(self, positive: bool = True):
+        if self.solar_cycle > 9:
+            return (
+                f"{chr(55 + self.solar_cycle)}+{self.day_of_the_year:06}"
+                if positive else
+                f"{chr(56 + self.solar_cycle)}-{self.days_left_in_cycle:06}" 
+            )
+        else:
+            return (
+                f"{self.solar_cycle}+{self.day_of_the_cycle:06}"
+                if positive else
+                f"{self.solar_cycle + 1}-{self.days_left_in_cycle:06}" 
+            )
+
+    def __str__(self):
+        return f"{self.year:04}+{self.day_of_the_year:03}"
+
+    def __repr__(self):
+        return f"DecalendarDate(year={self.year}, doty={self.day_of_the_year})"
+
 class Calendar:
     def __init__(self, start_date: str = "1970-01-01", n_days: int = 365):
         self.dates = [
@@ -22,39 +83,26 @@ class Calendar:
     def __repr__(self):
         return f"Calendar(start_date={self.dates[0]}, n_days={len(self.dates)})"
 
-    def write_times(self):
+    def write_lists(self):
         for page, week in enumerate(self.weeks):
             html_list = []
-            for i, d in enumerate(week):
-                if i and d.strftime("%G") == week[i-1].strftime("%Y"):
-                    date1 = d.strftime('W%V%u')
-                else:
-                    date1 = d.strftime('%GW%V%u')
-                if d.strftime("%Y") == d.strftime("%G"):
-                    date2 = d.strftime("%m%d")
-                else:
-                    date2 = d.strftime("%Y%m%d")
-                date3 = (153 * (
-                    d.month - 3 if d.month > 2 else d.month + 9
-                ) + 2) // 5 + d.day - 1
-                year = d.year - (d.month < 3) + 1
-                leap = year % 4 == 0 and year % 100 != 0 or year % 400 == 0
-                date4 = date3 - 365 - leap
+            for d in week:
+                dd = DecalendarDate(d)
                 html_list.append(
                     "<day class='solid wider'>\n\t\t\t"
-                    f"<date>{date1}</date>\n\t\t\t"
+                    f"<date>{d.strftime('%GW%V%u')}</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    f"<date>{date2}</date>\n\t\t\t"
+                    f"<date>{d.strftime("%Y%m%d")}</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    f"<date>+{date3:03}</date>\n\t\t\t"
+                    f"<date>{dd.year_date()}</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    f"<date>{date4:04}</date>\n\t\t\t"
+                    f"<date>{dd.year_date(False)}</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    "<time>&nbsp</time>\n\t\t\t"
+                    f"<date>{dd.cycle_date()}</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    "<time>&nbsp</time>\n\t\t\t"
+                    f"<date>{dd.cycle_date(False)}</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    "<time>&nbsp</time>\n\t\t\t"
+                    f"<date>{dd.day_of_the_era}</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
                     "<time>&nbsp</time>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
@@ -68,50 +116,12 @@ class Calendar:
                 self.__head
                 + "".join(html_list)
                 + f"<pages><current>{page + 1}</current>"
-                + f"<reference>{71 + page // 5}\n\t\t\t</reference>"
                 + self.__foot
                 )
         return self
 
-    def write_dates(self):
-        for page, five_weeks in enumerate(list(zip(*[iter(self.dates)] * 35))):
-            html_list = []
-            for i, d in enumerate(five_weeks):
-                if i and d.strftime("%G") == five_weeks[i-1].strftime("%Y"):
-                    date1 = d.strftime('W%V%u')
-                else:
-                    date1 = d.strftime('%GW%V%u')
-                if d.strftime("%Y") == d.strftime("%G"):
-                    date2 = d.strftime("%m%d")
-                else:
-                    date2 = d.strftime("%Y%m%d")
-                date3 = (153 * (
-                    d.month - 3 if d.month > 2 else d.month + 9
-                ) + 2) // 5 + d.day - 1
-                year = d.year - (d.month < 3) + 1
-                leap = year % 4 == 0 and year % 100 != 0 or year % 400 == 0
-                date4 = date3 - 365 - leap
-                html_list.append(
-                    "<week>\n\t\t\t"
-                    + f"<column>{date3:03}</column>\n\t\t\t"
-                    + f"<last>{date1}</last>\n\t\t\t"
-                    + "<dashed></dashed>\n\t\t\t"
-                    + f"<column class='solid'>{abs(date4):03}</column>\n\t\t\t"
-                    + f"<last class='solid'>{date2}</last>\n\t\t\t"
-                    + "<solid></solid>\n\t\t"
-                    + "</week>\n\t\t"
-            )
-            pathlib.Path(
-                f"{page + 71:02}_{five_weeks[0].isoformat()}_{five_weeks[-1].isoformat()}_month.html"
-            ).write_text(
-                self.__head + "".join(html_list)
-                + f"\n\t\t<pages>\n\t\t\t<current>{page + 71}</current>"
-                + f"<reference>{(page * 5 + 1)}-{(page * 5 + 5)}\n\t\t\t</reference>"
-                + self.__foot
-                )
-        return self
 
-    def write_toc(self):
+    def write_grid(self):
         html_list = []
         for i, week in enumerate(self.weeks):
             date1 = week[0].strftime("%V")
@@ -155,8 +165,8 @@ class Calendar:
         return self
 
 
+
 if __name__ == "__main__":
-    cal = Calendar("2024-01-01", n_days=490)
-    cal.write_times()
-    cal.write_dates()
-    cal.write_toc()
+    cal = Calendar("2024-02-05", n_days=420)
+    cal.write_lists()
+    # cal.write_grid()

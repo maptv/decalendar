@@ -3,49 +3,11 @@
     src: url(iosevcal-regular.ttf);
 }
 
-toc {
-    display: grid;
-    font-family: 'isosevcal', monospace;
-    grid-template-columns: 3ch 3ch 3ch 4ch 4ch 8ch 1fr;
-}
-
-column {
-    text-align: right;
-    border-right: 1px solid;
-    padding-right: 2px;
-    margin-right: 2px;
-}
-
-last {
-    text-align: right;
-}
-
 day {
     display: grid;
     font-family: 'isosevcal', monospace;
     grid-template-columns: 8ch 1fr;
 }
-
-week {
-    display: grid;
-    font-family: 'isosevcal', monospace;
-    grid-template-columns: 4ch 8ch 1fr;
-}
-
-.right {
-    position: relative;
-    right: 2.6px;
-    top: 4px;
-    font-size: 16px;
-}
-
-.left {
-    position: relative;
-    left: 2px;
-    bottom: 2px;
-    font-size: 16px;
-}
-
 
 .wider {
     grid-template-columns: 8ch 1fr;
@@ -76,7 +38,7 @@ pages {
     font-family: 'isosevcal', monospace;
 }
 
-current, reference {
+current {
     text-align: right;
     width: 50%
 }
