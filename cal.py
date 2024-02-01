@@ -123,50 +123,50 @@ class Calendar:
 
     def write_grid(self):
         html_list = []
-        for i, week in enumerate(self.weeks):
-            date1 = week[0].strftime("%V")
-            date2 = week[0].strftime("%Y%m%d")
-            date3 = (153 * (
-                week[0].month - 3 if week[0].month > 2 else week[0].month + 9
-            ) + 2) // 5 + week[0].day - 1
-            year = week[0].year - (week[0].month < 3) + 1
-            leap = year % 4 == 0 and year % 100 != 0 or year % 400 == 0
-            date4 = date3 - 365 - leap
-            current_page = 71 + i // 5
-            toc_class = "class='solid'" if (i + 1) % 5 == 0 else ""
-            last_class = "" if (i + 1) % 5 == 0 else "class='solid'"
-            if i != 0:
-                same_year = week[0].strftime("%Y") == self.weeks[i-1][0].strftime("%Y")
-                same_month = week[0].strftime("%m") == self.weeks[i-1][0].strftime("%m")
-                if same_year and same_month:
-                    date2 = week[0].strftime("%d")
-                elif same_year:
-                    date2 = week[0].strftime("%m%d")
-                previous_page = 71 + (i-1) // 5
-                if current_page == previous_page:
-                    current_page = "&nbsp;"
-            html_list.append(
-                f"<toc {toc_class}>\n\t\t\t"
-                f"<column>{i + 1}</column><column>{current_page}</column>"
-                f"<column>{date1}</column>\n\t\t\t"
-                f"<column>{date3:03}</column>\n\t\t\t"
-                f"<column>{abs(date4):03}</column>\n\t\t\t"
-                f"<last>{date2}</last>\n\t\t\t"
-                f"<last {last_class}></last>\n\t\t"
-                "</toc>\n\t\t"
+        after_header = """<div class="calendar-wrapper">
+            <ol class="calendar">
+                <li class="dotw">0</li>
+                <li class="dotw">1</li>
+                <li class="dotw">2</li>
+                <li class="dotw">3</li>
+                <li class="dotw">4</li>
+                <li class="dotw">5</li>
+                <li class="dotw">6</li>\n\t\t\t"""
+        before_footer = "</ol>\n\t\t</div>"
+        for i, date in enumerate(self.dates):
+            dd = DecalendarDate(date)
+            month = chr(55 + date.month) if date.month > 9 else date.month
+            doty = (
+                f"{date.strftime("%Y%m%d")}<br>{dd.year_date()}"
+                if dd.day_of_the_year == 0
+                else f"{month}{date.day:02}<br>{dd.day_of_the_year:03}"
             )
-        pathlib.Path(
-            f"85_{self.weeks[0][0].isoformat()}_{self.weeks[-1][-1].isoformat()}_toc.html"
-        ).write_text(
-            self.__head + "".join(html_list)
-            + "\n\t\t<pages>\n\t\t\t<current>85</current>"
-            + self.__foot
-            )
+            if i == 0:
+                html_list.append(
+                    f"\t<li style='grid-column-start: {date.isoweekday() - 1};'"
+                    f">{doty}</li>\n\t\t\t\t"
+                )
+            else:
+                html_list.append(
+                    f"<li>{doty}</li>\n\t\t\t\t"
+                )
+        d1 = len(html_list) // 10
+        for i in range(1, 11):
+            pathlib.Path(
+                f"{len(self.weeks) + i}_{self.dates[0].isoformat()}_"
+                f"{self.dates[-1].isoformat()}_year-grid.html"
+            ).write_text(
+                self.__head + after_header
+                + "".join(html_list[d1 * (i - 1):d1 * i])
+                + before_footer 
+                + "\n\t\t<pages>\n\t\t\t<current>"
+                + f"{len(self.weeks) + i}</current>"
+                + self.__foot
+                )
         return self
-
 
 
 if __name__ == "__main__":
     cal = Calendar("2024-02-05", n_days=420)
     cal.write_lists()
-    # cal.write_grid()
+    cal.write_grid()
