@@ -1,0 +1,100 @@
+@font-face {
+    font-family: isosevcal;
+    src: url(iosevcal-regular.ttf);
+}
+
+day {
+    display: grid;
+    font-size: 17px;
+    font-family: 'isosevcal', monospace;
+    grid-template-columns: 3ch 1fr;
+}
+
+.wider {
+    grid-template-columns: 3ch 1fr;
+}
+
+.solid {
+    border-bottom: solid 1px black;
+}
+
+.dashed {
+    border-bottom: dashed 1px black;
+}
+
+date, time {
+    text-align: right;
+}
+
+dashed {
+    border-bottom: dashed 1px black;
+}
+
+solid {
+    border-bottom: solid 1px black;
+}
+
+pages {
+    display: flex;
+    font-family: 'isosevcal', monospace;
+}
+
+current {
+    text-align: right;
+    width: 50%;
+    margin-top: 9px;
+}
+
+.calendar-wrapper {
+    font: 100% system-ui;
+}
+
+.left {
+    display: grid;
+    grid-template-columns: 2ch repeat(5, 1fr);
+    grid-gap: 2px;
+    margin: 0 auto;
+    max-width: 64em;
+    padding: 0;
+    font-size: 17px;
+}
+
+.right {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) 2ch;
+    grid-gap: 2px;
+    margin: 0 auto;
+    max-width: 64em;
+    padding: 0;
+    font-size: 17px;
+}
+
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: 'isosevcal', monospace;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin-left: 0;
+}
+
+ol li.cell {
+    padding: 2px;
+    border: 1px solid #eaeaea;
+    height: 19.8vw;
+}
+
+ol li.dek-label {
+    height: 19.8vw;
+}
+
+ol li.pent-label {
+    margin-bottom: -2px;
+}
