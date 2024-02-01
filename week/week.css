@@ -1,0 +1,85 @@
+@font-face {
+    font-family: isosevcal;
+    src: url(iosevcal-regular.ttf);
+}
+
+day {
+    display: grid;
+    font-family: 'isosevcal', monospace;
+    grid-template-columns: 8ch 1fr;
+}
+
+.wider {
+    grid-template-columns: 8ch 1fr;
+}
+
+.solid {
+    border-bottom: solid 1px black;
+}
+
+.dashed {
+    border-bottom: dashed 1px black;
+}
+
+date, time {
+    text-align: right;
+}
+
+dashed {
+    border-bottom: dashed 1px black;
+}
+
+solid {
+    border-bottom: solid 1px black;
+}
+
+pages {
+    display: flex;
+    font-family: 'isosevcal', monospace;
+}
+
+current {
+    text-align: right;
+    width: 50%;
+    margin-top: 9px;
+}
+
+.calendar-wrapper {
+    font: 100% system-ui;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 2px;
+    margin: 0 auto;
+    max-width: 64em;
+    padding: 0;
+}
+
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: 'isosevcal', monospace;
+}
+
+li {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    list-style: none;
+    margin-left: 0;
+}
+
+ol li:not(.dotw) {
+    justify-content: flex-start;
+    padding: 2px;
+    border: 1px solid #eaeaea;
+    height: 20vw;
+}
+
+ol li.dotw {
+    margin-bottom: -2px;
+}
