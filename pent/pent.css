@@ -1,6 +1,6 @@
 @font-face {
     font-family: isosevcal;
-    src: url(iosevcal-regular.ttf);
+    src: url(../iosevcal-regular.ttf);
 }
 
 day {
@@ -88,11 +88,24 @@ li {
 ol li.cell {
     padding: 2px;
     border: 1px solid #eaeaea;
-    height: 19.8vw;
+    height: 24vw;
+}
+
+ol li.dashed {
+    padding: 2px;
+    border: 1px dashed #eaeaea;
+    height: 24vw;
+}
+
+ol li.noborder {
+    padding: 2px;
+    height: 24vw;
+    white-space: nowrap;
+    grid-column: 2 / span 4;
 }
 
 ol li.dek-label {
-    height: 19.8vw;
+    height: 24vw;
 }
 
 ol li.pent-label {

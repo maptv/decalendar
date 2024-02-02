@@ -1,24 +1,15 @@
 import pathlib
 
 class Calendar:
-    def __init__(self, start: int = 0, stop: int = 365):
-        self.start = start
-        self.stop = stop
-        self.range = range(start, stop)
+    def __init__(self):
         self.__head = (
             "<!DOCTYPE html>\n<html>\n\n<head>\n\t"
             '<link rel="stylesheet" href="pent.css">\n'
             "</head>\n\n<body>\n\t<main>\n\t\t"
         )
         self.__foot = "\n\t\t</pages>\n\t</main>\n</body>\n\n</html>"
-        self.pents = list(zip(*[iter(self.range)] * 5))
-        self.deks = list(zip(*[iter(self.range)] * 10))
-
-    def __str__(self):
-        return f"Day {self.start} to Day {self.stop - 1}"
-
-    def __repr__(self):
-        return f"Calendar(start={self.start}, stop={self.stop - 1})"
+        self.pents = list(zip(*[iter(range(0, 365))] * 5))
+        self.deks = list(zip(*[iter(range(0, 360))] * 10))
 
     def write_lists(self):
         for page, pent in enumerate(self.pents):
@@ -81,38 +72,69 @@ class Calendar:
             dek_label = f"{dek[0]:03}"[:2]
             html_list_left.append(
                 f"<li class='dek-label'>{dek_label}</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
                 )
             html_list_right.append(
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
-                f"<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
                 f"<li class='dek-label'>{dek_label}</li>\n\t\t\t\t"
                 )
-        for i in range(6):
+        html_list_left.append(
+            "<li class='dek-label'>36</li>\n\t\t\t\t"
+            "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+            "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+            "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+            "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+            "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+            )
+        html_list_right.append(
+            "<li class='dashed'>&nbsp</li>\n\t\t\t\t"
+            "<li class='noborder'>year % 4 &equals; 0 &and; (year % 100 &ne; 0 &or; year % 400 &equals; 0)</li>\n\t\t\t\t"
+            "<li class='dek-label'>36</li>\n\t\t\t\t"
+            )
+        for dek in range(3):
+            dek_label = f"{dek:02}"
+            html_list_left.append(
+                f"<li class='dek-label'>{dek_label}</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                )
+            html_list_right.append(
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                "<li class='cell'>&nbsp</li>\n\t\t\t\t"
+                f"<li class='dek-label'>{dek_label}</li>\n\t\t\t\t"
+                )
+        for i in range(8):
             pathlib.Path(
-                f"{i * 2 + 73}_{6 * i}-{6 * i + 6}_"
+                f"{i * 2 + 73}_{5 * i}-{5 * i + 5}_"
                 "left_year_grid.html"
             ).write_text(
                 self.__head + after_header_left
-                + "".join(html_list_left[6 * i:6 * i + 6])
+                + "".join(html_list_left[5 * i:5 * i + 5])
                 + before_footer
                 + "\n\t\t<pages>\n\t\t\t<current>"
                 + f"{i * 2 + 73}</current>"
                 + self.__foot
                 )
             pathlib.Path(
-                f"{i * 2 + 74}_{6 * i}-{6 * i + 6}_"
+                f"{i * 2 + 74}_{5 * i}-{5 * i + 5}_"
                 "right_year_grid.html"
             ).write_text(
                 self.__head + after_header_right
-                + "".join(html_list_right[6 * i:6 * i + 6])
+                + "".join(html_list_right[5 * i:5 * i + 5])
                 + before_footer
                 + "\n\t\t<pages>\n\t\t\t<current>"
                 + f"{i * 2 + 74}</current>"
