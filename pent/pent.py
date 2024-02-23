@@ -38,7 +38,7 @@ class Calendar:
                     "<time>&nbsp</time>\n\t\t</day>\n\t\t"
                 )
             pathlib.Path(
-                f"{page:02}_{pent[0]:03}_{pent[-1]:03}_week.html"
+                f"{page:02}_{pent[0]:03}_{pent[-1]:03}_pent.html"
             ).write_text(
                 self.__head
                 + "".join(html_list)

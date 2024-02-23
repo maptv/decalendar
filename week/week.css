@@ -15,11 +15,11 @@ day {
 }
 
 .solid {
-    border-bottom: solid 1px black;
+    border-bottom: solid .5px black;
 }
 
 .dashed {
-    border-bottom: dashed 1px black;
+    border-bottom: dashed .5px black;
 }
 
 date, time {
@@ -27,11 +27,11 @@ date, time {
 }
 
 dashed {
-    border-bottom: dashed 1px black;
+    border-bottom: dashed .5px black;
 }
 
 solid {
-    border-bottom: solid 1px black;
+    border-bottom: solid .5px black;
 }
 
 pages {
@@ -52,7 +52,7 @@ current {
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-gap: 2px;
+    grid-gap: 1px;
     margin: 0 auto;
     max-width: 64em;
     padding: 0;
@@ -78,8 +78,8 @@ li {
 ol li:not(.dotw) {
     justify-content: flex-start;
     padding: 2px;
-    border: 1px solid #eaeaea;
-    height: 19.8vw;
+    border: .5px solid black;
+    height: 19.9vw;
 }
 
 ol li.dotw {
