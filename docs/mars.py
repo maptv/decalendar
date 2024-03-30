@@ -1,38 +1,53 @@
 from datetime import date, timedelta
 from time import time
 
-def sols(year, skip=150):
-    return (year * 668 + year // 2 + year // 10 - year // skip)
+def sols(year, cycle=1400):
+    return (year * 669 - year // 2 + year // 10 - year // 100 + year // cycle)
+sols(800) / 800
 
-sols(2)  # 1337
-1337 / 668
-1336 / 668
-
-sote = (time() / 86400000 + 6065.5848348500847758) / 1.0274912517
+sols(1000, 1000) / 1000
+sote = (time() / 86400 + 6065.5848348500847758) / 1.0274912517
 sote
-sols(10)  # 6686
-sols(150)  # 100289
-def get_yotc(dotc):
-    return (dotc - dotc // 1336 - dotc // 6685 + dotc // 100288) // 668
-get_yotc(1336)
-get_yotc(1337)
-get_yotc(6685)
-get_yotc(6686)
-get_yotc(100288)
-get_yotc(100289)
+
 def days2soty(days):
-    cycle = days // 73545
-    dotc = days - cycle * 73545
+    cycle = days // 668591
+    dotc = days - cycle * 668591
     yotc = (
-        dotc - dotc // 1336 - dotc // 6685 + dotc // 100288
-        ) // 668
+        dotc + dotc // 1337 - dotc // 6685 + dotc // 66859 - dotc // 668590
+        ) // 669
     print(cycle, dotc, yotc)
-    return int(yotc + cycle * 110), dotc - (
-        668 * yotc + yotc // 2 + yotc // 10
+    return int(yotc + cycle * 1000), dotc - (
+        669 * yotc - yotc // 2 + yotc // 10 - yotc // 100
         )
 
 days2soty(sote)
-days2soty(73545 * 40)
-
+sols(1)  # 669
+days2soty(668)
+days2soty(669)
+sols(2)  # 1337
+days2soty(1336)
+days2soty(1337)
+sols(3)  # 2006
+days2soty(2005)
+days2soty(2006)
+sols(4)  # 2674
+days2soty(2673)
+days2soty(2674)
+sols(10)  # 6686
+days2soty(6685)
+days2soty(6686)
+sols(11)  # 7355
+days2soty(7354)
+days2soty(7355)
+sols(100)  # 66859
+days2soty(66858)
+days2soty(66859)
+sols(1400)  # 668591
+days2soty(668590)
+days2soty(668591)
 date(1970,1,1) - date(1953,5,24)
 date(1953,5,24) - date(1970,1,1)
+
+1400 / 2 + 140 - 14 + 1
+1400 - 827
+(573*668 + 827 * 669) / 668591
