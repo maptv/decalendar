@@ -122,11 +122,11 @@ Unlike longitude, latitude does not affect time zones and instead determines day
 
   
 
-In contrast to longitude and latitude, changing orientation will not affect any other value. In the context of orientation, 0 turns is North, .25 turns is East, .5 turns is South, and .75 turns is West.
+In contrast to longitude and latitude, changing orientation will not affect any other value. Orientation moves clockwise from North, such that 0 turns is North, .25 turns is East, .5 turns is South, and .75 turns is West.
 
   
 
-Solar and lunar azimuth, the direction of the  point in the horizon below the Sun and the Moon, respectively, have the same definition of a turn as orientation. Just like seasons, azimuths in the Northern and Southern Hemisphere are shifted in relation to each other by about a half-turn.
+Solar and lunar azimuth, the direction of the point in the horizon below the Sun and the Moon, respectively, have the same definition of a turn as orientation. Just like seasons, azimuths in the Northern and Southern Hemisphere are shifted in relation to each other by about a half-turn.
 
   
 
@@ -185,7 +185,7 @@ Use Map that can roll as orientation changes
 
   
 
-While the year and the date are shown as full turns, the other dashboard components show subdivisions of turns such as milliturns (thousandths of a turn). Subdivisions make it possible to display decimal numbers or dyadic fractions as whole numbers, e.g. .125 = 1/8 = 125 milliturns.
+While the year and the date are shown as full turns, the other dashboard components show subdivisions of turns such as milliturns (thousandths of a turn). Subdivisions make it possible to display dyadic fractions or non-recurring decimal numbers as whole numbers, e.g. 1/8 = .125 turns = 125 milliturns.
 
   
 
