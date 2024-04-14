@@ -34,23 +34,7 @@ Instead of 2h ago, 1dd or .1d ago. Decimals are probably better until everyone i
 - 4cd (.04) ago
 - 2dd (.2) ago
 
-Moon info:
-
-At sunrise, if the moon is rising at the same time (or there-bouts), it’s New Moon.
-If it’s Noon, and the moon is just rising… it’s the 1st quarter.
-If it’s sunset, and the moon is just rising… it’s full moon.
-If it’s midnight, and the moon is just rising… it’s the 3rd quarter.
-
-Moonrise and moonset: time in millidays like with sunrise and sunset
-Moon phases: 0 to 9 (new moon is 0 and full moon is 5)
-
-Time zones:
-
-Apart from different time zones, Declock times can differ from UTC times because of Daylight Savings Time (DST). Declock times never shift! The standard DST practice of switching to a different time zone (e.g. EST to EDT) for certain parts of the year (e.g Day 9 to Day 277) could work for Declock, but that goes against the simplicity of determining time zones only by longitude. Of course, a country can decide to only have 1 time zone within its borders (China does this with UTC time zones). In fact, it would be OK to have anyone use whatever time zone they want as long as times are always provided with time zones.
-
-It is easy to convert times across time zones: just increment or decrement the one-digit time zone along with the first digit of the time.
-
-Dash:
+  
 
 The text below describes the Dec dashboard observable app I plan to make at a currently unspecified time. The dashboard can be the main way to explain how Dec works. Once I create it, it will be better than the barchart clock and the scrubbers in my first attempt to introduce Dec: [https://maptv.github.io/dec/](https://maptv.github.io/dec/). Since that first attempt, I had some new ideas, such as having turns be the base unit for everything, and changed my mind about some previous aspects, notably not have spreads be separate from slices. At minimum, the dashboard should show a map with a compass rose and allow users to change the longitude, latitude, and orientation as in the map-orientation notebook. If the dashboard allows for changing the season, day, and time, I could bring in the last 3 visualizations from the daylight notebook ([https://observablehq.com/@dbridges/visualizing-seasonal-daylight](https://observablehq.com/@dbridges/visualizing-seasonal-daylight)). The 2 visualizations on the right would help to explain that years are turns of the Earth around the Sun (top right visualization) and that days are turns of the Earth on its axis (bottom left visualization). Also, the daylight visualization helps explain how sunrise and sunset vary by location and day of the year (doty). It is great to have a map for selection of the location, but I want the map to also be able to rotate to change the orientation. Ideally, I would have multiple ways to interact with the dashboard:
 
@@ -66,19 +50,27 @@ A line plot with dual y-axes (altitude and azimuth) could show the position of t
 
 An alternative to the line plot could be a sunpath visualization which shows both altitude and azimuth and gives an idea of the sun's path: [https://observablehq.com/@d3/solar-path](https://observablehq.com/@d3/solar-path). 
 
-The line is easier to read and by convention time should be on the x-axis, plus it is really intuitive to have altitude be on the y-axis. Maybe it makes sense to have a dual labels for the x-axis (instead of dual y-axes) with time not changing but the azimuth changing based on the season/doty and global location like in [https://www.timeanddate.com/sun/usa/pittsburgh](https://www.timeanddate.com/sun/usa/pittsburgh) (maybe the little sun and moon icons that move upon hover could have little arrows that point in the direction of their azimuth). Unlike the sunpath diagram, a line plot would allow for showing the sun and moon on a single plot, which would show how the moon phase can predict the relationship between sun and moon position, i.e. during a new moon the altitudes should cross the horizon (altitude = 2.5) at the same time.
+The line is easier to read and by convention time should be on the x-axis, plus it is really intuitive to have altitude be on the y-axis. Maybe it makes sense to have a dual labels for the x-axis (instead of dual y-axes) with time not changing but the azimuth changing based on the season/doty and global location like in [https://www.timeanddate.com/sun/usa/pittsburgh](https://www.timeanddate.com/sun/usa/pittsburgh) (maybe the little sun and moon icons that move upon hover could have little arrows that point in the direction of their azimuth). Unlike the sunpath diagram, a line plot would allow for showing the sun and moon on a single plot, which would show how the moon phase can predict the relationship between sun and moon position, i.e. during a new moon the altitudes should cross the horizon (altitude = 0) at the same time.
 
 With the daylight notebook visualizations, the line plot (and maybe a sunpath diagram), the moon phase, and the compass rose, all of the dashboard values except year and (solar and lunar) distance will be visualized. 
 
+  
+
+  
+
 A scrubber that moves back and forth through the doty/season would be great.
 
-
+  
 
 Dec is a system that measures⏳time,📍position,🧭orientation,📐angles, and🔄cycles in units called turns. The dashboard below demonstrates the use of turns for various Dec measurements. 
 
   
 
 [https://en.m.wikipedia.org/wiki/Turn_(angle)#:~:text=One%20turn%20(symbol%20tr%20or,(symbol%20rev%20or%20r).](https://en.m.wikipedia.org/wiki/Turn_(angle)#:~:text=One%20turn%20(symbol%20tr%20or,(symbol%20rev%20or%20r).)
+
+  
+
+[https://en.m.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes](https://en.m.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes)
 
   
 
@@ -90,7 +82,7 @@ Years and days are shown as integers, because their fractional parts, the number
 
   
 
-Each component has a starting point that is equal to 0 turns. For example, years start at Year 0 (1 BC), days start at Day 0 (March 1), times start at midnight, moon phases start with a new moon, seasons start with Spring in the Northern Hemisphere and Fall in the Southern Hemisphere, and orientations and azimuths move clockwise from North.
+Each component has a starting point that is equal to 0 turns. For example, years start at Year 0 (1 BC), days start at Day 0 (March 1), times start at midnight, moon phases start with a new moon, longitude starts at the 144th west meridian, latitude starts at the Equator, seasons start with Spring in the Northern Hemisphere and Fall in the Southern Hemisphere, altitudes start at the horizon, and orientations and azimuths move clockwise from North.
 
 [](https://en.m.wikipedia.org/wiki/Season#Meteorological)  
 
@@ -103,6 +95,14 @@ Each component has a starting point that is equal to 0 turns. For example, years
   
 
 Most of the dashboard components are dependent on the longitude, because time zones are determined by rounding the longitude to the nearest deciturn (tenth of a turn). On the map, time zones are separated by the meridians (lines that run from South to North).
+
+  
+
+Each time zone has a width of 1 deciturn, which is 4,007.52 kilometers at the equator and zero at the North or South Pole. A deciturn of latitude is about 4000 kilometers anywhere on the planet.
+
+  
+
+[https://en.m.wikipedia.org/wiki/Longitude](https://en.m.wikipedia.org/wiki/Longitude)
 
   
 
@@ -142,7 +142,7 @@ Azimuths begin to shift North after the Day 111 solstice and then South after th
 
   
 
-Such seasonal variation is minimal near the Equator. At the center of any time zone (where the deciturn longitude is an integer) on the Equator (where the deciturn latitude is 2.5), both the time and the solar azimuth will always be about .25 turns at sunrise and about .75 turns at sunset!
+Such seasonal variation is minimal near the Equator. At the center of any time zone (where the deciturn longitude is an integer) on the Equator (where the latitude is 0), both the time and the solar azimuth will always be about .25 turns at sunrise and about .75 turns at sunset!
 
   
 
@@ -185,11 +185,11 @@ Use Map that can roll as orientation changes
 
   
 
-While the year and the date are shown as full turns, the other dashboard components show subdivisions of turns such as milliturns (thousandths of a turn). Subdivisions make it possible to drop the decimal and thus show values in a cleaner, more compact manner.
+While the year and the date are shown as full turns, the other dashboard components show subdivisions of turns such as milliturns (thousandths of a turn). Subdivisions make it possible to display decimal numbers or dyadic fractions as whole numbers, e.g. .125 = 1/8 = 125 milliturns.
 
   
 
-Values in Dec can have any number of digits to match the desired level of precision. Increasing the number of digits increases the precision, but at some point adding additional digits will no longer be worth the burden of dealing with longer numbers.
+Values in Dec can have any number of digits to match the desired level of precision. Increasing the number of digits increases the precision, but at some point the benefit of additional digits will no longer be worth the burden of dealing with longer numbers.
 
   
 
@@ -198,10 +198,6 @@ Milliturns are 2.77777 times more precise than degrees and thus provide sufficie
   
 
 Global coordinates in centimilliturns are precise enough to identify a specific neighborhood on a map. A centimilliturn of time is almost 16% more precise than a second and is called a beat because it resembles a heartbeat or musical beat.
-
-  
-
-  
 
   
 
@@ -251,7 +247,7 @@ It can be useful to combine time with global coordinates, because the first digi
 
   
 
-A latitude of .25 falls on the Equator, which gets about a half-day of sunlight every day of the year.
+A latitude of 0 turns falls on the Equator, which gets about a half-day of sunlight every day of the year.
 
   
 
@@ -281,9 +277,7 @@ Adding latitude allows us to 
 
   
 
-Norman longitude determines the time zone
-
-A half-turn of longitude arrives the 36th East Meridian and a quarter-turn of latitude goes from the South Pole to the Equator. 
+A half-turn of longitude arrives the 36th East Meridian and a quarter-turn of latitude goes from the the Equator to the South Pole. 
 
   
 
@@ -295,7 +289,7 @@ A time, longitude, and latitude can be put together.
 
   
 
-A longitude of .5 turns falls on the 36th East meridian and a latitude of .25 falls on the equator.
+A longitude of .5 turns falls on the 36th East meridian and a latitude of .5 falls on the equator, but in the other side of the globe!
 
   
 
