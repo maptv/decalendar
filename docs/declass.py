@@ -186,9 +186,11 @@ class Dec:
             f"time={dote % 1 * 10:.4f}, zone={int(self.zone)})"
         )
     def get_interval(self):
-        starts = [self.dote]
+        start = self.dote
+        starts = [start]
         for s in self.steps:
-            starts += [s]
+            start += s
+            starts += [start]
 
 class Interval:
     def __init__(self, start=Dec(day=719468), stop=Dec(day=730485)):
