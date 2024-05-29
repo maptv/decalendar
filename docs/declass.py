@@ -65,44 +65,16 @@ class Dec:
         # m = self.doty - self.nday
         # self.down = f"{y:04}-{abs(m.__floor__()):03}{m % 1 * 10:.4f}{'+' + str(self.zone) if self.zone else ''}"
     def __list__(self):
-        dote = self.dote + self.zone / 10
-        cykl = (dote if dote >= 0 else dote - 146096) // 146097
-        dotc = dote - cykl * 146097
-        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
-        year = yotc + cykl * 400
-        date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
-        return [year, date, dote, self.zone]
+        return [*self.dote2date(dote := self.dote + self.zone / 10), dote, self.zone]
     def __set__(self):
-        dote = self.dote + self.zone / 10
-        cykl = (dote if dote >= 0 else dote - 146096) // 146097
-        dotc = dote - cykl * 146097
-        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
-        year = yotc + cykl * 400
-        date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
-        return {year, date, dote, self.zone}
+        return {*self.dote2date(dote := self.dote + self.zone / 10), dote, self.zone}
     def __tuple__(self):
-        dote = self.dote + self.zone / 10
-        cykl = (dote if dote >= 0 else dote - 146096) // 146097
-        dotc = dote - cykl * 146097
-        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
-        year = yotc + cykl * 400
-        date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
-        return year, date, dote, self.zone
+        return (*self.dote2date(dote := self.dote + self.zone / 10), dote, self.zone)
     def __dict__(self):
-        dote = self.dote + self.zone / 10
-        cykl = (dote if dote >= 0 else dote - 146096) // 146097
-        dotc = dote - cykl * 146097
-        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
-        year = yotc + cykl * 400
-        date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
+        year, date = self.dote2date(dote := self.dote + self.zone / 10)
         return {"year": year, "date": date, "dote": dote, "zone": self.zone}
     def __str__(self):
-        dote = self.dote + self.zone / 10
-        cykl = (dote if dote >= 0 else dote - 146096) // 146097
-        dotc = dote - cykl * 146097
-        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
-        year = yotc + cykl * 400
-        date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
+        year, date = self.dote2date(dote := self.dote + self.zone / 10)
         return f"{int(year):04}+{date:03}{dote % 1 * 10:.4f}-{self.zone}"
     def __int__(self):
         return int(self.dote)
@@ -111,56 +83,87 @@ class Dec:
     def __bool__(self):
         return bool(self.dote)
     def __gt__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote > other.dote)
         return self.dote > other
     def __lt__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote < other.dote)
         return self.dote < other
     def __ge__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote >= other.dote)
         return self.dote >= other
     def __le__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote <= other.dote)
         return self.dote <= other
     def __add__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote + other.dote)
         return Dec(day=self.dote + other)
     def __sub__(self, other):
         if isinstance(other, Dec):
-            return Dec(day=int(self.dote - other.dote))
+            return Dec(day=self.dote - other.dote)
         return Dec(day=self.dote - other)
     def __mul__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote * other.dote)
         return Dec(day=self.dote * other)
     def __truediv__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote / other.dote)
         return Dec(day=self.dote / other)
     def __mod__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote % other.dote)
         return Dec(day=self.dote % other)
     def __floordiv__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote // other.dote)
         return Dec(day=self.dote // other)
     def __pow__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote ** other.dote)
         return Dec(day=self.dote ** other)
     def __matmul__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote @ other.dote)
         return Dec(day=self.dote @ other)
     def __and__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote & other.dote)
         return Dec(day=self.dote & other)
     def __or__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote | other.dote)
         return Dec(day=self.dote | other)
     def __xor__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote ^ other.dote)
         return Dec(day=self.dote ^ other)
     def __rshift__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote >> other.dote)
         return Dec(day=self.dote >> other)
     def __lshift__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote << other.dote)
         return Dec(day=self.dote << other)
     def __repr__(self):
-        dote = self.dote + self.zone / 10
-        cykl = (dote if dote >= 0 else dote - 146096) // 146097
-        dotc = dote - cykl * 146097
-        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
-        year = yotc + cykl * 400
-        date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
+        year, date = self.dote2date(dote := self.dote + self.zone / 10)
         return (
-            f"Dec(year={int(year)}, date={int(date):03}, "
+            f"Dec(year={int(year)}, date={int(date)}, "
             f"time={dote % 1 * 10:.4f}, zone={int(self.zone)})"
         )
 
 
-d = Dec(year=1969, day=306, zone=4)
-d.dote += 1
-d.date += 1
-d.year += 1.5
-d.dote
+u = Dec(year=1969, day=306, zone=1)
+m = Dec(year=1971, zone=9)
+u.date
+m.year
+m - u
+u.dote += 1
+u.date += 1
+u.year += 1.5
+str(u)
