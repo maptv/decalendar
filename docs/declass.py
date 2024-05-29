@@ -22,6 +22,8 @@ class Dec:
             + (hour + minute / 60 + second / 3600 + millisecond / 3600000) / 24
             )
         self._save_year_and_date()
+        self.stops = []
+        self.steps = []
     @staticmethod
     def dote2date(dote):
         cykl = (dote if dote >= 0 else dote - 146096) // 146097
@@ -40,8 +42,10 @@ class Dec:
         yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
         self._year = yotc + cykl * 400
         self._date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
-    def __call__(self):
-        return "test"
+    def __call__(self, stop, *steps):
+        self.stops += [stop]
+        self.steps += [steps]
+        return self
     @property
     def leap(self):
         y = self.year // 1 + 1
@@ -68,8 +72,6 @@ class Dec:
         diff = value - self._date
         self._dote += diff
         self._save_year_and_date()
-        # m = self.doty - self.nday
-        # self.down = f"{y:04}-{abs(m.__floor__()):03}{m % 1 * 10:.4f}{'+' + str(self.zone) if self.zone else ''}"
     def __iter__(self):
         yield from [*self.dote2date(dote := self.dote + self.zone / 10), dote, self.zone]
     def __str__(self):
@@ -186,7 +188,9 @@ class Dec:
 
 u = Dec(year=1969, day=306, zone=1)
 m = Dec(year=1971, zone=9)
-m
+m(3, 2)(4.3,3,2,1)
+m.stops
+m.steps
 u.zone += 4
 u
 u.dote
