@@ -22,8 +22,9 @@ class Dec:
             + (hour + minute / 60 + second / 3600 + millisecond / 3600000) / 24
             )
         self._save_year_and_date()
-        self.stops = []
-        self.steps = []
+        self.stop = []
+        self.step = []
+        self.call = []
     @staticmethod
     def dote2date(dote):
         cykl = (dote if dote >= 0 else dote - 146096) // 146097
@@ -43,8 +44,9 @@ class Dec:
         self._year = yotc + cykl * 400
         self._date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
     def __call__(self, stop, *steps):
-        self.stops += [stop]
-        self.steps += [steps]
+        self.stop += [stop]
+        self.step += [steps]
+        self.call += [(stop, *steps)]
         return self
     @property
     def leap(self):
@@ -73,10 +75,16 @@ class Dec:
         self._dote += diff
         self._save_year_and_date()
     def __iter__(self):
-        yield from [*self.dote2date(dote := self.dote + self.zone / 10), dote, self.zone]
+        yield from zip(
+            ["year", "date", "dote", "zone", "stop", "step"],
+            [*self.dote2date(dote := self.dote + self.zone / 10),
+            dote, self.zone, self.stop, self.step])
     def __str__(self):
         year, date = self.dote2date(dote := self.dote + self.zone / 10)
-        return f"{int(year):04}+{date:03}{dote % 1 * 10:.4f}-{self.zone}"
+        return (
+            f"{int(year):04}+{date:03}{dote % 1 * 10:.4f}-{self.zone}"
+            f"{''.join(map(str, self.call)).replace(' ', '')}"
+        )
     def __int__(self):
         return int(self.dote)
     def __float__(self):
@@ -159,6 +167,38 @@ class Dec:
         if isinstance(other, Dec):
             return Dec(day=self.dote @ other.dote)
         return Dec(day=self.dote @ other)
+    def __radd__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote + other.dote)
+        return Dec(day=self.dote + other)
+    def __rsub__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=other.dote - self.dote)
+        return Dec(day=self.dote - other)
+    def __rmul__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=self.dote * other.dote)
+        return Dec(day=self.dote * other)
+    def __rtruediv__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=other.dote / self.dote)
+        return Dec(day=other / self.dote)
+    def __rmod__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=other.dote % self.dote)
+        return Dec(day=other % self.dote)
+    def __rfloordiv__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=other.dote // self.dote)
+        return Dec(day=other // self.dote)
+    def __rpow__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=other.dote ** self.dote)
+        return Dec(day=other ** self.dote)
+    def __rmatmul__(self, other):
+        if isinstance(other, Dec):
+            return Dec(day=other.dote @ self.dote)
+        return Dec(day=other @ self.dote)
     def __and__(self, other):
         if isinstance(other, Dec):
             return Dec(day=self.dote & other.dote)
@@ -183,14 +223,66 @@ class Dec:
         year, date = self.dote2date(dote := self.dote + self.zone / 10)
         return (
             f"Dec(year={int(year)}, date={int(date)}, "
-            f"time={dote % 1 * 10:.4f}, zone={int(self.zone)})"
+            f"time={dote % 1 * 10:.4g}, zone={int(self.zone)}"
+            + (f", stop={str(self.stop).replace(' ', '')}"
+                if self.stop else "")
+            + (f", step={str(self.step).replace(' ', '').replace(',)', ')').replace('),(', ')(')}"
+                if self.step else "") + ")"
         )
-    def get_interval(self):
+    @property
+    def iter(self):
         start = self.dote
         starts = [start]
-        for s in self.steps:
-            start += s
-            starts += [start]
+        # result = []
+        for i, limit in enumerate(self.stop):
+            steps = self.step[i]
+            total = sum(steps)
+            c = 0
+            for j, s in enumerate(starts):
+                if not list(self.flatten(steps)):
+                    if isinstance(limit, (int, float, Dec)):
+                        yield (s, limit + s)
+                    else:
+                        yield (s, limit)
+                elif isinstance(limit, int):
+                    for c in range(limit):
+                        yield s
+                        starts.append(s)
+                        s += steps[c % len(steps)]
+                else:
+                    if isinstance(limit, float):
+                        l = s + limit
+                    elif isinstance(limit, Dec):
+                        l = limit
+                    while (total > 0 and s < l) or (total < 0 and s > l):
+                        yield s
+                        starts.append(s)
+                        s += steps[c % len(steps)]
+                        c += 1
+    @property
+    def list(self):
+        list(self.iter)
+    @property
+    def tuple(self):
+        tuple(self.iter)
+    @property
+    def set(self):
+        tuple(self.iter)
+    @property
+    def float(self):
+        list(map(float, self.flatten(self.iter)))
+    @property
+    def int(self):
+        list(map(int, self.flatten(self.iter)))
+    def flatten(self, nested):
+        for i in nested:
+            if isinstance(i, (list, tuple)):
+                yield from self.flatten(i)
+            else:
+                yield i
+
+        
+
 
 class Interval:
     def __init__(self, start=Dec(day=719468), stop=Dec(day=730485)):
@@ -198,16 +290,25 @@ class Interval:
         self.stop = stop
         self.range = stop - start
 
+
 i = Interval()
 i.start
-u = Dec(year=1969, day=306, zone=1)
+u = Dec(year=1969, day=306.54, zone=1)
+u
 m = Dec(year=2000)
 m.dote
-m(3, 2)(4.3,3,2,1)
-m.stops
-m.steps
+m(3, 2, 1)#(4.3,3,2,1)
+str(m)
+u
+m
+i = m.iter
+list(i)
+m.step
+
 u.zone += 4
 u
+u + 1
+1 + u
 u.dote
 u.year += 1.2
 m.year += 1.1
@@ -220,4 +321,5 @@ m - u
 u.dote += 1
 u.date += 1
 list(u)
-tuple(u)
+dict(u)
+len([()])
