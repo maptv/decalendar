@@ -200,10 +200,6 @@ class Dec:
         yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
         self._year = yotc + cykl * 400
         self._date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
-    @staticmethod
-    def get_cykl_and_yotc(year):
-        return [(cykl := (year if year >= 0 else year - 399) // 400),
-                year - cykl * 400]
     def __call__(self):
         return "test"
     @property
@@ -222,9 +218,7 @@ class Dec:
         return self._year
     @year.setter
     def year(self, value):
-        cykl = (value if value >= 0 else value - 399) // 400
-        yotc = value - cykl * 400
-        self._dote = cykl * 146097 + yotc * 365 + yotc // 4 - yotc // 100
+        self._dote = self.year2dote(value)
         self.save_year_and_date()
     @property
     def date(self):
