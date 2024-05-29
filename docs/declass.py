@@ -281,7 +281,6 @@ class Dec:
             else:
                 yield i
 
-        
 
 
 class Interval:
@@ -294,7 +293,7 @@ class Interval:
 i = Interval()
 i.start
 u = Dec(year=1969, day=306.54, zone=1)
-u
+eval(str(u)[:-2] + "/3650")
 m = Dec(year=2000)
 m.dote
 m(3, 2, 1)#(4.3,3,2,1)
@@ -323,3 +322,122 @@ u.date += 1
 list(u)
 dict(u)
 len([()])
+
+
+def iterate(start:int|float|Dec, stops=[], steps=[()]):
+    starts = [start]
+    result = []
+    for i, stop in enumerate(stops):
+        if i + 1 > len(steps) or not list(flatten(steps[i])):
+            result = []
+            for start in starts:
+                if isinstance(stop, (int, float, Dec)):
+                    result.append((start, stop + start))
+                else:
+                    result.append((start, stop))
+            break
+        else:
+            step = steps[i]
+            total = sum(step)
+            c = 0
+            for start in starts:
+                if isinstance(stop, int):
+                    for c in range(stop):
+                        result.append(start)
+                        start += step[c % len(step)]
+                else:
+                    stop = start + stop if isinstance(stop, float) else stop
+                    while (total > 0 and start < stop) or (total < 0 and start > stop):
+                        result.append(start)
+                        starts.append(start)
+                        start += step[c % len(step)]
+                        c += 1
+        starts = list(flatten(result))
+    return result
+
+# working
+iterate(0, [5], [[1, 2]])
+iterate(0, [3], [[1, 2], [3, 4]])
+iterate(0, [4, 3], [[2, 1]])
+iterate(0, [4, 3], [[1], [2]])
+iterate(0, [3, 2], [[1, 2], [3, 4]])
+iterate(0, [2, 3], [[1, 2], [3, 4]])
+iterate(0, [4, 3], [[1]])
+iterate(0, [4, -3], [[-1]])
+iterate(0, [8, 3], [[1, 2], [[]]])
+iterate(0.3, [8, .4], [[1, 2], [[]]])
+iterate(Dec(day=.3), [8, .4], [[1, 2.5], [[]]])
+
+# ???
+
+def flatten(nested):
+    if isinstance(nested, (int, float, str, bool)):
+        nested = [nested]
+    for i in nested:
+        if isinstance(i, (list, tuple)):
+            yield from flatten(i)
+        else:
+            yield i
+            
+            
+list(flatten(1))
+import re
+
+def multilimit_slice(arr, string):
+    string = string.lower().replace(r'[^\d.\-#*:<>hilnsx^]', '')
+    length = len(arr)
+    first, *others = re.split(r'([#*:<>hilnsx].*)', string, 1)
+    starts = []
+    results = []
+    if not others:
+        return int(first)
+    others = [o for o in re.split(r'(?=[#*<>hlnsx])', others[0]) if o]
+    for i, other in enumerate(others):
+        results.append([])
+        limit, *steps = re.split(r'(?=[#*:<>hilnsx])', other)
+        steps = [int(s[1:]) if not (s := int(s[1:])) else 1 for s in steps]
+        steps = [-s if '/^[<h#n]/' else s for s in steps] or [1]
+        total = sum(steps)
+        if total == 0:
+            steps = [1]
+            total = 1
+        if i == 0:
+            starts = [int(first)]
+        for j, start in enumerate(starts):
+            if isinstance(limit, int):
+            results[i].append([])
+            if not isinstance(start, int):
+                start = 0 if total > 0 else length - 1
+            elif start < 0 and start + length >= 0:
+                start += length
+            stop = int(limit[1:])
+            if '/^[*#xn]/' in limit:
+                if not isinstance(stop, int):
+                    count = 0
+                    while (total > 0 and start < length) or (total < 0 and start >= 0):
+                        if 0 <= start < length:
+                            starts.append(start)
+                        start += steps[count % len(steps)]
+                        count += 1
+                else:
+                    for c in range(stop):
+                        if 0 <= start < length:
+                            starts.append(start)
+                        start += steps[c % len(steps)]
+            elif '/^[<>hl]/' in limit:
+                stop = stop * (-1) ** ('/^[<h]/' in limit) + start
+            if stop < 0 and stop + length >= 0:
+                stop += length
+            elif stop < 0 and stop + length < 0:
+                stop = float('nan')
+            if (float('nan') == stop and total > 0) or stop > length:
+                stop = length
+            count = 0
+            while (float('nan') == stop and total < 0 and start >= 0) or (total > 0 and start < stop) or (total < 0 and start > stop):
+                if 0 <= start < length:
+                    starts.append(start)
+                start += steps[count % len(steps)]
+                count += 1
+            results[i][-1].extend(starts)
+    return [item for sublist in results[1:] for item in sublist] if len(results) > 1 else [item for sublist in results[0] for item in sublist]
+
