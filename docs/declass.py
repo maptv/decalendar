@@ -15,25 +15,25 @@ class Dec:
         utc=-9,
         degree=-162,
     ):
-        cykl, yotc = self.get_cykl_and_yotc(year)
         self.zone = int(zone // 1 + utc // 2.4 + 4 + (degree + 162) // 36)
-        self.dote = (
-            cykl * 146097 + yotc * 365 + yotc // 4 - yotc // 100 + day
+        self.dote = (self.year2dote(year) + day
             + (153 * (month - 3 if month > 2 else month + 9) + 2) // 5 + dotm - 1
             + week * 7 + dotw - 3 - self.zone / 10
             + (hour + minute / 60 + second / 3600 + millisecond / 3600000) / 24
             )
-        self.save_year_and_date()
-    def save_year_and_date(self):
-        cykl = (self._dote if self.dote >= 0 else self._dote - 146096) // 146097
-        dotc = self._dote - cykl * 146097
-        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
-        self._year = yotc + cykl * 400
-        self._date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
+        self.year, self.date = self.dote2date(self.dote)
     @staticmethod
-    def get_cykl_and_yotc(year):
-        return [(cykl := (year if year >= 0 else year - 399) // 400),
-                year - cykl * 400]
+    def dote2date(dote):
+        cykl = (dote if dote >= 0 else dote - 146096) // 146097
+        dotc = dote - cykl * 146097
+        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
+        date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
+        return [yotc + cykl * 400, date]
+    @staticmethod
+    def year2dote(year):
+        cykl = (year if year >= 0 else year - 399) // 400
+        yotc = year - cykl * 400
+        return cykl * 146097 + yotc * 365 + yotc // 4 - yotc // 100
     def __call__(self):
         return "test"
     @property
@@ -46,16 +46,14 @@ class Dec:
     @dote.setter
     def dote(self, value):
         self._dote = value
-        self.save_year_and_date()
+        self._year, self._date = self.dote2date(self._dote)
     @property
     def year(self):
         return self._year
     @year.setter
     def year(self, value):
-        cykl = (value if value >= 0 else value - 399) // 400
-        yotc = value - cykl * 400
-        self._dote = cykl * 146097 + yotc * 365 + yotc // 4 - yotc // 100
-        self.save_year_and_date()
+        self._dote = self.year2dote(value)
+        self._year, self._date = self.dote2date(self._dote)
     @property
     def date(self):
         return self._date
@@ -63,7 +61,7 @@ class Dec:
     def date(self, value):
         diff = value - self._date
         self._dote += diff
-        self.save_year_and_date()
+        self._year, self._date = self.dote2date(self._dote)
         # m = self.doty - self.nday
         # self.down = f"{y:04}-{abs(m.__floor__()):03}{m % 1 * 10:.4f}{'+' + str(self.zone) if self.zone else ''}"
     def __list__(self):
@@ -165,4 +163,4 @@ d = Dec(year=1969, day=306, zone=4)
 d.dote += 1
 d.date += 1
 d.year += 1.5
-d.date
+d.dote
