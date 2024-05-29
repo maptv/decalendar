@@ -25,12 +25,6 @@ class Dec:
             )
         self.save_year_and_date()
     def save_year_and_date(self):
-        cykl = (self.dote if self.dote >= 0 else self.dote - 146096) // 146097
-        dotc = self.dote - cykl * 146097
-        yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
-        self.year = yotc + cykl * 400
-        self.date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
-    def resave_year_and_date(self):
         cykl = (self._dote if self.dote >= 0 else self._dote - 146096) // 146097
         dotc = self._dote - cykl * 146097
         yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
@@ -52,7 +46,7 @@ class Dec:
     @dote.setter
     def dote(self, value):
         self._dote = value
-        self.resave_year_and_date()
+        self.save_year_and_date()
     @property
     def year(self):
         return self._year
@@ -61,7 +55,7 @@ class Dec:
         cykl = (value if value >= 0 else value - 399) // 400
         yotc = value - cykl * 400
         self._dote = cykl * 146097 + yotc * 365 + yotc // 4 - yotc // 100
-        self.resave_year_and_date()
+        self.save_year_and_date()
     @property
     def date(self):
         return self._date
@@ -69,7 +63,7 @@ class Dec:
     def date(self, value):
         diff = value - self._date
         self._dote += diff
-        self.resave_year_and_date()
+        self.save_year_and_date()
         # m = self.doty - self.nday
         # self.down = f"{y:04}-{abs(m.__floor__()):03}{m % 1 * 10:.4f}{'+' + str(self.zone) if self.zone else ''}"
     def __list__(self):
