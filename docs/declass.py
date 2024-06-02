@@ -1,4 +1,26 @@
 class Dec:
+    """Represents either a duration or an instant (a point in time)
+    To create a duration, pass a time without a time zone.
+    To create an instant, pass a time and also a time zone.
+    Both instants and durations can create intervals and series.
+    Intervals consist of two instants or an instant and a duration.
+    A series can consist of durations, instants, or intervals.
+    To create an interval, pass a limit to a duration or an instant.
+    Series requirge pass a limit and steps to a duration or an instant.
+    duration or an instant. Intervals cannot create series. 
+    Then, call the newly created instance to provide iteration logic.
+    All time units are converted to Zone 0 decimal years and days, but
+    converted back to the original time zone for display.
+    Class instances can be called to provide iteration logic.
+    The first argument in an instance call is the limit.
+    This conversion facilitates operations across time zones.
+    One-way time zone conversion introduces rounding errors that
+    are fixed upon conversion back to the original time zone.
+    Therefore, round-trip converted decimal years and days should
+    match the input day and year even if stored values do not.
+    year+lun.faza
+    year+day.time
+    """
     def __init__(
         self,
         year=0.,
@@ -223,7 +245,8 @@ class Dec:
         year, date = self.dote2date(dote := self.dote + self.zone / 10)
         return (
             f"Dec(year={int(year)}, date={int(date)}, "
-            f"time={dote % 1 * 10:.4g}, zone={int(self.zone)}"
+            f"time={dote % 1 * 10:.4g}"
+            + (f", zone={int(self.zone)}" if self.zone else "")
             + (f", stop={str(self.stop).replace(' ', '')}"
                 if self.stop else "")
             + (f", step={str(self.step).replace(' ', '').replace(',)', ')').replace('),(', ')(')}"
@@ -267,7 +290,7 @@ class Dec:
         tuple(self.iter)
     @property
     def set(self):
-        tuple(self.iter)
+        set(self.iter)
     @property
     def float(self):
         list(map(float, self.flatten(self.iter)))
@@ -283,92 +306,62 @@ class Dec:
 
 
 
-class Interval:
-    def __init__(self, start=Dec(day=719468), stop=Dec(day=730485)):
-        self.start = start
-        self.stop = stop
-        self.range = stop - start
+# class Interval:
+#     def __init__(self, start=Dec(day=719468), stop=Dec(day=730485)):
+#         self.start = start
+#         self.stop = stop
+#         self.range = stop - start
 
 
-i = Interval()
-i.start
+# i = Interval()
+# i.start
+# from decimal import Decimal
+
+# # d = Dec(year=Decimal(1969), day=Decimal(306.54), zone=1)
+# Decimal("306.54") * Decimal("2.4")
+# # time is included in the dote, but
+# # rounding errors are introduced when
+# # we change the time zone to Zone 0
 u = Dec(year=1969, day=306.54, zone=1)
-eval(str(u)[:-2] + "/3650")
-m = Dec(year=2000)
-m.dote
-m(3, 2, 1)#(4.3,3,2,1)
-str(m)
-u
-m
-i = m.iter
-list(i)
-m.step
+u.dote # broken
+# # We can fix this by returning to the
+# # original time zone
+u.dote + u.zone / 10 # healed
+str(u.dote + u.zone / 10).split(".")
+# I decided to convert all attributes
+# to Zone 0 before assigning them
+# so that calculations can be
+# u = Dec(year=1969, day=306.54, zone=1)
+# eval(str(u)[:-2] + "/3650")
+# m = Dec(year=2000)
+# m.dote
+# m(3, 2, 1)#(4.3,3,2,1)
+# str(m)
+# u
+# m
+# i = m.iter
+# list(i)
+# m.step
 
-u.zone += 4
-u
-u + 1
-1 + u
-u.dote
-u.year += 1.2
-m.year += 1.1
-u.date
-m.date
-m.dote
-m.year
-m - u
+# u.zone += 4
+# u
+# u + 1
+# 1 + u
+# u.dote
+# u.year += 1.2
+# m.year += 1.1
+# u.date
+# m.date
+# m.dote
+# m.year
+# m - u
 
-u.dote += 1
-u.date += 1
-list(u)
-dict(u)
-len([()])
+# u.dote += 1
+# u.date += 1
+# list(u)
+# dict(u)
+# len([()])
 
-
-def iterate(start:int|float|Dec, stops=[], steps=[()]):
-    starts = [start]
-    result = []
-    for i, stop in enumerate(stops):
-        if i + 1 > len(steps) or not list(flatten(steps[i])):
-            result = []
-            for start in starts:
-                if isinstance(stop, (int, float, Dec)):
-                    result.append((start, stop + start))
-                else:
-                    result.append((start, stop))
-            break
-        else:
-            step = steps[i]
-            total = sum(step)
-            c = 0
-            for start in starts:
-                if isinstance(stop, int):
-                    for c in range(stop):
-                        result.append(start)
-                        start += step[c % len(step)]
-                else:
-                    stop = start + stop if isinstance(stop, float) else stop
-                    while (total > 0 and start < stop) or (total < 0 and start > stop):
-                        result.append(start)
-                        starts.append(start)
-                        start += step[c % len(step)]
-                        c += 1
-        starts = list(flatten(result))
-    return result
-
-# working
-iterate(0, [5], [[1, 2]])
-iterate(0, [3], [[1, 2], [3, 4]])
-iterate(0, [4, 3], [[2, 1]])
-iterate(0, [4, 3], [[1], [2]])
-iterate(0, [3, 2], [[1, 2], [3, 4]])
-iterate(0, [2, 3], [[1, 2], [3, 4]])
-iterate(0, [4, 3], [[1]])
-iterate(0, [4, -3], [[-1]])
-iterate(0, [8, 3], [[1, 2], [[]]])
-iterate(0.3, [8, .4], [[1, 2], [[]]])
-iterate(Dec(day=.3), [8, .4], [[1, 2.5], [[]]])
-
-# ???
 
 def flatten(nested):
     if isinstance(nested, (int, float, str, bool)):
@@ -380,64 +373,53 @@ def flatten(nested):
             yield i
             
             
-list(flatten(1))
-import re
-
-def multilimit_slice(arr, string):
-    string = string.lower().replace(r'[^\d.\-#*:<>hilnsx^]', '')
-    length = len(arr)
-    first, *others = re.split(r'([#*:<>hilnsx].*)', string, 1)
-    starts = []
-    results = []
-    if not others:
-        return int(first)
-    others = [o for o in re.split(r'(?=[#*<>hlnsx])', others[0]) if o]
-    for i, other in enumerate(others):
-        results.append([])
-        limit, *steps = re.split(r'(?=[#*:<>hilnsx])', other)
-        steps = [int(s[1:]) if not (s := int(s[1:])) else 1 for s in steps]
-        steps = [-s if '/^[<h#n]/' else s for s in steps] or [1]
-        total = sum(steps)
-        if total == 0:
-            steps = [1]
-            total = 1
-        if i == 0:
-            starts = [int(first)]
-        for j, start in enumerate(starts):
-            if isinstance(limit, int):
-            results[i].append([])
-            if not isinstance(start, int):
-                start = 0 if total > 0 else length - 1
-            elif start < 0 and start + length >= 0:
-                start += length
-            stop = int(limit[1:])
-            if '/^[*#xn]/' in limit:
-                if not isinstance(stop, int):
-                    count = 0
-                    while (total > 0 and start < length) or (total < 0 and start >= 0):
-                        if 0 <= start < length:
-                            starts.append(start)
-                        start += steps[count % len(steps)]
-                        count += 1
+def iterate(start:int|float, stops=[], steps=[()]):
+    starts = [start]
+    result = []
+    for i, stop in enumerate(stops):
+        if i + 1 > len(steps) or not list(flatten(steps[i])):
+            result = []
+            for start in starts:
+                if isinstance(stop, (int, float)):
+                    result.append((start, stop + start))
                 else:
-                    for c in range(stop):
-                        if 0 <= start < length:
-                            starts.append(start)
-                        start += steps[c % len(steps)]
-            elif '/^[<>hl]/' in limit:
-                stop = stop * (-1) ** ('/^[<h]/' in limit) + start
-            if stop < 0 and stop + length >= 0:
-                stop += length
-            elif stop < 0 and stop + length < 0:
-                stop = float('nan')
-            if (float('nan') == stop and total > 0) or stop > length:
-                stop = length
-            count = 0
-            while (float('nan') == stop and total < 0 and start >= 0) or (total > 0 and start < stop) or (total < 0 and start > stop):
-                if 0 <= start < length:
-                    starts.append(start)
-                start += steps[count % len(steps)]
-                count += 1
-            results[i][-1].extend(starts)
-    return [item for sublist in results[1:] for item in sublist] if len(results) > 1 else [item for sublist in results[0] for item in sublist]
+                    result.append((start, stop))
+            break
+        else:
+            step = tuple(flatten(steps[i]))
+            total = sum(step)
+            for start in starts:
+                if isinstance(stop, int):
+                    for j in range(stop):
+                        result.append(start)
+                        start += step[j % len(step)]
+                else:
+                    c = 0
+                    stop = start + stop if isinstance(stop, float) else stop
+                    while (total > 0 and start < stop) or (total < 0 and start > stop):
+                        result.append(start)
+                        start += step[c % len(step)]
+                        c += 1
+        starts = list(flatten(result))
+    return result
 
+# working
+iterate(0, [5], [[1, 2]])
+iterate(0, [5.], [[1, 2]])
+iterate(0, [3], [[1, 2], [3, 4]])
+iterate(0, [3.], [[1, 2], [3, 4]])
+iterate(0, [4, .3], [[2, 1]])
+iterate(0, [4., .3], [[2, 1]])
+iterate(0, [4, 3], [[1], [2]])
+iterate(0, [4., 3], [[1], [2]])
+iterate(0, [3, 2], [[1, 2], [3, 4]])
+iterate(0, [2, 3], [[1, 2], [3, 4]])
+iterate(0, [4, .3], [[1]])
+iterate(0, [4., .3], [[1]])
+iterate(0, [5, -3], [[-1]])
+iterate(0, [-5., -3], [[-1]])
+iterate(0, [6, 3], [[1, 2], [[]]])
+iterate(0.3, [6, .4], [[1, 2], [[]]])
+iterate(0.3, [4.8, .4], [[1, 2], [[1]]])
+iterate(0.3, [4.8, .4], [[1, 2], [[1, 3.5]]])
+iterate(0.3, [4.8, .4], [[1, 2], [[]]])
