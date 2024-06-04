@@ -1,25 +1,15 @@
 class Dec:
-    """Represents either a duration or an instant (a point in time)
-    To create a duration, pass a time without a time zone.
-    To create an instant, pass a time and also a time zone.
+    """Represents either a duration or an instant (a point in time).
+    To create a duration, pass a time without a time zone, e.g. Dec(day=719468).
+    To create an instant, also pass a time zone, e.g. Dec(day=719468, zone=0).
     Both instants and durations can create intervals and series.
     Intervals consist of two instants or an instant and a duration.
     A series can consist of durations, instants, or intervals.
-    To create an interval, pass a limit to a duration or an instant.
-    Series requirge pass a limit and steps to a duration or an instant.
-    duration or an instant. Intervals cannot create series. 
-    Then, call the newly created instance to provide iteration logic.
-    All time units are converted to Zone 0 decimal years and days, but
-    converted back to the original time zone for display.
-    Class instances can be called to provide iteration logic.
-    The first argument in an instance call is the limit.
-    This conversion facilitates operations across time zones.
-    One-way time zone conversion introduces rounding errors that
-    are fixed upon conversion back to the original time zone.
-    Therefore, round-trip converted decimal years and days should
-    match the input day and year even if stored values do not.
-    year+lun.faza
-    year+day.time
+    To create an interval, pass a limit, e.g. Dec(day=719468, zone=0)(5).
+    To create a series, also pass a step, e.g. Dec(day=719468, zone=0)(5, 2).
+    The provided time is converted into Zone 0 decimal years and days.
+    Time zones are stored as integer decidays separately from the time.
+    The time zone is added back to the time when methods are called.
     """
     def __init__(
         self,
@@ -138,6 +128,7 @@ class Dec:
             return Dec(day=self.dote != other.dote)
         return self.dote != other
     def __gt__(self, other):
+        # if comparing against a string try to parse string to dote
         if isinstance(other, Dec):
             return Dec(day=self.dote > other.dote)
         return self.dote > other
@@ -363,17 +354,10 @@ str(u.dote + u.zone / 10).split(".")
 # len([()])
 
 
-def flatten(nested):
-    if isinstance(nested, (int, float, str, bool)):
-        nested = [nested]
-    for i in nested:
-        if isinstance(i, (list, tuple)):
-            yield from flatten(i)
-        else:
-            yield i
-            
-            
 def iterate(start:int|float, stops=[], steps=[()]):
+    """Produce a 2-tuple or list of Dec objects.
+    Initialize a list of starts with the provided start. 
+    """
     starts = [start]
     result = []
     for i, stop in enumerate(stops):
@@ -403,23 +387,72 @@ def iterate(start:int|float, stops=[], steps=[()]):
         starts = list(flatten(result))
     return result
 
+def flatten(nested):
+    if isinstance(nested, (int, float, str, bool)):
+        nested = [nested]
+    for i in nested:
+        if isinstance(i, (list, tuple)):
+            yield from flatten(i)
+        else:
+            yield i
+            
+            
+def generate(starts, stop, steps=()):
+    """Produce a 2-tuple or list of Dec objects.
+    Initialize a list of starts with the provided start. 
+    """
+    steps = tuple(flatten(steps))
+    for start in starts:
+        if not steps:
+            # Create an interval
+            if type(stop) in (int, float):
+                yield start, start + stop
+            else:
+                yield start, stop
+        else:
+            if type(stop) == int:
+                for i in range(stop):
+                    yield start
+                    start += steps[i % len(steps)]
+            else:
+                total = sum(steps)
+                if total == 0:
+                    for s in steps:
+                        yield start
+                        start += s
+                else:
+                    c = 0
+                    stop = start + stop if type(stop) == float else stop
+                    while (total > 0 and start < stop) or (total < 0 and start > stop):
+                        yield start
+                        start += steps[c % len(steps)]
+                        c += 1
+
+list(generate([0], 5, [[1, 2]]))
 # working
-iterate(0, [5], [[1, 2]])
-iterate(0, [5.], [[1, 2]])
-iterate(0, [3], [[1, 2], [3, 4]])
-iterate(0, [3.], [[1, 2], [3, 4]])
-iterate(0, [4, .3], [[2, 1]])
-iterate(0, [4., .3], [[2, 1]])
-iterate(0, [4, 3], [[1], [2]])
-iterate(0, [4., 3], [[1], [2]])
-iterate(0, [3, 2], [[1, 2], [3, 4]])
-iterate(0, [2, 3], [[1, 2], [3, 4]])
-iterate(0, [4, .3], [[1]])
-iterate(0, [4., .3], [[1]])
-iterate(0, [5, -3], [[-1]])
-iterate(0, [-5., -3], [[-1]])
-iterate(0, [6, 3], [[1, 2], [[]]])
-iterate(0.3, [6, .4], [[1, 2], [[]]])
-iterate(0.3, [4.8, .4], [[1, 2], [[1]]])
-iterate(0.3, [4.8, .4], [[1, 2], [[1, 3.5]]])
-iterate(0.3, [4.8, .4], [[1, 2], [[]]])
+t = 3,
+def repeat(start, stops, steps):
+    starts = start,
+    for i, stop in enumerate(stops):
+        starts = tuple(generate(starts, stop, steps[i] if i +1 <= len(steps) else ()))
+    return starts
+
+repeat(0, [5], [[1, 2]])
+repeat(0, [5.], [[1, 2]])
+repeat(0, [3], [[1, 2], [3, 4]])
+repeat(0, [3.], [[1, 2], [3, 4]])
+repeat(0, [4, .3], [[2, 1]])
+repeat(0, [4., .3], [[2, 1]])
+repeat(0, [4, 3], [[1], [2]])
+repeat(0, [4., 3], [[1], [2]])
+repeat(0, [3, 2], [[1, 2], [3, 4]])
+repeat(0, [2, 3], [[1, 2], [3, 4]])
+repeat(0, [4, .3], [[1]])
+repeat(0, [4., .3], [[1]])
+repeat(0, [5, -3], [[-1]])
+repeat(0, [-5., -3], [[-1]])
+repeat(0, [6, 3], [[1, 2], [[]]])
+repeat(0.3, [6, .4], [[1, 2], [[]]])
+repeat(0.3, [4.8, .4], [[1, 2], [[1]]])
+repeat(0.3, [4.8, .4], [[1, 2], [[1, 3.5]]])
+repeat(0.3, [4.8, .4], [[1, 2], [[]]])
