@@ -437,6 +437,89 @@ def repeat(start, stops, steps):
         starts = tuple(generate(starts, stop, steps[i] if i +1 <= len(steps) else ()))
     return starts
 
+class testClass:
+    def __init__(self, seq):
+        self.seq = seq
+        self.stop = []
+        self.step = []
+        self.call = []
+    def __getitem__(self, key):
+        if type(key) in (int, slice):
+            return self.__class__(self.seq[key])
+        return [self.seq[i] for i in key]
+    def __delitem__(self, key):
+        if type(key) == int:
+            self.seq = [j for i, j in enumerate(self.seq) if i != key]
+        elif type(key) == slice:
+            self.seq = [j for i, j in enumerate(self.seq) if i not in list(range(key.start or 0, key.stop or len(self.seq), key.step or 1))]
+        else:
+            indices = [i if type(i) == int else tuple(range(*i.indices(len(self.seq)))) if type(i) == slice else i for i in key]
+            self.seq = [j for i, j in enumerate(self.seq) if i not in tuple(flatten(indices))]
+    def __setitem__(self, key, val):
+        if type(key) == int:
+            self.seq[key] = val
+        elif type(key) == slice:
+            for i in range(key.start or 0, key.stop or len(self.seq), key.step or 1):
+                self.seq[i] = val
+        else:
+            for i in key:
+                self.__setitem__(i, val)
+    def __call__(self, stop, *steps):
+        self.stop += [stop]
+        self.step += [steps]
+        self.call += [(stop, *steps)]
+        return self
+
+[
+    i if type(i) == int else
+    tuple(range(*i.indices(15))) if type(i) == slice else i
+    for i in [slice(0, 3), slice(5, 9)]]
+
+
+tc = testClass([1, 2, 3, 4, 5, 6, 7, 8, 9])
+del tc[2]
+tc.seq
+tc = testClass([1, 2, 3, 4, 5, 6, 7, 8, 9])
+del tc[0, 2]
+tc.seq
+tc = testClass([1, 2, 3, 4, 5, 6, 7, 8, 9])
+del tc[:2]
+tc.seq
+tc = testClass([1, 2, 3, 4, 5, 6, 7, 8, 9])
+del tc[:2, 4:]
+tc.seq
+tc = testClass([1, 2, 3, 4, 5, 6, 7, 8, 9])
+tc[:4] = 0
+tc.seq
+
+3 in range(*slice(0, 5).indices(5))
+# not working
+tc = testClass([1, 2, 3, 4, 5, 6, 7, 8, 9])
+del tc[1:3, 7:9]
+tc.seq
+# skip item 2
+del tc[2]
+tc.seq
+# combine these slices to skip item 2
+tc[:1,2:]
+# combine these indexes
+tc[1, 0, 2]
+# combine these indexes with slices
+tc[1, 0, 2, :3, 5:]
+# overwrite these indexes and slices
+tc[1, 0, 2, :3, 5:] = 100
+tc.seq
+# delete these indexes and slices
+del tc[1, 0, 5:]
+tc.seq
+# allow for cycling through steps
+tc(2, 3, 4, 5, 6)
+tc.step
+tc.stop
+
+s = slice(0, 9, 3)
+s.stop
+range(*.indices(19))
 repeat(0, [5], [[1, 2]])
 repeat(0, [5.], [[1, 2]])
 repeat(0, [3], [[1, 2], [3, 4]])
