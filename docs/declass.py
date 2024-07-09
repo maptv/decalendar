@@ -1,12 +1,13 @@
 class Dec:
-    """Represents either a duration or an instant (a point in time).
-    To create a duration, pass a time without a time zone, e.g. Dec(day=719468).
-    To create an instant, also pass a time zone, e.g. Dec(day=719468, zone=0).
+    """Represents either a duration, instant, interval, or series.
+    To create
+    - a duration, instantiate without a time zone, e.g. Dec(day=9).
+    - an instant, instantiate with a time zone, e.g. Dec(day=719468, zone=0).
+    - an interval, pass a limit to an instance, e.g. Dec(day=9)(5).
+    - a series, pass a limit and a step to an instance, e.g. Dec(day=9)(5, 2).
     Both instants and durations can create intervals and series.
     Intervals consist of two instants or an instant and a duration.
     A series can consist of durations, instants, or intervals.
-    To create an interval, pass a limit, e.g. Dec(day=719468, zone=0)(5).
-    To create a series, also pass a step, e.g. Dec(day=719468, zone=0)(5, 2).
     The provided time is converted into Zone 0 decimal years and days.
     Time zones are stored as integer decidays separately from the time.
     The time zone is added back to the time when methods are called.
@@ -23,14 +24,16 @@ class Dec:
         minute=0,
         second=0,
         millisecond=0,
-        zone=0,
+        zone=None,
         utc=-9,
         degree=-162,
     ):
-        self.zone = int(zone // 1 + utc // 2.4 + 4 + (degree + 162) // 36)
+        self.zone = int(
+            zone // 1 + utc // 2.4 + 4 + (degree + 162) // 36
+            ) if zone is not None else None
         self.dote = (self.year2dote(year) + day
             + (153 * (month - 3 if month > 2 else month + 9) + 2) // 5 + dotm - 1
-            + week * 7 + dotw - 3 - self.zone / 10
+            + week * 7 + dotw - 3 - (self.zone / 10 if self.zone is not None else 0)
             + (hour + minute / 60 + second / 3600 + millisecond / 3600000) / 24
             )
         self._save_year_and_date()
@@ -89,13 +92,35 @@ class Dec:
     def __iter__(self):
         yield from zip(
             ["year", "date", "dote", "zone", "stop", "step"],
-            [*self.dote2date(dote := self.dote + self.zone / 10),
+            [*self.dote2date(
+                dote := self.dote + (self.zone / 10 if self.zone is not None else 0)),
             dote, self.zone, self.stop, self.step])
     def __str__(self):
-        year, date = self.dote2date(dote := self.dote + self.zone / 10)
+        dote = self.dote + (self.zone / 10 if self.zone is not None else 0)
+        if self.zone is None:
+            # Duration in days with optional iteration logic
+            return f"{format(dote, '.5f').strip('0')}{''.join(map(str, self.call)).replace(' ', '')}"
+        else:
+            year, date = self.dote2date(dote)
+            # Instant (year+deciday-zone) with optional iteration logic
+            return (
+                f"{int(year):04}+{date:03}{format(dote % 1 * 10, ".4f").strip("0")}"
+                f"-{self.zone}{''.join(map(str, self.call)).replace(' ', '')}"
+            )
+    def __repr__(self):
+        dote = self.dote + (self.zone / 10 if self.zone is not None else 0)
+        if self.zone is None:
+            pre = f"Dec(day={format(dote, '.5f').strip('0')}"
+        else:
+            year, date = self.dote2date(dote)
+            pre = (
+                f"Dec(year={int(year)}, date={int(date)}, "
+                f"time={dote % 1 * 10:.4g}, zone={int(self.zone)}"
+            )
         return (
-            f"{int(year):04}+{date:03}{dote % 1 * 10:.4f}-{self.zone}"
-            f"{''.join(map(str, self.call)).replace(' ', '')}"
+            pre + (f", stop={str(self.stop).replace(' ', '')}" if self.stop else "")
+            + (f", step={str(self.step).replace(' ', '').replace(',)', ')').replace('),(', ')(')}"
+               if self.step else "") + ")"
         )
     def __int__(self):
         return int(self.dote)
@@ -232,17 +257,6 @@ class Dec:
         if isinstance(other, Dec):
             return Dec(day=self.dote << other.dote)
         return Dec(day=self.dote << other)
-    def __repr__(self):
-        year, date = self.dote2date(dote := self.dote + self.zone / 10)
-        return (
-            f"Dec(year={int(year)}, date={int(date)}, "
-            f"time={dote % 1 * 10:.4g}"
-            + (f", zone={int(self.zone)}" if self.zone else "")
-            + (f", stop={str(self.stop).replace(' ', '')}"
-                if self.stop else "")
-            + (f", step={str(self.step).replace(' ', '').replace(',)', ')').replace('),(', ')(')}"
-                if self.step else "") + ")"
-        )
     @property
     def iter(self):
         start = self.dote
@@ -313,20 +327,25 @@ class Dec:
 # # time is included in the dote, but
 # # rounding errors are introduced when
 # # we change the time zone to Zone 0
-u = Dec(year=1969, day=306.54, zone=1)
-u.dote # broken
+i = Dec(year=1969, day=306.54, zone=1)
+i.dote # broken
 # # We can fix this by returning to the
 # # original time zone
-u.dote + u.zone / 10 # healed
-str(u.dote + u.zone / 10).split(".")
+i.dote + i.zone / 10 # healed
+i
+d = Dec(year=9969, day=1/3)
+d
+str(i)
+str(d)
+# str(u.dote + u.zone / 10).split(".")
 # I decided to convert all attributes
 # to Zone 0 before assigning them
 # so that calculations can be
 # u = Dec(year=1969, day=306.54, zone=1)
 # eval(str(u)[:-2] + "/3650")
-# m = Dec(year=2000)
-# m.dote
-# m(3, 2, 1)#(4.3,3,2,1)
+m = Dec(year=2000)
+m.dote
+m(3, 2, 1)(4.3,3,2,1)
 # str(m)
 # u
 # m
@@ -354,38 +373,38 @@ str(u.dote + u.zone / 10).split(".")
 # len([()])
 
 
-def iterate(start:int|float, stops=[], steps=[()]):
-    """Produce a 2-tuple or list of Dec objects.
-    Initialize a list of starts with the provided start. 
-    """
-    starts = [start]
-    result = []
-    for i, stop in enumerate(stops):
-        if i + 1 > len(steps) or not list(flatten(steps[i])):
-            result = []
-            for start in starts:
-                if isinstance(stop, (int, float)):
-                    result.append((start, stop + start))
-                else:
-                    result.append((start, stop))
-            break
-        else:
-            step = tuple(flatten(steps[i]))
-            total = sum(step)
-            for start in starts:
-                if isinstance(stop, int):
-                    for j in range(stop):
-                        result.append(start)
-                        start += step[j % len(step)]
-                else:
-                    c = 0
-                    stop = start + stop if isinstance(stop, float) else stop
-                    while (total > 0 and start < stop) or (total < 0 and start > stop):
-                        result.append(start)
-                        start += step[c % len(step)]
-                        c += 1
-        starts = list(flatten(result))
-    return result
+# def iterate(start:int|float, stops=[], steps=[()]):
+#     """Produce a 2-tuple or list of Dec objects.
+#     Initialize a list of starts with the provided start.
+#     """
+#     starts = [start]
+#     result = []
+#     for i, stop in enumerate(stops):
+#         if i + 1 > len(steps) or not list(flatten(steps[i])):
+#             result = []
+#             for start in starts:
+#                 if isinstance(stop, (int, float)):
+#                     result.append((start, stop + start))
+#                 else:
+#                     result.append((start, stop))
+#             break
+#         else:
+#             step = tuple(flatten(steps[i]))
+#             total = sum(step)
+#             for start in starts:
+#                 if isinstance(stop, int):
+#                     for j in range(stop):
+#                         result.append(start)
+#                         start += step[j % len(step)]
+#                 else:
+#                     c = 0
+#                     stop = start + stop if isinstance(stop, float) else stop
+#                     while (total > 0 and start < stop) or (total < 0 and start > stop):
+#                         result.append(start)
+#                         start += step[c % len(step)]
+#                         c += 1
+#         starts = list(flatten(result))
+#     return result
 
 def flatten(nested):
     if isinstance(nested, (int, float, str, bool)):
@@ -395,11 +414,11 @@ def flatten(nested):
             yield from flatten(i)
         else:
             yield i
-            
-            
+
+
 def generate(starts, stop, steps=()):
     """Produce a 2-tuple or list of Dec objects.
-    Initialize a list of starts with the provided start. 
+    Initialize a list of starts with the provided start.
     """
     steps = tuple(flatten(steps))
     for start in starts:
@@ -519,7 +538,7 @@ tc.stop
 
 s = slice(0, 9, 3)
 s.stop
-range(*.indices(19))
+# range(*.indices(19))
 repeat(0, [5], [[1, 2]])
 repeat(0, [5.], [[1, 2]])
 repeat(0, [3], [[1, 2], [3, 4]])
