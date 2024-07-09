@@ -1,3 +1,5 @@
+from itertools import islice, chain
+
 class Dec:
     """Represents either a duration, instant, interval, or series.
     To create
@@ -37,9 +39,10 @@ class Dec:
             + (hour + minute / 60 + second / 3600 + millisecond / 3600000) / 24
             )
         self._save_year_and_date()
-        self.stop = []
-        self.step = []
-        self.call = []
+        self._stops = []
+        self._steps = []
+        self._calls = []
+        self._range = iter([self.dote])
     @staticmethod
     def dote2date(dote):
         cykl = (dote if dote >= 0 else dote - 146096) // 146097
@@ -59,10 +62,31 @@ class Dec:
         self._year = yotc + cykl * 400
         self._date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
     def __call__(self, stop, *steps):
-        self.stop += [stop]
-        self.step += [steps]
-        self.call += [(stop, *steps)]
+        self._stops += [stop]
+        self._steps += [steps]
+        self._calls += [(stop, *steps)]
+        self._create_range()
         return self
+    def _create_range(self):
+        starts = self.dote,
+        nsteps = len(self._steps)
+        for i, stop in enumerate(self._stops):
+            starts = self._generate(starts, stop,
+                                    self._steps[i] if i + 1 <= nsteps else ())
+        self._range = iter(starts)
+    def __getitem__(self, key):
+        if type(key) == slice and key.start >= 0 and key.stop >= 0 and key.step >= 0:
+            return islice(self._range, key.start, key.stop, key.step)
+        elif type(key) == int and key >= 0:
+            return next(islice(self._range, key, None))
+        elif type(key) == slice or type(key) == int:
+            tuple(self._range)[key]
+        key = self._flatten(key)
+        if all(i >= 0 for i in key):
+            return chain(islice(self._range, i, None) for i in key)
+        else:
+            t = tuple(self._range)
+            return tuple(t[i] for i in key)
     @property
     def leap(self):
         y = self.year // 1 + 1
@@ -93,18 +117,18 @@ class Dec:
         dote = self.dote + (self.zone / 10 if self.zone is not None else 0)
         if self.zone is None:
             # Duration in days with optional iteration logic
-            return f"{format(dote, '.5f').strip('0')}{''.join(map(str, self.call)).replace(' ', '')}"
+            return f"{format(dote, '.5f').strip('0').rstrip(".")}{''.join(map(str, self._calls)).replace(' ', '')}"
         else:
             year, date = self.dote2date(dote)
             # Instant (year+deciday-zone) with optional iteration logic
             return (
-                f"{int(year):04}+{date:03}{format(dote % 1 * 10, ".4f").strip("0")}"
-                f"-{self.zone}{''.join(map(str, self.call)).replace(' ', '')}"
+                f"{int(year):04}+{date:03}{format(dote % 1 * 10, ".4f").strip("0").rstrip(".")}"
+                f"-{self.zone}{''.join(map(str, self._calls)).replace(' ', '')}"
             )
     def __repr__(self):
         dote = self.dote + (self.zone / 10 if self.zone is not None else 0)
         if self.zone is None:
-            pre = f"Dec(day={format(dote, '.5f').strip('0')}"
+            pre = f"Dec(day={format(dote, '.5f').strip('0').rstrip(".")}"
         else:
             year, date = self.dote2date(dote)
             pre = (
@@ -112,9 +136,9 @@ class Dec:
                 f"time={dote % 1 * 10:.4g}, zone={int(self.zone)}"
             )
         return (
-            pre + (f", stop={str(self.stop).replace(' ', '')}" if self.stop else "")
-            + (f", step={str(self.step).replace(' ', '').replace(',)', ')').replace('),(', ')(')}"
-               if self.step else "") + ")"
+            pre + (f", stop={str(self._stops).replace(' ', '')}" if self._stops else "")
+            + (f", step={str(self._steps).replace(' ', '').replace(',)', ')').replace('),(', ')(')}"
+               if self._steps else "") + ")"
         )
     def __int__(self):
         return int(self.dote)
@@ -251,23 +275,25 @@ class Dec:
         if isinstance(other, Dec):
             return Dec(day=self.dote << other.dote)
         return Dec(day=self.dote << other)
-    def flatten(self, nested):
+    def _flatten(self, nested):
         for i in nested:
             if isinstance(i, (list, tuple)):
-                yield from self.flatten(i)
+                yield from self._flatten(i)
             else:
                 yield i
     def __iter__(self):
-        starts = self.dote,
-        nsteps = len(self.step)
-        for i, stop in enumerate(self.stop):
-            starts = self.generate(starts, stop, self.step[i] if i +1 <= nsteps else ())
-        return starts
-    def generate(self, starts, stop, steps=()):
+        return self
+    def __next__(self):
+        try:
+            return next(self._range)
+        except StopIteration:
+            self._create_range()
+            raise
+    def _generate(self, starts, stop, steps=()):
         """Produce a 2-tuple or list of Dec objects.
         Initialize a list of starts with the provided start.
         """
-        steps = tuple(self.flatten(steps))
+        steps = tuple(self._flatten(steps))
         for start in starts:
             if not steps:
                 # Create an interval
@@ -304,7 +330,7 @@ class Dec:
     #         total = sum(steps)
     #         c = 0
     #         for j, s in enumerate(starts):
-    #             if not list(self.flatten(steps)):
+    #             if not list(self._flatten(steps)):
     #                 if isinstance(limit, (int, float, Dec)):
     #                     yield (s, limit + s)
     #                 else:
@@ -360,10 +386,13 @@ str(d)
 # u = Dec(year=1969, day=306.54, zone=1)
 # eval(str(u)[:-2] + "/3650")
 m = Dec(year=2000)
-m.dote
-m(3, 2, 1)(4.3,3,2,1)
-list(m(3, 2, 1))
-m.list
+# m(3, 2, 1)(4.3,3,2,1)
+m = Dec(year=2000)
+m(3.4, 2, 1)
+list(m)
+m = Dec(year=2000)
+half_year_eod = list(m(Dec(year=2000.5), 2))
+max(half_year_eod)
 # str(m)
 # u
 # m
