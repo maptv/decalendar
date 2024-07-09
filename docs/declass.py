@@ -89,12 +89,6 @@ class Dec:
         diff = value - self._date
         self._dote += diff
         self._save_year_and_date()
-    def __iter__(self):
-        yield from zip(
-            ["year", "date", "dote", "zone", "stop", "step"],
-            [*self.dote2date(
-                dote := self.dote + (self.zone / 10 if self.zone is not None else 0)),
-            dote, self.zone, self.stop, self.step])
     def __str__(self):
         dote = self.dote + (self.zone / 10 if self.zone is not None else 0)
         if self.zone is None:
@@ -257,57 +251,79 @@ class Dec:
         if isinstance(other, Dec):
             return Dec(day=self.dote << other.dote)
         return Dec(day=self.dote << other)
-    @property
-    def iter(self):
-        start = self.dote
-        starts = [start]
-        # result = []
-        for i, limit in enumerate(self.stop):
-            steps = self.step[i]
-            total = sum(steps)
-            c = 0
-            for j, s in enumerate(starts):
-                if not list(self.flatten(steps)):
-                    if isinstance(limit, (int, float, Dec)):
-                        yield (s, limit + s)
-                    else:
-                        yield (s, limit)
-                elif isinstance(limit, int):
-                    for c in range(limit):
-                        yield s
-                        starts.append(s)
-                        s += steps[c % len(steps)]
-                else:
-                    if isinstance(limit, float):
-                        l = s + limit
-                    elif isinstance(limit, Dec):
-                        l = limit
-                    while (total > 0 and s < l) or (total < 0 and s > l):
-                        yield s
-                        starts.append(s)
-                        s += steps[c % len(steps)]
-                        c += 1
-    @property
-    def list(self):
-        list(self.iter)
-    @property
-    def tuple(self):
-        tuple(self.iter)
-    @property
-    def set(self):
-        set(self.iter)
-    @property
-    def float(self):
-        list(map(float, self.flatten(self.iter)))
-    @property
-    def int(self):
-        list(map(int, self.flatten(self.iter)))
     def flatten(self, nested):
         for i in nested:
             if isinstance(i, (list, tuple)):
                 yield from self.flatten(i)
             else:
                 yield i
+    def __iter__(self):
+        starts = self.dote,
+        nsteps = len(self.step)
+        for i, stop in enumerate(self.stop):
+            starts = self.generate(starts, stop, self.step[i] if i +1 <= nsteps else ())
+        return starts
+    def generate(self, starts, stop, steps=()):
+        """Produce a 2-tuple or list of Dec objects.
+        Initialize a list of starts with the provided start.
+        """
+        steps = tuple(self.flatten(steps))
+        for start in starts:
+            if not steps:
+                # Create an interval
+                if type(stop) in (int, float):
+                    yield start, start + stop
+                else:
+                    yield start, stop
+            else:
+                if type(stop) == int:
+                    for i in range(stop):
+                        yield start
+                        start += steps[i % len(steps)]
+                else:
+                    total = sum(steps) if steps else 0
+                    if total == 0:
+                        for s in steps:
+                            yield start
+                            start += s
+                    else:
+                        c = 0
+                        stop = start + stop if type(stop) == float else stop
+                        while (total > 0 and start < stop) or (total < 0 and start > stop):
+                            yield start
+                            start += steps[c % len(steps)]
+                            c += 1
+
+    # @property
+    # def iter(self):
+    #     start = self.dote
+    #     starts = [start]
+    #     # result = []
+    #     for i, limit in enumerate(self.stop):
+    #         steps = self.step[i]
+    #         total = sum(steps)
+    #         c = 0
+    #         for j, s in enumerate(starts):
+    #             if not list(self.flatten(steps)):
+    #                 if isinstance(limit, (int, float, Dec)):
+    #                     yield (s, limit + s)
+    #                 else:
+    #                     yield (s, limit)
+    #             elif isinstance(limit, int):
+    #                 for c in range(limit):
+    #                     yield s
+    #                     starts.append(s)
+    #                     s += steps[c % len(steps)]
+    #             else:
+    #                 if isinstance(limit, float):
+    #                     l = s + limit
+    #                 elif isinstance(limit, Dec):
+    #                     l = limit
+    #                 while (total > 0 and s < l) or (total < 0 and s > l):
+    #                     yield s
+    #                     starts.append(s)
+    #                     s += steps[c % len(steps)]
+    #                     c += 1
 
 
 
@@ -346,6 +362,8 @@ str(d)
 m = Dec(year=2000)
 m.dote
 m(3, 2, 1)(4.3,3,2,1)
+list(m(3, 2, 1))
+m.list
 # str(m)
 # u
 # m
@@ -434,7 +452,7 @@ def generate(starts, stop, steps=()):
                     yield start
                     start += steps[i % len(steps)]
             else:
-                total = sum(steps)
+                total = sum(steps) if steps else 0
                 if total == 0:
                     for s in steps:
                         yield start
