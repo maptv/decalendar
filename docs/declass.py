@@ -30,9 +30,13 @@ class Dec:
         utc=-9,
         degree=-162,
     ):
-        self.zone = int(
-            zone // 1 + utc // 2.4 + 4 + (degree + 162) // 36
-            ) if zone is not None else None
+        if any(i is not None for i in [zone, utc, degree]):
+            self.zone = (
+                (zone if zone else 0)
+                + ((utc * 15 if utc else 0)
+                    + (((degree + 360 if (degree := degree % 360) < 0 else degree)
+                        + 18) if degree else 0)) / 36 % 10
+            ) // 1
         self.dote = (self.year2dote(year) + day
             + (153 * (month - 3 if month > 2 else month + 9) + 2) // 5 + dotm - 1
             + week * 7 + dotw - 3 - (self.zone / 10 if self.zone is not None else 0)

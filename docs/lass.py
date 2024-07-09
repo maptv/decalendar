@@ -29,14 +29,16 @@ class Dec:
         second=0,
         millisecond=0,
         zone=None,
-        utc=-9,
-        degree=-162,
+        utc=None,
+        degree=None,
     ):
-        self.zone = (
-            int(zone // 1 + utc // 2.4 + 4 + (degree + 162) // 36)
-            if zone is not None
-            else None
-        )
+        if any(i is not None for i in [zone, utc, degree]):
+            self.zone = (
+                (zone if zone else 0)
+                + ((utc * 15 if utc else 0)
+                    + (((degree + 360 if (degree := degree % 360) < 0 else degree)
+                        + 18) if degree else 0)) / 36 % 10
+            ) // 1
         self.dote = (
             self.year2dote(year)
             + day
