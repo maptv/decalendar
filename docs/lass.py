@@ -33,21 +33,13 @@ class Dec:
         degree=None,
     ):
         if any(i is not None for i in [zone, utc, degree]):
-            self.zone = (
-                (zone if zone else 0)
-                + ((utc * 15 if utc else 0)
-                    + (((degree + 360 if (degree := degree % 360) < 0 else degree)
-                        + 18) if degree else 0)) / 36 % 10
-            ) // 1
+            self.zone = ((zone if zone else 0) + ((utc * 15 if utc else 0) + (((
+                            degree + 360 if (degree := degree % 360) < 0 else degree
+                        ) + 18) if degree else 0)) / 36 % 10) // 1
         self.dote = (
-            self.year2dote(year)
-            + day
+            self.year2dote(year) + day
             + (153 * (month - 3 if month > 2 else month + 9) + 2) // 5
-            + dotm
-            - 1
-            + week * 7
-            + dotw
-            - 3
+            + dotm - 1 + week * 7 + dotw - 3
             - (self.zone / 10 if self.zone is not None else 0)
             + (hour + minute / 60 + second / 3600 + millisecond / 3600000) / 24
         )
@@ -72,11 +64,15 @@ class Dec:
         return cykl * 146097 + yotc * 365 + yotc // 4 - yotc // 100
 
     def _save_year_and_date(self):
-        cykl = (self._dote if self.dote >= 0 else self._dote - 146096) // 146097
+        cykl = (
+            self._dote if self.dote >= 0 else self._dote - 146096
+        ) // 146097
         dotc = self._dote - cykl * 146097
         yotc = (dotc - dotc // 1460 + dotc // 36524 - dotc // 146096) / 365
         self._year = yotc + cykl * 400
-        self._date = int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
+        self._date = (
+            int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
+        )
 
     def __call__(self, stop, *steps):
         self._stops += [stop]
@@ -168,14 +164,10 @@ class Dec:
                 f"time={dote % 1 * 10:.4g}, zone={int(self.zone)}"
             )
         return (
-            pre
-            + (f", stop={str(self._stops).replace(' ', '')}" if self._stops else "")
+            pre + (f", stop={str(self._stops).replace(' ', '')}" if self._stops else "")
             + (
                 f", step={str(self._steps).replace(' ', '').replace(',)', ')').replace('),(', ')(')}"
-                if self._steps
-                else ""
-            )
-            + ")"
+                if self._steps else "") + ")"
         )
 
     def __int__(self):
