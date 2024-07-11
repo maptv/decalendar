@@ -1,6 +1,8 @@
+#%% imports
 from itertools import islice, chain
 
 
+#%% define class
 class Dec:
     """Represents either a duration, instant, interval, or series.
     To create
@@ -32,10 +34,11 @@ class Dec:
         utc=None,
         degree=None,
     ):
-        if any(i is not None for i in [zone, utc, degree]):
-            self.zone = ((zone if zone else 0) + ((utc * 15 if utc else 0) + (((
-                            degree + 360 if (degree := degree % 360) < 0 else degree
-                        ) + 18) if degree else 0)) / 36 % 10) // 1
+        self.zone = int(((zone if zone else 0)
+            + ((utc * 15 if utc else 0) + (((
+                degree + 360 if (degree := degree % 360) < 0 else degree
+        ) + 18) if degree else 0)) / 36 % 10) // 1) if any(
+            i is not None for i in [zone, utc, degree]) else None
         self.dote = (
             self.year2dote(year) + day
             + (153 * (month - 3 if month > 2 else month + 9) + 2) // 5
@@ -74,11 +77,12 @@ class Dec:
             int(dotc) + (yotc := int(yotc)) // 100 - yotc * 365 - yotc // 4
         )
 
-    def __call__(self, stop, *steps):
-        self._stops += [stop]
-        self._steps += [steps]
-        self._calls += [(stop, *steps)]
-        self._create_range()
+    def __call__(self, stop=None, *steps):
+        if stop is not None:
+          self._stops += [stop]
+          self._steps += [steps]
+          self._calls += [(stop, *steps)]
+          self._create_range()
         return self
 
     def _create_range(self):
@@ -144,29 +148,43 @@ class Dec:
         dote = self.dote + (self.zone / 10 if self.zone is not None else 0)
         if self.zone is None:
             # Duration in days with optional iteration logic
-            return f"{format(dote, '.5f').strip('0').rstrip('.')}{''.join(map(str, self._calls)).replace(' ', '')}"
+            return (
+                format(dote, '.5f').rstrip('.0')
+                + "".join(map(str, self._calls)).replace(' ', '')
+            )
         else:
             year, date = self.dote2date(dote)
             # Instant (year+deciday-zone) with optional iteration logic
             return (
-                f"{int(year):04}+{date:03}{format(dote % 1 * 10, '.4f').strip('0').rstrip('.')}"
-                f"-{self.zone}{''.join(map(str, self._calls)).replace(' ', '')}"
+                f"{int(year):04}+{date:03}"
+                + format(dote % 1 * 10, '.4f').rstrip('.0')
+                + f"-{self.zone}"
+                + "".join(map(str, self._calls)).replace(' ', '')
             )
 
     def __repr__(self):
-        dote = self.dote + (self.zone / 10 if self.zone is not None else 0)
         if self.zone is None:
-            pre = f"Dec(day={format(dote, '.5f').strip('0').rstrip('.')}"
-        else:
-            year, date = self.dote2date(dote)
-            pre = (
-                f"Dec(year={int(year)}, date={int(date)}, "
-                f"time={dote % 1 * 10:.4g}, zone={int(self.zone)}"
+            pre = "Dec(" + (
+                f"day={format(dote, '.5f').rstrip('0.')}"
+                if (dote := self.dote + (
+                    self.zone / 10 if self.zone is not None else 0)) else ""
             )
+        else:
+            year, date = self.dote2date(dote := self.dote
+                + (self.zone / 10 if self.zone is not None else 0)
+            )
+            pre = "Dec(" + ",".join([
+                f"year={int(year)}" if year else "",
+                f"date={int(date)}" if date else "",
+                f"time={time:.4g}" if (time := dote % 1 * 10) else "",
+                f"zone={int(self.zone)}" if self.zone else ""
+            ])
         return (
-            pre + (f", stop={str(self._stops).replace(' ', '')}" if self._stops else "")
-            + (
-                f", step={str(self._steps).replace(' ', '').replace(',)', ')').replace('),(', ')(')}"
+            pre + (f"stop={str(self._stops).replace(' ', '')}"
+                if self._stops else "") + (f"step={str(self._steps)
+                    .replace(' ', '')
+                    .replace(',)', ')')
+                    .replace('),(', ')(')}"
                 if self._steps else "") + ")"
         )
 
@@ -393,3 +411,10 @@ class Dec:
                             yield start
                             start += steps[c % len(steps)]
                             c += 1
+
+d = Dec(zone=0)()
+d
+str(d)
+list(d)
+
+5
