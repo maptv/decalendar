@@ -1,27 +1,107 @@
-#%% imports
+# %% imports
 from itertools import islice, chain
 
 
-#%% define class
+# %% define class
 class Dec:
-    """Represents either a duration, instant, interval, or series.
-    To create
-    - a duration, instantiate without a time zone, e.g. Dec(day=9).
-    - an instant, instantiate with a time zone, e.g. Dec(day=719468, zone=0).
-    - an interval, pass a limit to an instance, e.g. Dec(day=9)(5).
-    - a series, pass a limit and a step to an instance, e.g. Dec(day=9)(5, 2).
-    Both instants and durations can create intervals and series.
-    Intervals consist of two instants or an instant and a duration.
-    A series can consist of durations, instants, or intervals.
-    The provided time is converted into Zone 0 decimal years and days.
-    Time zones are stored as integer decidays separately from the time.
-    The time zone is added back to the time when methods are called.
+    """Represents either
+        - a time span (a duration without a specific start or end),
+        - a time point (a specific instant in time),
+        - a time period (the duration in between two specific points in time),
+        - a series of time spans, time points, or time periods.
+
+        To create time spans, pass year and/or day values to the Dec class.
+
+        Span instantiation examples:
+        >>> one_year = Dec(1)
+        >>> one_year
+        Dec(day=365)
+        >>> one_day = Dec(0, 1)
+        >>> one_day
+        Dec(day=1)
+        >>> one_beat = Dec(0, 1e-5)
+        >>> one_beat
+        Dec(day=0.00001)
+
+        To create a time point, pass a time zone to the Dec class.
+
+        Time point instantiation examples:
+        >>> dec_epoch = Dec(0, 0, 0)
+        >>> dec_epoch
+        Dec(zone=0)
+        >>> unix_epoch = Dec(1969, 306, 0)
+        >>> unix_epoch
+        Dec(year=1969, date=306, zone=0)
+        >>> year2K = Dec(2000, 0, 0)
+        >>> year2K
+        Dec(year=2000, zone=0)
+        >>> dayB4year2K = Dec(2000, -1, 0)
+        >>> dayB4year2K
+        Dec(year=1999, date=365, zone=0)
+
+        To create a period, pass
+        - a time point to a time span or a time point.
+        - an int, float, or time span to a time point.
+        Time point arguments are interpreted as time period stopping points.
+        Other argument types are interpreted as time period durations.
+
+        Period creation examples:
+        >>> first_decade = Dec(0, 0, 0)(Dec(10))
+        >>> first_decade
+        Dec(zone=0, stop=[Dec(day=3652)])
+        >>> second_decade = Dec(10)(Dec(20, 0, 0))
+        >>> second_decade
+        Dec(day=3652, stop=[Dec(year=20, zone=0)])
+        >>> third_decade = Dec(20, 0, 0)(3652)
+        >>> third_decade
+        Dec(year=20, zone=0, stop=[3652])
+
+        To create a series instead of a period, pass more than one argument.
+
+        Time series creation examples:
+        >>> first_five_noons = Dec(day=.5, zone=0)(5, 1)
+        >>> first_five_noons
+        Dec(time=5, zone=0, stop=[5], step=[(1)])
+        >>> list(first_five_noons)
+        [0.5, 1.5, 2.5, 3.5, 4.5]
+
+        You can do arithmetic with any Dec object.
+
+        Arithmetic examples:
+        >>> one_year + one_beat
+        Dec(day=365.00001)
+        >>> one_year - one_beat
+        Dec(day=364.99999)
+        >>> dec_epoch + one_year
+        Dec(year=1, zone=0)
+
+        Args:
+        year: a common year with 365 days or a leap year with 366 days.
+        day: the base unit for Dec timekeeping.
+        zone: the Dec time zone, 0 to 9 decidays (tenths of a day).
+        utc: the UTC time zone offset in hours, a non-Dec unit used only for conversion
+        degree: the degrees of longitude, 1 deciday is 36 degrees.
+        month: 28, 29, 30, or 31 days, a non-Dec unit, used only for conversion
+        dotm: the day of the month, a non-Dec unit, used only for conversion
+        week: 7 days, a non-Dec unit, used only for conversion
+        dotw: the day of the week, a non-Dec unit, used only for conversion
+        hour: 1/24 of a day, a non-Dec unit, used only for conversion
+        minute: 1/1440 of a day, a non-Dec unit, used only for conversion
+        second: 1/86400 of a day, a non-Dec unit, used only for conversion
+        millisecond: 1/86400000 of a day, a non-Dec unit, used only for conversion
+
+    Returns:
+        This is a description of what is returned.
+
     """
 
     def __init__(
         self,
         year=0.0,
         day=0.0,
+        zone=None,
+        utc=None,
+        degree=None,
         month=3,
         dotm=1,
         week=0,
@@ -30,9 +110,6 @@ class Dec:
         minute=0,
         second=0,
         millisecond=0,
-        zone=None,
-        utc=None,
-        degree=None,
     ):
         self.zone = int(((zone if zone else 0)
             + ((utc * 15 if utc else 0) + (((
@@ -149,23 +226,23 @@ class Dec:
         if self.zone is None:
             # Duration in days with optional iteration logic
             return (
-                format(dote, '.5f').rstrip('.0')
-                + "".join(map(str, self._calls)).replace(' ', '')
+                format(dote, '.5f').rstrip('0').rstrip('.')
+                + "".join(map(str, self._calls))
             )
         else:
             year, date = self.dote2date(dote)
             # Instant (year+deciday-zone) with optional iteration logic
             return (
                 f"{int(year):04}+{date:03}"
-                + format(dote % 1 * 10, '.4f').rstrip('.0')
+                + format(dote % 1 * 10, '.4f').rstrip('0').rstrip('.')
                 + f"-{self.zone}"
-                + "".join(map(str, self._calls)).replace(' ', '')
+                + "".join(map(str, self._calls))
             )
 
     def __repr__(self):
         if self.zone is None:
             pre = "Dec(" + (
-                f"day={format(dote, '.5f').rstrip('0.')}"
+                f"day={format(dote, '.5f').rstrip('0').rstrip('.')}"
                 if (dote := self.dote + (
                     self.zone / 10 if self.zone is not None else 0)) else ""
             )
@@ -173,19 +250,18 @@ class Dec:
             year, date = self.dote2date(dote := self.dote
                 + (self.zone / 10 if self.zone is not None else 0)
             )
-            pre = "Dec(" + ",".join([
+            pre = "Dec(" + ", ".join(filter(None, [
                 f"year={int(year)}" if year else "",
                 f"date={int(date)}" if date else "",
                 f"time={time:.4g}" if (time := dote % 1 * 10) else "",
-                f"zone={int(self.zone)}" if self.zone else ""
-            ])
+                f"zone={int(self.zone)}"
+            ]))
         return (
-            pre + (f"stop={str(self._stops).replace(' ', '')}"
-                if self._stops else "") + (f"step={str(self._steps)
-                    .replace(' ', '')
-                    .replace(',)', ')')
-                    .replace('),(', ')(')}"
-                if self._steps else "") + ")"
+            ", ".join(filter(None, [
+                pre, f"stop={str(self._stops)}" if self._stops else "",
+                f"step={str(self._steps)}".replace(',)', ')').replace(
+                    '),(', ')(') if any(self._steps) else ""
+                ])) + ")"
         )
 
     def __int__(self):
@@ -228,34 +304,36 @@ class Dec:
 
     def __ne__(self, other):
         if isinstance(other, Dec):
-            return Dec(day=self.dote != other.dote)
+            return self.dote != other.dote
         return self.dote != other
 
     def __gt__(self, other):
         # if comparing against a string try to parse string to dote
         if isinstance(other, Dec):
-            return Dec(day=self.dote > other.dote)
+            return self.dote > other.dote
         return self.dote > other
 
     def __lt__(self, other):
         if isinstance(other, Dec):
-            return Dec(day=self.dote < other.dote)
+            return self.dote < other.dote
         return self.dote < other
 
     def __ge__(self, other):
         if isinstance(other, Dec):
-            return Dec(day=self.dote >= other.dote)
+            return self.dote >= other.dote
         return self.dote >= other
 
     def __le__(self, other):
         if isinstance(other, Dec):
-            return Dec(day=self.dote <= other.dote)
+            return self.dote <= other.dote
         return self.dote <= other
 
     def __add__(self, other):
         if isinstance(other, Dec):
             return Dec(day=self.dote + other.dote)
         return Dec(day=self.dote + other)
+
+        return self
 
     def __sub__(self, other):
         if isinstance(other, Dec):
@@ -412,9 +490,7 @@ class Dec:
                             start += steps[c % len(steps)]
                             c += 1
 
-d = Dec(zone=0)()
-d
-str(d)
-list(d)
-
-5
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
+    d = Dec(year=2000, day=-1, zone=0)
