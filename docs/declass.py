@@ -545,38 +545,38 @@ tc2[0:4,[2,3]] # -> 0,1,2,3,2,3 (same as tc2[0:4] + tc2[2] + tc2[3])
 tc2[0:4:2,1] # -> [0, 2, 3]
 # 4. skip:stop:step,step,skip:stop:step,step,step
 tc2[0:4:3,1,5:8:2,1] # same as tc2[0:4:3,1] + tc2[5:8,2,1]
-class testclass:
-    def __init__(self, seq):
-        self.seq = seq
-        self.stop = []
-        self.step = []
-        self.call = []
-    def __getitem__(self, key):
-        if type(key) in (int, slice):
-            return self.__class__(self.seq[key])
-        return [self.seq[i] for i in key]
-    def __delitem__(self, key):
-        if type(key) == int:
-            self.seq = [j for i, j in enumerate(self.seq) if i != key]
-        elif type(key) == slice:
-            self.seq = [j for i, j in enumerate(self.seq) if i not in list(range(key.start or 0, key.stop or len(self.seq), key.step or 1))]
-        else:
-            indices = [i if type(i) == int else tuple(range(*i.indices(len(self.seq)))) if type(i) == slice else i for i in key]
-            self.seq = [j for i, j in enumerate(self.seq) if i not in tuple(flatten(indices))]
-    def __setitem__(self, key, val):
-        if type(key) == int:
-            self.seq[key] = val
-        elif type(key) == slice:
-            for i in range(key.start or 0, key.stop or len(self.seq), key.step or 1):
-                self.seq[i] = val
-        else:
-            for i in key:
-                self.__setitem__(i, val)
-    def __call__(self, stop, *steps):
-        self.stop += [stop]
-        self.step += [steps]
-        self.call += [(stop, *steps)]
-        return self
+# class testclass:
+#     def __init__(self, seq):
+#         self.seq = seq
+#         self.stop = []
+#         self.step = []
+#         self.call = []
+#     def __getitem__(self, key):
+#         if type(key) in (int, slice):
+#             return self.__class__(self.seq[key])
+#         return [self.seq[i] for i in key]
+#     def __delitem__(self, key):
+#         if type(key) == int:
+#             self.seq = [j for i, j in enumerate(self.seq) if i != key]
+#         elif type(key) == slice:
+#             self.seq = [j for i, j in enumerate(self.seq) if i not in list(range(key.start or 0, key.stop or len(self.seq), key.step or 1))]
+#         else:
+#             indices = [i if type(i) == int else tuple(range(*i.indices(len(self.seq)))) if type(i) == slice else i for i in key]
+#             self.seq = [j for i, j in enumerate(self.seq) if i not in tuple(flatten(indices))]
+#     def __setitem__(self, key, val):
+#         if type(key) == int:
+#             self.seq[key] = val
+#         elif type(key) == slice:
+#             for i in range(key.start or 0, key.stop or len(self.seq), key.step or 1):
+#                 self.seq[i] = val
+#         else:
+#             for i in key:
+#                 self.__setitem__(i, val)
+#     def __call__(self, stop, *steps):
+#         self.stop += [stop]
+#         self.step += [steps]
+#         self.call += [(stop, *steps)]
+#         return self
 
 # [
 #     i if type(i) == int else
@@ -647,5 +647,3 @@ class testclass:
 # repeat(0.3, [4.8, .4], [[1, 2], [[1]]])
 # repeat(0.3, [4.8, .4], [[1, 2], [[1, 3.5]]])
 # repeat(0.3, [4.8, .4], [[1, 2], [[]]])
-l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-l[::2,1]

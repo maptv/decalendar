@@ -79,10 +79,10 @@ class Dec:
 
     def __call__(self, stop=None, *steps):
         if stop is not None:
-          self._stops += [stop]
-          self._steps += [steps]
-          self._calls += [(stop, *steps)]
-          self._create_range()
+            self._stops += [stop]
+            self._steps += [steps]
+            self._calls += [(stop, *steps)]
+            self._create_range()
         return self
 
     def _create_range(self):
