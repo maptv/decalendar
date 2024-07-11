@@ -330,8 +330,10 @@ class Dec:
 
     def __add__(self, other):
         if isinstance(other, Dec):
-            return Dec(day=self.dote + other.dote)
-        return Dec(day=self.dote + other)
+            self.dote += other.dote
+        else:
+            self.dote += other
+        return self
 
         return self
 
