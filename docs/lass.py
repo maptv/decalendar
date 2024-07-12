@@ -54,9 +54,9 @@ class Dec:
     >>> third_decade
     Dec(year=20, zone=0, stop=[3652])
 
-    To instantiate a series instead of a period, pass a stop and a step.
+    To instantiate a series instead of a time period, pass a stop and a step.
 
-    Time series instantiation examples:
+    Dec series instantiation examples:
     >>> first_five_days = Dec(0, 0, 0, 5, 1)
     >>> first_five_days
     Dec(zone=0, stop=[5], step=[(1)])
@@ -68,13 +68,14 @@ class Dec:
     >>> list(last_five_days_of_year2K)
     [730845.0, 730846.0, 730847.0, 730848.0, 730849.0]
 
-    To create a period, pass
-    - a time point to a time span or a time point.
+    You can also create a time period or series by calling a Dec object.
+    To create a time period, pass
+    - a time point to a time span or a time point or
     - an int, float, or time span to a time point.
     Time point arguments are interpreted as time period stopping points.
     Other argument types are interpreted as time period durations.
 
-    Period creation examples:
+    Dec object call examples:
     >>> first_decade = Dec(0, 0, 0)(Dec(10))
     >>> first_decade
     Dec(zone=0, stop=[Dec(day=3652)])
@@ -84,6 +85,8 @@ class Dec:
     >>> third_decade = Dec(20, 0, 0)(3652)
     >>> third_decade
     Dec(year=20, zone=0, stop=[3652])
+
+    To create a series, pass at least one step after a stop.
 
     You can do arithmetic with any Dec object including series.
 
@@ -114,15 +117,12 @@ class Dec:
     second: 1/86400 of a day, a non-Dec unit, used only for conversion
     millisecond: 1/86400000 of a day, a non-Dec unit, used only for conversion
 
-Returns:
-        This is a description of what is returned.
-
     """
 
     def __init__(
         self,
-        year=0,
-        day=0,
+        year=0.,
+        day=0.,
         zone=None,
         stop=None,
         step=None,
