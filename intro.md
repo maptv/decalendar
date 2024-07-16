@@ -2,7 +2,16 @@ Introduction to Deirenism
 
 Deirenism is a rationalistic natural religion based on reason and science instead of revelation and supernaturalism. The goal of Deirenism is to unite religious and irreligious people towards the common goal of securing a bright future for humanity. At the core of Deirenism is the belief that everyone should be welcome to participate, contribute, and benefit regardless of their religious beliefs or lack thereof.
 
-The supreme deity in Deirenism neither intervenes in the universe nor requires belief, faith, praise, prayer, or worship. The Deirenic view on divine intervention is not necessary because existence is not flawed. This view allows for is fully compatible with entirety of human knowledge and the  does not include any  a supreme deity based on the rationale that a supreme deity would not require but are expected to respect the religious practices and beliefs of others. The 
+Adherents of Deirenism can choose to practice other religions or opt to avoid religious practice entirely. Furthermore, Deirenism embraces syncretism and encourages the celebration of diverse religious and cultural practices. The practice of other religions can be incorporated into Deirenism. Outside of the context of other religions, pray for divine intervention because it implies that creation is flawed and can be improved by  intervention context of other religions, Deirenism eschews religious rituals can prayer for divine intervention is considered insulting by avoid reinforcing the flawed mindset that divine intervention is possible and can be won via praise or worship.
+
+There small numbers of ceremonies and rituals in Deirenism are considered a blank slate 
+
+The supreme deity in Deirenism is not conceited or vain and therefore does not require praise or worship. 
+
+inconsistent with Deirenic beliefs because  considers divine intervention as inconsistent with the belief in a benevolent, infallible, omnipotent, and omniscient supreme deity. The supreme deity in Deirenism does not intervene in our universe after creating it at the beginning of time. Not interact with is  neither intervenes in the universe nor requires belief, faith, praise, prayer, or worship. The rationale for this belief is that divine intervention would only be helpful if the supreme deity made mistakes when creating the universe. This view allows for is fully compatible with entirety of human knowledge and the  does not include any  a supreme deity based on the rationale that a supreme deity would not require but are expected to respect the religious practices and beliefs of others. The 
+
+because any divine intervention would move the universe further from the ideal. Since then, supreme not intervenes in the universe 
+
 
 To better understand their roles in the divine plan, Deirenists study topics that they believe will benefit humanity.
 
