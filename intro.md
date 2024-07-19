@@ -1,8 +1,22 @@
 Introduction to Deirenism
 
-Deirenism is a rationalistic natural religion based on reason and science instead of revelation and supernaturalism. The goal of Deirenism is to unite religious and irreligious people towards the common goal of securing a bright future for humanity. At the core of Deirenism is the belief that everyone should be welcome to participate, contribute, and benefit regardless of their religious beliefs or lack thereof.
+Deirenism is a rationalistic natural religion based on reason and science instead of revelation and supernaturalism.
+The goal of Deirenism is to unite religious and irreligious people towards the common goal of securing a bright future for humanity. At the core of Deirenism is the belief that everyone should be welcome to participate, contribute, and benefit regardless of their religious beliefs or lack thereof. In essence, Deirenism supports both freedom of religion and freedom from religion.
 
-An important Adherents of Deirenism can choose to practice other religions or opt to avoid religious practice entirely. Furthermore, Deirenism embraces syncretism and encourages the celebration of diverse religious and cultural practices. The practice of other religions can be incorporated into Deirenism. Outside of the context of other religions, pray for divine intervention because it implies that creation is flawed and can be improved by  intervention context of other religions, Deirenism eschews religious rituals can prayer for divine intervention is considered insulting by avoid reinforcing the flawed mindset that divine intervention is possible and can be won via praise or worship.
+Adherents of Deirenism can choose to practice other religions, avoid religious practice entirely, or combine practices from different religions into eclectic mixes or syncretic fusions. By way of analogy, Deirenism considers religious practices to be like dishes in a potluck gathering. To extend the analogy, participants can try a little bit of every dish, focus solely on their favorites, or choose to fast, but should be mindful of dietary preferences or restrictions. In this analogy, eclecticism is a salad bowl, syncretism is a melting pot, and religious purists are brumotactillophobes.
+
+Everyone has It may be difficult to accommodate everyone. The choice that best accommodates everyone involved is described by Deirenism as irenic. finding a solution that works for everyone
+
+To describe a solution peacefully co-existence and harmony irenic combinations, religions peacefully co-exist without necessarily mixing or melting together. Combining individual practices from different religions yields an eclectic mix, while a  Blending a Mixing religious elements are mixed together combined in a "mixing bowl" An example of an irenic compromise would be a wedding that included more than one ceremony.  remain separate individual religions without  typical way to combine religious practices is Furthermore, Deirenism embraces syncretism and encourages the celebration of diverse religious and cultural practices. 
+
+
+In terms of Deirenism welcomes people with of religious backgrounds, that are most similar to Deirenism are Unitarian Universalism, Humanism, Quakerism, and the Ethical Movement.
+
+
+
+encourages freedom of expression, even if the viewpoints being expressed are inconsistent with Deirenic teachings.
+
+The practice of other religions can be incorporated into Deirenism. Outside of the context of other religions, pray for divine intervention because it implies that creation is flawed and can be improved by  intervention context of other religions, Deirenism eschews religious rituals can prayer for divine intervention is considered insulting by avoid reinforcing the flawed mindset that divine intervention is possible and can be won via praise or worship.
 
 There small numbers of ceremonies and rituals in Deirenism are considered a blank slate 
 
