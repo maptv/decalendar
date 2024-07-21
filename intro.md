@@ -1,11 +1,25 @@
 Introduction to Deirenism
 
-Deirenism is a rationalistic natural religion based on reason and science instead of revelation and supernaturalism.
-The goal of Deirenism is to unite religious and irreligious people towards the common goal of securing a bright future for humanity. At the core of Deirenism is the belief that everyone should be welcome to participate, contribute, and benefit regardless of their religious beliefs or lack thereof. In essence, Deirenism supports both freedom of religion and freedom from religion.
+Deirenism is a rationalistic natural religion based on reason and science instead of revelation and supernaturalism. The goal of Deirenism is to unite religious and irreligious people towards the common goal of securing a bright future for humanity. At the core of Deirenism is the belief that everyone should be welcome to participate, contribute, and benefit regardless of their religious beliefs or lack thereof. In essence, Deirenism supports both freedom of religion and freedom from religion.
 
-Adherents of Deirenism can choose to practice other religions, avoid religious practice entirely, or combine practices from different religions into eclectic mixes or syncretic fusions. By way of analogy, Deirenism considers religious practices to be like dishes in a potluck gathering. To extend the analogy, participants can try a little bit of every dish, focus solely on their favorites, or choose to fast, but should be mindful of dietary preferences or restrictions. In this analogy, eclecticism is a salad bowl, syncretism is a melting pot, and religious purists are brumotactillophobes.
+Adherents of Deirenism can choose to practice other religions, avoid religious practice entirely, or combine practices from different religions into eclectic mixes or syncretic fusions. Religious practice in Deirenism is like a potluck gathering at which attendees can try a little bit of every dish, focus solely on their favorites, or choose to fast, but should be mindful of dietary preferences or restrictions. In this analogy, salad is eclectic, fondue is syncretic, and brumotactillophobia is religious purism.
 
-Everyone has It may be difficult to accommodate everyone. The choice that best accommodates everyone involved is described by Deirenism as irenic. finding a solution that works for everyone
+The religions that are most similar to Deirenism are Unitarian Universalism and Quakerism. The main aspect that distinguishes Deirenism from other religions is its calendar and time system. Deirenic dates and times can be combined into a single number: the days since the start of the year. 
+
+
+
+
+ it asserts has its own will use the At the beginning of the year in the Deirenic calendar, Deirenists celebrate mathematics during a series of holidays that each focus on a mathematical constant. The most important mathematical constants in Deirenism are the golden ratio and tau.
+
+Golden Ratio Day occurs on Day 1, the day after the New Year Day, in the Deirenic calendar. To celebrate the golden ratio, Deirenists fly kites, throw darts, and draw mandalas composed of golden triangles, golden gnomons, golden spirals, golden rectangles, and other golden shapes. The peak of the golden ratio celebrations is Time 618, the moment when 1.618 days have passed since the start of Day 0 (March 1 in the Gregorian calendar). Similarly, Tau Day occurs on Day 6 and peaks at Time283. To celebrate representation of tau, such as circles, cycles, and rotations, Deirenists play sports like ultimate frisbee, form circles while holding hands, and spin around in circles.
+
+The holidays that encourages the celebration of any religious and secular On the eve of Day 0 in the Deirenic calendar, Deirenists celebrate the New Year. On the mornings of Day 6 in the Deirenic calendar, Deirenists who wake up early enough can watch the day of the year become tau as part of the Tau Day holiday. It is also possible to celebrate Pi Day on Day 3, but it may be difficult to wake up early enough to see clocks show the day of the year become pi.
+
+Midday on Day 182 in common years and midnight on the eve of Day 183 in leap years, Deirenists have Dyad Day to celebrate the moment when the positive and negative day of the year have the same absolute value.
+
+
+
+Working together to find Combining practices from various religions to accommodate everyone is an example of an irenic compromise. The word “irenic” 
 
 To describe a solution peacefully co-existence and harmony irenic combinations, religions peacefully co-exist without necessarily mixing or melting together. Combining individual practices from different religions yields an eclectic mix, while a  Blending a Mixing religious elements are mixed together combined in a "mixing bowl" An example of an irenic compromise would be a wedding that included more than one ceremony.  remain separate individual religions without  typical way to combine religious practices is Furthermore, Deirenism embraces syncretism and encourages the celebration of diverse religious and cultural practices. 
 
