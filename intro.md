@@ -1,5 +1,51 @@
 Introduction to Deirenism
 
+Deirenism is a rationalistic natural religion based on reason and science rather than revelation and supernaturalism. By embracing humanism and religious pluralism, Deirenism seeks to unite religious and irreligious people of different backgrounds towards the common goal of securing a bright future for humanity. The widespread cooperation between diverse groups of people envisioned by Deirenism requires mutual respect and acceptance but also mutual protection from harm. Based on the understanding that the definition of harm can depend on cultural, religious, and secular context, Deirenism supports both freedom of religion and freedom from religion.
+
+Describing itself as a consistent axiomatic system of beliefs, Deirenism claims to be free of any contradictions. As part of its teaching, Deirenism often contrasts two types of beliefs: rational, scientific axioms and irrational, unscientific delusions. Regardless of the negative connotation of the word, Deirenism asserts that delusions are not always harmful and can be benign or may even have positive aspects. In general, Deirenism recommends tolerance of delusions unless an analysis of the potential benefits and costs indicates that challenging a delusion will be worthwhile.
+
+
+
+
+The harms of People who do not already have delusions Ideally, all people would espouse axioms  obtain all of the benefits of delusions without Some delusions may have cultural significance  evidenced by the placebo effect. Furthermore, delusions may have significance. a delusion may cause more harm than good. In general, Deirenism recommends weighing the potential benefits and costs before making any decision, such as whether to challenge or tolerate a delusion. Instead of Deirenism 
+
+
+Delusions can be shared  As an alternative, people who can free themselves The delusion, like the belief in a chosen people favored over others by God, can increase social cohesion of a group impact. In general, delusions have cultural or religious significance should . While the challenge delusions may go against the beliefs that are considered to be delusions by Deirenism may . It is possible to have all of the benefits of the placebo effects
+
+
+Sometimes the need to respect others and their beliefs, Deirenism cautions against called
+If also hold each other accountable for their actions. the tolerance paradox, which  arguments to moderation (Latin: argumentum ad temperantiam) does hold all beliefs to be equally valid. 
+
+emphasis on inclusiveness in Deirenism defends the right to challenge harmful views and 
+
+
+At the core of Deirenism is the belief that everyone should be welcome, held accountable, to participate and contribute, and benefit regardless of their religious beliefs or lack thereof. 
+While Deirenism supports Even when separated from actions, delusions
+ that lead to suffering
+through cognitive dissonance, incorrect conduct, guilt, remorse, and shame.
+
+In the view of Deirenism, delusional people can still understand, albeit in a subconscious manner, that their beliefs and actions are incorrect. who profess beliefs that are are capable of.
+
+false beliefs that are unreasonable, unscientific, or historically inaccurate.
+
+,
+that belief in the existence of Satan, divine intervention, and a punitive afterlife are inconsistent with is benevolent, infallible, omnipotent, omniscient, but  therefore created the universe exactly as intended with  created by God is flawed and requires divine correction.
+
+the principle of parsimony, 
+
+an insult to God. does interact with the universe. initiated the creation of the universe as part of a divine plan that  by concentrating everything into a single point and then releasing to never
+
+ always planned to initiated the creation of the universe. and would only intervene . In other words, Deirenism. In other words, because it would go against the divine plan.
+
+
+The goal of Deirenism is to unite religious and irreligious people towards the common goal of securing a bright future for humanity.
+
+Adherents of Deirenism can choose to practice other religions, avoid religious practice entirely, or combine practices from different religions into eclectic mixes or syncretic fusions. Religious practice in Deirenism is like a potluck gathering at which attendees can try a little bit of every dish, focus solely on their favorites, or choose to fast, but should be mindful of dietary preferences or restrictions. In this analogy, salad is eclectic, fondue is syncretic, and brumotactillophobia is religious purism.
+
+The religions that are most similar to Deirenism are Unitarian Universalism and Quakerism. The main similarity is openness to humanist between Deirenism and other religions is its calendar and time system. Deirenic dates and times can be combined into a single number: the days since the start of the year. 
+
+
+
 Deirenism is a rationalistic natural religion based on reason and science instead of revelation and supernaturalism. The goal of Deirenism is to unite religious and irreligious people towards the common goal of securing a bright future for humanity. At the core of Deirenism is the belief that everyone should be welcome to participate, contribute, and benefit regardless of their religious beliefs or lack thereof. In essence, Deirenism supports both freedom of religion and freedom from religion.
 
 Adherents of Deirenism can choose to practice other religions, avoid religious practice entirely, or combine practices from different religions into eclectic mixes or syncretic fusions. Religious practice in Deirenism is like a potluck gathering at which attendees can try a little bit of every dish, focus solely on their favorites, or choose to fast, but should be mindful of dietary preferences or restrictions. In this analogy, salad is eclectic, fondue is syncretic, and brumotactillophobia is religious purism.
