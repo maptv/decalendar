@@ -2,15 +2,23 @@ Introduction to Deirenism
 
 Deirenism is a rationalistic natural religion based on reason and science rather than revelation and supernaturalism. By embracing humanism and religious pluralism, Deirenism seeks to unite religious and irreligious people of different backgrounds towards the common goal of securing a bright future for humanity. The widespread cooperation between diverse groups of people envisioned by Deirenism requires mutual respect and acceptance but also mutual protection from harm. Based on the understanding that the definition of harm can depend on cultural, religious, and secular context, Deirenism espouses both freedom of religion and freedom from religion.
 
-Although Deirenism supports the right of every person to believe whatever they wish, it discourages irrational, unempirical, unscientific, or untrue beliefs that it calls delusions. Despite the negative connotation of the word, Deirenism asserts that delusions are not always harmful and can be benign or may even have positive aspects. Inspired by _The Republic_, the most prominent work of Plato, Deirenism uses the term "noble lies" to describe statements that maintain beneficial delusions. If it is likely that challenging a delusion will do more harm than good, Deirenism considers tolerance of delusions and even "noble lies" to be justified.
+Although Deirenism supports the right of every person to believe whatever they wish, it discourages irrational, unempirical, unscientific, or untrue beliefs that it calls delusions. Despite the negative connotation of the word, Deirenism asserts that delusions are not always harmful and can be benign or may even have positive aspects. Inspired by _The Republic_, the most prominent work of Plato, Deirenism uses the term "noble lies" to describe statements that maintain beneficial delusions. If it is likely that challenging a delusion will do more harm than good, Deirenism considers tolerance of delusions and even "noble lies" to be fully justified.
 
-In cases when disputing a delusion may be warranted, Deirenism advises against criticizing delusional people for their beliefs and instead recommends empowering delusional people to harness the power of their minds independently of their delusions. Deirenism claims that a deep understanding of delusion can provide all of its benefits without any of its drawbacks. The rationale for this claim is that an informed mind unencumbered by delusion should be just as, if not more, capable than a delusional mind. Perceptive readers may notice the possibility that 
+As an alternative to delusions, Deirenism offers beliefs that it calls axioms. As opposed to delusions, axioms can be interpreted literally without contradicting common sense, empirical observations, scientific knowledge, or historical facts. The advantages of axioms touted by Deirenism include decreased cognitive dissonance, greater awareness, lower susceptibility to deception, better-informed actions, and decreased risk of a crisis of faith.
 
 
+
+In cases when disputing a beneficial delusion may be warranted, Deirenism advises against criticizing delusional people for their beliefs. Instead, Deirenism recommends offering  corresponding Deirenic belief as alternative to delusions. The likelihood of success of this approach can be improved by emulating the mechanisms of action of delusion. an understanding of how The rationale for this claim is that an informed mind unencumbered by delusion should be just as, if not more, capable than a delusional mind. While this approach, Perceptive readers may notice the possibility that 
+Deirenism claims that a deep understanding of delusion . 
+that the  can provide all of the benefits of delusion without any of its drawbacks. 
+offering Deirenic beliefs as 
+ that can provide greater benefits without fewer drawbacks
+touting the advantages of the enlightened mind as an 
+empowering delusional people to harness the power of their minds independently of their 
 An example of the power of delusion is the placebo effect in placebo-controlled clinical trials. While it may be provide alternative to del
 In Deirenism, beliefs that can be interpreted literally without are called axioms. as axioms only a limited set of  the use of principles to define beliefs and  to only espouse refers to correct beliefs as axioms.  In its teachings, Deirenism often contrasts rational beliefs that it calls axioms with irrational beliefs that it calls delusions.
 
-contradict common sense, empirical observations, scientific knowledge, or historical facts
+contradict 
 
 The harmony with the natural world of helps Deirenists avoid the cognitive dissonance that occurs when people try to believe things that they know, albeit subconsciously, are irrational or simply not true. 
 
