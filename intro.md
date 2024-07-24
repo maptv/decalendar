@@ -4,12 +4,31 @@ Deirenism is a rationalistic natural religion based on reason and science rather
 
 Although Deirenism supports the right of every person to believe whatever they wish, it discourages irrational, unempirical, unscientific, or untrue beliefs that it calls delusions. Despite the negative connotation of the word, Deirenism asserts that delusions are not always harmful and can be benign or may even have positive aspects. Drawing from _The Republic_, the most prominent work of Plato, Deirenism uses the term "noble lies" to describe statements that maintain beneficial delusions. If challenging a delusion is likely to do more harm than good, Deirenism considers tolerance of delusions and even "noble lies" to be fully justified.
 
-In cases when disputing a delusion may be warranted, Deirenism advises against criticizing delusional people for their beliefs and instead recommends demonstrating empathy and offering axioms as alternatives to delusions. Axioms are beliefs that either serve as the premise or basis for further discussion or are accepted as true by consensus. As opposed to delusions, axioms can be interpreted literally without contradicting common sense, empirical observations, scientific knowledge, or historical facts. One of the purported benefits of axioms touted by Deirenism is stress relief via the mitigation of cognitive dissonance caused by delusions.
+In cases when disputing a delusion may be warranted, Deirenism advises against criticizing delusional people for their beliefs and instead recommends demonstrating empathy and offering axioms as alternatives to delusions. Axioms are beliefs that either are accepted as true by consensus or serve as the premise or basis for further discussion or reasoning. As opposed to delusions, axioms can be interpreted literally without contradicting common sense, empirical observations, scientific knowledge, or historical facts. One of the purported benefits of axioms touted by Deirenism is stress relief via the mitigation of cognitive dissonance caused by delusions.
 
-Any efforts to replace delusions with axioms
+The replacement of delusions with axioms does not require a change in identity, religious or otherwise, because axioms can exist independently of each other and outside of Deirenism. The independence of axioms allows them to be combined with other beliefs.
+
+and matched religious conversion not consider itself mutually exclusive with any other religion. require common cautions against calling should only aim not be aimed , because Deirenism values the religious background .
+Religions are not mutually exclusive if we do not interpret their beliefs literally.
+
 No conversion
 No intervention
 No purism
+
+0. God is benevolent, infallible, omnipotent, and omniscient
+1. God created the universe
+2. God set the laws that govern the universe
+3. God has a plan for the universe
+4. God does not intervene in the universe
+
+0. Humans are bound by the human condition
+1. Humans can study the universe
+2. Humans can study the laws that govern the universe
+3. Humans can attempt to interpret divine intent
+4. Humans have free will
+
+the laws of nature
+God is a representation of infinity and thus any not anthropomorphic and does not resemble a in any way
 
 
 Towards the goal of Importantly, Deirenism does not acknowledge the term conver
@@ -51,7 +70,7 @@ The harms of People who do not already have delusions Ideally, all people would 
 Delusions can be shared  As an alternative, people who can free themselves The delusion, like the belief in a chosen people favored over others by God, can increase social cohesion of a group impact. In general, delusions have cultural or religious significance should . While the challenge delusions may go against the beliefs that are considered to be delusions by Deirenism may . It is possible to have all of the benefits of the placebo effects
 
 
-Sometimes the need to respect others and their beliefs, Deirenism cautions against called
+Sometimes the need to respect others and their beliefs
 If also hold each other accountable for their actions. the tolerance paradox, which  arguments to moderation (Latin: argumentum ad temperantiam) does hold all beliefs to be equally valid. 
 
 emphasis on inclusiveness in Deirenism defends the right to challenge harmful views and 
@@ -67,7 +86,7 @@ In the view of Deirenism, delusional people can still understand, albeit in a su
 false beliefs that are unreasonable, unscientific, or historically inaccurate.
 
 ,
-that belief in the existence of Satan, divine intervention, and a punitive afterlife are inconsistent with is benevolent, infallible, omnipotent, omniscient, but  therefore created the universe exactly as intended with  created by God is flawed and requires divine correction.
+that belief in the existence of Satan, divine intervention, and a punitive afterlife are inconsistent with is ut  therefore created the universe exactly as intended with  created by God is flawed and requires divine correction.
 
 the principle of parsimony, 
 
@@ -158,10 +177,3 @@ Adherents of Deirenism are encouraged to belong to other religions does not requ
 The only tools Instead of attributing events to  Deirenism encourages its adherents to not view occurences  created our universe as the perfect match which required constant upkeep and adjustment. Therefore, Deirenists At the core of Deirenism is a secular life philosophy called Irenism which asserts that people can lead fulfilling, meaningful lives without religion.
 
 Irenism can be suitable for Agnostics, Atheists, Humanists, and other irreligious people. At the core of   Adherents of Deirenism and Irenism are called Deirenists and Irenists.
-
-The adherents of Religious tolerance and respect for the cultures and beliefs of others is central also striving to unify. The name Deirenism combines 
-
-Irenic conduct is the highest, most ethical, most moral conduct.
-instead of revelation and any other kind of divine intervention .
-
-Irenism is a life philosophy that serves as the secular complement to Deirenism.
