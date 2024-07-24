@@ -6,7 +6,7 @@ Although Deirenism supports the right of every person to believe whatever they w
 
 In cases when disputing a delusion may be warranted, Deirenism advises against criticizing delusional people for their beliefs and instead recommends demonstrating empathy and offering axioms as alternatives to delusions. Axioms are beliefs that either are accepted as true by consensus or serve as the premise or basis for further discussion or reasoning. As opposed to delusions, axioms can be interpreted literally without contradicting common sense, empirical observations, scientific knowledge, or historical facts. One of the purported benefits of axioms touted by Deirenism is stress relief via the mitigation of cognitive dissonance caused by delusions.
 
-The replacement of delusions with axioms does not require a change in identity, religious or otherwise, because axioms can exist independently of each other and outside of Deirenism. The independence of axioms allows them to be combined with other beliefs.
+The replacement of delusions with axioms does not require a change in identity, religious or otherwise, because axioms can exist independently of each other and outside of Deirenism. The independence of axioms facilitates eclecticism, the combination of unaltered elements from different sources. As long as delusions are not taken literally, they can safely be combined with axioms. Literal interpretation of delusions leads to contradictions and can result in cognitive dissonance.
 
 and matched religious conversion not consider itself mutually exclusive with any other religion. require common cautions against calling should only aim not be aimed , because Deirenism values the religious background .
 Religions are not mutually exclusive if we do not interpret their beliefs literally.
@@ -98,6 +98,8 @@ an insult to God. does interact with the universe. initiated the creation of the
 The goal of Deirenism is to unite religious and irreligious people towards the common goal of securing a bright future for humanity.
 
 Adherents of Deirenism can choose to practice other religions, avoid religious practice entirely, or combine practices from different religions into eclectic mixes or syncretic fusions. Religious practice in Deirenism is like a potluck gathering at which attendees can try a little bit of every dish, focus solely on their favorites, or choose to fast, but should be mindful of dietary preferences or restrictions. In this analogy, salad is eclectic, fondue is syncretic, and brumotactillophobia is religious purism.
+
+Other than offending religious purists, the only concerns with combining religions are cognitive overload and limited time. Imagine if you did not speak any language other than English, and you tried to learn to read out loud the untranslated versions of many sacred texts including the Quran, Tao Te Ching, Tanakh, Kojiki, Nihon-gi, Tripitaka, Vedas, and Guru Granth Sahib. Even if you could learn all of the languages required (Arabic, Classical Chinese, Hebrew, Japanese, Sanskrit, and Sant Bhasha) in one lifetime, you probably would not have much left over for reading!
 
 The religions that are most similar to Deirenism are Unitarian Universalism and Quakerism. The main similarity is openness to humanist between Deirenism and other religions is its calendar and time system. Deirenic dates and times can be combined into a single number: the days since the start of the year. 
 
