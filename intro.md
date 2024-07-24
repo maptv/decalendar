@@ -4,7 +4,7 @@ Deirenism is a rationalistic natural religion based on reason and science rather
 
 Although Deirenism supports the right of every person to believe whatever they wish, it discourages irrational, unempirical, unscientific, or untrue beliefs that it calls delusions. Despite the negative connotation of the word, Deirenism asserts that delusions are not always harmful and can be benign or may even have positive aspects. Inspired by _The Republic_, the most prominent work of Plato, Deirenism uses the term "noble lies" to describe statements that maintain beneficial delusions. If it is likely that challenging a delusion will do more harm than good, Deirenism considers tolerance of delusions and even "noble lies" to be fully justified.
 
-As an alternative to delusions, Deirenism offers beliefs that it calls axioms. As opposed to delusions, axioms can be interpreted literally without contradicting common sense, empirical observations, scientific knowledge, or historical facts. The advantages of axioms touted by Deirenism include decreased cognitive dissonance, greater awareness, lower susceptibility to deception, better-informed actions, and decreased risk of a crisis of faith.
+In Deirenism, the inverse of a delusion is called an axiom. As opposed to delusions, axioms can be interpreted literally without contradicting common sense, empirical observations, scientific knowledge, or historical facts. According to Deirenism, axioms can protect against cognitive dissonance caused by delusions. In extreme cases, delusions can even lead to a crisis during which an individual questions all of their beliefs Axioms avoid
 
 
 
