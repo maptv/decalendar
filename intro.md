@@ -12,7 +12,8 @@ The way that Deirenism reconciles axioms and delusions may upset literalists. Es
 
 If literal interpretations of delusions can be avoided, the potential for eclecticism and syncretism in Deirenism is limitless. can be combined with any part of any other religion. 
 
-Deirenists imagine the universe to be like a giant sequence of dominos that God set up before the beginning of time.  Interventionists imagine the universe as a 
+Deirenists imagine the universe to be like an infinite domino toppling show which God flawless set up before the beginning of time so that knocking down the first domino results in an endless chain reaction. In contrast, interventionists imagine God spending eternity knocking over individual dominoes to keep the chain reaction going.
+
 No conversion
 No intervention
 No purism
