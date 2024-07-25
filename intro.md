@@ -10,12 +10,7 @@ The replacement of delusions with axioms does not require a change in identity, 
 
 The way that Deirenism reconciles axioms and delusions may upset literalists. Essentially, Deirenism considers all delusions to be allegories or metaphors that can teach valuable lessons but should never be taken literally. To avoid offending literalists, Deirenism cautions against criticism of the literal interpretation of delusions and instead endorses discussions of how different interpretations can relate to human experience and real life in the natural world. Such discussions offer an opportunity to learn about and possibly prevent the use of literally interpreted delusions to guide or justify real-world actions.
 
-If literal interpretations of delusions can be avoided, any part of Deirenism can be combined with any part of any other religion.
-
-though contradictions between delusions and axioms can exacerbate cognitive dissonance not taken literally, Deirenism encourages . eclecticism and syncretism are exercises of religious freedom, but more importantly  Whenever axioms and delusions, contradictions are In the case of the literal interpretation of delusions, cognitive dissonance . is because between delusion, axioms, and their fusions resulting in 
-
-and matched religious conversion not consider itself mutually exclusive with any other religion. require common should only aim not be aimed , because Deirenism values the religious background .
-Religions are not mutually exclusive if we do not interpret their beliefs literally.
+If literal interpretations of delusions can be avoided, the potential for eclecticism and syncretism in Deirenism is limitless. can be combined with any part of any other religion. 
 
 No conversion
 No intervention
