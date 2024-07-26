@@ -2,7 +2,15 @@ Introduction to Deirenism
 
 Deirenism is a rationalistic natural religion based on reason and science rather than revelation and supernaturalism. By embracing humanism and religious pluralism, Deirenism seeks to unite religious and irreligious people of different backgrounds towards the common goal of securing a bright future for humanity. The widespread cooperation between diverse groups of people envisioned by Deirenism requires mutual respect and acceptance but also mutual protection from harm. Based on the understanding that the definition of harm can depend on cultural, religious, and secular context, Deirenism espouses both freedom of religion and freedom from religion.
 
-Although Deirenism supports the right of every person to believe whatever they wish, it does not consider all beliefs to be equal. Rational, empirical, scientific, or self-evident beliefs are called axioms in Deirenism. In general, axioms are beliefs that either are accepted as true by consensus or serve as the premise or basis for further discussion or reasoning. The inverse of an axiom is referred to as an allegory by Deirenism. Allegories are essentially stories that may be inspiring and can teach valuable lessons but should never be taken literally. Acknowledging that beliefs that are irrational, unempirical, unscientific, or untrue, exist in 
+Although Deirenism supports the right of every person to believe whatever they wish, it does not consider all beliefs to be equal. Rational, empirical, scientific, or self-evident beliefs are called axioms in Deirenism. In general, axioms are beliefs that either are accepted as true by consensus or serve as the premise or basis for further discussion or reasoning. The inverse of an axiom is referred to as an allegory by Deirenism. Essentially, allegories are fictional stories that may hold valuable lessons, while axioms are lessons without fiction. In contrast to axioms, allegories cannot be used for reasoning and should never be taken literally.
+
+The literal interpretations of delusions is considered to be dangerous by Deirenism.
+The danger of allegories is that they may be interpreted 
+Rather than describing allegories as irrational, unempirical, unscientific, or untrue, Deirenism are essentially stories that may be inspiring and can teach valuable lessons but.
+
+In the context of religious freedom, 
+
+Acknowledging that beliefs that are , exist in 
 
 In contrast to axioms,  are referred to as allegories by Deirenism. Axioms and allegories duality To minimize cognitive burden, Deirenism only includes beliefs that it considers to be axioms. To limit cognitive dissonance,   To differentiate axioms from allegories and delusions, Deirenism describes axioms as . According to this definition,   beliefs As opposed to allegories and delusions, axioms can be interpreted literally without contradicting common sense, empirical observations, scientific knowledge, or historical facts. 
 
