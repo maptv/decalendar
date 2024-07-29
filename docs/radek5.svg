@@ -1,0 +1,2107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.0"
+   width="188.98103"
+   height="218.61021"
+   id="c:\5-5-duopyramid.svg"
+   sodipodi:docname="radek5.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   inkscape:export-filename="tetradecagon-cutout-and-engrave.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5935">
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect197"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect197"
+       invert="false"
+       hide_mask="false"
+       background="true"
+       background_color="#ffffffff" />
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect21"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect19"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect16"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect13"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect11"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect114"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect299"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect274"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect274"
+       invert="false"
+       hide_mask="false"
+       background="false"
+       background_color="#ffffffff" />
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect275"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect274"
+       invert="false"
+       hide_mask="false"
+       background="false"
+       background_color="#ffffffff" />
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect276"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect274"
+       invert="false"
+       hide_mask="false"
+       background="false"
+       background_color="#ffffffff" />
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect430"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect430"
+       invert="false"
+       hide_mask="false"
+       background="true"
+       background_color="#ffffffff" />
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect112"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect112"
+       invert="false"
+       hide_mask="false"
+       background="false"
+       background_color="#ffffffff" />
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect422"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect112"
+       invert="false"
+       hide_mask="false"
+       background="false"
+       background_color="#ffffffff" />
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect482"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect482"
+       invert="false"
+       hide_mask="false"
+       background="true"
+       background_color="#ffffffff" />
+    <filter
+       id="mask-powermask-path-effect384_inverse"
+       inkscape:label="filtermask-powermask-path-effect384"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect384_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect384_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect482-8">
+      <path
+         id="mask-powermask-path-effect482_box-4"
+         style="fill:#ffffff;fill-opacity:1"
+         d="M -15,-9.9999976 H 241 V 246 H -15 Z" />
+      <g
+         id="g482-9">
+        <path
+           id="path433-7"
+           style="display:inline;fill:none;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 206.82517,148.63106 V 87.416576 L 170.79398,37.893085 112.49467,18.976836 54.195162,37.893085 18.164181,87.416576 v 61.214484 l 36.030981,49.52349 58.299508,18.91625 58.29931,-18.91625 z" />
+        <path
+           id="path434-3"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 54.270452,198.21508 V 37.785926" />
+        <path
+           id="path435-1"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 170.76076,198.21508 V 37.785926" />
+        <path
+           id="path436-0"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 18.245351,148.70945 112.54325,18.919543" />
+        <path
+           id="path437-2"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 112.5376,217.10354 206.8355,87.313633" />
+        <path
+           id="path438-3"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 18.22827,87.42681 170.80546,37.851479" />
+        <path
+           id="path439-7"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 54.22576,198.20463 206.80295,148.6293" />
+        <path
+           id="path440-1"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 112.48796,18.919541 94.2979,129.789909" />
+        <path
+           id="path441-8"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 18.245334,87.341181 112.54323,217.13109" />
+        <path
+           id="path442-9"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 54.22576,37.834947 206.80295,87.410278" />
+        <path
+           id="path443-3"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 18.22827,148.6679 152.57719,49.57533" />
+        <path
+           id="path444-7"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 76.532053,167.61775 V 144.18737" />
+        <path
+           id="path445-4"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 148.53773,91.923865 V 68.493489" />
+        <path
+           id="path446-8"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 54.276103,136.99029 68.048127,118.03471" />
+        <path
+           id="path447-0"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 157.02166,118.07652 170.79369,99.120945" />
+        <path
+           id="path448-4"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 54.273029,99.130434 76.556635,91.890051" />
+        <path
+           id="path449-0"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 148.51317,144.22119 22.28361,-7.24038" />
+        <path
+           id="path450-5"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 76.523991,68.499333 22.283606,7.240383" />
+        <path
+           id="path451-7"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 126.26217,160.3715 22.28361,7.24038" />
+        <path
+           id="path452-0"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 112.52992,56.797073 13.77203,18.955571" />
+        <path
+           id="path453-0"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 98.767861,160.35858 13.772029,18.95558" />
+        <path
+           id="path454-5"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 148.5377,167.61775 V 144.18737" />
+        <path
+           id="path455-6"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 76.532033,91.923865 V 68.493489" />
+        <path
+           id="path456-7"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 112.52989,179.31416 13.77203,-18.95558" />
+        <path
+           id="path457-8"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 98.767832,75.752643 112.53986,56.797072" />
+        <path
+           id="path458-0"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 76.523992,167.61189 22.283606,-7.24038" />
+        <path
+           id="path459-6"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 126.26217,75.739732 22.28361,-7.240383" />
+        <path
+           id="path460-5"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 54.272987,136.98079 22.283606,7.24038" />
+        <path
+           id="path461-7"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 148.51313,91.890031 22.28361,7.240383" />
+        <path
+           id="path462-3"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 54.276089,99.120955 68.048113,118.07653" />
+        <path
+           id="path463-4"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 157.02164,118.03472 13.77203,18.95558" />
+        <path
+           id="path464-3"
+           style="display:inline;fill:none;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 85.00849,155.82 27.49702,8.92188 27.49692,-8.92188 16.99415,-23.35781 V 103.59031 L 140.00243,80.232498 112.50551,71.310627 85.00849,80.232498 68.014444,103.59031 v 28.87188 z" />
+        <path
+           id="path465-0"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="M 139.98702,126.83384 V 80.278892" />
+        <path
+           id="path466-4"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="M 85.077253,155.77723 V 109.22228" />
+        <path
+           id="path467-8"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="m 129.64648,141.23211 27.36431,-37.66375" />
+        <path
+           id="path468-7"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="M 68.211046,132.37265 95.575362,94.708899" />
+        <path
+           id="path469-5"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="m 112.71271,146.87797 44.2764,-14.38627" />
+        <path
+           id="path470-9"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="M 68.217863,103.59968 112.49426,89.213412" />
+        <path
+           id="path471-5"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="m 95.732443,141.49499 44.276397,14.38627" />
+        <path
+           id="path472-3"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="M 85.173703,80.328702 129.4501,94.714973" />
+        <path
+           id="path473-2"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="m 85.145171,127.04928 27.364319,37.66375" />
+        <path
+           id="path474-7"
+           style="fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-linecap:round;stroke-dasharray:none"
+           d="m 112.55561,71.358439 27.36431,37.663751" />
+        <path
+           id="path475-3"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 112.53213,217.01449 V 18.986487" />
+        <path
+           id="path476-9"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 18.364235,87.40347 206.70006,148.59749" />
+        <path
+           id="path477-7"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 54.333166,37.89648 170.73111,198.1045" />
+        <path
+           id="path478-7"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 18.364224,148.5975 206.70005,87.40348" />
+        <path
+           id="path479-9"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="M 54.333164,198.1045 170.7311,37.89648" />
+        <path
+           id="path480-5"
+           style="display:inline;fill:none;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 112.52107,217.09219 58.29931,-18.91625 36.03119,-49.52349 V 87.437966 L 170.82038,37.914475 112.52107,18.998226 54.221562,37.914475 18.190581,87.437966 v 61.214484 l 36.030981,49.52349 z" />
+        <path
+           id="path481-3"
+           style="display:inline;fill:none;stroke:#000000;stroke-width:4.72441;stroke-dasharray:none"
+           d="m 112.65336,234.09478 68.16351,-22.11687 42.12764,-57.90283 V 82.503141 L 180.81687,24.600306 112.65336,2.483439 44.489605,24.600306 2.3622048,82.503141 v 71.571939 l 42.1274002,57.90283 z" />
+        <path
+           id="path482-3"
+           style="fill:none;stroke:#000000;stroke-width:4.72441;stroke-miterlimit:0;stroke-dasharray:none"
+           d="m 118.33507,11.849435 a 5.6399952,5.6399952 0 0 1 -5.64,5.639996 5.6399952,5.6399952 0 0 1 -5.63999,-5.639996 5.6399952,5.6399952 0 0 1 5.63999,-5.639995 5.6399952,5.6399952 0 0 1 5.64,5.639995 z" />
+      </g>
+    </mask>
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect482-3"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect482-3"
+       invert="false"
+       hide_mask="false"
+       background="true"
+       background_color="#ffffffff" />
+    <filter
+       id="mask-powermask-path-effect482_inverse-8"
+       inkscape:label="filtermask-powermask-path-effect482"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect482_primitive1-5"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect482_primitive2-8"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect100_inverse"
+       inkscape:label="filtermask-powermask-path-effect100"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect100_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect100_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect101_inverse"
+       inkscape:label="filtermask-powermask-path-effect101"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect101_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect101_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect102_inverse"
+       inkscape:label="filtermask-powermask-path-effect102"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect102_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect102_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect103_inverse"
+       inkscape:label="filtermask-powermask-path-effect103"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect103_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect103_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect104_inverse"
+       inkscape:label="filtermask-powermask-path-effect104"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect104_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect104_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect105_inverse"
+       inkscape:label="filtermask-powermask-path-effect105"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect105_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect105_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect106_inverse"
+       inkscape:label="filtermask-powermask-path-effect106"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect106_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect106_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect107_inverse"
+       inkscape:label="filtermask-powermask-path-effect107"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect107_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect107_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect108_inverse"
+       inkscape:label="filtermask-powermask-path-effect108"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect108_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect108_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect109_inverse"
+       inkscape:label="filtermask-powermask-path-effect109"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect109_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect109_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect110_inverse"
+       inkscape:label="filtermask-powermask-path-effect110"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect110_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect110_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect111_inverse"
+       inkscape:label="filtermask-powermask-path-effect111"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect111_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect111_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect113_inverse"
+       inkscape:label="filtermask-powermask-path-effect113"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect113_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect113_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect114_inverse"
+       inkscape:label="filtermask-powermask-path-effect114"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect114_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect114_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect115_inverse"
+       inkscape:label="filtermask-powermask-path-effect115"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect115_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect115_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect116_inverse"
+       inkscape:label="filtermask-powermask-path-effect116"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect116_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect116_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect117_inverse"
+       inkscape:label="filtermask-powermask-path-effect117"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect117_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect117_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect118_inverse"
+       inkscape:label="filtermask-powermask-path-effect118"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect118_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect118_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect119_inverse"
+       inkscape:label="filtermask-powermask-path-effect119"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect119_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect119_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect120_inverse"
+       inkscape:label="filtermask-powermask-path-effect120"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect120_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect120_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect121_inverse"
+       inkscape:label="filtermask-powermask-path-effect121"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect121_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect121_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect122_inverse"
+       inkscape:label="filtermask-powermask-path-effect122"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect122_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect122_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect123_inverse"
+       inkscape:label="filtermask-powermask-path-effect123"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect123_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect123_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect124_inverse"
+       inkscape:label="filtermask-powermask-path-effect124"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect124_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect124_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect125_inverse"
+       inkscape:label="filtermask-powermask-path-effect125"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect125_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect125_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect126_inverse"
+       inkscape:label="filtermask-powermask-path-effect126"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect126_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect126_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect127_inverse"
+       inkscape:label="filtermask-powermask-path-effect127"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect127_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect127_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect128_inverse"
+       inkscape:label="filtermask-powermask-path-effect128"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect128_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect128_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect129_inverse"
+       inkscape:label="filtermask-powermask-path-effect129"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect129_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect129_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect130_inverse"
+       inkscape:label="filtermask-powermask-path-effect130"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect130_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect130_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect159_inverse"
+       inkscape:label="filtermask-powermask-path-effect159"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect159_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect159_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect160_inverse"
+       inkscape:label="filtermask-powermask-path-effect160"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect160_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect160_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect161_inverse"
+       inkscape:label="filtermask-powermask-path-effect161"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect161_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect161_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect162_inverse"
+       inkscape:label="filtermask-powermask-path-effect162"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect162_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect162_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect163_inverse"
+       inkscape:label="filtermask-powermask-path-effect163"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect163_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect163_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect164_inverse"
+       inkscape:label="filtermask-powermask-path-effect164"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect164_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect164_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect165_inverse"
+       inkscape:label="filtermask-powermask-path-effect165"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect165_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect165_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect166_inverse"
+       inkscape:label="filtermask-powermask-path-effect166"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect166_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect166_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect167_inverse"
+       inkscape:label="filtermask-powermask-path-effect167"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect167_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect167_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect168_inverse"
+       inkscape:label="filtermask-powermask-path-effect168"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect168_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect168_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect169_inverse"
+       inkscape:label="filtermask-powermask-path-effect169"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect169_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect169_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect170_inverse"
+       inkscape:label="filtermask-powermask-path-effect170"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect170_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect170_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect171_inverse"
+       inkscape:label="filtermask-powermask-path-effect171"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect171_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect171_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect172_inverse"
+       inkscape:label="filtermask-powermask-path-effect172"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect172_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect172_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect173_inverse"
+       inkscape:label="filtermask-powermask-path-effect173"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect173_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect173_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect174_inverse"
+       inkscape:label="filtermask-powermask-path-effect174"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect174_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect174_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect175_inverse"
+       inkscape:label="filtermask-powermask-path-effect175"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect175_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect175_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect176_inverse"
+       inkscape:label="filtermask-powermask-path-effect176"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect176_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect176_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect177_inverse"
+       inkscape:label="filtermask-powermask-path-effect177"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect177_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect177_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect178_inverse"
+       inkscape:label="filtermask-powermask-path-effect178"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect178_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect178_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect179_inverse"
+       inkscape:label="filtermask-powermask-path-effect179"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect179_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect179_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect180_inverse"
+       inkscape:label="filtermask-powermask-path-effect180"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect180_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect180_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect181_inverse"
+       inkscape:label="filtermask-powermask-path-effect181"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect181_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect181_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect182_inverse"
+       inkscape:label="filtermask-powermask-path-effect182"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect182_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect182_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect183_inverse"
+       inkscape:label="filtermask-powermask-path-effect183"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect183_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect183_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect184_inverse"
+       inkscape:label="filtermask-powermask-path-effect184"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect184_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect184_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect185_inverse"
+       inkscape:label="filtermask-powermask-path-effect185"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect185_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect185_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect186_inverse"
+       inkscape:label="filtermask-powermask-path-effect186"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect186_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect186_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect187_inverse"
+       inkscape:label="filtermask-powermask-path-effect187"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect187_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect187_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect188_inverse"
+       inkscape:label="filtermask-powermask-path-effect188"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect188_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect188_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect373_inverse"
+       inkscape:label="filtermask-powermask-path-effect373"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect373_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect373_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect422" />
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect112">
+      <g
+         id="g112"
+         transform="translate(-88.378002,-328.45032)">
+        <path
+           id="path79"
+           style="display:inline;fill:none;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 204.43386,146.11706 V 84.902575 L 168.40267,35.379084 110.10336,16.462835 51.803852,35.379084 15.772871,84.902575 v 61.214485 l 36.030981,49.52349 58.299508,18.91625 58.29931,-18.91625 z" />
+        <path
+           id="path80"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 51.879142,195.70108 V 35.271925" />
+        <path
+           id="path81"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 168.36945,195.70108 V 35.271925" />
+        <path
+           id="path82"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 15.854041,146.19545 110.15194,16.405542" />
+        <path
+           id="path83"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 110.14629,214.58954 204.44419,84.799632" />
+        <path
+           id="path84"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 15.83696,84.912809 168.41415,35.337478" />
+        <path
+           id="path85"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 51.83445,195.69063 204.41164,146.1153" />
+        <path
+           id="path86"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="m 110.09665,16.40554 94.2979,129.78991" />
+        <path
+           id="path87"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 15.854024,84.82718 110.15192,214.61709" />
+        <path
+           id="path88"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 51.83445,35.320946 204.41164,84.896277" />
+        <path
+           id="path89"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="m 15.83696,146.1539 152.57719,49.57533" />
+        <path
+           id="path90"
+           style="display:inline;fill:none;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="m 82.61718,153.306 27.49702,8.92188 27.49692,-8.92188 16.99415,-23.35781 V 101.07631 L 137.61112,77.718497 110.1142,68.796626 82.61718,77.718497 65.623134,101.07631 v 28.87188 z" />
+        <path
+           id="path91"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="M 137.59571,124.31984 V 77.764891" />
+        <path
+           id="path92"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="M 82.685943,153.26323 V 106.70828" />
+        <path
+           id="path93"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="m 127.25517,138.71811 27.36431,-37.66375" />
+        <path
+           id="path94"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="M 65.819736,129.85865 93.184052,92.194898" />
+        <path
+           id="path95"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="M 110.3214,144.36397 154.5978,129.9777" />
+        <path
+           id="path96"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="M 65.826553,101.08568 110.10295,86.699411" />
+        <g
+           id="g101">
+          <g
+             id="g98">
+            <path
+               id="path97"
+               style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+               d="M 65.523584,130.13123 V 83.576287" />
+            <path
+               id="path98"
+               style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+               d="M 65.693399,83.223889 109.9698,68.83762" />
+          </g>
+          <g
+             id="g100"
+             transform="rotate(36,110.14218,115.46315)">
+            <path
+               id="path99"
+               style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+               d="M 65.523584,130.13123 V 83.576287" />
+            <path
+               id="path100"
+               style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+               d="M 65.693399,83.223889 109.9698,68.83762" />
+          </g>
+        </g>
+        <path
+           id="path101"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="m 93.341133,138.98099 44.276397,14.38627" />
+        <path
+           id="path102"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="M 82.782393,77.814701 127.05879,92.200972" />
+        <path
+           id="path103"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="m 82.753861,124.53528 27.364319,37.66375" />
+        <path
+           id="path104"
+           style="fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-linecap:round;stroke-dasharray:none"
+           d="m 110.1643,68.844438 27.36431,37.663752" />
+        <path
+           id="path105"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 110.14082,214.50049 V 16.472486" />
+        <path
+           id="path106"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 15.972925,84.889469 204.30875,146.08349" />
+        <path
+           id="path107"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 51.941856,35.382479 168.3398,195.5905" />
+        <path
+           id="path108"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 15.972914,146.0835 204.30874,84.889479" />
+        <path
+           id="path109"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="M 51.941854,195.5905 168.33979,35.382479" />
+        <path
+           id="path110"
+           style="display:inline;fill:none;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="m 110.12976,214.57819 58.29931,-18.91625 36.03119,-49.52349 V 84.923965 L 168.42907,35.400474 110.12976,16.484225 51.830252,35.400474 15.799271,84.923965 v 61.214485 l 36.030981,49.52349 z" />
+        <path
+           id="path111"
+           style="display:inline;fill:none;stroke:#000000;stroke-width:3.77953;stroke-dasharray:none"
+           d="m 110.26205,231.58078 68.16351,-22.11687 42.12764,-57.90283 V 79.98914 L 178.42556,22.086305 110.26205,-0.03056161 42.098295,22.086305 -0.02910496,79.98914 v 71.57194 L 42.098295,209.46391 Z" />
+        <path
+           id="path112"
+           style="fill:none;stroke:#000000;stroke-width:3.77953;stroke-miterlimit:0;stroke-dasharray:none"
+           d="m 115.94376,9.3354345 a 5.6399952,5.6399952 0 0 1 -5.64,5.6399955 5.6399952,5.6399952 0 0 1 -5.63999,-5.6399955 5.6399952,5.6399952 0 0 1 5.63999,-5.6399952 5.6399952,5.6399952 0 0 1 5.64,5.6399952 z" />
+      </g>
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect276" />
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect275" />
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect274">
+      <g
+         id="g274"
+         style="stroke-width:5.66929;stroke-dasharray:none"
+         transform="matrix(2.5725897,0,0,2.5725897,-11.287855,19.781869)">
+        <path
+           id="path226"
+           style="display:inline;fill:none;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 204.43386,146.11706 V 84.902575 L 168.40267,35.379084 110.10336,16.462835 51.803852,35.379084 15.772871,84.902575 v 61.214485 l 36.030981,49.52349 58.299508,18.91625 58.29931,-18.91625 z" />
+        <path
+           id="path227"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 51.879142,195.70108 V 35.271925" />
+        <path
+           id="path228"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 168.36945,195.70108 V 35.271925" />
+        <path
+           id="path229"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 15.854041,146.19545 110.15194,16.405542" />
+        <path
+           id="path230"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 110.14629,214.58954 204.44419,84.799632" />
+        <path
+           id="path231"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 15.83696,84.912809 168.41415,35.337478" />
+        <path
+           id="path232"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 51.83445,195.69063 204.41164,146.1153" />
+        <path
+           id="path233"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 110.09665,16.40554 94.2979,129.78991" />
+        <path
+           id="path234"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 15.854024,84.82718 110.15192,214.61709" />
+        <path
+           id="path235"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 51.83445,35.320946 204.41164,84.896277" />
+        <path
+           id="path236"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 15.83696,146.1539 152.57719,49.57533" />
+        <path
+           id="path237"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 74.140743,165.10375 V 141.67337" />
+        <path
+           id="path238"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 146.14642,89.409864 V 65.979488" />
+        <path
+           id="path239"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 51.884793,134.47629 65.656817,115.52071" />
+        <path
+           id="path240"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 154.63035,115.56252 168.40238,96.606944" />
+        <path
+           id="path241"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 51.881719,96.616433 74.165325,89.37605" />
+        <path
+           id="path242"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 146.12186,141.70719 22.28361,-7.24038" />
+        <path
+           id="path243"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 74.132681,65.985332 22.283606,7.240383" />
+        <path
+           id="path244"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 123.87086,157.8575 22.28361,7.24038" />
+        <path
+           id="path245"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 110.13861,54.283072 13.77203,18.955571" />
+        <path
+           id="path246"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 96.376551,157.84458 13.772029,18.95558" />
+        <path
+           id="path247"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 146.14639,165.10375 V 141.67337" />
+        <path
+           id="path248"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 74.140723,89.409864 V 65.979488" />
+        <path
+           id="path249"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 110.13858,176.80016 13.77203,-18.95558" />
+        <path
+           id="path250"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 96.376522,73.238642 110.14855,54.283071" />
+        <path
+           id="path251"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 74.132682,165.09789 22.283606,-7.24038" />
+        <path
+           id="path252"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 123.87086,73.225731 22.28361,-7.240383" />
+        <path
+           id="path253"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 51.881677,134.46679 22.283606,7.24038" />
+        <path
+           id="path254"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 146.12182,89.37603 22.28361,7.240383" />
+        <path
+           id="path255"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 51.884779,96.606954 65.656803,115.56253" />
+        <path
+           id="path256"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 154.63033,115.52072 13.77203,18.95558" />
+        <path
+           id="path257"
+           style="display:inline;fill:none;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 82.61718,153.306 27.49702,8.92188 27.49692,-8.92188 16.99415,-23.35781 V 101.07631 L 137.61112,77.718497 110.1142,68.796626 82.61718,77.718497 65.623134,101.07631 v 28.87188 z" />
+        <path
+           id="path258"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="M 137.59571,124.31984 V 77.764891" />
+        <path
+           id="path259"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="M 82.685943,153.26323 V 106.70828" />
+        <path
+           id="path260"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="m 127.25517,138.71811 27.36431,-37.66375" />
+        <path
+           id="path261"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="M 65.819736,129.85865 93.184052,92.194898" />
+        <path
+           id="path262"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="M 110.3214,144.36397 154.5978,129.9777" />
+        <path
+           id="path263"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="M 65.826553,101.08568 110.10295,86.699411" />
+        <path
+           id="path264"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="m 93.341133,138.98099 44.276397,14.38627" />
+        <path
+           id="path265"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="M 82.782393,77.814701 127.05879,92.200972" />
+        <path
+           id="path266"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="m 82.753861,124.53528 27.364319,37.66375" />
+        <path
+           id="path267"
+           style="fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-linecap:round;stroke-dasharray:none"
+           d="m 110.1643,68.844438 27.36431,37.663752" />
+        <path
+           id="path268"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 110.14082,214.50049 V 16.472486" />
+        <path
+           id="path269"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 15.972925,84.889469 204.30875,146.08349" />
+        <path
+           id="path270"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 51.941856,35.382479 168.3398,195.5905" />
+        <path
+           id="path271"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 15.972914,146.0835 204.30874,84.889479" />
+        <path
+           id="path272"
+           style="display:inline;fill-opacity:0;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="M 51.941854,195.5905 168.33979,35.382479" />
+        <path
+           id="path273"
+           style="display:inline;fill:none;stroke:#000000;stroke-width:5.66929;stroke-dasharray:none"
+           d="m 110.12976,214.57819 58.29931,-18.91625 36.03119,-49.52349 V 84.923965 L 168.42907,35.400474 110.12976,16.484225 51.830252,35.400474 15.799271,84.923965 v 61.214485 l 36.030981,49.52349 z" />
+        <path
+           id="path274"
+           style="fill:none;stroke:#000000;stroke-width:5.66929;stroke-miterlimit:0;stroke-dasharray:none"
+           d="m 115.94376,9.3354345 a 5.6399952,5.6399952 0 0 1 -5.64,5.6399955 5.6399952,5.6399952 0 0 1 -5.63999,-5.6399955 5.6399952,5.6399952 0 0 1 5.63999,-5.6399952 5.6399952,5.6399952 0 0 1 5.64,5.6399952 z" />
+      </g>
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath298">
+      <path
+         id="lpe_path-effect299"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.390286;stroke-dasharray:none"
+         class="powerclip"
+         d="M 228.21293,-4.9099395 H 315.7808 V 82.65795 H 228.21293 Z M 271.9969,580.10535 426.8717,529.8534 522.59018,398.29201 V 235.67291 L 426.8717,104.11145 271.9969,53.859569 117.12158,104.11145 21.403597,235.67291 v 162.6191 L 117.12158,529.8534 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath113">
+      <path
+         id="lpe_path-effect114"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.142403;stroke-dasharray:none"
+         class="powerclip"
+         d="M 80.712728,0.94833947 H 108.26365 V 28.499546 H 80.712728 Z M 94.488192,218.53396 152.84096,199.60034 188.90517,150.03145 V 88.760836 L 152.84096,39.191925 94.488192,20.258332 36.13523,39.191925 0.07120138,88.760836 V 150.03145 L 36.13523,199.60034 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipath_lpe_path-effect11">
+      <path
+         id="path11"
+         style="display:block;fill:none;stroke:#000000;stroke-width:0.142403;stroke-dasharray:none"
+         d="m 94.488192,218.53396 58.352768,-18.93362 36.06421,-49.56889 V 88.760836 L 152.84096,39.191925 94.488192,20.258332 36.13523,39.191925 0.07120138,88.760836 V 150.03145 L 36.13523,199.60034 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath14">
+      <path
+         id="path14"
+         clip-path="none"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.142403;stroke-miterlimit:0;stroke-dasharray:none"
+         d="M 109.02915,14.61216 A 14.540954,14.540964 0 0 1 94.488192,29.153128 14.540954,14.540964 0 0 1 79.947228,14.61216 14.540954,14.540964 0 0 1 94.488192,0.07120139 14.540954,14.540964 0 0 1 109.02915,14.61216 Z m -5.83731,0.11178 A 8.7037736,8.7037781 0 0 1 94.488173,23.427735 8.7037736,8.7037781 0 0 1 85.78454,14.72394 8.7037736,8.7037781 0 0 1 94.488173,6.0201504 8.7037736,8.7037781 0 0 1 103.19184,14.72394 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipath_lpe_path-effect19">
+      <path
+         id="path21"
+         style="display:block;fill:none;stroke:#000000;stroke-width:0.142403;stroke-dasharray:none"
+         d="m 94.488192,218.53396 58.352768,-18.93362 36.06421,-49.56889 V 88.760836 L 152.84096,39.191925 94.488192,20.258332 36.13523,39.191925 0.07120138,88.760836 V 150.03145 L 36.13523,199.60034 Z" />
+    </clipPath>
+    <filter
+       id="mask-powermask-path-effect24_inverse"
+       inkscape:label="filtermask-powermask-path-effect24"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect24_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect24_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect25_inverse"
+       inkscape:label="filtermask-powermask-path-effect25"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect25_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect25_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       id="mask-powermask-path-effect26_inverse"
+       inkscape:label="filtermask-powermask-path-effect26"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect26_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect26_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath113-7">
+      <path
+         id="path114-9"
+         style="display:none;fill:none;stroke:#000000;stroke-width:0.142403;stroke-dasharray:none"
+         d="m 94.488192,218.53396 58.352768,-18.93362 36.06421,-49.56889 V 88.760836 L 152.84096,39.191925 94.488192,20.258332 36.13523,39.191925 0.07120138,88.760836 V 150.03145 L 36.13523,199.60034 Z" />
+      <path
+         id="lpe_path-effect114-3"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.142403;stroke-dasharray:none"
+         class="powerclip"
+         d="M 80.712728,0.9483395 H 108.26365 V 28.499546 H 80.712728 Z M 94.488192,218.53396 152.84096,199.60034 188.90517,150.03145 V 88.760836 L 152.84096,39.191925 94.488192,20.258332 36.13523,39.191925 0.07120138,88.760836 V 150.03145 L 36.13523,199.60034 Z" />
+    </clipPath>
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect114-8"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath298-0">
+      <path
+         id="path299-2"
+         style="display:none;fill:none;stroke:#000000;stroke-width:0.390286;stroke-dasharray:none"
+         d="M 271.9969,580.10535 426.8717,529.8534 522.59018,398.29201 V 235.67291 L 426.8717,104.11145 271.9969,53.859569 117.12158,104.11145 21.403597,235.67291 v 162.6191 L 117.12158,529.8534 Z" />
+      <path
+         id="lpe_path-effect299-4"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.390286;stroke-dasharray:none"
+         class="powerclip"
+         d="M 228.21293,-4.9099395 H 315.7808 V 82.657949 H 228.21293 Z M 271.9969,580.10535 426.8717,529.8534 522.59018,398.29201 V 235.67291 L 426.8717,104.11145 271.9969,53.859569 117.12158,104.11145 21.403597,235.67291 v 162.6191 L 117.12158,529.8534 Z" />
+    </clipPath>
+    <inkscape:path-effect
+       effect="powerclip"
+       id="path-effect299-8"
+       is_visible="true"
+       lpeversion="1"
+       inverse="true"
+       flatten="false"
+       hide_clip="false"
+       message="Use fill-rule evenodd on &lt;b&gt;fill and stroke&lt;/b&gt; dialog if no flatten result after convert clip to paths." />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipath_lpe_path-effect114-8">
+      <path
+         id="lpe_path-effect114-8"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.142403;stroke-dasharray:none"
+         class="powerclip"
+         d="M 80.712728,0.9483395 H 108.26365 V 28.499546 H 80.712728 Z M 94.488192,218.53396 152.84096,199.60034 188.90517,150.03145 V 88.760836 L 152.84096,39.191925 94.488192,20.258332 36.13523,39.191925 0.07120138,88.760836 V 150.03145 L 36.13523,199.60034 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipath_lpe_path-effect299-8">
+      <path
+         id="lpe_path-effect299-8"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.390286;stroke-dasharray:none"
+         class="powerclip"
+         d="M 228.21293,-4.9099395 H 315.7808 V 82.657949 H 228.21293 Z M 271.9969,580.10535 426.8717,529.8534 522.59018,398.29201 V 235.67291 L 426.8717,104.11145 271.9969,53.859569 117.12158,104.11145 21.403597,235.67291 v 162.6191 L 117.12158,529.8534 Z" />
+    </clipPath>
+    <filter
+       id="mask-powermask-path-effect193_inverse"
+       inkscape:label="filtermask-powermask-path-effect193"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect193_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect193_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath113-9">
+      <path
+         id="lpe_path-effect114-0"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.142403;stroke-dasharray:none"
+         class="powerclip"
+         d="M 80.712728,0.94833947 H 108.26365 V 28.499546 H 80.712728 Z M 94.488192,218.53396 152.84096,199.60034 188.90517,150.03145 V 88.760836 L 152.84096,39.191925 94.488192,20.258332 36.13523,39.191925 0.07120138,88.760836 V 150.03145 L 36.13523,199.60034 Z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath298-2">
+      <path
+         id="lpe_path-effect299-3"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.390286;stroke-dasharray:none"
+         class="powerclip"
+         d="M 228.21293,-4.9099395 H 315.7808 V 82.65795 H 228.21293 Z M 271.9969,580.10535 426.8717,529.8534 522.59018,398.29201 V 235.67291 L 426.8717,104.11145 271.9969,53.859569 117.12158,104.11145 21.403597,235.67291 v 162.6191 L 117.12158,529.8534 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview5933"
+     pagecolor="#000000"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.8799149"
+     inkscape:cx="48.140476"
+     inkscape:cy="113.03703"
+     inkscape:window-width="1088"
+     inkscape:window-height="776"
+     inkscape:window-x="193"
+     inkscape:window-y="28"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="c:\5-5-duopyramid.svg" />
+  <!-- X Coordinate transform: fx(x)=(x+1.05)*476.1905-->
+  <!-- Y Coordinate transform: fy(y)=(0.9986093-y)*476.1905 -->
+  <path
+     id="path451"
+     style="color:#000000;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.26772;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+     inkscape:transform-center-x="-50.734881"
+     inkscape:transform-center-y="9.4891767"
+     d="m 93.947266,11.105469 c -4.045093,0.192571 -7.187164,4.843417 -5.666726,8.647247 0.237632,0.720362 0.610134,1.395501 1.088601,1.983612 -17.68375,5.755175 -35.383439,11.473044 -53.048829,17.277344 -1.70993,1.621615 -2.79642,3.753675 -4.278629,5.566317 -10.649181,14.65972 -21.308857,29.315463 -31.92058925,44.000089 -0.42773295,2.349491 -0.0529848,4.746317 -0.18939632,7.116406 0.0031846,18.085186 -0.0064248,36.173296 0.03705257,54.256636 1.01587764,2.12801 2.7054842,3.82222 3.9741435,5.79174 10.6506695,14.65691 21.2943395,29.32239 31.9789815,43.95241 2.041462,1.10616 4.369996,1.47746 6.517313,2.32174 17.263057,5.60684 34.525595,11.22526 51.801046,16.78763 2.369573,-0.3177 4.537403,-1.40864 6.835056,-2.01481 17.19576,-5.59526 34.40582,-11.15824 51.58291,-16.80355 1.69428,-1.59306 2.75882,-3.7025 4.22394,-5.4882 10.66822,-14.68677 21.34746,-29.36918 31.97919,-44.08016 0.4198,-2.38371 0.0516,-4.81289 0.18744,-7.21601 -0.003,-18.05134 0.006,-36.10559 -0.037,-54.155082 -1.01392,-2.129322 -2.70763,-3.822534 -3.97414,-5.793691 C 174.38639,68.598433 163.74345,53.932243 153.06055,39.300781 150.95072,38.183317 148.56366,37.780242 146.3505,36.920703 130.77859,31.859896 115.20668,26.799088 99.634766,21.738281 102.16791,18.746741 101.1342,13.466034 97.503745,11.840245 96.417294,11.26984 95.167894,11.041108 93.947266,11.105469 Z m 0.71289,2.265625 c 2.893807,-0.0082 5.130816,3.594344 3.671875,6.148437 -0.281253,0.551242 -0.670344,1.043939 -1.15039,1.435547 -1.368177,-0.512712 -2.967123,-1.138096 -4.35986,-0.342582 -0.468743,0.219577 -1.219458,0.50651 -1.532346,-0.113564 -1.961877,-2.084068 -1.038018,-6.095197 1.77597,-6.86308 0.513312,-0.177951 1.053398,-0.249676 1.594751,-0.264758 z M 72.058594,50.412109 C 61.592448,47.009766 51.126302,43.607422 40.660156,40.205078 57.594401,34.703125 74.528646,29.201172 91.462891,23.699219 84.994792,32.603516 78.526693,41.507813 72.058594,50.412109 Z M 148.33008,40.208984 c -10.45703,3.399089 -20.91406,6.798177 -31.3711,10.197266 -6.46419,-8.897135 -12.92838,-17.794271 -19.392574,-26.691406 16.921224,5.498047 33.842444,10.996093 50.763674,16.49414 z M 93.339844,57.318359 c -6.3125,-2.048828 -12.625,-4.097656 -18.9375,-6.146484 6.3125,-8.691406 12.625,-17.382812 18.9375,-26.074219 0,10.740235 0,21.480469 0,32.220703 z m 21.273436,-6.15039 c -6.31055,2.048828 -12.62109,4.097656 -18.931639,6.146484 0,-10.736979 0,-21.473958 0,-32.210937 6.310549,8.688151 12.621089,17.376302 18.931639,26.064453 z m 15.48633,17.328125 c -3.89453,-5.365235 -7.78906,-10.730469 -11.68359,-16.095703 10.19791,-3.311849 20.39583,-6.623698 30.59375,-9.935547 -6.30339,8.677083 -12.60678,17.354166 -18.91016,26.03125 z M 70.601562,52.402344 C 66.708333,57.765625 62.815104,63.128906 58.921875,68.492188 52.620443,59.818359 46.31901,51.144531 40.017578,42.470703 50.21224,45.78125 60.406901,49.091797 70.601562,52.402344 Z M 35.742188,76.789062 C 25.266276,80.193359 14.790365,83.597656 4.3144531,87.001953 14.790365,72.583984 25.266276,58.166016 35.742188,43.748047 c -10e-7,11.013672 0,22.027344 0,33.041015 z M 184.6582,86.990234 c -10.4681,-3.401692 -20.93619,-6.803385 -31.40429,-10.205078 0,-11.005208 0,-22.010416 0,-33.015625 10.4681,14.406901 20.93619,28.813802 31.40429,43.220703 z M 57.033203,69.876953 c -6.317057,2.050781 -12.634114,4.101563 -18.951172,6.152344 0,-10.747396 0,-21.494792 0,-32.242188 6.317058,8.696615 12.634115,17.39323 18.951172,26.089844 z m 93.880857,6.148438 c -6.30859,-2.047526 -12.61719,-4.095052 -18.92578,-6.142579 6.3086,-8.685546 12.61719,-17.371093 18.92578,-26.05664 0,10.733073 0,21.466146 0,32.199219 z m -23.86523,-7.753907 c -9.57943,-3.111979 -19.15886,-6.223958 -28.738283,-9.335937 5.919923,-1.92513 11.839843,-3.850261 17.759763,-5.775391 3.65951,5.03711 7.31901,10.074219 10.97852,15.111328 z M 90.695312,58.935547 c -9.573567,3.110677 -19.147135,6.221354 -28.720703,9.332031 3.656901,-5.035156 7.313802,-10.070312 10.970703,-15.105469 5.916667,1.92448 11.833334,3.848959 17.75,5.773438 z m -9.974609,17.386719 c -5.986979,-1.945313 -11.973958,-3.890625 -17.960937,-5.835938 9.56901,-3.109375 19.13802,-6.21875 28.707031,-9.328125 -3.582031,5.054688 -7.164063,10.109375 -10.746094,15.164063 z m 45.597657,-5.810547 c -5.86849,1.983073 -11.73698,3.966146 -17.60547,5.949219 -3.70182,-5.092448 -7.40365,-10.184896 -11.105468,-15.277344 9.570308,3.109375 19.140628,6.21875 28.710938,9.328125 z m -21.11524,5.111328 c -3.17382,-1.03125 -6.347651,-2.0625 -9.521479,-3.09375 0,-3.336589 0,-6.673177 0,-10.009766 3.173828,4.367839 6.347659,8.735677 9.521479,13.103516 z M 93.339844,72.53125 c -3.052084,0.992839 -6.104167,1.985677 -9.15625,2.978516 3.052083,-4.307943 6.104166,-8.615886 9.15625,-12.923828 0,3.315104 0,6.630208 0,9.945312 z m -15.953125,5.185547 c -3.171224,1.031901 -6.342448,2.063802 -9.513672,3.095703 -1.958984,-2.697917 -3.917969,-5.395833 -5.876953,-8.09375 5.130208,1.666016 10.260416,3.332031 15.390625,4.998047 z M 38.082031,97.167969 c 0,-6.220052 0,-12.440104 0,-18.660157 5.917318,-1.923177 11.834636,-3.846354 17.751953,-5.769531 C 49.916667,80.88151 43.999349,89.02474 38.082031,97.167969 Z M 150.91406,78.505859 c 0,6.210938 0,12.421875 0,18.632813 -5.9082,-8.13086 -11.8164,-16.261719 -17.72461,-24.392578 5.90821,1.919922 11.81641,3.839843 17.72461,5.759765 z m -29.76172,2.304688 c -3.05013,-0.992188 -6.10026,-1.984375 -9.15039,-2.976563 4.9961,-1.690104 9.99219,-3.380208 14.98828,-5.070312 -1.94596,2.682292 -3.89192,5.364583 -5.83789,8.046875 z M 58.013672,92.669922 C 52.008464,94.61849 46.003255,96.567057 39.998047,98.515625 45.929688,90.351562 51.861328,82.1875 57.792969,74.023438 c 0.07357,6.215494 0.147135,12.430989 0.220703,18.646484 z m 91.062498,5.923828 c -5.94075,-1.852865 -11.88151,-3.705729 -17.82226,-5.558594 0,-6.323567 0,-12.647135 0,-18.970703 5.94075,8.176432 11.88151,16.352865 17.82226,24.529297 z M 128.9082,90.257812 c -1.95442,-2.690755 -3.90885,-5.38151 -5.86328,-8.072265 1.95443,-2.690104 3.90886,-5.380208 5.86328,-8.070313 0,5.38086 0,10.761719 0,16.142578 z M 65.982422,82.189453 c -1.88737,2.598958 -3.77474,5.197917 -5.66211,7.796875 -0.06185,-5.283854 -0.123697,-10.567708 -0.185546,-15.851562 1.949218,2.684895 3.898437,5.369791 5.847656,8.054687 z m 41.937498,-3.208984 c 3.92513,1.274739 7.85026,2.549479 11.77539,3.824219 -2.81575,3.878906 -5.63151,7.757812 -8.44726,11.636718 -4.55664,-6.272786 -9.11328,-12.545573 -13.669925,-18.818359 3.447265,1.11914 6.894535,2.238281 10.341795,3.357422 z M 77.773438,94.4375 C 74.959635,90.560547 72.145833,86.683594 69.332031,82.806641 76.69987,80.414062 84.067708,78.021484 91.435547,75.628906 86.88151,81.898437 82.327474,88.167969 77.773438,94.4375 Z m 15.566406,-4.304688 c -4.166667,1.354167 -8.333334,2.708334 -12.5,4.0625 4.166666,-5.735026 8.333333,-11.470052 12.5,-17.205078 0,4.38086 0,8.761719 0,13.142578 z m 14.833986,4.056641 c -4.16406,-1.353516 -8.328127,-2.707031 -12.492189,-4.060547 0,-4.377604 0,-8.755208 0,-13.132812 4.164062,5.73112 8.328129,11.462239 12.492189,17.193359 z m 75.67578,-4.984375 c -10.19857,3.3125 -20.39714,6.625 -30.5957,9.9375 0,-6.625651 0,-13.251302 0,-19.876953 10.19856,3.313151 20.39713,6.626302 30.5957,9.939453 z M 35.742188,99.123047 C 25.555339,95.813802 15.36849,92.504557 5.1816406,89.195312 15.36849,85.886068 25.555339,82.576823 35.742188,79.267578 c 0,6.61849 -10e-7,13.236979 0,19.855469 z M 129.11914,94.53125 c 2.02771,2.827485 4.10385,5.63705 6.14648,8.46094 -7.37174,-2.39388 -14.74348,-4.787763 -22.11523,-7.181643 2.8151,-3.878906 5.63021,-7.757813 8.44531,-11.636719 2.50782,3.452474 5.01563,6.904948 7.52344,10.357422 z M 75.875,95.8125 c -7.370443,2.393229 -14.740885,4.78646 -22.111328,7.17969 4.555989,-6.272138 9.111979,-12.544273 13.667969,-18.816409 2.814453,3.878907 5.628906,7.757813 8.443359,11.636719 z m -40.845703,5.55078 c -3.901693,5.375 -7.803386,10.75 -11.705078,16.125 C 17.009115,108.79492 10.69401,100.10156 4.3789062,91.408203 14.595703,94.726563 24.8125,98.044922 35.029297,101.36328 Z m 130.667973,16.12891 c -3.90039,-5.3724 -7.80079,-10.74479 -11.70118,-16.11719 10.21289,-3.317057 20.42578,-6.634115 30.63868,-9.951172 -6.3125,8.689452 -12.625,17.378902 -18.9375,26.068362 z M 109.34961,97.044922 c -4.55599,6.272138 -9.11198,12.544268 -13.667969,18.816408 0,-7.7513 0,-15.50261 0,-23.253908 4.555989,1.479167 9.111979,2.958333 13.667969,4.4375 z M 93.339844,115.85742 c -4.554037,-6.27018 -9.108073,-12.54036 -13.66211,-18.810545 4.554037,-1.478516 9.108073,-2.957031 13.66211,-4.435547 0,7.748702 0,15.497392 0,23.246092 z M 21.875,119.47656 c -6.479818,8.91862 -12.9596354,17.83724 -19.4394531,26.75586 0,-17.83724 0,-35.67448 0,-53.511717 C 8.9153646,101.63932 15.395182,110.55794 21.875,119.47656 Z m 164.66992,26.70313 c -6.46549,-8.89909 -12.93099,-17.79818 -19.39648,-26.69727 6.46614,-8.90039 12.93229,-17.80078 19.39844,-26.70117 -6.6e-4,17.79948 -0.001,35.59896 -0.002,53.39844 z M 50.253906,103.84375 c -3.169271,-1.03125 -6.338541,-2.0625 -9.507812,-3.09375 5.128255,-1.665365 10.25651,-3.330729 15.384765,-4.996094 -1.958984,2.696615 -3.917968,5.393234 -5.876953,8.089844 z m 97.962894,-3.05859 c -3.14519,1.02278 -6.29037,2.04557 -9.43555,3.06836 -1.87956,-2.5892 -3.75911,-5.17839 -5.63867,-7.767582 5.02474,1.566406 10.04948,3.132812 15.07422,4.699222 z m -56.781253,16.43359 c -7.367188,-2.39193 -14.734375,-4.78385 -22.101563,-7.17578 2.813151,-3.87695 5.626302,-7.75391 8.439454,-11.630861 4.554036,6.268881 9.108072,12.537761 13.662109,18.806641 z m 28.257813,-7.16602 c -7.37175,2.39388 -14.74349,4.78776 -22.115235,7.18165 4.556645,-6.27279 9.113285,-12.54558 13.669925,-18.818364 2.8151,3.878904 5.63021,7.757814 8.44531,11.636714 z m 14.83594,-4.82421 c -4.16341,1.35481 -8.32683,2.70963 -12.49024,4.06445 -2.57357,-3.54297 -5.14713,-7.08594 -7.7207,-10.628908 6.73698,2.188148 13.47396,4.376298 20.21094,6.564458 z m -67.541019,4.05273 c -4.156901,-1.35221 -8.313802,-2.70443 -12.470703,-4.05664 6.725912,-2.1849 13.451823,-4.36979 20.177734,-6.554688 -2.56901,3.537108 -5.13802,7.074218 -7.707031,10.611328 z m -17.464843,-3.20313 c 0,3.21876 -10e-7,6.4375 0,9.65626 -3.164063,-4.24805 -6.328126,-8.4961 -9.492188,-12.74415 3.164063,1.0293 6.328125,2.0586 9.492188,3.08789 z m 89.982422,10.02149 c 0,-3.33659 0,-6.67318 0,-10.00977 3.17448,-1.0319 6.34896,-2.0638 9.52344,-3.0957 -3.17448,4.36849 -6.34896,8.73698 -9.52344,13.10547 z m -90.285157,3.16016 c -3.712891,5.10742 -7.425781,10.21484 -11.138672,15.32226 0,-10.09114 0,-20.18229 0,-30.27344 3.712891,4.98373 7.425782,9.96745 11.138672,14.95118 z M 164.25,119.47852 c -3.66536,5.04492 -7.33073,10.08984 -10.99609,15.13476 0,-10.08984 0,-20.17969 0,-30.26953 3.66536,5.04492 7.33073,10.08984 10.99609,15.13477 z m -128.507812,15.0957 c -3.65625,-5.0332 -7.3125,-10.06641 -10.96875,-15.09961 3.656249,-5.03255 7.3125,-10.0651 10.96875,-15.09766 0,10.06576 -10e-7,20.13151 0,30.19727 z m 115.171872,0.0391 c -3.70703,-4.97591 -7.41406,-9.95182 -11.12109,-14.92773 3.70703,-5.09831 7.41406,-10.19662 11.12109,-15.29493 0,10.07422 0,20.14844 0,30.22266 z M 66.255859,111.51367 c 0,4.38477 0,8.76953 0,13.1543 -4.171224,-5.74024 -8.342448,-11.48047 -12.513671,-17.2207 4.171223,1.35546 8.342447,2.71093 12.513671,4.0664 z m 56.513671,13.14649 c 0,-4.37761 0,-8.75521 0,-13.13282 4.16537,-1.35351 8.33073,-2.70703 12.49609,-4.06054 -4.16536,5.73112 -8.33072,11.46224 -12.49609,17.19336 z m 14.39649,7.41601 c -4.55339,-1.47786 -9.10678,-2.95573 -13.66016,-4.43359 4.55338,-6.26953 9.10677,-12.53906 13.66016,-18.8086 0,7.7474 0,15.4948 0,23.24219 z M 65.521484,127.6543 c -4.552734,1.47721 -9.105468,2.95442 -13.658203,4.43164 0,-7.7461 0,-15.49219 0,-23.23828 4.552735,6.26888 9.105469,12.53776 13.658203,18.80664 z m 25.201172,-8.19141 c -7.375,2.39518 -14.75,4.79037 -22.125,7.18555 0,-4.79102 0,-9.58203 0,-14.37305 7.375,2.39583 14.75,4.79167 22.125,7.1875 z m 29.705074,7.17383 c -7.36328,-2.39128 -14.72656,-4.78255 -22.089839,-7.17383 7.363279,-2.39193 14.726559,-4.78385 22.089839,-7.17578 0,4.7832 0,9.56641 0,14.34961 z m -85.414058,10.92969 c -10.203125,3.3138 -20.40625,6.6276 -30.6093751,9.9414 6.3066411,-8.68164 12.6132811,-17.36328 18.9199221,-26.04492 3.896484,5.36784 7.792968,10.73568 11.689453,16.10352 z m 149.591798,9.92382 c -10.19531,-3.31119 -20.39063,-6.62239 -30.58594,-9.93359 3.89323,-5.36328 7.78646,-10.72656 11.67969,-16.08984 6.30208,8.67448 12.60417,17.34896 18.90625,26.02343 z M 119.70312,128.875 c -2.81705,3.88086 -5.63411,7.76172 -8.45117,11.64258 -4.55859,-6.27604 -9.11718,-12.55209 -13.675778,-18.82813 7.375648,2.39519 14.751298,4.79037 22.126948,7.18555 z m -41.933589,11.64648 c -2.815104,-3.87825 -5.630208,-7.75651 -8.445312,-11.63476 7.370442,-2.39323 14.740885,-4.78646 22.111328,-7.17969 -4.555339,6.27149 -9.110677,12.54297 -13.666016,18.81445 z M 49.523438,132.8457 c -3.177084,1.03256 -6.354167,2.06511 -9.53125,3.09766 3.177083,-4.37175 6.354166,-8.74349 9.53125,-13.11524 0,3.3392 -10e-7,6.67839 0,10.01758 z m 59.832032,9.04688 c -4.55794,1.47916 -9.11589,2.95833 -13.673829,4.4375 0,-7.75456 0,-15.50912 0,-23.26367 4.557939,6.27539 9.115889,12.55078 13.673829,18.82617 z m -16.015626,4.43554 c -4.556641,-1.47851 -9.113281,-2.95703 -13.669922,-4.43554 4.556641,-6.27409 9.113281,-12.54818 13.669922,-18.82227 0,7.75261 0,15.50521 0,23.25781 z M 148.94727,135.9082 c -3.14714,-1.02409 -6.29428,-2.04817 -9.44141,-3.07226 0,-3.20117 0,-6.40235 0,-9.60352 3.14713,4.22526 6.29427,8.45052 9.44141,12.67578 z m -12.50782,-1.59375 c -4.55664,6.27344 -9.11328,12.54688 -13.66992,18.82032 0,-7.75261 0,-15.50521 0,-23.25782 4.55664,1.47917 9.11328,2.95834 13.66992,4.4375 z m -70.183591,18.81641 c -4.553385,-6.26953 -9.10677,-12.53906 -13.660156,-18.80859 4.553386,-1.47722 9.106771,-2.95443 13.660156,-4.43165 0,7.74675 0,15.49349 0,23.24024 z m 54.171871,0.01 c -2.57552,-3.54492 -5.15104,-7.08984 -7.72656,-10.63476 2.57552,-3.54427 5.15104,-7.08854 7.72656,-10.63281 0,7.08919 0,14.17838 0,21.26757 z M 76.320312,142.50977 c -2.574218,3.54296 -5.148437,7.08593 -7.722656,10.6289 0,-7.08594 0,-14.17187 0,-21.25781 2.574219,3.54297 5.148438,7.08594 7.722656,10.62891 z m 71.992188,-4.33399 c -5.13932,1.66992 -10.27865,3.33985 -15.41797,5.00977 1.96289,-2.70378 3.92578,-5.40756 5.88867,-8.11133 3.17644,1.03385 6.35287,2.06771 9.5293,3.10156 z m -92.388672,4.7207 c -5.054036,-1.57617 -10.108073,-3.15234 -15.162109,-4.72851 3.163411,-1.02865 6.326823,-2.05729 9.490234,-3.08594 1.890625,2.60482 3.78125,5.20964 5.671875,7.81445 z m 127.998052,6.84766 c -10.22266,3.32096 -20.44532,6.64193 -30.66797,9.96289 0,-6.64127 0,-13.28255 0,-19.92383 10.22265,3.32032 20.44531,6.64063 30.66797,9.96094 z M 35.742188,159.69336 C 25.53776,156.37891 15.333333,153.06445 5.1289062,149.75 15.333333,146.4349 25.53776,143.11979 35.742188,139.80469 c -10e-7,6.62955 0,13.25911 0,19.88867 z m 22.001953,-13.76563 c 0,6.3099 0,12.6198 0,18.92969 -5.929037,-8.16015 -11.858073,-16.32031 -17.78711,-24.48047 5.929037,1.85026 11.858073,3.70052 17.78711,5.55078 z m 73.496089,18.98829 c -0.0749,-6.2168 -0.14974,-12.4336 -0.22461,-18.6504 6.00717,-1.94921 12.01433,-3.89843 18.02149,-5.84765 -5.93229,8.16601 -11.86458,16.33203 -17.79688,24.49805 z m -75.39648,1.30859 c -5.920573,-1.92383 -11.841146,-3.84766 -17.761719,-5.77149 0,-6.2233 0,-12.44661 0,-18.66992 5.920573,8.14714 11.841146,16.29427 17.761719,24.44141 z m 95.07031,-5.75781 c -5.91211,1.92122 -11.82422,3.84244 -17.73633,5.76367 5.91211,-8.13542 11.82422,-16.27083 17.73633,-24.40625 0,6.21419 0,12.42838 0,18.64258 z M 90.705078,147.94922 c -6.738281,2.1888 -13.476562,4.3776 -20.214844,6.5664 2.574219,-3.54296 5.148438,-7.08593 7.722657,-10.6289 4.164062,1.35417 8.328125,2.70833 12.492187,4.0625 z m 27.826172,6.56445 c -6.73503,-2.18815 -13.47005,-4.3763 -20.205078,-6.56445 4.162758,-1.35417 8.325518,-2.70833 12.488278,-4.0625 2.57227,3.54232 5.14453,7.08463 7.7168,10.62695 z m -52.548828,2.22461 c -1.964844,2.70443 -3.929688,5.40886 -5.894531,8.11328 0,-5.4082 0,-10.8164 0,-16.22461 1.964843,2.70378 3.929687,5.40756 5.894531,8.11133 z m 62.914058,8.06445 c -1.95052,-2.68684 -3.90104,-5.37369 -5.85156,-8.06054 1.88867,-2.60026 3.77735,-5.20052 5.66602,-7.80078 0.0618,5.28711 0.1237,10.57421 0.18554,15.86132 z m -11.11718,-8.05664 c -7.36589,2.39258 -14.73177,4.78516 -22.097659,7.17774 0,-4.78451 0,-9.56901 0,-14.35352 7.365889,2.39193 14.731769,4.78386 22.097659,7.17578 z m -24.439456,7.17579 c -7.361328,-2.39193 -14.722657,-4.78386 -22.083985,-7.17579 7.361329,-2.39127 14.722657,-4.78255 22.083985,-7.17382 0,4.7832 0,9.5664 0,14.34961 z m -57.597656,-1.74805 c 0,11.02669 -10e-7,22.05338 0,33.08008 -10.487631,-14.4349 -20.975261,-28.8698 -31.4628911,-43.30469 10.4876301,3.4082 20.9752601,6.8164 31.4628911,10.22461 z m 117.511722,33.05664 c 0,-11.01432 0,-22.02865 0,-33.04297 10.47656,-3.4043 20.95312,-6.80859 31.42968,-10.21289 -10.47656,14.41862 -20.95312,28.83724 -31.42968,43.25586 z M 77.048828,161.10352 c -5.011068,1.69531 -10.022135,3.39062 -15.033203,5.08593 1.952474,-2.69075 3.904948,-5.38151 5.857422,-8.07226 3.058594,0.99544 6.117187,1.99088 9.175781,2.98633 z m 49.992192,5.12109 c -5.13803,-1.66927 -10.27605,-3.33854 -15.41407,-5.00781 3.17513,-1.03321 6.35026,-2.06641 9.52539,-3.09961 1.96289,2.70247 3.92579,5.40495 5.88868,8.10742 z m -35.601567,11.56836 c -9.588542,-3.11524 -19.177083,-6.23047 -28.765625,-9.3457 5.880208,-1.98763 11.760417,-3.97526 17.640625,-5.96289 3.708333,5.10286 7.416667,10.20572 11.125,15.30859 z m 34.869137,-9.32813 c -9.59179,3.11719 -19.18359,6.23438 -28.775387,9.35157 3.589847,-5.06641 7.179687,-10.13282 10.769527,-15.19922 6.00196,1.94922 12.00391,3.89843 18.00586,5.84765 z m -69.296871,0.61328 c -6.309896,8.68685 -12.619792,17.3737 -18.929688,26.06055 0,-10.73502 0,-21.47005 0,-32.20508 6.309896,2.04818 12.619792,4.09636 18.929688,6.14453 z m 93.902341,26.02149 c -6.29948,-8.67253 -12.59896,-17.34505 -18.89844,-26.01758 6.29948,-2.04492 12.59896,-4.08984 18.89844,-6.13476 0,10.71744 0,21.43489 0,32.15234 z M 93.339844,166.39844 c 0,3.33984 0,6.67968 0,10.01953 -3.178386,-4.37305 -6.356771,-8.74609 -9.535156,-13.11914 3.178385,1.0332 6.35677,2.0664 9.535156,3.09961 z m 2.341797,9.95703 c 0,-3.31836 0,-6.63672 0,-9.95508 3.055338,-0.99349 6.110679,-1.98698 9.166019,-2.98047 -3.05534,4.31185 -6.110681,8.6237 -9.166019,12.93555 z m -25.06836,10.20898 c -10.212239,3.31641 -20.424479,6.63282 -30.636719,9.94922 6.312501,-8.6888 12.625,-17.3776 18.9375,-26.0664 3.89974,5.37239 7.79948,10.74479 11.699219,16.11718 z m 78.429689,9.94532 c -10.20964,-3.31576 -20.41927,-6.63151 -30.62891,-9.94727 3.89909,-5.37109 7.79818,-10.74219 11.69727,-16.11328 6.31055,8.68685 12.62109,17.3737 18.93164,26.06055 z M 90.712891,180.03125 c -5.917969,1.92448 -11.835938,3.84896 -17.753907,5.77344 -3.657552,-5.03516 -7.315104,-10.07031 -10.972656,-15.10547 9.575521,3.11068 19.151042,6.22135 28.726563,9.33203 z m 25.355469,5.76953 c -5.91406,-1.92318 -11.82813,-3.84635 -17.742188,-5.76953 9.569658,-3.10872 19.139318,-6.21745 28.708988,-9.32617 -3.6556,5.0319 -7.3112,10.0638 -10.9668,15.0957 z m -1.45703,1.99219 c -6.3099,8.6875 -12.61979,17.375 -18.929689,26.0625 0,-10.73568 0,-21.47136 0,-32.20703 6.309899,2.04817 12.619789,4.09635 18.929689,6.14453 z m -21.271486,26.05859 c -6.307943,-8.68489 -12.615886,-17.36979 -18.923828,-26.05468 6.307942,-2.04753 12.615885,-4.09506 18.923828,-6.14258 0,10.73242 0,21.46484 0,32.19726 z m 55.054686,-15.07812 c -16.95443,5.50781 -33.90885,11.01562 -50.86328,16.52344 6.47526,-8.91407 12.95052,-17.82813 19.42578,-26.74219 10.47917,3.40625 20.95833,6.8125 31.4375,10.21875 z m -56.884764,16.54297 c -16.963542,-5.51172 -33.927084,-11.02344 -50.890625,-16.53516 10.483724,-3.4082 20.967448,-6.81641 31.451171,-10.22461 6.479818,8.91992 12.959636,17.83984 19.439454,26.75977 z" />
+</svg>
