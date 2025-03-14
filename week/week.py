@@ -43,10 +43,31 @@ class DecalendarDate:
             f"{self.year + 1:04}-{self.days_left_in_year:03}"
         )
 
+    def doty(self, positive: bool = True):
+        return (
+            f"{self.year:04}+{self.day_of_the_year:03}"
+            if positive else
+            f"{self.year + 1:04}-{self.days_left_in_year:03}"
+        )
+
+    def month_date(self):
+        month_number = self.day_of_the_year - date.day
+        return (
+            f"{self.year:04}"
+            f"{'-' if month_number < 0 else '+'}{month_number:03}"
+        )
+
+    def month_date(self):
+        month_number = self.day_of_the_year - date.day
+        return (
+            f"{self.year:04}"
+            f"{'-' if month_number < 0 else '+'}{month_number:03}"
+        )
+
     def cycle_date(self, positive: bool = True):
         if self.solar_cycle > 9:
             return (
-                f"{chr(55 + self.solar_cycle)}+{self.day_of_the_year:06}"
+                f"{chr(55 + self.solar_cycle)}+{self.day_of_the_cycle:06}"
                 if positive else
                 f"{chr(56 + self.solar_cycle)}-{self.days_left_in_cycle:06}"
             )
@@ -88,21 +109,28 @@ class Calendar:
             html_list = []
             for d in week:
                 dd = DecalendarDate(d)
+                wd = int(d.strftime('%w'))
+                wk = dd.day_of_the_year - wd
+                mo = dd.day_of_the_year - d.day
                 html_list.append(
                     "<day class='solid wider'>\n\t\t\t"
-                    f"<date>{d.strftime('%GW%V%u')}</date>\n\t\t\t"
+                    f"<date>{dd.day_of_the_year:03}"
+                    f"&nbsp;&nbsp;&nbsp;</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    f"<date>{d.strftime("%Y%m%d")}</date>\n\t\t\t"
+                    f"<date>-{dd.days_left_in_year:03}"
+                    f"&nbsp;&nbsp;&nbsp;</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
-                    f"<date>{dd.year_date()}</date>\n\t\t\t"
+                    f"<date>{'-' if wk < 0 else ''}{abs(wk):03}"
+                    f"+{wd}&nbsp;</date>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
-                    f"<date>{dd.year_date(False)}</date>\n\t\t\t"
-                    "<solid></solid>\n\t\t\t"
-                    f"<date>{dd.cycle_date()}</date>\n\t\t\t"
-                    "<dashed></dashed>\n\t\t\t"
-                    f"<date>{dd.cycle_date(False)}</date>\n\t\t\t"
+                    f"<date>{'-' if mo < 0 else ''}{abs(mo):03}"
+                    f"+{d.day:02}</date>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
                     f"<date>{dd.day_of_the_era}</date>\n\t\t\t"
+                    "<dashed></dashed>\n\t\t\t"
+                    "<time>&nbsp</time>\n\t\t\t"
+                    "<solid></solid>\n\t\t\t"
+                    "<time>&nbsp</time>\n\t\t\t"
                     "<dashed></dashed>\n\t\t\t"
                     "<time>&nbsp</time>\n\t\t\t"
                     "<solid></solid>\n\t\t\t"
@@ -111,11 +139,11 @@ class Calendar:
                     "<time>&nbsp</time>\n\t\t</day>\n\t\t"
                 )
             pathlib.Path(
-                f"{page + 1:02}_{week[0].isoformat()}_{week[-1].isoformat()}_week.html"
+                f"{page:02}_{week[0].isoformat()}_{week[-1].isoformat()}_week.html"
             ).write_text(
                 self.__head
                 + "".join(html_list)
-                + f"<pages><current>{page + 1}</current>"
+                + f"<pages><current>{page}</current>"
                 + self.__foot
                 )
         return self
@@ -138,14 +166,14 @@ class Calendar:
             dd = DecalendarDate(date)
             month = chr(55 + date.month) if date.month > 9 else date.month
             greg_doty = (
-                f"{date.strftime("%Y%m%d")}<br>{dd.year_date()}"
+                f"{date.strftime('%Y%m%d')}<br>{dd.year_date()}"
                 if not i or not i % d1 or dd.day_of_the_year in (0, 306) else
                 f"{month}{date.day:02}<br>{dd.day_of_the_year:03}"
             )
             if not i or not i % d1:
                 html_list.append(
                     "\t<li style='grid-column-start: "
-                    f"{date.isoweekday() - 1};'"
+                    f"{date.strftime('%w')};'"
                     f">{greg_doty}</li>\n\t\t\t\t"
                 )
             else:
@@ -161,13 +189,13 @@ class Calendar:
                 + "".join(html_list[d1 * (i - 1):d1 * i])
                 + before_footer
                 + "\n\t\t<pages>\n\t\t\t<current>"
-                + f"{len(self.weeks) + i}</current>"
+                + f"{len(self.weeks) + i - 1}</current>"
                 + self.__foot
                 )
         return self
 
 
 if __name__ == "__main__":
-    cal = Calendar("2024-02-05", n_days=420)
+    cal = Calendar("2025-03-02", n_days=420)
     cal.write_lists()
     cal.write_grid()

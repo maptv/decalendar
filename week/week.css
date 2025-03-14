@@ -7,11 +7,11 @@ day {
     display: grid;
     font-size: 11px;
     font-family: 'isosevcal', monospace;
-    grid-template-columns: 8ch 1fr;
+    grid-template-columns: 7ch 1fr;
 }
 
 .wider {
-    grid-template-columns: 8ch 1fr;
+    grid-template-columns: 7ch 1fr;
 }
 
 .solid {
